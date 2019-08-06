@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmLogin
+Partial Class frmOtorisasi
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
@@ -52,7 +52,7 @@ Partial Class frmLogin
         Me.SimpleButton2.Name = "SimpleButton2"
         Me.SimpleButton2.Size = New System.Drawing.Size(143, 38)
         Me.SimpleButton2.TabIndex = 4
-        Me.SimpleButton2.Text = "&Login"
+        Me.SimpleButton2.Text = "&Otorisasi"
         '
         'TextEdit1
         '
@@ -97,7 +97,7 @@ Partial Class frmLogin
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
-        'frmLogin
+        'frmOtorisasi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -111,9 +111,9 @@ Partial Class frmLogin
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmLogin"
+        Me.Name = "frmOtorisasi"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Login"
+        Me.Text = "Otorisasi Supervisor Pelase ... !!"
         CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()

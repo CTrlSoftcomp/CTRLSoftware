@@ -99,6 +99,12 @@
     <Compile Include="Class\Terbilang.vb" />
     <Compile Include="Class\TimeZone.vb" />
     <Compile Include="Class\Utils.vb" />
+    <Compile Include="Form\Application\frmOtorisasi.Designer.vb">
+      <DependentUpon>frmOtorisasi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmOtorisasi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmDashboard.Designer.vb">
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </Compile>
@@ -121,6 +127,12 @@
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmSettingDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmDaftar.Designer.vb">
+      <DependentUpon>frmDaftar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmDaftar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmDaftarMaster.Designer.vb">
@@ -148,6 +160,9 @@
     <Compile Include="Repository\RepMenu.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Application\frmOtorisasi.resx">
+      <DependentUpon>frmOtorisasi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmDaftar.resx">
+      <DependentUpon>frmDaftar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDaftarMaster.resx">
       <DependentUpon>frmDaftarMaster.vb</DependentUpon>

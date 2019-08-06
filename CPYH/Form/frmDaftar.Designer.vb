@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDaftarMaster
+Partial Class frmDaftar
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
@@ -29,23 +29,21 @@ Partial Class frmDaftarMaster
         Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.Bar2 = New DevExpress.XtraBars.Bar
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,7 +129,6 @@ Partial Class frmDaftarMaster
         'PanelControl2
         '
         Me.PanelControl2.Controls.Add(Me.LabelControl1)
-        Me.PanelControl2.Controls.Add(Me.ckTdkAktif)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 22)
         Me.PanelControl2.Name = "PanelControl2"
@@ -146,15 +143,6 @@ Partial Class frmDaftarMaster
         Me.LabelControl1.Size = New System.Drawing.Size(56, 25)
         Me.LabelControl1.TabIndex = 1
         Me.LabelControl1.Text = "Daftar"
-        '
-        'ckTdkAktif
-        '
-        Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 12)
-        Me.ckTdkAktif.Name = "ckTdkAktif"
-        Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
-        Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
-        Me.ckTdkAktif.TabIndex = 0
         '
         'GridControl1
         '
@@ -191,6 +179,32 @@ Partial Class frmDaftarMaster
         Me.BarManager1.MainMenu = Me.Bar2
         Me.BarManager1.MaxItemId = 2
         '
+        'Bar2
+        '
+        Me.Bar2.BarName = "Main menu"
+        Me.Bar2.DockCol = 0
+        Me.Bar2.DockRow = 0
+        Me.Bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.Bar2.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1)})
+        Me.Bar2.OptionsBar.MultiLine = True
+        Me.Bar2.OptionsBar.UseWholeRow = True
+        Me.Bar2.Text = "Main menu"
+        Me.Bar2.Visible = False
+        '
+        'BarSubItem1
+        '
+        Me.BarSubItem1.Caption = "File"
+        Me.BarSubItem1.Id = 0
+        Me.BarSubItem1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSaveLayout)})
+        Me.BarSubItem1.Name = "BarSubItem1"
+        '
+        'mnSaveLayout
+        '
+        Me.mnSaveLayout.Caption = "Save Layout"
+        Me.mnSaveLayout.Id = 1
+        Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F10))
+        Me.mnSaveLayout.Name = "mnSaveLayout"
+        '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
@@ -219,33 +233,7 @@ Partial Class frmDaftarMaster
         Me.barDockControlRight.Location = New System.Drawing.Point(983, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 536)
         '
-        'Bar2
-        '
-        Me.Bar2.BarName = "Main menu"
-        Me.Bar2.DockCol = 0
-        Me.Bar2.DockRow = 0
-        Me.Bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar2.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1)})
-        Me.Bar2.OptionsBar.MultiLine = True
-        Me.Bar2.OptionsBar.UseWholeRow = True
-        Me.Bar2.Text = "Main menu"
-        Me.Bar2.Visible = False
-        '
-        'BarSubItem1
-        '
-        Me.BarSubItem1.Caption = "File"
-        Me.BarSubItem1.Id = 0
-        Me.BarSubItem1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSaveLayout)})
-        Me.BarSubItem1.Name = "BarSubItem1"
-        '
-        'mnSaveLayout
-        '
-        Me.mnSaveLayout.Caption = "Save Layout"
-        Me.mnSaveLayout.Id = 1
-        Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F10))
-        Me.mnSaveLayout.Name = "mnSaveLayout"
-        '
-        'frmDaftarMaster
+        'frmDaftar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -257,14 +245,13 @@ Partial Class frmDaftarMaster
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmDaftarMaster"
-        Me.Text = "Daftar Master"
+        Me.Name = "frmDaftar"
+        Me.Text = "Daftar"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -280,7 +267,6 @@ Partial Class frmDaftarMaster
     Friend WithEvents cmdBaru As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents cmdCetak As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents ckTdkAktif As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView

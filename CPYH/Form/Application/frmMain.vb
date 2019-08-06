@@ -89,21 +89,21 @@ Public Class frmMain
                 End If
             Next
 
-            Dim pages As RibbonPageCollection = RibbonControl.Pages
-            For a As Integer = 0 To pages.Count - 1
-                Dim page As RibbonPage = pages(a)
-                If NullToStr(page.Tag) = NamaAplikasi Then
-                    Dim groups As DevExpress.XtraBars.Ribbon.RibbonPageGroupCollection = page.Groups
-                    For Each group As RibbonPageGroup In groups
-                        Dim itemLinks As RibbonPageGroupItemLinkCollection = group.ItemLinks
-                        For i As Integer = 0 To itemLinks.Count - 1
-                            Dim item As BarItem = TryCast(itemLinks(i).Item, BarItem)
-                            Ribbon.Items.Remove(item)
-                        Next i
-                    Next group
-                    page.Groups.Clear()
-                End If
-            Next a
+            'Dim pages As RibbonPageCollection = RibbonControl.Pages
+            'For a As Integer = 0 To pages.Count - 1
+            '    Dim page As RibbonPage = pages(a)
+            '    If NullToStr(page.Tag) = NamaAplikasi Then
+            '        Dim groups As DevExpress.XtraBars.Ribbon.RibbonPageGroupCollection = page.Groups
+            '        For Each group As RibbonPageGroup In groups
+            '            Dim itemLinks As RibbonPageGroupItemLinkCollection = group.ItemLinks
+            '            For i As Integer = 0 To itemLinks.Count - 1
+            '                Dim item As BarItem = TryCast(itemLinks(i).Item, BarItem)
+            '                Ribbon.Items.Remove(item)
+            '            Next i
+            '        Next group
+            '        page.Groups.Clear()
+            '    End If
+            'Next a
             RibbonControl.Pages.Clear()
 
             barSetting.Enabled = True
@@ -175,21 +175,27 @@ Public Class frmMain
                     rbItem.Visibility = IIf(SubMenu.Visible, BarItemVisibility.Always, BarItemVisibility.Never)
                     rbItem.Name = SubMenu.Name
                     rbItem.Caption = SubMenu.Caption
-                    rbItem.ImageIndex = Menu.NoID - 1
+                    rbItem.ImageIndex = IIf(SubMenu.BigMenu, -1, Menu.NoID - 1)
+                    rbItem.LargeImageIndex = IIf(SubMenu.BigMenu, Menu.NoID - 1, -1)
                     rbItem.RibbonStyle = IIf(SubMenu.BigMenu, RibbonItemStyles.Large, RibbonItemStyles.Default)
+                    
+                    AddHandler rbItem.ItemClick, AddressOf rbItem_ItemClick
                     rbItem.Tag = NamaAplikasi
 
-                    'RibbonControl.Items.Add(rbItem)
                     rbPageGroup.ItemLinks.Add(rbItem, SubMenu.BeginGroup)
+                    RibbonControl.Items.Add(rbItem)
                 Next
                 rbPage.Groups.Add(rbPageGroup)
-                'pageCategori.Pages.Add(rbPage)
+                
                 RibbonControl.Pages.Add(rbPage)
             Next
             'RibbonControl.PageCategories.Add(pageCategori)
+            RibbonControl.Images = ImageCollectionSmall
+            RibbonControl.LargeImages = ImageCollectionLarge
+
             RibbonPageCategory1.Visible = IIf(UserLogin.Supervisor, True, False)
             barLoginOut.Caption = "Logout"
-
+            
             UserLogin.TanggalSystem = Repository.RepMenu.GetTimeServer()
             TimeZoneInformation.TimeZoneFunctionality.SetTime(System.TimeZone.CurrentTimeZone.ToLocalTime(UserLogin.TanggalSystem))
             barStaticUID.Caption = "User : [" & UserLogin.Nama & "]"
@@ -211,5 +217,108 @@ Public Class frmMain
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub barSettingPerusahaan_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barSettingPerusahaan.ItemClick
+
+    End Sub
+
+    Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
+        Select Case NullToStr(e.Item.Name)
+            Case "mnKategori"
+                Dim x As frmDaftarMaster = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarMaster(e.Item.Name, _
+                                            e.Item.Caption, _
+                                            "MKategori", _
+                                            "SELECT MKategori.NoID, MKategori.Kode, MKategori.Nama, MKategori.IsActive Aktif, MParent.Kode + '-' + MParent.Nama KategoriUtama" & vbCrLf & _
+                                            "FROM MKategori" & vbCrLf & _
+                                            "LEFT JOIN MKategori MParent ON MParent.NoID=MKategori.IDParent ")
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnSatuan"
+                Dim x As frmDaftarMaster = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarMaster(e.Item.Name, _
+                                            e.Item.Caption, _
+                                            "MSatuan", _
+                                            "SELECT MSatuan.NoID, MSatuan.Kode, MSatuan.Nama, MSatuan.Konversi, MSatuan.IsActive Aktif " & vbCrLf & _
+                                            "FROM MSatuan")
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnMerk"
+                Dim x As frmDaftarMaster = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarMaster(e.Item.Name, _
+                                            e.Item.Caption, _
+                                            "MMerk", _
+                                            "SELECT MMerk.NoID, MMerk.Kode, MMerk.Nama, MMerk.IsActive Aktif " & vbCrLf & _
+                                            "FROM MMerk")
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case Else
+                XtraMessageBox.Show("Menue Durong Onok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
+        Application.DoEvents()
+    End Sub
+
+    Private Sub barManagementRole_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barManagementRole.ItemClick
+        Dim x As frmDaftar = Nothing
+        For Each frm In Me.MdiChildren
+            If TypeOf frm Is frmDaftar AndAlso frm.Name = e.Item.Name Then
+                x = frm
+            End If
+        Next
+        If x Is Nothing Then
+            x = New frmDaftar(e.Item.Name, _
+                                    e.Item.Caption, _
+                                    "MRole", _
+                                    "SELECT MRole.NoID, MRole.Role, MRole.IsSupervisor SPV" & vbCrLf & _
+                                    "FROM MRole")
+            x.MdiParent = Me
+        End If
+        x.Show()
+        x.Focus()
+    End Sub
+
+    Private Sub barManagementUser_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barManagementUser.ItemClick
+        Dim x As frmDaftar = Nothing
+        For Each frm In Me.MdiChildren
+            If TypeOf frm Is frmDaftar AndAlso frm.Name = e.Item.Name Then
+                x = frm
+            End If
+        Next
+        If x Is Nothing Then
+            x = New frmDaftar(e.Item.Name, _
+                                    e.Item.Caption, _
+                                    "MUser", _
+                                    "SELECT MUser.NoID, MUser.Kode, MUser.Nama, MRole.[Role], MRole.IsSupervisor SPV " & vbCrLf & _
+                                    "FROM MUser" & vbCrLf & _
+                                    "LEFT JOIN MRole ON MRole.NoID=MUser.IDRole")
+            x.MdiParent = Me
+        End If
+        x.Show()
+        x.Focus()
     End Sub
 End Class

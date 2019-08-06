@@ -33,6 +33,8 @@ Partial Class frmMain
         Me.barSettingPerusahaan = New DevExpress.XtraBars.BarButtonItem
         Me.IsEditReport = New DevExpress.XtraBars.BarEditItem
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+        Me.barManagementUser = New DevExpress.XtraBars.BarButtonItem
+        Me.barManagementRole = New DevExpress.XtraBars.BarButtonItem
         Me.ImageCollectionLarge = New DevExpress.Utils.ImageCollection(Me.components)
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory
         Me.RibbonPage6 = New DevExpress.XtraBars.Ribbon.RibbonPage
@@ -61,15 +63,16 @@ Partial Class frmMain
         Me.RibbonControl.ExpandCollapseItem.Id = 0
         Me.RibbonControl.ExpandCollapseItem.Name = ""
         Me.RibbonControl.Images = Me.ImageCollectionSmall
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.IsEditReport})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.IsEditReport, Me.barManagementUser, Me.barManagementRole})
         Me.RibbonControl.LargeImages = Me.ImageCollectionLarge
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 19
+        Me.RibbonControl.MaxItemId = 21
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
         Me.RibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
-        Me.RibbonControl.Size = New System.Drawing.Size(1151, 49)
+        Me.RibbonControl.SelectedPage = Me.RibbonPage6
+        Me.RibbonControl.Size = New System.Drawing.Size(1151, 145)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'ApplicationMenu1
@@ -101,6 +104,18 @@ Partial Class frmMain
         'ImageCollectionSmall
         '
         Me.ImageCollectionSmall.ImageStream = CType(resources.GetObject("ImageCollectionSmall.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollectionSmall.Images.SetKeyName(0, "Master.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(1, "SaldoAwal.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(2, "Pembelian.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(3, "Penjualan.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(4, "Internal.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(5, "Accounting.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(6, "Accounting.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(7, "Laporan.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(8, "Help.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(9, "Home.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(10, "Customer.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(11, "UserKey.png")
         '
         'rgbiSkins
         '
@@ -127,6 +142,7 @@ Partial Class frmMain
         '
         Me.barSettingPerusahaan.Caption = "Setting Perusahaan"
         Me.barSettingPerusahaan.Id = 16
+        Me.barSettingPerusahaan.LargeImageIndex = 9
         Me.barSettingPerusahaan.Name = "barSettingPerusahaan"
         Me.barSettingPerusahaan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
@@ -142,10 +158,36 @@ Partial Class frmMain
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         '
+        'barManagementUser
+        '
+        Me.barManagementUser.Caption = "Management User"
+        Me.barManagementUser.Id = 19
+        Me.barManagementUser.ImageIndex = 11
+        Me.barManagementUser.Name = "barManagementUser"
+        '
+        'barManagementRole
+        '
+        Me.barManagementRole.Caption = "Role User"
+        Me.barManagementRole.Id = 20
+        Me.barManagementRole.ImageIndex = 10
+        Me.barManagementRole.Name = "barManagementRole"
+        '
         'ImageCollectionLarge
         '
         Me.ImageCollectionLarge.ImageSize = New System.Drawing.Size(32, 32)
         Me.ImageCollectionLarge.ImageStream = CType(resources.GetObject("ImageCollectionLarge.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollectionLarge.Images.SetKeyName(0, "Master.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(1, "SaldoAwal.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(2, "Pembelian.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(3, "Penjualan.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(4, "Internal.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(5, "Accounting.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(6, "Accounting.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(7, "Laporan.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(8, "Help.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(9, "Home.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(10, "Customer.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(11, "UserKey.png")
         '
         'RibbonPageCategory1
         '
@@ -171,6 +213,8 @@ Partial Class frmMain
         'RibbonPageGroup5
         '
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barSettingPerusahaan)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementUser, True)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementRole)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.IsEditReport, True)
         Me.RibbonPageGroup5.Name = "RibbonPageGroup5"
         Me.RibbonPageGroup5.Text = "Setting Applikasi"
@@ -244,6 +288,8 @@ Partial Class frmMain
     Friend WithEvents ImageCollectionLarge As DevExpress.Utils.ImageCollection
     Friend WithEvents ImageCollectionSmall As DevExpress.Utils.ImageCollection
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents barManagementUser As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents barManagementRole As DevExpress.XtraBars.BarButtonItem
 
 
 End Class

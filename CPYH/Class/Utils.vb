@@ -6,8 +6,10 @@ Imports DevExpress.XtraGrid
 Public Class Utils
     Public Shared Parser As New modParser
     Public Shared NamaAplikasi As String = Application.ProductName.ToString
+    Public Shared FolderLayouts As String = Application.StartupPath & "\System\Layouts\"
     Public Shared StrKonSQL As String = ""
     Public Shared UserLogin As New Model.User
+    Public Shared UserOtorisasi As New Model.User
 
     Public Shared Function BuangSpasi(ByVal x) As String
         Dim i As Integer, Str As String = ""

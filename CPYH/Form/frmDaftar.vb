@@ -21,7 +21,7 @@ Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
 
-Public Class frmDaftarMaster
+Public Class frmDaftar
     Private formName As String
     Private tableName As String
 
@@ -54,11 +54,7 @@ Public Class frmDaftarMaster
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                If ckTdkAktif.Checked Then
-                                    com.CommandText = SQL
-                                Else
-                                    com.CommandText = SQL & " WHERE [" & tableName & "].IsActive=1"
-                                End If
+                                com.CommandText = SQL
                                 oDA.Fill(ds, tableName)
                                 BindingSource1.DataSource = ds.Tables(tableName)
 
@@ -82,20 +78,12 @@ Public Class frmDaftarMaster
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
         If GridView1.RowCount >= 1 Then
             Select Case tableName
-                Case "MKategori"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Kategori " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                Case "MUser"
+                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
-                Case "MSatuan"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Satuan " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    End If
-                Case "MMerk"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Merk " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    End If
-                Case "MGudang"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Gudang " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                Case "MRole"
+                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case Else
@@ -119,7 +107,7 @@ Public Class frmDaftarMaster
                                 oDA.SelectCommand = com
 
                                 Select Case tableName
-                                    Case "MKategori", "MSatuan", "MMerk", "MGudang"
+                                    Case "MKategori", "MSatuan", "MMerk"
                                         com.CommandText = "UPDATE " & tableName & " SET IsActive=0 WHERE NoID=" & NoID
                                         com.ExecuteNonQuery()
                                 End Select

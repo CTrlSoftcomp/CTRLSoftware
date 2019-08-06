@@ -1,0 +1,249 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmMain
+    Inherits DevExpress.XtraBars.Ribbon.RibbonForm
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing AndAlso components IsNot Nothing Then
+            components.Dispose()
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
+        Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl
+        Me.ApplicationMenu1 = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
+        Me.barSetting = New DevExpress.XtraBars.BarButtonItem
+        Me.barLoginOut = New DevExpress.XtraBars.BarButtonItem
+        Me.barExit = New DevExpress.XtraBars.BarButtonItem
+        Me.ImageCollectionSmall = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.rgbiSkins = New DevExpress.XtraBars.RibbonGalleryBarItem
+        Me.barStaticUID = New DevExpress.XtraBars.BarStaticItem
+        Me.barStaticJam = New DevExpress.XtraBars.BarStaticItem
+        Me.barSettingPerusahaan = New DevExpress.XtraBars.BarButtonItem
+        Me.IsEditReport = New DevExpress.XtraBars.BarEditItem
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+        Me.ImageCollectionLarge = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory
+        Me.RibbonPage6 = New DevExpress.XtraBars.Ribbon.RibbonPage
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup
+        Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup
+        Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar
+        Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
+        Me.defaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImageCollectionSmall, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImageCollectionLarge, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'RibbonControl
+        '
+        Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
+        Me.RibbonControl.ApplicationButtonText = Nothing
+        '
+        '
+        '
+        Me.RibbonControl.ExpandCollapseItem.Id = 0
+        Me.RibbonControl.ExpandCollapseItem.Name = ""
+        Me.RibbonControl.Images = Me.ImageCollectionSmall
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.IsEditReport})
+        Me.RibbonControl.LargeImages = Me.ImageCollectionLarge
+        Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
+        Me.RibbonControl.MaxItemId = 19
+        Me.RibbonControl.Name = "RibbonControl"
+        Me.RibbonControl.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
+        Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
+        Me.RibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
+        Me.RibbonControl.Size = New System.Drawing.Size(1151, 49)
+        Me.RibbonControl.StatusBar = Me.RibbonStatusBar
+        '
+        'ApplicationMenu1
+        '
+        Me.ApplicationMenu1.ItemLinks.Add(Me.barSetting)
+        Me.ApplicationMenu1.ItemLinks.Add(Me.barLoginOut, True)
+        Me.ApplicationMenu1.ItemLinks.Add(Me.barExit, True)
+        Me.ApplicationMenu1.Name = "ApplicationMenu1"
+        Me.ApplicationMenu1.Ribbon = Me.RibbonControl
+        '
+        'barSetting
+        '
+        Me.barSetting.Caption = "Setting Koneksi"
+        Me.barSetting.Id = 14
+        Me.barSetting.Name = "barSetting"
+        '
+        'barLoginOut
+        '
+        Me.barLoginOut.Caption = "Login"
+        Me.barLoginOut.Id = 13
+        Me.barLoginOut.Name = "barLoginOut"
+        '
+        'barExit
+        '
+        Me.barExit.Caption = "Keluar"
+        Me.barExit.Id = 15
+        Me.barExit.Name = "barExit"
+        '
+        'ImageCollectionSmall
+        '
+        Me.ImageCollectionSmall.ImageStream = CType(resources.GetObject("ImageCollectionSmall.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        '
+        'rgbiSkins
+        '
+        Me.rgbiSkins.Caption = "Skins"
+        Me.rgbiSkins.Id = 1
+        Me.rgbiSkins.Name = "rgbiSkins"
+        '
+        'barStaticUID
+        '
+        Me.barStaticUID.Caption = "User : (none)"
+        Me.barStaticUID.Id = 2
+        Me.barStaticUID.Name = "barStaticUID"
+        Me.barStaticUID.TextAlignment = System.Drawing.StringAlignment.Near
+        '
+        'barStaticJam
+        '
+        Me.barStaticJam.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right
+        Me.barStaticJam.Caption = "Tanggal System : (none)"
+        Me.barStaticJam.Id = 3
+        Me.barStaticJam.Name = "barStaticJam"
+        Me.barStaticJam.TextAlignment = System.Drawing.StringAlignment.Near
+        '
+        'barSettingPerusahaan
+        '
+        Me.barSettingPerusahaan.Caption = "Setting Perusahaan"
+        Me.barSettingPerusahaan.Id = 16
+        Me.barSettingPerusahaan.Name = "barSettingPerusahaan"
+        Me.barSettingPerusahaan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
+        'IsEditReport
+        '
+        Me.IsEditReport.Caption = "Edit Report"
+        Me.IsEditReport.Edit = Me.RepositoryItemCheckEdit1
+        Me.IsEditReport.Id = 18
+        Me.IsEditReport.Name = "IsEditReport"
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        '
+        'ImageCollectionLarge
+        '
+        Me.ImageCollectionLarge.ImageSize = New System.Drawing.Size(32, 32)
+        Me.ImageCollectionLarge.ImageStream = CType(resources.GetObject("ImageCollectionLarge.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        '
+        'RibbonPageCategory1
+        '
+        Me.RibbonPageCategory1.Color = System.Drawing.Color.Empty
+        Me.RibbonPageCategory1.Name = "RibbonPageCategory1"
+        Me.RibbonPageCategory1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage6})
+        Me.RibbonPageCategory1.Text = "Tools"
+        Me.RibbonPageCategory1.Visible = False
+        '
+        'RibbonPage6
+        '
+        Me.RibbonPage6.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup5})
+        Me.RibbonPage6.Name = "RibbonPage6"
+        Me.RibbonPage6.Text = "Setting"
+        Me.RibbonPage6.Visible = False
+        '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.rgbiSkins)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.Text = "Skins"
+        '
+        'RibbonPageGroup5
+        '
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.barSettingPerusahaan)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.IsEditReport, True)
+        Me.RibbonPageGroup5.Name = "RibbonPageGroup5"
+        Me.RibbonPageGroup5.Text = "Setting Applikasi"
+        '
+        'RibbonStatusBar
+        '
+        Me.RibbonStatusBar.ItemLinks.Add(Me.barStaticUID)
+        Me.RibbonStatusBar.ItemLinks.Add(Me.barStaticJam)
+        Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 498)
+        Me.RibbonStatusBar.Name = "RibbonStatusBar"
+        Me.RibbonStatusBar.Ribbon = Me.RibbonControl
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(1151, 31)
+        '
+        'XtraTabbedMdiManager1
+        '
+        Me.XtraTabbedMdiManager1.MdiParent = Me
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "Data Satuan"
+        Me.BarButtonItem1.Id = 4
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 5000
+        '
+        'frmMain
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1151, 529)
+        Me.Controls.Add(Me.RibbonStatusBar)
+        Me.Controls.Add(Me.RibbonControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
+        Me.Name = "frmMain"
+        Me.Ribbon = Me.RibbonControl
+        Me.StatusBar = Me.RibbonStatusBar
+        Me.Text = "CTRL Software"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImageCollectionSmall, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImageCollectionLarge, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents RibbonControl As DevExpress.XtraBars.Ribbon.RibbonControl
+    Friend WithEvents RibbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
+    Friend WithEvents XtraTabbedMdiManager1 As DevExpress.XtraTabbedMdi.XtraTabbedMdiManager
+    Friend WithEvents defaultLookAndFeel1 As DevExpress.LookAndFeel.DefaultLookAndFeel
+    Friend WithEvents RibbonPageCategory1 As DevExpress.XtraBars.Ribbon.RibbonPageCategory
+    Friend WithEvents rgbiSkins As DevExpress.XtraBars.RibbonGalleryBarItem
+    Friend WithEvents barStaticUID As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents RibbonPage6 As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents barStaticJam As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ApplicationMenu1 As DevExpress.XtraBars.Ribbon.ApplicationMenu
+    Friend WithEvents barLoginOut As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents barSetting As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents barExit As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents barSettingPerusahaan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents IsEditReport As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RibbonPageGroup5 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents ImageCollectionLarge As DevExpress.Utils.ImageCollection
+    Friend WithEvents ImageCollectionSmall As DevExpress.Utils.ImageCollection
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+
+
+End Class

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CtrlSoft", "CPYH\CtrlSoft.vbproj", "{F9BDD123-EAE3-4536-91CC-B68A31399E8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

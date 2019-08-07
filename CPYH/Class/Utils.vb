@@ -9,7 +9,15 @@ Public Class Utils
     Public Shared FolderLayouts As String = Application.StartupPath & "\System\Layouts\"
     Public Shared StrKonSQL As String = ""
     Public Shared UserLogin As New Model.User
+    Public Shared SettingPerusaan As New Model.SettingPerusahaan
     Public Shared UserOtorisasi As New Model.User
+    Public Shared IsEditReport As Boolean = False
+
+    Public Enum pStatusForm
+        Baru = 0
+        Edit = 1
+        TempInsert = 2
+    End Enum
 
     Public Shared Function BuangSpasi(ByVal x) As String
         Dim i As Integer, Str As String = ""

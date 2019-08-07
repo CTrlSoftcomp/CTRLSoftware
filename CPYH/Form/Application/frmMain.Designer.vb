@@ -31,7 +31,7 @@ Partial Class frmMain
         Me.barStaticUID = New DevExpress.XtraBars.BarStaticItem
         Me.barStaticJam = New DevExpress.XtraBars.BarStaticItem
         Me.barSettingPerusahaan = New DevExpress.XtraBars.BarButtonItem
-        Me.IsEditReport = New DevExpress.XtraBars.BarEditItem
+        Me.barEditReport = New DevExpress.XtraBars.BarEditItem
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
         Me.barManagementUser = New DevExpress.XtraBars.BarButtonItem
         Me.barManagementRole = New DevExpress.XtraBars.BarButtonItem
@@ -63,7 +63,7 @@ Partial Class frmMain
         Me.RibbonControl.ExpandCollapseItem.Id = 0
         Me.RibbonControl.ExpandCollapseItem.Name = ""
         Me.RibbonControl.Images = Me.ImageCollectionSmall
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.IsEditReport, Me.barManagementUser, Me.barManagementRole})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.barEditReport, Me.barManagementUser, Me.barManagementRole})
         Me.RibbonControl.LargeImages = Me.ImageCollectionLarge
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 21
@@ -146,12 +146,12 @@ Partial Class frmMain
         Me.barSettingPerusahaan.Name = "barSettingPerusahaan"
         Me.barSettingPerusahaan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
-        'IsEditReport
+        'barEditReport
         '
-        Me.IsEditReport.Caption = "Edit Report"
-        Me.IsEditReport.Edit = Me.RepositoryItemCheckEdit1
-        Me.IsEditReport.Id = 18
-        Me.IsEditReport.Name = "IsEditReport"
+        Me.barEditReport.Caption = "Edit Report"
+        Me.barEditReport.Edit = Me.RepositoryItemCheckEdit1
+        Me.barEditReport.Id = 18
+        Me.barEditReport.Name = "barEditReport"
         '
         'RepositoryItemCheckEdit1
         '
@@ -215,7 +215,7 @@ Partial Class frmMain
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barSettingPerusahaan)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementUser, True)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementRole)
-        Me.RibbonPageGroup5.ItemLinks.Add(Me.IsEditReport, True)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.barEditReport, True)
         Me.RibbonPageGroup5.Name = "RibbonPageGroup5"
         Me.RibbonPageGroup5.Text = "Setting Applikasi"
         '
@@ -282,7 +282,7 @@ Partial Class frmMain
     Friend WithEvents barSetting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents barExit As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents barSettingPerusahaan As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents IsEditReport As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents barEditReport As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents RibbonPageGroup5 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents ImageCollectionLarge As DevExpress.Utils.ImageCollection

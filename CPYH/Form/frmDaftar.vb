@@ -20,6 +20,7 @@ Imports CtrlSoft.Utils
 Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
+Imports CtrlSoft.CetakDX
 
 Public Class frmDaftar
     Private formName As String
@@ -31,6 +32,8 @@ Public Class frmDaftar
     Dim repdateedit As New RepositoryItemDateEdit
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
+
+    Private ds As New DataSet
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
         DialogResult = Windows.Forms.DialogResult.Cancel
@@ -59,8 +62,10 @@ Public Class frmDaftar
                                 BindingSource1.DataSource = ds.Tables(tableName)
 
                                 GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByValue("NoID", NoID)
+                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
                                 GridView1.SelectRow(GridView1.FocusedRowHandle)
+
+                                Me.ds = ds
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End Try
@@ -72,7 +77,11 @@ Public Class frmDaftar
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        GridControl1.ShowPrintPreview()
+        Dim NamaFile As String = ""
+        If IsEditReport Then
+            NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
+            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
+        End If
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
@@ -107,8 +116,14 @@ Public Class frmDaftar
                                 oDA.SelectCommand = com
 
                                 Select Case tableName
-                                    Case "MKategori", "MSatuan", "MMerk"
-                                        com.CommandText = "UPDATE " & tableName & " SET IsActive=0 WHERE NoID=" & NoID
+                                    Case "MUser"
+                                        com.CommandText = "DELETE FROM MUser WHERE Kode NOT IN ('ADM', 'SU') AND NoID=" & NoID
+                                        com.ExecuteNonQuery()
+                                    Case "MRole"
+                                        com.CommandText = "DELETE MRoleD FROM MRoleD INNER JOIN MRole ON MRole.NoID=MRoleD.IDRole WHERE MRole.Role NOT IN ('ALL', 'SU') AND MRole.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MRole WHERE MRole.Role NOT IN ('ALL', 'SU') AND MRole.NoID=" & NoID
                                         com.ExecuteNonQuery()
                                 End Select
 
@@ -128,11 +143,41 @@ Public Class frmDaftar
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-
+        Select Case tableName
+            Case "MUser"
+                Using frm As New frmEntriUser(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MRole"
+                Using frm As New frmEntriRole(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-
+        Select Case tableName
+            Case "MUser"
+                Using frm As New frmEntriUser(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MRole"
+                Using frm As New frmEntriRole(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
@@ -151,8 +196,8 @@ Public Class frmDaftar
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
         With GridView1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & GridView1.Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower

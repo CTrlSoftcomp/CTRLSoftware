@@ -277,6 +277,23 @@ Public Class frmMain
                 End If
                 x.Show()
                 x.Focus()
+            Case "mnGudang"
+                Dim x As frmDaftarMaster = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarMaster(e.Item.Name, _
+                                            e.Item.Caption, _
+                                            "MGudang", _
+                                            "SELECT MGudang.NoID, MGudang.Kode, MGudang.Nama, MGudang.IsActive Aktif " & vbCrLf & _
+                                            "FROM MGudang")
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case Else
                 XtraMessageBox.Show("Menue Durong Onok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
@@ -320,5 +337,9 @@ Public Class frmMain
         End If
         x.Show()
         x.Focus()
+    End Sub
+
+    Private Sub IsEditReport_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barEditReport.ItemClick
+        IsEditReport = NullToBool(barEditReport.EditValue)
     End Sub
 End Class

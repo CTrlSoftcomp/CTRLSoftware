@@ -17,6 +17,7 @@ Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.LookAndFeel
 Imports CtrlSoft.Ini
 Imports CtrlSoft.Utils
+Imports CtrlSoft.CetakDX
 Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
@@ -24,6 +25,7 @@ Imports DevExpress.XtraEditors.Repository
 Public Class frmDaftarMaster
     Private formName As String
     Private tableName As String
+    Private ds As New DataSet
 
     Private SQL As String
 
@@ -63,8 +65,10 @@ Public Class frmDaftarMaster
                                 BindingSource1.DataSource = ds.Tables(tableName)
 
                                 GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByValue("NoID", NoID)
+                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
                                 GridView1.SelectRow(GridView1.FocusedRowHandle)
+
+                                Me.ds = ds
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End Try
@@ -76,7 +80,9 @@ Public Class frmDaftarMaster
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        GridControl1.ShowPrintPreview()
+        Dim NamaFile As String = ""
+        NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
@@ -140,11 +146,65 @@ Public Class frmDaftarMaster
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-
+        Select Case tableName
+            Case "MGudang"
+                Using frm As New frmEntriGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MMerk"
+                Using frm As New frmEntriMerk(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MSatuan"
+                Using frm As New frmEntriSatuan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MKategori"
+                Using frm As New frmEntriKategori(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-
+        Select Case tableName
+            Case "MGudang"
+                Using frm As New frmEntriGudang(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MMerk"
+                Using frm As New frmEntriMerk(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MSatuan"
+                Using frm As New frmEntriSatuan(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MKategori"
+                Using frm As New frmEntriKategori(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
@@ -163,8 +223,8 @@ Public Class frmDaftarMaster
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
         With GridView1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & GridView1.Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower

@@ -92,6 +92,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\CetakDX.vb" />
     <Compile Include="Class\Ini.vb" />
     <Compile Include="Class\modMain.vb" />
     <Compile Include="Class\modParser.vb" />
@@ -99,6 +100,18 @@
     <Compile Include="Class\Terbilang.vb" />
     <Compile Include="Class\TimeZone.vb" />
     <Compile Include="Class\Utils.vb" />
+    <Compile Include="Form\Application\frmEntriUser.Designer.vb">
+      <DependentUpon>frmEntriUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmEntriUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Application\frmEntriRole.Designer.vb">
+      <DependentUpon>frmEntriRole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmEntriRole.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmOtorisasi.Designer.vb">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>
     </Compile>
@@ -129,6 +142,30 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriKategori.Designer.vb">
+      <DependentUpon>frmEntriKategori.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriKategori.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMerk.Designer.vb">
+      <DependentUpon>frmEntriMerk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMerk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSatuan.Designer.vb">
+      <DependentUpon>frmEntriSatuan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSatuan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriGudang.Designer.vb">
+      <DependentUpon>frmEntriGudang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriGudang.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmDaftar.Designer.vb">
       <DependentUpon>frmDaftar.vb</DependentUpon>
     </Compile>
@@ -141,6 +178,7 @@
     <Compile Include="Form\frmDaftarMaster.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\SettingPerusahaan.vb" />
     <Compile Include="Model\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -160,6 +198,12 @@
     <Compile Include="Repository\RepMenu.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Application\frmEntriUser.resx">
+      <DependentUpon>frmEntriUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmEntriRole.resx">
+      <DependentUpon>frmEntriRole.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmOtorisasi.resx">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +218,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriKategori.resx">
+      <DependentUpon>frmEntriKategori.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriMerk.resx">
+      <DependentUpon>frmEntriMerk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriSatuan.resx">
+      <DependentUpon>frmEntriSatuan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriGudang.resx">
+      <DependentUpon>frmEntriGudang.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDaftar.resx">
       <DependentUpon>frmDaftar.vb</DependentUpon>

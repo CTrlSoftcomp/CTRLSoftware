@@ -61,6 +61,7 @@ Partial Class frmOtorisasi
         Me.TextEdit1.Name = "TextEdit1"
         Me.TextEdit1.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextEdit1.Properties.Appearance.Options.UseFont = True
+        Me.TextEdit1.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextEdit1.Size = New System.Drawing.Size(294, 24)
         Me.TextEdit1.TabIndex = 1
         '
@@ -71,6 +72,7 @@ Partial Class frmOtorisasi
         Me.TextEdit2.Name = "TextEdit2"
         Me.TextEdit2.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextEdit2.Properties.Appearance.Options.UseFont = True
+        Me.TextEdit2.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextEdit2.Properties.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextEdit2.Size = New System.Drawing.Size(294, 24)
         Me.TextEdit2.TabIndex = 3

@@ -225,6 +225,20 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnKontak"
+                Dim x As frmDaftarKontak = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarKontak(e.Item.Name, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnKategori"
                 Dim x As frmDaftarMaster = Nothing
                 For Each frm In Me.MdiChildren

@@ -24,7 +24,6 @@ Imports DevExpress.XtraEditors.Repository
 
 Public Class frmDaftarKontak
     Private formName As String
-    Private tableName As String
     Private ds As New DataSet
 
     Private SQL As String
@@ -56,17 +55,48 @@ Public Class frmDaftarKontak
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
+                                SQL = "SELECT [MAlamat].[NoID],[MAlamat].[Kode],[MAlamat].[Nama],[MAlamat].[NamaAlias],[MAlamat].[Alamat],[MAlamat].[Kota]" & vbCrLf & _
+                                      ",[MAlamat].[HP],[MAlamat].[Telp],[MAlamat].[ContactPerson],[MAlamat].[LimitHutang],[MAlamat].[LimitPiutang]" & vbCrLf & _
+                                      ",[MAlamat].[LimitNotaPiutang],[MAlamat].[LimitUmurPiutang],MTypeHarga.Caption TypeHarga,[MAlamat].[IsActive] Aktif" & vbCrLf & _
+                                      ",[MAlamat].[IsSupplier] Supplier,[MAlamat].[IsPegawai] Pegawai,[MAlamat].[IsCustomer] Customer" & vbCrLf & _
+                                      "FROM [dbo].[MAlamat]" & vbCrLf & _
+                                      "LEFT JOIN MTypeHarga ON MTypeHarga.NoID=MAlamat.IDTypeHarga" & vbCrLf & _
+                                      "WHERE 1=1 "
                                 If ckTdkAktif.Checked Then
-                                    com.CommandText = SQL
-                                Else
-                                    com.CommandText = SQL & " WHERE [" & tableName & "].IsActive=1"
+                                    SQL &= " AND MAlamat.IsActive=1"
                                 End If
-                                oDA.Fill(ds, tableName)
-                                BindingSource1.DataSource = ds.Tables(tableName)
+
+                                com.CommandText = SQL
+                                oDA.Fill(ds, "MAlamat")
+                                BindingSource1.DataSource = ds.Tables("MAlamat")
+
+                                com.CommandText = SQL & " AND MAlamat.IsCustomer=1"
+                                oDA.Fill(ds, "MCustomer")
+                                BindingSource2.DataSource = ds.Tables("MCustomer")
+
+                                com.CommandText = SQL & " AND MAlamat.IsSupplier=1"
+                                oDA.Fill(ds, "MSupplier")
+                                BindingSource3.DataSource = ds.Tables("MSupplier")
+
+                                com.CommandText = SQL & " AND MAlamat.IsSupplier=1"
+                                oDA.Fill(ds, "MPegawai")
+                                BindingSource4.DataSource = ds.Tables("MPegawai")
 
                                 GridView1.ClearSelection()
                                 GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
                                 GridView1.SelectRow(GridView1.FocusedRowHandle)
+
+                                GridView2.ClearSelection()
+                                GridView2.FocusedRowHandle = GridView2.LocateByDisplayText(0, GridView2.Columns("NoID"), NoID.ToString("n0"))
+                                GridView2.SelectRow(GridView1.FocusedRowHandle)
+
+                                GridView3.ClearSelection()
+                                GridView3.FocusedRowHandle = GridView3.LocateByDisplayText(0, GridView3.Columns("NoID"), NoID.ToString("n0"))
+                                GridView3.SelectRow(GridView1.FocusedRowHandle)
+
+                                GridView4.ClearSelection()
+                                GridView4.FocusedRowHandle = GridView4.LocateByDisplayText(0, GridView4.Columns("NoID"), NoID.ToString("n0"))
+                                GridView4.SelectRow(GridView4.FocusedRowHandle)
 
                                 Me.ds = ds
                             Catch ex As Exception
@@ -81,14 +111,37 @@ Public Class frmDaftarKontak
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
         Dim NamaFile As String = ""
-        NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatCustomer.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Customer", "Lap_MAlamatCustomer.repx", Me.ds)
+            Case 2
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatSupplier.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Supplier", "Lap_MAlamatSupplier.repx", Me.ds)
+            Case 3
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatPegawai.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Pegawai", "Lap_MAlamatPegawai.repx", Me.ds)
+            Case Else
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatAll.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master All", "Lap_MAlamatAll.repx", Me.ds)
+        End Select
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        If GridView1.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Kategori " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                gridview = GridView2
+            Case 2
+                gridview = GridView3
+            Case 3
+                gridview = GridView4
+            Case Else
+                gridview = GridView1
+        End Select
+        If gridview.RowCount >= 1 Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
             End If
         End If
     End Sub
@@ -107,11 +160,8 @@ Public Class frmDaftarKontak
                                 com.Transaction = cn.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                Select Case tableName
-                                    Case "MKategori", "MSatuan", "MMerk", "MGudang"
-                                        com.CommandText = "UPDATE " & tableName & " SET IsActive=0 WHERE NoID=" & NoID
-                                        com.ExecuteNonQuery()
-                                End Select
+                                com.CommandText = "UPDATE MAlamat SET IsActive=0 WHERE NoID=" & NoID
+                                com.ExecuteNonQuery()
 
                                 If com.Transaction IsNot Nothing Then
                                     com.Transaction.Commit()
@@ -129,83 +179,82 @@ Public Class frmDaftarKontak
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Select Case tableName
-            Case "MGudang"
-                Using frm As New frmEntriGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MMerk"
-                Using frm As New frmEntriMerk(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MSatuan"
-                Using frm As New frmEntriSatuan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MKategori"
-                Using frm As New frmEntriKategori(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        End Select
+        'Select Case tableName
+        '    Case "MGudang"
+        '        Using frm As New frmEntriGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MMerk"
+        '        Using frm As New frmEntriMerk(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MSatuan"
+        '        Using frm As New frmEntriSatuan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MKategori"
+        '        Using frm As New frmEntriKategori(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case Else
+        '        XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        'End Select
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Select Case tableName
-            Case "MGudang"
-                Using frm As New frmEntriGudang(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MMerk"
-                Using frm As New frmEntriMerk(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MSatuan"
-                Using frm As New frmEntriSatuan(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MKategori"
-                Using frm As New frmEntriKategori(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        End Select
+        'Select Case tableName
+        '    Case "MGudang"
+        '        Using frm As New frmEntriGudang(-1)
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MMerk"
+        '        Using frm As New frmEntriMerk(-1)
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MSatuan"
+        '        Using frm As New frmEntriSatuan(-1)
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case "MKategori"
+        '        Using frm As New frmEntriKategori(-1)
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshData(frm.NoID)
+        '            End If
+        '        End Using
+        '    Case Else
+        '        XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        'End Select
     End Sub
 
-    Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
+    Public Sub New(ByVal formName As String, ByVal caption As String)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Me.Text = caption
-        Me.tableName = tableName
         Me.formName = formName
         Me.SQL = SQL
         Me.Tag = Me.formName
         Me.Name = Me.formName
     End Sub
 
-    Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
-        With GridView1
+    Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, GridView2.DataSourceChanged, GridView3.DataSourceChanged, GridView4.DataSourceChanged
+        With sender
             If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
             End If
@@ -261,6 +310,9 @@ Public Class frmDaftarKontak
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+                    GridView2.SaveLayoutToXml(FolderLayouts & Me.Name & GridView2.Name & ".xml")
+                    GridView3.SaveLayoutToXml(FolderLayouts & Me.Name & GridView3.Name & ".xml")
+                    GridView4.SaveLayoutToXml(FolderLayouts & Me.Name & GridView4.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

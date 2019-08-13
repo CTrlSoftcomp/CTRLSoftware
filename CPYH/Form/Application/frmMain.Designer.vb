@@ -45,12 +45,14 @@ Partial Class frmMain
         Me.defaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ICButtons = New DevExpress.Utils.ImageCollection(Me.components)
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollectionSmall, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollectionLarge, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ICButtons, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -87,35 +89,43 @@ Partial Class frmMain
         '
         Me.barSetting.Caption = "Setting Koneksi"
         Me.barSetting.Id = 14
+        Me.barSetting.ImageIndex = 11
+        Me.barSetting.LargeImageIndex = 11
         Me.barSetting.Name = "barSetting"
         '
         'barLoginOut
         '
         Me.barLoginOut.Caption = "Login"
         Me.barLoginOut.Id = 13
+        Me.barLoginOut.ImageIndex = 12
+        Me.barLoginOut.LargeImageIndex = 12
         Me.barLoginOut.Name = "barLoginOut"
         '
         'barExit
         '
         Me.barExit.Caption = "Keluar"
         Me.barExit.Id = 15
+        Me.barExit.ImageIndex = 13
+        Me.barExit.LargeImageIndex = 13
         Me.barExit.Name = "barExit"
         '
         'ImageCollectionSmall
         '
         Me.ImageCollectionSmall.ImageStream = CType(resources.GetObject("ImageCollectionSmall.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.ImageCollectionSmall.Images.SetKeyName(0, "Master.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(1, "SaldoAwal.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(2, "Pembelian.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(3, "Penjualan.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(4, "Internal.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(5, "Accounting.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(6, "Accounting.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(7, "Laporan.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(8, "Help.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(9, "Home.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(10, "Customer.png")
-        Me.ImageCollectionSmall.Images.SetKeyName(11, "UserKey.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(0, "product.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(1, "coinstack.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(2, "dispatch.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(3, "market_segmentation2.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(4, "alliance2.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(5, "currency_dollar_sign2.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(6, "balance.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(7, "stats_bar_chart.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(8, "home.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(9, "group.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(10, "administrator.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(11, "connect_to_database.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(12, "key.png")
+        Me.ImageCollectionSmall.Images.SetKeyName(13, "close.png")
         '
         'rgbiSkins
         '
@@ -142,7 +152,8 @@ Partial Class frmMain
         '
         Me.barSettingPerusahaan.Caption = "Setting Perusahaan"
         Me.barSettingPerusahaan.Id = 16
-        Me.barSettingPerusahaan.LargeImageIndex = 9
+        Me.barSettingPerusahaan.ImageIndex = 8
+        Me.barSettingPerusahaan.LargeImageIndex = 8
         Me.barSettingPerusahaan.Name = "barSettingPerusahaan"
         Me.barSettingPerusahaan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
@@ -162,32 +173,34 @@ Partial Class frmMain
         '
         Me.barManagementUser.Caption = "Management User"
         Me.barManagementUser.Id = 19
-        Me.barManagementUser.ImageIndex = 11
+        Me.barManagementUser.ImageIndex = 10
         Me.barManagementUser.Name = "barManagementUser"
         '
         'barManagementRole
         '
         Me.barManagementRole.Caption = "Role User"
         Me.barManagementRole.Id = 20
-        Me.barManagementRole.ImageIndex = 10
+        Me.barManagementRole.ImageIndex = 9
         Me.barManagementRole.Name = "barManagementRole"
         '
         'ImageCollectionLarge
         '
         Me.ImageCollectionLarge.ImageSize = New System.Drawing.Size(32, 32)
         Me.ImageCollectionLarge.ImageStream = CType(resources.GetObject("ImageCollectionLarge.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.ImageCollectionLarge.Images.SetKeyName(0, "Master.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(1, "SaldoAwal.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(2, "Pembelian.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(3, "Penjualan.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(4, "Internal.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(5, "Accounting.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(6, "Accounting.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(7, "Laporan.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(8, "Help.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(9, "Home.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(10, "Customer.png")
-        Me.ImageCollectionLarge.Images.SetKeyName(11, "UserKey.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(0, "product.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(1, "coinstack.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(2, "dispatch.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(3, "market_segmentation.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(4, "alliance.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(5, "currency_dollar_sign.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(6, "balance.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(7, "stats_column_chart.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(8, "home.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(9, "group.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(10, "administrator.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(11, "connect_to_database.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(12, "key.png")
+        Me.ImageCollectionLarge.Images.SetKeyName(13, "close.png")
         '
         'RibbonPageCategory1
         '
@@ -242,6 +255,20 @@ Partial Class frmMain
         '
         Me.Timer1.Interval = 5000
         '
+        'ICButtons
+        '
+        Me.ICButtons.ImageSize = New System.Drawing.Size(24, 24)
+        Me.ICButtons.ImageStream = CType(resources.GetObject("ICButtons.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ICButtons.Images.SetKeyName(0, "add.png")
+        Me.ICButtons.Images.SetKeyName(1, "pencil.png")
+        Me.ICButtons.Images.SetKeyName(2, "trash_can.png")
+        Me.ICButtons.Images.SetKeyName(3, "reload.png")
+        Me.ICButtons.Images.SetKeyName(4, "checkmark.png")
+        Me.ICButtons.Images.SetKeyName(5, "close.png")
+        Me.ICButtons.Images.SetKeyName(6, "print.png")
+        Me.ICButtons.Images.SetKeyName(7, "lock_open.png")
+        Me.ICButtons.Images.SetKeyName(8, "diskette.png")
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -262,6 +289,7 @@ Partial Class frmMain
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImageCollectionLarge, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ICButtons, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -290,6 +318,7 @@ Partial Class frmMain
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents barManagementUser As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents barManagementRole As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ICButtons As DevExpress.Utils.ImageCollection
 
 
 End Class

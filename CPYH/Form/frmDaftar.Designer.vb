@@ -68,6 +68,7 @@ Partial Class frmDaftar
         '
         Me.cmdCetak.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdCetak.Appearance.Options.UseFont = True
+        Me.cmdCetak.ImageIndex = 6
         Me.cmdCetak.Location = New System.Drawing.Point(390, 5)
         Me.cmdCetak.Name = "cmdCetak"
         Me.cmdCetak.Size = New System.Drawing.Size(120, 38)
@@ -78,6 +79,7 @@ Partial Class frmDaftar
         '
         Me.cmdHapus.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdHapus.Appearance.Options.UseFont = True
+        Me.cmdHapus.ImageIndex = 2
         Me.cmdHapus.Location = New System.Drawing.Point(264, 5)
         Me.cmdHapus.Name = "cmdHapus"
         Me.cmdHapus.Size = New System.Drawing.Size(120, 38)
@@ -88,6 +90,7 @@ Partial Class frmDaftar
         '
         Me.cmdEdit.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdEdit.Appearance.Options.UseFont = True
+        Me.cmdEdit.ImageIndex = 1
         Me.cmdEdit.Location = New System.Drawing.Point(138, 5)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(120, 38)
@@ -98,6 +101,7 @@ Partial Class frmDaftar
         '
         Me.cmdBaru.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdBaru.Appearance.Options.UseFont = True
+        Me.cmdBaru.ImageIndex = 0
         Me.cmdBaru.Location = New System.Drawing.Point(12, 5)
         Me.cmdBaru.Name = "cmdBaru"
         Me.cmdBaru.Size = New System.Drawing.Size(120, 38)
@@ -109,6 +113,7 @@ Partial Class frmDaftar
         Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
+        Me.cmdRefresh.ImageIndex = 3
         Me.cmdRefresh.Location = New System.Drawing.Point(725, 5)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
@@ -120,6 +125,7 @@ Partial Class frmDaftar
         Me.cmdTutup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
+        Me.cmdTutup.ImageIndex = 5
         Me.cmdTutup.Location = New System.Drawing.Point(851, 5)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(120, 38)

@@ -14,7 +14,7 @@
             DxErrorProvider1.SetError(TextEdit2, "Password Harus diisi!", DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information)
         End If
         If Not DxErrorProvider1.HasErrors Then
-            Dim User As Model.User = Repository.RepMenu.GetLogin(TextEdit1.Text, TextEdit2.Text)
+            Dim User As Model.User = Repository.RepSQLServer.GetLogin(TextEdit1.Text, TextEdit2.Text)
             If User IsNot Nothing Then
                 Utils.UserLogin = User
                 DialogResult = Windows.Forms.DialogResult.OK
@@ -23,5 +23,10 @@
                 DxErrorProvider1.SetError(TextEdit1, "User dan Password Salah!", DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information)
             End If
         End If
+    End Sub
+
+    Private Sub frmLogin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        SimpleButton1.ImageList = frmMain.ICButtons
+        SimpleButton2.ImageList = frmMain.ICButtons
     End Sub
 End Class

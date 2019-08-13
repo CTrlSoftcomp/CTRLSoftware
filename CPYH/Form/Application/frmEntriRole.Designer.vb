@@ -37,13 +37,13 @@ Partial Class frmEntriRole
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.Bar2 = New DevExpress.XtraBars.Bar
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -103,7 +103,7 @@ Partial Class frmEntriRole
         Me.GridControl1.Location = New System.Drawing.Point(12, 52)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(524, 292)
+        Me.GridControl1.Size = New System.Drawing.Size(524, 281)
         Me.GridControl1.TabIndex = 3
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -123,9 +123,10 @@ Partial Class frmEntriRole
         '
         Me.SimpleButton2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SimpleButton2.Appearance.Options.UseFont = True
-        Me.SimpleButton2.Location = New System.Drawing.Point(440, 348)
+        Me.SimpleButton2.ImageIndex = 5
+        Me.SimpleButton2.Location = New System.Drawing.Point(440, 337)
         Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(96, 23)
+        Me.SimpleButton2.Size = New System.Drawing.Size(96, 34)
         Me.SimpleButton2.StyleController = Me.LayoutControl1
         Me.SimpleButton2.TabIndex = 8
         Me.SimpleButton2.Text = "&Tutup"
@@ -134,9 +135,10 @@ Partial Class frmEntriRole
         '
         Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SimpleButton1.Appearance.Options.UseFont = True
-        Me.SimpleButton1.Location = New System.Drawing.Point(340, 348)
+        Me.SimpleButton1.ImageIndex = 8
+        Me.SimpleButton1.Location = New System.Drawing.Point(340, 337)
         Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(96, 23)
+        Me.SimpleButton1.Size = New System.Drawing.Size(96, 34)
         Me.SimpleButton1.StyleController = Me.LayoutControl1
         Me.SimpleButton1.TabIndex = 7
         Me.SimpleButton1.Text = "&Simpan"
@@ -157,11 +159,11 @@ Partial Class frmEntriRole
         '
         Me.LayoutControlItem1.Control = Me.SimpleButton1
         Me.LayoutControlItem1.CustomizationFormText = "LayoutControlItem1"
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(328, 336)
-        Me.LayoutControlItem1.MaxSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem1.MinSize = New System.Drawing.Size(100, 27)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(328, 325)
+        Me.LayoutControlItem1.MaxSize = New System.Drawing.Size(100, 38)
+        Me.LayoutControlItem1.MinSize = New System.Drawing.Size(100, 38)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(100, 27)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(100, 38)
         Me.LayoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem1.Text = "LayoutControlItem1"
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
@@ -172,11 +174,11 @@ Partial Class frmEntriRole
         '
         Me.LayoutControlItem2.Control = Me.SimpleButton2
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(428, 336)
-        Me.LayoutControlItem2.MaxSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem2.MinSize = New System.Drawing.Size(100, 27)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(428, 325)
+        Me.LayoutControlItem2.MaxSize = New System.Drawing.Size(100, 38)
+        Me.LayoutControlItem2.MinSize = New System.Drawing.Size(100, 38)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(100, 27)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(100, 38)
         Me.LayoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem2.Text = "LayoutControlItem2"
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
@@ -186,9 +188,9 @@ Partial Class frmEntriRole
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 336)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 325)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(328, 27)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(328, 38)
         Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -198,7 +200,7 @@ Partial Class frmEntriRole
         Me.LayoutControlItem3.CustomizationFormText = "Setting Menu"
         Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 24)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(528, 312)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(528, 301)
         Me.LayoutControlItem3.Text = "Setting Menu"
         Me.LayoutControlItem3.TextLocation = DevExpress.Utils.Locations.Top
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(63, 13)
@@ -244,6 +246,32 @@ Partial Class frmEntriRole
         Me.BarManager1.MainMenu = Me.Bar2
         Me.BarManager1.MaxItemId = 2
         '
+        'Bar2
+        '
+        Me.Bar2.BarName = "Main menu"
+        Me.Bar2.DockCol = 0
+        Me.Bar2.DockRow = 0
+        Me.Bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.Bar2.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1)})
+        Me.Bar2.OptionsBar.MultiLine = True
+        Me.Bar2.OptionsBar.UseWholeRow = True
+        Me.Bar2.Text = "Main menu"
+        Me.Bar2.Visible = False
+        '
+        'BarSubItem1
+        '
+        Me.BarSubItem1.Caption = "File"
+        Me.BarSubItem1.Id = 0
+        Me.BarSubItem1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSaveLayout)})
+        Me.BarSubItem1.Name = "BarSubItem1"
+        '
+        'mnSaveLayout
+        '
+        Me.mnSaveLayout.Caption = "Save Layout"
+        Me.mnSaveLayout.Id = 1
+        Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F10)
+        Me.mnSaveLayout.Name = "mnSaveLayout"
+        '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
@@ -271,32 +299,6 @@ Partial Class frmEntriRole
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(548, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 383)
-        '
-        'Bar2
-        '
-        Me.Bar2.BarName = "Main menu"
-        Me.Bar2.DockCol = 0
-        Me.Bar2.DockRow = 0
-        Me.Bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar2.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarSubItem1)})
-        Me.Bar2.OptionsBar.MultiLine = True
-        Me.Bar2.OptionsBar.UseWholeRow = True
-        Me.Bar2.Text = "Main menu"
-        Me.Bar2.Visible = False
-        '
-        'BarSubItem1
-        '
-        Me.BarSubItem1.Caption = "File"
-        Me.BarSubItem1.Id = 0
-        Me.BarSubItem1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSaveLayout)})
-        Me.BarSubItem1.Name = "BarSubItem1"
-        '
-        'mnSaveLayout
-        '
-        Me.mnSaveLayout.Caption = "Save Layout"
-        Me.mnSaveLayout.Id = 1
-        Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F10)
-        Me.mnSaveLayout.Name = "mnSaveLayout"
         '
         'frmEntriRole
         '

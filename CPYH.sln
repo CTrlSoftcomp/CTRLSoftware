@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CtrlSoft", "CPYH\CtrlSoft.vbproj", "{F9BDD123-EAE3-4536-91CC-B68A31399E8C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupCPYH", "SetupCPYH\SetupCPYH.vdproj", "{B9DCE1B4-4CDD-415D-94B8-F43803576CE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -11,8 +13,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BDD123-EAE3-4536-91CC-B68A31399E8C}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B9DCE1B4-4CDD-415D-94B8-F43803576CE1}.Debug|Any CPU.ActiveCfg = Debug
+		{B9DCE1B4-4CDD-415D-94B8-F43803576CE1}.Release|Any CPU.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -86,6 +86,11 @@ Public Class frmEntriSatuan
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
+            SimpleButton1.ImageList = frmMain.ICButtons
+            SimpleButton1.ImageIndex = 8
+            SimpleButton2.ImageList = frmMain.ICButtons
+            SimpleButton2.ImageIndex = 5
+
             LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then

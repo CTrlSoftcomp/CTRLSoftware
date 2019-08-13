@@ -44,17 +44,17 @@ Partial Class frmDaftarKontak
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage
         Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage
-        Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage
-        Me.XtraTabPage4 = New DevExpress.XtraTab.XtraTabPage
         Me.GridControl2 = New DevExpress.XtraGrid.GridControl
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridControl3 = New DevExpress.XtraGrid.GridControl
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridControl4 = New DevExpress.XtraGrid.GridControl
-        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage
+        Me.GridControl3 = New DevExpress.XtraGrid.GridControl
         Me.BindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.XtraTabPage4 = New DevExpress.XtraTab.XtraTabPage
+        Me.GridControl4 = New DevExpress.XtraGrid.GridControl
         Me.BindingSource4 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,17 +68,17 @@ Partial Class frmDaftarKontak
         Me.XtraTabControl1.SuspendLayout()
         Me.XtraTabPage1.SuspendLayout()
         Me.XtraTabPage2.SuspendLayout()
-        Me.XtraTabPage3.SuspendLayout()
-        Me.XtraTabPage4.SuspendLayout()
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridControl4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabPage3.SuspendLayout()
+        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabPage4.SuspendLayout()
+        CType(Me.GridControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -99,6 +99,7 @@ Partial Class frmDaftarKontak
         '
         Me.cmdCetak.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdCetak.Appearance.Options.UseFont = True
+        Me.cmdCetak.ImageIndex = 6
         Me.cmdCetak.Location = New System.Drawing.Point(390, 5)
         Me.cmdCetak.Name = "cmdCetak"
         Me.cmdCetak.Size = New System.Drawing.Size(120, 38)
@@ -109,6 +110,7 @@ Partial Class frmDaftarKontak
         '
         Me.cmdHapus.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdHapus.Appearance.Options.UseFont = True
+        Me.cmdHapus.ImageIndex = 2
         Me.cmdHapus.Location = New System.Drawing.Point(264, 5)
         Me.cmdHapus.Name = "cmdHapus"
         Me.cmdHapus.Size = New System.Drawing.Size(120, 38)
@@ -119,6 +121,7 @@ Partial Class frmDaftarKontak
         '
         Me.cmdEdit.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdEdit.Appearance.Options.UseFont = True
+        Me.cmdEdit.ImageIndex = 1
         Me.cmdEdit.Location = New System.Drawing.Point(138, 5)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(120, 38)
@@ -129,6 +132,7 @@ Partial Class frmDaftarKontak
         '
         Me.cmdBaru.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdBaru.Appearance.Options.UseFont = True
+        Me.cmdBaru.ImageIndex = 0
         Me.cmdBaru.Location = New System.Drawing.Point(12, 5)
         Me.cmdBaru.Name = "cmdBaru"
         Me.cmdBaru.Size = New System.Drawing.Size(120, 38)
@@ -140,6 +144,7 @@ Partial Class frmDaftarKontak
         Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
+        Me.cmdRefresh.ImageIndex = 3
         Me.cmdRefresh.Location = New System.Drawing.Point(725, 5)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
@@ -151,6 +156,7 @@ Partial Class frmDaftarKontak
         Me.cmdTutup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
+        Me.cmdTutup.ImageIndex = 5
         Me.cmdTutup.Location = New System.Drawing.Point(851, 5)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(120, 38)
@@ -179,10 +185,10 @@ Partial Class frmDaftarKontak
         'ckTdkAktif
         '
         Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 12)
+        Me.ckTdkAktif.Location = New System.Drawing.Point(843, 12)
         Me.ckTdkAktif.Name = "ckTdkAktif"
         Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
-        Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
+        Me.ckTdkAktif.Size = New System.Drawing.Size(128, 19)
         Me.ckTdkAktif.TabIndex = 0
         '
         'GridControl1
@@ -298,20 +304,6 @@ Partial Class frmDaftarKontak
         Me.XtraTabPage2.Size = New System.Drawing.Size(977, 415)
         Me.XtraTabPage2.Text = "Customer"
         '
-        'XtraTabPage3
-        '
-        Me.XtraTabPage3.Controls.Add(Me.GridControl3)
-        Me.XtraTabPage3.Name = "XtraTabPage3"
-        Me.XtraTabPage3.Size = New System.Drawing.Size(977, 415)
-        Me.XtraTabPage3.Text = "Supplier"
-        '
-        'XtraTabPage4
-        '
-        Me.XtraTabPage4.Controls.Add(Me.GridControl4)
-        Me.XtraTabPage4.Name = "XtraTabPage4"
-        Me.XtraTabPage4.Size = New System.Drawing.Size(977, 415)
-        Me.XtraTabPage4.Text = "Pegawai"
-        '
         'GridControl2
         '
         Me.GridControl2.DataSource = Me.BindingSource2
@@ -335,6 +327,13 @@ Partial Class frmDaftarKontak
         Me.GridView2.OptionsView.ShowFooter = True
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
+        'XtraTabPage3
+        '
+        Me.XtraTabPage3.Controls.Add(Me.GridControl3)
+        Me.XtraTabPage3.Name = "XtraTabPage3"
+        Me.XtraTabPage3.Size = New System.Drawing.Size(977, 415)
+        Me.XtraTabPage3.Text = "Supplier"
+        '
         'GridControl3
         '
         Me.GridControl3.DataSource = Me.BindingSource3
@@ -357,6 +356,13 @@ Partial Class frmDaftarKontak
         Me.GridView3.OptionsView.ShowAutoFilterRow = True
         Me.GridView3.OptionsView.ShowFooter = True
         Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'XtraTabPage4
+        '
+        Me.XtraTabPage4.Controls.Add(Me.GridControl4)
+        Me.XtraTabPage4.Name = "XtraTabPage4"
+        Me.XtraTabPage4.Size = New System.Drawing.Size(977, 415)
+        Me.XtraTabPage4.Text = "Pegawai"
         '
         'GridControl4
         '
@@ -409,17 +415,17 @@ Partial Class frmDaftarKontak
         Me.XtraTabControl1.ResumeLayout(False)
         Me.XtraTabPage1.ResumeLayout(False)
         Me.XtraTabPage2.ResumeLayout(False)
-        Me.XtraTabPage3.ResumeLayout(False)
-        Me.XtraTabPage4.ResumeLayout(False)
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridControl4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabPage3.ResumeLayout(False)
+        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabPage4.ResumeLayout(False)
+        CType(Me.GridControl4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -21,6 +21,7 @@ Partial Class frmEntriBarang
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.ckTampilkanSemua = New DevExpress.XtraEditors.CheckEdit
         Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
         Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton
         Me.cmdEdit = New DevExpress.XtraEditors.SimpleButton
@@ -75,7 +76,6 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.LayoutControlItem29 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlGroup3 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem
@@ -102,6 +102,10 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem31 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem32 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem33 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlGroup5 = New DevExpress.XtraLayout.LayoutControlGroup
+        Me.LayoutControlItem29 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem34 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar
@@ -113,6 +117,7 @@ Partial Class frmEntriBarang
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.ckTampilkanSemua.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtHargaJualB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,7 +166,6 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem29, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -188,12 +192,17 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem31, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem32, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem33, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem29, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem34, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.ckTampilkanSemua)
         Me.LayoutControl1.Controls.Add(Me.cmdRefresh)
         Me.LayoutControl1.Controls.Add(Me.cmdHapus)
         Me.LayoutControl1.Controls.Add(Me.cmdEdit)
@@ -230,19 +239,28 @@ Partial Class frmEntriBarang
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 22)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(560, 311, 250, 350)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(69, 322, 250, 350)
         Me.LayoutControl1.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignMode.AlignInGroups
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(1040, 547)
+        Me.LayoutControl1.Size = New System.Drawing.Size(1040, 599)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'ckTampilkanSemua
+        '
+        Me.ckTampilkanSemua.Location = New System.Drawing.Point(897, 310)
+        Me.ckTampilkanSemua.Name = "ckTampilkanSemua"
+        Me.ckTampilkanSemua.Properties.Caption = "Tampilkan Semua"
+        Me.ckTampilkanSemua.Size = New System.Drawing.Size(119, 19)
+        Me.ckTampilkanSemua.StyleController = Me.LayoutControl1
+        Me.ckTampilkanSemua.TabIndex = 13
         '
         'cmdRefresh
         '
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
         Me.cmdRefresh.ImageIndex = 3
-        Me.cmdRefresh.Location = New System.Drawing.Point(312, 505)
+        Me.cmdRefresh.Location = New System.Drawing.Point(312, 557)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(100, 30)
         Me.cmdRefresh.StyleController = Me.LayoutControl1
@@ -254,7 +272,7 @@ Partial Class frmEntriBarang
         Me.cmdHapus.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdHapus.Appearance.Options.UseFont = True
         Me.cmdHapus.ImageIndex = 2
-        Me.cmdHapus.Location = New System.Drawing.Point(212, 505)
+        Me.cmdHapus.Location = New System.Drawing.Point(212, 557)
         Me.cmdHapus.Name = "cmdHapus"
         Me.cmdHapus.Size = New System.Drawing.Size(96, 30)
         Me.cmdHapus.StyleController = Me.LayoutControl1
@@ -266,7 +284,7 @@ Partial Class frmEntriBarang
         Me.cmdEdit.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdEdit.Appearance.Options.UseFont = True
         Me.cmdEdit.ImageIndex = 1
-        Me.cmdEdit.Location = New System.Drawing.Point(112, 505)
+        Me.cmdEdit.Location = New System.Drawing.Point(112, 557)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(96, 30)
         Me.cmdEdit.StyleController = Me.LayoutControl1
@@ -278,7 +296,7 @@ Partial Class frmEntriBarang
         Me.cmdBaru.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdBaru.Appearance.Options.UseFont = True
         Me.cmdBaru.ImageIndex = 0
-        Me.cmdBaru.Location = New System.Drawing.Point(12, 505)
+        Me.cmdBaru.Location = New System.Drawing.Point(12, 557)
         Me.cmdBaru.Name = "cmdBaru"
         Me.cmdBaru.Size = New System.Drawing.Size(96, 30)
         Me.cmdBaru.StyleController = Me.LayoutControl1
@@ -287,10 +305,10 @@ Partial Class frmEntriBarang
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(12, 294)
+        Me.GridControl1.Location = New System.Drawing.Point(24, 333)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1016, 207)
+        Me.GridControl1.Size = New System.Drawing.Size(992, 208)
         Me.GridControl1.TabIndex = 5
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -647,7 +665,7 @@ Partial Class frmEntriBarang
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
         Me.cmdTutup.ImageIndex = 5
-        Me.cmdTutup.Location = New System.Drawing.Point(933, 505)
+        Me.cmdTutup.Location = New System.Drawing.Point(933, 557)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(95, 30)
         Me.cmdTutup.StyleController = Me.LayoutControl1
@@ -659,7 +677,7 @@ Partial Class frmEntriBarang
         Me.cmdSimpan.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSimpan.Appearance.Options.UseFont = True
         Me.cmdSimpan.ImageIndex = 8
-        Me.cmdSimpan.Location = New System.Drawing.Point(833, 505)
+        Me.cmdSimpan.Location = New System.Drawing.Point(833, 557)
         Me.cmdSimpan.Name = "cmdSimpan"
         Me.cmdSimpan.Size = New System.Drawing.Size(96, 30)
         Me.cmdSimpan.StyleController = Me.LayoutControl1
@@ -735,10 +753,10 @@ Partial Class frmEntriBarang
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem3, Me.LayoutControlGroup2, Me.LayoutControlItem29, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.LayoutControlItem30, Me.LayoutControlItem31, Me.LayoutControlItem32, Me.LayoutControlItem33})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem3, Me.LayoutControlGroup2, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.LayoutControlItem30, Me.LayoutControlItem31, Me.LayoutControlItem32, Me.LayoutControlItem33, Me.LayoutControlGroup5})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1040, 547)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1040, 599)
         Me.LayoutControlGroup1.Text = "Root"
         Me.LayoutControlGroup1.TextVisible = False
         '
@@ -746,7 +764,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem1.Control = Me.cmdSimpan
         Me.LayoutControlItem1.CustomizationFormText = "LayoutControlItem1"
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(821, 493)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(821, 545)
         Me.LayoutControlItem1.MaxSize = New System.Drawing.Size(100, 0)
         Me.LayoutControlItem1.MinSize = New System.Drawing.Size(100, 27)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
@@ -761,7 +779,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem2.Control = Me.cmdTutup
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(921, 493)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(921, 545)
         Me.LayoutControlItem2.MaxSize = New System.Drawing.Size(99, 0)
         Me.LayoutControlItem2.MinSize = New System.Drawing.Size(99, 27)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
@@ -775,7 +793,7 @@ Partial Class frmEntriBarang
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(404, 464)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(404, 545)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
         Me.EmptySpaceItem3.Size = New System.Drawing.Size(417, 34)
         Me.EmptySpaceItem3.Text = "EmptySpaceItem3"
@@ -877,17 +895,6 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem10.Size = New System.Drawing.Size(303, 24)
         Me.LayoutControlItem10.Text = "Type Pajak"
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(77, 13)
-        '
-        'LayoutControlItem29
-        '
-        Me.LayoutControlItem29.Control = Me.GridControl1
-        Me.LayoutControlItem29.CustomizationFormText = "Satuan dan Barcode"
-        Me.LayoutControlItem29.Location = New System.Drawing.Point(0, 266)
-        Me.LayoutControlItem29.Name = "LayoutControlItem29"
-        Me.LayoutControlItem29.Size = New System.Drawing.Size(1020, 227)
-        Me.LayoutControlItem29.Text = "Satuan dan Barcode"
-        Me.LayoutControlItem29.TextLocation = DevExpress.Utils.Locations.Top
-        Me.LayoutControlItem29.TextSize = New System.Drawing.Size(97, 13)
         '
         'LayoutControlGroup3
         '
@@ -1136,7 +1143,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem30.Control = Me.cmdBaru
         Me.LayoutControlItem30.CustomizationFormText = "LayoutControlItem30"
-        Me.LayoutControlItem30.Location = New System.Drawing.Point(0, 493)
+        Me.LayoutControlItem30.Location = New System.Drawing.Point(0, 545)
         Me.LayoutControlItem30.MaxSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem30.MinSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem30.Name = "LayoutControlItem30"
@@ -1151,7 +1158,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem31.Control = Me.cmdEdit
         Me.LayoutControlItem31.CustomizationFormText = "LayoutControlItem31"
-        Me.LayoutControlItem31.Location = New System.Drawing.Point(100, 493)
+        Me.LayoutControlItem31.Location = New System.Drawing.Point(100, 545)
         Me.LayoutControlItem31.MaxSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem31.MinSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem31.Name = "LayoutControlItem31"
@@ -1166,7 +1173,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem32.Control = Me.cmdHapus
         Me.LayoutControlItem32.CustomizationFormText = "LayoutControlItem32"
-        Me.LayoutControlItem32.Location = New System.Drawing.Point(200, 493)
+        Me.LayoutControlItem32.Location = New System.Drawing.Point(200, 545)
         Me.LayoutControlItem32.MaxSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem32.MinSize = New System.Drawing.Size(100, 34)
         Me.LayoutControlItem32.Name = "LayoutControlItem32"
@@ -1181,7 +1188,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem33.Control = Me.cmdRefresh
         Me.LayoutControlItem33.CustomizationFormText = "LayoutControlItem33"
-        Me.LayoutControlItem33.Location = New System.Drawing.Point(300, 493)
+        Me.LayoutControlItem33.Location = New System.Drawing.Point(300, 545)
         Me.LayoutControlItem33.MaxSize = New System.Drawing.Size(104, 34)
         Me.LayoutControlItem33.MinSize = New System.Drawing.Size(104, 34)
         Me.LayoutControlItem33.Name = "LayoutControlItem33"
@@ -1191,6 +1198,49 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem33.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem33.TextToControlDistance = 0
         Me.LayoutControlItem33.TextVisible = False
+        '
+        'LayoutControlGroup5
+        '
+        Me.LayoutControlGroup5.CustomizationFormText = "Satuan dan Barcode"
+        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem29, Me.LayoutControlItem34, Me.EmptySpaceItem4})
+        Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 266)
+        Me.LayoutControlGroup5.Name = "LayoutControlGroup5"
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1020, 279)
+        Me.LayoutControlGroup5.Text = "Satuan dan Barcode"
+        '
+        'LayoutControlItem29
+        '
+        Me.LayoutControlItem29.Control = Me.GridControl1
+        Me.LayoutControlItem29.CustomizationFormText = "Satuan dan Barcode"
+        Me.LayoutControlItem29.Location = New System.Drawing.Point(0, 23)
+        Me.LayoutControlItem29.Name = "LayoutControlItem29"
+        Me.LayoutControlItem29.Size = New System.Drawing.Size(996, 212)
+        Me.LayoutControlItem29.Text = "Satuan dan Barcode"
+        Me.LayoutControlItem29.TextLocation = DevExpress.Utils.Locations.Top
+        Me.LayoutControlItem29.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem29.TextToControlDistance = 0
+        Me.LayoutControlItem29.TextVisible = False
+        '
+        'LayoutControlItem34
+        '
+        Me.LayoutControlItem34.Control = Me.ckTampilkanSemua
+        Me.LayoutControlItem34.CustomizationFormText = "Tampilkan Semua"
+        Me.LayoutControlItem34.Location = New System.Drawing.Point(873, 0)
+        Me.LayoutControlItem34.Name = "LayoutControlItem34"
+        Me.LayoutControlItem34.Size = New System.Drawing.Size(123, 23)
+        Me.LayoutControlItem34.Text = "Tampilkan Semua"
+        Me.LayoutControlItem34.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem34.TextToControlDistance = 0
+        Me.LayoutControlItem34.TextVisible = False
+        '
+        'EmptySpaceItem4
+        '
+        Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 0)
+        Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(873, 23)
+        Me.EmptySpaceItem4.Text = "EmptySpaceItem4"
+        Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'DxErrorProvider1
         '
@@ -1245,7 +1295,7 @@ Partial Class frmEntriBarang
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 569)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 621)
         Me.barDockControlBottom.Size = New System.Drawing.Size(1040, 0)
         '
         'barDockControlLeft
@@ -1253,20 +1303,20 @@ Partial Class frmEntriBarang
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 22)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 547)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 599)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1040, 22)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 547)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 599)
         '
         'frmEntriBarang
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1040, 569)
+        Me.ClientSize = New System.Drawing.Size(1040, 621)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
@@ -1275,8 +1325,10 @@ Partial Class frmEntriBarang
         Me.Name = "frmEntriBarang"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Entri Barang"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.ckTampilkanSemua.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtHargaJualB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1325,7 +1377,6 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem29, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1352,6 +1403,10 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem31, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem32, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem33, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem29, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem34, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1448,4 +1503,8 @@ Partial Class frmEntriBarang
     Friend WithEvents LayoutControlItem31 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem32 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem33 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlGroup5 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents ckTampilkanSemua As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents LayoutControlItem34 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
 End Class

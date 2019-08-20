@@ -201,6 +201,12 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriBarangD.Designer.vb">
+      <DependentUpon>frmEntriBarangD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBarangD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriBarang.Designer.vb">
       <DependentUpon>frmEntriBarang.vb</DependentUpon>
     </Compile>
@@ -301,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBarangD.resx">
+      <DependentUpon>frmEntriBarangD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriBarang.resx">
       <DependentUpon>frmEntriBarang.vb</DependentUpon>

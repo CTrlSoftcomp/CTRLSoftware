@@ -55,13 +55,14 @@ Public Class frmDaftarBarang
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                SQL = "SELECT MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
+                                SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
                                         "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
                                         "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
-                                        "MBarangD.ProsenUpA, MBarangD.HargaJualA, MBarangD.ProsenUpB, MBarangD.HargaJualB," & vbCrLf & _
-                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak " & vbCrLf & _
+                                        "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
+                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MKategori.Nama AS Kategori " & vbCrLf & _
                                         "FROM MBarang (NOLOCK)" & vbCrLf & _
                                         "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                        "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
                                         "LEFT JOIN MTypePajak (NOLOCK) ON MTypePajak.NoID=MBarang.IDTypePajak" & vbCrLf & _
                                         "LEFT JOIN MSatuan (NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan" & vbCrLf & _
                                         "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _

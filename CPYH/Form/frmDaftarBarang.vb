@@ -59,7 +59,7 @@ Public Class frmDaftarBarang
                                         "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
                                         "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
                                         "MBarangD.ProsenUpA, MBarangD.HargaJualA, MBarangD.ProsenUpB, MBarangD.HargaJualB," & vbCrLf & _
-                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3" & vbCrLf & _
+                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak " & vbCrLf & _
                                         "FROM MBarang (NOLOCK)" & vbCrLf & _
                                         "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                         "LEFT JOIN MTypePajak (NOLOCK) ON MTypePajak.NoID=MBarang.IDTypePajak" & vbCrLf & _
@@ -101,7 +101,7 @@ Public Class frmDaftarBarang
         Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
         gridview = GridView1
         If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data Barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                 HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
             End If
         End If
@@ -140,7 +140,7 @@ Public Class frmDaftarBarang
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+        Using frm As New frmEntriBarang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
             If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                 RefreshData(frm.NoID)
             End If
@@ -148,7 +148,7 @@ Public Class frmDaftarBarang
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, -1)
+        Using frm As New frmEntriBarang(-1)
             If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                 RefreshData(frm.NoID)
             End If
@@ -241,5 +241,9 @@ Public Class frmDaftarBarang
 
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
+    End Sub
+
+    Private Sub frmDaftarBarang_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged
+
     End Sub
 End Class

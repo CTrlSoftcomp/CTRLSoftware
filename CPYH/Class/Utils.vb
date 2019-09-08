@@ -17,6 +17,13 @@ Public Class Utils
         Baru = 0
         Edit = 1
         TempInsert = 2
+        Posted = 3
+    End Enum
+
+    Public Enum TypePajak
+        NonPajak = 0
+        Include = 1
+        Exclude = 2
     End Enum
 
     Public Shared Function BuangSpasi(ByVal x) As String

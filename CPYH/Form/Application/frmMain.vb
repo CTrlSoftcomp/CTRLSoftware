@@ -225,6 +225,21 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnPO"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPO.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPO, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnBarang"
                 Dim x As frmDaftarBarang = Nothing
                 For Each frm In Me.MdiChildren
@@ -367,7 +382,15 @@ Public Class frmMain
         x.Focus()
     End Sub
 
+    Private Sub barEditReport_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles barEditReport.EditValueChanged
+        IsEditReport = NullToBool(barEditReport.EditValue)
+    End Sub
+
     Private Sub IsEditReport_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barEditReport.ItemClick
         IsEditReport = NullToBool(barEditReport.EditValue)
+    End Sub
+
+    Private Sub barEditReport_ItemPress(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barEditReport.ItemPress
+
     End Sub
 End Class

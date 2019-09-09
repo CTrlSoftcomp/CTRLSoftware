@@ -63,6 +63,11 @@ Public Class frmDaftarTransaksi
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
                                         com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarPembelian
+                                        SQL = "spDaftarBeli @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
                                 End Select
 
                                 com.CommandText = SQL
@@ -106,6 +111,16 @@ Public Class frmDaftarTransaksi
                                     NamaFile = "Faktur_MPO.repx"
                                     Judul = "Faktur Pesanan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPembelian
+                                    Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPO @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPO.repx"
+                                    Judul = "Faktur Pesanan"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -123,6 +138,10 @@ Public Class frmDaftarTransaksi
             Select Case formName
                 Case modMain.FormName.DaftarPO
                     If XtraMessageBox.Show("Ingin menghapus data pesanan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPembelian
+                    If XtraMessageBox.Show("Ingin menghapus data pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
             End Select
@@ -150,6 +169,12 @@ Public Class frmDaftarTransaksi
 
                                         com.CommandText = "DELETE FROM MPO WHERE ISNULL(MPO.IsPosted, 0)=0 AND MPO.NoID=" & NoID
                                         com.ExecuteNonQuery()
+                                    Case modMain.FormName.DaftarPembelian
+                                        com.CommandText = "DELETE MBeliD FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDBeli WHERE ISNULL(MBeli.IsPosted, 0)=0 AND MBeli.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MBeli WHERE ISNULL(MBeli.IsPosted, 0)=0 AND MBeli.NoID=" & NoID
+                                        com.ExecuteNonQuery()
                                 End Select
 
                                 If com.Transaction IsNot Nothing Then
@@ -174,6 +199,11 @@ Public Class frmDaftarTransaksi
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
+            Case modMain.FormName.DaftarPembelian
+                Dim x As New frmEntriBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
         End Select
     End Sub
 
@@ -181,6 +211,11 @@ Public Class frmDaftarTransaksi
         Select Case formName
             Case modMain.FormName.DaftarPO
                 Dim x As New frmEntriPO(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPembelian
+                Dim x As New frmEntriBeli(-1)
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()

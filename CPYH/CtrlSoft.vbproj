@@ -203,6 +203,18 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriBeliD.Designer.vb">
+      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBeliD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBeli.Designer.vb">
+      <DependentUpon>frmEntriBeli.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBeli.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriPOD.Designer.vb">
       <DependentUpon>frmEntriPOD.vb</DependentUpon>
     </Compile>
@@ -329,6 +341,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBeliD.resx">
+      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBeli.resx">
+      <DependentUpon>frmEntriBeli.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriPOD.resx">
       <DependentUpon>frmEntriPOD.vb</DependentUpon>

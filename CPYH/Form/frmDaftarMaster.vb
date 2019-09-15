@@ -266,6 +266,13 @@ Public Class frmDaftarMaster
 
     Private Sub frmDaftarMaster_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            cmdBaru.ImageList = frmMain.ICButtons
+            cmdEdit.ImageList = frmMain.ICButtons
+            cmdHapus.ImageList = frmMain.ICButtons
+            cmdCetak.ImageList = frmMain.ICButtons
+            cmdRefresh.ImageList = frmMain.ICButtons
+            cmdTutup.ImageList = frmMain.ICButtons
+
             LabelControl1.Text = Me.Text
             RefreshData(-1)
         Catch ex As Exception

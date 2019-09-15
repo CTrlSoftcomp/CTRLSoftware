@@ -62,7 +62,7 @@ Public Class frmDaftarKontak
                                       "FROM [dbo].[MAlamat]" & vbCrLf & _
                                       "LEFT JOIN MTypeHarga ON MTypeHarga.NoID=MAlamat.IDTypeHarga" & vbCrLf & _
                                       "WHERE 1=1 "
-                                If ckTdkAktif.Checked Then
+                                If Not ckTdkAktif.Checked Then
                                     SQL &= " AND MAlamat.IsActive=1"
                                 End If
 
@@ -78,7 +78,7 @@ Public Class frmDaftarKontak
                                 oDA.Fill(ds, "MSupplier")
                                 BindingSource3.DataSource = ds.Tables("MSupplier")
 
-                                com.CommandText = SQL & " AND MAlamat.IsSupplier=1"
+                                com.CommandText = SQL & " AND MAlamat.IsPegawai=1"
                                 oDA.Fill(ds, "MPegawai")
                                 BindingSource4.DataSource = ds.Tables("MPegawai")
 
@@ -179,65 +179,61 @@ Public Class frmDaftarKontak
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        'Select Case tableName
-        '    Case "MGudang"
-        '        Using frm As New frmEntriGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MMerk"
-        '        Using frm As New frmEntriMerk(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MSatuan"
-        '        Using frm As New frmEntriSatuan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MKategori"
-        '        Using frm As New frmEntriKategori(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case Else
-        '        XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        'End Select
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, NullToLong(GridView2.GetRowCellValue(GridView2.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 2
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, NullToLong(GridView3.GetRowCellValue(GridView3.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 3
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, NullToLong(GridView4.GetRowCellValue(GridView4.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+        End Select
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        'Select Case tableName
-        '    Case "MGudang"
-        '        Using frm As New frmEntriGudang(-1)
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MMerk"
-        '        Using frm As New frmEntriMerk(-1)
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MSatuan"
-        '        Using frm As New frmEntriSatuan(-1)
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case "MKategori"
-        '        Using frm As New frmEntriKategori(-1)
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshData(frm.NoID)
-        '            End If
-        '        End Using
-        '    Case Else
-        '        XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        'End Select
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 2
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 3
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+        End Select
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String)
@@ -298,6 +294,13 @@ Public Class frmDaftarKontak
 
     Private Sub frmDaftarMaster_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            cmdBaru.ImageList = frmMain.ICButtons
+            cmdEdit.ImageList = frmMain.ICButtons
+            cmdHapus.ImageList = frmMain.ICButtons
+            cmdCetak.ImageList = frmMain.ICButtons
+            cmdRefresh.ImageList = frmMain.ICButtons
+            cmdTutup.ImageList = frmMain.ICButtons
+
             LabelControl1.Text = Me.Text
             RefreshData(-1)
         Catch ex As Exception

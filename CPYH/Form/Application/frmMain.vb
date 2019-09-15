@@ -196,7 +196,7 @@ Public Class frmMain
             RibbonPageCategory1.Visible = IIf(UserLogin.Supervisor, True, False)
             barLoginOut.Caption = "Logout"
             
-            UserLogin.TanggalSystem = Repository.RepMenu.GetTimeServer()
+            UserLogin.TanggalSystem = Repository.RepSQLServer.GetTimeServer()
             TimeZoneInformation.TimeZoneFunctionality.SetTime(System.TimeZone.CurrentTimeZone.ToLocalTime(UserLogin.TanggalSystem))
             barStaticUID.Caption = "User : [" & UserLogin.Nama & "]"
             barStaticJam.Caption = "Tanggal System : " & UserLogin.TanggalSystem.ToString("dd/MM/yyyy HH:mm")
@@ -225,10 +225,24 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnBarang"
+                Dim x As frmDaftarBarang = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarBarang Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarBarang(e.Item.Name, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnKontak"
                 Dim x As frmDaftarKontak = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                    If TypeOf frm Is frmDaftarKontak Then
                         x = frm
                     End If
                 Next

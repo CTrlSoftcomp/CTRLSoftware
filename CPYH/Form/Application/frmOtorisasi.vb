@@ -14,7 +14,7 @@
             DxErrorProvider1.SetError(TextEdit2, "Password Harus diisi!", DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information)
         End If
         If Not DxErrorProvider1.HasErrors Then
-            Dim User As Model.User = Repository.RepMenu.GetOtorisasiSPV(TextEdit1.Text, TextEdit2.Text)
+            Dim User As Model.User = Repository.RepSQLServer.GetOtorisasiSPV(TextEdit1.Text, TextEdit2.Text)
             If User IsNot Nothing Then
                 Utils.UserOtorisasi = User
                 DialogResult = Windows.Forms.DialogResult.OK
@@ -23,5 +23,10 @@
                 DxErrorProvider1.SetError(TextEdit1, "User dan Password Salah!", DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information)
             End If
         End If
+    End Sub
+
+    Private Sub frmOtorisasi_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        SimpleButton1.ImageList = frmMain.ICButtons
+        SimpleButton2.ImageList = frmMain.ICButtons
     End Sub
 End Class

@@ -82,4 +82,9 @@ Public Class frmSettingDB
     Sub RunODBC()
         Shell("odbcad32.exe", AppWinStyle.NormalFocus, False)
     End Sub
+
+    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
 End Class

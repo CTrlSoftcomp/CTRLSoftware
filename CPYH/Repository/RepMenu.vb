@@ -5,7 +5,53 @@ Imports DevExpress.Utils
 Imports CtrlSoft.Utils
 
 Namespace Repository
-    Public Class RepMenu
+    Public Class RepSQLServer
+        Public Shared Function GetKodeKontak(ByVal tipe As Integer) As String
+            'All = 0
+            'Customer = 1
+            'Supplier = 2
+            'Pegawai = 3
+            Dim Hasil As String = "", NoUrut As Long = -1
+            Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT CONVERT(BIGINT, MAX(RIGHT(Kode, 3))) FROM MAlamat WHERE ISNUMERIC(RIGHT(Kode, 3))=1 AND SUBSTRING(Kode, 1, LEN(@Kode))=@Kode"
+                                    Select Case tipe
+                                        Case 1
+                                            Hasil = "CUST-"
+                                        Case 2
+                                            Hasil = "SUP-"
+                                        Case 3
+                                            Hasil = "KRY-"
+                                        Case Else
+                                            Hasil = "KRY-"
+                                    End Select
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = Hasil
+                                    NoUrut = NullToLong(com.ExecuteScalar) + 1
+                                    Hasil &= NoUrut.ToString("00000")
+
+                                    Application.DoEvents()
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil = ""
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
         Public Shared Function GetLogin(ByVal Kode As String, ByVal Pwd As String) As Model.User
             Dim User As Model.User = Nothing
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)

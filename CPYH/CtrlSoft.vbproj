@@ -17,7 +17,7 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
     <OptionInfer>On</OptionInfer>
-    <ApplicationIcon>DashboardMainDemo.ico</ApplicationIcon>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -201,6 +201,30 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriBarangD.Designer.vb">
+      <DependentUpon>frmEntriBarangD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBarangD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBarang.Designer.vb">
+      <DependentUpon>frmEntriBarang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBarang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmDaftarBarang.Designer.vb">
+      <DependentUpon>frmDaftarBarang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmDaftarBarang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriKontak.Designer.vb">
+      <DependentUpon>frmEntriKontak.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriKontak.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmDaftarKontak.Designer.vb">
       <DependentUpon>frmDaftarKontak.vb</DependentUpon>
     </Compile>
@@ -284,6 +308,18 @@
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBarangD.resx">
+      <DependentUpon>frmEntriBarangD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBarang.resx">
+      <DependentUpon>frmEntriBarang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmDaftarBarang.resx">
+      <DependentUpon>frmDaftarBarang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriKontak.resx">
+      <DependentUpon>frmEntriKontak.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDaftarKontak.resx">
       <DependentUpon>frmDaftarKontak.vb</DependentUpon>
     </EmbeddedResource>
@@ -326,7 +362,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DashboardMainDemo.ico" />
+    <Content Include="Logo.ico" />
+    <None Include="Resources\Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

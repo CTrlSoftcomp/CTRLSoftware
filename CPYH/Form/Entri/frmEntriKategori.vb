@@ -86,6 +86,11 @@ Public Class frmEntriKategori
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
+            SimpleButton1.ImageList = frmMain.ICButtons
+            SimpleButton1.ImageIndex = 8
+            SimpleButton2.ImageList = frmMain.ICButtons
+            SimpleButton2.ImageIndex = 5
+
             LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
@@ -112,7 +117,7 @@ Public Class frmEntriKategori
                                 com.Transaction = cn.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT NoID, [Nama] Induk FROM MKategori WHERE IsActive=1"
+                                com.CommandText = "SELECT NoID, [Nama] Induk FROM MKategori WHERE NoID<>" & NoID & " AND IsActive=1"
                                 oDA.Fill(ds, "MParent")
                                 txtParent.Properties.DataSource = ds.Tables("MParent")
                                 txtParent.Properties.ValueMember = "NoID"

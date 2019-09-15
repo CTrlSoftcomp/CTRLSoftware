@@ -3,6 +3,7 @@ Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraEditors
 Imports System.Data
 Imports System.Data.SqlClient
+Imports DevExpress.Utils
 
 Public Class frmEntriBeli
     Private NoID As Long = -1
@@ -24,6 +25,131 @@ Public Class frmEntriBeli
     End Sub
 
 #Region "Init Data"
+    Private Sub InitLoadLookUpPO()
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "DECLARE @IDSupplier AS INT =" & NullToLong(txtSupplier.EditValue) & ", @Tanggal AS DATETIME='" & NullToDate(txtTanggal.EditValue).ToString("yyyy-MM-dd HH:mm:ss") & "', @IDBeli AS BIGINT=" & NoID & ";" & vbCrLf & _
+                                              "SELECT MPO.NoID, MPO.Kode, MPO.Tanggal" & vbCrLf & _
+                                              "FROM MPO" & vbCrLf & _
+                                              "INNER JOIN MPOD ON MPO.NoID=MPOD.IDHeader" & vbCrLf & _
+                                              "LEFT JOIN (SELECT MBeli.IDPO, COUNT(MBeli.IDPO) AS Jml " & vbCrLf & _
+                                              "FROM MBeli WHERE MBeli.NoID<>@IDBeli GROUP BY MBeli.IDPO) MBeli ON MBeli.IDPO=MPO.NoID" & vbCrLf & _
+                                              "WHERE MPO.IsPosted=1 AND ISNULL(MPO.IsExpired, 0)=0 AND CONVERT(DATE, MPO.Expired)>=CONVERT(DATE, @Tanggal) AND ISNULL(MBeli.Jml, 0)=0 AND MPO.IDSupplier=@IDSupplier AND CONVERT(DATE, MPO.Tanggal)<=CONVERT(DATE, @Tanggal)" & vbCrLf & _
+                                              "GROUP BY MPO.NoID, MPO.Kode, MPO.Tanggal"
+                            oDA.Fill(ds, "MPO")
+                            txtPO.Properties.DataSource = ds.Tables("MPO")
+                            txtPO.Properties.ValueMember = "NoID"
+                            txtPO.Properties.DisplayMember = "Kode"
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+    Private Sub InitLoadDataPO()
+        Dim IDPOD As Long = -1
+        If IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True AndAlso NullToStr(txtPO.Text) <> "" Then
+            Using dlg As New WaitDialogForm("Sedang meload data!", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+
+                                    cn.Open()
+                                    com.Connection = cn
+                                    com.CommandTimeout = cn.ConnectionTimeout
+                                    oDA.SelectCommand = com
+                                    com.Transaction = cn.BeginTransaction
+
+                                    com.CommandText = "SELECT MAX(NoID) FROM MBeliD"
+                                    IDPOD = NullToLong(com.ExecuteScalar()) + 1
+
+                                    com.CommandText = "DECLARE @IDPO AS BIGINT=" & NullToLong(txtPO.EditValue) & ", @IDBeli AS BIGINT=" & NoID & ", @IDBeliD AS BIGINT=" & IDPOD & ";" & vbCrLf & _
+                                                      "INSERT INTO [dbo].[MBeliD]" & vbCrLf & _
+                                                      "([NoID],[IDHeader],[IDPOD],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty],[Harga]" & vbCrLf & _
+                                                      ",[DiscProsen1],[DiscProsen2],[DiscProsen3],[DiscProsen4],[DiscProsen5],[DiscRp]" & vbCrLf & _
+                                                      ",[DiscNotaProsen],[DiscNotaRp],[JumlahBruto],[DPP],[PPN],[Jumlah])" & vbCrLf & _
+                                                      "SELECT @IDBeliD + ROW_NUMBER() OVER(ORDER BY NoID) [NoID],@IDBeli [IDHeader],NoID [IDPOD],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty],[Harga]" & vbCrLf & _
+                                                      ",[DiscProsen1],[DiscProsen2],[DiscProsen3],[DiscProsen4],[DiscProsen5],[DiscRp]" & vbCrLf & _
+                                                      ",[DiscNotaProsen],[DiscNotaRp],[JumlahBruto],[DPP],[PPN],[Jumlah]" & vbCrLf & _
+                                                      "FROM MPOD" & vbCrLf & _
+                                                      "WHERE MPOD.IDHeader=@IDPO"
+                                    If NullToLong(com.ExecuteNonQuery()) >= 1 Then
+                                        com.CommandText = "SELECT MPO.IDTypePajak FROM MPO WHERE NoID=" & NullToLong(txtPO.EditValue)
+                                        txtTypePajak.EditValue = NullToLong(com.ExecuteScalar())
+                                        IDTypePajak = txtTypePajak.EditValue
+
+                                        com.CommandText = "UPDATE MBeli SET IDTypePajak=" & NullToLong(txtTypePajak.EditValue) & " WHERE NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
+                                                              "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                              "FROM MBeli " & vbCrLf & _
+                                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                                              "WHERE MBeli.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                                          "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                                          "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                          "FROM MBeli " & vbCrLf & _
+                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                                          "WHERE MBeliD.IDHeader=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                                          "PPN=ISNULL(MBeli.PPN, 0)-(ISNULL(Detil.PPN, 0)-ISNULL(MBeliD.PPN, 0)), " & vbCrLf & _
+                                                          "DPP=ISNULL(MBeli.DPP, 0)-(ISNULL(Detil.DPP, 0)-ISNULL(MBeliD.DPP, 0)) " & vbCrLf & _
+                                                          "FROM MBeli " & vbCrLf & _
+                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(DPP) AS DPP, SUM(PPN) AS PPN, MAX(NoID) AS NoID FROM MBeliD GROUP BY IDHeader) AS Detil ON Detil.IDHeader=MBeli.NoID AND Detil.NoID=MBeliD.NoID" & vbCrLf & _
+                                                          "WHERE MBeliD.IDHeader=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                                          "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
+                                                          "FROM MBeli " & vbCrLf & _
+                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                                          "WHERE MBeliD.IDHeader=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), Total=ISNULL(MBeliD.Jumlah, 0)" & vbCrLf & _
+                                                          "FROM MBeli " & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                                          "WHERE MBeli.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        If com.Transaction IsNot Nothing Then
+                                            com.Transaction.Commit()
+                                        End If
+                                        com.Transaction = Nothing
+
+                                        RefreshDetil()
+                                    End If
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
+    End Sub
     Private Sub InitLoadLookUp()
         Using cn As New SqlConnection(StrKonSQL)
             Using com As New SqlCommand
@@ -78,9 +204,11 @@ Public Class frmEntriBeli
                                 End If
                                 txtTanggal.EditValue = NullToDate(iRow.Item("Tanggal"))
                                 txtKode.Text = NullToStr(iRow.Item("Kode"))
-                                txtExpired.EditValue = NullToDate(iRow.Item("Expired"))
+                                txtJatuhTempo.EditValue = NullToDate(iRow.Item("JatuhTempo"))
                                 txtSupplier.EditValue = -1
                                 txtSupplier.EditValue = NullToLong(iRow.Item("IDSupplier"))
+                                InitLoadLookUpPO()
+                                txtPO.EditValue = NullToLong(iRow.Item("IDPO"))
                                 txtTypePajak.EditValue = NullToLong(iRow.Item("IDTypePajak"))
                                 IDTypePajak = txtTypePajak.EditValue
                                 txtNoReff.Text = NullToStr(iRow.Item("NoReff"))
@@ -88,6 +216,8 @@ Public Class frmEntriBeli
                             Else
                                 txtTanggal.EditValue = Now
                                 txtSupplier.EditValue = -1
+                                InitLoadLookUpPO()
+                                txtPO.EditValue = -1
                                 txtTypePajak.EditValue = 1
                                 IDTypePajak = txtTypePajak.EditValue
                                 pStatus = pStatusForm.Baru
@@ -115,11 +245,12 @@ Public Class frmEntriBeli
                                 com.CommandTimeout = cn.ConnectionTimeout
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MBeliD.*, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf & _
+                                com.CommandText = "SELECT MBeliD.*, MPOD.Qty*MPOD.Konversi AS QtyOrder, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf & _
                                                   "FROM MBeliD" & vbCrLf & _
                                                   "LEFT JOIN MBarang ON MBarang.NoID=MBeliD.IDBarang" & vbCrLf & _
                                                   "LEFT JOIN MBarangD ON MBarangD.NoID=MBeliD.IDBarangD" & vbCrLf & _
                                                   "LEFT JOIN MSatuan ON MSatuan.NoID=MBeliD.IDSatuan" & vbCrLf & _
+                                                  "LEFT JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD" & vbCrLf & _
                                                   "WHERE MBeliD.IDHeader=" & NoID
                                 oDA.Fill(ds, "MBeliD")
                                 GridControl1.DataSource = ds.Tables("MBeliD")
@@ -128,6 +259,16 @@ Public Class frmEntriBeli
                                 GridView1.ClearSelection()
                                 GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), IDDetil.ToString("n0"))
                                 GridView1.SelectRow(GridView1.FocusedRowHandle)
+
+                                If ds.Tables("MBeliD").Rows.Count >= 1 Then
+                                    txtPO.Enabled = False
+                                    txtSupplier.Enabled = False
+                                    txtTanggal.Enabled = False
+                                Else
+                                    txtPO.Enabled = True
+                                    txtSupplier.Enabled = True
+                                    txtTanggal.Enabled = True
+                                End If
 
                                 If pStatus = pStatusForm.Posted Then
                                     mnBaru.Enabled = False
@@ -203,15 +344,15 @@ Public Class frmEntriBeli
                                     Exit Try
                                 End If
 
-                                com.CommandText = "EXEC [dbo].[spSimpanMBeli] @NoID,@Kode,@NoReff,@IDSupplier,@Tanggal,@Expired,@Catatan,@IDTypePajak,@Subtotal," & vbCrLf & _
-                                                  "@DiscNotaProsen,@DiscNotaRp,@TotalBruto,@DPP,@PPN,@Total,@IsPosted,@TglPosted,@IDUserPosted,@IDUserEntry,@IDUserEdit,@IsExpired"
+                                com.CommandText = "EXEC [dbo].[spSimpanMBeli] @NoID,@Kode,@NoReff,@IDSupplier,@Tanggal,@JatuhTempo,@Catatan,@IDTypePajak,@Subtotal," & vbCrLf & _
+                                                  "@DiscNotaProsen,@DiscNotaRp,@TotalBruto,@DPP,@PPN,@Total,@IsPosted,@TglPosted,@IDUserPosted,@IDUserEntry,@IDUserEdit,@IDPO"
                                 com.Parameters.Clear()
                                 com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                 com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtKode.Text
                                 com.Parameters.Add(New SqlParameter("@NoReff", SqlDbType.VarChar)).Value = txtNoReff.Text
                                 com.Parameters.Add(New SqlParameter("@IDSupplier", SqlDbType.Int)).Value = NullTolInt(txtSupplier.EditValue)
                                 com.Parameters.Add(New SqlParameter("@Tanggal", SqlDbType.DateTime)).Value = NullToDate(txtTanggal.EditValue)
-                                com.Parameters.Add(New SqlParameter("@Expired", SqlDbType.Date)).Value = NullToDate(txtExpired.EditValue)
+                                com.Parameters.Add(New SqlParameter("@JatuhTempo", SqlDbType.Date)).Value = NullToDate(txtJatuhTempo.EditValue)
                                 com.Parameters.Add(New SqlParameter("@Catatan", SqlDbType.VarChar)).Value = txtCatatan.Text
                                 com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.SmallInt)).Value = NullTolInt(txtTypePajak.EditValue)
                                 com.Parameters.Add(New SqlParameter("@Subtotal", SqlDbType.Money)).Value = NullToDbl(txtSubtotal.EditValue)
@@ -226,7 +367,8 @@ Public Class frmEntriBeli
                                 com.Parameters.Add(New SqlParameter("@IDUserPosted", SqlDbType.Int)).Value = System.DBNull.Value
                                 com.Parameters.Add(New SqlParameter("@IDUserEntry", SqlDbType.Int)).Value = UserLogin.NoID
                                 com.Parameters.Add(New SqlParameter("@IDUserEdit", SqlDbType.Int)).Value = IIf(pStatus = pStatusForm.Edit, UserLogin.NoID, -1)
-                                com.Parameters.Add(New SqlParameter("@IsExpired", SqlDbType.Bit)).Value = False
+                                com.Parameters.Add(New SqlParameter("@IDPO", SqlDbType.BigInt)).Value = NullToLong(txtPO.EditValue)
+
                                 NoID = NullToLong(com.ExecuteScalar())
                                 com.Parameters.Clear()
 
@@ -483,6 +625,7 @@ Public Class frmEntriBeli
                                 txtNamaSupplier.Text = ""
                                 txtAlamatSupplier.Text = ""
                             End If
+                            InitLoadLookUpPO()
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End Try
@@ -496,14 +639,15 @@ Public Class frmEntriBeli
         Try
             If pStatus = pStatusForm.Baru Then
                 txtKode.Text = "AUTO" 'Repository.RepKode.GetNewKode("MBeli", "Kode", "PO-" & NullToDate(txtTanggal.EditValue).ToString("yyMM") & "-", "", Repository.RepKode.Format.A00000)
-                txtExpired.EditValue = DateAdd(DateInterval.Day, 30, txtTanggal.EditValue)
+                txtJatuhTempo.EditValue = DateAdd(DateInterval.Day, 30, txtTanggal.EditValue)
+                InitLoadLookUpPO()
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged
+    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, gvPO.DataSourceChanged
         With sender
             If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
@@ -590,6 +734,7 @@ Public Class frmEntriBeli
                     LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvSupplier.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier.Name & ".xml")
                     gvTypePajak.SaveLayoutToXml(FolderLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    gvPO.SaveLayoutToXml(FolderLayouts & Me.Name & gvPO.Name & ".xml")
                     GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -607,7 +752,7 @@ Public Class frmEntriBeli
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiParent.MdiChildren
                     If TypeOf frm Is frmDaftarTransaksi AndAlso _
-                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPO.ToString Then
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPembelian.ToString Then
                         x = frm
                     End If
                 Next
@@ -630,11 +775,11 @@ Public Class frmEntriBeli
         If txtSupplier.Text = "" Then
             DxErrorProvider1.SetError(txtSupplier, "Supplier harus dipilih!", DXErrorProvider.ErrorType.Critical)
         End If
-        If DateDiff(DateInterval.Day, txtTanggal.EditValue, txtExpired.EditValue) < 0 Then
-            DxErrorProvider1.SetError(txtExpired, "Expired Pesanan salah!", DXErrorProvider.ErrorType.Critical)
+        If DateDiff(DateInterval.Day, txtTanggal.EditValue, txtJatuhTempo.EditValue) < 0 Then
+            DxErrorProvider1.SetError(txtJatuhTempo, "Jatuh Tempo Pembelian salah!", DXErrorProvider.ErrorType.Critical)
         End If
         If txtTotal.EditValue < 0 Then
-            DxErrorProvider1.SetError(txtTotal, "Total Peanan salah!", DXErrorProvider.ErrorType.Critical)
+            DxErrorProvider1.SetError(txtTotal, "Total Pembelian salah!", DXErrorProvider.ErrorType.Critical)
         End If
         Return Not DxErrorProvider1.HasErrors
     End Function
@@ -647,5 +792,20 @@ Public Class frmEntriBeli
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso IDTypePajak <> NullTolInt(txtTypePajak.EditValue) Then
             UpdateTypePajak()
         End If
+    End Sub
+
+    Private Sub txtPO_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles txtPO.ButtonClick
+        Select Case e.Button.Index
+            Case 0
+
+            Case 1
+                InitLoadDataPO()
+            Case 2
+                InitLoadLookUpPO()
+        End Select
+    End Sub
+
+    Private Sub txtPO_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPO.EditValueChanged
+
     End Sub
 End Class

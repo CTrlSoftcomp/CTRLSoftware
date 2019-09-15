@@ -19,7 +19,7 @@ Namespace Repository
                                 com.Transaction = com.Connection.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT COUNT(MBeliD.NoID) FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDBeli INNER JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD WHERE MPOD.IDHeader=" & NoID
+                                com.CommandText = "SELECT COUNT(MBeliD.NoID) FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader INNER JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD WHERE MPOD.IDHeader=" & NoID
                                 If NullToLong(com.ExecuteScalar()) = 0 Then
                                     com.CommandText = "UPDATE MPO SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE NoID=" & NoID
                                     com.ExecuteNonQuery()
@@ -49,9 +49,31 @@ Namespace Repository
                                 com.Transaction = com.Connection.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT COUNT(MBeliD.NoID) FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDBeli INNER JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD WHERE MPOD.IDHeader=" & NoID
-                                If NullToLong(com.ExecuteScalar()) = 0 Then
-                                    com.CommandText = "UPDATE MBeli SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE NoID=" & NoID
+                                com.CommandText = "SELECT MBeliD.*, MBeli.Total, MBeli.Tanggal, MBeli.Kode AS KdTransaksi, MBeli.IDSupplier, MBeli.DPP, MBeli.PPN, MAlamat.LimitHutang" & vbCrLf & _
+                                                  "FROM MBeliD" & vbCrLf & _
+                                                  "INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
+                                                  "INNER JOIN MAlamat ON MAlamat.NoID=MBeli.IDSupplier" & vbCrLf & _
+                                                  "WHERE ISNULL(MBeli.Total,0)>0 AND ISNULL(MBeli.IsPosted,0)=1 AND MBeli.NoID=" & NoID
+                                oDA.Fill(ds, "MBeli")
+                                If ds.Tables("MBeli").Rows.Count >= 1 Then
+                                    com.CommandText = "SELECT COUNT(MReturBeliD.NoID) FROM MReturBeliD INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader INNER JOIN MBeliD ON MBeliD.NoID=MReturBeliD.IDBeliD WHERE MBeliD.IDHeader=" & NoID
+                                    If NullToLong(com.ExecuteScalar()) <> 0 Then
+                                        XtraMessageBox.Show("Pembelian sudah pernah diretur!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                        Return False
+                                    End If
+                                    com.CommandText = "SELECT COUNT(NoID) FROM MHutangPiutang WHERE ReffNoTransaksi='" & FixApostropi(ds.Tables("MBeli").Rows(0).Item("KdTransaksi")) & "'"
+                                    If NullToLong(com.ExecuteScalar()) <> 0 Then
+                                        XtraMessageBox.Show("Pembelian sudah dibayar!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                        Return False
+                                    End If
+
+                                    com.CommandText = "UPDATE MBeli SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi=2 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi=2 AND IDTransaksi=" & NoID
                                     com.ExecuteNonQuery()
 
                                     com.Transaction.Commit()

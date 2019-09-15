@@ -21,6 +21,8 @@ Imports CtrlSoft.CetakDX
 Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraGrid.Views.Grid
+Imports DevExpress.XtraGrid.Views.Grid.ViewInfo
 
 Public Class frmDaftarBarang
     Private formName As String
@@ -244,7 +246,37 @@ Public Class frmDaftarBarang
         MyBase.Finalize()
     End Sub
 
-    Private Sub frmDaftarBarang_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged
+    Private Sub GridView1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GridView1.MouseDown
+        Dim View As GridView = CType(sender, GridView)
+        If View Is Nothing Then Return
+        ' obtaining hit info
+        Dim hitInfo As GridHitInfo = View.CalcHitInfo(New System.Drawing.Point(e.X, e.Y))
+        If (e.Button = Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
+          (Not View.IsGroupRow(hitInfo.RowHandle)) Then
+            PopupMenu1.ShowPopup(Control.MousePosition)
+        End If
+    End Sub
 
+    Private WithEvents frmLogHistoryPerubahanHarga As New frmLogPerubahanHarga(-1)
+    Private Sub mnHistoryHarga_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHistoryHarga.ItemClick
+        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim NoID As Long = -1
+            Try
+                Cursor = Cursors.WaitCursor
+                dlg.Show()
+                dlg.Focus()
+
+                NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                frmLogHistoryPerubahanHarga = New frmLogPerubahanHarga(NoID)
+                frmLogHistoryPerubahanHarga.StartPosition = FormStartPosition.CenterScreen
+                frmLogHistoryPerubahanHarga.Show()
+                frmLogHistoryPerubahanHarga.Focus()
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                Cursor = MyCursor
+            End Try
+        End Using
     End Sub
 End Class

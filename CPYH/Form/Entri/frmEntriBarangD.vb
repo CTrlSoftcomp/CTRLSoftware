@@ -29,7 +29,7 @@ Public Class frmEntriBarangD
         If txtHargaJualA.EditValue < txtModal.EditValue * txtKonversi.EditValue Then
             DxErrorProvider1.SetError(txtHargaJualA, "Harga Jual Retail dibawah modal!")
         End If
-        If txtHargaJualB.EditValue < txtModal.EditValue * txtKonversi.EditValue Then
+        If txtHargaJualB.EditValue <> 0 AndAlso txtHargaJualB.EditValue < txtModal.EditValue Then
             DxErrorProvider1.SetError(txtHargaJualB, "Harga Jual Grosir dibawah modal!")
         End If
         If txtKonversi.EditValue <> 1 AndAlso ckIsDefault.Checked Then
@@ -56,11 +56,17 @@ Public Class frmEntriBarangD
                                     End If
 
                                     If Not DxErrorProvider1.HasErrors Then
+                                        com.CommandText = "UPDATE MBarang SET IDUser=@IDUser, TanggalUpdate=GETDATE() WHERE NoID=@IDBarang"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
+                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = Utils.UserLogin.NoID
+                                        com.ExecuteNonQuery()
+
                                         If pStatus = pStatusForm.Baru Then
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
-                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (@NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
+                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (@IDUser, GETDATE(), @NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
                                         Else
                                             com.CommandText = "UPDATE MBarangD SET Barcode=@Barcode, IDBarang=@IDBarang, IDSatuan=@IDSatuan, Konversi=@Konversi, ProsenUpA=@ProsenUpA, ProsenUpB=@ProsenUpB, HargaJualA=@HargaJualA, HargaJualB=@HargaJualB, IsActive=@IsActive, IsDefault=@IsDefault WHERE NoID=@NoID"
                                         End If
@@ -78,6 +84,7 @@ Public Class frmEntriBarangD
                                         com.Parameters.Add(New SqlParameter("@IsDefault", SqlDbType.Bit)).Value = ckIsDefault.Checked
                                         com.ExecuteNonQuery()
 
+                                        
                                         com.Transaction.Commit()
 
                                         DialogResult = Windows.Forms.DialogResult.OK

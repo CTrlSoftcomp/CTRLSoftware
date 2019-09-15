@@ -634,7 +634,7 @@ Public Class frmEntriPO
             DxErrorProvider1.SetError(txtExpired, "Expired Pesanan salah!", DXErrorProvider.ErrorType.Critical)
         End If
         If txtTotal.EditValue < 0 Then
-            DxErrorProvider1.SetError(txtTotal, "Total Peanan salah!", DXErrorProvider.ErrorType.Critical)
+            DxErrorProvider1.SetError(txtTotal, "Total Pesanan salah!", DXErrorProvider.ErrorType.Critical)
         End If
         Return Not DxErrorProvider1.HasErrors
     End Function

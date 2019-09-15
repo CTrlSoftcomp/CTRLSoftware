@@ -161,6 +161,12 @@
     <Compile Include="Class\TimeZone.vb" />
     <Compile Include="Class\UnPosting.vb" />
     <Compile Include="Class\Utils.vb" />
+    <Compile Include="Form\Application\frmLogPerubahanHarga.Designer.vb">
+      <DependentUpon>frmLogPerubahanHarga.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmLogPerubahanHarga.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmEntriUser.Designer.vb">
       <DependentUpon>frmEntriUser.vb</DependentUpon>
     </Compile>
@@ -171,6 +177,12 @@
       <DependentUpon>frmEntriRole.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmEntriRole.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Application\frmHasilPosting.Designer.vb">
+      <DependentUpon>frmHasilPosting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmHasilPosting.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Application\frmOtorisasi.Designer.vb">
@@ -321,11 +333,17 @@
     <Compile Include="Repository\RepMenu.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Application\frmLogPerubahanHarga.resx">
+      <DependentUpon>frmLogPerubahanHarga.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmEntriUser.resx">
       <DependentUpon>frmEntriUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmEntriRole.resx">
       <DependentUpon>frmEntriRole.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmHasilPosting.resx">
+      <DependentUpon>frmHasilPosting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmOtorisasi.resx">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>

@@ -34,6 +34,7 @@ Public Class frmDaftarTransaksi
     Dim repdateedit As New RepositoryItemDateEdit
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
+    Private WithEvents frmHasilPosting As New frmHasilPosting(-1, -1)
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
         DialogResult = Windows.Forms.DialogResult.Cancel
@@ -114,12 +115,12 @@ Public Class frmDaftarTransaksi
                                 Case modMain.FormName.DaftarPembelian
                                     Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
-                                    com.CommandText = "spFakturMPO @NoID"
+                                    com.CommandText = "spFakturMBeli @NoID"
                                     com.Parameters.Clear()
                                     com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                                     oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MPO.repx"
-                                    Judul = "Faktur Pesanan"
+                                    NamaFile = "Faktur_MBeli.repx"
+                                    Judul = "Faktur Pembelian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
@@ -339,6 +340,11 @@ Public Class frmDaftarTransaksi
                             If Not Repository.PostingData.PostingPO(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarPembelian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingBeli(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -353,7 +359,7 @@ Public Class frmDaftarTransaksi
     End Sub
 
     Private Sub mnUnposting_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnUnposting.ItemClick
-        Using dlg As New WaitDialogForm("Sedang memosting data ...", NamaAplikasi)
+        Using dlg As New WaitDialogForm("Sedang mengunposting data ...", NamaAplikasi)
             Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
             Try
@@ -368,7 +374,11 @@ Public Class frmDaftarTransaksi
                             If Not Repository.UnPostingData.UnPostingPO(NoID) Then
                                 Exit For
                             End If
-
+                        Case modMain.FormName.DaftarPembelian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingBeli(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -383,6 +393,31 @@ Public Class frmDaftarTransaksi
     End Sub
 
     Private Sub mnHasilPosting_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHasilPosting.ItemClick
+        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim NoID As Long = -1
+            Try
+                Cursor = Cursors.WaitCursor
+                dlg.Show()
+                dlg.Focus()
 
+                For Each iRow In GridView1.GetSelectedRows
+                    Select Case formName
+                        Case modMain.FormName.DaftarPembelian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 2)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case Else
+                            Exit For
+                    End Select
+                Next
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                Cursor = MyCursor
+            End Try
+        End Using
     End Sub
 End Class

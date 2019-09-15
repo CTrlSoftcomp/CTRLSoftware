@@ -50,4 +50,12 @@ Public Class modMain
             Directory.CreateDirectory(GetAppPath() & "\Report")
         End If
     End Sub
+
+    Public Enum FormName
+        DaftarPO = 0
+        DaftarPembelian = 1
+        DaftarReturPembelian = 2
+        DaftarPenjualan = 3
+        DaftarReturPenjualan = 4
+    End Enum
 End Class

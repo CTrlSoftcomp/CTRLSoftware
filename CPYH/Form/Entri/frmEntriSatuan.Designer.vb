@@ -26,6 +26,7 @@ Partial Class frmEntriSatuan
         Me.txtUserID = New DevExpress.XtraEditors.TextEdit
         Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton
+        Me.txtKonversi = New DevExpress.XtraEditors.SpinEdit
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem
@@ -34,6 +35,7 @@ Partial Class frmEntriSatuan
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem
         Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar
@@ -43,13 +45,12 @@ Partial Class frmEntriSatuan
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.txtKonversi = New DevExpress.XtraEditors.SpinEdit
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,10 +59,9 @@ Partial Class frmEntriSatuan
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -132,6 +132,23 @@ Partial Class frmEntriSatuan
         Me.SimpleButton1.StyleController = Me.LayoutControl1
         Me.SimpleButton1.TabIndex = 7
         Me.SimpleButton1.Text = "&Simpan"
+        '
+        'txtKonversi
+        '
+        Me.txtKonversi.EditValue = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.txtKonversi.EnterMoveNextControl = True
+        Me.txtKonversi.Location = New System.Drawing.Point(57, 60)
+        Me.txtKonversi.Name = "txtKonversi"
+        Me.txtKonversi.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtKonversi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtKonversi.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.txtKonversi.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKonversi.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.txtKonversi.Properties.Mask.EditMask = "n0"
+        Me.txtKonversi.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtKonversi.Size = New System.Drawing.Size(313, 20)
+        Me.txtKonversi.StyleController = Me.LayoutControl1
+        Me.txtKonversi.TabIndex = 11
         '
         'LayoutControlGroup1
         '
@@ -225,6 +242,16 @@ Partial Class frmEntriSatuan
         Me.LayoutControlItem3.TextToControlDistance = 0
         Me.LayoutControlItem3.TextVisible = False
         '
+        'LayoutControlItem6
+        '
+        Me.LayoutControlItem6.Control = Me.txtKonversi
+        Me.LayoutControlItem6.CustomizationFormText = "Konversi"
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutControlItem6.Name = "LayoutControlItem6"
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(362, 24)
+        Me.LayoutControlItem6.Text = "Konversi"
+        Me.LayoutControlItem6.TextSize = New System.Drawing.Size(41, 13)
+        '
         'DxErrorProvider1
         '
         Me.DxErrorProvider1.ContainerControl = Me
@@ -295,33 +322,6 @@ Partial Class frmEntriSatuan
         Me.barDockControlRight.Location = New System.Drawing.Point(382, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 194)
         '
-        'LayoutControlItem6
-        '
-        Me.LayoutControlItem6.Control = Me.txtKonversi
-        Me.LayoutControlItem6.CustomizationFormText = "Konversi"
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 48)
-        Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(362, 24)
-        Me.LayoutControlItem6.Text = "Konversi"
-        Me.LayoutControlItem6.TextSize = New System.Drawing.Size(41, 13)
-        '
-        'txtKonversi
-        '
-        Me.txtKonversi.EditValue = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.txtKonversi.EnterMoveNextControl = True
-        Me.txtKonversi.Location = New System.Drawing.Point(57, 60)
-        Me.txtKonversi.Name = "txtKonversi"
-        Me.txtKonversi.Properties.Appearance.Options.UseTextOptions = True
-        Me.txtKonversi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.txtKonversi.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
-        Me.txtKonversi.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtKonversi.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
-        Me.txtKonversi.Properties.Mask.EditMask = "n0"
-        Me.txtKonversi.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.txtKonversi.Size = New System.Drawing.Size(313, 20)
-        Me.txtKonversi.StyleController = Me.LayoutControl1
-        Me.txtKonversi.TabIndex = 11
-        '
         'frmEntriSatuan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -340,6 +340,7 @@ Partial Class frmEntriSatuan
         CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -348,10 +349,9 @@ Partial Class frmEntriSatuan
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

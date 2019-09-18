@@ -225,6 +225,21 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnReturBeli"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarReturPembelian.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPembelian, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnBeli"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren

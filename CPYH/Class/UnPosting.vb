@@ -88,5 +88,52 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function UnPostingReturBeli(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MReturBeliD.*, MReturBeli.Total, MReturBeli.Tanggal, MReturBeli.Kode AS KdTransaksi, MReturBeli.IDSupplier, MReturBeli.DPP, MReturBeli.PPN, MAlamat.LimitHutang" & vbCrLf & _
+                                                  "FROM MReturBeliD" & vbCrLf & _
+                                                  "INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader" & vbCrLf & _
+                                                  "INNER JOIN MAlamat ON MAlamat.NoID=MReturBeli.IDSupplier" & vbCrLf & _
+                                                  "WHERE ISNULL(MReturBeli.Total,0)>0 AND ISNULL(MReturBeli.IsPosted,0)=1 AND MReturBeli.NoID=" & NoID
+                                oDA.Fill(ds, "MReturBeli")
+                                If ds.Tables("MReturBeli").Rows.Count >= 1 Then
+                                    com.CommandText = "SELECT COUNT(NoID) FROM MHutangPiutang WHERE ReffNoTransaksi='" & FixApostropi(ds.Tables("MReturBeli").Rows(0).Item("KdTransaksi")) & "'"
+                                    If NullToLong(com.ExecuteScalar()) <> 0 Then
+                                        XtraMessageBox.Show("Returan Barang sudah dibayar!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                        Return False
+                                    End If
+
+                                    com.CommandText = "UPDATE MReturBeli SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi=3 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi=3 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

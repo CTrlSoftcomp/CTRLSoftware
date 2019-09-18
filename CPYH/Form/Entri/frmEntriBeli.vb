@@ -700,31 +700,31 @@ Public Class frmEntriBeli
     End Sub
 
     Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
-        If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
-            Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
-                Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshDetil(frm.NoID)
-                    End If
-                Catch ex As Exception
-                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            End Using
-        End If
+        'If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
+        '    Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
+        '        Try
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshDetil(frm.NoID)
+        '            End If
+        '        Catch ex As Exception
+        '            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '        End Try
+        '    End Using
+        'End If
     End Sub
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
-        If IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True Then
-            Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue)
-                Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshDetil(frm.NoID)
-                    End If
-                Catch ex As Exception
-                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            End Using
-        End If
+        'If IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True Then
+        '    Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue)
+        '        Try
+        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        '                RefreshDetil(frm.NoID)
+        '            End If
+        '        Catch ex As Exception
+        '            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '        End Try
+        '    End Using
+        'End If
     End Sub
 
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick

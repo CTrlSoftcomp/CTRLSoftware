@@ -128,5 +128,67 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function PostingReturBeli(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MReturBeliD.*, MReturBeli.Total, MReturBeli.Tanggal, MReturBeli.Kode AS KdTransaksi, MReturBeli.IDSupplier, MReturBeli.DPP, MReturBeli.PPN, MAlamat.LimitHutang" & vbCrLf & _
+                                                  "FROM MReturBeliD" & vbCrLf & _
+                                                  "INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader" & vbCrLf & _
+                                                  "INNER JOIN MAlamat ON MAlamat.NoID=MReturBeli.IDSupplier" & vbCrLf & _
+                                                  "WHERE ISNULL(MReturBeli.Total,0)>0 AND ISNULL(MReturBeli.IsPosted,0)=0 AND MReturBeli.NoID=" & NoID
+                                oDA.Fill(ds, "MReturBeli")
+                                If ds.Tables("MReturBeli").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MReturBeli SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi=3 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MReturBeliD.[IDBarang],MReturBeliD.[IDBarangD],''[Varian],2 [IDJenisTransaksi],MReturBeli.NoID [IDTransaksi],MReturBeliD.NoID [IDTransaksiD],MReturBeli.IDGudang [IDGudang]" & vbCrLf & _
+                                                      ",MReturBeliD.IDSatuan [IDSatuan],MReturBeliD.Konversi [Konversi],0 [QtyMasuk],MReturBeliD.Qty [QtyKeluar],0 [Debet],0 [Kredit],0 [HargaBeli],0 [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MReturBeliD" & vbCrLf & _
+                                                      "INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader" & vbCrLf & _
+                                                      "WHERE MReturBeli.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi=3 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MHutangPiutang] (" & vbCrLf & _
+                                                      "[IDAlamat],[IDTransaksi],[IDJenisTransaksi],[NoTransaksi],[NoUrut],[Tanggal],[JatuhTempo],[Debet]" & vbCrLf & _
+                                                      ",[Kredit],[Saldo],[ReffNoTransaksi],[ReffNoUrut])" & vbCrLf & _
+                                                      "SELECT MReturBeli.IDSupplier, MReturBeli.NoID, 3 [IDJenisTransaksi],MReturBeli.Kode [NoTransaksi],1 [NoUrut],MReturBeli.[Tanggal],MReturBeli.[JatuhTempo],MReturBeli.Total [Debet]" & vbCrLf & _
+                                                      ",0 [Kredit],MReturBeli.Total [Saldo],'' [ReffNoTransaksi],-1 [ReffNoUrut]" & vbCrLf & _
+                                                      "FROM MReturBeli" & vbCrLf & _
+                                                      "INNER JOIN MAlamat ON MAlamat.NoID=MReturBeli.IDSupplier" & vbCrLf & _
+                                                      "WHERE MReturBeli.NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

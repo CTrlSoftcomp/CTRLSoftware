@@ -215,10 +215,16 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Entri\frmEntriBeliD.Designer.vb">
-      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    <Compile Include="Form\Entri\frmEntriReturBeliD.Designer.vb">
+      <DependentUpon>frmEntriReturBeliD.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Entri\frmEntriBeliD.vb">
+    <Compile Include="Form\Entri\frmEntriReturBeliD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeli.Designer.vb">
+      <DependentUpon>frmEntriReturBeli.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeli.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriBeli.Designer.vb">
@@ -360,8 +366,11 @@
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Entri\frmEntriBeliD.resx">
-      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Entri\frmEntriReturBeliD.resx">
+      <DependentUpon>frmEntriReturBeliD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriReturBeli.resx">
+      <DependentUpon>frmEntriReturBeli.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriBeli.resx">
       <DependentUpon>frmEntriBeli.vb</DependentUpon>

@@ -74,6 +74,11 @@ Public Class frmDaftarTransaksi
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
                                         com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarPenjualan
+                                        SQL = "spDaftarJual @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
                                 End Select
 
                                 com.CommandText = SQL
@@ -137,6 +142,16 @@ Public Class frmDaftarTransaksi
                                     NamaFile = "Faktur_MReturBeli.repx"
                                     Judul = "Faktur Retur Pembelian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPenjualan
+                                    Repository.PostingData.PostingJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMJual @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MJual.repx"
+                                    Judul = "Faktur Penjualan"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -162,6 +177,10 @@ Public Class frmDaftarTransaksi
                     End If
                 Case modMain.FormName.DaftarReturPembelian
                     If XtraMessageBox.Show("Ingin menghapus data retur pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPenjualan
+                    If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
             End Select
@@ -197,10 +216,17 @@ Public Class frmDaftarTransaksi
                                         com.ExecuteNonQuery()
 
                                     Case modMain.FormName.DaftarReturPembelian
-                                        com.CommandText = "DELETE MReturBeliD FROM MBeliD INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader WHERE ISNULL(MReturBeli.IsPosted, 0)=0 AND MReturBeli.NoID=" & NoID
+                                        com.CommandText = "DELETE MReturBeliD FROM MReturBeliD INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader WHERE ISNULL(MReturBeli.IsPosted, 0)=0 AND MReturBeli.NoID=" & NoID
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "DELETE FROM MReturBeli WHERE ISNULL(MReturBeli.IsPosted, 0)=0 AND MReturBeli.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarPenjualan
+                                        com.CommandText = "DELETE MJualD FROM MJualD INNER JOIN MJual ON MJual.NoID=MJualD.IDHeader WHERE ISNULL(MJual.IsPosted, 0)=0 AND MJual.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MJual WHERE ISNULL(MJual.IsPosted, 0)=0 AND MJual.NoID=" & NoID
                                         com.ExecuteNonQuery()
                                 End Select
 
@@ -236,6 +262,11 @@ Public Class frmDaftarTransaksi
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
+            Case modMain.FormName.DaftarPenjualan
+                Dim x As New frmEntriJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
         End Select
     End Sub
 
@@ -253,6 +284,11 @@ Public Class frmDaftarTransaksi
                 x.Focus()
             Case modMain.FormName.DaftarReturPembelian
                 Dim x As New frmEntriReturBeli(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenjualan
+                Dim x As New frmEntriJual(-1)
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
@@ -386,6 +422,11 @@ Public Class frmDaftarTransaksi
                             If Not Repository.PostingData.PostingReturBeli(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarPenjualan
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingJual(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -425,6 +466,11 @@ Public Class frmDaftarTransaksi
                             If Not Repository.UnPostingData.UnPostingReturBeli(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarPenjualan
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingJual(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -458,6 +504,12 @@ Public Class frmDaftarTransaksi
                         Case modMain.FormName.DaftarReturPembelian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             frmHasilPosting = New frmHasilPosting(NoID, 3)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarPenjualan
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 6)
                             frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
                             frmHasilPosting.Show()
                             frmHasilPosting.Focus()

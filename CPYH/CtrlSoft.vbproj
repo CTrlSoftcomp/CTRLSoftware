@@ -107,6 +107,7 @@
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -116,6 +117,7 @@
     <Reference Include="System.Deployment">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
@@ -213,6 +215,30 @@
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmSettingDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualD.Designer.vb">
+      <DependentUpon>frmEntriJualD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJual.Designer.vb">
+      <DependentUpon>frmEntriJual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJual.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBeliD.Designer.vb">
+      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriBeliD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualDBayar.Designer.vb">
+      <DependentUpon>frmEntriJualDBayar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualDBayar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriReturBeliD.Designer.vb">
@@ -317,6 +343,7 @@
     <Compile Include="Form\frmDaftarMaster.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
     <Compile Include="Model\SettingPerusahaan.vb" />
     <Compile Include="Model\User.vb" />
@@ -365,6 +392,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJualD.resx">
+      <DependentUpon>frmEntriJualD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJual.resx">
+      <DependentUpon>frmEntriJual.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriBeliD.resx">
+      <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJualDBayar.resx">
+      <DependentUpon>frmEntriJualDBayar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriReturBeliD.resx">
       <DependentUpon>frmEntriReturBeliD.vb</DependentUpon>
@@ -439,6 +478,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="My Project\DataSources\CtrlSoft.Model.Pembayaran.datasource" />
     <None Include="Resources\Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

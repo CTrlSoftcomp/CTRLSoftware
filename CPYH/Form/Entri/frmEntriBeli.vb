@@ -167,6 +167,12 @@ Public Class frmEntriBeli
                             txtSupplier.Properties.ValueMember = "NoID"
                             txtSupplier.Properties.DisplayMember = "Kode"
 
+                            com.CommandText = "SELECT NoID, Kode + '-' + Nama AS Gudang FROM MGudang WHERE IsActive=1"
+                            oDA.Fill(ds, "MGudang")
+                            txtGudang.Properties.DataSource = ds.Tables("MGudang")
+                            txtGudang.Properties.ValueMember = "NoID"
+                            txtGudang.Properties.DisplayMember = "Gudang"
+
                             com.CommandText = "SELECT NoID, TypePajak FROM MTypePajak"
                             oDA.Fill(ds, "MTypePajak")
                             txtTypePajak.Properties.DataSource = ds.Tables("MTypePajak")
@@ -202,6 +208,7 @@ Public Class frmEntriBeli
                                 Else
                                     pStatus = pStatusForm.Edit
                                 End If
+                                txtGudang.EditValue = NullToLong(iRow.Item("IDGudang"))
                                 txtTanggal.EditValue = NullToDate(iRow.Item("Tanggal"))
                                 txtKode.Text = NullToStr(iRow.Item("Kode"))
                                 txtJatuhTempo.EditValue = NullToDate(iRow.Item("JatuhTempo"))
@@ -214,6 +221,7 @@ Public Class frmEntriBeli
                                 txtNoReff.Text = NullToStr(iRow.Item("NoReff"))
                                 txtCatatan.Text = NullToStr(iRow.Item("Catatan"))
                             Else
+                                txtGudang.EditValue = -1
                                 txtTanggal.EditValue = Now
                                 txtSupplier.EditValue = -1
                                 InitLoadLookUpPO()
@@ -345,7 +353,7 @@ Public Class frmEntriBeli
                                 End If
 
                                 com.CommandText = "EXEC [dbo].[spSimpanMBeli] @NoID,@Kode,@NoReff,@IDSupplier,@Tanggal,@JatuhTempo,@Catatan,@IDTypePajak,@Subtotal," & vbCrLf & _
-                                                  "@DiscNotaProsen,@DiscNotaRp,@TotalBruto,@DPP,@PPN,@Total,@IsPosted,@TglPosted,@IDUserPosted,@IDUserEntry,@IDUserEdit,@IDPO"
+                                                  "@DiscNotaProsen,@DiscNotaRp,@TotalBruto,@DPP,@PPN,@Total,@IsPosted,@TglPosted,@IDUserPosted,@IDUserEntry,@IDUserEdit,@IDPO,@IDGudang"
                                 com.Parameters.Clear()
                                 com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                 com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtKode.Text
@@ -368,6 +376,7 @@ Public Class frmEntriBeli
                                 com.Parameters.Add(New SqlParameter("@IDUserEntry", SqlDbType.Int)).Value = UserLogin.NoID
                                 com.Parameters.Add(New SqlParameter("@IDUserEdit", SqlDbType.Int)).Value = IIf(pStatus = pStatusForm.Edit, UserLogin.NoID, -1)
                                 com.Parameters.Add(New SqlParameter("@IDPO", SqlDbType.BigInt)).Value = NullToLong(txtPO.EditValue)
+                                com.Parameters.Add(New SqlParameter("@IDGudang", SqlDbType.Int)).Value = NullToLong(txtGudang.EditValue)
 
                                 NoID = NullToLong(com.ExecuteScalar())
                                 com.Parameters.Clear()
@@ -647,7 +656,7 @@ Public Class frmEntriBeli
         End Try
     End Sub
 
-    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, gvPO.DataSourceChanged
+    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, gvPO.DataSourceChanged, gvGudang.DataSourceChanged
         With sender
             If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
@@ -700,31 +709,31 @@ Public Class frmEntriBeli
     End Sub
 
     Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
-        'If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
-        '    Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
-        '        Try
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshDetil(frm.NoID)
-        '            End If
-        '        Catch ex As Exception
-        '            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '    End Using
-        'End If
+        If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
+            Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
+                Try
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshDetil(frm.NoID)
+                    End If
+                Catch ex As Exception
+                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End If
     End Sub
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
-        'If IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True Then
-        '    Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue)
-        '        Try
-        '            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '                RefreshDetil(frm.NoID)
-        '            End If
-        '        Catch ex As Exception
-        '            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '    End Using
-        'End If
+        If IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True Then
+            Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue)
+                Try
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshDetil(frm.NoID)
+                    End If
+                Catch ex As Exception
+                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End If
     End Sub
 
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick
@@ -735,6 +744,7 @@ Public Class frmEntriBeli
                     gvSupplier.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier.Name & ".xml")
                     gvTypePajak.SaveLayoutToXml(FolderLayouts & Me.Name & gvTypePajak.Name & ".xml")
                     gvPO.SaveLayoutToXml(FolderLayouts & Me.Name & gvPO.Name & ".xml")
+                    gvGudang.SaveLayoutToXml(FolderLayouts & Me.Name & gvGudang.Name & ".xml")
                     GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -774,6 +784,9 @@ Public Class frmEntriBeli
         End If
         If txtSupplier.Text = "" Then
             DxErrorProvider1.SetError(txtSupplier, "Supplier harus dipilih!", DXErrorProvider.ErrorType.Critical)
+        End If
+        If txtGudang.Text = "" Then
+            DxErrorProvider1.SetError(txtGudang, "Gudang harus dipilih!", DXErrorProvider.ErrorType.Critical)
         End If
         If DateDiff(DateInterval.Day, txtTanggal.EditValue, txtJatuhTempo.EditValue) < 0 Then
             DxErrorProvider1.SetError(txtJatuhTempo, "Jatuh Tempo Pembelian salah!", DXErrorProvider.ErrorType.Critical)

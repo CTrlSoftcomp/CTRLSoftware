@@ -240,6 +240,21 @@ Public Class frmMain
                 End If
                 x.Show()
                 x.Focus()
+            Case "mnJual"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPenjualan.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenjualan, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnBeli"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren

@@ -97,7 +97,7 @@ Public Class frmEntriPOD
                                                   "DPP=ROUND(CASE WHEN MPO.IDTypePajak=0 THEN 0 WHEN MPO.IDTypePajak=1 THEN ISNULL(MPOD.JumlahBruto, 0)/1.0 ELSE ISNULL(MPOD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
                                                   "FROM MPO " & vbCrLf & _
                                                   "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MPOD GROUP BY IDHeader) AS MPOD ON MPOD.IDHeader=MPO.NoID " & vbCrLf & _
-                                                  "WHERE MPO.NoID=" & NoID
+                                                  "WHERE MPO.NoID=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "UPDATE MPOD SET " & vbCrLf & _
@@ -105,7 +105,7 @@ Public Class frmEntriPOD
                                                           "DPP=ROUND(CASE WHEN MPO.IDTypePajak=0 THEN 0 WHEN MPO.IDTypePajak=1 THEN ISNULL(MPOD.JumlahBruto, 0)/1.0 ELSE ISNULL(MPOD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
                                                           "FROM MPO " & vbCrLf & _
                                                           "INNER JOIN MPOD ON MPOD.IDHeader=MPO.NoID " & vbCrLf & _
-                                                          "WHERE MPOD.IDHeader=" & NoID
+                                                          "WHERE MPOD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "UPDATE MPOD SET " & vbCrLf & _
@@ -114,20 +114,20 @@ Public Class frmEntriPOD
                                                           "FROM MPO " & vbCrLf & _
                                                           "INNER JOIN MPOD ON MPOD.IDHeader=MPO.NoID" & vbCrLf & _
                                                           "INNER JOIN (SELECT IDHeader, SUM(DPP) AS DPP, SUM(PPN) AS PPN, MAX(NoID) AS NoID FROM MPOD GROUP BY IDHeader) AS Detil ON Detil.IDHeader=MPO.NoID AND Detil.NoID=MPOD.NoID" & vbCrLf & _
-                                                          "WHERE MPOD.IDHeader=" & NoID
+                                                          "WHERE MPOD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "UPDATE MPOD SET " & vbCrLf & _
                                                           "Jumlah=CASE WHEN MPO.IDTypePajak=0 THEN MPOD.JumlahBruto ELSE MPOD.DPP+MPOD.PPN END " & vbCrLf & _
                                                           "FROM MPO " & vbCrLf & _
                                                           "INNER JOIN MPOD ON MPOD.IDHeader=MPO.NoID " & vbCrLf & _
-                                                          "WHERE MPOD.IDHeader=" & NoID
+                                                          "WHERE MPOD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "UPDATE MPO SET Subtotal=ISNULL(MPOD.JumlahBruto, 0), TotalBruto=ISNULL(MPOD.JumlahBruto, 0), Total=ISNULL(MPOD.Jumlah, 0)" & vbCrLf & _
                                                           "FROM MPO " & vbCrLf & _
                                                           "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MPOD GROUP BY IDHeader) AS MPOD ON MPOD.IDHeader=MPO.NoID " & vbCrLf & _
-                                                          "WHERE MPO.NoID=" & NoID
+                                                          "WHERE MPO.NoID=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.Transaction.Commit()

@@ -107,6 +107,7 @@
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -116,6 +117,7 @@
     <Reference Include="System.Deployment">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
@@ -161,6 +163,12 @@
     <Compile Include="Class\TimeZone.vb" />
     <Compile Include="Class\UnPosting.vb" />
     <Compile Include="Class\Utils.vb" />
+    <Compile Include="Form\Application\frmLogPerubahanHarga.Designer.vb">
+      <DependentUpon>frmLogPerubahanHarga.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmLogPerubahanHarga.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmEntriUser.Designer.vb">
       <DependentUpon>frmEntriUser.vb</DependentUpon>
     </Compile>
@@ -171,6 +179,12 @@
       <DependentUpon>frmEntriRole.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmEntriRole.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Application\frmHasilPosting.Designer.vb">
+      <DependentUpon>frmHasilPosting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmHasilPosting.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Application\frmOtorisasi.Designer.vb">
@@ -203,10 +217,40 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriJualD.Designer.vb">
+      <DependentUpon>frmEntriJualD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJual.Designer.vb">
+      <DependentUpon>frmEntriJual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJual.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriBeliD.Designer.vb">
       <DependentUpon>frmEntriBeliD.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Entri\frmEntriBeliD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualDBayar.Designer.vb">
+      <DependentUpon>frmEntriJualDBayar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriJualDBayar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeliD.Designer.vb">
+      <DependentUpon>frmEntriReturBeliD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeliD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeli.Designer.vb">
+      <DependentUpon>frmEntriReturBeli.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriReturBeli.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriBeli.Designer.vb">
@@ -299,6 +343,7 @@
     <Compile Include="Form\frmDaftarMaster.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
     <Compile Include="Model\SettingPerusahaan.vb" />
     <Compile Include="Model\User.vb" />
@@ -321,11 +366,17 @@
     <Compile Include="Repository\RepMenu.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Application\frmLogPerubahanHarga.resx">
+      <DependentUpon>frmLogPerubahanHarga.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmEntriUser.resx">
       <DependentUpon>frmEntriUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmEntriRole.resx">
       <DependentUpon>frmEntriRole.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmHasilPosting.resx">
+      <DependentUpon>frmHasilPosting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmOtorisasi.resx">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>
@@ -342,8 +393,23 @@
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJualD.resx">
+      <DependentUpon>frmEntriJualD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJual.resx">
+      <DependentUpon>frmEntriJual.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriBeliD.resx">
       <DependentUpon>frmEntriBeliD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriJualDBayar.resx">
+      <DependentUpon>frmEntriJualDBayar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriReturBeliD.resx">
+      <DependentUpon>frmEntriReturBeliD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriReturBeli.resx">
+      <DependentUpon>frmEntriReturBeli.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriBeli.resx">
       <DependentUpon>frmEntriBeli.vb</DependentUpon>
@@ -412,6 +478,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="My Project\DataSources\CtrlSoft.Model.Pembayaran.datasource" />
     <None Include="Resources\Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

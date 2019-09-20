@@ -43,7 +43,7 @@ Public Class frmEntriBarang
         If txtHargaJualA.EditValue < txtModal.EditValue Then
             DxErrorProvider1.SetError(txtHargaJualA, "Harga Jual Retail dibawah modal!")
         End If
-        If txtHargaJualB.EditValue < txtModal.EditValue Then
+        If txtHargaJualB.EditValue <> 0 AndAlso txtHargaJualB.EditValue < txtModal.EditValue Then
             DxErrorProvider1.SetError(txtHargaJualB, "Harga Jual Grosir dibawah modal!")
         End If
         If txtSupplier1.Text = "" AndAlso txtSupplier2.Text = "" AndAlso txtSupplier3.Text = "" Then
@@ -86,13 +86,13 @@ Public Class frmEntriBarang
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
                                             com.CommandText = "INSERT INTO [dbo].[MBarang]" & vbCrLf & _
-                                                              "([IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf & _
+                                                              "([IDUser],[TanggalUpdate],[IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf & _
                                                               ",[Keterangan],[IsActive],[IDTypePajak],[IDSupplier1]" & vbCrLf & _
                                                               ",[IDSupplier2],[IDSupplier3],[HargaBeli],[IDSatuanBeli]" & vbCrLf & _
                                                               ",[IsiCtn],[HargaBeliPcsBruto],[DiscProsen1],[DiscProsen2],[DiscProsen3]" & vbCrLf & _
                                                               ",[DiscProsen4],[DiscProsen5],[DiscRp],[HargaBeliPcs],[IDSatuan],[ProsenUpA]" & vbCrLf & _
                                                               ",[HargaJualA],[ProsenUpB],[HargaJualB]) VALUES" & vbCrLf & _
-                                                              "(@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
+                                                              "(@IDUser,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
                                                               ",@Keterangan,@IsActive,@IDTypePajak,@IDSupplier1" & vbCrLf & _
                                                               ",@IDSupplier2,@IDSupplier3,@HargaBeli,@IDSatuanBeli" & vbCrLf & _
                                                               ",@IsiCtn,@HargaBeliPcsBruto,@DiscProsen1,@DiscProsen2,@DiscProsen3" & vbCrLf & _
@@ -100,7 +100,7 @@ Public Class frmEntriBarang
                                                               ",@HargaJualA,@ProsenUpB,@HargaJualB)"
                                         Else
                                             com.CommandText = "UPDATE [dbo].[MBarang] SET " & vbCrLf & _
-                                                              "[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
+                                                              "[IDUser]=@IDUser,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
                                                               ",[Keterangan]=@Keterangan,[IsActive]=@IsActive,[IDTypePajak]=@IDTypePajak,[IDSupplier1]=@IDSupplier1" & vbCrLf & _
                                                               ",[IDSupplier2]=@IDSupplier2,[IDSupplier3]=@IDSupplier3,[HargaBeli]=@HargaBeli,[IDSatuanBeli]=@IDSatuanBeli" & vbCrLf & _
                                                               ",[IsiCtn]=@IsiCtn,[HargaBeliPcsBruto]=@HargaBeliPcsBruto,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3" & vbCrLf & _
@@ -108,6 +108,7 @@ Public Class frmEntriBarang
                                                               ",[HargaJualA]=@HargaJualA,[ProsenUpB]=@ProsenUpB,[HargaJualB]=@HargaJualB WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = Utils.UserLogin.NoID
                                         com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                         com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtKode.Text
                                         com.Parameters.Add(New SqlParameter("@Alias", SqlDbType.VarChar)).Value = txtAlias.Text

@@ -41,6 +41,8 @@ Partial Class frmDaftarBarang
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,6 +52,7 @@ Partial Class frmDaftarBarang
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -193,9 +196,9 @@ Partial Class frmDaftarBarang
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnHistoryHarga})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 2
+        Me.BarManager1.MaxItemId = 3
         '
         'Bar2
         '
@@ -251,7 +254,19 @@ Partial Class frmDaftarBarang
         Me.barDockControlRight.Location = New System.Drawing.Point(983, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 536)
         '
-        'frmDaftarMaster
+        'PopupMenu1
+        '
+        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnHistoryHarga)})
+        Me.PopupMenu1.Manager = Me.BarManager1
+        Me.PopupMenu1.Name = "PopupMenu1"
+        '
+        'mnHistoryHarga
+        '
+        Me.mnHistoryHarga.Caption = "History Harga"
+        Me.mnHistoryHarga.Id = 2
+        Me.mnHistoryHarga.Name = "mnHistoryHarga"
+        '
+        'frmDaftarBarang
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -263,7 +278,7 @@ Partial Class frmDaftarBarang
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmDaftarMaster"
+        Me.Name = "frmDaftarBarang"
         Me.Text = "Daftar Master"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
@@ -275,6 +290,7 @@ Partial Class frmDaftarBarang
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -299,4 +315,6 @@ Partial Class frmDaftarBarang
     Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
     Friend WithEvents BarSubItem1 As DevExpress.XtraBars.BarSubItem
     Friend WithEvents mnSaveLayout As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
+    Friend WithEvents mnHistoryHarga As DevExpress.XtraBars.BarButtonItem
 End Class

@@ -5,12 +5,13 @@ Imports DevExpress.Utils
 Imports CtrlSoft.Utils
 Imports DevExpress.XtraEditors.Repository
 
-Public Class frmEntriBeliD
+Public Class frmEntriReturBeliD
     Public NoID As Long = -1
     Public IDHeader As Long = -1
-    Private frmPemanggil As frmEntriBeli = Nothing
+    Private frmPemanggil As frmEntriReturBeli = Nothing
     Private pStatus As Utils.pStatusForm
     Private TypePajak As Utils.TypePajak
+    Private QtySisa As Double = 0.0
 
     Dim repckedit As New RepositoryItemCheckEdit
     Dim repdateedit As New RepositoryItemDateEdit
@@ -29,11 +30,17 @@ Public Class frmEntriBeliD
             DxErrorProvider1.SetError(txtKonversi, "Konversi salah!")
         End If
         If txtJumlah.EditValue < 0.0 Then
-            DxErrorProvider1.SetError(txtHargaBeli, "Nilai Pembelian salah!")
+            DxErrorProvider1.SetError(txtHargaBeli, "Nilai Retur Pembelian salah!")
         End If
-        If frmPemanggil.txtPO.Text <> "" AndAlso txtPO.Text = "" Then
-            If XtraMessageBox.Show("Barang tidak ditemukan di nota PO. Ingin Melanjutkan Penyimpanan?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                DxErrorProvider1.SetError(txtBarcode, "Barang tidak ditemukan di Item PO!")
+        If txtBeli.Text = "" Then
+            If XtraMessageBox.Show("Yakin ingin meretur barang tanpa ada referensi pembelian?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                DxErrorProvider1.SetError(txtBeli, "Isi Referensi Pembelian!")
+            End If
+        Else
+            If QtySisa < txtQty.EditValue * txtKonversi.EditValue Then
+                If XtraMessageBox.Show("Yakin ingin meretur barang dengan qty melebihi qty pembelian?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                    DxErrorProvider1.SetError(txtQty, "Isi Referensi Pembelian!")
+                End If
             End If
         End If
 
@@ -51,28 +58,29 @@ Public Class frmEntriBeliD
                                     com.Transaction = cn.BeginTransaction
                                     oDA.SelectCommand = com
 
-                                    'com.CommandText = "SELECT COUNT(NoID) FROM MBarangD WHERE Barcode='" & FixApostropi(txtBarcode.Text) & "' AND NoID<>" & Me.NoID
-                                    'If NullToLong(com.ExecuteScalar()) >= 1 Then
-                                    '    DxErrorProvider1.SetError(txtBarcode, "Barcode sudah dipakai!")
-                                    'End If
+                                    com.CommandText = "SELECT SUM((QtyMasuk-QtyKeluar)*Konversi) FROM MKartuStok WHERE IDGudang=" & NullToLong(frmPemanggil.txtGudang.EditValue) & " AND IDBarang=" & IDBarang & " AND Tanggal<=GETDATE()"
+                                    If NullToDbl(com.ExecuteScalar()) < (txtQty.EditValue * txtKonversi.EditValue) Then
+                                        DxErrorProvider1.SetError(txtQty, "Saldo Stok Tidak Cukup!")
+                                    End If
 
                                     If Not DxErrorProvider1.HasErrors Then
                                         If pStatus = pStatusForm.Baru Then
-                                            com.CommandText = "SELECT MAX(NoID) FROM MBeliD"
+                                            com.CommandText = "SELECT MAX(NoID) FROM MReturBeliD"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
-                                            com.CommandText = "INSERT INTO [dbo].[MBeliD] ([NoID],[IDHeader],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty]" & vbCrLf & _
+                                            com.CommandText = "INSERT INTO [dbo].[MReturBeliD] ([NoID],[IDHeader],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty]" & vbCrLf & _
                                                               ",[Harga],[DiscProsen1],[DiscProsen2],[DiscProsen3],[DiscProsen4],[DiscProsen5],[DiscRp]" & vbCrLf & _
-                                                              ",[DiscNotaProsen],[DiscNotaRp],[JumlahBruto],[DPP],[PPN],[Jumlah]) VALUES (" & vbCrLf & _
+                                                              ",[DiscNotaProsen],[DiscNotaRp],[JumlahBruto],[DPP],[PPN],[Jumlah],[IDBeliD]) VALUES (" & vbCrLf & _
                                                               "@NoID,@IDHeader,@IDBarangD,@IDBarang,@IDSatuan,@Konversi,@Qty" & vbCrLf & _
                                                               ",@Harga,@DiscProsen1,@DiscProsen2,@DiscProsen3,@DiscProsen4,@DiscProsen5,@DiscRp" & vbCrLf & _
-                                                              ",@DiscNotaProsen,@DiscNotaRp,@JumlahBruto,@DPP,@PPN,@Jumlah)"
+                                                              ",@DiscNotaProsen,@DiscNotaRp,@JumlahBruto,@DPP,@PPN,@Jumlah,@IDBeliD)"
                                         Else
-                                            com.CommandText = "UPDATE [dbo].[MBeliD] SET [IDBarangD]=@IDBarangD,[IDBarang]=@IDBarang,[IDSatuan]=@IDSatuan,[Konversi]=@Konversi,[Qty]=@Qty" & vbCrLf & _
+                                            com.CommandText = "UPDATE [dbo].[MReturBeliD] SET [IDBarangD]=@IDBarangD,[IDBarang]=@IDBarang,[IDSatuan]=@IDSatuan,[Konversi]=@Konversi,[Qty]=@Qty" & vbCrLf & _
                                                               ",[Harga]=@Harga,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3,[DiscProsen4]=@DiscProsen4,[DiscProsen5]=@DiscProsen5,[DiscRp]=@DiscRp" & vbCrLf & _
-                                                              ",[DiscNotaProsen]=@DiscNotaProsen,[DiscNotaRp]=@DiscNotaRp,[JumlahBruto]=@JumlahBruto,[DPP]=@DPP,[PPN]=@PPN,[Jumlah]=@Jumlah WHERE NoID=@NoID"
+                                                              ",[DiscNotaProsen]=@DiscNotaProsen,[DiscNotaRp]=@DiscNotaRp,[JumlahBruto]=@JumlahBruto,[DPP]=@DPP,[PPN]=@PPN,[Jumlah]=@Jumlah,[IDBeliD]=@IDBeliD WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@IDBeliD", SqlDbType.BigInt)).Value = NullToLong(txtBeli.EditValue)
                                         com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                         com.Parameters.Add(New SqlParameter("@IDHeader", SqlDbType.BigInt)).Value = IDHeader
                                         com.Parameters.Add(New SqlParameter("@IDBarangD", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
@@ -97,42 +105,42 @@ Public Class frmEntriBeliD
 
                                         com.Parameters.Clear()
 
-                                        com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
-                                                  "FROM MBeli " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                  "WHERE MBeli.NoID=" & IDHeader
+                                        com.CommandText = "UPDATE MReturBeli SET Subtotal=ISNULL(MReturBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MReturBeliD.JumlahBruto, 0), " & vbCrLf & _
+                                                  "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                                  "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                  "FROM MReturBeli " & vbCrLf & _
+                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                  "WHERE MReturBeli.NoID=" & IDHeader
                                         com.ExecuteNonQuery()
 
-                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                                          "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                          "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
-                                                          "FROM MBeli " & vbCrLf & _
-                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                          "WHERE MBeliD.IDHeader=" & IDHeader
+                                        com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                                          "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                                          "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                          "FROM MReturBeli " & vbCrLf & _
+                                                          "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                          "WHERE MReturBeliD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
-                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                                          "PPN=ISNULL(MBeli.PPN, 0)-(ISNULL(Detil.PPN, 0)-ISNULL(MBeliD.PPN, 0)), " & vbCrLf & _
-                                                          "DPP=ISNULL(MBeli.DPP, 0)-(ISNULL(Detil.DPP, 0)-ISNULL(MBeliD.DPP, 0)) " & vbCrLf & _
-                                                          "FROM MBeli " & vbCrLf & _
-                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
-                                                          "INNER JOIN (SELECT IDHeader, SUM(DPP) AS DPP, SUM(PPN) AS PPN, MAX(NoID) AS NoID FROM MBeliD GROUP BY IDHeader) AS Detil ON Detil.IDHeader=MBeli.NoID AND Detil.NoID=MBeliD.NoID" & vbCrLf & _
-                                                          "WHERE MBeliD.IDHeader=" & IDHeader
+                                        com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                                          "PPN=ISNULL(MReturBeli.PPN, 0)-(ISNULL(Detil.PPN, 0)-ISNULL(MReturBeliD.PPN, 0)), " & vbCrLf & _
+                                                          "DPP=ISNULL(MReturBeli.DPP, 0)-(ISNULL(Detil.DPP, 0)-ISNULL(MReturBeliD.DPP, 0)) " & vbCrLf & _
+                                                          "FROM MReturBeli " & vbCrLf & _
+                                                          "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID" & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(DPP) AS DPP, SUM(PPN) AS PPN, MAX(NoID) AS NoID FROM MReturBeliD GROUP BY IDHeader) AS Detil ON Detil.IDHeader=MReturBeli.NoID AND Detil.NoID=MReturBeliD.NoID" & vbCrLf & _
+                                                          "WHERE MReturBeliD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
-                                        com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                                          "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
-                                                          "FROM MBeli " & vbCrLf & _
-                                                          "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                          "WHERE MBeliD.IDHeader=" & IDHeader
+                                        com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                                          "Jumlah=CASE WHEN MReturBeli.IDTypePajak=0 THEN MReturBeliD.JumlahBruto ELSE MReturBeliD.DPP+MReturBeliD.PPN END " & vbCrLf & _
+                                                          "FROM MReturBeli " & vbCrLf & _
+                                                          "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                          "WHERE MReturBeliD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
-                                        com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), Total=ISNULL(MBeliD.Jumlah, 0)" & vbCrLf & _
-                                                          "FROM MBeli " & vbCrLf & _
-                                                          "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                          "WHERE MBeli.NoID=" & IDHeader
+                                        com.CommandText = "UPDATE MReturBeli SET Subtotal=ISNULL(MReturBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MReturBeliD.JumlahBruto, 0), Total=ISNULL(MReturBeliD.Jumlah, 0)" & vbCrLf & _
+                                                          "FROM MReturBeli " & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                          "WHERE MReturBeli.NoID=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.Transaction.Commit()
@@ -156,7 +164,7 @@ Public Class frmEntriBeliD
         Me.Close()
     End Sub
 
-    Public Sub New(ByVal formPemanggil As frmEntriBeli, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As Utils.TypePajak)
+    Public Sub New(ByVal formPemanggil As frmEntriReturBeli, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As Utils.TypePajak)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -211,13 +219,6 @@ Public Class frmEntriBeliD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MPOD.NoID, MPO.Kode FROM MPO INNER JOIN MPOD WHERE " & vbCrLf & _
-                                                  IIf(frmPemanggil.txtPO.Text <> "", " AND MPOD.IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue), "MPO.NoID=-1")
-                                oDA.Fill(ds, "MPOD")
-                                txtPO.Properties.DataSource = ds.Tables("MPOD")
-                                txtPO.Properties.DisplayMember = "Kode"
-                                txtPO.Properties.ValueMember = "NoID"
-
                                 com.CommandText = "SELECT MBarangD.NoID, MBarangD.Barcode, MBarang.Kode, MBarang.Nama FROM MBarang INNER JOIN MBarangD ON MBarangD.IDBarang=MBarang.NoID WHERE MBarangD.IsActive=1 AND MBarang.IsActive=1 " & vbCrLf & _
                                                   "" 'IIf(frmPemanggil.txtPO.Text <> "", " AND MBarang.NoID IN (SELECT MPOD.IDBarang FROM MPOD WHERE IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue) & ")", "")
                                 oDA.Fill(ds, "MBarangD")
@@ -225,17 +226,17 @@ Public Class frmEntriBeliD
                                 txtBarcode.Properties.DisplayMember = "Barcode"
                                 txtBarcode.Properties.ValueMember = "NoID"
 
-                                com.CommandText = "SELECT * FROM MBeliD WHERE NoID=" & NoID
-                                oDA.Fill(ds, "MBeliD")
+                                com.CommandText = "SELECT * FROM MReturBeliD WHERE NoID=" & NoID
+                                oDA.Fill(ds, "MReturBeliD")
 
-                                If ds.Tables("MBeliD").Rows.Count >= 1 Then
-                                    Dim iRow As DataRow = ds.Tables("MBeliD").Rows(0)
+                                If ds.Tables("MReturBeliD").Rows.Count >= 1 Then
+                                    Dim iRow As DataRow = ds.Tables("MReturBeliD").Rows(0)
                                     pStatus = pStatusForm.Edit
                                     Me.NoID = NullToLong(iRow.Item("NoID"))
                                     Me.IDHeader = NullToLong(iRow.Item("IDHeader"))
                                     txtBarcode.EditValue = NullToLong(iRow.Item("IDBarangD"))
                                     IDBarang = NullToLong(iRow.Item("IDBarang"))
-                                    txtPO.EditValue = NullToLong(iRow.Item("IDPOD"))
+                                    txtBeli.EditValue = NullToLong(iRow.Item("IDBeliD"))
                                     txtSatuan.EditValue = NullToLong(iRow.Item("IDSatuan"))
                                     txtKonversi.EditValue = NullToDbl(iRow.Item("Konversi"))
                                     txtQty.EditValue = NullToDbl(iRow.Item("Qty"))
@@ -247,11 +248,18 @@ Public Class frmEntriBeliD
                                     txtDiscProsen4.EditValue = NullToDbl(iRow.Item("DiscProsen4"))
                                     txtDiscProsen5.EditValue = NullToDbl(iRow.Item("DiscProsen5"))
                                     txtDiscRp.EditValue = NullToDbl(iRow.Item("DiscRp"))
+
+                                    com.CommandText = "SELECT MBeliD.NoID, MBeli.Kode FROM MBeli INNER JOIN MBeliD ON MBeli.NoID=MBeliD.IDHeader WHERE MBeli.IsPosted=1 AND MBeli.IDSupplier=" & NullToLong(frmPemanggil.txtSupplier.EditValue) & " AND MBeliD.IDBarang=" & IDBarang
+                                    oDA.Fill(ds, "MBeliD")
+                                    txtBeli.Properties.DataSource = ds.Tables("MBeliD")
+                                    txtBeli.Properties.DisplayMember = "Kode"
+                                    txtBeli.Properties.ValueMember = "NoID"
+                                    txtBeli.EditValue = NullToLong(com.ExecuteScalar())
                                 Else
                                     pStatus = pStatusForm.Baru
                                     Me.NoID = -1
                                     IDBarang = -1
-                                    txtPO.EditValue = -1
+                                    txtBeli.EditValue = -1
                                     txtBarcode.EditValue = -1
                                     txtSatuan.EditValue = -1
                                     txtKonversi.EditValue = 1
@@ -408,12 +416,18 @@ Public Class frmEntriBeliD
                                     txtDiscProsen5.EditValue = NullToDbl(iRow.Item("DiscProsen5"))
                                     txtDiscRp.EditValue = NullToDbl(iRow.Item("DiscRp"))
 
-                                    If (frmPemanggil.txtPO.Text <> "") Then
-                                        com.CommandText = "SELECT TOP 1 NoID FROM MPOD WHERE IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue)
-                                        txtPO.EditValue = NullToLong(com.ExecuteScalar())
-                                    Else
-                                        txtPO.EditValue = -1
-                                    End If
+                                    com.CommandText = "SELECT MBeliD.NoID, MBeli.Kode " & vbCrLf & _
+                                                      " FROM MBeli " & vbCrLf & _
+                                                      " INNER JOIN MBeliD ON MBeli.NoID=MBeliD.IDHeader " & vbCrLf & _
+                                                      " WHERE MBeli.IsPosted=1 AND MBeli.IDSupplier=" & NullToLong(frmPemanggil.txtSupplier.EditValue) & " AND MBeliD.IDBarang=" & IDBarang & vbCrLf & _
+                                                      " AND (MBeliD.Qty*MBeliD.Konversi)-ISNULL((SELECT SUM(MReturBeliD.Qty-MReturBeliD.Konversi) FROM MReturBeliD INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader WHERE MReturBeliD.NoID<>" & NoID & "), 0)>0" & vbCrLf & _
+                                                      " ORDER BY MBeli.Tanggal DESC"
+                                    oDA.Fill(ds, "MBeliD")
+                                    txtBeli.Properties.DataSource = ds.Tables("MBeliD")
+                                    txtBeli.Properties.DisplayMember = "Kode"
+                                    txtBeli.Properties.ValueMember = "NoID"
+                                    txtBeli.EditValue = NullToLong(com.ExecuteScalar())
+                                    InitLoadDataPembelian()
                                 Else
                                     IDBarang = -1
                                     txtKodeBarang.EditValue = ""
@@ -427,7 +441,8 @@ Public Class frmEntriBeliD
                                     txtDiscProsen4.EditValue = 0.0
                                     txtDiscProsen5.EditValue = 0.0
                                     txtDiscRp.EditValue = 0.0
-                                    txtPO.EditValue = -1
+                                    txtBeli.EditValue = -1
+                                    InitLoadDataPembelian()
                                 End If
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -483,5 +498,57 @@ Public Class frmEntriBeliD
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub InitLoadDataPembelian()
+        Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                dlg.Show()
+                                dlg.Focus()
+                                cn.Open()
+                                com.Connection = cn
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MBeliD.*, ISNULL((SELECT SUM(MReturBeliD.Qty-MReturBeliD.Konversi) FROM MReturBeliD INNER JOIN MReturBeli ON MReturBeli.NoID=MReturBeliD.IDHeader WHERE MReturBeliD.NoID<>" & NoID & "), 0) QtyRetur FROM MBeliD INNER JOIN MBeli ON MBeliD.IDHeader=MBeli.NoID WHERE MBeliD.NoID=" & NullToLong(txtBeli.EditValue)
+                                oDA.Fill(ds, "MBeliD")
+
+                                If ds.Tables("MBeliD").Rows.Count >= 1 Then
+                                    Dim iRow As DataRow = ds.Tables("MBeliD").Rows(0)
+                                    txtSatuan.EditValue = NullToLong(iRow.Item("IDSatuan"))
+                                    txtKonversi.EditValue = NullToDbl(iRow.Item("Konversi"))
+                                    QtySisa = (NullToDbl(iRow.Item("Qty")) * NullToDbl(iRow.Item("Konversi"))) - NullToDbl(iRow.Item("QtyRetur"))
+                                    txtQty.EditValue = CInt(QtySisa / NullToDbl(iRow.Item("Konversi")))
+
+                                    txtHargaBeli.EditValue = NullToDbl(iRow.Item("Harga"))
+                                    txtDiscProsen1.EditValue = NullToDbl(iRow.Item("DiscProsen1"))
+                                    txtDiscProsen2.EditValue = NullToDbl(iRow.Item("DiscProsen2"))
+                                    txtDiscProsen3.EditValue = NullToDbl(iRow.Item("DiscProsen3"))
+                                    txtDiscProsen4.EditValue = NullToDbl(iRow.Item("DiscProsen4"))
+                                    txtDiscProsen5.EditValue = NullToDbl(iRow.Item("DiscProsen5"))
+                                    txtDiscRp.EditValue = NullToDbl(iRow.Item("DiscRp"))
+                                Else
+                                    QtySisa = 0.0
+                                End If
+                                HitungJumlah()
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    Private Sub txtBeli_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtBeli.EditValueChanged
+        InitLoadDataPembelian()
+    End Sub
+
+    Private Sub txtBeli_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtBeli.LostFocus
+        'InitLoadDataPembelian()
     End Sub
 End Class

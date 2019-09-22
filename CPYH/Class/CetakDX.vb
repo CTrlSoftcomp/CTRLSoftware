@@ -83,11 +83,11 @@ Public Class CetakDX
                 For i As Integer = 0 To XtraReport.CalculatedFields.Count - 1
                     Select Case XtraReport.CalculatedFields(i).Name.ToUpper
                         Case "NamaPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(SettingPerusaan.NamaPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.NamaPerusahaan) & "'"
                         Case "AlamatPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(SettingPerusaan.AlamatPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.AlamatPerusahaan) & "'"
                         Case "KotaPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(SettingPerusaan.KotaPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.KotaPerusahaan) & "'"
                         Case Else 'Selain Settingan Default
                             If CalculateFields <> "" Then
                                 Parameter = CalculateFields.Split("|")

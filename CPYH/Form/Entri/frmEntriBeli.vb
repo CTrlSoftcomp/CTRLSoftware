@@ -605,8 +605,8 @@ Public Class frmEntriBeli
                 InitLoadLookUp()
                 LoadData()
                 RefreshDetil()
-                If System.IO.File.Exists(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
-                    LayoutControl1.RestoreLayoutFromXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
+                    LayoutControl1.RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -658,8 +658,8 @@ Public Class frmEntriBeli
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, gvPO.DataSourceChanged, gvGudang.DataSourceChanged
         With sender
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -740,12 +740,12 @@ Public Class frmEntriBeli
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvSupplier.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(FolderLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    gvPO.SaveLayoutToXml(FolderLayouts & Me.Name & gvPO.Name & ".xml")
-                    gvGudang.SaveLayoutToXml(FolderLayouts & Me.Name & gvGudang.Name & ".xml")
-                    GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvSupplier.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    gvPO.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvPO.Name & ".xml")
+                    gvGudang.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvGudang.Name & ".xml")
+                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -818,7 +818,7 @@ Public Class frmEntriBeli
         End Select
     End Sub
 
-    Private Sub txtPO_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPO.EditValueChanged
-
+    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
+        mnEdit.PerformClick()
     End Sub
 End Class

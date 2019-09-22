@@ -96,8 +96,8 @@ Public Class frmEntriRole
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -170,8 +170,8 @@ Public Class frmEntriRole
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
         With GridView1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -229,8 +229,8 @@ Public Class frmEntriRole
 
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -239,8 +239,8 @@ Public Class frmEntriRole
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
-                    LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

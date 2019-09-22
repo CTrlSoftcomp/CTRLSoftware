@@ -15,6 +15,10 @@ Public Class frmEntriJual
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
 
+    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
+        mnEdit.PerformClick()
+    End Sub
+
     Public Sub New(ByVal NoID As Long)
 
         ' This call is required by the Windows Form Designer.
@@ -241,7 +245,7 @@ Public Class frmEntriJual
                                 oDA.Fill(ds, "MJualD")
 
                                 For Each iRow As DataRow In ds.Tables("MJualD").Rows
-                                    com.CommandText = "SELECT SUM((QtyMasuk-QtyKeluar)*Konversi) FROM MKartuStok WHERE IDGudang=" & NullToLong(txtGudang.EditValue) & " AND IDBarang=" & NullToLong(iRow.Item("IDBarang")) & " AND Tanggal<='" & txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
+                                    com.CommandText = "EXEC spCekSaldoStok " & NullToLong(iRow.Item("IDBarang")) & ", " & NullToLong(txtGudang.EditValue) & ", '" & txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
                                     If NullToDbl(com.ExecuteScalar()) < NullToDbl(iRow.Item("QtyRetur")) Then
                                         DxErrorProvider1.SetError(txtKode, "Saldo Stok Tidak Cukup!")
                                     End If
@@ -361,7 +365,7 @@ Public Class frmEntriJual
                                         com.Parameters.Add(New SqlParameter("@IDJenisPembayaran", SqlDbType.Int)).Value = bayar.IDJenisPembayaran
                                         com.Parameters.Add(New SqlParameter("@AtasNama", SqlDbType.VarChar)).Value = bayar.AtasNama
                                         com.Parameters.Add(New SqlParameter("@NoRekening", SqlDbType.VarChar)).Value = bayar.NoRekening
-                                        com.Parameters.Add(New SqlParameter("@Nominal", SqlDbType.Money)).Value = bayar.NoRekening
+                                        com.Parameters.Add(New SqlParameter("@Nominal", SqlDbType.Money)).Value = bayar.Nominal
                                         com.Parameters.Add(New SqlParameter("@ChargeProsen", SqlDbType.Float)).Value = bayar.ChargeProsen
                                         com.Parameters.Add(New SqlParameter("@ChargeRp", SqlDbType.Money)).Value = bayar.ChargeRp
                                         com.Parameters.Add(New SqlParameter("@Total", SqlDbType.Money)).Value = bayar.Total
@@ -562,8 +566,8 @@ Public Class frmEntriJual
                 InitLoadLookUp()
                 LoadData()
                 RefreshDetil()
-                If System.IO.File.Exists(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
-                    LayoutControl1.RestoreLayoutFromXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
+                    LayoutControl1.RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -613,8 +617,8 @@ Public Class frmEntriJual
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvCustomer.DataSourceChanged, gvTypePajak.DataSourceChanged
         With sender
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -695,10 +699,10 @@ Public Class frmEntriJual
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvCustomer.SaveLayoutToXml(FolderLayouts & Me.Name & gvCustomer.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(FolderLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvCustomer.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvCustomer.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

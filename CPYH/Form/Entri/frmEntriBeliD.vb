@@ -188,8 +188,8 @@ Public Class frmEntriBeliD
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -211,8 +211,8 @@ Public Class frmEntriBeliD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MPOD.NoID, MPO.Kode FROM MPO INNER JOIN MPOD WHERE " & vbCrLf & _
-                                                  IIf(frmPemanggil.txtPO.Text <> "", " AND MPOD.IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue), "MPO.NoID=-1")
+                                com.CommandText = "SELECT MPOD.NoID, MPO.Kode FROM MPO INNER JOIN MPOD ON MPOD.IDHeader=MPO.NoID WHERE " & vbCrLf & _
+                                                  IIf(frmPemanggil.txtPO.Text <> "", " MPOD.IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue), "MPO.NoID=-1")
                                 oDA.Fill(ds, "MPOD")
                                 txtPO.Properties.DataSource = ds.Tables("MPOD")
                                 txtPO.Properties.DisplayMember = "Kode"
@@ -300,8 +300,8 @@ Public Class frmEntriBeliD
 
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -310,8 +310,8 @@ Public Class frmEntriBeliD
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvSatuan.SaveLayoutToXml(FolderLayouts & Me.Name & gvSatuan.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvSatuan.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -325,8 +325,8 @@ Public Class frmEntriBeliD
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvSatuan.DataSourceChanged, gvBarcode.DataSourceChanged
         With sender
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower

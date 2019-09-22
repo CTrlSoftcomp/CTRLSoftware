@@ -6,10 +6,9 @@ Imports DevExpress.XtraGrid
 Public Class Utils
     Public Shared Parser As New modParser
     Public Shared NamaAplikasi As String = Application.ProductName.ToString
-    Public Shared FolderLayouts As String = Application.StartupPath & "\System\Layouts\"
     Public Shared StrKonSQL As String = ""
     Public Shared UserLogin As New Model.User
-    Public Shared SettingPerusaan As New Model.SettingPerusahaan
+    Public Shared SettingPerusahaan As New Model.SettingPerusahaan
     Public Shared UserOtorisasi As New Model.User
     Public Shared IsEditReport As Boolean = False
 

@@ -220,7 +220,15 @@ Public Class frmMain
     End Sub
 
     Private Sub barSettingPerusahaan_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barSettingPerusahaan.ItemClick
+        Using frm As New frmSettingPerusahaan
+            Try
+                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
 
+                End If
+            Catch ex As Exception
+
+            End Try
+        End Using
     End Sub
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)

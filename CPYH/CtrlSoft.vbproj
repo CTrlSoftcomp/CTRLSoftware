@@ -217,6 +217,12 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Application\frmSettingPerusahaan.Designer.vb">
+      <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmSettingPerusahaan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriJualD.Designer.vb">
       <DependentUpon>frmEntriJualD.vb</DependentUpon>
     </Compile>
@@ -362,6 +368,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Repository\RepConfig.vb" />
     <Compile Include="Repository\RepKode.vb" />
     <Compile Include="Repository\RepMenu.vb" />
   </ItemGroup>
@@ -392,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmSettingPerusahaan.resx">
+      <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriJualD.resx">
       <DependentUpon>frmEntriJualD.vb</DependentUpon>

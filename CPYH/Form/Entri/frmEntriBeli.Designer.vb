@@ -391,6 +391,10 @@ Partial Class frmEntriBeli
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsCustomization.AllowFilter = False
+        Me.GridView1.OptionsFilter.AllowColumnMRUFilterList = False
+        Me.GridView1.OptionsFilter.AllowFilterEditor = False
+        Me.GridView1.OptionsFilter.AllowMRUFilterList = False
         Me.GridView1.OptionsNavigation.EnterMoveNextColumn = True
         Me.GridView1.OptionsSelection.MultiSelect = True
         Me.GridView1.OptionsView.ColumnAutoWidth = False

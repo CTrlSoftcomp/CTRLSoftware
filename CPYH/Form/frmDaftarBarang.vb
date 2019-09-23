@@ -45,6 +45,8 @@ Public Class frmDaftarBarang
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
+        Dim NamaFieldGudang As String = ""
+
         Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
             Using cn As New SqlConnection(StrKonSQL)
                 Using com As New SqlCommand
@@ -57,11 +59,19 @@ Public Class frmDaftarBarang
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
+                                com.CommandText = "SELECT * FROM MGudang WHERE IsActive=1"
+                                oDA.Fill(ds, "MGudang")
+
+                                NamaFieldGudang = ""
+                                For Each iRow As DataRow In ds.Tables("MGudang").Rows
+                                    NamaFieldGudang &= IIf(NamaFieldGudang = "", "", ", ") & "[" & iRow.Item("Kode") & "]"
+                                Next
+
                                 SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
                                         "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
                                         "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
                                         "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
-                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MKategori.Nama AS Kategori " & vbCrLf & _
+                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", ") & NamaFieldGudang.Replace("[", "TSaldoStok.[") & " " & vbCrLf & _
                                         "FROM MBarang (NOLOCK)" & vbCrLf & _
                                         "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                         "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
@@ -70,6 +80,11 @@ Public Class frmDaftarBarang
                                         "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _
                                         "LEFT JOIN MAlamat MSupplier2 (NOLOCK) ON MSupplier2.NoID=MBarang.IDSupplier2" & vbCrLf & _
                                         "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
+                                        IIf(NamaFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
+                                        "SELECT * FROM (" & vbCrLf & _
+                                        "SELECT A.IDBarang, B.Kode, A.SaldoAkhir" & vbCrLf & _
+                                        "FROM TSaldoStok (NOLOCK) A" & vbCrLf & _
+                                        "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
                                         "WHERE 1=1 "
                                 If Not ckTdkAktif.Checked Then
                                     SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"
@@ -173,8 +188,8 @@ Public Class frmDaftarBarang
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
         With sender
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -234,7 +249,7 @@ Public Class frmDaftarBarang
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -278,5 +293,9 @@ Public Class frmDaftarBarang
                 Cursor = MyCursor
             End Try
         End Using
+    End Sub
+
+    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
+        cmdEdit.PerformClick()
     End Sub
 End Class

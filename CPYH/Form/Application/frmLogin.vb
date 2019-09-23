@@ -17,6 +17,7 @@
             Dim User As Model.User = Repository.RepSQLServer.GetLogin(TextEdit1.Text, TextEdit2.Text)
             If User IsNot Nothing Then
                 Utils.UserLogin = User
+                Utils.SettingPerusahaan = Repository.RepConfig.GetSettingPerusahaan()
                 DialogResult = Windows.Forms.DialogResult.OK
                 Me.Close()
             Else

@@ -212,8 +212,8 @@ Public Class frmEntriBarang
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -414,8 +414,8 @@ Public Class frmEntriBarang
     End Sub
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -424,15 +424,15 @@ Public Class frmEntriBarang
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(FolderLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvKategori.SaveLayoutToXml(FolderLayouts & Me.Name & gvKategori.Name & ".xml")
-                    gvSatuanBeli.SaveLayoutToXml(FolderLayouts & Me.Name & gvSatuanBeli.Name & ".xml")
-                    gvSatuanJual.SaveLayoutToXml(FolderLayouts & Me.Name & gvSatuanJual.Name & ".xml")
-                    gvSupplier1.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier1.Name & ".xml")
-                    gvSupplier2.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier2.Name & ".xml")
-                    gvSupplier3.SaveLayoutToXml(FolderLayouts & Me.Name & gvSupplier3.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(FolderLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    GridView1.SaveLayoutToXml(FolderLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvKategori.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
+                    gvSatuanBeli.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuanBeli.Name & ".xml")
+                    gvSatuanJual.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuanJual.Name & ".xml")
+                    gvSupplier1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier1.Name & ".xml")
+                    gvSupplier2.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier2.Name & ".xml")
+                    gvSupplier3.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier3.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -444,8 +444,8 @@ Public Class frmEntriBarang
     gvSatuanJual.DataSourceChanged, gvSupplier1.DataSourceChanged, _
     gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged, gvTypePajak.DataSourceChanged
         With sender
-            If System.IO.File.Exists(FolderLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(FolderLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -727,11 +727,7 @@ Public Class frmEntriBarang
         End If
     End Sub
 
-    Private Sub txtKategori_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtKategori.LostFocus
-        
-    End Sub
-
-    Private Sub txtProsenUpA_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtProsenUpA.EditValueChanged
-
+    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
+        cmdEdit.PerformClick()
     End Sub
 End Class

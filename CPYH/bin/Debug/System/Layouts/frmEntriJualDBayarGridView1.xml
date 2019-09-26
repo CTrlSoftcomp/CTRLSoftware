@@ -1,0 +1,79 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="9">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">colNoID</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">116</property>
+      <property name="Name">colIDJenisTransaksi</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Name">colIsBank</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">137</property>
+      <property name="Name">colAtasNama</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="VisibleIndex">2</property>
+      <property name="Visible">true</property>
+      <property name="Width">142</property>
+      <property name="Name">colNoRekening</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="VisibleIndex">3</property>
+      <property name="Visible">true</property>
+      <property name="Width">110</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat" />
+        <property name="FieldName">Nominal</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colNominal</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
+      <property name="Width">80</property>
+      <property name="Name">colChargeProsen</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="VisibleIndex">5</property>
+      <property name="Visible">true</property>
+      <property name="Width">98</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat" />
+        <property name="FieldName">ChargeRp</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colChargeRp</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">161</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat" />
+        <property name="FieldName">Total</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colTotal</property>
+    </property>
+  </property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="ShowFooter">true</property>
+    <property name="ShowGroupPanel">false</property>
+    <property name="ColumnAutoWidth">false</property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="GroupSummarySortInfoState" />
+</XtraSerializer>

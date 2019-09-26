@@ -1,0 +1,152 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="24">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Width">43</property>
+      <property name="Name">colNoID</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Width">79</property>
+      <property name="Name">colIDBarang</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Width">79</property>
+      <property name="Name">colIDBarangD</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Width">46</property>
+      <property name="Name">colVarian</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Width">111</property>
+      <property name="Name">colIDJenisTransaksi</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Width">79</property>
+      <property name="Name">colIDTransaksi</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Width">92</property>
+      <property name="Name">colIDTransaksiD</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Width">71</property>
+      <property name="Name">colIDGudang</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Width">64</property>
+      <property name="Name">colIDSatuan</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Width">59</property>
+      <property name="Name">colKonversi</property>
+    </property>
+    <property name="Item11" isnull="true" iskey="true">
+      <property name="Width">71</property>
+      <property name="Name">colQtyMasuk</property>
+    </property>
+    <property name="Item12" isnull="true" iskey="true">
+      <property name="Width">70</property>
+      <property name="Name">colQtyKeluar</property>
+    </property>
+    <property name="Item13" isnull="true" iskey="true">
+      <property name="VisibleIndex">5</property>
+      <property name="Visible">true</property>
+      <property name="Width">74</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat">SUM={0:n2}</property>
+        <property name="FieldName">Debet</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colDebet</property>
+    </property>
+    <property name="Item14" isnull="true" iskey="true">
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">74</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat">SUM={0:n2}</property>
+        <property name="FieldName">Kredit</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colKredit</property>
+    </property>
+    <property name="Item15" isnull="true" iskey="true">
+      <property name="VisibleIndex">7</property>
+      <property name="Visible">true</property>
+      <property name="Width">79</property>
+      <property name="Name">colHargaBeli</property>
+    </property>
+    <property name="Item16" isnull="true" iskey="true">
+      <property name="VisibleIndex">8</property>
+      <property name="Visible">true</property>
+      <property name="Width">42</property>
+      <property name="Name">colHPP</property>
+    </property>
+    <property name="Item17" isnull="true" iskey="true">
+      <property name="Name">colSaldoAkhir</property>
+    </property>
+    <property name="Item18" isnull="true" iskey="true">
+      <property name="Width">68</property>
+      <property name="Name">colNilaiAkhir</property>
+    </property>
+    <property name="Item19" isnull="true" iskey="true">
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">95</property>
+      <property name="Name">colKodeBarang</property>
+    </property>
+    <property name="Item20" isnull="true" iskey="true">
+      <property name="VisibleIndex">2</property>
+      <property name="Visible">true</property>
+      <property name="Width">166</property>
+      <property name="Name">colNamaBarang</property>
+    </property>
+    <property name="Item21" isnull="true" iskey="true">
+      <property name="Width">48</property>
+      <property name="Name">colSatuan</property>
+    </property>
+    <property name="Item22" isnull="true" iskey="true">
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">65</property>
+      <property name="Name">colGudang</property>
+    </property>
+    <property name="Item23" isnull="true" iskey="true">
+      <property name="VisibleIndex">3</property>
+      <property name="Visible">true</property>
+      <property name="Width">112</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat">SUM={0:n2}</property>
+        <property name="FieldName">Qty Masuk (Pcs)</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colQtyMasuk(Pcs)</property>
+    </property>
+    <property name="Item24" isnull="true" iskey="true">
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
+      <property name="Width">111</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat">SUM={0:n2}</property>
+        <property name="FieldName">Qty Keluar (Pcs)</property>
+        <property name="Tag" isnull="true" />
+      </property>
+      <property name="Name">colQtyKeluar(Pcs)</property>
+    </property>
+  </property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="ShowFooter">true</property>
+    <property name="ShowGroupPanel">false</property>
+    <property name="ColumnAutoWidth">false</property>
+    <property name="ShowAutoFilterRow">true</property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="SortInfo">~Xtra#Base64AAEAAAD/////AQAAAAAAAAAMAgAAAF1EZXZFeHByZXNzLlh0cmFHcmlkLnYxMC4yLCBWZXJzaW9uPTEwLjIuOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEFAQAAADhEZXZFeHByZXNzLlh0cmFHcmlkLkNvbHVtbnMuR3JpZENvbHVtblNvcnRJbmZvQ29sbGVjdGlvbgQAAAAKZ3JvdXBDb3VudAVjbG9uZQ9jbG9uZUdyb3VwQ291bnQTQ29sbGVjdGlvbkJhc2UrbGlzdAADAAMIsgFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0RldkV4cHJlc3MuWHRyYUdyaWQuQ29sdW1ucy5HcmlkQ29sdW1uU29ydEluZm8sIERldkV4cHJlc3MuWHRyYUdyaWQudjEwLjIsIFZlcnNpb249MTAuMi44LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YV1dCBxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AgAAAAAAAAAJAwAAAAAAAAAJBAAAAAQDAAAAsgFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0RldkV4cHJlc3MuWHRyYUdyaWQuQ29sdW1ucy5HcmlkQ29sdW1uU29ydEluZm8sIERldkV4cHJlc3MuWHRyYUdyaWQudjEwLjIsIFZlcnNpb249MTAuMi44LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YV1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAwRGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mb1tdAgAAAAgICQUAAAAAAAAAAAAAAAQEAAAAHFN5c3RlbS5Db2xsZWN0aW9ucy5BcnJheUxpc3QDAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgUAAAgICQYAAAABAAAAAgAAAAcFAAAAAAEAAAAAAAAABC5EZXZFeHByZXNzLlh0cmFHcmlkLkNvbHVtbnMuR3JpZENvbHVtblNvcnRJbmZvAgAAABAGAAAABAAAAAkHAAAADQMMCAAAABlEZXZFeHByZXNzLlh0cmFHcmlkLnYxMC4yBQcAAAAuRGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mbwIAAAAJU29ydE9yZGVyCkNvbHVtbk5hbWUAAQgIAAAAAQAAAAYJAAAAC2NvbElEQmFyYW5nCw==</property>
+  <property name="GroupSummarySortInfoState" />
+</XtraSerializer>

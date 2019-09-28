@@ -21,6 +21,8 @@ Partial Class frmEntriBarang
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.txtMerk = New DevExpress.XtraEditors.SearchLookUpEdit
+        Me.gvMerk = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.ckTampilkanSemua = New DevExpress.XtraEditors.CheckEdit
         Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
         Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton
@@ -76,6 +78,7 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem35 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlGroup3 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem
@@ -117,6 +120,8 @@ Partial Class frmEntriBarang
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.txtMerk.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvMerk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ckTampilkanSemua.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -166,6 +171,7 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem35, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -202,6 +208,7 @@ Partial Class frmEntriBarang
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.txtMerk)
         Me.LayoutControl1.Controls.Add(Me.ckTampilkanSemua)
         Me.LayoutControl1.Controls.Add(Me.cmdRefresh)
         Me.LayoutControl1.Controls.Add(Me.cmdHapus)
@@ -246,9 +253,29 @@ Partial Class frmEntriBarang
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
+        'txtMerk
+        '
+        Me.txtMerk.EnterMoveNextControl = True
+        Me.txtMerk.Location = New System.Drawing.Point(105, 243)
+        Me.txtMerk.Name = "txtMerk"
+        Me.txtMerk.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtMerk.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtMerk.Properties.NullText = ""
+        Me.txtMerk.Properties.View = Me.gvMerk
+        Me.txtMerk.Size = New System.Drawing.Size(218, 20)
+        Me.txtMerk.StyleController = Me.LayoutControl1
+        Me.txtMerk.TabIndex = 12
+        '
+        'gvMerk
+        '
+        Me.gvMerk.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.gvMerk.Name = "gvMerk"
+        Me.gvMerk.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.gvMerk.OptionsView.ShowGroupPanel = False
+        '
         'ckTampilkanSemua
         '
-        Me.ckTampilkanSemua.Location = New System.Drawing.Point(897, 310)
+        Me.ckTampilkanSemua.Location = New System.Drawing.Point(897, 334)
         Me.ckTampilkanSemua.Name = "ckTampilkanSemua"
         Me.ckTampilkanSemua.Properties.Caption = "Tampilkan Semua"
         Me.ckTampilkanSemua.Size = New System.Drawing.Size(119, 19)
@@ -305,10 +332,10 @@ Partial Class frmEntriBarang
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(24, 333)
+        Me.GridControl1.Location = New System.Drawing.Point(24, 357)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(992, 208)
+        Me.GridControl1.Size = New System.Drawing.Size(992, 184)
         Me.GridControl1.TabIndex = 5
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -633,7 +660,7 @@ Partial Class frmEntriBarang
         'ckAktif
         '
         Me.ckAktif.EditValue = True
-        Me.ckAktif.Location = New System.Drawing.Point(24, 243)
+        Me.ckAktif.Location = New System.Drawing.Point(24, 267)
         Me.ckAktif.Name = "ckAktif"
         Me.ckAktif.Properties.Caption = "Aktif"
         Me.ckAktif.Size = New System.Drawing.Size(299, 19)
@@ -802,10 +829,10 @@ Partial Class frmEntriBarang
         'LayoutControlGroup2
         '
         Me.LayoutControlGroup2.CustomizationFormText = "Detail"
-        Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.LayoutControlItem4, Me.LayoutControlItem7, Me.LayoutControlItem5, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutControlItem3, Me.LayoutControlItem10})
+        Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.LayoutControlItem4, Me.LayoutControlItem7, Me.LayoutControlItem5, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutControlItem3, Me.LayoutControlItem10, Me.LayoutControlItem35})
         Me.LayoutControlGroup2.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup2.Name = "LayoutControlGroup2"
-        Me.LayoutControlGroup2.Size = New System.Drawing.Size(327, 266)
+        Me.LayoutControlGroup2.Size = New System.Drawing.Size(327, 290)
         Me.LayoutControlGroup2.Text = "Detail"
         '
         'LayoutControlItem6
@@ -878,7 +905,7 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlItem3.Control = Me.ckAktif
         Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 199)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 223)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(303, 23)
         Me.LayoutControlItem3.Text = "LayoutControlItem3"
@@ -896,13 +923,23 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem10.Text = "Type Pajak"
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(77, 13)
         '
+        'LayoutControlItem35
+        '
+        Me.LayoutControlItem35.Control = Me.txtMerk
+        Me.LayoutControlItem35.CustomizationFormText = "Merk"
+        Me.LayoutControlItem35.Location = New System.Drawing.Point(0, 199)
+        Me.LayoutControlItem35.Name = "LayoutControlItem35"
+        Me.LayoutControlItem35.Size = New System.Drawing.Size(303, 24)
+        Me.LayoutControlItem35.Text = "Merk"
+        Me.LayoutControlItem35.TextSize = New System.Drawing.Size(77, 13)
+        '
         'LayoutControlGroup3
         '
         Me.LayoutControlGroup3.CustomizationFormText = "Info Modal"
         Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem13, Me.LayoutControlItem12, Me.LayoutControlItem11, Me.LayoutControlItem14, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.EmptySpaceItem1, Me.LayoutControlItem15})
         Me.LayoutControlGroup3.Location = New System.Drawing.Point(327, 0)
         Me.LayoutControlGroup3.Name = "LayoutControlGroup3"
-        Me.LayoutControlGroup3.Size = New System.Drawing.Size(419, 266)
+        Me.LayoutControlGroup3.Size = New System.Drawing.Size(419, 290)
         Me.LayoutControlGroup3.Text = "Info Modal"
         '
         'LayoutControlItem13
@@ -1053,7 +1090,7 @@ Partial Class frmEntriBarang
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 192)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(395, 30)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(395, 54)
         Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -1073,7 +1110,7 @@ Partial Class frmEntriBarang
         Me.LayoutControlGroup4.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.LayoutControlItem28, Me.EmptySpaceItem2})
         Me.LayoutControlGroup4.Location = New System.Drawing.Point(746, 0)
         Me.LayoutControlGroup4.Name = "LayoutControlGroup4"
-        Me.LayoutControlGroup4.Size = New System.Drawing.Size(274, 266)
+        Me.LayoutControlGroup4.Size = New System.Drawing.Size(274, 290)
         Me.LayoutControlGroup4.Text = "Harga Jual"
         '
         'LayoutControlItem24
@@ -1135,7 +1172,7 @@ Partial Class frmEntriBarang
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
         Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 72)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(250, 150)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(250, 174)
         Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -1203,9 +1240,9 @@ Partial Class frmEntriBarang
         '
         Me.LayoutControlGroup5.CustomizationFormText = "Satuan dan Barcode"
         Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem29, Me.LayoutControlItem34, Me.EmptySpaceItem4})
-        Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 266)
+        Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 290)
         Me.LayoutControlGroup5.Name = "LayoutControlGroup5"
-        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1020, 279)
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1020, 255)
         Me.LayoutControlGroup5.Text = "Satuan dan Barcode"
         '
         'LayoutControlItem29
@@ -1214,7 +1251,7 @@ Partial Class frmEntriBarang
         Me.LayoutControlItem29.CustomizationFormText = "Satuan dan Barcode"
         Me.LayoutControlItem29.Location = New System.Drawing.Point(0, 23)
         Me.LayoutControlItem29.Name = "LayoutControlItem29"
-        Me.LayoutControlItem29.Size = New System.Drawing.Size(996, 212)
+        Me.LayoutControlItem29.Size = New System.Drawing.Size(996, 188)
         Me.LayoutControlItem29.Text = "Satuan dan Barcode"
         Me.LayoutControlItem29.TextLocation = DevExpress.Utils.Locations.Top
         Me.LayoutControlItem29.TextSize = New System.Drawing.Size(0, 0)
@@ -1328,6 +1365,8 @@ Partial Class frmEntriBarang
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.txtMerk.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvMerk, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ckTampilkanSemua.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1377,6 +1416,7 @@ Partial Class frmEntriBarang
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem35, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1507,4 +1547,7 @@ Partial Class frmEntriBarang
     Friend WithEvents ckTampilkanSemua As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LayoutControlItem34 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents txtMerk As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents gvMerk As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LayoutControlItem35 As DevExpress.XtraLayout.LayoutControlItem
 End Class

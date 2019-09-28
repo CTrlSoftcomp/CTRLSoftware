@@ -1,0 +1,9 @@
+[Application]
+Skins=Springtime
+[DBConfig]
+Server=(local)
+Database=DBPOS
+Username=sa
+Password=Sg1
+TimeOut=10
+ODBC=DBPOS

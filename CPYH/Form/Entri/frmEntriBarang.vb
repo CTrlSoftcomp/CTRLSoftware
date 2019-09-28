@@ -162,7 +162,7 @@ Public Class frmEntriBarang
                                                               "WHERE MBarangD.IsDefault=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
 
-                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET ProsenUpA=ROUND((MBarangD.HargaJualA-MBarang.HargaBeliPcs*MBarangD.Konversi)/MBarang.HargaBeliPcs*MBarangD.Konversi*100, 2), ProsenUpB=ROUND((MBarangD.HargaJualB-MBarang.HargaBeliPcs*MBarangD.Konversi)/MBarang.HargaBeliPcs*MBarangD.Konversi*100, 2)" & vbCrLf & _
+                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET ProsenUpA=ROUND(((MBarangD.HargaJualA-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2), ProsenUpB=ROUND(((MBarangD.HargaJualB-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2)" & vbCrLf & _
                                                               "FROM MBarangD INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                                               "WHERE ISNULL(MBarangD.IsDefault,0)=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
@@ -395,10 +395,10 @@ Public Class frmEntriBarang
                                             GridView1.SetRowCellValue(i, "ProsenUpB", -100.0)
                                             GridView1.SetRowCellValue(i, "MarginGrosir", -100.0)
                                         Else
-                                            GridView1.SetRowCellValue(i, "ProsenUpA", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "MarginRetail", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "ProsenUpB", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "MarginGrosir", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "ProsenUpA", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "MarginRetail", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "ProsenUpB", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "MarginGrosir", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
                                         End If
                                     End If
                                 Next

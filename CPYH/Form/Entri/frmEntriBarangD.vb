@@ -66,7 +66,8 @@ Public Class frmEntriBarangD
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
-                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (@IDUser, GETDATE(), @NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
+                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (" & vbCrLf & _
+                                                              "@NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
                                         Else
                                             com.CommandText = "UPDATE MBarangD SET Barcode=@Barcode, IDBarang=@IDBarang, IDSatuan=@IDSatuan, Konversi=@Konversi, ProsenUpA=@ProsenUpA, ProsenUpB=@ProsenUpB, HargaJualA=@HargaJualA, HargaJualB=@HargaJualB, IsActive=@IsActive, IsDefault=@IsDefault WHERE NoID=@NoID"
                                         End If
@@ -244,7 +245,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / txtModal.EditValue * txtKonversi.EditValue * 100, 2)
+                txtProsenUpA.EditValue = Utils.Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -291,7 +292,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / txtModal.EditValue * txtKonversi.EditValue * 100, 2)
+                txtProsenUpA.EditValue = Utils.Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -303,7 +304,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / txtModal.EditValue * txtKonversi.EditValue * 100, 2)
+                txtProsenUpB.EditValue = Utils.Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -315,7 +316,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / txtModal.EditValue * txtKonversi.EditValue * 100, 2)
+                txtProsenUpB.EditValue = Utils.Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

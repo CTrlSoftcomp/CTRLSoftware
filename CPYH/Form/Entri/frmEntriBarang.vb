@@ -86,13 +86,13 @@ Public Class frmEntriBarang
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
                                             com.CommandText = "INSERT INTO [dbo].[MBarang]" & vbCrLf & _
-                                                              "([IDUser],[TanggalUpdate],[IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf & _
+                                                              "([IDMerk],[IDUser],[TanggalUpdate],[IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf & _
                                                               ",[Keterangan],[IsActive],[IDTypePajak],[IDSupplier1]" & vbCrLf & _
                                                               ",[IDSupplier2],[IDSupplier3],[HargaBeli],[IDSatuanBeli]" & vbCrLf & _
                                                               ",[IsiCtn],[HargaBeliPcsBruto],[DiscProsen1],[DiscProsen2],[DiscProsen3]" & vbCrLf & _
                                                               ",[DiscProsen4],[DiscProsen5],[DiscRp],[HargaBeliPcs],[IDSatuan],[ProsenUpA]" & vbCrLf & _
                                                               ",[HargaJualA],[ProsenUpB],[HargaJualB]) VALUES" & vbCrLf & _
-                                                              "(@IDUser,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
+                                                              "(@IDMerk,@IDUser,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
                                                               ",@Keterangan,@IsActive,@IDTypePajak,@IDSupplier1" & vbCrLf & _
                                                               ",@IDSupplier2,@IDSupplier3,@HargaBeli,@IDSatuanBeli" & vbCrLf & _
                                                               ",@IsiCtn,@HargaBeliPcsBruto,@DiscProsen1,@DiscProsen2,@DiscProsen3" & vbCrLf & _
@@ -100,7 +100,7 @@ Public Class frmEntriBarang
                                                               ",@HargaJualA,@ProsenUpB,@HargaJualB)"
                                         Else
                                             com.CommandText = "UPDATE [dbo].[MBarang] SET " & vbCrLf & _
-                                                              "[IDUser]=@IDUser,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
+                                                              "[IDMerk]=@IDMerk,[IDUser]=@IDUser,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
                                                               ",[Keterangan]=@Keterangan,[IsActive]=@IsActive,[IDTypePajak]=@IDTypePajak,[IDSupplier1]=@IDSupplier1" & vbCrLf & _
                                                               ",[IDSupplier2]=@IDSupplier2,[IDSupplier3]=@IDSupplier3,[HargaBeli]=@HargaBeli,[IDSatuanBeli]=@IDSatuanBeli" & vbCrLf & _
                                                               ",[IsiCtn]=@IsiCtn,[HargaBeliPcsBruto]=@HargaBeliPcsBruto,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3" & vbCrLf & _
@@ -114,6 +114,7 @@ Public Class frmEntriBarang
                                         com.Parameters.Add(New SqlParameter("@Alias", SqlDbType.VarChar)).Value = txtAlias.Text
                                         com.Parameters.Add(New SqlParameter("@Nama", SqlDbType.VarChar)).Value = txtNama.Text
                                         com.Parameters.Add(New SqlParameter("@IDKategori", SqlDbType.Int)).Value = NullToLong(txtKategori.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDMerk", SqlDbType.Int)).Value = NullToLong(txtMerk.EditValue)
                                         com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
                                         com.Parameters.Add(New SqlParameter("@DefaultBarcode", SqlDbType.VarChar)).Value = txtBarcode.Text
                                         com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = txtKeterangan.Text
@@ -262,6 +263,13 @@ Public Class frmEntriBarang
                                 txtKategori.Properties.DisplayMember = "Nama"
                                 txtKategori.EditValue = -1
 
+                                com.CommandText = "SELECT NoID, Kode, Nama FROM MMerk WHERE IsActive=1"
+                                oDA.Fill(ds, "MMerk")
+                                txtMerk.Properties.DataSource = ds.Tables("MMerk")
+                                txtMerk.Properties.ValueMember = "NoID"
+                                txtMerk.Properties.DisplayMember = "Nama"
+                                txtMerk.EditValue = -1
+
                                 com.CommandText = "SELECT NoID, Kode, Nama FROM MAlamat WHERE IsActive=1 AND IsSupplier=1"
                                 oDA.Fill(ds, "MSupplier")
                                 txtSupplier1.Properties.DataSource = ds.Tables("MSupplier")
@@ -290,6 +298,7 @@ Public Class frmEntriBarang
                                     txtAlias.Text = NullToStr(ds.Tables("MBarang").Rows(0).Item("Alias"))
                                     txtBarcode.Text = NullToStr(ds.Tables("MBarang").Rows(0).Item("DefaultBarcode"))
                                     txtKategori.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("IDKategori"))
+                                    txtMerk.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("IDMerk"))
                                     txtKeterangan.EditValue = NullToStr(ds.Tables("MBarang").Rows(0).Item("Keterangan"))
                                     txtTypePajak.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("IDTypePajak"))
                                     ckAktif.Checked = NullToBool(ds.Tables("MBarang").Rows(0).Item("IsActive"))
@@ -442,7 +451,8 @@ Public Class frmEntriBarang
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvKategori.DataSourceChanged, gvSatuanBeli.DataSourceChanged, _
     gvSatuanJual.DataSourceChanged, gvSupplier1.DataSourceChanged, _
-    gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged, gvTypePajak.DataSourceChanged
+    gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged, _
+    gvTypePajak.DataSourceChanged, gvMerk.DataSourceChanged
         With sender
             If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")

@@ -325,5 +325,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+#Custom File / Folder
 /CPYH/My Project/licenses.licx
 /CPYH/bin/Debug/CtrlSoft.vshost.exe.manifest

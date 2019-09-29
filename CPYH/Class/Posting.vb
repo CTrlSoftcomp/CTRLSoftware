@@ -50,7 +50,7 @@ Namespace Repository
                                                   "FROM MBeliD" & vbCrLf & _
                                                   "INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
                                                   "INNER JOIN MAlamat ON MAlamat.NoID=MBeli.IDSupplier" & vbCrLf & _
-                                                  "WHERE ISNULL(MBeli.Total,0)>0 AND ISNULL(MBeli.IsPosted,0)=0 AND MBeli.NoID=" & NoID
+                                                  "WHERE ISNULL(MBeli.IsPosted,0)=0 AND MBeli.NoID=" & NoID
                                 oDA.Fill(ds, "MBeli")
                                 If ds.Tables("MBeli").Rows.Count >= 1 Then
                                     Dim Limit As Double = 0.0

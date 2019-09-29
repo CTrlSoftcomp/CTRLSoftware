@@ -46,63 +46,64 @@ Public Class frmDaftarBarang
 
     Public Sub RefreshData(ByVal NoID As Long)
         Dim NamaFieldGudang As String = ""
+        Using dsGudang As New DataSet
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
 
-        Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
-            Using cn As New SqlConnection(StrKonSQL)
-                Using com As New SqlCommand
-                    Using oDA As New SqlDataAdapter
-                        Using ds As New DataSet
-                            Try
-                                dlg.Show()
-                                dlg.Focus()
-                                cn.Open()
-                                com.Connection = cn
-                                oDA.SelectCommand = com
+                                    com.CommandText = "SELECT * FROM MGudang WHERE IsActive=1"
+                                    oDA.Fill(dsGudang, "MGudang")
 
-                                com.CommandText = "SELECT * FROM MGudang WHERE IsActive=1"
-                                oDA.Fill(ds, "MGudang")
+                                    NamaFieldGudang = ""
+                                    For Each iRow As DataRow In dsGudang.Tables("MGudang").Rows
+                                        NamaFieldGudang &= IIf(NamaFieldGudang = "", "", ", ") & "[" & iRow.Item("Kode") & "]"
+                                    Next
 
-                                NamaFieldGudang = ""
-                                For Each iRow As DataRow In ds.Tables("MGudang").Rows
-                                    NamaFieldGudang &= IIf(NamaFieldGudang = "", "", ", ") & "[" & iRow.Item("Kode") & "]"
-                                Next
+                                    SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
+                                            "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
+                                            "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
+                                            "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
+                                            "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", ") & NamaFieldGudang.Replace("[", "TSaldoStok.[") & " " & vbCrLf & _
+                                            "FROM MBarang (NOLOCK)" & vbCrLf & _
+                                            "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                            "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
+                                            "LEFT JOIN MMerk (NOLOCK) ON MMerk.NoID=MBarang.IDMerk" & vbCrLf & _
+                                            "LEFT JOIN MTypePajak (NOLOCK) ON MTypePajak.NoID=MBarang.IDTypePajak" & vbCrLf & _
+                                            "LEFT JOIN MSatuan (NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan" & vbCrLf & _
+                                            "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _
+                                            "LEFT JOIN MAlamat MSupplier2 (NOLOCK) ON MSupplier2.NoID=MBarang.IDSupplier2" & vbCrLf & _
+                                            "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
+                                            IIf(NamaFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
+                                            "SELECT * FROM (" & vbCrLf & _
+                                            "SELECT A.IDBarang, B.Kode, A.SaldoAkhir" & vbCrLf & _
+                                            "FROM TSaldoStok (NOLOCK) A" & vbCrLf & _
+                                            "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
+                                            "WHERE 1=1 "
+                                    If Not ckTdkAktif.Checked Then
+                                        SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"
+                                    End If
 
-                                SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
-                                        "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
-                                        "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
-                                        "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
-                                        "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", ") & NamaFieldGudang.Replace("[", "TSaldoStok.[") & " " & vbCrLf & _
-                                        "FROM MBarang (NOLOCK)" & vbCrLf & _
-                                        "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
-                                        "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
-                                        "LEFT JOIN MMerk (NOLOCK) ON MMerk.NoID=MBarang.IDMerk" & vbCrLf & _
-                                        "LEFT JOIN MTypePajak (NOLOCK) ON MTypePajak.NoID=MBarang.IDTypePajak" & vbCrLf & _
-                                        "LEFT JOIN MSatuan (NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan" & vbCrLf & _
-                                        "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _
-                                        "LEFT JOIN MAlamat MSupplier2 (NOLOCK) ON MSupplier2.NoID=MBarang.IDSupplier2" & vbCrLf & _
-                                        "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
-                                        IIf(NamaFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
-                                        "SELECT * FROM (" & vbCrLf & _
-                                        "SELECT A.IDBarang, B.Kode, A.SaldoAkhir" & vbCrLf & _
-                                        "FROM TSaldoStok (NOLOCK) A" & vbCrLf & _
-                                        "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
-                                        "WHERE 1=1 "
-                                If Not ckTdkAktif.Checked Then
-                                    SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"
-                                End If
+                                    com.CommandText = SQL
+                                    oDA.Fill(ds, "MBarang")
+                                    BindingSource1.DataSource = ds.Tables("MBarang")
 
-                                com.CommandText = SQL
-                                oDA.Fill(ds, "MBarang")
-                                BindingSource1.DataSource = ds.Tables("MBarang")
+                                    GridView1.ClearSelection()
+                                    GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
+                                    GridView1.SelectRow(GridView1.FocusedRowHandle)
 
-                                GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
-                                GridView1.SelectRow(GridView1.FocusedRowHandle)
-
-                                Me.ds = ds
-                            Catch ex As Exception
-                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            End Try
+                                    Me.ds = ds
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
                         End Using
                     End Using
                 End Using
@@ -298,5 +299,55 @@ Public Class frmDaftarBarang
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
         cmdEdit.PerformClick()
+    End Sub
+
+    Private Sub mnHitungUlangSaldo_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHitungUlangSaldo.ItemClick
+        Using dlg As New WaitDialogForm("Sedang merubah data ...", NamaAplikasi)
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                dlg.Show()
+                                dlg.Focus()
+                                cn.Open()
+                                com.Connection = cn
+                                com.Transaction = cn.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "DELETE T FROM TSaldoStok T INNER JOIN MBarang d ON d.NoID = T.IDBarang"
+                                com.ExecuteNonQuery()
+                                com.CommandText = "INSERT INTO TSaldoStok (" & vbCrLf & _
+                                                  "IDBarang" & vbCrLf & _
+                                                  ",IDGudang" & vbCrLf & _
+                                                  ",SaldoAkhir" & vbCrLf & _
+                                                  ")" & vbCrLf & _
+                                                  "Select d.NoID" & vbCrLf & _
+                                                  ",MSaldoStok.IDGudang" & vbCrLf & _
+                                                  ",ISNULL(MSaldoStok.Saldo, 0)" & vbCrLf & _
+                                                  "FROM MBarang d" & vbCrLf & _
+                                                  "RIGHT JOIN (" & vbCrLf & _
+                                                  "Select IDBarang" & vbCrLf & _
+                                                  ",IDGudang" & vbCrLf & _
+                                                  ",SUM(Konversi * (QtyMasuk - QtyKeluar)) AS Saldo" & vbCrLf & _
+                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf & _
+                                                  "GROUP BY IDBarang" & vbCrLf & _
+                                                  ",IDGudang" & vbCrLf & _
+                                                  ") MSaldoStok ON MSaldoStok.IDBarang = d.NoID"
+                                com.ExecuteNonQuery()
+
+                                If com.Transaction IsNot Nothing Then
+                                    com.Transaction.Commit()
+                                    com.Transaction = Nothing
+                                    cmdRefresh.PerformClick()
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End Using
     End Sub
 End Class

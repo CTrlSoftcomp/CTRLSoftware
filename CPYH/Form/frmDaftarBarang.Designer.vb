@@ -41,8 +41,9 @@ Partial Class frmDaftarBarang
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.mnHitungUlangSaldo = New DevExpress.XtraBars.BarButtonItem
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -196,9 +197,9 @@ Partial Class frmDaftarBarang
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnHistoryHarga})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnHistoryHarga, Me.mnHitungUlangSaldo})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 3
+        Me.BarManager1.MaxItemId = 4
         '
         'Bar2
         '
@@ -254,17 +255,23 @@ Partial Class frmDaftarBarang
         Me.barDockControlRight.Location = New System.Drawing.Point(983, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 536)
         '
-        'PopupMenu1
-        '
-        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnHistoryHarga)})
-        Me.PopupMenu1.Manager = Me.BarManager1
-        Me.PopupMenu1.Name = "PopupMenu1"
-        '
         'mnHistoryHarga
         '
         Me.mnHistoryHarga.Caption = "History Harga"
         Me.mnHistoryHarga.Id = 2
         Me.mnHistoryHarga.Name = "mnHistoryHarga"
+        '
+        'PopupMenu1
+        '
+        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnHistoryHarga), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHitungUlangSaldo)})
+        Me.PopupMenu1.Manager = Me.BarManager1
+        Me.PopupMenu1.Name = "PopupMenu1"
+        '
+        'mnHitungUlangSaldo
+        '
+        Me.mnHitungUlangSaldo.Caption = "Hitung Ulang Saldo"
+        Me.mnHitungUlangSaldo.Id = 3
+        Me.mnHitungUlangSaldo.Name = "mnHitungUlangSaldo"
         '
         'frmDaftarBarang
         '
@@ -317,4 +324,5 @@ Partial Class frmDaftarBarang
     Friend WithEvents mnSaveLayout As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
     Friend WithEvents mnHistoryHarga As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnHitungUlangSaldo As DevExpress.XtraBars.BarButtonItem
 End Class

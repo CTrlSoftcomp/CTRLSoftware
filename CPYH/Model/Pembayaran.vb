@@ -98,6 +98,8 @@
             IDJenisPembayaran = 1
             Nominal = 0.0
             IsBank = False
+            AtasNama = ""
+            NoRekening = ""
         End Sub
     End Class
 End Namespace

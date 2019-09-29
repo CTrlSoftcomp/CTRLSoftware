@@ -27,6 +27,8 @@
       <property name="Name">colBarcode</property>
     </property>
     <property name="Item6" isnull="true" iskey="true">
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
       <property name="Width">63</property>
       <property name="Name">colIsDefault</property>
     </property>
@@ -59,25 +61,25 @@
       <property name="Name">colSatuan</property>
     </property>
     <property name="Item13" isnull="true" iskey="true">
-      <property name="VisibleIndex">4</property>
+      <property name="VisibleIndex">5</property>
       <property name="Visible">true</property>
       <property name="Width">97</property>
       <property name="Name">colMarginRetail</property>
     </property>
     <property name="Item14" isnull="true" iskey="true">
-      <property name="VisibleIndex">5</property>
+      <property name="VisibleIndex">6</property>
       <property name="Visible">true</property>
       <property name="Width">91</property>
       <property name="Name">colHargaRetail</property>
     </property>
     <property name="Item15" isnull="true" iskey="true">
-      <property name="VisibleIndex">6</property>
+      <property name="VisibleIndex">7</property>
       <property name="Visible">true</property>
       <property name="Width">101</property>
       <property name="Name">colMarginGrosir</property>
     </property>
     <property name="Item16" isnull="true" iskey="true">
-      <property name="VisibleIndex">7</property>
+      <property name="VisibleIndex">8</property>
       <property name="Visible">true</property>
       <property name="Width">95</property>
       <property name="Name">colHargaGrosir</property>

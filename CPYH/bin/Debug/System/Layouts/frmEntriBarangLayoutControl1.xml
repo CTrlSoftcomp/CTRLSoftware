@@ -1,6 +1,6 @@
 ﻿<XtraSerializer version="1.0" application="LayoutControl">
   <property name="#LayoutVersion" />
-  <property name="Items" iskey="true" value="43">
+  <property name="Items" iskey="true" value="44">
     <property name="Item1" isnull="true" iskey="true">
       <property name="ExpandButtonMode">Normal</property>
       <property name="ExpandButtonVisible">false</property>
@@ -256,7 +256,7 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=382@3,Height=297</property>
+      <property name="Size">@3,Width=382@3,Height=296</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
@@ -650,7 +650,7 @@
       <property name="TextVisible">false</property>
       <property name="ImageToTextDistance">5</property>
       <property name="MaxSize">@1,Width=0@2,Height=26</property>
-      <property name="MinSize">@2,Width=52@2,Height=26</property>
+      <property name="MinSize">@2,Width=53@2,Height=26</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@3,Y=223</property>
       <property name="Size">@3,Width=358@2,Height=26</property>
@@ -745,7 +745,7 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=490@3,Height=297</property>
+      <property name="Size">@3,Width=490@3,Height=296</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
@@ -1522,7 +1522,7 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=321@3,Height=297</property>
+      <property name="Size">@3,Width=321@3,Height=296</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
@@ -2107,11 +2107,11 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@4,Width=1193@3,Height=461</property>
+      <property name="Size">@4,Width=1193@3,Height=462</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
-      <property name="Location">@1,X=0@3,Y=297</property>
+      <property name="Location">@1,X=0@3,Y=296</property>
       <property name="ShowTabPageCloseButton">false</property>
       <property name="OptionsToolTip" isnull="true" iskey="true">
         <property name="IconToolTipTitle" />
@@ -2312,7 +2312,7 @@
       <property name="MinSize">@3,Width=104@2,Height=24</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=26</property>
-      <property name="Size">@4,Width=1169@3,Height=387</property>
+      <property name="Size">@4,Width=1169@3,Height=389</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -2349,6 +2349,54 @@
       <property name="Image" isnull="true" />
       <property name="TextToControlDistance">0</property>
       <property name="TextLocation">Top</property>
+    </property>
+    <property name="Item44" isnull="true" iskey="true">
+      <property name="ParentName">Customization</property>
+      <property name="CustomizationFormText">Merk</property>
+      <property name="Text">Merk</property>
+      <property name="TextVisible">true</property>
+      <property name="ImageToTextDistance">5</property>
+      <property name="MaxSize">@1,Width=0@2,Height=28</property>
+      <property name="MinSize">@3,Width=136@2,Height=28</property>
+      <property name="ShowInCustomizationForm">true</property>
+      <property name="Location">@1,X=0@3,Y=219</property>
+      <property name="Size">@3,Width=303@2,Height=28</property>
+      <property name="AppearanceItemCaption" isnull="true" iskey="true">
+        <property name="Font">Segoe UI, 10pt</property>
+        <property name="BackColor2" />
+        <property name="BackColor" />
+        <property name="ForeColor" />
+        <property name="BorderColor" />
+        <property name="GradientMode">Horizontal</property>
+      </property>
+      <property name="OptionsCustomization" isnull="true" iskey="true">
+        <property name="AllowDrop">Default</property>
+        <property name="AllowDrag">Default</property>
+      </property>
+      <property name="OptionsToolTip" isnull="true" iskey="true">
+        <property name="IconToolTipTitle" />
+        <property name="IconToolTipIconType">None</property>
+        <property name="EnableIconToolTip">true</property>
+        <property name="IconToolTip" />
+        <property name="ToolTip" />
+        <property name="ToolTipTitle" />
+        <property name="ToolTipIconType">None</property>
+      </property>
+      <property name="ImageAlignment">MiddleLeft</property>
+      <property name="Padding">2, 2, 2, 2</property>
+      <property name="TextAlignMode">UseParentOptions</property>
+      <property name="Spacing">0, 0, 0, 0</property>
+      <property name="AllowHtmlStringInCaption">false</property>
+      <property name="Name">LayoutControlItem35</property>
+      <property name="TypeName">LayoutControlItem</property>
+      <property name="ControlName">txtMerk</property>
+      <property name="SizeConstraintsType">Default</property>
+      <property name="TextSize">@2,Width=77@2,Height=13</property>
+      <property name="Visibility">Always</property>
+      <property name="ImageIndex">-1</property>
+      <property name="Image" isnull="true" />
+      <property name="TextToControlDistance">5</property>
+      <property name="TextLocation">Left</property>
     </property>
   </property>
   <property name="LookAndFeel" isnull="true" iskey="true">

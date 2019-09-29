@@ -1,19 +1,19 @@
 /// <XRTypeInfo>
 ///   <AssemblyFullName>DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</AssemblyFullName>
-///   <AssemblyLocation>D:\CPYH\2019 - CPYH\CPYH\bin\Debug\DevExpress.XtraReports.v10.2.dll</AssemblyLocation>
+///   <AssemblyLocation>C:\WINDOWS\assembly\GAC_MSIL\DevExpress.XtraReports.v10.2\10.2.8.0__b88d1754d700e49a\DevExpress.XtraReports.v10.2.dll</AssemblyLocation>
 ///   <TypeName>DevExpress.XtraReports.UI.XtraReport</TypeName>
 ///   <Localization>en-US</Localization>
 /// </XRTypeInfo>
 namespace XtraReportSerialization {
     
-    public class LAP_MKATEGORI : DevExpress.XtraReports.UI.XtraReport {
+    public class LAP_MBARANGALL : DevExpress.XtraReports.UI.XtraReport {
         private DevExpress.XtraReports.UI.TopMarginBand topMarginBand1;
         private DevExpress.XtraReports.UI.DetailBand detailBand1;
+        private DevExpress.XtraReports.UI.XRLabel label2;
+        private DevExpress.XtraReports.UI.XRLabel label1;
         private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
-        private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
-        private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
         private System.Resources.ResourceManager _resources;
-        public LAP_MKATEGORI() {
+        public LAP_MBARANGALL() {
             this.InitializeComponent();
         }
         private System.Resources.ResourceManager resources {
@@ -31,53 +31,64 @@ namespace XtraReportSerialization {
             this.topMarginBand1 = new DevExpress.XtraReports.UI.TopMarginBand();
             this.detailBand1 = new DevExpress.XtraReports.UI.DetailBand();
             this.bottomMarginBand1 = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
+            this.label2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label1 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // topMarginBand1
             // 
             this.topMarginBand1.Dpi = 254F;
-            this.topMarginBand1.HeightF = 60.85417F;
+            this.topMarginBand1.HeightF = 254F;
             this.topMarginBand1.Name = "topMarginBand1";
             // 
             // detailBand1
             // 
+            this.detailBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label2,
+                        this.label1});
             this.detailBand1.Dpi = 254F;
-            this.detailBand1.HeightF = 254F;
+            this.detailBand1.HeightF = 58.42F;
             this.detailBand1.Name = "detailBand1";
             // 
             // bottomMarginBand1
             // 
             this.bottomMarginBand1.Dpi = 254F;
-            this.bottomMarginBand1.HeightF = 71.4375F;
+            this.bottomMarginBand1.HeightF = 254F;
             this.bottomMarginBand1.Name = "bottomMarginBand1";
             // 
-            // ReportHeader
+            // label2
             // 
-            this.ReportHeader.Dpi = 254F;
-            this.ReportHeader.HeightF = 254F;
-            this.ReportHeader.Name = "ReportHeader";
+            this.label2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MGudang.Nama")});
+            this.label2.Dpi = 254F;
+            this.label2.LocationFloat = new DevExpress.Utils.PointFloat(1140.354F, 0F);
+            this.label2.Name = "label2";
+            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label2.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.label2.Text = "label2";
             // 
-            // PageFooter
+            // label1
             // 
-            this.PageFooter.Dpi = 254F;
-            this.PageFooter.HeightF = 254F;
-            this.PageFooter.Name = "PageFooter";
+            this.label1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.Barcode")});
+            this.label1.Dpi = 254F;
+            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.label1.Name = "label1";
+            this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label1.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.label1.Text = "label1";
             // 
-            // LAP_MKATEGORI
+            // LAP_MBARANGALL
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
                         this.topMarginBand1,
                         this.detailBand1,
-                        this.bottomMarginBand1,
-                        this.ReportHeader,
-                        this.PageFooter});
-            this.DataSourceSchema = "D:\\CPYH\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\LAP_MKATEGORI.xsd";
-            this.DisplayName = "Lap_MKategori.repx";
+                        this.bottomMarginBand1});
+            this.DataSourceSchema = "D:\\CPYH\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\LAP_MBARANGALL.xsd";
+            this.DisplayName = "Lap_MBarangAll.repx";
             this.Dpi = 254F;
-            this.Margins = new System.Drawing.Printing.Margins(254, 254, 61, 71);
-            this.Name = "LAP_MKATEGORI";
+            this.Margins = new System.Drawing.Printing.Margins(254, 254, 254, 254);
+            this.Name = "LAP_MBARANGALL";
             this.PageHeight = 2794;
             this.PageWidth = 2159;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;

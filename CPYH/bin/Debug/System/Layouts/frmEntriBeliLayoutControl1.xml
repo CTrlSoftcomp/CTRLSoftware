@@ -1,13 +1,13 @@
 ﻿<XtraSerializer version="1.0" application="LayoutControl">
   <property name="#LayoutVersion" />
-  <property name="Items" iskey="true" value="21">
+  <property name="Items" iskey="true" value="22">
     <property name="Item1" isnull="true" iskey="true">
       <property name="ExpandButtonMode">Normal</property>
       <property name="ExpandButtonVisible">false</property>
       <property name="Padding">10, 10, 10, 10</property>
       <property name="TextVisible">false</property>
       <property name="Spacing">0, 0, 0, 0</property>
-      <property name="Size">@4,Width=1592@3,Height=613</property>
+      <property name="Size">@4,Width=1913@3,Height=793</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
@@ -137,10 +137,10 @@
       <property name="ShowInCustomizationForm">true</property>
       <property name="Visibility">Always</property>
       <property name="CustomizationFormText">EmptySpaceItem1</property>
-      <property name="Size">@3,Width=413@3,Height=188</property>
+      <property name="Size">@3,Width=497@3,Height=187</property>
       <property name="Spacing">0, 0, 0, 0</property>
       <property name="TextSize">@1,Width=0@1,Height=0</property>
-      <property name="Location">@3,X=571@1,Y=0</property>
+      <property name="Location">@3,X=688@1,Y=0</property>
       <property name="Padding">2, 2, 2, 2</property>
       <property name="AllowHtmlStringInCaption">false</property>
       <property name="TextVisible">false</property>
@@ -163,8 +163,8 @@
       <property name="MaxSize">@1,Width=0@1,Height=0</property>
       <property name="MinSize">@3,Width=104@2,Height=24</property>
       <property name="ShowInCustomizationForm">true</property>
-      <property name="Location">@1,X=0@3,Y=188</property>
-      <property name="Size">@4,Width=1572@3,Height=297</property>
+      <property name="Location">@1,X=0@3,Y=187</property>
+      <property name="Size">@4,Width=1893@3,Height=478</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -208,7 +208,7 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=571@3,Height=188</property>
+      <property name="Size">@3,Width=688@3,Height=187</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
@@ -317,7 +317,7 @@
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@1,Y=0</property>
-      <property name="Size">@3,Width=547@2,Height=28</property>
+      <property name="Size">@3,Width=664@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -365,7 +365,7 @@
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=28</property>
-      <property name="Size">@3,Width=273@2,Height=28</property>
+      <property name="Size">@3,Width=331@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -413,7 +413,7 @@
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=56</property>
-      <property name="Size">@3,Width=547@2,Height=28</property>
+      <property name="Size">@3,Width=664@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -461,7 +461,7 @@
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=84</property>
-      <property name="Size">@3,Width=547@2,Height=28</property>
+      <property name="Size">@3,Width=664@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -509,7 +509,7 @@
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@3,Y=112</property>
-      <property name="Size">@3,Width=547@2,Height=28</property>
+      <property name="Size">@3,Width=664@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -556,8 +556,8 @@
       <property name="MaxSize">@1,Width=0@2,Height=28</property>
       <property name="MinSize">@3,Width=138@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
-      <property name="Location">@3,X=273@2,Y=28</property>
-      <property name="Size">@3,Width=274@2,Height=28</property>
+      <property name="Location">@3,X=331@2,Y=28</property>
+      <property name="Size">@3,Width=333@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -601,11 +601,11 @@
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">true</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=588@3,Height=188</property>
+      <property name="Size">@3,Width=708@3,Height=187</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
-      <property name="Location">@3,X=984@1,Y=0</property>
+      <property name="Location">@4,X=1185@1,Y=0</property>
       <property name="ShowTabPageCloseButton">false</property>
       <property name="OptionsToolTip" isnull="true" iskey="true">
         <property name="IconToolTipTitle" />
@@ -710,7 +710,7 @@
       <property name="MinSize">@3,Width=149@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@1,Y=0</property>
-      <property name="Size">@3,Width=564@2,Height=28</property>
+      <property name="Size">@3,Width=684@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -758,7 +758,7 @@
       <property name="MinSize">@3,Width=149@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=28</property>
-      <property name="Size">@3,Width=564@2,Height=28</property>
+      <property name="Size">@3,Width=684@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -806,7 +806,7 @@
       <property name="MinSize">@3,Width=109@2,Height=24</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=56</property>
-      <property name="Size">@3,Width=564@2,Height=84</property>
+      <property name="Size">@3,Width=684@2,Height=56</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -845,16 +845,64 @@
       <property name="TextLocation">Left</property>
     </property>
     <property name="Item15" isnull="true" iskey="true">
+      <property name="ParentName">LayoutControlGroup3</property>
+      <property name="CustomizationFormText">Gudang</property>
+      <property name="Text">Gudang</property>
+      <property name="TextVisible">true</property>
+      <property name="ImageToTextDistance">5</property>
+      <property name="MaxSize">@1,Width=0@2,Height=28</property>
+      <property name="MinSize">@3,Width=149@2,Height=28</property>
+      <property name="ShowInCustomizationForm">true</property>
+      <property name="Location">@1,X=0@3,Y=112</property>
+      <property name="Size">@3,Width=684@2,Height=28</property>
+      <property name="AppearanceItemCaption" isnull="true" iskey="true">
+        <property name="Font">Segoe UI, 10pt</property>
+        <property name="BackColor2" />
+        <property name="BackColor" />
+        <property name="ForeColor" />
+        <property name="BorderColor" />
+        <property name="GradientMode">Horizontal</property>
+      </property>
+      <property name="OptionsCustomization" isnull="true" iskey="true">
+        <property name="AllowDrop">Default</property>
+        <property name="AllowDrag">Default</property>
+      </property>
+      <property name="OptionsToolTip" isnull="true" iskey="true">
+        <property name="IconToolTipTitle" />
+        <property name="IconToolTipIconType">None</property>
+        <property name="EnableIconToolTip">true</property>
+        <property name="IconToolTip" />
+        <property name="ToolTip" />
+        <property name="ToolTipTitle" />
+        <property name="ToolTipIconType">None</property>
+      </property>
+      <property name="ImageAlignment">MiddleLeft</property>
+      <property name="Padding">2, 2, 2, 2</property>
+      <property name="TextAlignMode">UseParentOptions</property>
+      <property name="Spacing">0, 0, 0, 0</property>
+      <property name="AllowHtmlStringInCaption">false</property>
+      <property name="Name">LayoutControlItem16</property>
+      <property name="TypeName">LayoutControlItem</property>
+      <property name="ControlName">txtGudang</property>
+      <property name="SizeConstraintsType">Default</property>
+      <property name="TextSize">@2,Width=92@2,Height=17</property>
+      <property name="Visibility">Always</property>
+      <property name="ImageIndex">-1</property>
+      <property name="Image" isnull="true" />
+      <property name="TextToControlDistance">3</property>
+      <property name="TextLocation">Left</property>
+    </property>
+    <property name="Item16" isnull="true" iskey="true">
       <property name="ExpandButtonMode">Normal</property>
       <property name="ExpandButtonVisible">false</property>
       <property name="Padding">9, 9, 9, 9</property>
       <property name="TextVisible">false</property>
       <property name="Spacing">2, 2, 2, 2</property>
-      <property name="Size">@3,Width=634@3,Height=108</property>
+      <property name="Size">@3,Width=763@3,Height=108</property>
       <property name="Expanded">true</property>
       <property name="ExpandOnDoubleClick">false</property>
       <property name="DefaultLayoutType">Vertical</property>
-      <property name="Location">@3,X=938@3,Y=485</property>
+      <property name="Location">@4,X=1130@3,Y=665</property>
       <property name="ShowTabPageCloseButton">false</property>
       <property name="OptionsToolTip" isnull="true" iskey="true">
         <property name="IconToolTipTitle" />
@@ -949,7 +997,7 @@
       <property name="TextToControlDistance">0</property>
       <property name="TabbedGroupParentName" />
     </property>
-    <property name="Item16" isnull="true" iskey="true">
+    <property name="Item17" isnull="true" iskey="true">
       <property name="ParentName">LayoutControlGroup4</property>
       <property name="CustomizationFormText">Subtotal</property>
       <property name="Text">Subtotal</property>
@@ -959,7 +1007,7 @@
       <property name="MinSize">@3,Width=105@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@1,Y=0</property>
-      <property name="Size">@3,Width=610@2,Height=28</property>
+      <property name="Size">@3,Width=739@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -997,7 +1045,7 @@
       <property name="TextToControlDistance">3</property>
       <property name="TextLocation">Left</property>
     </property>
-    <property name="Item17" isnull="true" iskey="true">
+    <property name="Item18" isnull="true" iskey="true">
       <property name="ParentName">LayoutControlGroup4</property>
       <property name="CustomizationFormText">DPP</property>
       <property name="Text">DPP</property>
@@ -1007,7 +1055,7 @@
       <property name="MinSize">@3,Width=105@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=28</property>
-      <property name="Size">@3,Width=305@2,Height=28</property>
+      <property name="Size">@3,Width=370@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -1045,7 +1093,7 @@
       <property name="TextToControlDistance">3</property>
       <property name="TextLocation">Left</property>
     </property>
-    <property name="Item18" isnull="true" iskey="true">
+    <property name="Item19" isnull="true" iskey="true">
       <property name="ParentName">LayoutControlGroup4</property>
       <property name="CustomizationFormText">PPN</property>
       <property name="Text">PPN</property>
@@ -1054,8 +1102,8 @@
       <property name="MaxSize">@1,Width=0@2,Height=28</property>
       <property name="MinSize">@3,Width=105@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
-      <property name="Location">@3,X=305@2,Y=28</property>
-      <property name="Size">@3,Width=305@2,Height=28</property>
+      <property name="Location">@3,X=370@2,Y=28</property>
+      <property name="Size">@3,Width=369@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -1093,7 +1141,7 @@
       <property name="TextToControlDistance">3</property>
       <property name="TextLocation">Left</property>
     </property>
-    <property name="Item19" isnull="true" iskey="true">
+    <property name="Item20" isnull="true" iskey="true">
       <property name="ParentName">LayoutControlGroup4</property>
       <property name="CustomizationFormText">Total</property>
       <property name="Text">Total</property>
@@ -1103,7 +1151,7 @@
       <property name="MinSize">@3,Width=105@2,Height=28</property>
       <property name="ShowInCustomizationForm">true</property>
       <property name="Location">@1,X=0@2,Y=56</property>
-      <property name="Size">@3,Width=610@2,Height=28</property>
+      <property name="Size">@3,Width=739@2,Height=28</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -1141,7 +1189,7 @@
       <property name="TextToControlDistance">3</property>
       <property name="TextLocation">Left</property>
     </property>
-    <property name="Item20" isnull="true" iskey="true">
+    <property name="Item21" isnull="true" iskey="true">
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -1172,10 +1220,10 @@
       <property name="ShowInCustomizationForm">true</property>
       <property name="Visibility">Always</property>
       <property name="CustomizationFormText">EmptySpaceItem2</property>
-      <property name="Size">@3,Width=328@3,Height=108</property>
+      <property name="Size">@3,Width=395@3,Height=108</property>
       <property name="Spacing">0, 0, 0, 0</property>
       <property name="TextSize">@1,Width=0@1,Height=0</property>
-      <property name="Location">@3,X=610@3,Y=485</property>
+      <property name="Location">@3,X=735@3,Y=665</property>
       <property name="Padding">2, 2, 2, 2</property>
       <property name="AllowHtmlStringInCaption">false</property>
       <property name="TextVisible">false</property>
@@ -1189,7 +1237,7 @@
       <property name="SizeConstraintsType">Default</property>
       <property name="Image" isnull="true" />
     </property>
-    <property name="Item21" isnull="true" iskey="true">
+    <property name="Item22" isnull="true" iskey="true">
       <property name="ParentName">Root</property>
       <property name="CustomizationFormText">Catatan</property>
       <property name="Text">Catatan</property>
@@ -1198,8 +1246,8 @@
       <property name="MaxSize">@1,Width=0@1,Height=0</property>
       <property name="MinSize">@2,Width=48@2,Height=44</property>
       <property name="ShowInCustomizationForm">true</property>
-      <property name="Location">@1,X=0@3,Y=485</property>
-      <property name="Size">@3,Width=610@3,Height=108</property>
+      <property name="Location">@1,X=0@3,Y=665</property>
+      <property name="Size">@3,Width=735@3,Height=108</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />

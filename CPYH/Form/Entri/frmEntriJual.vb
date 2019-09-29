@@ -363,8 +363,8 @@ Public Class frmEntriJual
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@IDHeader", SqlDbType.BigInt)).Value = NoID
                                         com.Parameters.Add(New SqlParameter("@IDJenisPembayaran", SqlDbType.Int)).Value = bayar.IDJenisPembayaran
-                                        com.Parameters.Add(New SqlParameter("@AtasNama", SqlDbType.VarChar)).Value = bayar.AtasNama
-                                        com.Parameters.Add(New SqlParameter("@NoRekening", SqlDbType.VarChar)).Value = bayar.NoRekening
+                                        com.Parameters.Add(New SqlParameter("@AtasNama", SqlDbType.VarChar)).Value = NullToStr(bayar.AtasNama)
+                                        com.Parameters.Add(New SqlParameter("@NoRekening", SqlDbType.VarChar)).Value = NullToStr(bayar.NoRekening)
                                         com.Parameters.Add(New SqlParameter("@Nominal", SqlDbType.Money)).Value = bayar.Nominal
                                         com.Parameters.Add(New SqlParameter("@ChargeProsen", SqlDbType.Float)).Value = bayar.ChargeProsen
                                         com.Parameters.Add(New SqlParameter("@ChargeRp", SqlDbType.Money)).Value = bayar.ChargeRp

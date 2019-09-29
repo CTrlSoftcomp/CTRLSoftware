@@ -233,6 +233,19 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnKartuStok"
+                Dim x As frmLaporanKartuStok = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmLaporanKartuStok Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmLaporanKartuStok(e.Item.Caption, -1, -1)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnReturBeli"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren

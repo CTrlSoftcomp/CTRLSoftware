@@ -209,7 +209,7 @@ Public Class frmEntriJualD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MBarangD.NoID, MBarangD.Barcode, MBarang.Kode, MBarang.Nama FROM MBarang INNER JOIN MBarangD ON MBarangD.IDBarang=MBarang.NoID WHERE MBarangD.IsActive=1 AND MBarang.IsActive=1 " & vbCrLf & _
+                                com.CommandText = "SELECT MBarangD.NoID, MBarangD.Barcode, MBarang.Kode, MBarang.Nama + ISNULL(' (' + MSatuan.Kode + ')', '') AS Nama FROM MBarang INNER JOIN MBarangD ON MBarangD.IDBarang=MBarang.NoID LEFT JOIN MSatuan ON MBarangD.IDSatuan=MSatuan.NoID WHERE MBarangD.IsActive=1 AND MBarang.IsActive=1 " & vbCrLf & _
                                                   "" 'IIf(frmPemanggil.txtPO.Text <> "", " AND MBarang.NoID IN (SELECT MPOD.IDBarang FROM MPOD WHERE IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue) & ")", "")
                                 oDA.Fill(ds, "MBarangD")
                                 txtBarcode.Properties.DataSource = ds.Tables("MBarangD")
@@ -300,6 +300,7 @@ Public Class frmEntriJualD
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvBarcode.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
                     gvSatuan.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -381,7 +382,7 @@ Public Class frmEntriJualD
                                 com.CommandText = "SELECT IDTypeHarga FROM MAlamat WHERE NoID=" & NullToLong(frmPemanggil.txtCustomer.EditValue)
                                 IDTypeHarga = NullToLong(com.ExecuteScalar())
 
-                                com.CommandText = "SELECT MBarangD.IDBarang, MBarang.Kode, MBarang.Nama, MBarangD.IDSatuan, " & IIf(IDTypeHarga = 2, "MBarangD.HargaJualB", "MBarangD.HargaJualA") & " AS HargaJual FROM MBarang INNER JOIN MBarangD ON MBarang.NoID=MBarangD.IDBarang WHERE MBarangD.NoID=" & NullToLong(txtBarcode.EditValue)
+                                com.CommandText = "SELECT MBarangD.IDBarang, MBarang.Kode, MBarang.Nama + ISNULL(' (' + MSatuan.Kode + ')', '') AS Nama, MBarangD.IDSatuan, " & IIf(IDTypeHarga = 2, "MBarangD.HargaJualB", "MBarangD.HargaJualA") & " AS HargaJual FROM MBarang INNER JOIN MBarangD ON MBarang.NoID=MBarangD.IDBarang LEFT JOIN MSatuan ON MSatuan.NoID=MBarangD.IDSatuan WHERE MBarangD.NoID=" & NullToLong(txtBarcode.EditValue)
                                 oDA.Fill(ds, "MBarang")
                                 If ds.Tables("MBarang").Rows.Count >= 1 Then
                                     Dim iRow As DataRow = ds.Tables("MBarang").Rows(0)

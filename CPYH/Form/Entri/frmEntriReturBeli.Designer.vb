@@ -618,7 +618,7 @@ Partial Class frmEntriReturBeli
         '
         'mnBaru
         '
-        Me.mnBaru.Caption = "&Baru"
+        Me.mnBaru.Caption = "&Baru (F1)"
         Me.mnBaru.Id = 0
         Me.mnBaru.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1)
         Me.mnBaru.Name = "mnBaru"
@@ -626,7 +626,7 @@ Partial Class frmEntriReturBeli
         '
         'mnEdit
         '
-        Me.mnEdit.Caption = "&Edit"
+        Me.mnEdit.Caption = "&Edit (F2)"
         Me.mnEdit.Id = 1
         Me.mnEdit.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
         Me.mnEdit.Name = "mnEdit"
@@ -634,7 +634,7 @@ Partial Class frmEntriReturBeli
         '
         'mnHapus
         '
-        Me.mnHapus.Caption = "&Hapus"
+        Me.mnHapus.Caption = "&Hapus (F4)"
         Me.mnHapus.Id = 2
         Me.mnHapus.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F4)
         Me.mnHapus.Name = "mnHapus"
@@ -642,7 +642,7 @@ Partial Class frmEntriReturBeli
         '
         'mnRefresh
         '
-        Me.mnRefresh.Caption = "&Refresh"
+        Me.mnRefresh.Caption = "&Refresh (F5)"
         Me.mnRefresh.Id = 3
         Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
         Me.mnRefresh.Name = "mnRefresh"
@@ -650,7 +650,7 @@ Partial Class frmEntriReturBeli
         '
         'mnSimpan
         '
-        Me.mnSimpan.Caption = "&Simpan"
+        Me.mnSimpan.Caption = "&Simpan (F6)"
         Me.mnSimpan.Id = 5
         Me.mnSimpan.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F6)
         Me.mnSimpan.Name = "mnSimpan"
@@ -658,7 +658,7 @@ Partial Class frmEntriReturBeli
         '
         'mnTutup
         '
-        Me.mnTutup.Caption = "&Tutup"
+        Me.mnTutup.Caption = "&Tutup (F3)"
         Me.mnTutup.Id = 4
         Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
         Me.mnTutup.Name = "mnTutup"

@@ -548,7 +548,9 @@ Public Class frmEntriReturBeli
         End Try
     End Sub
 
-    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged
+    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, _
+    gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, _
+    gvGudang.DataSourceChanged
         With sender
             If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
@@ -634,6 +636,7 @@ Public Class frmEntriReturBeli
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvSupplier.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
+                    gvGudang.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvGudang.Name & ".xml")
                     gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
                     GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If

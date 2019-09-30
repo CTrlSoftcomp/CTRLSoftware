@@ -241,7 +241,7 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmLaporanKartuStok(e.Item.Caption, -1, -1)
+                    x = New frmLaporanKartuStok(e.Item.Caption, -1, -1, UserLogin.TanggalSystem.AddDays((-1 * UserLogin.TanggalSystem.Day) + 1), UserLogin.TanggalSystem)
                     x.MdiParent = Me
                 End If
                 x.Show()

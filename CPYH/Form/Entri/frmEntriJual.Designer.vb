@@ -21,6 +21,8 @@ Partial Class frmEntriJual
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit
+        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit
         Me.txtGudang = New DevExpress.XtraEditors.SearchLookUpEdit
         Me.gvGudang = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.txtTypePajak = New DevExpress.XtraEditors.SearchLookUpEdit
@@ -59,6 +61,8 @@ Partial Class frmEntriJual
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem17 = New DevExpress.XtraLayout.LayoutControlItem
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
@@ -77,12 +81,10 @@ Partial Class frmEntriJual
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit
-        Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit
-        Me.LayoutControlItem17 = New DevExpress.XtraLayout.LayoutControlItem
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtTypePajak.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,14 +125,12 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -161,6 +161,42 @@ Partial Class frmEntriJual
         Me.LayoutControl1.Size = New System.Drawing.Size(907, 503)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'TextEdit2
+        '
+        Me.TextEdit2.EditValue = 0
+        Me.TextEdit2.EnterMoveNextControl = True
+        Me.TextEdit2.Location = New System.Drawing.Point(597, 459)
+        Me.TextEdit2.Name = "TextEdit2"
+        Me.TextEdit2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextEdit2.Properties.Appearance.Options.UseFont = True
+        Me.TextEdit2.Properties.Appearance.Options.UseTextOptions = True
+        Me.TextEdit2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TextEdit2.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextEdit2.Properties.Mask.EditMask = "n2"
+        Me.TextEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TextEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TextEdit2.Properties.ReadOnly = True
+        Me.TextEdit2.Size = New System.Drawing.Size(286, 20)
+        Me.TextEdit2.StyleController = Me.LayoutControl1
+        Me.TextEdit2.TabIndex = 15
+        '
+        'TextEdit1
+        '
+        Me.TextEdit1.EditValue = 0
+        Me.TextEdit1.EnterMoveNextControl = True
+        Me.TextEdit1.Location = New System.Drawing.Point(597, 435)
+        Me.TextEdit1.Name = "TextEdit1"
+        Me.TextEdit1.Properties.Appearance.Options.UseTextOptions = True
+        Me.TextEdit1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TextEdit1.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextEdit1.Properties.Mask.EditMask = "n2"
+        Me.TextEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TextEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TextEdit1.Properties.ReadOnly = True
+        Me.TextEdit1.Size = New System.Drawing.Size(286, 20)
+        Me.TextEdit1.StyleController = Me.LayoutControl1
+        Me.TextEdit1.TabIndex = 15
         '
         'txtGudang
         '
@@ -587,6 +623,26 @@ Partial Class frmEntriJual
         Me.LayoutControlItem12.Text = "Total"
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(40, 13)
         '
+        'LayoutControlItem16
+        '
+        Me.LayoutControlItem16.Control = Me.TextEdit1
+        Me.LayoutControlItem16.CustomizationFormText = "Bayar"
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 72)
+        Me.LayoutControlItem16.Name = "LayoutControlItem16"
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(334, 24)
+        Me.LayoutControlItem16.Text = "Bayar"
+        Me.LayoutControlItem16.TextSize = New System.Drawing.Size(40, 13)
+        '
+        'LayoutControlItem17
+        '
+        Me.LayoutControlItem17.Control = Me.TextEdit2
+        Me.LayoutControlItem17.CustomizationFormText = "Sisa"
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(0, 96)
+        Me.LayoutControlItem17.Name = "LayoutControlItem17"
+        Me.LayoutControlItem17.Size = New System.Drawing.Size(334, 24)
+        Me.LayoutControlItem17.Text = "Sisa"
+        Me.LayoutControlItem17.TextSize = New System.Drawing.Size(40, 13)
+        '
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
@@ -630,7 +686,7 @@ Partial Class frmEntriJual
         '
         'mnBaru
         '
-        Me.mnBaru.Caption = "&Baru"
+        Me.mnBaru.Caption = "&Baru (F1)"
         Me.mnBaru.Id = 0
         Me.mnBaru.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1)
         Me.mnBaru.Name = "mnBaru"
@@ -638,7 +694,7 @@ Partial Class frmEntriJual
         '
         'mnEdit
         '
-        Me.mnEdit.Caption = "&Edit"
+        Me.mnEdit.Caption = "&Edit (F2)"
         Me.mnEdit.Id = 1
         Me.mnEdit.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
         Me.mnEdit.Name = "mnEdit"
@@ -646,7 +702,7 @@ Partial Class frmEntriJual
         '
         'mnHapus
         '
-        Me.mnHapus.Caption = "&Hapus"
+        Me.mnHapus.Caption = "&Hapus (F4)"
         Me.mnHapus.Id = 2
         Me.mnHapus.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F4)
         Me.mnHapus.Name = "mnHapus"
@@ -654,7 +710,7 @@ Partial Class frmEntriJual
         '
         'mnRefresh
         '
-        Me.mnRefresh.Caption = "&Refresh"
+        Me.mnRefresh.Caption = "&Refresh (F5)"
         Me.mnRefresh.Id = 3
         Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
         Me.mnRefresh.Name = "mnRefresh"
@@ -662,7 +718,7 @@ Partial Class frmEntriJual
         '
         'mnSimpan
         '
-        Me.mnSimpan.Caption = "&Simpan"
+        Me.mnSimpan.Caption = "&Simpan (F6)"
         Me.mnSimpan.Id = 5
         Me.mnSimpan.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F6)
         Me.mnSimpan.Name = "mnSimpan"
@@ -670,7 +726,7 @@ Partial Class frmEntriJual
         '
         'mnTutup
         '
-        Me.mnTutup.Caption = "&Tutup"
+        Me.mnTutup.Caption = "&Tutup (F3)"
         Me.mnTutup.Id = 4
         Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
         Me.mnTutup.Name = "mnTutup"
@@ -734,62 +790,6 @@ Partial Class frmEntriJual
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
-        'TextEdit1
-        '
-        Me.TextEdit1.EditValue = 0
-        Me.TextEdit1.EnterMoveNextControl = True
-        Me.TextEdit1.Location = New System.Drawing.Point(597, 435)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Properties.Appearance.Options.UseTextOptions = True
-        Me.TextEdit1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.TextEdit1.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TextEdit1.Properties.Mask.EditMask = "n2"
-        Me.TextEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TextEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.TextEdit1.Properties.ReadOnly = True
-        Me.TextEdit1.Size = New System.Drawing.Size(286, 20)
-        Me.TextEdit1.StyleController = Me.LayoutControl1
-        Me.TextEdit1.TabIndex = 15
-        '
-        'LayoutControlItem16
-        '
-        Me.LayoutControlItem16.Control = Me.TextEdit1
-        Me.LayoutControlItem16.CustomizationFormText = "Bayar"
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 72)
-        Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(334, 24)
-        Me.LayoutControlItem16.Text = "Bayar"
-        Me.LayoutControlItem16.TextSize = New System.Drawing.Size(40, 13)
-        '
-        'TextEdit2
-        '
-        Me.TextEdit2.EditValue = 0
-        Me.TextEdit2.EnterMoveNextControl = True
-        Me.TextEdit2.Location = New System.Drawing.Point(597, 459)
-        Me.TextEdit2.Name = "TextEdit2"
-        Me.TextEdit2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextEdit2.Properties.Appearance.Options.UseFont = True
-        Me.TextEdit2.Properties.Appearance.Options.UseTextOptions = True
-        Me.TextEdit2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.TextEdit2.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TextEdit2.Properties.Mask.EditMask = "n2"
-        Me.TextEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TextEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.TextEdit2.Properties.ReadOnly = True
-        Me.TextEdit2.Size = New System.Drawing.Size(286, 20)
-        Me.TextEdit2.StyleController = Me.LayoutControl1
-        Me.TextEdit2.TabIndex = 15
-        '
-        'LayoutControlItem17
-        '
-        Me.LayoutControlItem17.Control = Me.TextEdit2
-        Me.LayoutControlItem17.CustomizationFormText = "Sisa"
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(0, 96)
-        Me.LayoutControlItem17.Name = "LayoutControlItem17"
-        Me.LayoutControlItem17.Size = New System.Drawing.Size(334, 24)
-        Me.LayoutControlItem17.Text = "Sisa"
-        Me.LayoutControlItem17.TextSize = New System.Drawing.Size(40, 13)
-        '
         'frmEntriJual
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -804,6 +804,8 @@ Partial Class frmEntriJual
         Me.Text = "Entri Penjualan"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtTypePajak.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -844,14 +846,12 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

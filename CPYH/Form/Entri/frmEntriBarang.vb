@@ -108,23 +108,23 @@ Public Class frmEntriBarang
                                                               ",[HargaJualA]=@HargaJualA,[ProsenUpB]=@ProsenUpB,[HargaJualB]=@HargaJualB WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = Utils.UserLogin.NoID
+                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.BigInt)).Value = Utils.UserLogin.NoID
                                         com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                         com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtKode.Text
                                         com.Parameters.Add(New SqlParameter("@Alias", SqlDbType.VarChar)).Value = txtAlias.Text
                                         com.Parameters.Add(New SqlParameter("@Nama", SqlDbType.VarChar)).Value = txtNama.Text
-                                        com.Parameters.Add(New SqlParameter("@IDKategori", SqlDbType.Int)).Value = NullToLong(txtKategori.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@IDMerk", SqlDbType.Int)).Value = NullToLong(txtMerk.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDKategori", SqlDbType.BigInt)).Value = NullToLong(txtKategori.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDMerk", SqlDbType.BigInt)).Value = NullToLong(txtMerk.EditValue)
                                         com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
                                         com.Parameters.Add(New SqlParameter("@DefaultBarcode", SqlDbType.VarChar)).Value = txtBarcode.Text
                                         com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = txtKeterangan.Text
-                                        com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.Int)).Value = txtTypePajak.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier1", SqlDbType.Int)).Value = txtSupplier1.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier2", SqlDbType.Int)).Value = txtSupplier2.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier3", SqlDbType.Int)).Value = txtSupplier3.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.BigInt)).Value = txtTypePajak.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier1", SqlDbType.BigInt)).Value = txtSupplier1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier2", SqlDbType.BigInt)).Value = txtSupplier2.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier3", SqlDbType.BigInt)).Value = txtSupplier3.EditValue
                                         com.Parameters.Add(New SqlParameter("@HargaBeli", SqlDbType.Money)).Value = txtHargaBeli.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSatuanBeli", SqlDbType.Int)).Value = txtSatuanBeli.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IsiCtn", SqlDbType.Int)).Value = txtIsiCtn.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSatuanBeli", SqlDbType.BigInt)).Value = txtSatuanBeli.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IsiCtn", SqlDbType.BigInt)).Value = txtIsiCtn.EditValue
                                         com.Parameters.Add(New SqlParameter("@HargaBeliPcsBruto", SqlDbType.Money)).Value = Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscProsen1", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen1.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscProsen2", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen2.EditValue, 2)
@@ -133,7 +133,7 @@ Public Class frmEntriBarang
                                         com.Parameters.Add(New SqlParameter("@DiscProsen5", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen5.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscRp", SqlDbType.Money)).Value = Bulatkan(txtDiscRp.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@HargaBeliPcs", SqlDbType.Money)).Value = Bulatkan(txtModal.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.Int)).Value = txtSatuanJual.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.BigInt)).Value = txtSatuanJual.EditValue
                                         com.Parameters.Add(New SqlParameter("@ProsenUpA", SqlDbType.Float)).Value = Bulatkan(txtProsenUpA.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@ProsenUpB", SqlDbType.Float)).Value = Bulatkan(txtProsenUpB.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@HargaJualA", SqlDbType.Money)).Value = Bulatkan(txtHargaJualA.EditValue, 2)
@@ -145,8 +145,8 @@ Public Class frmEntriBarang
                                             com.Parameters.Clear()
                                             IDBarangD = NullToLong(com.ExecuteScalar()) + 1
                                             com.CommandText = "INSERT INTO [dbo].[MBarangD] ([NoID],[IDBarang],[IDSatuan],[Konversi],[Barcode],[IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB])" & vbCrLf & _
-                                                              "SELECT " & IDBarangD & " [NoID],1 [IDBarang],[IDSatuan],1 [Konversi],MBarang.DefaultBarcode [Barcode],1 [IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB]" & vbCrLf & _
-                                                              "FROM MBarang" & vbCrLf & _
+                                                              "SELECT " & IDBarangD & " [NoID]," & Me.NoID & " [IDBarang],[IDSatuan],1 [Konversi],MBarang.DefaultBarcode [Barcode],1 [IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB]" & vbCrLf & _
+                                                              "FROM MBarang (NOLOCK)" & vbCrLf & _
                                                               "WHERE MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
                                             com.Transaction.Commit()
@@ -159,12 +159,12 @@ Public Class frmEntriBarang
                                             RefreshDetil(IDBarangD)
                                         Else
                                             com.CommandText = "UPDATE [dbo].[MBarangD] SET IDSatuan=MBarang.IDSatuan, Konversi=1, ProsenUpA=MBarang.ProsenUpA, HargaJualA=MBarang.HargaJualA, ProsenUpB=MBarang.ProsenUpB, HargaJualB=MBarang.HargaJualB" & vbCrLf & _
-                                                              "FROM MBarangD INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                                               "WHERE MBarangD.IsDefault=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
 
                                             com.CommandText = "UPDATE [dbo].[MBarangD] SET ProsenUpA=ROUND(((MBarangD.HargaJualA-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2), ProsenUpB=ROUND(((MBarangD.HargaJualB-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2)" & vbCrLf & _
-                                                              "FROM MBarangD INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                                               "WHERE ISNULL(MBarangD.IsDefault,0)=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
                                             com.Transaction.Commit()

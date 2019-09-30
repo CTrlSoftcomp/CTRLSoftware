@@ -218,8 +218,7 @@ Public Class frmEntriBeliD
                                 txtPO.Properties.DisplayMember = "Kode"
                                 txtPO.Properties.ValueMember = "NoID"
 
-                                com.CommandText = "SELECT MBarangD.NoID, MBarangD.Barcode, MBarang.Kode, MBarang.Nama + ISNULL(' (' + MSatuan.Kode + ')', '') AS Nama FROM MBarang INNER JOIN MBarangD ON MBarangD.IDBarang=MBarang.NoID LEFT JOIN MSatuan ON MBarangD.IDSatuan=MSatuan.NoID WHERE MBarangD.IsActive=1 AND MBarang.IsActive=1 " & vbCrLf & _
-                                                  "" 'IIf(frmPemanggil.txtPO.Text <> "", " AND MBarang.NoID IN (SELECT MPOD.IDBarang FROM MPOD WHERE IDHeader=" & NullToLong(frmPemanggil.txtPO.EditValue) & ")", "")
+                                com.CommandText = Utils.Dataset.SQLLookUpBarcode
                                 oDA.Fill(ds, "MBarangD")
                                 txtBarcode.Properties.DataSource = ds.Tables("MBarangD")
                                 txtBarcode.Properties.DisplayMember = "Barcode"

@@ -359,6 +359,7 @@
     <Compile Include="Form\Laporan\frmLaporanKartuStok.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\Dataset.vb" />
     <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
     <Compile Include="Model\SettingPerusahaan.vb" />

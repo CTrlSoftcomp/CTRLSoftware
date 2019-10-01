@@ -11,6 +11,7 @@ Public Class Utils
     Public Shared SettingPerusahaan As New Model.SettingPerusahaan
     Public Shared UserOtorisasi As New Model.User
     Public Shared IsEditReport As Boolean = False
+    Public Shared Dataset As New Model.Dataset
 
     Public Enum pStatusForm
         Baru = 0

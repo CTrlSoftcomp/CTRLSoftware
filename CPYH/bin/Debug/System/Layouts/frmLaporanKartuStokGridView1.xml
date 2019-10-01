@@ -49,7 +49,7 @@
     <property name="Item11" isnull="true" iskey="true">
       <property name="VisibleIndex">8</property>
       <property name="Visible">true</property>
-      <property name="Width">77</property>
+      <property name="Width">84</property>
       <property name="SummaryItem" isnull="true" iskey="true">
         <property name="SummaryType">Sum</property>
         <property name="DisplayFormat">SUM={0:n2}</property>
@@ -61,7 +61,7 @@
     <property name="Item12" isnull="true" iskey="true">
       <property name="VisibleIndex">9</property>
       <property name="Visible">true</property>
-      <property name="Width">73</property>
+      <property name="Width">77</property>
       <property name="SummaryItem" isnull="true" iskey="true">
         <property name="SummaryType">Sum</property>
         <property name="DisplayFormat">SUM={0:n2}</property>
@@ -79,13 +79,13 @@
     <property name="Item14" isnull="true" iskey="true">
       <property name="VisibleIndex">11</property>
       <property name="Visible">true</property>
-      <property name="Width">79</property>
+      <property name="Width">69</property>
       <property name="Name">colNilaiAwal</property>
     </property>
     <property name="Item15" isnull="true" iskey="true">
       <property name="VisibleIndex">12</property>
       <property name="Visible">true</property>
-      <property name="Width">118</property>
+      <property name="Width">108</property>
       <property name="SummaryItem" isnull="true" iskey="true">
         <property name="SummaryType">Sum</property>
         <property name="DisplayFormat">SUM={0:n2}</property>
@@ -97,7 +97,7 @@
     <property name="Item16" isnull="true" iskey="true">
       <property name="VisibleIndex">13</property>
       <property name="Visible">true</property>
-      <property name="Width">70</property>
+      <property name="Width">108</property>
       <property name="SummaryItem" isnull="true" iskey="true">
         <property name="SummaryType">Sum</property>
         <property name="DisplayFormat">SUM={0:n2}</property>
@@ -109,25 +109,25 @@
     <property name="Item17" isnull="true" iskey="true">
       <property name="VisibleIndex">14</property>
       <property name="Visible">true</property>
-      <property name="Width">79</property>
+      <property name="Width">104</property>
       <property name="Name">colNilaiAkhir</property>
     </property>
     <property name="Item18" isnull="true" iskey="true">
       <property name="VisibleIndex">15</property>
       <property name="Visible">true</property>
-      <property name="Width">72</property>
+      <property name="Width">77</property>
       <property name="Name">colHargaBeli</property>
     </property>
     <property name="Item19" isnull="true" iskey="true">
       <property name="VisibleIndex">16</property>
       <property name="Visible">true</property>
-      <property name="Width">69</property>
+      <property name="Width">77</property>
       <property name="Name">colHPP</property>
     </property>
     <property name="Item20" isnull="true" iskey="true">
       <property name="VisibleIndex">3</property>
       <property name="Visible">true</property>
-      <property name="Width">63</property>
+      <property name="Width">97</property>
       <property name="Name">colBarcode</property>
     </property>
     <property name="Item21" isnull="true" iskey="true">
@@ -139,13 +139,13 @@
     <property name="Item22" isnull="true" iskey="true">
       <property name="VisibleIndex">5</property>
       <property name="Visible">true</property>
-      <property name="Width">224</property>
+      <property name="Width">194</property>
       <property name="Name">colNamaBarang</property>
     </property>
     <property name="Item23" isnull="true" iskey="true">
       <property name="VisibleIndex">6</property>
       <property name="Visible">true</property>
-      <property name="Width">55</property>
+      <property name="Width">51</property>
       <property name="Name">colSatuan</property>
     </property>
     <property name="Item24" isnull="true" iskey="true">
@@ -157,7 +157,7 @@
     <property name="Item25" isnull="true" iskey="true">
       <property name="VisibleIndex">2</property>
       <property name="Visible">true</property>
-      <property name="Width">61</property>
+      <property name="Width">72</property>
       <property name="Name">colGudang</property>
     </property>
   </property>

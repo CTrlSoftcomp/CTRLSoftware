@@ -206,7 +206,7 @@ Public Class frmEntriPOD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MBarangD.NoID, MBarangD.Barcode, MBarang.Kode, MBarang.Nama FROM MBarang INNER JOIN MBarangD ON MBarangD.IDBarang=MBarang.NoID WHERE MBarangD.IsActive=1 AND MBarang.IsActive=1"
+                                com.CommandText = Utils.Dataset.SQLLookUpBarcode
                                 oDA.Fill(ds, "MBarangD")
                                 txtBarcode.Properties.DataSource = ds.Tables("MBarangD")
                                 txtBarcode.Properties.DisplayMember = "Barcode"

@@ -1,0 +1,2 @@
+1. Ketika pilih supplier 3, lalu supplier 3 dikosongi , disave muncul warning dibawah ini
+The parameterized query '(@IDUser bigint, @NoID bigint, @Kode varchar(7), @Alias varchar (800' expect the parameter '@IDSupplier3', which was not supplied.

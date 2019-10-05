@@ -50,7 +50,7 @@ Public Class frmEntriBarang
             DxErrorProvider1.SetError(txtSupplier1, "Supplier harus diisi!")
         End If
 
-        Dim IDBarangD As Long = -1
+        Dim IDBarangD As Long = -1, IDUser As Long = -1
         If Not DxErrorProvider1.HasErrors Then
             Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
                 Using cn As New SqlConnection(StrKonSQL)
@@ -82,6 +82,8 @@ Public Class frmEntriBarang
 
                                     If Not DxErrorProvider1.HasErrors Then
                                         If pStatus = pStatusForm.Baru Then
+                                            IDUser = Utils.UserLogin.NoID
+
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarang"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
@@ -92,7 +94,7 @@ Public Class frmEntriBarang
                                                               ",[IsiCtn],[HargaBeliPcsBruto],[DiscProsen1],[DiscProsen2],[DiscProsen3]" & vbCrLf & _
                                                               ",[DiscProsen4],[DiscProsen5],[DiscRp],[HargaBeliPcs],[IDSatuan],[ProsenUpA]" & vbCrLf & _
                                                               ",[HargaJualA],[ProsenUpB],[HargaJualB]) VALUES" & vbCrLf & _
-                                                              "(@IDMerk,@IDUser,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
+                                                              "(@IDMerk,@IDUsera,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
                                                               ",@Keterangan,@IsActive,@IDTypePajak,@IDSupplier1" & vbCrLf & _
                                                               ",@IDSupplier2,@IDSupplier3,@HargaBeli,@IDSatuanBeli" & vbCrLf & _
                                                               ",@IsiCtn,@HargaBeliPcsBruto,@DiscProsen1,@DiscProsen2,@DiscProsen3" & vbCrLf & _
@@ -100,7 +102,7 @@ Public Class frmEntriBarang
                                                               ",@HargaJualA,@ProsenUpB,@HargaJualB)"
                                         Else
                                             com.CommandText = "UPDATE [dbo].[MBarang] SET " & vbCrLf & _
-                                                              "[IDMerk]=@IDMerk,[IDUser]=@IDUser,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
+                                                              "[IDMerk]=@IDMerk,[IDUser]=@IDUsera,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
                                                               ",[Keterangan]=@Keterangan,[IsActive]=@IsActive,[IDTypePajak]=@IDTypePajak,[IDSupplier1]=@IDSupplier1" & vbCrLf & _
                                                               ",[IDSupplier2]=@IDSupplier2,[IDSupplier3]=@IDSupplier3,[HargaBeli]=@HargaBeli,[IDSatuanBeli]=@IDSatuanBeli" & vbCrLf & _
                                                               ",[IsiCtn]=@IsiCtn,[HargaBeliPcsBruto]=@HargaBeliPcsBruto,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3" & vbCrLf & _
@@ -108,8 +110,8 @@ Public Class frmEntriBarang
                                                               ",[HargaJualA]=@HargaJualA,[ProsenUpB]=@ProsenUpB,[HargaJualB]=@HargaJualB WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.BigInt)).Value = Utils.UserLogin.NoID
                                         com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                        com.Parameters.Add(New SqlParameter("@IDUsera", SqlDbType.BigInt)).Value = IDUser
                                         com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtKode.Text
                                         com.Parameters.Add(New SqlParameter("@Alias", SqlDbType.VarChar)).Value = txtAlias.Text
                                         com.Parameters.Add(New SqlParameter("@Nama", SqlDbType.VarChar)).Value = txtNama.Text
@@ -118,13 +120,13 @@ Public Class frmEntriBarang
                                         com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
                                         com.Parameters.Add(New SqlParameter("@DefaultBarcode", SqlDbType.VarChar)).Value = txtBarcode.Text
                                         com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = txtKeterangan.Text
-                                        com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.BigInt)).Value = txtTypePajak.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier1", SqlDbType.BigInt)).Value = txtSupplier1.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier2", SqlDbType.BigInt)).Value = txtSupplier2.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSupplier3", SqlDbType.BigInt)).Value = txtSupplier3.EditValue
-                                        com.Parameters.Add(New SqlParameter("@HargaBeli", SqlDbType.Money)).Value = txtHargaBeli.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IDSatuanBeli", SqlDbType.BigInt)).Value = txtSatuanBeli.EditValue
-                                        com.Parameters.Add(New SqlParameter("@IsiCtn", SqlDbType.BigInt)).Value = txtIsiCtn.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.BigInt)).Value = NullToLong(txtTypePajak.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier1", SqlDbType.BigInt)).Value = NullToLong(txtSupplier1.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier2", SqlDbType.BigInt)).Value = NullToLong(txtSupplier2.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDSupplier3", SqlDbType.BigInt)).Value = NullToLong(txtSupplier3.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@HargaBeli", SqlDbType.Money)).Value = NullToDbl(txtHargaBeli.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDSatuanBeli", SqlDbType.BigInt)).Value = NullToLong(txtSatuanBeli.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IsiCtn", SqlDbType.BigInt)).Value = NullToDbl(txtIsiCtn.EditValue)
                                         com.Parameters.Add(New SqlParameter("@HargaBeliPcsBruto", SqlDbType.Money)).Value = Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscProsen1", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen1.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscProsen2", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen2.EditValue, 2)
@@ -133,7 +135,7 @@ Public Class frmEntriBarang
                                         com.Parameters.Add(New SqlParameter("@DiscProsen5", SqlDbType.Money)).Value = Bulatkan(txtDiscProsen5.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@DiscRp", SqlDbType.Money)).Value = Bulatkan(txtDiscRp.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@HargaBeliPcs", SqlDbType.Money)).Value = Bulatkan(txtModal.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.BigInt)).Value = txtSatuanJual.EditValue
+                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.BigInt)).Value = NullTolInt(txtSatuanJual.EditValue)
                                         com.Parameters.Add(New SqlParameter("@ProsenUpA", SqlDbType.Float)).Value = Bulatkan(txtProsenUpA.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@ProsenUpB", SqlDbType.Float)).Value = Bulatkan(txtProsenUpB.EditValue, 2)
                                         com.Parameters.Add(New SqlParameter("@HargaJualA", SqlDbType.Money)).Value = Bulatkan(txtHargaJualA.EditValue, 2)

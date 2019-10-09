@@ -55,42 +55,44 @@ Public Class frmLaporanKartuStok
         Using cn As New SqlConnection(StrKonSQL)
             Using com As New SqlCommand
                 Using oDA As New SqlDataAdapter
-                    Using ds As New DataSet
-                        Try
-                            cn.Open()
-                            com.Connection = cn
-                            com.CommandTimeout = cn.ConnectionTimeout
-                            oDA.SelectCommand = com
+                    Try
+                        cn.Open()
+                        com.Connection = cn
+                        com.CommandTimeout = cn.ConnectionTimeout
+                        oDA.SelectCommand = com
 
-                            com.CommandText = "spLapKartuStok @TglDari, @TglSampai, @IDBarang, @IDGudang"
-                            com.Parameters.Clear()
-                            com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = NullToDate(DateEdit1.EditValue)
-                            com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = NullToDate(DateEdit2.EditValue)
-                            com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
-                            com.Parameters.Add(New SqlParameter("@IDGudang", SqlDbType.VarChar)).Value = txtGudang.EditValue.ToString.Replace(" ", "")
+                        com.CommandText = "spLapKartuStok @TglDari, @TglSampai, @IDBarang, @IDGudang"
+                        com.Parameters.Clear()
+                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = NullToDate(DateEdit1.EditValue)
+                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = NullToDate(DateEdit2.EditValue)
+                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
+                        com.Parameters.Add(New SqlParameter("@IDGudang", SqlDbType.VarChar)).Value = txtGudang.EditValue.ToString.Replace(" ", "")
 
-                            oDA.Fill(ds, "MData")
-                            BindingSource1.DataSource = ds.Tables("MData")
+                        If ds.Tables("") IsNot Nothing Then
+                            ds.Tables("").Clear()
+                            ds.Tables("").Columns.Clear()
+                        End If
+                        oDA.Fill(ds, "MData")
+                        BindingSource1.DataSource = ds.Tables("MData")
 
-                            GridView1.ClearSelection()
-                            GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
-                            GridView1.SelectRow(GridView1.FocusedRowHandle)
+                        GridView1.ClearSelection()
+                        GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
+                        GridView1.SelectRow(GridView1.FocusedRowHandle)
 
-                            If ds.Tables("MData").Rows.Count >= 1 Then
-                                lbSaldoAwal.Text = NullToDbl(ds.Tables("MData").Rows(0).Item("SaldoAwal")).ToString("n2")
-                                lbNilaiAwal.Text = NullToDbl(ds.Tables("MData").Rows(0).Item("NilaiAwal")).ToString("n2")
-                                lbSaldoAkhir.Text = NullToDbl(ds.Tables("MData").Rows(ds.Tables("MData").Rows.Count - 1).Item("SaldoAkhir")).ToString("n2")
-                                lbNilaiAkhir.Text = NullToDbl(ds.Tables("MData").Rows(ds.Tables("MData").Rows.Count - 1).Item("NilaiAkhir")).ToString("n2")
-                            Else
-                                lbSaldoAwal.Text = "0.00"
-                                lbNilaiAwal.Text = "0.00"
-                                lbSaldoAkhir.Text = "0.00"
-                                lbNilaiAkhir.Text = "0.00"
-                            End If
-                        Catch ex As Exception
-                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End Try
-                    End Using
+                        If ds.Tables("MData").Rows.Count >= 1 Then
+                            lbSaldoAwal.Text = NullToDbl(ds.Tables("MData").Rows(0).Item("SaldoAwal")).ToString("n2")
+                            lbNilaiAwal.Text = NullToDbl(ds.Tables("MData").Rows(0).Item("NilaiAwal")).ToString("n2")
+                            lbSaldoAkhir.Text = NullToDbl(ds.Tables("MData").Rows(ds.Tables("MData").Rows.Count - 1).Item("SaldoAkhir")).ToString("n2")
+                            lbNilaiAkhir.Text = NullToDbl(ds.Tables("MData").Rows(ds.Tables("MData").Rows.Count - 1).Item("NilaiAkhir")).ToString("n2")
+                        Else
+                            lbSaldoAwal.Text = "0.00"
+                            lbNilaiAwal.Text = "0.00"
+                            lbSaldoAkhir.Text = "0.00"
+                            lbNilaiAkhir.Text = "0.00"
+                        End If
+                    Catch ex As Exception
+                        XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
                 End Using
             End Using
         End Using

@@ -68,9 +68,9 @@ Public Class frmLaporanKartuStok
                         com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
                         com.Parameters.Add(New SqlParameter("@IDGudang", SqlDbType.VarChar)).Value = txtGudang.EditValue.ToString.Replace(" ", "")
 
-                        If ds.Tables("") IsNot Nothing Then
-                            ds.Tables("").Clear()
-                            ds.Tables("").Columns.Clear()
+                        If ds.Tables("MData") IsNot Nothing Then
+                            ds.Tables("MData").Clear()
+                            ds.Tables("MData").Columns.Clear()
                         End If
                         oDA.Fill(ds, "MData")
                         BindingSource1.DataSource = ds.Tables("MData")

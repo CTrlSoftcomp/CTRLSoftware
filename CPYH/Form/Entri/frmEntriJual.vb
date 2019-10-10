@@ -260,6 +260,7 @@ Public Class frmEntriJual
                                     Exit Try
                                 End If
 
+                                ListPembayaran = New List(Of Model.Pembayaran)
                                 If Not pStatus = pStatusForm.Baru Then
                                     com.CommandText = "SELECT MJualDBayar.*, MJenisPembayaran.IsBank FROM MJualDBayar LEFT JOIN MJenisPembayaran ON MJenisPembayaran.NoID=MJualDBayar.IDJenisPembayaran WHERE MJualDBayar.IDHeader=" & NoID & " ORDER BY MJualDBayar.NoID"
                                     oDA.Fill(ds, "MJualDBayar")
@@ -282,8 +283,6 @@ Public Class frmEntriJual
                                             ListPembayaran = frm.iList
                                         End If
                                     End If
-                                Else
-                                    ListPembayaran = New List(Of Model.Pembayaran)
                                 End If
 
                                 If Not DxErrorProvider1.HasErrors Then

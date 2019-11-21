@@ -9,6 +9,7 @@ Imports DevExpress.XtraGrid.Views.Grid
 Public Class frmEntriJualDBayar
     Public iList As New List(Of Model.Pembayaran)
     Private Total As Double
+    Private IDCustomer As Long
 
     Private Sub mnTambah_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTambah.ItemClick
         Try
@@ -164,8 +165,65 @@ Public Class frmEntriJualDBayar
     Private Function IsValidasi() As Boolean
         DxErrorProvider1.ClearErrors()
         If NullToDbl(Subtotal) < 0.0 Then
-            DxErrorProvider1.SetError(lbSubtotal, "Penjualan anda salah input!", DXErrorProvider.ErrorType.Critical)
+            DxErrorProvider1.SetError(txtTotalBayar, "Penjualan anda salah input!", DXErrorProvider.ErrorType.Critical)
         End If
+
+        'Cek Limit Piutang
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "SELECT * FROM MAlamat WHERE NoID=" & IDCustomer
+                            oDA.Fill(ds, "MAlamat")
+
+                            If ds.Tables("MAlamat").Rows.Count >= 1 Then
+                                com.CommandText = "SELECT A.IDAlamat" & vbCrLf & _
+                                                  ",SUM((A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0)) AS Saldo" & vbCrLf & _
+                                                  ",COUNT(A.NoTransaksi) AS JmlNota" & vbCrLf & _
+                                                  ",DATEDIFF(DAY, MAX(A.Tanggal), GETDATE()) TglTerlamaPiutang" & vbCrLf & _
+                                                  "FROM MHutangPiutang A(NOLOCK)" & vbCrLf & _
+                                                  "LEFT JOIN (" & vbCrLf & _
+                                                  "SELECT ReffNoTransaksi" & vbCrLf & _
+                                                  ",ReffNoUrut" & vbCrLf & _
+                                                  ",SUM(Kredit - Debet) AS Pelunasan" & vbCrLf & _
+                                                  "FROM MHutangPiutang(NOLOCK)" & vbCrLf & _
+                                                  "GROUP BY ReffNoTransaksi" & vbCrLf & _
+                                                  ",ReffNoUrut" & vbCrLf & _
+                                                  ") AS B ON B.ReffNoTransaksi = A.NoTransaksi" & vbCrLf & _
+                                                  "AND B.ReffNoUrut = A.NoUrut" & vbCrLf & _
+                                                  "WHERE ISNULL(A.ReffNoTransaksi, '')='' AND ISNULL(A.ReffNoUrut, 0)<=0 AND (A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0) <> 0.0" & vbCrLf & _
+                                                  "GROUP BY A.IDAlamat" & vbCrLf & _
+                                                  "HAVING A.IDAlamat = " & IDCustomer
+                                oDA.Fill(ds, "MPiutang")
+
+                                If ds.Tables("MPiutang").Rows.Count >= 1 Then
+                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("Saldo")) - IIf(Sisa <= 0, Sisa * -1, 0) < 0 Then
+                                        DxErrorProvider1.SetError(txtTotalBayar, "Limit Piutang Customer Tidak Mencukupi.", DXErrorProvider.ErrorType.Critical)
+                                    End If
+                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("JmlNota")) - IIf(Sisa <= 0, 1, 0) < 0 Then
+                                        DxErrorProvider1.SetError(txtTotalBayar, "Limit Jml Nota Piutang Customer melebihi batas.", DXErrorProvider.ErrorType.Critical)
+                                    End If
+                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("TglTerlamaPiutang")) < 0 Then
+                                        DxErrorProvider1.SetError(txtTotalBayar, "Customer ini memiliki Piutang yang sudah Jatuh Tempo dan Melebihi Setting Limit Umur Piutang Terlama.", DXErrorProvider.ErrorType.Critical)
+                                    End If
+                                End If
+                            Else
+                                DxErrorProvider1.SetError(txtTotalBayar, "Customer harus diisi.", DXErrorProvider.ErrorType.Warning)
+                            End If
+                        Catch ex As Exception
+                            DxErrorProvider1.SetError(txtTotalBayar, "Error : " & ex.Message, DXErrorProvider.ErrorType.Critical)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+
         Return Not DxErrorProvider1.HasErrors
     End Function
 
@@ -181,7 +239,7 @@ Public Class frmEntriJualDBayar
         Me.Close()
     End Sub
 
-    Public Sub New(ByVal Total As Double, ByVal iList As List(Of Model.Pembayaran))
+    Public Sub New(ByVal IDCustomer As Long, ByVal Total As Double, ByVal iList As List(Of Model.Pembayaran))
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -189,6 +247,7 @@ Public Class frmEntriJualDBayar
         ' Add any initialization after the InitializeComponent() call.
         Me.Total = Total
         Me.iList = iList
+        Me.IDCustomer = IDCustomer
     End Sub
 
     Private Subtotal, ChargeRp, TotalBayar, Sisa As Double
@@ -199,10 +258,10 @@ Public Class frmEntriJualDBayar
             ChargeRp = iList.Sum(Function(m) m.ChargeRp)
             TotalBayar = iList.Sum(Function(m) m.Total)
             Sisa = TotalBayar - (Subtotal + ChargeRp)
-            lbSubtotal.Text = Subtotal.ToString("n2")
-            lbCharge.Text = ChargeRp.ToString("n2")
-            lbTotalBayar.Text = TotalBayar.ToString("n2")
-            lbKembali.Text = Sisa.ToString("n2")
+            txtSubtotal.EditValue = Subtotal
+            txtCharge.EditValue = ChargeRp
+            txtTotalBayar.EditValue = TotalBayar
+            txtKembali.EditValue = Sisa
         Catch ex As Exception
 
         End Try

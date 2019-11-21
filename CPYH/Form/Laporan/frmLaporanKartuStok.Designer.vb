@@ -53,8 +53,8 @@ Partial Class frmLaporanKartuStok
         Me.lbSaldoAwal = New DevExpress.XtraEditors.LabelControl
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -68,8 +68,8 @@ Partial Class frmLaporanKartuStok
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BarManager1
@@ -244,6 +244,7 @@ Partial Class frmLaporanKartuStok
         Me.DateEdit2.Name = "DateEdit2"
         Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DateEdit2.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.DateEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DateEdit2.Size = New System.Drawing.Size(100, 20)
@@ -277,6 +278,7 @@ Partial Class frmLaporanKartuStok
         Me.DateEdit1.Name = "DateEdit1"
         Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
@@ -454,8 +456,8 @@ Partial Class frmLaporanKartuStok
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

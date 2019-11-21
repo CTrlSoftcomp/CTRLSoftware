@@ -203,39 +203,51 @@ Namespace Repository
                                 com.Transaction = com.Connection.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MJualD.*, MJual.Total, MJual.Sisa, MJual.Tanggal, MJual.Kode AS KdTransaksi, MJual.IDCustomer, MJual.DPP, MJual.PPN, MAlamat.LimitPiutang, MAlamat.LimitNotaPiutang, MAlamat.LimitUmurPiutang" & vbCrLf & _
+                                com.CommandText = "SELECT MJualD.*, MJual.Total, CASE WHEN MJual.Total-ISNULL(MJualDBayar.Jumlah, 0)<0 THEN 0 ELSE MJual.Total-ISNULL(MJualDBayar.Jumlah, 0) END AS Sisa, MJual.Sisa Sisa1, MJual.Tanggal, MJual.Kode AS KdTransaksi, MJual.IDCustomer, MJual.DPP, MJual.PPN, MAlamat.LimitPiutang, MAlamat.LimitNotaPiutang, MAlamat.LimitUmurPiutang" & vbCrLf & _
                                                   "FROM MJualD" & vbCrLf & _
                                                   "INNER JOIN MJual ON MJual.NoID=MJualD.IDHeader" & vbCrLf & _
                                                   "INNER JOIN MAlamat ON MAlamat.NoID=MJual.IDCustomer" & vbCrLf & _
+                                                  "LEFT JOIN (SELECT IDHeader, SUM(Nominal) AS Jumlah FROM MJualDBayar GROUP BY IDHeader) AS MJualDBayar ON MJualDBayar.IDHeader=MJual.NoID" & vbCrLf & _
                                                   "WHERE ISNULL(MJual.Total,0)>0 AND ISNULL(MJual.IsPosted,0)=0 AND MJual.NoID=" & NoID
                                 oDA.Fill(ds, "MJual")
                                 If ds.Tables("MJual").Rows.Count >= 1 Then
-                                    Dim Limit As Double = 0.0
-                                    com.CommandText = "SELECT SUM(Debet-Kredit) AS Saldo FROM MHutangPiutang WHERE CONVERT(DATE, Tanggal)<=CONVERT(DATE, '" & NullToDate(ds.Tables("MJual").Rows(0).Item("Tanggal")).ToString("yyyy-MM-dd") & "') AND IDAlamat=" & NullToLong(ds.Tables("MJual").Rows(0).Item("IDCustomer"))
-                                    Limit = NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitPiutang")) - NullToDbl(com.ExecuteScalar()) - NullToDbl(ds.Tables("MJual").Rows(0).Item("Sisa"))
-                                    If Limit < 0 Then
-                                        XtraMessageBox.Show("Limit Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                    If NullToDbl(ds.Tables("MJual").Rows(0).Item("Sisa")) <> NullToDbl(ds.Tables("MJual").Rows(0).Item("Sisa1")) Then
+                                        XtraMessageBox.Show("Lakukan Pembayaran dengan benar dahulu.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                         Return False
                                     End If
 
-                                    com.CommandText = "SELECT COUNT(NoID) AS Qty" & vbCrLf & _
-                                                      "FROM MHutangPiutang" & vbCrLf & _
-                                                      "LEFT JOIN (SELECT ReffNoTransaksi, ReffNoUrut, SUM(Kredit-Debet) AS Pelunasan FROM MHutangPiutang GROUP BY ReffNoTransaksi, ReffNoUrut) AS MPelunasan ON MPelunasan.ReffNoTransaksi=MHutangPiutang.NoTransaksi AND MPelunasan.ReffNoUrut=MHutangPiutang.NoUrut" & vbCrLf & _
-                                                      "WHERE (ISNULL(MHutangPiutang.NoUrut, 0)<=0 OR ISNULL(MHutangPiutang.NoTransaksi, '')='') AND CONVERT(DATE, Tanggal)<=CONVERT(DATE, '" & NullToDate(ds.Tables("MJual").Rows(0).Item("Tanggal")).ToString("yyyy-MM-dd") & "') AND IDAlamat=" & NullToLong(ds.Tables("MJual").Rows(0).Item("IDCustomer"))
-                                    Limit = NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(com.ExecuteScalar()) - 1
-                                    If Limit < 0 Then
-                                        XtraMessageBox.Show("Limit Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                                        Return False
-                                    End If
+                                    com.CommandText = "SELECT A.IDAlamat" & vbCrLf & _
+                                                      ",SUM((A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0)) AS Saldo" & vbCrLf & _
+                                                      ",COUNT(A.NoTransaksi) AS JmlNota" & vbCrLf & _
+                                                      ",DATEDIFF(DAY, MAX(A.Tanggal), GETDATE()) TglTerlamaPiutang" & vbCrLf & _
+                                                      "FROM MHutangPiutang A(NOLOCK)" & vbCrLf & _
+                                                      "LEFT JOIN (" & vbCrLf & _
+                                                      "SELECT ReffNoTransaksi" & vbCrLf & _
+                                                      ",ReffNoUrut" & vbCrLf & _
+                                                      ",SUM(Kredit - Debet) AS Pelunasan" & vbCrLf & _
+                                                      "FROM MHutangPiutang(NOLOCK)" & vbCrLf & _
+                                                      "GROUP BY ReffNoTransaksi" & vbCrLf & _
+                                                      ",ReffNoUrut" & vbCrLf & _
+                                                      ") AS B ON B.ReffNoTransaksi = A.NoTransaksi" & vbCrLf & _
+                                                      "AND B.ReffNoUrut = A.NoUrut" & vbCrLf & _
+                                                      "WHERE ISNULL(A.ReffNoTransaksi, '')='' AND ISNULL(A.ReffNoUrut, 0)<=0 AND (A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0) <> 0.0" & vbCrLf & _
+                                                      "GROUP BY A.IDAlamat" & vbCrLf & _
+                                                      "HAVING A.IDAlamat = " & NullToLong(ds.Tables("MJual").Rows(0).Item("IDCustomer"))
+                                    oDA.Fill(ds, "MPiutang")
 
-                                    com.CommandText = "SELECT MAX(DATEDIFF(DAY, CONVERT(DATE, Tanggal), CONVERT(DATE, GETDATE()))) AS Umur" & vbCrLf & _
-                                                      "FROM MHutangPiutang" & vbCrLf & _
-                                                      "LEFT JOIN (SELECT ReffNoTransaksi, ReffNoUrut, SUM(Kredit-Debet) AS Pelunasan FROM MHutangPiutang GROUP BY ReffNoTransaksi, ReffNoUrut) AS MPelunasan ON MPelunasan.ReffNoTransaksi=MHutangPiutang.NoTransaksi AND MPelunasan.ReffNoUrut=MHutangPiutang.NoUrut" & vbCrLf & _
-                                                      "WHERE (ISNULL(MHutangPiutang.NoUrut, 0)<=0 OR ISNULL(MHutangPiutang.NoTransaksi, '')='') AND CONVERT(DATE, Tanggal)<=CONVERT(DATE, '" & NullToDate(ds.Tables("MJual").Rows(0).Item("Tanggal")).ToString("yyyy-MM-dd") & "') AND IDAlamat=" & NullToLong(ds.Tables("MJual").Rows(0).Item("IDCustomer"))
-                                    Limit = NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(com.ExecuteScalar())
-                                    If Limit < 0 Then
-                                        XtraMessageBox.Show("Limit Umur Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                                        Return False
+                                    If ds.Tables("MPiutang").Rows.Count >= 1 Then
+                                        If NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("Saldo")) - NullToDbl(ds.Tables("MJual").Rows(0).Item("Sisa")) < 0 Then
+                                            XtraMessageBox.Show("Limit Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                            Return False
+                                        End If
+                                        If NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("JmlNota")) - IIf(NullToDbl(ds.Tables("MJual").Rows(0).Item("Sisa")) > 0, 1, 0) < 0 Then
+                                            XtraMessageBox.Show("Limit Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                            Return False
+                                        End If
+                                        If NullToDbl(ds.Tables("MJual").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("TglTerlamaPiutang")) < 0 Then
+                                            XtraMessageBox.Show("Limit Umur Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                            Return False
+                                        End If
                                     End If
 
                                     com.CommandText = "UPDATE MJual SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID

@@ -336,6 +336,7 @@ Partial Class frmEntriJual
         Me.txtJatuhTempo.Name = "txtJatuhTempo"
         Me.txtJatuhTempo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtJatuhTempo.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.txtJatuhTempo.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.txtJatuhTempo.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.txtJatuhTempo.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.txtJatuhTempo.Size = New System.Drawing.Size(79, 20)
@@ -382,6 +383,7 @@ Partial Class frmEntriJual
         Me.txtTanggal.Name = "txtTanggal"
         Me.txtTanggal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtTanggal.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.txtTanggal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.txtTanggal.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.txtTanggal.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.txtTanggal.Size = New System.Drawing.Size(79, 20)

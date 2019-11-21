@@ -52,16 +52,15 @@ Partial Class frmEntriJualDBayar
         Me.colChargeRp = New DevExpress.XtraGrid.Columns.GridColumn
         Me.colTotal = New DevExpress.XtraGrid.Columns.GridColumn
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.lbKembali = New DevExpress.XtraEditors.LabelControl
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
+        Me.txtCharge = New DevExpress.XtraEditors.TextEdit
+        Me.txtSubtotal = New DevExpress.XtraEditors.TextEdit
+        Me.txtTotalBayar = New DevExpress.XtraEditors.TextEdit
+        Me.txtKembali = New DevExpress.XtraEditors.TextEdit
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl
-        Me.lbTotalBayar = New DevExpress.XtraEditors.LabelControl
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
-        Me.lbCharge = New DevExpress.XtraEditors.LabelControl
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.lbSubtotal = New DevExpress.XtraEditors.LabelControl
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer
-        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,6 +71,10 @@ Partial Class frmEntriJualDBayar
         CType(Me.riCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.txtCharge.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtSubtotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtTotalBayar.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtKembali.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -207,11 +210,11 @@ Partial Class frmEntriJualDBayar
         '
         Me.GridControl1.DataSource = Me.PembayaranBindingSource
         Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 165)
+        Me.GridControl1.Location = New System.Drawing.Point(0, 185)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
         Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.riCalcEdit, Me.riSearchLookUpEdit})
-        Me.GridControl1.Size = New System.Drawing.Size(819, 271)
+        Me.GridControl1.Size = New System.Drawing.Size(819, 251)
         Me.GridControl1.TabIndex = 7
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -361,100 +364,154 @@ Partial Class frmEntriJualDBayar
         '
         'PanelControl1
         '
-        Me.PanelControl1.Controls.Add(Me.lbKembali)
+        Me.PanelControl1.Controls.Add(Me.LabelControl2)
+        Me.PanelControl1.Controls.Add(Me.txtCharge)
+        Me.PanelControl1.Controls.Add(Me.txtSubtotal)
+        Me.PanelControl1.Controls.Add(Me.txtTotalBayar)
+        Me.PanelControl1.Controls.Add(Me.txtKembali)
         Me.PanelControl1.Controls.Add(Me.LabelControl8)
-        Me.PanelControl1.Controls.Add(Me.lbTotalBayar)
         Me.PanelControl1.Controls.Add(Me.LabelControl6)
-        Me.PanelControl1.Controls.Add(Me.lbCharge)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
-        Me.PanelControl1.Controls.Add(Me.lbSubtotal)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Controls.Add(Me.ShapeContainer1)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 22)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(819, 143)
+        Me.PanelControl1.Size = New System.Drawing.Size(819, 163)
         Me.PanelControl1.TabIndex = 12
         '
-        'lbKembali
+        'LabelControl2
         '
-        Me.lbKembali.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbKembali.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.lbKembali.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbKembali.Location = New System.Drawing.Point(612, 112)
-        Me.lbKembali.Name = "lbKembali"
-        Me.lbKembali.Size = New System.Drawing.Size(195, 25)
-        Me.lbKembali.TabIndex = 7
-        Me.lbKembali.Text = "999.999.999,00"
+        Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.LabelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None
+        Me.LabelControl2.LineColor = System.Drawing.Color.Black
+        Me.LabelControl2.LineLocation = DevExpress.XtraEditors.LineLocation.Center
+        Me.LabelControl2.LineVisible = True
+        Me.LabelControl2.Location = New System.Drawing.Point(383, 112)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(424, 10)
+        Me.LabelControl2.TabIndex = 9
+        '
+        'txtCharge
+        '
+        Me.txtCharge.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCharge.EditValue = New Decimal(New Integer() {1410065407, 2, 0, 0})
+        Me.txtCharge.EnterMoveNextControl = True
+        Me.txtCharge.Location = New System.Drawing.Point(612, 41)
+        Me.txtCharge.MenuManager = Me.BarManager1
+        Me.txtCharge.Name = "txtCharge"
+        Me.txtCharge.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.txtCharge.Properties.Appearance.Options.UseFont = True
+        Me.txtCharge.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtCharge.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtCharge.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
+        Me.txtCharge.Properties.Mask.EditMask = "n2"
+        Me.txtCharge.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtCharge.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtCharge.Properties.ReadOnly = True
+        Me.txtCharge.Size = New System.Drawing.Size(195, 32)
+        Me.txtCharge.TabIndex = 3
+        '
+        'txtSubtotal
+        '
+        Me.txtSubtotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSubtotal.EditValue = New Decimal(New Integer() {1410065407, 2, 0, 0})
+        Me.txtSubtotal.EnterMoveNextControl = True
+        Me.txtSubtotal.Location = New System.Drawing.Point(612, 3)
+        Me.txtSubtotal.MenuManager = Me.BarManager1
+        Me.txtSubtotal.Name = "txtSubtotal"
+        Me.txtSubtotal.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.txtSubtotal.Properties.Appearance.Options.UseFont = True
+        Me.txtSubtotal.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtSubtotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtSubtotal.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
+        Me.txtSubtotal.Properties.Mask.EditMask = "n2"
+        Me.txtSubtotal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtSubtotal.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtSubtotal.Properties.ReadOnly = True
+        Me.txtSubtotal.Size = New System.Drawing.Size(195, 32)
+        Me.txtSubtotal.TabIndex = 1
+        '
+        'txtTotalBayar
+        '
+        Me.txtTotalBayar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalBayar.EditValue = New Decimal(New Integer() {1410065407, 2, 0, 0})
+        Me.txtTotalBayar.EnterMoveNextControl = True
+        Me.txtTotalBayar.Location = New System.Drawing.Point(612, 79)
+        Me.txtTotalBayar.MenuManager = Me.BarManager1
+        Me.txtTotalBayar.Name = "txtTotalBayar"
+        Me.txtTotalBayar.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.txtTotalBayar.Properties.Appearance.Options.UseFont = True
+        Me.txtTotalBayar.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtTotalBayar.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtTotalBayar.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
+        Me.txtTotalBayar.Properties.Mask.EditMask = "n2"
+        Me.txtTotalBayar.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtTotalBayar.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtTotalBayar.Properties.ReadOnly = True
+        Me.txtTotalBayar.Size = New System.Drawing.Size(195, 32)
+        Me.txtTotalBayar.TabIndex = 5
+        '
+        'txtKembali
+        '
+        Me.txtKembali.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtKembali.EditValue = New Decimal(New Integer() {1410065407, 2, 0, 0})
+        Me.txtKembali.EnterMoveNextControl = True
+        Me.txtKembali.Location = New System.Drawing.Point(612, 125)
+        Me.txtKembali.MenuManager = Me.BarManager1
+        Me.txtKembali.Name = "txtKembali"
+        Me.txtKembali.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.txtKembali.Properties.Appearance.Options.UseFont = True
+        Me.txtKembali.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtKembali.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtKembali.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
+        Me.txtKembali.Properties.Mask.EditMask = "n2"
+        Me.txtKembali.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtKembali.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtKembali.Properties.ReadOnly = True
+        Me.txtKembali.Size = New System.Drawing.Size(195, 32)
+        Me.txtKembali.TabIndex = 7
         '
         'LabelControl8
         '
+        Me.LabelControl8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl8.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.LabelControl8.Location = New System.Drawing.Point(291, 112)
+        Me.LabelControl8.Location = New System.Drawing.Point(291, 128)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(315, 25)
         Me.LabelControl8.TabIndex = 6
         Me.LabelControl8.Text = "Kembalian / Kurang Bayar"
         '
-        'lbTotalBayar
-        '
-        Me.lbTotalBayar.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbTotalBayar.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.lbTotalBayar.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbTotalBayar.Location = New System.Drawing.Point(612, 68)
-        Me.lbTotalBayar.Name = "lbTotalBayar"
-        Me.lbTotalBayar.Size = New System.Drawing.Size(195, 25)
-        Me.lbTotalBayar.TabIndex = 5
-        Me.lbTotalBayar.Text = "999.999.999,00"
-        '
         'LabelControl6
         '
+        Me.LabelControl6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.LabelControl6.Location = New System.Drawing.Point(468, 68)
+        Me.LabelControl6.Location = New System.Drawing.Point(468, 82)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(138, 25)
         Me.LabelControl6.TabIndex = 4
         Me.LabelControl6.Text = "Total Bayar"
         '
-        'lbCharge
-        '
-        Me.lbCharge.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbCharge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.lbCharge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbCharge.Location = New System.Drawing.Point(612, 37)
-        Me.lbCharge.Name = "lbCharge"
-        Me.lbCharge.Size = New System.Drawing.Size(195, 25)
-        Me.lbCharge.TabIndex = 3
-        Me.lbCharge.Text = "999.999.999,00"
-        '
         'LabelControl4
         '
+        Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl4.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.LabelControl4.Location = New System.Drawing.Point(468, 37)
+        Me.LabelControl4.Location = New System.Drawing.Point(468, 44)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(138, 25)
         Me.LabelControl4.TabIndex = 2
         Me.LabelControl4.Text = "Charge"
         '
-        'lbSubtotal
-        '
-        Me.lbSubtotal.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbSubtotal.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.lbSubtotal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbSubtotal.Location = New System.Drawing.Point(612, 6)
-        Me.lbSubtotal.Name = "lbSubtotal"
-        Me.lbSubtotal.Size = New System.Drawing.Size(195, 25)
-        Me.lbSubtotal.TabIndex = 1
-        Me.lbSubtotal.Text = "999.999.999,00"
-        '
         'LabelControl1
         '
+        Me.LabelControl1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
@@ -463,26 +520,6 @@ Partial Class frmEntriJualDBayar
         Me.LabelControl1.Size = New System.Drawing.Size(138, 25)
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Subtotal"
-        '
-        'ShapeContainer1
-        '
-        Me.ShapeContainer1.Location = New System.Drawing.Point(2, 2)
-        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer1.Name = "ShapeContainer1"
-        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(815, 139)
-        Me.ShapeContainer1.TabIndex = 8
-        Me.ShapeContainer1.TabStop = False
-        '
-        'LineShape1
-        '
-        Me.LineShape1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LineShape1.BorderWidth = 2
-        Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 504
-        Me.LineShape1.X2 = 812
-        Me.LineShape1.Y1 = 97
-        Me.LineShape1.Y2 = 97
         '
         'DxErrorProvider1
         '
@@ -511,6 +548,10 @@ Partial Class frmEntriJualDBayar
         CType(Me.riCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        CType(Me.txtCharge.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtSubtotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtTotalBayar.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtKembali.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -537,16 +578,10 @@ Partial Class frmEntriJualDBayar
     Friend WithEvents mnTambah As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarStaticItem4 As DevExpress.XtraBars.BarStaticItem
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents lbTotalBayar As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents lbCharge As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents lbSubtotal As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents lbKembali As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents colNoID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colIDJenisTransaksi As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colAtasNama As DevExpress.XtraGrid.Columns.GridColumn
@@ -558,4 +593,9 @@ Partial Class frmEntriJualDBayar
     Friend WithEvents colIsBank As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents mnSaveLayout As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
+    Friend WithEvents txtKembali As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtTotalBayar As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtCharge As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtSubtotal As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
 End Class

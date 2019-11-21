@@ -276,7 +276,7 @@ Public Class frmEntriJual
                                                                                       .Nominal = NullToDbl(iRow.Item("Nominal"))})
                                     Next
                                     If MunculkanPembayaran Then
-                                        frm = New frmEntriJualDBayar(txtTotal.EditValue, ListPembayaran)
+                                        frm = New frmEntriJualDBayar(txtCustomer.EditValue, txtTotal.EditValue, ListPembayaran)
                                         If frm.ShowDialog(Me) <> Windows.Forms.DialogResult.OK Then
                                             DxErrorProvider1.SetError(txtKode, "Pembayaran dibatalkan!")
                                         Else
@@ -304,7 +304,7 @@ Public Class frmEntriJual
                                     com.Parameters.Add(New SqlParameter("@DPP", SqlDbType.Money)).Value = NullToDbl(txtDPP.EditValue)
                                     com.Parameters.Add(New SqlParameter("@PPN", SqlDbType.Money)).Value = NullToDbl(txtPPN.EditValue)
                                     com.Parameters.Add(New SqlParameter("@Total", SqlDbType.Money)).Value = NullToDbl(txtTotal.EditValue)
-                                    com.Parameters.Add(New SqlParameter("@Sisa", SqlDbType.Money)).Value = NullToDbl(txtTotal.EditValue) + NullToDbl(ListPembayaran.Sum(Function(m) m.ChargeRp)) - NullToDbl(ListPembayaran.Sum(Function(m) m.Total))
+                                    com.Parameters.Add(New SqlParameter("@Sisa", SqlDbType.Money)).Value = (NullToDbl(txtTotal.EditValue) + NullToDbl(ListPembayaran.Sum(Function(m) m.ChargeRp))) - NullToDbl(ListPembayaran.Sum(Function(m) m.Total))
                                     com.Parameters.Add(New SqlParameter("@IsPosted", SqlDbType.Bit)).Value = False
                                     com.Parameters.Add(New SqlParameter("@TglPosted", SqlDbType.DateTime)).Value = System.DBNull.Value
                                     com.Parameters.Add(New SqlParameter("@IDUserPosted", SqlDbType.Int)).Value = System.DBNull.Value
@@ -348,7 +348,7 @@ Public Class frmEntriJual
                                     com.ExecuteNonQuery()
 
                                     com.CommandText = "UPDATE MJual SET Subtotal=ISNULL(MJualD.JumlahBruto, 0), TotalBruto=ISNULL(MJualD.JumlahBruto, 0), Total=ISNULL(MJualD.Jumlah, 0), " & vbCrLf & _
-                                                      "Bayar=ISNULL(MJualDBayar.TotalBayar, 0), Sisa=ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0)" & vbCrLf & _
+                                                      "Bayar=ISNULL(MJualDBayar.TotalBayar, 0), Sisa=CASE WHEN ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0)<0 THEN 0 ELSE ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0) END" & vbCrLf & _
                                                       "FROM MJual " & vbCrLf & _
                                                       "LEFT JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
                                                       "LEFT JOIN (SELECT IDHeader, SUM(Total) AS TotalBayar, SUM(ChargeRp) AS ChargeRp FROM MJualDBayar GROUP BY IDHeader) AS MJualDBayar ON MJualDBayar.IDHeader=MJual.NoID " & vbCrLf & _

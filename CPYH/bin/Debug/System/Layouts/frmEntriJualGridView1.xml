@@ -88,6 +88,12 @@
       <property name="VisibleIndex">7</property>
       <property name="Visible">true</property>
       <property name="Width">157</property>
+      <property name="SummaryItem" isnull="true" iskey="true">
+        <property name="SummaryType">Sum</property>
+        <property name="DisplayFormat">SUM={0:n2}</property>
+        <property name="FieldName">Jumlah</property>
+        <property name="Tag" isnull="true" />
+      </property>
       <property name="Name">colJumlah</property>
     </property>
     <property name="Item21" isnull="true" iskey="true">

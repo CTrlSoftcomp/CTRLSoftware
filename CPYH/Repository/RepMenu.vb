@@ -66,6 +66,9 @@ Namespace Repository
                                     com.Connection = cn
                                     oDA.SelectCommand = com
 
+                                    'Proses Update Struktur
+                                    DBVersion.UpdateDB()
+
                                     com.CommandText = "SELECT TOP 1 MUser.*, MRole.Role, MRole.IsSupervisor FROM MUser INNER JOIN MRole ON MRole.NoID=MUser.IDRole WHERE MUser.Kode=@Kode AND MUser.Pwd=@Pwd"
                                     com.Parameters.Clear()
                                     com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = Kode

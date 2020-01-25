@@ -29,9 +29,9 @@ Public Class frmEntriJualD
         If txtKonversi.EditValue <= 0 Then
             DxErrorProvider1.SetError(txtKonversi, "Konversi salah!")
         End If
-        If txtJumlah.EditValue < 0.0 Then
-            DxErrorProvider1.SetError(txtHarga, "Nilai Penjualan Penjualan salah!")
-        End If
+        'If txtJumlah.EditValue < 0.0 Then
+        '    DxErrorProvider1.SetError(txtHarga, "Nilai Penjualan Penjualan salah!")
+        'End If
 
         If Not DxErrorProvider1.HasErrors Then
             Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
@@ -47,9 +47,11 @@ Public Class frmEntriJualD
                                     com.Transaction = cn.BeginTransaction
                                     oDA.SelectCommand = com
 
-                                    com.CommandText = "EXEC spCekSaldoStok " & NullToLong(IDBarang) & ", " & NullToLong(frmPemanggil.txtGudang.EditValue) & ", '" & frmPemanggil.txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
-                                    If NullToDbl(com.ExecuteScalar()) < (txtQty.EditValue * txtKonversi.EditValue) Then
-                                        DxErrorProvider1.SetError(txtQty, "Saldo Stok Tidak Cukup!")
+                                    If (txtQty.EditValue * txtKonversi.EditValue) > 0 Then
+                                        com.CommandText = "EXEC spCekSaldoStok " & NullToLong(IDBarang) & ", " & NullToLong(frmPemanggil.txtGudang.EditValue) & ", '" & frmPemanggil.txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
+                                        If NullToDbl(com.ExecuteScalar()) < (txtQty.EditValue * txtKonversi.EditValue) Then
+                                            DxErrorProvider1.SetError(txtQty, "Saldo Stok Tidak Cukup!")
+                                        End If
                                     End If
 
                                     If Not DxErrorProvider1.HasErrors Then
@@ -94,16 +96,35 @@ Public Class frmEntriJualD
                                         com.Parameters.Clear()
 
                                         com.CommandText = "UPDATE MJual SET Subtotal=ISNULL(MJualD.JumlahBruto, 0), TotalBruto=ISNULL(MJualD.JumlahBruto, 0), " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MJual.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MJualD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=1 THEN ISNULL(MJualD.JumlahBruto, 0)/1.0 ELSE ISNULL(MJualD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
-                                                  "FROM MJual " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
-                                                  "WHERE MJual.NoID=" & IDHeader
+                                                          "DPP=ROUND(CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=2 THEN ISNULL(MJualD.JumlahBruto, 0)/1.0 ELSE ISNULL(MJualD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                          "FROM MJual " & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
+                                                          "WHERE MJual.NoID=" & IDHeader
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MJual SET " & vbCrLf & _
+                                                          "PPN=ROUND((CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=1 THEN ISNULL(MJualD.JumlahBruto, 0)-ISNULL(MJualD.DPP, 0) ELSE 0.1*ISNULL(MJualD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                                          "FROM MJual " & vbCrLf & _
+                                                          "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(DPP) AS DPP, SUM(PPN) AS PPN FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
+                                                          "WHERE MJualD.IDHeader=" & IDHeader
                                         com.ExecuteNonQuery()
 
                                         com.CommandText = "UPDATE MJualD SET " & vbCrLf & _
-                                                          "PPN=ROUND((CASE WHEN MJual.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MJualD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                          "DPP=ROUND(CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=1 THEN ISNULL(MJualD.JumlahBruto, 0)/1.0 ELSE ISNULL(MJualD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                          "PPN=ROUND((CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=1 THEN ISNULL(MJualD.JumlahBruto, 0)-ISNULL(MJualD.DPP, 0) ELSE 0.1*ISNULL(MJualD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                                          "FROM MJual " & vbCrLf & _
+                                                          "INNER JOIN MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
+                                                          "WHERE MJualD.IDHeader=" & IDHeader
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MJualD SET " & vbCrLf & _
+                                                          "DPP=ROUND(CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=2 THEN ISNULL(MJualD.JumlahBruto, 0)/1.0 ELSE ISNULL(MJualD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                          "FROM MJual " & vbCrLf & _
+                                                          "INNER JOIN MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
+                                                          "WHERE MJual.NoID=" & IDHeader
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "UPDATE MJualD SET " & vbCrLf & _
+                                                          "PPN=ROUND((CASE WHEN MJual.IDTypePajak=0 THEN 0 WHEN MJual.IDTypePajak=1 THEN ISNULL(MJualD.JumlahBruto, 0)-ISNULL(MJualD.DPP, 0) ELSE 0.1*ISNULL(MJualD.JumlahBruto, 0) END), 0) " & vbCrLf & _
                                                           "FROM MJual " & vbCrLf & _
                                                           "INNER JOIN MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
                                                           "WHERE MJualD.IDHeader=" & IDHeader
@@ -274,7 +295,7 @@ Public Class frmEntriJualD
                 txtJumlah.EditValue = TotalBruto
             ElseIf TypePajak = Utils.TypePajak.Include Then
                 DPP = Bulatkan((HargaBruto * txtQty.EditValue) / 1.1, 0)
-                PPN = Bulatkan(DPP * 0.1, 0)
+                PPN = TotalBruto - DPP 'Bulatkan(DPP * 0.1, 0)
                 txtJumlah.EditValue = Bulatkan(DPP + PPN, 0)
             Else
                 DPP = Bulatkan(TotalBruto, 0)

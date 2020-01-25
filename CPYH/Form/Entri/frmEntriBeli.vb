@@ -220,6 +220,8 @@ Public Class frmEntriBeli
                                 IDTypePajak = txtTypePajak.EditValue
                                 txtNoReff.Text = NullToStr(iRow.Item("NoReff"))
                                 txtCatatan.Text = NullToStr(iRow.Item("Catatan"))
+                                txtDiscProsen.EditValue = NullToDbl(iRow.Item("DiscNotaProsen"))
+                                txtDiscRp.EditValue = NullToDbl(iRow.Item("DiscNotaRp"))
                             Else
                                 txtGudang.EditValue = -1
                                 txtTanggal.EditValue = Now
@@ -228,6 +230,8 @@ Public Class frmEntriBeli
                                 txtPO.EditValue = -1
                                 txtTypePajak.EditValue = 1
                                 IDTypePajak = txtTypePajak.EditValue
+                                txtDiscProsen.EditValue = 0.0
+                                txtDiscRp.EditValue = 0.0
                                 pStatus = pStatusForm.Baru
                             End If
                         Catch ex As Exception
@@ -283,11 +287,17 @@ Public Class frmEntriBeli
                                     mnEdit.Enabled = False
                                     mnHapus.Enabled = False
                                     mnSimpan.Enabled = False
+
+                                    txtDiscProsen.Properties.ReadOnly = True
+                                    txtDiscRp.Properties.ReadOnly = True
                                 Else
                                     mnBaru.Enabled = True
                                     mnEdit.Enabled = True
                                     mnHapus.Enabled = True
                                     mnSimpan.Enabled = True
+
+                                    txtDiscProsen.Properties.ReadOnly = False
+                                    txtDiscRp.Properties.ReadOnly = False
                                 End If
 
                                 com.CommandText = "SELECT SUM(MBeliD.JumlahBruto) JumlahBruto, SUM(MBeliD.Jumlah) Jumlah, SUM(MBeliD.DPP) DPP, SUM(MBeliD.PPN) PPN" & vbCrLf & _
@@ -306,12 +316,93 @@ Public Class frmEntriBeli
                                     txtPPN.EditValue = 0
                                     txtTotal.EditValue = 0
                                 End If
+                                HitungJumlah()
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End Try
                         End Using
                     End Using
                 End Using
+            End Using
+        End Using
+    End Sub
+    Private Sub HitungJumlah()
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Try
+                    If pStatus <> pStatusForm.Posted Then
+                        txtBruto.EditValue = Bulatkan((txtSubtotal.EditValue * (1 - (txtDiscProsen.EditValue / 100))) - txtDiscRp.EditValue, 2)
+                        If txtTypePajak.EditValue = Utils.TypePajak.NonPajak Then
+                            txtDPP.EditValue = 0.0
+                            txtPPN.EditValue = 0.0
+                            txtTotal.EditValue = txtBruto.EditValue
+                        ElseIf txtTypePajak.EditValue = Utils.TypePajak.Include Then
+                            txtDPP.EditValue = Bulatkan(txtBruto.EditValue / 1.1, 0)
+                            txtPPN.EditValue = Bulatkan(txtDPP.EditValue * 0.1, 0)
+                            txtTotal.EditValue = Bulatkan(txtDPP.EditValue + txtPPN.EditValue, 0)
+                        Else
+                            txtDPP.EditValue = Bulatkan(txtBruto.EditValue, 0)
+                            txtPPN.EditValue = Bulatkan(txtDPP.EditValue * 0.1, 0)
+                            txtTotal.EditValue = Bulatkan(txtDPP.EditValue + txtPPN.EditValue, 0)
+                        End If
+
+                        cn.Open()
+                        com.Connection = cn
+
+                        com.CommandText = "SELECT IsPosted FROM MBeli WHERE NoID=" & NoID
+                        If Not NullToBool(com.ExecuteScalar()) Then
+                            com.Transaction = cn.BeginTransaction
+
+                            com.CommandText = "UPDATE MBeli SET IDTypePajak=" & NullToLong(txtTypePajak.EditValue) & " WHERE NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
+                                                  "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                  "FROM MBeli " & vbCrLf & _
+                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                                  "WHERE MBeli.NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "FROM MBeli " & vbCrLf & _
+                                              "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                              "PPN=ISNULL(MBeli.PPN, 0)-(ISNULL(Detil.PPN, 0)-ISNULL(MBeliD.PPN, 0)), " & vbCrLf & _
+                                              "DPP=ISNULL(MBeli.DPP, 0)-(ISNULL(Detil.DPP, 0)-ISNULL(MBeliD.DPP, 0)) " & vbCrLf & _
+                                              "FROM MBeli " & vbCrLf & _
+                                              "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, SUM(DPP) AS DPP, SUM(PPN) AS PPN, MAX(NoID) AS NoID FROM MBeliD GROUP BY IDHeader) AS Detil ON Detil.IDHeader=MBeli.NoID AND Detil.NoID=MBeliD.NoID" & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                              "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
+                                              "FROM MBeli " & vbCrLf & _
+                                              "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(" & FixKoma(txtBruto.EditValue) & ", 0), Total=ISNULL(" & FixKoma(txtTotal.EditValue) & ", 0)" & vbCrLf & _
+                                              "FROM MBeli " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
+                                              "WHERE MBeli.NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            If com.Transaction IsNot Nothing Then
+                                com.Transaction.Commit()
+                            End If
+                            com.Transaction = Nothing
+                        End If
+                    End If
+                Catch ex As Exception
+                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
             End Using
         End Using
     End Sub
@@ -364,9 +455,9 @@ Public Class frmEntriBeli
                                 com.Parameters.Add(New SqlParameter("@Catatan", SqlDbType.VarChar)).Value = txtCatatan.Text
                                 com.Parameters.Add(New SqlParameter("@IDTypePajak", SqlDbType.SmallInt)).Value = NullTolInt(txtTypePajak.EditValue)
                                 com.Parameters.Add(New SqlParameter("@Subtotal", SqlDbType.Money)).Value = NullToDbl(txtSubtotal.EditValue)
-                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = 0.0
-                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = 0.0
-                                com.Parameters.Add(New SqlParameter("@TotalBruto", SqlDbType.Money)).Value = NullToDbl(txtSubtotal.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
+                                com.Parameters.Add(New SqlParameter("@TotalBruto", SqlDbType.Money)).Value = NullToDbl(txtBruto.EditValue)
                                 com.Parameters.Add(New SqlParameter("@DPP", SqlDbType.Money)).Value = NullToDbl(txtDPP.EditValue)
                                 com.Parameters.Add(New SqlParameter("@PPN", SqlDbType.Money)).Value = NullToDbl(txtPPN.EditValue)
                                 com.Parameters.Add(New SqlParameter("@Total", SqlDbType.Money)).Value = NullToDbl(txtTotal.EditValue)
@@ -381,20 +472,36 @@ Public Class frmEntriBeli
                                 NoID = NullToLong(com.ExecuteScalar())
                                 com.Parameters.Clear()
 
-                                com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                                  "DiscNotaProsen=ROUND(@DiscNotaProsen, 2)" & vbCrLf & _
+                                                  ",DiscNotaRp=ROUND((@DiscNotaRp/(MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))) * 100.0, 2)" & vbCrLf & _
                                                   "FROM MBeli " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                  "WHERE MBeli.NoID=" & NoID
+                                                  "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
+                                                  "WHERE MBeliD.IDHeader=" & NoID
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
+                                com.ExecuteNonQuery()
+
+                                com.CommandText = "UPDATE MBeliD SET DiscNotaRp=MBeli.DiscNotaRp-(ISNULL(MBeliD2.DiscNotaRp, 0)-ISNULL(MBeliD.DiscNotaRp, 0))" & vbCrLf & _
+                                                  "FROM MBeliD " & vbCrLf & _
+                                                  "INNER JOIN (SELECT IDHeader, MAX(NoID) AS NoID, SUM(DiscNotaRp) AS DiscNotaRp FROM MBeliD GROUP BY IDHeader) AS MBeliD2 ON MBeliD2.NoID=MBeliD.NoID" & vbCrLf & _
+                                                  "INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
+                                                  "WHERE MBeliD.IDHeader=" & NoID
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                                 com.ExecuteNonQuery()
 
                                 com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                  "PPN=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END * 0.1, 0), " & vbCrLf & _
+                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END, 0) " & vbCrLf & _
                                                   "FROM MBeli " & vbCrLf & _
                                                   "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                                   "WHERE MBeliD.IDHeader=" & NoID
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                                 com.ExecuteNonQuery()
 
                                 com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
@@ -407,16 +514,13 @@ Public Class frmEntriBeli
                                 com.ExecuteNonQuery()
 
                                 com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                                  "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
+                                                  "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2) ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
                                                   "FROM MBeli " & vbCrLf & _
                                                   "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                                   "WHERE MBeliD.IDHeader=" & NoID
-                                com.ExecuteNonQuery()
-
-                                com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), Total=ISNULL(MBeliD.Jumlah, 0)" & vbCrLf & _
-                                                  "FROM MBeli " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                  "WHERE MBeli.NoID=" & NoID
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                                com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                                 com.ExecuteNonQuery()
 
                                 If com.Transaction IsNot Nothing Then
@@ -462,20 +566,36 @@ Public Class frmEntriBeli
                             com.CommandText = "UPDATE MBeli SET IDTypePajak=" & NullToLong(txtTypePajak.EditValue) & " WHERE NoID=" & NoID
                             com.ExecuteNonQuery()
 
-                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
-                                                  "FROM MBeli " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                                  "WHERE MBeli.NoID=" & NoID
+                            com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                              "DiscNotaProsen=ROUND(@DiscNotaProsen, 2)" & vbCrLf & _
+                                              ",DiscNotaRp=ROUND((@DiscNotaRp/(MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))) * 100.0, 2)" & vbCrLf & _
+                                              "FROM MBeli " & vbCrLf & _
+                                              "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeliD SET DiscNotaRp=MBeli.DiscNotaRp-(ISNULL(MBeliD2.DiscNotaRp, 0)-ISNULL(MBeliD.DiscNotaRp, 0))" & vbCrLf & _
+                                              "FROM MBeliD " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, MAX(NoID) AS NoID, SUM(DiscNotaRp) AS DiscNotaRp FROM MBeliD GROUP BY IDHeader) AS MBeliD2 ON MBeliD2.NoID=MBeliD.NoID" & vbCrLf & _
+                                              "INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "PPN=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END * 0.1, 0), " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END, 0) " & vbCrLf & _
                                               "FROM MBeli " & vbCrLf & _
                                               "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                               "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
@@ -488,16 +608,13 @@ Public Class frmEntriBeli
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                              "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
+                                              "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2) ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
                                               "FROM MBeli " & vbCrLf & _
                                               "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                               "WHERE MBeliD.IDHeader=" & NoID
-                            com.ExecuteNonQuery()
-
-                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), Total=ISNULL(MBeliD.Jumlah, 0)" & vbCrLf & _
-                                              "FROM MBeli " & vbCrLf & _
-                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                              "WHERE MBeli.NoID=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             If com.Transaction IsNot Nothing Then
@@ -542,20 +659,36 @@ Public Class frmEntriBeli
                             com.CommandText = "UPDATE MBeli SET IDTypePajak=" & NullToLong(txtTypePajak.EditValue) & " WHERE NoID=" & NoID
                             com.ExecuteNonQuery()
 
-                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                            com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
+                                              "DiscNotaProsen=ROUND(@DiscNotaProsen, 2)" & vbCrLf & _
+                                              ",DiscNotaRp=ROUND((@DiscNotaRp/(MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))) * 100.0, 2)" & vbCrLf & _
                                               "FROM MBeli " & vbCrLf & _
-                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                              "WHERE MBeli.NoID=" & NoID
+                                              "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MBeliD SET DiscNotaRp=MBeli.DiscNotaRp-(ISNULL(MBeliD2.DiscNotaRp, 0)-ISNULL(MBeliD.DiscNotaRp, 0))" & vbCrLf & _
+                                              "FROM MBeliD " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, MAX(NoID) AS NoID, SUM(DiscNotaRp) AS DiscNotaRp FROM MBeliD GROUP BY IDHeader) AS MBeliD2 ON MBeliD2.NoID=MBeliD.NoID" & vbCrLf & _
+                                              "INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
+                                              "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ISNULL(MBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "PPN=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END * 0.1, 0), " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MBeli.IDTypePajak=0 THEN 0 WHEN MBeli.IDTypePajak=1 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.1 ELSE ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2)/1.0 END, 0) " & vbCrLf & _
                                               "FROM MBeli " & vbCrLf & _
                                               "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                               "WHERE MBeliD.IDHeader=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
@@ -568,16 +701,13 @@ Public Class frmEntriBeli
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MBeliD SET " & vbCrLf & _
-                                              "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN MBeliD.JumlahBruto ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
+                                              "Jumlah=CASE WHEN MBeli.IDTypePajak=0 THEN ROUND((MBeliD.JumlahBruto * (1.0-(@DiscNotaProsen/100.0)))-MBeliD.DiscNotaRp, 2) ELSE MBeliD.DPP+MBeliD.PPN END " & vbCrLf & _
                                               "FROM MBeli " & vbCrLf & _
                                               "INNER JOIN MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
                                               "WHERE MBeliD.IDHeader=" & NoID
-                            com.ExecuteNonQuery()
-
-                            com.CommandText = "UPDATE MBeli SET Subtotal=ISNULL(MBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MBeliD.JumlahBruto, 0), Total=ISNULL(MBeliD.Jumlah, 0)" & vbCrLf & _
-                                              "FROM MBeli " & vbCrLf & _
-                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MBeliD GROUP BY IDHeader) AS MBeliD ON MBeliD.IDHeader=MBeli.NoID " & vbCrLf & _
-                                              "WHERE MBeli.NoID=" & NoID
+                            com.Parameters.Clear()
+                            com.Parameters.Add(New SqlParameter("@DiscNotaProsen", SqlDbType.Float)).Value = NullToDbl(txtDiscProsen.EditValue)
+                            com.Parameters.Add(New SqlParameter("@DiscNotaRp", SqlDbType.Float)).Value = NullToDbl(txtDiscRp.EditValue)
                             com.ExecuteNonQuery()
 
                             If com.Transaction IsNot Nothing Then
@@ -608,11 +738,21 @@ Public Class frmEntriBeli
                 If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
                     LayoutControl1.RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
+
+                AddHandler txtSubtotal.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtDiscProsen.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtDiscRp.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtDPP.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtPPN.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtTotal.LostFocus, AddressOf txt_LostFocus
+                AddHandler txtBruto.LostFocus, AddressOf txt_LostFocus
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Using
     End Sub
+
+
 
     Private Sub txtSupplier_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSupplier.EditValueChanged
         Using cn As New SqlConnection(StrKonSQL)
@@ -820,5 +960,9 @@ Public Class frmEntriBeli
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
         mnEdit.PerformClick()
+    End Sub
+
+    Private Sub txt_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        HitungJumlah()
     End Sub
 End Class

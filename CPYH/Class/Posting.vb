@@ -292,5 +292,107 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function PostingReturJual(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MReturJualD.*, MReturJual.Total, CASE WHEN MReturJual.Total-ISNULL(MReturJualDBayar.Jumlah, 0)<0 THEN 0 ELSE MReturJual.Total-ISNULL(MReturJualDBayar.Jumlah, 0) END AS Sisa, MReturJual.Sisa Sisa1, MReturJual.Tanggal, MReturJual.Kode AS KdTransaksi, MReturJual.IDCustomer, MReturJual.DPP, MReturJual.PPN, MAlamat.LimitPiutang, MAlamat.LimitNotaPiutang, MAlamat.LimitUmurPiutang" & vbCrLf & _
+                                                  "FROM MReturJualD" & vbCrLf & _
+                                                  "INNER JOIN MReturJual ON MReturJual.NoID=MReturJualD.IDHeader" & vbCrLf & _
+                                                  "INNER JOIN MAlamat ON MAlamat.NoID=MReturJual.IDCustomer" & vbCrLf & _
+                                                  "LEFT JOIN (SELECT IDHeader, SUM(Nominal) AS Jumlah FROM MReturJualDBayar GROUP BY IDHeader) AS MReturJualDBayar ON MReturJualDBayar.IDHeader=MReturJual.NoID" & vbCrLf & _
+                                                  "WHERE ISNULL(MReturJual.Total,0)>0 AND ISNULL(MReturJual.IsPosted,0)=0 AND MReturJual.NoID=" & NoID
+                                oDA.Fill(ds, "MReturJual")
+                                If ds.Tables("MReturJual").Rows.Count >= 1 Then
+                                    If NullToDbl(ds.Tables("MReturJual").Rows(0).Item("Sisa")) <> NullToDbl(ds.Tables("MReturJual").Rows(0).Item("Sisa1")) Then
+                                        XtraMessageBox.Show("Lakukan Pembayaran dengan benar dahulu.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                        Return False
+                                    End If
+
+                                    'com.CommandText = "SELECT A.IDAlamat" & vbCrLf & _
+                                    '                  ",SUM((A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0)) AS Saldo" & vbCrLf & _
+                                    '                  ",COUNT(A.NoTransaksi) AS JmlNota" & vbCrLf & _
+                                    '                  ",DATEDIFF(DAY, MAX(A.Tanggal), GETDATE()) TglTerlamaPiutang" & vbCrLf & _
+                                    '                  "FROM MHutangPiutang A(NOLOCK)" & vbCrLf & _
+                                    '                  "LEFT JOIN (" & vbCrLf & _
+                                    '                  "SELECT ReffNoTransaksi" & vbCrLf & _
+                                    '                  ",ReffNoUrut" & vbCrLf & _
+                                    '                  ",SUM(Kredit - Debet) AS Pelunasan" & vbCrLf & _
+                                    '                  "FROM MHutangPiutang(NOLOCK)" & vbCrLf & _
+                                    '                  "GROUP BY ReffNoTransaksi" & vbCrLf & _
+                                    '                  ",ReffNoUrut" & vbCrLf & _
+                                    '                  ") AS B ON B.ReffNoTransaksi = A.NoTransaksi" & vbCrLf & _
+                                    '                  "AND B.ReffNoUrut = A.NoUrut" & vbCrLf & _
+                                    '                  "WHERE ISNULL(A.ReffNoTransaksi, '')='' AND ISNULL(A.ReffNoUrut, 0)<=0 AND (A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0) <> 0.0" & vbCrLf & _
+                                    '                  "GROUP BY A.IDAlamat" & vbCrLf & _
+                                    '                  "HAVING A.IDAlamat = " & NullToLong(ds.Tables("MReturJual").Rows(0).Item("IDCustomer"))
+                                    'oDA.Fill(ds, "MPiutang")
+
+                                    'If ds.Tables("MPiutang").Rows.Count >= 1 Then
+                                    '    If NullToDbl(ds.Tables("MReturJual").Rows(0).Item("LimitPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("Saldo")) - NullToDbl(ds.Tables("MReturJual").Rows(0).Item("Sisa")) < 0 Then
+                                    '        XtraMessageBox.Show("Limit Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                    '        Return False
+                                    '    End If
+                                    '    If NullToDbl(ds.Tables("MReturJual").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("JmlNota")) - IIf(NullToDbl(ds.Tables("MReturJual").Rows(0).Item("Sisa")) > 0, 1, 0) < 0 Then
+                                    '        XtraMessageBox.Show("Limit Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                    '        Return False
+                                    '    End If
+                                    '    If NullToDbl(ds.Tables("MReturJual").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("TglTerlamaPiutang")) < 0 Then
+                                    '        XtraMessageBox.Show("Limit Umur Nota Piutang tidak mencukupi! Setting dulu di master Customer.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                    '        Return False
+                                    '    End If
+                                    'End If
+
+                                    com.CommandText = "UPDATE MReturJual SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi=7 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MReturJual.[Tanggal],MReturJualD.[IDBarang],MReturJualD.[IDBarangD],''[Varian],7 [IDJenisTransaksi],MReturJual.NoID [IDTransaksi],MReturJualD.NoID [IDTransaksiD],MReturJual.IDGudang [IDGudang]" & vbCrLf & _
+                                                      ",MReturJualD.IDSatuan [IDSatuan],MReturJualD.Konversi [Konversi],MReturJualD.Qty [QtyMasuk],0 [QtyKeluar],0 [Debet],0 [Kredit],0 [HargaBeli],0 [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MReturJualD" & vbCrLf & _
+                                                      "INNER JOIN MReturJual ON MReturJual.NoID=MReturJualD.IDHeader" & vbCrLf & _
+                                                      "WHERE MReturJual.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi=7 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MHutangPiutang] (" & vbCrLf & _
+                                                      "[IDAlamat],[IDTransaksi],[IDJenisTransaksi],[NoTransaksi],[NoUrut],[Tanggal],[JatuhTempo],[Debet]" & vbCrLf & _
+                                                      ",[Kredit],[Saldo],[ReffNoTransaksi],[ReffNoUrut])" & vbCrLf & _
+                                                      "SELECT MReturJual.IDCustomer, MReturJual.NoID, 7 [IDJenisTransaksi],MReturJual.Kode [NoTransaksi],1 [NoUrut],MReturJual.[Tanggal],MReturJual.[JatuhTempo],0 [Debet]" & vbCrLf & _
+                                                      ",MReturJual.Sisa [Kredit],MReturJual.Sisa [Saldo],'' [ReffNoTransaksi],-1 [ReffNoUrut]" & vbCrLf & _
+                                                      "FROM MReturJual" & vbCrLf & _
+                                                      "INNER JOIN MAlamat ON MAlamat.NoID=MReturJual.IDCustomer" & vbCrLf & _
+                                                      "WHERE MReturJual.Sisa > 0 AND MReturJual.NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

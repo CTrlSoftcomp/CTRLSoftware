@@ -21,6 +21,9 @@ Partial Class frmEntriBeli
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.txtBruto = New DevExpress.XtraEditors.TextEdit
+        Me.txtDiscRp = New DevExpress.XtraEditors.TextEdit
+        Me.txtDiscProsen = New DevExpress.XtraEditors.TextEdit
         Me.txtGudang = New DevExpress.XtraEditors.SearchLookUpEdit
         Me.gvGudang = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.txtPO = New DevExpress.XtraEditors.SearchLookUpEdit
@@ -62,6 +65,9 @@ Partial Class frmEntriBeli
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem17 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem18 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
@@ -82,6 +88,9 @@ Partial Class frmEntriBeli
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.txtBruto.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtDiscRp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtDiscProsen.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,6 +134,9 @@ Partial Class frmEntriBeli
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -133,6 +145,9 @@ Partial Class frmEntriBeli
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.txtBruto)
+        Me.LayoutControl1.Controls.Add(Me.txtDiscRp)
+        Me.LayoutControl1.Controls.Add(Me.txtDiscProsen)
         Me.LayoutControl1.Controls.Add(Me.txtGudang)
         Me.LayoutControl1.Controls.Add(Me.txtPO)
         Me.LayoutControl1.Controls.Add(Me.txtTypePajak)
@@ -158,6 +173,55 @@ Partial Class frmEntriBeli
         Me.LayoutControl1.Size = New System.Drawing.Size(907, 503)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'txtBruto
+        '
+        Me.txtBruto.EditValue = 0
+        Me.txtBruto.EnterMoveNextControl = True
+        Me.txtBruto.Location = New System.Drawing.Point(597, 411)
+        Me.txtBruto.Name = "txtBruto"
+        Me.txtBruto.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtBruto.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtBruto.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtBruto.Properties.Mask.EditMask = "n2"
+        Me.txtBruto.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtBruto.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtBruto.Properties.ReadOnly = True
+        Me.txtBruto.Size = New System.Drawing.Size(286, 20)
+        Me.txtBruto.StyleController = Me.LayoutControl1
+        Me.txtBruto.TabIndex = 13
+        '
+        'txtDiscRp
+        '
+        Me.txtDiscRp.EditValue = 0
+        Me.txtDiscRp.EnterMoveNextControl = True
+        Me.txtDiscRp.Location = New System.Drawing.Point(764, 387)
+        Me.txtDiscRp.Name = "txtDiscRp"
+        Me.txtDiscRp.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtDiscRp.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtDiscRp.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDiscRp.Properties.Mask.EditMask = "n2"
+        Me.txtDiscRp.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtDiscRp.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtDiscRp.Size = New System.Drawing.Size(119, 20)
+        Me.txtDiscRp.StyleController = Me.LayoutControl1
+        Me.txtDiscRp.TabIndex = 16
+        '
+        'txtDiscProsen
+        '
+        Me.txtDiscProsen.EditValue = 0
+        Me.txtDiscProsen.EnterMoveNextControl = True
+        Me.txtDiscProsen.Location = New System.Drawing.Point(597, 387)
+        Me.txtDiscProsen.Name = "txtDiscProsen"
+        Me.txtDiscProsen.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtDiscProsen.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtDiscProsen.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDiscProsen.Properties.Mask.EditMask = "n2"
+        Me.txtDiscProsen.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtDiscProsen.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtDiscProsen.Size = New System.Drawing.Size(119, 20)
+        Me.txtDiscProsen.StyleController = Me.LayoutControl1
+        Me.txtDiscProsen.TabIndex = 15
         '
         'txtGudang
         '
@@ -221,10 +285,10 @@ Partial Class frmEntriBeli
         '
         'txtCatatan
         '
-        Me.txtCatatan.Location = New System.Drawing.Point(12, 415)
+        Me.txtCatatan.Location = New System.Drawing.Point(12, 367)
         Me.txtCatatan.Name = "txtCatatan"
         Me.txtCatatan.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtCatatan.Size = New System.Drawing.Size(340, 76)
+        Me.txtCatatan.Size = New System.Drawing.Size(340, 124)
         Me.txtCatatan.StyleController = Me.LayoutControl1
         Me.txtCatatan.TabIndex = 13
         '
@@ -283,7 +347,7 @@ Partial Class frmEntriBeli
         '
         Me.txtSubtotal.EditValue = 0
         Me.txtSubtotal.EnterMoveNextControl = True
-        Me.txtSubtotal.Location = New System.Drawing.Point(597, 411)
+        Me.txtSubtotal.Location = New System.Drawing.Point(597, 363)
         Me.txtSubtotal.Name = "txtSubtotal"
         Me.txtSubtotal.Properties.Appearance.Options.UseTextOptions = True
         Me.txtSubtotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -384,7 +448,7 @@ Partial Class frmEntriBeli
         Me.GridControl1.Location = New System.Drawing.Point(12, 200)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(883, 195)
+        Me.GridControl1.Size = New System.Drawing.Size(883, 147)
         Me.GridControl1.TabIndex = 6
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -441,7 +505,7 @@ Partial Class frmEntriBeli
         Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
         Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 188)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(887, 199)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(887, 151)
         Me.LayoutControlItem7.Text = "LayoutControlItem7"
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextToControlDistance = 0
@@ -571,10 +635,10 @@ Partial Class frmEntriBeli
         'LayoutControlGroup4
         '
         Me.LayoutControlGroup4.CustomizationFormText = "Total"
-        Me.LayoutControlGroup4.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem12})
-        Me.LayoutControlGroup4.Location = New System.Drawing.Point(529, 387)
+        Me.LayoutControlGroup4.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem12, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19})
+        Me.LayoutControlGroup4.Location = New System.Drawing.Point(529, 339)
         Me.LayoutControlGroup4.Name = "LayoutControlGroup4"
-        Me.LayoutControlGroup4.Size = New System.Drawing.Size(358, 96)
+        Me.LayoutControlGroup4.Size = New System.Drawing.Size(358, 144)
         Me.LayoutControlGroup4.Text = "Total"
         Me.LayoutControlGroup4.TextVisible = False
         '
@@ -592,7 +656,7 @@ Partial Class frmEntriBeli
         '
         Me.LayoutControlItem5.Control = Me.txtDPP
         Me.LayoutControlItem5.CustomizationFormText = "DPP"
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 24)
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 72)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
         Me.LayoutControlItem5.Size = New System.Drawing.Size(167, 24)
         Me.LayoutControlItem5.Text = "DPP"
@@ -602,7 +666,7 @@ Partial Class frmEntriBeli
         '
         Me.LayoutControlItem6.Control = Me.txtPPN
         Me.LayoutControlItem6.CustomizationFormText = "PPN"
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(167, 24)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(167, 72)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
         Me.LayoutControlItem6.Size = New System.Drawing.Size(167, 24)
         Me.LayoutControlItem6.Text = "PPN"
@@ -612,18 +676,48 @@ Partial Class frmEntriBeli
         '
         Me.LayoutControlItem12.Control = Me.txtTotal
         Me.LayoutControlItem12.CustomizationFormText = "Total"
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 96)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
         Me.LayoutControlItem12.Size = New System.Drawing.Size(334, 24)
         Me.LayoutControlItem12.Text = "Total"
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(40, 13)
         '
+        'LayoutControlItem17
+        '
+        Me.LayoutControlItem17.Control = Me.txtDiscProsen
+        Me.LayoutControlItem17.CustomizationFormText = "Disc %"
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(0, 24)
+        Me.LayoutControlItem17.Name = "LayoutControlItem17"
+        Me.LayoutControlItem17.Size = New System.Drawing.Size(167, 24)
+        Me.LayoutControlItem17.Text = "Disc %"
+        Me.LayoutControlItem17.TextSize = New System.Drawing.Size(40, 13)
+        '
+        'LayoutControlItem18
+        '
+        Me.LayoutControlItem18.Control = Me.txtDiscRp
+        Me.LayoutControlItem18.CustomizationFormText = "Disc Rp"
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(167, 24)
+        Me.LayoutControlItem18.Name = "LayoutControlItem18"
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(167, 24)
+        Me.LayoutControlItem18.Text = "Disc Rp"
+        Me.LayoutControlItem18.TextSize = New System.Drawing.Size(40, 13)
+        '
+        'LayoutControlItem19
+        '
+        Me.LayoutControlItem19.Control = Me.txtBruto
+        Me.LayoutControlItem19.CustomizationFormText = "Bruto"
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutControlItem19.Name = "LayoutControlItem19"
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(334, 24)
+        Me.LayoutControlItem19.Text = "Bruto"
+        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(40, 13)
+        '
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(344, 387)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(344, 339)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(185, 96)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(185, 144)
         Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -631,9 +725,9 @@ Partial Class frmEntriBeli
         '
         Me.LayoutControlItem13.Control = Me.txtCatatan
         Me.LayoutControlItem13.CustomizationFormText = "Catatan"
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 387)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 339)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
-        Me.LayoutControlItem13.Size = New System.Drawing.Size(344, 96)
+        Me.LayoutControlItem13.Size = New System.Drawing.Size(344, 144)
         Me.LayoutControlItem13.Text = "Catatan"
         Me.LayoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(39, 13)
@@ -779,6 +873,9 @@ Partial Class frmEntriBeli
         Me.Text = "Entri Pembelian"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.txtBruto.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtDiscRp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtDiscProsen.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -822,6 +919,9 @@ Partial Class frmEntriBeli
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -889,4 +989,10 @@ Partial Class frmEntriBeli
     Friend WithEvents txtGudang As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents gvGudang As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtBruto As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtDiscRp As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtDiscProsen As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LayoutControlItem17 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem18 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem19 As DevExpress.XtraLayout.LayoutControlItem
 End Class

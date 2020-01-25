@@ -27,6 +27,8 @@ Partial Class frmEntriJual
         Me.gvGudang = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.txtTypePajak = New DevExpress.XtraEditors.SearchLookUpEdit
         Me.gvTypePajak = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.GridControl2 = New DevExpress.XtraGrid.GridControl
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.txtCatatan = New DevExpress.XtraEditors.MemoEdit
         Me.txtTotal = New DevExpress.XtraEditors.TextEdit
         Me.txtPPN = New DevExpress.XtraEditors.TextEdit
@@ -44,7 +46,6 @@ Partial Class frmEntriJual
         Me.txtAlamatCustomer = New DevExpress.XtraEditors.MemoEdit
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem
-        Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlGroup2 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.LayoutControlItem8 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem
@@ -65,6 +66,11 @@ Partial Class frmEntriJual
         Me.LayoutControlItem17 = New DevExpress.XtraLayout.LayoutControlItem
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.TabbedControlGroup1 = New DevExpress.XtraLayout.TabbedControlGroup
+        Me.LayoutControlGroup5 = New DevExpress.XtraLayout.LayoutControlGroup
+        Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlGroup6 = New DevExpress.XtraLayout.LayoutControlGroup
+        Me.LayoutControlItem18 = New DevExpress.XtraLayout.LayoutControlItem
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar1 = New DevExpress.XtraBars.Bar
         Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
@@ -89,6 +95,8 @@ Partial Class frmEntriJual
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtTypePajak.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvTypePajak, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCatatan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPPN.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,7 +116,6 @@ Partial Class frmEntriJual
         CType(Me.txtAlamatCustomer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,6 +136,11 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TabbedControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -139,6 +151,7 @@ Partial Class frmEntriJual
         Me.LayoutControl1.Controls.Add(Me.TextEdit1)
         Me.LayoutControl1.Controls.Add(Me.txtGudang)
         Me.LayoutControl1.Controls.Add(Me.txtTypePajak)
+        Me.LayoutControl1.Controls.Add(Me.GridControl2)
         Me.LayoutControl1.Controls.Add(Me.txtCatatan)
         Me.LayoutControl1.Controls.Add(Me.txtTotal)
         Me.LayoutControl1.Controls.Add(Me.txtPPN)
@@ -155,7 +168,7 @@ Partial Class frmEntriJual
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 51)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(401, 265, 250, 350)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(920, 298, 250, 350)
         Me.LayoutControl1.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignMode.AlignInGroups
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
         Me.LayoutControl1.Size = New System.Drawing.Size(907, 503)
@@ -237,6 +250,27 @@ Partial Class frmEntriJual
         Me.gvTypePajak.Name = "gvTypePajak"
         Me.gvTypePajak.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.gvTypePajak.OptionsView.ShowGroupPanel = False
+        '
+        'GridControl2
+        '
+        Me.GridControl2.Location = New System.Drawing.Point(24, 208)
+        Me.GridControl2.MainView = Me.GridView2
+        Me.GridControl2.Name = "GridControl2"
+        Me.GridControl2.Size = New System.Drawing.Size(859, 127)
+        Me.GridControl2.TabIndex = 7
+        Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
+        '
+        'GridView2
+        '
+        Me.GridView2.GridControl = Me.GridControl2
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsBehavior.Editable = False
+        Me.GridView2.OptionsNavigation.EnterMoveNextColumn = True
+        Me.GridView2.OptionsSelection.MultiSelect = True
+        Me.GridView2.OptionsView.ColumnAutoWidth = False
+        Me.GridView2.OptionsView.ShowAutoFilterRow = True
+        Me.GridView2.OptionsView.ShowFooter = True
+        Me.GridView2.OptionsView.ShowGroupPanel = False
         '
         'txtCatatan
         '
@@ -402,10 +436,10 @@ Partial Class frmEntriJual
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(12, 176)
+        Me.GridControl1.Location = New System.Drawing.Point(24, 208)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(883, 171)
+        Me.GridControl1.Size = New System.Drawing.Size(859, 127)
         Me.GridControl1.TabIndex = 6
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -436,7 +470,7 @@ Partial Class frmEntriJual
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutControlItem7, Me.LayoutControlGroup2, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.EmptySpaceItem2, Me.LayoutControlItem13})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutControlGroup2, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.TabbedControlGroup1})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(907, 503)
@@ -451,18 +485,6 @@ Partial Class frmEntriJual
         Me.EmptySpaceItem1.Size = New System.Drawing.Size(233, 164)
         Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'LayoutControlItem7
-        '
-        Me.LayoutControlItem7.Control = Me.GridControl1
-        Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 164)
-        Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(887, 175)
-        Me.LayoutControlItem7.Text = "LayoutControlItem7"
-        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem7.TextToControlDistance = 0
-        Me.LayoutControlItem7.TextVisible = False
         '
         'LayoutControlGroup2
         '
@@ -665,6 +687,59 @@ Partial Class frmEntriJual
         Me.LayoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(39, 13)
         '
+        'TabbedControlGroup1
+        '
+        Me.TabbedControlGroup1.CustomizationFormText = "TabbedControlGroup1"
+        Me.TabbedControlGroup1.Location = New System.Drawing.Point(0, 164)
+        Me.TabbedControlGroup1.Name = "TabbedControlGroup1"
+        Me.TabbedControlGroup1.SelectedTabPage = Me.LayoutControlGroup5
+        Me.TabbedControlGroup1.SelectedTabPageIndex = 0
+        Me.TabbedControlGroup1.Size = New System.Drawing.Size(887, 175)
+        Me.TabbedControlGroup1.TabPages.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup5, Me.LayoutControlGroup6})
+        Me.TabbedControlGroup1.Text = "TabbedControlGroup1"
+        '
+        'LayoutControlGroup5
+        '
+        Me.LayoutControlGroup5.CustomizationFormText = "Barang"
+        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem7})
+        Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlGroup5.Name = "LayoutControlGroup5"
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(863, 131)
+        Me.LayoutControlGroup5.Text = "Barang"
+        '
+        'LayoutControlItem7
+        '
+        Me.LayoutControlItem7.Control = Me.GridControl1
+        Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem7.Name = "LayoutControlItem7"
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(863, 131)
+        Me.LayoutControlItem7.Text = "Grid Barang"
+        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem7.TextToControlDistance = 0
+        Me.LayoutControlItem7.TextVisible = False
+        '
+        'LayoutControlGroup6
+        '
+        Me.LayoutControlGroup6.CustomizationFormText = "Pembayaran"
+        Me.LayoutControlGroup6.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem18})
+        Me.LayoutControlGroup6.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlGroup6.Name = "LayoutControlGroup6"
+        Me.LayoutControlGroup6.Size = New System.Drawing.Size(863, 131)
+        Me.LayoutControlGroup6.Text = "Pembayaran"
+        '
+        'LayoutControlItem18
+        '
+        Me.LayoutControlItem18.Control = Me.GridControl2
+        Me.LayoutControlItem18.CustomizationFormText = "Grid Pembayaran"
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem18.Name = "LayoutControlItem18"
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(863, 131)
+        Me.LayoutControlItem18.Text = "Grid Pembayaran"
+        Me.LayoutControlItem18.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem18.TextToControlDistance = 0
+        Me.LayoutControlItem18.TextVisible = False
+        '
         'BarManager1
         '
         Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar1, Me.Bar2})
@@ -812,6 +887,8 @@ Partial Class frmEntriJual
         CType(Me.gvGudang, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtTypePajak.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvTypePajak, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtCatatan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtPPN.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -831,7 +908,6 @@ Partial Class frmEntriJual
         CType(Me.txtAlamatCustomer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
@@ -852,6 +928,11 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TabbedControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -862,7 +943,6 @@ Partial Class frmEntriJual
     Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents txtKode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlGroup2 As DevExpress.XtraLayout.LayoutControlGroup
     Friend WithEvents LayoutControlItem8 As DevExpress.XtraLayout.LayoutControlItem
@@ -918,4 +998,11 @@ Partial Class frmEntriJual
     Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem17 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents GridControl2 As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents TabbedControlGroup1 As DevExpress.XtraLayout.TabbedControlGroup
+    Friend WithEvents LayoutControlGroup5 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlGroup6 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents LayoutControlItem18 As DevExpress.XtraLayout.LayoutControlItem
 End Class

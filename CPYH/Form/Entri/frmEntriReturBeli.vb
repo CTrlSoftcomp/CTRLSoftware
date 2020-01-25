@@ -275,16 +275,35 @@ Public Class frmEntriReturBeli
                                     com.Parameters.Clear()
 
                                     com.CommandText = "UPDATE MReturBeli SET Subtotal=ISNULL(MReturBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MReturBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                                      "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                      "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                      "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
                                                       "FROM MReturBeli " & vbCrLf & _
                                                       "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
                                                       "WHERE MReturBeli.NoID=" & NoID
                                     com.ExecuteNonQuery()
 
+                                    com.CommandText = "UPDATE MReturBeli SET " & vbCrLf & _
+                                                      "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                                      "FROM MReturBeli " & vbCrLf & _
+                                                      "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(DPP) AS DPP, SUM(PPN) AS PPN FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                      "WHERE MReturBeliD.IDHeader=" & NoID
+                                    com.ExecuteNonQuery()
+
                                     com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
-                                                      "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                      "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                      "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                                      "FROM MReturBeli " & vbCrLf & _
+                                                      "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                      "WHERE MReturBeliD.IDHeader=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                                      "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                                      "FROM MReturBeli " & vbCrLf & _
+                                                      "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                                      "WHERE MReturBeli.NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                                      "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
                                                       "FROM MReturBeli " & vbCrLf & _
                                                       "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
                                                       "WHERE MReturBeliD.IDHeader=" & NoID
@@ -357,16 +376,35 @@ Public Class frmEntriReturBeli
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MReturBeli SET Subtotal=ISNULL(MReturBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MReturBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                                  "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                                  "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
-                                                  "FROM MReturBeli " & vbCrLf & _
-                                                  "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
-                                                  "WHERE MReturBeli.NoID=" & NoID
+                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeli.NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MReturBeli SET " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(DPP) AS DPP, SUM(PPN) AS PPN FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeliD.IDHeader=" & NoID
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeli.NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
                                               "FROM MReturBeli " & vbCrLf & _
                                               "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
                                               "WHERE MReturBeliD.IDHeader=" & NoID
@@ -437,16 +475,35 @@ Public Class frmEntriReturBeli
                             com.ExecuteNonQuery()
 
                             com.CommandText = "UPDATE MReturBeli SET Subtotal=ISNULL(MReturBeliD.JumlahBruto, 0), TotalBruto=ISNULL(MReturBeliD.JumlahBruto, 0), " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
                                               "FROM MReturBeli " & vbCrLf & _
                                               "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
                                               "WHERE MReturBeli.NoID=" & NoID
                             com.ExecuteNonQuery()
 
+                            com.CommandText = "UPDATE MReturBeli SET " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(DPP) AS DPP, SUM(PPN) AS PPN FROM MReturBeliD GROUP BY IDHeader) AS MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
                             com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
-                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 ELSE 0.1 END)*ISNULL(MReturBeliD.JumlahBruto, 0), 0), " & vbCrLf & _
-                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeliD.IDHeader=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                              "DPP=ROUND(CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=2 THEN ISNULL(MReturBeliD.JumlahBruto, 0)/1.0 ELSE ISNULL(MReturBeliD.JumlahBruto, 0)/1.1 END, 0) " & vbCrLf & _
+                                              "FROM MReturBeli " & vbCrLf & _
+                                              "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
+                                              "WHERE MReturBeli.NoID=" & NoID
+                            com.ExecuteNonQuery()
+
+                            com.CommandText = "UPDATE MReturBeliD SET " & vbCrLf & _
+                                              "PPN=ROUND((CASE WHEN MReturBeli.IDTypePajak=0 THEN 0 WHEN MReturBeli.IDTypePajak=1 THEN ISNULL(MReturBeliD.JumlahBruto, 0)-ISNULL(MReturBeliD.DPP, 0) ELSE 0.1*ISNULL(MReturBeliD.JumlahBruto, 0) END), 0) " & vbCrLf & _
                                               "FROM MReturBeli " & vbCrLf & _
                                               "INNER JOIN MReturBeliD ON MReturBeliD.IDHeader=MReturBeli.NoID " & vbCrLf & _
                                               "WHERE MReturBeliD.IDHeader=" & NoID

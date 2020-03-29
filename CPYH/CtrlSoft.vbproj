@@ -228,6 +228,18 @@
     <Compile Include="Form\Application\frmSettingPerusahaan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriInternalD.Designer.vb">
+      <DependentUpon>frmEntriInternalD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriInternalD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriInternal.Designer.vb">
+      <DependentUpon>frmEntriInternal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriInternal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriReturJualDBayar.Designer.vb">
       <DependentUpon>frmEntriReturJualDBayar.vb</DependentUpon>
     </Compile>
@@ -378,6 +390,12 @@
     <Compile Include="Form\Laporan\frmLaporanKartuStok.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Laporan\frmLaporanSaldoStok.Designer.vb">
+      <DependentUpon>frmLaporanSaldoStok.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Laporan\frmLaporanSaldoStok.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\Dataset.vb" />
     <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
@@ -432,6 +450,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingPerusahaan.resx">
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriInternalD.resx">
+      <DependentUpon>frmEntriInternalD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriInternal.resx">
+      <DependentUpon>frmEntriInternal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriReturJualDBayar.resx">
       <DependentUpon>frmEntriReturJualDBayar.vb</DependentUpon>
@@ -507,6 +531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Laporan\frmLaporanKartuStok.resx">
       <DependentUpon>frmLaporanKartuStok.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Laporan\frmLaporanSaldoStok.resx">
+      <DependentUpon>frmLaporanSaldoStok.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

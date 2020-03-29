@@ -233,6 +233,19 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnSaldoStok"
+                Dim x As frmLaporanSaldoStok = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmLaporanKartuStok Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmLaporanSaldoStok(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnKartuStok"
                 Dim x As frmLaporanKartuStok = Nothing
                 For Each frm In Me.MdiChildren
@@ -286,6 +299,51 @@ Public Class frmMain
                 Next
                 If x Is Nothing Then
                     x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPenjualan, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnMutasiGudang"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarMutasiGudang.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarMutasiGudang, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnPenyesuaianMasuk"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPenyesuaian.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenyesuaian, _
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnPenyesuaianKeluar"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPemakaian.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPemakaian, _
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If

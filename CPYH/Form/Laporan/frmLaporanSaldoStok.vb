@@ -24,11 +24,11 @@ Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraGrid.Views.Grid.ViewInfo
 
-Public Class frmDaftarBarang
+Public Class frmLaporanSaldoStok
     Private formName As String
     Private ds As New DataSet
 
-    Private SQL As String
+    Private SQL As String, TglSampai As Date
 
     Dim repckedit As New RepositoryItemCheckEdit
     Dim repdateedit As New RepositoryItemDateEdit
@@ -46,6 +46,7 @@ Public Class frmDaftarBarang
 
     Public Sub RefreshData(ByVal NoID As Long)
         Dim NamaFieldGudang As String = "", TotalFieldGudang As String = ""
+        Dim NamaNilaiGudang As String = "", TotalNilaiGudang As String = ""
         Using dsGudang As New DataSet
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
                 Using cn As New SqlConnection(StrKonSQL)
@@ -63,9 +64,15 @@ Public Class frmDaftarBarang
                                     oDA.Fill(dsGudang, "MGudang")
 
                                     NamaFieldGudang = ""
+                                    TotalFieldGudang = ""
+                                    NamaNilaiGudang = ""
+                                    TotalNilaiGudang = ""
                                     For Each iRow As DataRow In dsGudang.Tables("MGudang").Rows
                                         NamaFieldGudang &= IIf(NamaFieldGudang = "", "", ", ") & "[" & iRow.Item("Kode") & "]"
                                         TotalFieldGudang &= IIf(TotalFieldGudang = "", "", "+") & "ISNULL([" & iRow.Item("Kode") & "], 0.0)"
+
+                                        NamaNilaiGudang &= IIf(NamaNilaiGudang = "", "", ", ") & "[Nilai " & iRow.Item("Kode") & "]"
+                                        TotalNilaiGudang &= IIf(TotalNilaiGudang = "", "", "+") & "ISNULL([Nilai " & iRow.Item("Kode") & "], 0.0)"
                                     Next
 
                                     SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
@@ -73,6 +80,7 @@ Public Class frmDaftarBarang
                                             "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
                                             "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
                                             "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", " & NamaFieldGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalFieldGudang = "", "", ", " & TotalFieldGudang.Replace("[", "TSaldoStok.[") & " AS TotalQty") & " " & vbCrLf & _
+                                            IIf(NamaNilaiGudang = "", "", ", " & NamaNilaiGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalNilaiGudang = "", "", ", " & TotalNilaiGudang.Replace("[", "TSaldoStok.[") & " AS NilaiPersediaan") & " " & vbCrLf & _
                                             "FROM MBarang (NOLOCK)" & vbCrLf & _
                                             "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
                                             "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
@@ -84,9 +92,11 @@ Public Class frmDaftarBarang
                                             "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
                                             IIf(NamaFieldGudang = "" AndAlso TotalFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
                                             "SELECT * FROM (" & vbCrLf & _
-                                            "SELECT A.IDBarang, B.Kode, A.SaldoAkhir" & vbCrLf & _
-                                            "FROM TSaldoStok (NOLOCK) A" & vbCrLf & _
-                                            "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
+                                            "SELECT A.IDBarang, B.Kode, 'Nilai ' + B.Kode AS Nilai, SUM(A.Konversi*(A.QtyMasuk-A.QtyKeluar)) AS SaldoAkhir, SUM(A.Debet-A.Kredit) AS NilaiAkhir" & vbCrLf & _
+                                            "FROM MKartuStok (NOLOCK) A" & vbCrLf & _
+                                            "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang" & vbCrLf & _
+                                            "WHERE CONVERT(DATE, A.Tanggal)<='" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "'" & vbCrLf & _
+                                            "GROUP BY A.IDBarang, B.Kode) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT PIVOT (SUM(NilaiAkhir) FOR Nilai IN (" & NamaNilaiGudang & ")) AS PVT2) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
                                             "WHERE 1=1 "
                                     If Not ckTdkAktif.Checked Then
                                         SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"
@@ -114,69 +124,11 @@ Public Class frmDaftarBarang
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
         Dim NamaFile As String = ""
-        NamaFile = Application.StartupPath & "\Report\Lap_MBarangAll.repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Barang", "Lap_MBarangAll.repx", Me.ds)
+        NamaFile = Application.StartupPath & "\Report\Laporan_SaldoStok.repx"
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Saldo Stok", "Laporan_SaldoStok.repx", Me.ds)
     End Sub
 
-    Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
-        gridview = GridView1
-        If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-            End If
-        End If
-    End Sub
-
-    Private Sub HapusData(ByVal NoID As Long)
-        Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
-            Using cn As New SqlConnection(StrKonSQL)
-                Using com As New SqlCommand
-                    Using oDA As New SqlDataAdapter
-                        Using ds As New DataSet
-                            Try
-                                dlg.Show()
-                                dlg.Focus()
-                                cn.Open()
-                                com.Connection = cn
-                                com.Transaction = cn.BeginTransaction
-                                oDA.SelectCommand = com
-
-                                com.CommandText = "UPDATE MBarang SET IsActive=0 WHERE NoID=" & NoID
-                                com.ExecuteNonQuery()
-
-                                If com.Transaction IsNot Nothing Then
-                                    com.Transaction.Commit()
-                                    com.Transaction = Nothing
-                                    cmdRefresh.PerformClick()
-                                End If
-                            Catch ex As Exception
-                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            End Try
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End Using
-    End Sub
-
-    Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Using frm As New frmEntriBarang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                RefreshData(frm.NoID)
-            End If
-        End Using
-    End Sub
-
-    Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Using frm As New frmEntriBarang(-1)
-            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                RefreshData(frm.NoID)
-            End If
-        End Using
-    End Sub
-
-    Public Sub New(ByVal formName As String, ByVal caption As String)
+    Public Sub New(ByVal formName As String, ByVal caption As String, ByVal TglSampai As Date)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -187,6 +139,7 @@ Public Class frmDaftarBarang
         Me.SQL = SQL
         Me.Tag = Me.formName
         Me.Name = Me.formName
+        Me.TglSampai = TglSampai
     End Sub
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
@@ -234,9 +187,8 @@ Public Class frmDaftarBarang
 
     Private Sub frmDaftarMaster_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            cmdBaru.ImageList = frmMain.ICButtons
-            cmdEdit.ImageList = frmMain.ICButtons
-            cmdHapus.ImageList = frmMain.ICButtons
+            DateEdit1.DateTime = TglSampai
+
             cmdCetak.ImageList = frmMain.ICButtons
             cmdRefresh.ImageList = frmMain.ICButtons
             cmdTutup.ImageList = frmMain.ICButtons
@@ -299,7 +251,7 @@ Public Class frmDaftarBarang
     End Sub
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
-        cmdEdit.PerformClick()
+
     End Sub
 
     Private Sub mnHitungUlangSaldo_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHitungUlangSaldo.ItemClick

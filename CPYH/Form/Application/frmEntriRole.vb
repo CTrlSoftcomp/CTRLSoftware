@@ -117,7 +117,6 @@ Public Class frmEntriRole
                                 dlg.Focus()
                                 cn.Open()
                                 com.Connection = cn
-                                com.Transaction = cn.BeginTransaction
                                 oDA.SelectCommand = com
 
                                 com.CommandText = "SELECT * FROM MRole WHERE NoID=" & NoID
@@ -142,7 +141,8 @@ Public Class frmEntriRole
                                                       "FROM MRoleD" & vbCrLf & _
                                                       "INNER JOIN MMenu ON MMenu.NoID=MRoleD.IDMenu" & vbCrLf & _
                                                       "LEFT JOIN MMenu MParent ON MParent.NoID=MMenu.IDParent" & vbCrLf & _
-                                                      "WHERE MRoleD.IDRole=" & NoID
+                                                      "WHERE MRoleD.IDRole=" & NoID & vbCrLf & _
+                                                      "ORDER BY MMenu.NoID, MParent.Caption"
                                 Else
                                     pStatus = pStatusForm.Baru
                                     Me.NoID = -1
@@ -152,12 +152,11 @@ Public Class frmEntriRole
                                     com.CommandText = "SELECT MMenu.NoID, MParent.Caption GroupMenu, MMenu.Caption, MMenu.NoUrut, CONVERT(BIT, 0) Aktif" & vbCrLf & _
                                                       "FROM MMenu" & vbCrLf & _
                                                       "LEFT JOIN MMenu MParent ON MParent.NoID=MMenu.IDParent" & vbCrLf & _
-                                                      "WHERE MMenu.IsActive=1"
+                                                      "WHERE MMenu.IsActive=1" & vbCrLf & _
+                                                      "ORDER BY MMenu.NoID, MParent.Caption"
                                 End If
                                 oDA.Fill(ds, "MMenu")
                                 BindingSource1.DataSource = ds.Tables("MMenu")
-
-                                com.Transaction.Commit()
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End Try

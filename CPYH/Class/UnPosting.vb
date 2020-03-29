@@ -229,5 +229,116 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function UnPostingMutasiGudang(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MMutasiGudangD.*, MMutasiGudang.Total, MMutasiGudang.Tanggal, MMutasiGudang.Kode AS KdTransaksi" & vbCrLf & _
+                                                  "FROM MMutasiGudangD" & vbCrLf & _
+                                                  "INNER JOIN MMutasiGudang ON MMutasiGudang.NoID=MMutasiGudangD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MMutasiGudang.IsPosted,0)=1 AND MMutasiGudang.NoID=" & NoID
+                                oDA.Fill(ds, "MMutasiGudang")
+                                If ds.Tables("MMutasiGudang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MMutasiGudang SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi IN (4, 5) AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
+        Public Shared Function UnPostingPemakaian(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MPemakaianD.*, MPemakaian.Total, MPemakaian.Tanggal, MPemakaian.Kode AS KdTransaksi" & vbCrLf & _
+                                                  "FROM MPemakaianD" & vbCrLf & _
+                                                  "INNER JOIN MPemakaian ON MPemakaian.NoID=MPemakaianD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MPemakaian.IsPosted,0)=1 AND MPemakaian.NoID=" & NoID
+                                oDA.Fill(ds, "MPemakaian")
+                                If ds.Tables("MPemakaian").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MPemakaian SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 8 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
+        Public Shared Function UnPostingPenyesuaian(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MPenyesuaianD.*, MPenyesuaian.Total, MPenyesuaian.Tanggal, MPenyesuaian.Kode AS KdTransaksi" & vbCrLf & _
+                                                  "FROM MPenyesuaianD" & vbCrLf & _
+                                                  "INNER JOIN MPenyesuaian ON MPenyesuaian.NoID=MPenyesuaianD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MPenyesuaian.IsPosted,0)=1 AND MPenyesuaian.NoID=" & NoID
+                                oDA.Fill(ds, "MPenyesuaian")
+                                If ds.Tables("MPenyesuaian").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MPenyesuaian SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 14 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

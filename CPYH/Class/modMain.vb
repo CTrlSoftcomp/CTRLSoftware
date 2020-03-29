@@ -57,5 +57,14 @@ Public Class modMain
         DaftarReturPembelian = 2
         DaftarPenjualan = 3
         DaftarReturPenjualan = 4
+        DaftarMutasiGudang = 5
+        DaftarPenyesuaian = 6
+        DaftarPemakaian = 7
+    End Enum
+
+    Public Enum FormInternal
+        MutasiGudang = 0
+        Penyesuaian = 1
+        Pemakaian = 2
     End Enum
 End Class

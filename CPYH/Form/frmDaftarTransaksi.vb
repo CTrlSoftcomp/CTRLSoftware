@@ -84,6 +84,21 @@ Public Class frmDaftarTransaksi
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
                                         com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarMutasiGudang
+                                        SQL = "spDaftarMutasiGudang @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarPemakaian
+                                        SQL = "spDaftarPemakaian @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarPenyesuaian
+                                        SQL = "spDaftarPenyesuaian @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
                                 End Select
 
                                 com.CommandText = SQL
@@ -167,6 +182,36 @@ Public Class frmDaftarTransaksi
                                     NamaFile = "Faktur_MReturJual.repx"
                                     Judul = "Faktur Retur Penjualan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarMutasiGudang
+                                    Repository.PostingData.PostingMutasiGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMMutasiGudang @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MMutasiGudang.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPemakaian
+                                    Repository.PostingData.PostingPemakaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPemakaian @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPemakaian.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPenyesuaian
+                                    Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPenyesuaian @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPenyesuaian.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -196,6 +241,18 @@ Public Class frmDaftarTransaksi
                     End If
                 Case modMain.FormName.DaftarPenjualan
                     If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarMutasiGudang
+                    If XtraMessageBox.Show("Ingin menghapus data mutasi gudang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPemakaian
+                    If XtraMessageBox.Show("Ingin menghapus data pemakaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPenyesuaian
+                    If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
             End Select
@@ -256,6 +313,27 @@ Public Class frmDaftarTransaksi
 
                                         com.CommandText = "DELETE FROM MReturJual WHERE ISNULL(MReturJual.IsPosted, 0)=0 AND MReturJual.NoID=" & NoID
                                         com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarMutasiGudang
+                                        com.CommandText = "DELETE MMutasiGudangD FROM MMutasiGudangD INNER JOIN MMutasiGudang ON MMutasiGudang.NoID=MMutasiGudangD.IDHeader WHERE ISNULL(MMutasiGudang.IsPosted, 0)=0 AND MMutasiGudang.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MMutasiGudang WHERE ISNULL(MMutasiGudang.IsPosted, 0)=0 AND MMutasiGudang.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarPemakaian
+                                        com.CommandText = "DELETE MPemakaianD FROM MPemakaianD INNER JOIN MPemakaian ON MPemakaian.NoID=MPemakaianD.IDHeader WHERE ISNULL(MPemakaian.IsPosted, 0)=0 AND MPemakaian.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MPemakaian WHERE ISNULL(MPemakaian.IsPosted, 0)=0 AND MPemakaian.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarPenyesuaian
+                                        com.CommandText = "DELETE MPenyesuaianD FROM MPenyesuaianD INNER JOIN MPenyesuaian ON MPenyesuaian.NoID=MPenyesuaianD.IDHeader WHERE ISNULL(MPenyesuaian.IsPosted, 0)=0 AND MPenyesuaian.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MPenyesuaian WHERE ISNULL(MPenyesuaian.IsPosted, 0)=0 AND MPenyesuaian.NoID=" & NoID
+                                        com.ExecuteNonQuery()
                                 End Select
 
                                 If com.Transaction IsNot Nothing Then
@@ -300,6 +378,21 @@ Public Class frmDaftarTransaksi
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
+            Case modMain.FormName.DaftarMutasiGudang
+                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPemakaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenyesuaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
         End Select
     End Sub
 
@@ -327,6 +420,21 @@ Public Class frmDaftarTransaksi
                 x.Focus()
             Case modMain.FormName.DaftarReturPenjualan
                 Dim x As New frmEntriReturJual(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarMutasiGudang
+                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, -1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPemakaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, -1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenyesuaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, -1)
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
@@ -474,6 +582,21 @@ Public Class frmDaftarTransaksi
                             If Not Repository.PostingData.PostingReturJual(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarMutasiGudang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingMutasiGudang(NoID) Then
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarPemakaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingPemakaian(NoID) Then
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarPenyesuaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingPenyesuaian(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -523,6 +646,21 @@ Public Class frmDaftarTransaksi
                             If Not Repository.UnPostingData.UnPostingReturJual(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarMutasiGudang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingMutasiGudang(NoID) Then
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarPemakaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingPemakaian(NoID) Then
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarPenyesuaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingPenyesuaian(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -568,6 +706,24 @@ Public Class frmDaftarTransaksi
                         Case modMain.FormName.DaftarReturPenjualan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             frmHasilPosting = New frmHasilPosting(NoID, 7)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarMutasiGudang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 4)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarPemakaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 8)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarPenyesuaian
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 14)
                             frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
                             frmHasilPosting.Show()
                             frmHasilPosting.Focus()

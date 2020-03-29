@@ -394,5 +394,162 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function PostingMutasiGudang(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MMutasiGudangD.*, MMutasiGudang.Total" & vbCrLf & _
+                                                  "FROM MMutasiGudangD" & vbCrLf & _
+                                                  "INNER JOIN MMutasiGudang ON MMutasiGudang.NoID=MMutasiGudangD.IDHeader" & vbCrLf & _
+                                                  "INNER JOIN MGudang MGudangAsal ON MGudangAsal.NoID=MMutasiGudang.IDGudangAsal" & vbCrLf & _
+                                                  "INNER JOIN MGudang MGudangTujuan ON MGudangTujuan.NoID=MMutasiGudang.IDGudangTujuan" & vbCrLf & _
+                                                  "WHERE ISNULL(MMutasiGudang.IsPosted,0)=0 AND MMutasiGudang.NoID=" & NoID
+                                oDA.Fill(ds, "MMutasiGudang")
+                                If ds.Tables("MMutasiGudang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MMutasiGudang SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi IN (4,5) AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MMutasiGudang.[Tanggal],MMutasiGudangD.[IDBarang],MMutasiGudangD.[IDBarangD],''[Varian],4 [IDJenisTransaksi],MMutasiGudang.NoID [IDTransaksi],MMutasiGudangD.NoID [IDTransaksiD],MMutasiGudang.IDGudangAsal [IDGudang]" & vbCrLf & _
+                                                      ",MMutasiGudangD.IDSatuan [IDSatuan],MMutasiGudangD.Konversi [Konversi],0 [QtyMasuk],MMutasiGudangD.Qty [QtyKeluar],0 [Debet],0 [Kredit],0 [HargaBeli],MMutasiGudangD.HPP [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MMutasiGudangD" & vbCrLf & _
+                                                      "INNER JOIN MMutasiGudang ON MMutasiGudang.NoID=MMutasiGudangD.IDHeader" & vbCrLf & _
+                                                      "WHERE MMutasiGudang.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MMutasiGudang.[Tanggal],MMutasiGudangD.[IDBarang],MMutasiGudangD.[IDBarangD],''[Varian],5 [IDJenisTransaksi],MMutasiGudang.NoID [IDTransaksi],MMutasiGudangD.NoID [IDTransaksiD],MMutasiGudang.IDGudangTujuan [IDGudang]" & vbCrLf & _
+                                                      ",MMutasiGudangD.IDSatuan [IDSatuan],MMutasiGudangD.Konversi [Konversi],MMutasiGudangD.Qty [QtyMasuk],0 [QtyKeluar],0 [Debet],0 [Kredit],0 [HargaBeli],MMutasiGudangD.HPP [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MMutasiGudangD" & vbCrLf & _
+                                                      "INNER JOIN MMutasiGudang ON MMutasiGudang.NoID=MMutasiGudangD.IDHeader" & vbCrLf & _
+                                                      "WHERE MMutasiGudang.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
+        Public Shared Function PostingPemakaian(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MPemakaianD.*, MPemakaian.Total" & vbCrLf & _
+                                                  "FROM MPemakaianD" & vbCrLf & _
+                                                  "INNER JOIN MPemakaian ON MPemakaian.NoID=MPemakaianD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MPemakaian.IsPosted,0)=0 AND MPemakaian.NoID=" & NoID
+                                oDA.Fill(ds, "MPemakaian")
+                                If ds.Tables("MPemakaian").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MPemakaian SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 8 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MPemakaian.[Tanggal],MPemakaianD.[IDBarang],MPemakaianD.[IDBarangD],''[Varian],8 [IDJenisTransaksi],MPemakaian.NoID [IDTransaksi],MPemakaianD.NoID [IDTransaksiD],MPemakaian.IDGudang [IDGudang]" & vbCrLf & _
+                                                      ",MPemakaianD.IDSatuan [IDSatuan],MPemakaianD.Konversi [Konversi],0 [QtyMasuk],MPemakaianD.Qty [QtyKeluar],0 [Debet],0 [Kredit],0 [HargaBeli],MPemakaianD.HPP [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MPemakaianD" & vbCrLf & _
+                                                      "INNER JOIN MPemakaian ON MPemakaian.NoID=MPemakaianD.IDHeader" & vbCrLf & _
+                                                      "WHERE MPemakaian.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
+        Public Shared Function PostingPenyesuaian(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MPenyesuaianD.*, MPenyesuaian.Total" & vbCrLf & _
+                                                  "FROM MPenyesuaianD" & vbCrLf & _
+                                                  "INNER JOIN MPenyesuaian ON MPenyesuaian.NoID=MPenyesuaianD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MPenyesuaian.IsPosted,0)=0 AND MPenyesuaian.NoID=" & NoID
+                                oDA.Fill(ds, "MPenyesuaian")
+                                If ds.Tables("MPenyesuaian").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MPenyesuaian SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 14 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MPenyesuaian.[Tanggal],MPenyesuaianD.[IDBarang],MPenyesuaianD.[IDBarangD],''[Varian],14 [IDJenisTransaksi],MPenyesuaian.NoID [IDTransaksi],MPenyesuaianD.NoID [IDTransaksiD],MPenyesuaian.IDGudang [IDGudang]" & vbCrLf & _
+                                                      ",MPenyesuaianD.IDSatuan [IDSatuan],MPenyesuaianD.Konversi [Konversi],MPenyesuaianD.Qty [QtyMasuk],0 [QtyKeluar],MPenyesuaianD.Jumlah [Debet],0 [Kredit],0 [HargaBeli],MPenyesuaianD.HPP [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MPenyesuaianD" & vbCrLf & _
+                                                      "INNER JOIN MPenyesuaian ON MPenyesuaian.NoID=MPenyesuaianD.IDHeader" & vbCrLf & _
+                                                      "WHERE MPenyesuaian.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

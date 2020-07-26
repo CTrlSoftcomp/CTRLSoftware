@@ -76,11 +76,12 @@ Namespace Repository
 
                                     oDA.Fill(ds, "MUser")
                                     For Each iRow As DataRow In ds.Tables("MUser").Rows
-                                        User = New Model.User With {.NoID = NullToLong(iRow.Item("NoID")), _
-                                                                     .Nama = NullToStr(iRow.Item("Nama")), _
-                                                                     .Kode = NullToStr(iRow.Item("Kode")), _
-                                                                     .Role = NullToStr(iRow.Item("Role")), _
-                                                                     .Supervisor = NullToBool(iRow.Item("IsSupervisor"))}
+                                        User = New Model.User With {.TanggalSystem = Now(), _
+                                                                    .NoID = NullToLong(iRow.Item("NoID")), _
+                                                                    .Nama = NullToStr(iRow.Item("Nama")), _
+                                                                    .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                    .Role = NullToStr(iRow.Item("Role")), _
+                                                                    .Supervisor = NullToBool(iRow.Item("IsSupervisor"))}
                                         com.CommandText = "SELECT dbo.MMenu.NoID, dbo.MMenu.IDParent, dbo.MMenu.NoUrut, dbo.MMenu.Name, dbo.MMenu.Caption, dbo.MMenu.IsBig, dbo.MMenu.IsBeginGroup, CONVERT(BIT, CASE WHEN dbo.MMenu.IsActive=1 AND dbo.MRoleD.IsActive=1 THEN 1 ELSE 0 END) IsActive" & vbCrLf & _
                                                           " FROM dbo.MUser " & vbCrLf & _
                                                           " INNER JOIN dbo.MRoleD ON dbo.MUser.IDRole = dbo.MRoleD.IDRole " & vbCrLf & _
@@ -241,12 +242,15 @@ Namespace Repository
                                     Hasil = com.ExecuteScalar()
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil = Now()
                                 End Try
                             End Using
                         End Using
                     End Using
                 End Using
             End Using
+
+            Return Hasil
         End Function
     End Class
 End Namespace

@@ -236,7 +236,7 @@ Public Class frmMain
             Case "mnSaldoStok"
                 Dim x As frmLaporanSaldoStok = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmLaporanKartuStok Then
+                    If TypeOf frm Is frmLaporanSaldoStok Then
                         x = frm
                     End If
                 Next

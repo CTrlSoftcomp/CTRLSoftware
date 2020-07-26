@@ -80,7 +80,7 @@ Public Class frmDaftar
         Dim NamaFile As String = ""
         If IsEditReport Then
             NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
-            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
+            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
         End If
     End Sub
 

@@ -186,13 +186,16 @@ Public Class frmLaporanKartuStok
     End Sub
 
     Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
-        Dim NamaFile As String = "", Judul As String = "", CalculateFields As String = ""
+        Dim NamaFile As String = "", Judul As String = "", CalculateFields As New List(Of Model.CetakDX.CalculateFields)
         Try
             InitLoadData()
             NamaFile = "Laporan_Kartu_Stok.repx"
             Judul = "Laporan Kartu Stok"
-            CalculateFields = "TglDari=DATETIME=#" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "#|TglSampai=DATETIME=#" & DateEdit2.DateTime.ToString("yyyy-MM-dd") & "#|FilterBarang=STRING='" & FixApostropi(txtBarcode.Text) & "'|FilterGudang=STRING='" & FixApostropi(txtGudang.Text) & "'"
-            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds, , CalculateFields)
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "TglDari", .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, .Value = DateEdit1.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "TglSampai", .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, .Value = DateEdit2.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterBarang", .Type = Model.CetakDX.CalculateFields.iType.String, .Value = txtBarcode.Text})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterGudang", .Type = Model.CetakDX.CalculateFields.iType.String, .Value = txtGudang.Text})
+            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds, , CalculateFields)
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

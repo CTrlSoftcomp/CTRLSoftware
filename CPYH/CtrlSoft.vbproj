@@ -557,6 +557,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="app.config" />
     <None Include="My Project\DataSources\CtrlSoft.Model.Pembayaran.datasource" />
     <None Include="Resources\Background.jpg" />
   </ItemGroup>

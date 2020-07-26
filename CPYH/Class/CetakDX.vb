@@ -17,7 +17,7 @@ Imports DevExpress.XtraReports.Extensions
 Imports CtrlSoft.Utils
 
 Public Class CetakDX
-    Public Enum action_
+    Public Enum ActionPrint
         Edit = 0
         Preview = 1
         Print = 2
@@ -53,12 +53,20 @@ Public Class CetakDX
         End Try
         Return strContents
     End Function
-    Public Shared Function ViewXtraReport(ByVal frmParent As XtraForm, ByVal Action As action_, ByVal sReportName As String, ByVal Judul As String, ByVal RptName As String, ByVal DS As DataSet, Optional ByVal UkuranKertas As String = "", Optional ByVal CalculateFields As String = "", Optional ByVal ParameterField As String = "", Optional ByVal FilterString As String = "") As Boolean
+    Public Shared Function ViewXtraReport(ByVal frmParent As XtraForm, _
+                                          ByVal Action As ActionPrint, _
+                                          ByVal sReportName As String, _
+                                          ByVal Judul As String, _
+                                          ByVal RptName As String, _
+                                          ByVal DS As DataSet, _
+                                          Optional ByVal UkuranKertas As String = "", _
+                                          Optional ByVal CalculateFields As List(Of Model.CetakDX.CalculateFields) = Nothing, _
+                                          Optional ByVal ParameterField As List(Of Model.CetakDX.CalculateFields) = Nothing, _
+                                          Optional ByVal FilterString As String = "") As Boolean
         Dim Hasil As Boolean = False
         Dim XtraReport As DevExpress.XtraReports.UI.XtraReport = Nothing
         Dim dlg As WaitDialogForm = Nothing
         Dim Parameter() As String = Nothing
-        Dim ValueField() As String = Nothing
         ' Create a new Security Permission which denies any File IO operations.
         Dim permission As New ScriptSecurityPermission("System.Security.Permissions.FileIOPermission")
         Try
@@ -80,6 +88,8 @@ Public Class CetakDX
                 If UkuranKertas <> "" Then
                     XtraReport.PaperName = UkuranKertas
                 End If
+
+                'Calculate Fields
                 For i As Integer = 0 To XtraReport.CalculatedFields.Count - 1
                     Select Case XtraReport.CalculatedFields(i).Name.ToUpper
                         Case "NamaPerusahaan".ToUpper
@@ -89,61 +99,60 @@ Public Class CetakDX
                         Case "KotaPerusahaan".ToUpper
                             XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.KotaPerusahaan) & "'"
                         Case Else 'Selain Settingan Default
-                            If CalculateFields <> "" Then
-                                Parameter = CalculateFields.Split("|")
-                                For x As Integer = 0 To Parameter.Length - 1
-                                    ValueField = Parameter(x).Split("=")
-                                    Select Case ValueField(1).ToUpper
-                                        Case "Bit".ToUpper, "Boolean".ToUpper
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = CBool(ValueField(2)).ToString
+                            If CalculateFields IsNot Nothing Then
+                                For Each item As Model.CetakDX.CalculateFields In CalculateFields
+                                    Select Case item.Type
+                                        Case Model.CetakDX.CalculateFields.iType.VariantBit
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = CBool(item.Value).ToString
                                             End If
-                                        Case "Date".ToUpper, "Time".ToUpper, "Datetime".ToUpper
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = CDate(ValueField(2)).ToString("#yyyy-MM-dd#")
+                                        Case Model.CetakDX.CalculateFields.iType.VariantDateTime
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = CDate(item.Value).ToString("#yyyy-MM-dd HH:mm:ss#")
                                             End If
-                                        Case "Int".ToUpper, "Integer".ToUpper, "Single".ToUpper, "Long".ToUpper
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = FixKoma(CLng(ValueField(2)))
+                                        Case Model.CetakDX.CalculateFields.iType.VariantInt
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = FixKoma(CLng(item.Value))
                                             End If
-                                        Case "Double".ToUpper, "Numeric".ToUpper, "Decimal".ToUpper
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = FixKoma(CDbl(ValueField(2)))
+                                        Case Model.CetakDX.CalculateFields.iType.VariantDouble
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = FixKoma(CDbl(item.Value))
                                             End If
-                                        Case "Money".ToUpper, "Currency".ToUpper
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = FixKoma(CDbl(ValueField(2)))
+                                        Case Model.CetakDX.CalculateFields.iType.String
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(NullToStr(item.Value)) & "'"
                                             End If
                                         Case Else
-                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(ValueField(0)).ToUpper Then
-                                                XtraReport.CalculatedFields(i).Expression = NullToStr(ValueField(2))
+                                            If XtraReport.CalculatedFields(i).Name.ToUpper = NullToStr(item.Name).ToUpper Then
+                                                XtraReport.CalculatedFields(i).Expression = NullToStr(item.Value)
                                             End If
                                     End Select
                                 Next
                             End If
                     End Select
                 Next
-                If ParameterField <> "" Then
-                    Parameter = ParameterField.Split("|")
-                    For i As Integer = 0 To Parameter.Length - 1
-                        ValueField = Parameter(i).Split("=")
-                        Select Case ValueField(1).ToUpper
-                            Case "Bit".ToUpper, "Boolean".ToUpper
-                                XtraReport.Parameters(ValueField(0)).Value = CBool(ValueField(2))
-                            Case "Date".ToUpper, "Time".ToUpper, "Datetime".ToUpper
-                                XtraReport.Parameters(ValueField(0)).Value = CDate(ValueField(2))
-                            Case "Int".ToUpper, "Integer".ToUpper, "Single".ToUpper, "Long".ToUpper
-                                XtraReport.Parameters(ValueField(0)).Value = CLng(ValueField(2))
-                            Case "Double".ToUpper, "Numeric".ToUpper, "Decimal".ToUpper
-                                XtraReport.Parameters(ValueField(0)).Value = CDbl(ValueField(2))
-                            Case "Money".ToUpper, "Currency".ToUpper
-                                XtraReport.Parameters(ValueField(0)).Value = CDbl(ValueField(2))
+
+                'Parameter Fields
+                If ParameterField IsNot Nothing Then
+                    For Each item As Model.CetakDX.CalculateFields In ParameterField
+                        Select Case item.Type
+                            Case Model.CetakDX.CalculateFields.iType.VariantBit
+                                XtraReport.Parameters(item.Name).Value = CBool(item.Value).ToString
+                            Case Model.CetakDX.CalculateFields.iType.VariantDateTime
+                                XtraReport.Parameters(item.Name).Value = CDate(item.Value).ToString("#yyyy-MM-dd HH:mm:ss#")
+                            Case Model.CetakDX.CalculateFields.iType.VariantInt
+                                XtraReport.Parameters(item.Name).Value = FixKoma(CLng(item.Value))
+                            Case Model.CetakDX.CalculateFields.iType.VariantDouble
+                                XtraReport.Parameters(item.Name).Value = FixKoma(CDbl(item.Value))
+                            Case Model.CetakDX.CalculateFields.iType.String
+                                XtraReport.Parameters(item.Name).Value = "'" & FixApostropi(NullToStr(item.Value)) & "'"
                             Case Else
-                                XtraReport.Parameters(ValueField(0)).Value = CStr(ValueField(2))
+                                XtraReport.Parameters(item.Name).Value = NullToStr(item.Value)
                         End Select
                     Next
                     XtraReport.RequestParameters = False
                 End If
+
                 XtraReport.ScriptLanguage = ScriptLanguage.VisualBasic
                 permission.Deny = True
                 If FilterString <> "" Then
@@ -162,11 +171,11 @@ Public Class CetakDX
                 XtraReport.DisplayName = RptName
                 'XtraReport.CreateDocument(True)
 
-                If Action = action_.Edit Then
+                If Action = ActionPrint.Edit Then
                     XtraReport.ShowDesignerDialog()
-                ElseIf Action = action_.Preview Then
+                ElseIf Action = ActionPrint.Preview Then
                     XtraReport.ShowPreviewDialog()
-                ElseIf Action = action_.Print Then
+                ElseIf Action = ActionPrint.Print Then
                     XtraReport.PrintDialog()
                 End If
             Else
@@ -194,13 +203,56 @@ Public Class CetakDX
         Finally
             dlg.Close()
             dlg.Dispose()
-            If Not DS Is Nothing AndAlso Action = action_.Print Then
+            If Not DS Is Nothing AndAlso Action = ActionPrint.Print Then
                 DS.Dispose()
             End If
-            If Not XtraReport Is Nothing AndAlso Action = action_.Print Then
+            If Not XtraReport Is Nothing AndAlso Action = ActionPrint.Print Then
                 XtraReport.Dispose()
             End If
         End Try
         Return Hasil
     End Function
 End Class
+
+Namespace Model.CetakDX
+    Public Class CalculateFields
+        Private _Name As String
+        Private _Type As iType
+        Private _Value As Object
+
+        Public Enum iType
+            [String] = 0
+            [VariantInt] = 1
+            [VariantDateTime] = 2
+            [VariantBit] = 3
+            [VariantDouble] = 4
+        End Enum
+
+        Public Property Name() As String
+            Get
+                Return _Name
+            End Get
+            Set(ByVal value As String)
+                _Name = value
+            End Set
+        End Property
+
+        Public Property Type() As iType
+            Get
+                Return _Type
+            End Get
+            Set(ByVal value As iType)
+                _Type = value
+            End Set
+        End Property
+
+        Public Property Value() As Object
+            Get
+                Return _Value
+            End Get
+            Set(ByVal value As Object)
+                _Value = value
+            End Set
+        End Property
+    End Class
+End Namespace

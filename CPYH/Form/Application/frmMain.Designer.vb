@@ -90,6 +90,8 @@ Partial Class frmMain
         Me.barSetting.Caption = "Setting Koneksi"
         Me.barSetting.Id = 14
         Me.barSetting.ImageIndex = 11
+        Me.barSetting.ItemShortcut = New DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+                        Or System.Windows.Forms.Keys.S))
         Me.barSetting.LargeImageIndex = 11
         Me.barSetting.Name = "barSetting"
         '
@@ -98,6 +100,7 @@ Partial Class frmMain
         Me.barLoginOut.Caption = "Login"
         Me.barLoginOut.Id = 13
         Me.barLoginOut.ImageIndex = 12
+        Me.barLoginOut.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L))
         Me.barLoginOut.LargeImageIndex = 12
         Me.barLoginOut.Name = "barLoginOut"
         '
@@ -106,6 +109,7 @@ Partial Class frmMain
         Me.barExit.Caption = "Keluar"
         Me.barExit.Id = 15
         Me.barExit.ImageIndex = 13
+        Me.barExit.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4))
         Me.barExit.LargeImageIndex = 13
         Me.barExit.Name = "barExit"
         '
@@ -162,6 +166,7 @@ Partial Class frmMain
         Me.barEditReport.Caption = "Edit Report"
         Me.barEditReport.Edit = Me.RepositoryItemCheckEdit1
         Me.barEditReport.Id = 18
+        Me.barEditReport.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E))
         Me.barEditReport.Name = "barEditReport"
         '
         'RepositoryItemCheckEdit1

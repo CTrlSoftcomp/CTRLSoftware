@@ -343,6 +343,38 @@ Public Class frmEntriInternal
         Return Hasil
     End Function
 
+    Private Function CekDetil() As Boolean
+        Dim Hasil As Boolean = False
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "SELECT IsPosted FROM M" & NamaForm & "(NOLOCK) WHERE NoID=" & NoID
+                            If NullToBool(com.ExecuteScalar()) Then
+                                XtraMessageBox.Show("Nota telah diposting!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                Exit Try
+                            End If
+
+                            com.CommandText = "SELECT COUNT(NoID) FROM M" & NamaForm & "D(NOLOCK) WHERE IDHeader=" & NoID
+                            Hasil = IIf(NullToLong(com.ExecuteScalar()) >= 1, True, False)
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+
+        Return Hasil
+    End Function
+
     Private Function HapusDetil(ByVal IDDetil As Long) As Boolean
         Dim Hasil As Boolean = False
         Using cn As New SqlConnection(StrKonSQL)
@@ -559,6 +591,10 @@ Public Class frmEntriInternal
         'If txtTotal.EditValue < 0 Then
         '    DxErrorProvider1.SetError(txtTotal, "Total PeM" & NamaForm & "an salah!", DXErrorProvider.ErrorType.Critical)
         'End If
+        If Not CekDetil() Then
+            DxErrorProvider1.SetError(txtKode, "Item masih kosong!", DXErrorProvider.ErrorType.Critical)
+        End If
+
         Return Not DxErrorProvider1.HasErrors
     End Function
 End Class

@@ -114,16 +114,16 @@ Public Class frmDaftarKontak
         Select Case XtraTabControl1.SelectedTabPageIndex
             Case 1
                 NamaFile = Application.StartupPath & "\Report\Lap_MAlamatCustomer.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Customer", "Lap_MAlamatCustomer.repx", Me.ds)
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Customer", "Lap_MAlamatCustomer.repx", Me.ds)
             Case 2
                 NamaFile = Application.StartupPath & "\Report\Lap_MAlamatSupplier.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Supplier", "Lap_MAlamatSupplier.repx", Me.ds)
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Supplier", "Lap_MAlamatSupplier.repx", Me.ds)
             Case 3
                 NamaFile = Application.StartupPath & "\Report\Lap_MAlamatPegawai.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Pegawai", "Lap_MAlamatPegawai.repx", Me.ds)
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Pegawai", "Lap_MAlamatPegawai.repx", Me.ds)
             Case Else
                 NamaFile = Application.StartupPath & "\Report\Lap_MAlamatAll.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master All", "Lap_MAlamatAll.repx", Me.ds)
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master All", "Lap_MAlamatAll.repx", Me.ds)
         End Select
     End Sub
 

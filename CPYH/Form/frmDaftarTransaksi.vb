@@ -141,7 +141,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MPO.repx"
                                     Judul = "Faktur Pesanan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPembelian
                                     Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -151,7 +151,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MBeli.repx"
                                     Judul = "Faktur Pembelian"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarReturPembelian
                                     Repository.PostingData.PostingReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -161,7 +161,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MReturBeli.repx"
                                     Judul = "Faktur Retur Pembelian"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPenjualan
                                     Repository.PostingData.PostingJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -171,7 +171,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MJual.repx"
                                     Judul = "Faktur Penjualan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarReturPenjualan
                                     Repository.PostingData.PostingReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -181,7 +181,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MReturJual.repx"
                                     Judul = "Faktur Retur Penjualan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarMutasiGudang
                                     Repository.PostingData.PostingMutasiGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -191,7 +191,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MMutasiGudang.repx"
                                     Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPemakaian
                                     Repository.PostingData.PostingPemakaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -201,7 +201,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MPemakaian.repx"
                                     Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPenyesuaian
                                     Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
@@ -211,7 +211,7 @@ Public Class frmDaftarTransaksi
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MPenyesuaian.repx"
                                     Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

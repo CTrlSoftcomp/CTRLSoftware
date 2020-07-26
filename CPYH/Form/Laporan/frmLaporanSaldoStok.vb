@@ -125,7 +125,11 @@ Public Class frmLaporanSaldoStok
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
         Dim NamaFile As String = ""
         NamaFile = Application.StartupPath & "\Report\Laporan_SaldoStok.repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Saldo Stok", "Laporan_SaldoStok.repx", Me.ds)
+        Dim CalculateFields As New List(Of Model.CetakDX.CalculateFields)
+        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "TglSampai", _
+                                                                    .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, _
+                                                                    .Value = DateEdit1.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Saldo Stok", "Laporan_SaldoStok.repx", Me.ds, , CalculateFields)
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String, ByVal TglSampai As Date)

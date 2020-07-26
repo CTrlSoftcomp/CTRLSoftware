@@ -606,7 +606,8 @@ Public Class frmEntriReturBeli
     End Sub
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, _
-    gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, _
+    gvSupplier.DataSourceChanged, _
+    gvTypePajak.DataSourceChanged, _
     gvGudang.DataSourceChanged
         With sender
             If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then

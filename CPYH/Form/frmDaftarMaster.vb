@@ -82,7 +82,7 @@ Public Class frmDaftarMaster
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
         Dim NamaFile As String = ""
         NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click

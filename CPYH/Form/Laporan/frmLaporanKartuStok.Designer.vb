@@ -97,6 +97,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.mnPreview.Caption = "&Preview (F8)"
         Me.mnPreview.Id = 8
+        Me.mnPreview.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
         Me.mnPreview.Name = "mnPreview"
         '
         'mnRefresh

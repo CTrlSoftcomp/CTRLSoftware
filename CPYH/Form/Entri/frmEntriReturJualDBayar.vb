@@ -168,61 +168,61 @@ Public Class frmEntriReturJualDBayar
             DxErrorProvider1.SetError(txtTotalBayar, "Retur Penjualan anda salah input!", DXErrorProvider.ErrorType.Critical)
         End If
 
-        'Cek Limit Piutang
-        Using cn As New SqlConnection(StrKonSQL)
-            Using com As New SqlCommand
-                Using oDA As New SqlDataAdapter
-                    Using ds As New DataSet
-                        Try
-                            cn.Open()
-                            com.Connection = cn
-                            com.CommandTimeout = cn.ConnectionTimeout
-                            oDA.SelectCommand = com
+        ''Cek Limit Piutang
+        'Using cn As New SqlConnection(StrKonSQL)
+        '    Using com As New SqlCommand
+        '        Using oDA As New SqlDataAdapter
+        '            Using ds As New DataSet
+        '                Try
+        '                    cn.Open()
+        '                    com.Connection = cn
+        '                    com.CommandTimeout = cn.ConnectionTimeout
+        '                    oDA.SelectCommand = com
 
-                            com.CommandText = "SELECT * FROM MAlamat WHERE NoID=" & IDCustomer
-                            oDA.Fill(ds, "MAlamat")
+        '                    com.CommandText = "SELECT * FROM MAlamat WHERE NoID=" & IDCustomer
+        '                    oDA.Fill(ds, "MAlamat")
 
-                            If ds.Tables("MAlamat").Rows.Count >= 1 Then
-                                com.CommandText = "SELECT A.IDAlamat" & vbCrLf & _
-                                                  ",SUM((A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0)) AS Saldo" & vbCrLf & _
-                                                  ",COUNT(A.NoTransaksi) AS JmlNota" & vbCrLf & _
-                                                  ",DATEDIFF(DAY, MAX(A.Tanggal), GETDATE()) TglTerlamaPiutang" & vbCrLf & _
-                                                  "FROM MHutangPiutang A(NOLOCK)" & vbCrLf & _
-                                                  "LEFT JOIN (" & vbCrLf & _
-                                                  "SELECT ReffNoTransaksi" & vbCrLf & _
-                                                  ",ReffNoUrut" & vbCrLf & _
-                                                  ",SUM(Kredit - Debet) AS Pelunasan" & vbCrLf & _
-                                                  "FROM MHutangPiutang(NOLOCK)" & vbCrLf & _
-                                                  "GROUP BY ReffNoTransaksi" & vbCrLf & _
-                                                  ",ReffNoUrut" & vbCrLf & _
-                                                  ") AS B ON B.ReffNoTransaksi = A.NoTransaksi" & vbCrLf & _
-                                                  "AND B.ReffNoUrut = A.NoUrut" & vbCrLf & _
-                                                  "WHERE ISNULL(A.ReffNoTransaksi, '')='' AND ISNULL(A.ReffNoUrut, 0)<=0 AND (A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0) <> 0.0" & vbCrLf & _
-                                                  "GROUP BY A.IDAlamat" & vbCrLf & _
-                                                  "HAVING A.IDAlamat = " & IDCustomer
-                                oDA.Fill(ds, "MPiutang")
+        '                    If ds.Tables("MAlamat").Rows.Count >= 1 Then
+        '                        com.CommandText = "SELECT A.IDAlamat" & vbCrLf & _
+        '                                          ",SUM((A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0)) AS Saldo" & vbCrLf & _
+        '                                          ",COUNT(A.NoTransaksi) AS JmlNota" & vbCrLf & _
+        '                                          ",DATEDIFF(DAY, MAX(A.Tanggal), GETDATE()) TglTerlamaPiutang" & vbCrLf & _
+        '                                          "FROM MHutangPiutang A(NOLOCK)" & vbCrLf & _
+        '                                          "LEFT JOIN (" & vbCrLf & _
+        '                                          "SELECT ReffNoTransaksi" & vbCrLf & _
+        '                                          ",ReffNoUrut" & vbCrLf & _
+        '                                          ",SUM(Kredit - Debet) AS Pelunasan" & vbCrLf & _
+        '                                          "FROM MHutangPiutang(NOLOCK)" & vbCrLf & _
+        '                                          "GROUP BY ReffNoTransaksi" & vbCrLf & _
+        '                                          ",ReffNoUrut" & vbCrLf & _
+        '                                          ") AS B ON B.ReffNoTransaksi = A.NoTransaksi" & vbCrLf & _
+        '                                          "AND B.ReffNoUrut = A.NoUrut" & vbCrLf & _
+        '                                          "WHERE ISNULL(A.ReffNoTransaksi, '')='' AND ISNULL(A.ReffNoUrut, 0)<=0 AND (A.Debet - A.Kredit) - ISNULL(B.Pelunasan, 0) <> 0.0" & vbCrLf & _
+        '                                          "GROUP BY A.IDAlamat" & vbCrLf & _
+        '                                          "HAVING A.IDAlamat = " & IDCustomer
+        '                        oDA.Fill(ds, "MPiutang")
 
-                                If ds.Tables("MPiutang").Rows.Count >= 1 Then
-                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("Saldo")) - IIf(Sisa <= 0, Sisa * -1, 0) < 0 Then
-                                        DxErrorProvider1.SetError(txtTotalBayar, "Limit Piutang Customer Tidak Mencukupi.", DXErrorProvider.ErrorType.Critical)
-                                    End If
-                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("JmlNota")) - IIf(Sisa <= 0, 1, 0) < 0 Then
-                                        DxErrorProvider1.SetError(txtTotalBayar, "Limit Jml Nota Piutang Customer melebihi batas.", DXErrorProvider.ErrorType.Critical)
-                                    End If
-                                    If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("TglTerlamaPiutang")) < 0 Then
-                                        DxErrorProvider1.SetError(txtTotalBayar, "Customer ini memiliki Piutang yang sudah Jatuh Tempo dan Melebihi Setting Limit Umur Piutang Terlama.", DXErrorProvider.ErrorType.Critical)
-                                    End If
-                                End If
-                            Else
-                                DxErrorProvider1.SetError(txtTotalBayar, "Customer harus diisi.", DXErrorProvider.ErrorType.Warning)
-                            End If
-                        Catch ex As Exception
-                            DxErrorProvider1.SetError(txtTotalBayar, "Error : " & ex.Message, DXErrorProvider.ErrorType.Critical)
-                        End Try
-                    End Using
-                End Using
-            End Using
-        End Using
+        '                        If ds.Tables("MPiutang").Rows.Count >= 1 Then
+        '                            If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("Saldo")) - IIf(Sisa <= 0, Sisa * -1, 0) < 0 Then
+        '                                DxErrorProvider1.SetError(txtTotalBayar, "Limit Piutang Customer Tidak Mencukupi.", DXErrorProvider.ErrorType.Critical)
+        '                            End If
+        '                            If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitNotaPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("JmlNota")) - IIf(Sisa <= 0, 1, 0) < 0 Then
+        '                                DxErrorProvider1.SetError(txtTotalBayar, "Limit Jml Nota Piutang Customer melebihi batas.", DXErrorProvider.ErrorType.Critical)
+        '                            End If
+        '                            If NullToDbl(ds.Tables("MAlamat").Rows(0).Item("LimitUmurPiutang")) - NullToDbl(ds.Tables("MPiutang").Rows(0).Item("TglTerlamaPiutang")) < 0 Then
+        '                                DxErrorProvider1.SetError(txtTotalBayar, "Customer ini memiliki Piutang yang sudah Jatuh Tempo dan Melebihi Setting Limit Umur Piutang Terlama.", DXErrorProvider.ErrorType.Critical)
+        '                            End If
+        '                        End If
+        '                    Else
+        '                        DxErrorProvider1.SetError(txtTotalBayar, "Customer harus diisi.", DXErrorProvider.ErrorType.Warning)
+        '                    End If
+        '                Catch ex As Exception
+        '                    DxErrorProvider1.SetError(txtTotalBayar, "Error : " & ex.Message, DXErrorProvider.ErrorType.Critical)
+        '                End Try
+        '            End Using
+        '        End Using
+        '    End Using
+        'End Using
 
         Return Not DxErrorProvider1.HasErrors
     End Function

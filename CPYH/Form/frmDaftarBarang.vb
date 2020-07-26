@@ -115,7 +115,7 @@ Public Class frmDaftarBarang
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
         Dim NamaFile As String = ""
         NamaFile = Application.StartupPath & "\Report\Lap_MBarangAll.repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, action_.Edit, action_.Preview), NamaFile, "Laporan Master Barang", "Lap_MBarangAll.repx", Me.ds)
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Barang", "Lap_MBarangAll.repx", Me.ds)
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click

@@ -377,14 +377,6 @@ Public Class frmEntriJual
                                                       "WHERE MJualD.IDHeader=" & NoID
                                     com.ExecuteNonQuery()
 
-                                    com.CommandText = "UPDATE MJual SET Subtotal=ISNULL(MJualD.JumlahBruto, 0), TotalBruto=ISNULL(MJualD.JumlahBruto, 0), Total=ISNULL(MJualD.Jumlah, 0), " & vbCrLf & _
-                                                      "Bayar=ISNULL(MJualDBayar.TotalBayar, 0), Sisa=CASE WHEN ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0)<0 THEN 0 ELSE ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0) END" & vbCrLf & _
-                                                      "FROM MJual " & vbCrLf & _
-                                                      "LEFT JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
-                                                      "LEFT JOIN (SELECT IDHeader, SUM(Total) AS TotalBayar, SUM(ChargeRp) AS ChargeRp FROM MJualDBayar GROUP BY IDHeader) AS MJualDBayar ON MJualDBayar.IDHeader=MJual.NoID " & vbCrLf & _
-                                                      "WHERE MJual.NoID=" & NoID
-                                    com.ExecuteNonQuery()
-
                                     com.CommandText = "DELETE FROM MJualDBayar WHERE IDHeader=" & NoID
                                     com.ExecuteNonQuery()
                                     For Each bayar In ListPembayaran
@@ -400,6 +392,14 @@ Public Class frmEntriJual
                                         com.Parameters.Add(New SqlParameter("@Total", SqlDbType.Money)).Value = bayar.Total
                                         com.ExecuteNonQuery()
                                     Next
+
+                                    com.CommandText = "UPDATE MJual SET Subtotal=ISNULL(MJualD.JumlahBruto, 0), TotalBruto=ISNULL(MJualD.JumlahBruto, 0), Total=ISNULL(MJualD.Jumlah, 0), " & vbCrLf & _
+                                                      "Bayar=ISNULL(MJualDBayar.TotalBayar, 0), Sisa=CASE WHEN ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0)<0 THEN 0 ELSE ISNULL(MJualD.Jumlah, 0)+ISNULL(MJualDBayar.ChargeRp, 0)-ISNULL(MJualDBayar.TotalBayar, 0) END" & vbCrLf & _
+                                                      "FROM MJual " & vbCrLf & _
+                                                      "LEFT JOIN (SELECT IDHeader, SUM(JumlahBruto) AS JumlahBruto, SUM(Jumlah) AS Jumlah FROM MJualD GROUP BY IDHeader) AS MJualD ON MJualD.IDHeader=MJual.NoID " & vbCrLf & _
+                                                      "LEFT JOIN (SELECT IDHeader, SUM(Total) AS TotalBayar, SUM(ChargeRp) AS ChargeRp FROM MJualDBayar GROUP BY IDHeader) AS MJualDBayar ON MJualDBayar.IDHeader=MJual.NoID " & vbCrLf & _
+                                                      "WHERE MJual.NoID=" & NoID
+                                    com.ExecuteNonQuery()
 
                                     If com.Transaction IsNot Nothing Then
                                         com.Transaction.Commit()

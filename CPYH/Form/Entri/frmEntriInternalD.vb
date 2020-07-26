@@ -65,7 +65,7 @@ Public Class frmEntriInternalD
             DxErrorProvider1.SetError(txtKonversi, "Konversi salah!")
         End If
         If txtJumlah.EditValue < 0.0 Then
-            DxErrorProvider1.SetError(txtHPP, "Nilai Retur Pembelian salah!")
+            DxErrorProvider1.SetError(txtHPP, "Nilai HPP salah!")
         End If
 
         If Not DxErrorProvider1.HasErrors Then
@@ -268,6 +268,7 @@ Public Class frmEntriInternalD
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvSatuan.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
+                    gvBarcode.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

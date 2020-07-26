@@ -59,6 +59,11 @@ Public Class frmDaftarTransaksi
                                 oDA.SelectCommand = com
 
                                 Select Case formName
+                                    Case modMain.FormName.DaftarStockOpname
+                                        SQL = "spDaftarStockOpname @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
                                     Case modMain.FormName.DaftarPO
                                         SQL = "spDaftarPO @TglDari, @TglSampai"
                                         com.Parameters.Clear()

@@ -21,6 +21,7 @@ Partial Class frmEntriInternalD
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.txtKeterangan = New DevExpress.XtraEditors.TextEdit
         Me.txtQty = New DevExpress.XtraEditors.TextEdit
         Me.txtNamaBarang = New DevExpress.XtraEditors.TextEdit
         Me.txtKodeBarang = New DevExpress.XtraEditors.TextEdit
@@ -46,6 +47,7 @@ Partial Class frmEntriInternalD
         Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem15 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar
@@ -57,6 +59,7 @@ Partial Class frmEntriInternalD
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.txtKeterangan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQty.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNamaBarang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtKodeBarang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,12 +83,14 @@ Partial Class frmEntriInternalD
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.txtKeterangan)
         Me.LayoutControl1.Controls.Add(Me.txtQty)
         Me.LayoutControl1.Controls.Add(Me.txtNamaBarang)
         Me.LayoutControl1.Controls.Add(Me.txtKodeBarang)
@@ -104,6 +109,16 @@ Partial Class frmEntriInternalD
         Me.LayoutControl1.Size = New System.Drawing.Size(382, 338)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'txtKeterangan
+        '
+        Me.txtKeterangan.EnterMoveNextControl = True
+        Me.txtKeterangan.Location = New System.Drawing.Point(80, 180)
+        Me.txtKeterangan.Name = "txtKeterangan"
+        Me.txtKeterangan.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKeterangan.Size = New System.Drawing.Size(290, 20)
+        Me.txtKeterangan.StyleController = Me.LayoutControl1
+        Me.txtKeterangan.TabIndex = 13
         '
         'txtQty
         '
@@ -260,7 +275,7 @@ Partial Class frmEntriInternalD
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem1, Me.EmptySpaceItem3, Me.LayoutControlItem6, Me.LayoutControlItem4, Me.LayoutControlItem8, Me.LayoutControlItem13, Me.LayoutControlItem5, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.LayoutControlItem16})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem1, Me.EmptySpaceItem3, Me.LayoutControlItem6, Me.LayoutControlItem4, Me.LayoutControlItem8, Me.LayoutControlItem13, Me.LayoutControlItem5, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.LayoutControlItem16, Me.LayoutControlItem3})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(382, 338)
@@ -300,9 +315,9 @@ Partial Class frmEntriInternalD
         'EmptySpaceItem1
         '
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 168)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 192)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(362, 123)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(362, 99)
         Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -395,6 +410,16 @@ Partial Class frmEntriInternalD
         Me.LayoutControlItem16.Text = "Qty"
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(64, 13)
         '
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.txtKeterangan
+        Me.LayoutControlItem3.CustomizationFormText = "Keterangan"
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 168)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(362, 24)
+        Me.LayoutControlItem3.Text = "Keterangan"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(64, 13)
+        '
         'DxErrorProvider1
         '
         Me.DxErrorProvider1.ContainerControl = Me
@@ -465,7 +490,7 @@ Partial Class frmEntriInternalD
         Me.barDockControlRight.Location = New System.Drawing.Point(382, 22)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 338)
         '
-        'frmEntriMutasiGudangD
+        'frmEntriInternalD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -475,11 +500,12 @@ Partial Class frmEntriInternalD
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmEntriMutasiGudangD"
+        Me.Name = "frmEntriInternalD"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Entri Item Mutasi Gudang"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.txtKeterangan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQty.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNamaBarang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtKodeBarang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -503,6 +529,7 @@ Partial Class frmEntriInternalD
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -543,4 +570,6 @@ Partial Class frmEntriInternalD
     Friend WithEvents txtJumlah As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txtQty As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtKeterangan As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
 End Class

@@ -60,6 +60,7 @@ Public Class modMain
         DaftarMutasiGudang = 5
         DaftarPenyesuaian = 6
         DaftarPemakaian = 7
+        DaftarStockOpname = 8
     End Enum
 
     Public Enum FormInternal

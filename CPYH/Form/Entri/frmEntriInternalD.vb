@@ -96,12 +96,12 @@ Public Class frmEntriInternalD
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
                                             com.CommandText = "INSERT INTO [dbo].[M" & NamaForm & "D] ([NoID],[IDHeader],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty]" & vbCrLf & _
-                                                              ",[HPP],[Jumlah]) VALUES (" & vbCrLf & _
+                                                              ",[HPP],[Jumlah],[Keterangan]) VALUES (" & vbCrLf & _
                                                               "@NoID,@IDHeader,@IDBarangD,@IDBarang,@IDSatuan,@Konversi,@Qty" & vbCrLf & _
-                                                              ",@HPP,@Jumlah)"
+                                                              ",@HPP,@Jumlah,@Keterangan)"
                                         Else
                                             com.CommandText = "UPDATE [dbo].[M" & NamaForm & "D] SET [IDBarangD]=@IDBarangD,[IDBarang]=@IDBarang,[IDSatuan]=@IDSatuan,[Konversi]=@Konversi,[Qty]=@Qty" & vbCrLf & _
-                                                              ",[HPP]=@HPP,[Jumlah]=@Jumlah WHERE NoID=@NoID"
+                                                              ",[HPP]=@HPP,[Jumlah]=@Jumlah,[Keterangan]=@Keterangan WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
@@ -113,6 +113,7 @@ Public Class frmEntriInternalD
                                         com.Parameters.Add(New SqlParameter("@Qty", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtQty.EditValue), 3)
                                         com.Parameters.Add(New SqlParameter("@HPP", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtHPP.EditValue), 2)
                                         com.Parameters.Add(New SqlParameter("@Jumlah", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtJumlah.EditValue), 2)
+                                        com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = NullToStr(txtKeterangan.Text)
                                         com.ExecuteNonQuery()
 
                                         com.Parameters.Clear()
@@ -216,6 +217,7 @@ Public Class frmEntriInternalD
                                     txtQty.EditValue = NullToDbl(iRow.Item("Qty"))
 
                                     txtHPP.EditValue = NullToDbl(iRow.Item("HPP"))
+                                    txtKeterangan.Text = NullToStr(iRow.Item("Keterangan"))
                                 Else
                                     pStatus = pStatusForm.Baru
                                     Me.NoID = -1
@@ -224,6 +226,7 @@ Public Class frmEntriInternalD
                                     txtSatuan.EditValue = -1
                                     txtKonversi.EditValue = 1
                                     txtQty.EditValue = 0
+                                    txtKeterangan.Text = ""
                                 End If
                                 HitungJumlah()
                             Catch ex As Exception

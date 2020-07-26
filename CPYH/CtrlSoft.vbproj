@@ -424,7 +424,8 @@
     </Compile>
     <Compile Include="Repository\RepConfig.vb" />
     <Compile Include="Repository\RepKode.vb" />
-    <Compile Include="Repository\RepMenu.vb" />
+    <Compile Include="Repository\RepSQLServer.vb" />
+    <Compile Include="Repository\RepUpdateDB.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form\Application\frmLogPerubahanHarga.resx">

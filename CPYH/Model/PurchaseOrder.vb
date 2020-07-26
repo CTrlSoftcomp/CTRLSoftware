@@ -48,4 +48,37 @@
         Private Barang_ As Model.Barang
 
     End Class
+
+    Public Class Core
+        Private _NoID As Long
+        Private _Kode As String
+        Private _Nama As String
+
+        Public Property NoID() As Long
+            Get
+                Return _NoID
+            End Get
+            Set(ByVal value As Long)
+                _NoID = value
+            End Set
+        End Property
+
+        Public Property Kode() As String
+            Get
+                Return _Kode
+            End Get
+            Set(ByVal value As String)
+                _Kode = value
+            End Set
+        End Property
+
+        Public Property Nama() As String
+            Get
+                Return _Nama
+            End Get
+            Set(ByVal value As String)
+                _Nama = value
+            End Set
+        End Property
+    End Class
 End Namespace

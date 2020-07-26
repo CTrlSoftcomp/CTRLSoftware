@@ -67,7 +67,7 @@ Namespace Repository
                                     oDA.SelectCommand = com
 
                                     'Proses Update Struktur
-                                    DBVersion.UpdateDB()
+                                    Repository.RepUpdateDB.UpdateDB()
 
                                     com.CommandText = "SELECT TOP 1 MUser.*, MRole.Role, MRole.IsSupervisor FROM MUser INNER JOIN MRole ON MRole.NoID=MUser.IDRole WHERE MUser.Kode=@Kode AND MUser.Pwd=@Pwd"
                                     com.Parameters.Clear()
@@ -243,6 +243,142 @@ Namespace Repository
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                                     Hasil = Now()
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            Return Hasil
+        End Function
+        Public Shared Function GetListKategori() As List(Of Model.Core)
+            Dim Hasil As New List(Of Model.Core)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using dt As New DataTable
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT * FROM MKategori(NOLOCK) WHERE IsActive=1 AND NoID NOT IN (SELECT IDParent FROM MKategori(NOLOCK))"
+                                    oDA.Fill(dt)
+
+                                    For Each iRow As DataRow In dt.Rows
+                                        Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
+                                                                       .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                    Next
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil.Clear()
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            Return Hasil
+        End Function
+        Public Shared Function GetListDepartemen() As List(Of Model.Core)
+            Dim Hasil As New List(Of Model.Core)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using dt As New DataTable
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT * FROM MKategori(NOLOCK) WHERE IsActive=1 AND NoID IN (SELECT IDParent FROM MKategori(NOLOCK))"
+                                    oDA.Fill(dt)
+
+                                    For Each iRow As DataRow In dt.Rows
+                                        Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
+                                                                       .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                    Next
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil.Clear()
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            Return Hasil
+        End Function
+        Public Shared Function GetListSupplier() As List(Of Model.Core)
+            Dim Hasil As New List(Of Model.Core)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using dt As New DataTable
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT NoID, Kode, Nama FROM MAlamat(NOLOCK) WHERE IsActive=1 AND IsSupplier=1"
+                                    oDA.Fill(dt)
+
+                                    For Each iRow As DataRow In dt.Rows
+                                        Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
+                                                                       .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                    Next
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil.Clear()
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            Return Hasil
+        End Function
+        Public Shared Function GetListMerk() As List(Of Model.Core)
+            Dim Hasil As New List(Of Model.Core)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using dt As New DataTable
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT NoID, Kode, Nama FROM MMerk(NOLOCK) WHERE IsActive=1"
+                                    oDA.Fill(dt)
+
+                                    For Each iRow As DataRow In dt.Rows
+                                        Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
+                                                                       .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                    Next
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil.Clear()
                                 End Try
                             End Using
                         End Using

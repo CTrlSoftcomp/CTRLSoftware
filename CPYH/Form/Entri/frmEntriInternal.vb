@@ -138,7 +138,6 @@ Public Class frmEntriInternal
                                 txtGudangAsal.EditValue = -1
                                 txtGudangTujuan.EditValue = -1
                                 txtTanggal.EditValue = UserLogin.TanggalSystem
-                                txtKode.Text = ""
                                 txtNoReff.Text = ""
                                 txtCatatan.Text = ""
                                 pStatus = pStatusForm.Baru
@@ -557,7 +556,7 @@ Public Class frmEntriInternal
                 For Each frm In Me.MdiParent.MdiChildren
                     If TypeOf frm Is frmDaftarTransaksi AndAlso _
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = IIf(pForm = modMain.FormInternal.MutasiGudang, modMain.FormName.DaftarMutasiGudang.ToString, _
-                                                                         IIf(pForm = modMain.FormInternal.Pemakaian, modMain.FormName.DaftarPemakaian, modMain.FormName.DaftarPenyesuaian)) Then
+                                                                         IIf(pForm = modMain.FormInternal.Pemakaian, modMain.FormName.DaftarPemakaian, modMain.FormName.DaftarPenyesuaian)).ToString Then
                         x = frm
                     End If
                 Next
@@ -591,7 +590,7 @@ Public Class frmEntriInternal
         'If txtTotal.EditValue < 0 Then
         '    DxErrorProvider1.SetError(txtTotal, "Total PeM" & NamaForm & "an salah!", DXErrorProvider.ErrorType.Critical)
         'End If
-        If Not CekDetil() Then
+        If Not pStatus = pStatusForm.Baru AndAlso Not CekDetil() Then
             DxErrorProvider1.SetError(txtKode, "Item masih kosong!", DXErrorProvider.ErrorType.Critical)
         End If
 

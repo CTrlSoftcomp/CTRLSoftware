@@ -158,20 +158,14 @@
       <property name="Name">colTotalQty</property>
     </property>
     <property name="Item33" isnull="true" iskey="true">
-      <property name="VisibleIndex">14</property>
-      <property name="Visible">true</property>
       <property name="Width">70</property>
       <property name="Name">colNilaiGD</property>
     </property>
     <property name="Item34" isnull="true" iskey="true">
-      <property name="VisibleIndex">15</property>
-      <property name="Visible">true</property>
       <property name="Width">79</property>
       <property name="Name">colNilaiTK</property>
     </property>
     <property name="Item35" isnull="true" iskey="true">
-      <property name="VisibleIndex">16</property>
-      <property name="Visible">true</property>
       <property name="Width">116</property>
       <property name="Name">colNilaiPersediaan</property>
     </property>

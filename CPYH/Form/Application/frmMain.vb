@@ -234,6 +234,19 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnMutasiStok"
+                Dim x As frmLaporanMutasiSaldoStok = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmLaporanMutasiSaldoStok Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmLaporanMutasiSaldoStok(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnSaldoStok"
                 Dim x As frmLaporanSaldoStok = Nothing
                 For Each frm In Me.MdiChildren

@@ -817,12 +817,43 @@ Public Class frmEntriReturJual
         If txtTotal.EditValue < 0 Then
             DxErrorProvider1.SetError(txtTotal, "Total PemReturJualan salah!", DXErrorProvider.ErrorType.Critical)
         End If
+        If Not pStatus = pStatusForm.Baru AndAlso Not CekDetil() Then
+            DxErrorProvider1.SetError(txtKode, "Item masih kosong!", DXErrorProvider.ErrorType.Critical)
+        End If
         Return Not DxErrorProvider1.HasErrors
     End Function
 
-    Private Sub txtTypePajak_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTypePajak.EditValueChanged
+    Private Function CekDetil() As Boolean
+        Dim Hasil As Boolean = False
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
 
-    End Sub
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "SELECT IsPosted FROM MReturJual(NOLOCK) WHERE NoID=" & NoID
+                            If NullToBool(com.ExecuteScalar()) Then
+                                XtraMessageBox.Show("Nota telah diposting!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                Exit Try
+                            End If
+
+                            com.CommandText = "SELECT COUNT(NoID) FROM MReturJualD(NOLOCK) WHERE IDHeader=" & NoID
+                            Hasil = IIf(NullToLong(com.ExecuteScalar()) >= 1, True, False)
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+
+        Return Hasil
+    End Function
 
     Private Sub txtTypePajak_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtTypePajak.LostFocus
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso IDTypePajak <> NullTolInt(txtTypePajak.EditValue) Then

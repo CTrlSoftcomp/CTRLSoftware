@@ -221,14 +221,14 @@ Public Class frmLaporanMutasiSaldoStok
     End Sub
 
     Private Sub GridView1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GridView1.MouseDown
-        Dim View As GridView = CType(sender, GridView)
-        If View Is Nothing Then Return
-        ' obtaining hit info
-        Dim hitInfo As GridHitInfo = View.CalcHitInfo(New System.Drawing.Point(e.X, e.Y))
-        If (e.Button = Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
-          (Not View.IsGroupRow(hitInfo.RowHandle)) Then
-            PopupMenu1.ShowPopup(Control.MousePosition)
-        End If
+        'Dim View As GridView = CType(sender, GridView)
+        'If View Is Nothing Then Return
+        '' obtaining hit info
+        'Dim hitInfo As GridHitInfo = View.CalcHitInfo(New System.Drawing.Point(e.X, e.Y))
+        'If (e.Button = Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
+        '  (Not View.IsGroupRow(hitInfo.RowHandle)) Then
+        '    PopupMenu1.ShowPopup(Control.MousePosition)
+        'End If
     End Sub
 
     Private WithEvents frmLogHistoryPerubahanHarga As New frmLogPerubahanHarga(-1)

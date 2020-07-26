@@ -25,11 +25,11 @@ Partial Class frmLaporanMutasiSaldoStok
         Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
         Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
+        Me.txtKategori = New DevExpress.XtraEditors.SearchLookUpEdit
+        Me.gvKategori = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
+        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
@@ -40,26 +40,30 @@ Partial Class frmLaporanMutasiSaldoStok
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem
         Me.mnHitungUlangSaldo = New DevExpress.XtraBars.BarButtonItem
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
+        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.txtKategori = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.gvKategori = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -110,6 +114,8 @@ Partial Class frmLaporanMutasiSaldoStok
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.LabelControl3)
+        Me.PanelControl2.Controls.Add(Me.DateEdit2)
         Me.PanelControl2.Controls.Add(Me.LabelControl4)
         Me.PanelControl2.Controls.Add(Me.txtKategori)
         Me.PanelControl2.Controls.Add(Me.LabelControl2)
@@ -122,46 +128,59 @@ Partial Class frmLaporanMutasiSaldoStok
         Me.PanelControl2.Size = New System.Drawing.Size(983, 68)
         Me.PanelControl2.TabIndex = 1
         '
-        'LabelControl1
+        'LabelControl4
         '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 15)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(175, 25)
-        Me.LabelControl1.TabIndex = 1
-        Me.LabelControl1.Text = "Laporan Saldo Stok"
+        Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelControl4.Location = New System.Drawing.Point(572, 41)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(40, 13)
+        Me.LabelControl4.TabIndex = 7
+        Me.LabelControl4.Text = "Kategori"
         '
-        'ckTdkAktif
+        'txtKategori
         '
-        Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 12)
-        Me.ckTdkAktif.Name = "ckTdkAktif"
-        Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
-        Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
-        Me.ckTdkAktif.TabIndex = 0
+        Me.txtKategori.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtKategori.EnterMoveNextControl = True
+        Me.txtKategori.Location = New System.Drawing.Point(618, 38)
+        Me.txtKategori.Name = "txtKategori"
+        Me.txtKategori.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtKategori.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKategori.Properties.NullText = ""
+        Me.txtKategori.Properties.View = Me.gvKategori
+        Me.txtKategori.Size = New System.Drawing.Size(353, 20)
+        Me.txtKategori.TabIndex = 8
         '
-        'GridControl1
+        'gvKategori
         '
-        Me.GridControl1.DataSource = Me.BindingSource1
-        Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 90)
-        Me.GridControl1.MainView = Me.GridView1
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(983, 417)
-        Me.GridControl1.TabIndex = 2
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
+        Me.gvKategori.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.gvKategori.Name = "gvKategori"
+        Me.gvKategori.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.gvKategori.OptionsView.ShowGroupPanel = False
         '
-        'GridView1
+        'LabelControl2
         '
-        Me.GridView1.GridControl = Me.GridControl1
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsBehavior.Editable = False
-        Me.GridView1.OptionsNavigation.EnterMoveNextColumn = True
-        Me.GridView1.OptionsSelection.MultiSelect = True
-        Me.GridView1.OptionsView.ColumnAutoWidth = False
-        Me.GridView1.OptionsView.ShowAutoFilterRow = True
-        Me.GridView1.OptionsView.ShowFooter = True
-        Me.GridView1.OptionsView.ShowGroupPanel = False
+        Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelControl2.Location = New System.Drawing.Point(561, 15)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(51, 13)
+        Me.LabelControl2.TabIndex = 3
+        Me.LabelControl2.Text = "Sampai Tgl"
+        '
+        'DateEdit1
+        '
+        Me.DateEdit1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateEdit1.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
+        Me.DateEdit1.EnterMoveNextControl = True
+        Me.DateEdit1.Location = New System.Drawing.Point(618, 12)
+        Me.DateEdit1.MenuManager = Me.BarManager1
+        Me.DateEdit1.Name = "DateEdit1"
+        Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
+        Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
+        Me.DateEdit1.TabIndex = 4
         '
         'BarManager1
         '
@@ -241,67 +260,79 @@ Partial Class frmLaporanMutasiSaldoStok
         Me.mnHitungUlangSaldo.Id = 3
         Me.mnHitungUlangSaldo.Name = "mnHitungUlangSaldo"
         '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 15)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(240, 25)
+        Me.LabelControl1.TabIndex = 1
+        Me.LabelControl1.Text = "Laporan Mutasi Saldo Stok"
+        '
+        'ckTdkAktif
+        '
+        Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 12)
+        Me.ckTdkAktif.Name = "ckTdkAktif"
+        Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
+        Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
+        Me.ckTdkAktif.TabIndex = 0
+        '
+        'GridControl1
+        '
+        Me.GridControl1.DataSource = Me.BindingSource1
+        Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControl1.Location = New System.Drawing.Point(0, 90)
+        Me.GridControl1.MainView = Me.GridView1
+        Me.GridControl1.Name = "GridControl1"
+        Me.GridControl1.Size = New System.Drawing.Size(983, 417)
+        Me.GridControl1.TabIndex = 2
+        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
+        '
+        'GridView1
+        '
+        Me.GridView1.GridControl = Me.GridControl1
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsNavigation.EnterMoveNextColumn = True
+        Me.GridView1.OptionsSelection.MultiSelect = True
+        Me.GridView1.OptionsView.ColumnAutoWidth = False
+        Me.GridView1.OptionsView.ShowAutoFilterRow = True
+        Me.GridView1.OptionsView.ShowFooter = True
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
         'PopupMenu1
         '
         Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnHistoryHarga), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHitungUlangSaldo)})
         Me.PopupMenu1.Manager = Me.BarManager1
         Me.PopupMenu1.Name = "PopupMenu1"
         '
-        'LabelControl2
+        'DateEdit2
         '
-        Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl2.Location = New System.Drawing.Point(688, 15)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(51, 13)
-        Me.LabelControl2.TabIndex = 3
-        Me.LabelControl2.Text = "Sampai Tgl"
+        Me.DateEdit2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateEdit2.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
+        Me.DateEdit2.EnterMoveNextControl = True
+        Me.DateEdit2.Location = New System.Drawing.Point(745, 12)
+        Me.DateEdit2.MenuManager = Me.BarManager1
+        Me.DateEdit2.Name = "DateEdit2"
+        Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.DateEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
+        Me.DateEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.DateEdit2.Size = New System.Drawing.Size(100, 20)
+        Me.DateEdit2.TabIndex = 9
         '
-        'DateEdit1
+        'LabelControl3
         '
-        Me.DateEdit1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateEdit1.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
-        Me.DateEdit1.EnterMoveNextControl = True
-        Me.DateEdit1.Location = New System.Drawing.Point(745, 12)
-        Me.DateEdit1.MenuManager = Me.BarManager1
-        Me.DateEdit1.Name = "DateEdit1"
-        Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
-        Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
-        Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
-        Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
-        Me.DateEdit1.TabIndex = 4
+        Me.LabelControl3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelControl3.Location = New System.Drawing.Point(724, 15)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(15, 13)
+        Me.LabelControl3.TabIndex = 10
+        Me.LabelControl3.Text = "s/d"
         '
-        'LabelControl4
-        '
-        Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl4.Location = New System.Drawing.Point(688, 41)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(40, 13)
-        Me.LabelControl4.TabIndex = 7
-        Me.LabelControl4.Text = "Kategori"
-        '
-        'txtKategori
-        '
-        Me.txtKategori.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtKategori.EnterMoveNextControl = True
-        Me.txtKategori.Location = New System.Drawing.Point(744, 38)
-        Me.txtKategori.Name = "txtKategori"
-        Me.txtKategori.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txtKategori.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtKategori.Properties.NullText = ""
-        Me.txtKategori.Properties.View = Me.gvKategori
-        Me.txtKategori.Size = New System.Drawing.Size(227, 20)
-        Me.txtKategori.TabIndex = 8
-        '
-        'gvKategori
-        '
-        Me.gvKategori.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.gvKategori.Name = "gvKategori"
-        Me.gvKategori.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.gvKategori.OptionsView.ShowGroupPanel = False
-        '
-        'frmLaporanSaldoStok
+        'frmLaporanMutasiSaldoStok
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -313,23 +344,25 @@ Partial Class frmLaporanMutasiSaldoStok
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmLaporanSaldoStok"
-        Me.Text = "Laporan Saldo Stok"
+        Me.Name = "frmLaporanMutasiSaldoStok"
+        Me.Text = "Laporan Mutasi Saldo Stok"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
+        CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -359,4 +392,6 @@ Partial Class frmLaporanMutasiSaldoStok
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txtKategori As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents gvKategori As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DateEdit2 As DevExpress.XtraEditors.DateEdit
 End Class

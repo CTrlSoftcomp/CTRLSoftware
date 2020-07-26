@@ -36,17 +36,17 @@ Public Class frmLaporanSaldoStok
     Dim reppicedit As New RepositoryItemPictureEdit
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        mnTutup.PerformClick()
     End Sub
 
     Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
-        RefreshData(-1)
+        mnRefresh.PerformClick()
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
         Dim NamaFieldGudang As String = "", TotalFieldGudang As String = ""
         Dim NamaNilaiGudang As String = "", TotalNilaiGudang As String = ""
+        Dim TmpNamaFieldGudang As String = "", TmpTotalNilaiGudang As String = ""
         Using dsGudang As New DataSet
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
                 Using cn As New SqlConnection(StrKonSQL)
@@ -70,15 +70,16 @@ Public Class frmLaporanSaldoStok
                                     For Each iRow As DataRow In dsGudang.Tables("MGudang").Rows
                                         NamaFieldGudang &= IIf(NamaFieldGudang = "", "", ", ") & "[" & iRow.Item("Kode") & "]"
                                         TotalFieldGudang &= IIf(TotalFieldGudang = "", "", "+") & "ISNULL([" & iRow.Item("Kode") & "], 0.0)"
+                                        TmpNamaFieldGudang &= IIf(TmpNamaFieldGudang = "", "", ", ") & "ISNULL(SUM([" & iRow.Item("Kode") & "]), 0.0) AS [" & iRow.Item("Kode") & "]"
 
                                         NamaNilaiGudang &= IIf(NamaNilaiGudang = "", "", ", ") & "[Nilai " & iRow.Item("Kode") & "]"
                                         TotalNilaiGudang &= IIf(TotalNilaiGudang = "", "", "+") & "ISNULL([Nilai " & iRow.Item("Kode") & "], 0.0)"
+                                        TmpTotalNilaiGudang &= IIf(TmpTotalNilaiGudang = "", "", ", ") & "ISNULL(SUM([Nilai " & iRow.Item("Kode") & "]), 0.0) AS [Nilai " & iRow.Item("Kode") & "]"
                                     Next
 
-                                    SQL = "SELECT MBarangD.Barcode, MBarangD.Konversi, MBarang.NoID, MBarangD.NoID IDBarangD, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
-                                            "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, MSatuan.Kode AS Satuan, " & vbCrLf & _
-                                            "MBarang.IsiCtn, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, MBarang.HargaBeliPcs, " & vbCrLf & _
-                                            "MBarangD.ProsenUpA MarginRetail, MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB MarginGrosir, MBarangD.HargaJualB HargaGrosir," & vbCrLf & _
+                                    SQL = "SELECT DISTINCT MBarang.DefaultBarcode Barcode, MBarang.NoID, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
+                                            "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, " & vbCrLf & _
+                                            "MBarang.IsiCtn, MBarang.HargaBeliPcs, " & vbCrLf & _
                                             "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", " & NamaFieldGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalFieldGudang = "", "", ", " & TotalFieldGudang.Replace("[", "TSaldoStok.[") & " AS TotalQty") & " " & vbCrLf & _
                                             IIf(NamaNilaiGudang = "", "", ", " & NamaNilaiGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalNilaiGudang = "", "", ", " & TotalNilaiGudang.Replace("[", "TSaldoStok.[") & " AS NilaiPersediaan") & " " & vbCrLf & _
                                             "FROM MBarang (NOLOCK)" & vbCrLf & _
@@ -86,20 +87,28 @@ Public Class frmLaporanSaldoStok
                                             "LEFT JOIN MKategori (NOLOCK) ON MKategori.NoID=MBarang.IDKategori" & vbCrLf & _
                                             "LEFT JOIN MMerk (NOLOCK) ON MMerk.NoID=MBarang.IDMerk" & vbCrLf & _
                                             "LEFT JOIN MTypePajak (NOLOCK) ON MTypePajak.NoID=MBarang.IDTypePajak" & vbCrLf & _
-                                            "LEFT JOIN MSatuan (NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan" & vbCrLf & _
                                             "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _
                                             "LEFT JOIN MAlamat MSupplier2 (NOLOCK) ON MSupplier2.NoID=MBarang.IDSupplier2" & vbCrLf & _
                                             "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
                                             IIf(NamaFieldGudang = "" AndAlso TotalFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
-                                            "SELECT * FROM (" & vbCrLf & _
+                                            "SELECT IDBarang, " & TmpNamaFieldGudang & ", " & TmpTotalNilaiGudang & " FROM (SELECT * FROM (" & vbCrLf & _
                                             "SELECT A.IDBarang, B.Kode, 'Nilai ' + B.Kode AS Nilai, SUM(A.Konversi*(A.QtyMasuk-A.QtyKeluar)) AS SaldoAkhir, SUM(A.Debet-A.Kredit) AS NilaiAkhir" & vbCrLf & _
                                             "FROM MKartuStok (NOLOCK) A" & vbCrLf & _
                                             "INNER JOIN MGudang (NOLOCK) B ON B.NoID=A.IDGudang" & vbCrLf & _
                                             "WHERE CONVERT(DATE, A.Tanggal)<='" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "'" & vbCrLf & _
-                                            "GROUP BY A.IDBarang, B.Kode) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT PIVOT (SUM(NilaiAkhir) FOR Nilai IN (" & NamaNilaiGudang & ")) AS PVT2) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
+                                            "GROUP BY A.IDBarang, B.Kode) T PIVOT (SUM(SaldoAkhir) FOR Kode IN (" & NamaFieldGudang & ")) AS PVT PIVOT (SUM(NilaiAkhir) FOR Nilai IN (" & NamaNilaiGudang & ")) AS PVT2) AS TmpSource GROUP BY IDBarang) TSaldoStok ON TSaldoStok.IDBarang=MBarang.NoID") & vbCrLf & _
                                             "WHERE 1=1 "
                                     If Not ckTdkAktif.Checked Then
                                         SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"
+                                    End If
+                                    If NullToLong(txtKategori.EditValue) >= 1 Then
+                                        SQL &= " AND MBarang.IDKategori=" & NullToLong(txtKategori.EditValue)
+                                    End If
+                                    If NullToLong(txtSupplier.EditValue) >= 1 Then
+                                        SQL &= " AND (MBarang.IDSupplier1=" & NullToLong(txtSupplier.EditValue) & " OR MBarang.IDSupplier2=" & NullToLong(txtSupplier.EditValue) & " OR MBarang.IDSupplier3=" & NullToLong(txtSupplier.EditValue) & ")"
+                                    End If
+                                    If NullToLong(txtMerk.EditValue) >= 1 Then
+                                        SQL &= " AND MBarang.IDMerk=" & NullToLong(txtMerk.EditValue)
                                     End If
 
                                     com.CommandText = SQL
@@ -123,13 +132,7 @@ Public Class frmLaporanSaldoStok
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        Dim NamaFile As String = ""
-        NamaFile = Application.StartupPath & "\Report\Laporan_SaldoStok.repx"
-        Dim CalculateFields As New List(Of Model.CetakDX.CalculateFields)
-        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "TglSampai", _
-                                                                    .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, _
-                                                                    .Value = DateEdit1.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Saldo Stok", "Laporan_SaldoStok.repx", Me.ds, , CalculateFields)
+        mnCetak.PerformClick()
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String, ByVal TglSampai As Date)
@@ -146,7 +149,8 @@ Public Class frmLaporanSaldoStok
         Me.TglSampai = TglSampai
     End Sub
 
-    Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
+    Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, _
+    gvKategori.DataSourceChanged, gvSupplier.DataSourceChanged, gvMerk.DataSourceChanged
         With sender
             If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
@@ -181,14 +185,6 @@ Public Class frmLaporanSaldoStok
         End With
     End Sub
 
-    Private Sub frmDaftarMaster_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        Try
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Sub frmDaftarMaster_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             DateEdit1.DateTime = TglSampai
@@ -196,6 +192,21 @@ Public Class frmLaporanSaldoStok
             cmdCetak.ImageList = frmMain.ICButtons
             cmdRefresh.ImageList = frmMain.ICButtons
             cmdTutup.ImageList = frmMain.ICButtons
+
+            txtKategori.Properties.DataSource = Repository.RepSQLServer.GetListKategori
+            txtKategori.Properties.DisplayMember = "Nama"
+            txtKategori.Properties.ValueMember = "NoID"
+            txtKategori.EditValue = -1
+
+            txtSupplier.Properties.DataSource = Repository.RepSQLServer.GetListSupplier
+            txtSupplier.Properties.DisplayMember = "Nama"
+            txtSupplier.Properties.ValueMember = "NoID"
+            txtSupplier.EditValue = -1
+
+            txtMerk.Properties.DataSource = Repository.RepSQLServer.GetListMerk
+            txtMerk.Properties.DisplayMember = "Nama"
+            txtMerk.Properties.ValueMember = "NoID"
+            txtMerk.EditValue = -1
 
             LabelControl1.Text = Me.Text
             RefreshData(-1)
@@ -209,6 +220,9 @@ Public Class frmLaporanSaldoStok
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    gvKategori.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
+                    gvSupplier.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
+                    gvMerk.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvMerk.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -306,5 +320,34 @@ Public Class frmLaporanSaldoStok
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Private Sub mnRefresh_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnRefresh.ItemClick
+        RefreshData(-1)
+    End Sub
+
+    Private Sub mnCetak_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnCetak.ItemClick
+        Dim NamaFile As String = ""
+        NamaFile = Application.StartupPath & "\Report\Laporan_SaldoStok.repx"
+        Dim CalculateFields As New List(Of Model.CetakDX.CalculateFields)
+        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "TglSampai", _
+                                                                    .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, _
+                                                                    .Value = DateEdit1.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
+        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterKategori", _
+                                                                    .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                    .Value = IIf(NullToLong(txtKategori.EditValue) >= 1, txtKategori.Text, "ALL")})
+        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterSupplier", _
+                                                                    .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                    .Value = IIf(NullToLong(txtSupplier.EditValue) >= 1, txtSupplier.Text, "ALL")})
+        CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterMerk", _
+                                                                    .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                    .Value = IIf(NullToLong(txtMerk.EditValue) >= 1, txtMerk.Text, "ALL")})
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Saldo Stok", "Laporan_SaldoStok.repx", Me.ds, , CalculateFields)
+
     End Sub
 End Class

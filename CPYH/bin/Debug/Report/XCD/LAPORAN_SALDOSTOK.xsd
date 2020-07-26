@@ -7,28 +7,14 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Barcode" type="xs:string" minOccurs="0" />
-              <xs:element name="Konversi" type="xs:int" minOccurs="0" />
               <xs:element name="NoID" type="xs:int" minOccurs="0" />
-              <xs:element name="IDBarangD" type="xs:int" minOccurs="0" />
               <xs:element name="Kode" type="xs:string" minOccurs="0" />
               <xs:element name="Nama" type="xs:string" minOccurs="0" />
               <xs:element name="Alias" type="xs:string" minOccurs="0" />
               <xs:element name="Keterangan" type="xs:string" minOccurs="0" />
               <xs:element name="Aktif" type="xs:boolean" minOccurs="0" />
-              <xs:element name="Satuan" type="xs:string" minOccurs="0" />
               <xs:element name="IsiCtn" type="xs:int" minOccurs="0" />
-              <xs:element name="HargaBeli" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscProsen1" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscProsen2" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscProsen3" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscProsen4" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscProsen5" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DiscRp" type="xs:decimal" minOccurs="0" />
               <xs:element name="HargaBeliPcs" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MarginRetail" type="xs:decimal" minOccurs="0" />
-              <xs:element name="HargaRetail" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MarginGrosir" type="xs:decimal" minOccurs="0" />
-              <xs:element name="HargaGrosir" type="xs:decimal" minOccurs="0" />
               <xs:element name="Supplier" type="xs:string" minOccurs="0" />
               <xs:element name="Supplier2" type="xs:string" minOccurs="0" />
               <xs:element name="Supplier3" type="xs:string" minOccurs="0" />

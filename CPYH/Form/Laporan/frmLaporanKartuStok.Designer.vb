@@ -190,7 +190,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl5
         '
         Me.LabelControl5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl5.Location = New System.Drawing.Point(387, 70)
+        Me.LabelControl5.Location = New System.Drawing.Point(402, 70)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl5.TabIndex = 7
@@ -209,7 +209,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl4
         '
         Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl4.Location = New System.Drawing.Point(387, 44)
+        Me.LabelControl4.Location = New System.Drawing.Point(405, 44)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(34, 13)
         Me.LabelControl4.TabIndex = 5
@@ -263,7 +263,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl2
         '
         Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl2.Location = New System.Drawing.Point(387, 18)
+        Me.LabelControl2.Location = New System.Drawing.Point(403, 18)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(36, 13)
         Me.LabelControl2.TabIndex = 1

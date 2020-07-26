@@ -20,6 +20,12 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRLabel label9;
+        private DevExpress.XtraReports.UI.XRLabel label8;
+        private DevExpress.XtraReports.UI.XRLabel label7;
+        private DevExpress.XtraReports.UI.XRLabel label6;
+        private DevExpress.XtraReports.UI.XRLabel label5;
+        private DevExpress.XtraReports.UI.XRLabel label4;
         private DevExpress.XtraReports.UI.XRLabel label3;
         private DevExpress.XtraReports.UI.XRLabel label2;
         private DevExpress.XtraReports.UI.XRLabel label1;
@@ -32,8 +38,10 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.XRTableCell tableCell3;
         private DevExpress.XtraReports.UI.XRTableCell tableCell5;
         private DevExpress.XtraReports.UI.XRTableCell tableCell6;
-        private DevExpress.XtraReports.UI.CalculatedField TglDari;
         private DevExpress.XtraReports.UI.CalculatedField TglSampai;
+        private DevExpress.XtraReports.UI.CalculatedField FilterKategori;
+        private DevExpress.XtraReports.UI.CalculatedField FilterSupplier;
+        private DevExpress.XtraReports.UI.CalculatedField FilterMerk;
         private System.Resources.ResourceManager _resources;
         public xtraReport1() {
             this.InitializeComponent();
@@ -65,6 +73,12 @@ namespace XtraReportSerialization {
             this.tableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.label9 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label8 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label7 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label4 = new DevExpress.XtraReports.UI.XRLabel();
             this.label3 = new DevExpress.XtraReports.UI.XRLabel();
             this.label2 = new DevExpress.XtraReports.UI.XRLabel();
             this.label1 = new DevExpress.XtraReports.UI.XRLabel();
@@ -76,8 +90,10 @@ namespace XtraReportSerialization {
             this.tableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.TglDari = new DevExpress.XtraReports.UI.CalculatedField();
             this.TglSampai = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterKategori = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterSupplier = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterMerk = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -109,11 +125,17 @@ namespace XtraReportSerialization {
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label9,
+                        this.label8,
+                        this.label7,
+                        this.label6,
+                        this.label5,
+                        this.label4,
                         this.label3,
                         this.label2,
                         this.label1});
             this.ReportHeader.Dpi = 254F;
-            this.ReportHeader.HeightF = 159.1734F;
+            this.ReportHeader.HeightF = 307.7634F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // PageHeader
@@ -233,6 +255,96 @@ namespace XtraReportSerialization {
             this.pageInfo1.StylePriority.UseTextAlignment = false;
             this.pageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
+            // label9
+            // 
+            this.label9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterMerk", "{0:dd-MM-yyyy}")});
+            this.label9.Dpi = 254F;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.LocationFloat = new DevExpress.Utils.PointFloat(1455.208F, 217.5933F);
+            this.label9.Name = "label9";
+            this.label9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label9.SizeF = new System.Drawing.SizeF(449.7916F, 58.42001F);
+            this.label9.StylePriority.UseFont = false;
+            this.label9.StylePriority.UsePadding = false;
+            this.label9.StylePriority.UseTextAlignment = false;
+            this.label9.Text = "Periode";
+            this.label9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.Dpi = 254F;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.LocationFloat = new DevExpress.Utils.PointFloat(1285.875F, 217.5933F);
+            this.label8.Name = "label8";
+            this.label8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label8.SizeF = new System.Drawing.SizeF(169.3333F, 58.41999F);
+            this.label8.StylePriority.UseFont = false;
+            this.label8.StylePriority.UsePadding = false;
+            this.label8.StylePriority.UseTextAlignment = false;
+            this.label8.Text = "Merk : ";
+            this.label8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterSupplier", "{0:dd-MM-yyyy}")});
+            this.label7.Dpi = 254F;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label7.LocationFloat = new DevExpress.Utils.PointFloat(1455.208F, 159.1734F);
+            this.label7.Name = "label7";
+            this.label7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label7.SizeF = new System.Drawing.SizeF(449.7916F, 58.42001F);
+            this.label7.StylePriority.UseFont = false;
+            this.label7.StylePriority.UsePadding = false;
+            this.label7.StylePriority.UseTextAlignment = false;
+            this.label7.Text = "Periode";
+            this.label7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.Dpi = 254F;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label6.LocationFloat = new DevExpress.Utils.PointFloat(1285.875F, 159.1734F);
+            this.label6.Name = "label6";
+            this.label6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label6.SizeF = new System.Drawing.SizeF(169.3333F, 58.41999F);
+            this.label6.StylePriority.UseFont = false;
+            this.label6.StylePriority.UsePadding = false;
+            this.label6.StylePriority.UseTextAlignment = false;
+            this.label6.Text = "Supplier :";
+            this.label6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterKategori", "{0:dd-MM-yyyy}")});
+            this.label5.Dpi = 254F;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label5.LocationFloat = new DevExpress.Utils.PointFloat(1455.208F, 100.7534F);
+            this.label5.Name = "label5";
+            this.label5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label5.SizeF = new System.Drawing.SizeF(449.7916F, 58.42001F);
+            this.label5.StylePriority.UseFont = false;
+            this.label5.StylePriority.UsePadding = false;
+            this.label5.StylePriority.UseTextAlignment = false;
+            this.label5.Text = "Periode";
+            this.label5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.Dpi = 254F;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label4.LocationFloat = new DevExpress.Utils.PointFloat(1285.875F, 100.7535F);
+            this.label4.Name = "label4";
+            this.label4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label4.SizeF = new System.Drawing.SizeF(169.3333F, 58.41999F);
+            this.label4.StylePriority.UseFont = false;
+            this.label4.StylePriority.UsePadding = false;
+            this.label4.StylePriority.UseTextAlignment = false;
+            this.label4.Text = "Kategori :";
+            this.label4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
             // label3
             // 
             this.label3.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
@@ -241,12 +353,13 @@ namespace XtraReportSerialization {
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label3.LocationFloat = new DevExpress.Utils.PointFloat(169.3333F, 100.7534F);
             this.label3.Name = "label3";
-            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
             this.label3.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label3.StylePriority.UseFont = false;
+            this.label3.StylePriority.UsePadding = false;
             this.label3.StylePriority.UseTextAlignment = false;
             this.label3.Text = "Periode";
-            this.label3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.label3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -254,12 +367,13 @@ namespace XtraReportSerialization {
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 100.7534F);
             this.label2.Name = "label2";
-            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
             this.label2.SizeF = new System.Drawing.SizeF(169.3333F, 58.41999F);
             this.label2.StylePriority.UseFont = false;
+            this.label2.StylePriority.UsePadding = false;
             this.label2.StylePriority.UseTextAlignment = false;
             this.label2.Text = "Periode :";
-            this.label2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.label2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // label1
             // 
@@ -356,17 +470,29 @@ namespace XtraReportSerialization {
             this.tableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.tableCell6.Weight = 0.30000000320394543;
             // 
-            // TglDari
-            // 
-            this.TglDari.Expression = "#2020-01-01#";
-            this.TglDari.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
-            this.TglDari.Name = "TglDari";
-            // 
             // TglSampai
             // 
-            this.TglSampai.Expression = "2020-07-26 12:14:04";
+            this.TglSampai.Expression = "#2020-07-26 16:02:48#";
             this.TglSampai.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
             this.TglSampai.Name = "TglSampai";
+            // 
+            // FilterKategori
+            // 
+            this.FilterKategori.Expression = "\'ALL\'";
+            this.FilterKategori.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterKategori.Name = "FilterKategori";
+            // 
+            // FilterSupplier
+            // 
+            this.FilterSupplier.Expression = "\'ALL\'";
+            this.FilterSupplier.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterSupplier.Name = "FilterSupplier";
+            // 
+            // FilterMerk
+            // 
+            this.FilterMerk.Expression = "\'ALL\'";
+            this.FilterMerk.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterMerk.Name = "FilterMerk";
             // 
             // xtraReport1
             // 
@@ -377,8 +503,10 @@ namespace XtraReportSerialization {
                         this.ReportHeader,
                         this.PageHeader});
             this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
-                        this.TglDari,
-                        this.TglSampai});
+                        this.TglSampai,
+                        this.FilterKategori,
+                        this.FilterSupplier,
+                        this.FilterMerk});
             this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\LAPORAN_SALDOSTOK.xsd";
             this.DisplayName = "Laporan_SaldoStok.repx";
             this.Dpi = 254F;
@@ -391,6 +519,9 @@ namespace XtraReportSerialization {
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic;
             this.ScriptSecurityPermissions.AddRange(new DevExpress.XtraReports.ScriptSecurityPermission[] {
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true)});
             this.SnapGridSize = 31.75F;

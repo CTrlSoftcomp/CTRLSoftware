@@ -198,6 +198,7 @@ Public Class frmMain
             
             UserLogin.TanggalSystem = Repository.RepSQLServer.GetTimeServer()
             TimeZoneInformation.TimeZoneFunctionality.SetTime(System.TimeZone.CurrentTimeZone.ToLocalTime(UserLogin.TanggalSystem))
+            UserLogin.TanggalSystem = Now()
             barStaticUID.Caption = "User : [" & UserLogin.Nama & "]"
             barStaticJam.Caption = "Tanggal System : " & UserLogin.TanggalSystem.ToString("dd/MM/yyyy HH:mm")
 

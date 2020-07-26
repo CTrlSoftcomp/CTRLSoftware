@@ -416,7 +416,7 @@ Partial Class frmEntriReturJual
         Me.txtTanggal.Location = New System.Drawing.Point(90, 92)
         Me.txtTanggal.Name = "txtTanggal"
         Me.txtTanggal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txtTanggal.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.txtTanggal.Properties.Mask.EditMask = "dd-MM-yyyy HH:mm:ss"
         Me.txtTanggal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.txtTanggal.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.txtTanggal.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})

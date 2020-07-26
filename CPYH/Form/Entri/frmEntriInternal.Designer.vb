@@ -198,7 +198,7 @@ Partial Class frmEntriInternal
         Me.txtTanggal.Location = New System.Drawing.Point(66, 68)
         Me.txtTanggal.Name = "txtTanggal"
         Me.txtTanggal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txtTanggal.Properties.Mask.EditMask = "dd-MM-yyyy"
+        Me.txtTanggal.Properties.Mask.EditMask = "dd-MM-yyyy HH:mm:ss"
         Me.txtTanggal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.txtTanggal.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.txtTanggal.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
@@ -508,7 +508,7 @@ Partial Class frmEntriInternal
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
-        'frmEntriMutasiGudang
+        'frmEntriInternal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -518,7 +518,7 @@ Partial Class frmEntriInternal
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmEntriMutasiGudang"
+        Me.Name = "frmEntriInternal"
         Me.Text = "Entri Mutasi Gudang"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)

@@ -822,13 +822,34 @@ Public Class frmEntriJual
         Return Not DxErrorProvider1.HasErrors
     End Function
 
-    Private Sub txtTypePajak_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTypePajak.EditValueChanged
-
-    End Sub
-
     Private Sub txtTypePajak_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtTypePajak.LostFocus
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso IDTypePajak <> NullTolInt(txtTypePajak.EditValue) Then
             UpdateTypePajak()
         End If
+    End Sub
+
+    Private Sub mnFastEntri_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnFastEntri.ItemClick
+        txtFastEntri.Focus()
+    End Sub
+
+    Private Sub txtFastEntri_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFastEntri.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Enter
+                If txtFastEntri.Text <> "" AndAlso IIf(pStatus = pStatusForm.Baru, SimpanData(False), True) = True Then
+                    Dim iList = Repository.RepSQLServer.GetBarangDetil(txtFastEntri.Text)
+                    If iList.Count >= 1 Then
+                        Using frm As New frmEntriJualD(Me, -1, NoID, txtTypePajak.EditValue, iList(0).NoID)
+                            Try
+                                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                    RefreshDetil(frm.NoID)
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                        txtFastEntri.Text = ""
+                    End If
+                End If
+        End Select
     End Sub
 End Class

@@ -36,12 +36,11 @@ Public Class frmDaftar
     Private ds As New DataSet
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        mnTutup.PerformClick()
     End Sub
 
     Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
-        RefreshData(-1)
+        mnRefresh.PerformClick()
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
@@ -77,28 +76,11 @@ Public Class frmDaftar
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        Dim NamaFile As String = ""
-        If IsEditReport Then
-            NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
-            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
-        End If
+        mnPreview.PerformClick()
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        If GridView1.RowCount >= 1 Then
-            Select Case tableName
-                Case "MUser"
-                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    End If
-                Case "MRole"
-                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    End If
-                Case Else
-                    XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            End Select
-        End If
+        mnHapus.PerformClick()
     End Sub
 
     Private Sub HapusData(ByVal NoID As Long)
@@ -143,41 +125,11 @@ Public Class frmDaftar
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Select Case tableName
-            Case "MUser"
-                Using frm As New frmEntriUser(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MRole"
-                Using frm As New frmEntriRole(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        End Select
+        mnEdit.PerformClick()
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Select Case tableName
-            Case "MUser"
-                Using frm As New frmEntriUser(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MRole"
-                Using frm As New frmEntriRole(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-        End Select
+        mnBaru.PerformClick()
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
@@ -267,5 +219,77 @@ Public Class frmDaftar
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
         cmdEdit.PerformClick()
+    End Sub
+
+    Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
+        Select Case tableName
+            Case "MUser"
+                Using frm As New frmEntriUser(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MRole"
+                Using frm As New frmEntriRole(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
+    End Sub
+
+    Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
+        Select Case tableName
+            Case "MUser"
+                Using frm As New frmEntriUser(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case "MRole"
+                Using frm As New frmEntriRole(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        End Select
+    End Sub
+
+    Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
+        If GridView1.RowCount >= 1 Then
+            Select Case tableName
+                Case "MUser"
+                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    End If
+                Case "MRole"
+                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    End If
+                Case Else
+                    XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            End Select
+        End If
+    End Sub
+
+    Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
+        Dim NamaFile As String = ""
+        If IsEditReport Then
+            NamaFile = Application.StartupPath & "\Report\Lap_" & tableName & ".repx"
+            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master", "Lap_" & tableName & ".repx", Me.ds)
+        End If
+    End Sub
+
+    Private Sub mnRefresh_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnRefresh.ItemClick
+        RefreshData(-1)
     End Sub
 End Class

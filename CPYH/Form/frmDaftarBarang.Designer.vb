@@ -42,8 +42,15 @@ Partial Class frmDaftarBarang
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.mnHitungUlangSaldo = New DevExpress.XtraBars.BarButtonItem
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.Bar1 = New DevExpress.XtraBars.Bar
+        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
+        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem
+        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +76,7 @@ Partial Class frmDaftarBarang
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(983, 51)
         Me.PanelControl1.TabIndex = 0
+        Me.PanelControl1.Visible = False
         '
         'cmdCetak
         '
@@ -143,7 +151,7 @@ Partial Class frmDaftarBarang
         Me.PanelControl2.Controls.Add(Me.LabelControl1)
         Me.PanelControl2.Controls.Add(Me.ckTdkAktif)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 22)
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 51)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(983, 44)
         Me.PanelControl2.TabIndex = 1
@@ -170,10 +178,10 @@ Partial Class frmDaftarBarang
         '
         Me.GridControl1.DataSource = Me.BindingSource1
         Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 66)
+        Me.GridControl1.Location = New System.Drawing.Point(0, 95)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(983, 441)
+        Me.GridControl1.Size = New System.Drawing.Size(983, 412)
         Me.GridControl1.TabIndex = 2
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -191,15 +199,15 @@ Partial Class frmDaftarBarang
         '
         'BarManager1
         '
-        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2})
+        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2, Me.Bar1})
         Me.BarManager1.DockControls.Add(Me.barDockControlTop)
         Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnHistoryHarga, Me.mnHitungUlangSaldo})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnHistoryHarga, Me.mnHitungUlangSaldo, Me.mnBaru, Me.mnEdit, Me.mnHapus, Me.mnPreview, Me.mnRefresh, Me.mnTutup})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 4
+        Me.BarManager1.MaxItemId = 10
         '
         'Bar2
         '
@@ -232,7 +240,7 @@ Partial Class frmDaftarBarang
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(983, 22)
+        Me.barDockControlTop.Size = New System.Drawing.Size(983, 51)
         '
         'barDockControlBottom
         '
@@ -245,15 +253,15 @@ Partial Class frmDaftarBarang
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 22)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 536)
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 507)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(983, 22)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 536)
+        Me.barDockControlRight.Location = New System.Drawing.Point(983, 51)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 507)
         '
         'mnHistoryHarga
         '
@@ -261,17 +269,68 @@ Partial Class frmDaftarBarang
         Me.mnHistoryHarga.Id = 2
         Me.mnHistoryHarga.Name = "mnHistoryHarga"
         '
+        'mnHitungUlangSaldo
+        '
+        Me.mnHitungUlangSaldo.Caption = "Hitung Ulang Saldo"
+        Me.mnHitungUlangSaldo.Id = 3
+        Me.mnHitungUlangSaldo.Name = "mnHitungUlangSaldo"
+        '
         'PopupMenu1
         '
         Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnHistoryHarga), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHitungUlangSaldo)})
         Me.PopupMenu1.Manager = Me.BarManager1
         Me.PopupMenu1.Name = "PopupMenu1"
         '
-        'mnHitungUlangSaldo
+        'Bar1
         '
-        Me.mnHitungUlangSaldo.Caption = "Hitung Ulang Saldo"
-        Me.mnHitungUlangSaldo.Id = 3
-        Me.mnHitungUlangSaldo.Name = "mnHitungUlangSaldo"
+        Me.Bar1.BarName = "Custom 3"
+        Me.Bar1.DockCol = 0
+        Me.Bar1.DockRow = 1
+        Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnBaru), New DevExpress.XtraBars.LinkPersistInfo(Me.mnEdit), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHapus), New DevExpress.XtraBars.LinkPersistInfo(Me.mnPreview, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup, True)})
+        Me.Bar1.Text = "Custom 3"
+        '
+        'mnBaru
+        '
+        Me.mnBaru.Caption = "&Baru (F1)"
+        Me.mnBaru.Id = 4
+        Me.mnBaru.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1)
+        Me.mnBaru.Name = "mnBaru"
+        '
+        'mnEdit
+        '
+        Me.mnEdit.Caption = "&Edit (F2)"
+        Me.mnEdit.Id = 5
+        Me.mnEdit.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
+        Me.mnEdit.Name = "mnEdit"
+        '
+        'mnHapus
+        '
+        Me.mnHapus.Caption = "&Hapus (F4)"
+        Me.mnHapus.Id = 6
+        Me.mnHapus.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F4)
+        Me.mnHapus.Name = "mnHapus"
+        '
+        'mnPreview
+        '
+        Me.mnPreview.Caption = "&Preview (F8)"
+        Me.mnPreview.Id = 7
+        Me.mnPreview.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
+        Me.mnPreview.Name = "mnPreview"
+        '
+        'mnRefresh
+        '
+        Me.mnRefresh.Caption = "&Refresh (F5)"
+        Me.mnRefresh.Id = 8
+        Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
+        Me.mnRefresh.Name = "mnRefresh"
+        '
+        'mnTutup
+        '
+        Me.mnTutup.Caption = "&Tutup (F3)"
+        Me.mnTutup.Id = 9
+        Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
+        Me.mnTutup.Name = "mnTutup"
         '
         'frmDaftarBarang
         '
@@ -325,4 +384,11 @@ Partial Class frmDaftarBarang
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
     Friend WithEvents mnHistoryHarga As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnHitungUlangSaldo As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents Bar1 As DevExpress.XtraBars.Bar
+    Friend WithEvents mnBaru As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnEdit As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnHapus As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnPreview As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnRefresh As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnTutup As DevExpress.XtraBars.BarButtonItem
 End Class

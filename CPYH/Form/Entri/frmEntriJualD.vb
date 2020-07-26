@@ -8,6 +8,8 @@ Imports DevExpress.XtraEditors.Repository
 Public Class frmEntriJualD
     Public NoID As Long = -1
     Public IDHeader As Long = -1
+    Private IDBarangD As Long = -1
+
     Private frmPemanggil As frmEntriJual = Nothing
     Private pStatus As Utils.pStatusForm
     Private TypePajak As Utils.TypePajak
@@ -175,7 +177,7 @@ Public Class frmEntriJualD
         Me.Close()
     End Sub
 
-    Public Sub New(ByVal formPemanggil As frmEntriJual, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As Utils.TypePajak)
+    Public Sub New(ByVal formPemanggil As frmEntriJual, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As Utils.TypePajak, Optional ByVal IDBarangD As Long = -1)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -185,6 +187,7 @@ Public Class frmEntriJualD
         Me.IDHeader = IDHeader
         Me.TypePajak = TypePajak
         Me.frmPemanggil = formPemanggil
+        Me.IDBarangD = IDBarangD
 
         AddHandler txtQty.LostFocus, AddressOf txtEdit_EditValueChanged
         AddHandler txtDiscProsen1.LostFocus, AddressOf txtEdit_EditValueChanged
@@ -205,12 +208,12 @@ Public Class frmEntriJualD
             SimpleButton2.ImageList = frmMain.ICButtons
             SimpleButton2.ImageIndex = 5
 
-            LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
                     .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
+            LoadData(NoID)
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -264,7 +267,12 @@ Public Class frmEntriJualD
                                     txtBarcode.EditValue = -1
                                     txtSatuan.EditValue = -1
                                     txtKonversi.EditValue = 1
+
+                                    txtBarcode.EditValue = IDBarangD
                                     txtQty.EditValue = 0
+                                    If NullToStr(txtBarcode.Text) <> "" Then
+                                        LayoutControlItem16.Control.Focus()
+                                    End If
                                 End If
                                 HitungJumlah()
                             Catch ex As Exception

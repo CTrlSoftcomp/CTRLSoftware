@@ -34,12 +34,11 @@ Public Class frmDaftarKontak
     Dim reppicedit As New RepositoryItemPictureEdit
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        mnTutup.PerformClick()
     End Sub
 
     Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
-        RefreshData(-1)
+        mnRefresh.PerformClick()
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
@@ -110,40 +109,11 @@ Public Class frmDaftarKontak
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        Dim NamaFile As String = ""
-        Select Case XtraTabControl1.SelectedTabPageIndex
-            Case 1
-                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatCustomer.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Customer", "Lap_MAlamatCustomer.repx", Me.ds)
-            Case 2
-                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatSupplier.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Supplier", "Lap_MAlamatSupplier.repx", Me.ds)
-            Case 3
-                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatPegawai.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Pegawai", "Lap_MAlamatPegawai.repx", Me.ds)
-            Case Else
-                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatAll.repx"
-                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master All", "Lap_MAlamatAll.repx", Me.ds)
-        End Select
+        mnPreview.PerformClick()
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
-        Select Case XtraTabControl1.SelectedTabPageIndex
-            Case 1
-                gridview = GridView2
-            Case 2
-                gridview = GridView3
-            Case 3
-                gridview = GridView4
-            Case Else
-                gridview = GridView1
-        End Select
-        If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-            End If
-        End If
+        mnHapus.PerformClick()
     End Sub
 
     Private Sub HapusData(ByVal NoID As Long)
@@ -179,61 +149,11 @@ Public Class frmDaftarKontak
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Select Case XtraTabControl1.SelectedTabPageIndex
-            Case 1
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, NullToLong(GridView2.GetRowCellValue(GridView2.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case 2
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, NullToLong(GridView3.GetRowCellValue(GridView3.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case 3
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, NullToLong(GridView4.GetRowCellValue(GridView4.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-        End Select
+        mnEdit.PerformClick()
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Select Case XtraTabControl1.SelectedTabPageIndex
-            Case 1
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case 2
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case 3
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case Else
-                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-        End Select
+        mnBaru.PerformClick()
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String)
@@ -325,5 +245,105 @@ Public Class frmDaftarKontak
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick, GridView2.DoubleClick, GridView3.DoubleClick, GridView4.DoubleClick
         cmdEdit.PerformClick()
+    End Sub
+
+    Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 2
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 3
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+        End Select
+    End Sub
+
+    Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, NullToLong(GridView2.GetRowCellValue(GridView2.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 2
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, NullToLong(GridView3.GetRowCellValue(GridView3.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case 3
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, NullToLong(GridView4.GetRowCellValue(GridView4.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+            Case Else
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.NoID)
+                    End If
+                End Using
+        End Select
+    End Sub
+
+    Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
+        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                gridview = GridView2
+            Case 2
+                gridview = GridView3
+            Case 3
+                gridview = GridView4
+            Case Else
+                gridview = GridView1
+        End Select
+        If gridview.RowCount >= 1 Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+            End If
+        End If
+    End Sub
+
+    Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
+        Dim NamaFile As String = ""
+        Select Case XtraTabControl1.SelectedTabPageIndex
+            Case 1
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatCustomer.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Customer", "Lap_MAlamatCustomer.repx", Me.ds)
+            Case 2
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatSupplier.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Supplier", "Lap_MAlamatSupplier.repx", Me.ds)
+            Case 3
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatPegawai.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Pegawai", "Lap_MAlamatPegawai.repx", Me.ds)
+            Case Else
+                NamaFile = Application.StartupPath & "\Report\Lap_MAlamatAll.repx"
+                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master All", "Lap_MAlamatAll.repx", Me.ds)
+        End Select
+    End Sub
+
+    Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

@@ -21,6 +21,7 @@ Partial Class frmEntriJual
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
+        Me.txtFastEntri = New DevExpress.XtraEditors.TextEdit
         Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit
         Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit
         Me.txtGudang = New DevExpress.XtraEditors.SearchLookUpEdit
@@ -71,6 +72,7 @@ Partial Class frmEntriJual
         Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem
         Me.LayoutControlGroup6 = New DevExpress.XtraLayout.LayoutControlGroup
         Me.LayoutControlItem18 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar1 = New DevExpress.XtraBars.Bar
         Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
@@ -79,6 +81,7 @@ Partial Class frmEntriJual
         Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
         Me.mnSimpan = New DevExpress.XtraBars.BarButtonItem
         Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
+        Me.mnFastEntri = New DevExpress.XtraBars.BarButtonItem
         Me.Bar2 = New DevExpress.XtraBars.Bar
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
         Me.mnSaveLayouts = New DevExpress.XtraBars.BarButtonItem
@@ -89,6 +92,7 @@ Partial Class frmEntriJual
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.txtFastEntri.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,12 +145,14 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.txtFastEntri)
         Me.LayoutControl1.Controls.Add(Me.TextEdit2)
         Me.LayoutControl1.Controls.Add(Me.TextEdit1)
         Me.LayoutControl1.Controls.Add(Me.txtGudang)
@@ -174,6 +180,16 @@ Partial Class frmEntriJual
         Me.LayoutControl1.Size = New System.Drawing.Size(907, 503)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'txtFastEntri
+        '
+        Me.txtFastEntri.EnterMoveNextControl = True
+        Me.txtFastEntri.Location = New System.Drawing.Point(62, 351)
+        Me.txtFastEntri.Name = "txtFastEntri"
+        Me.txtFastEntri.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtFastEntri.Size = New System.Drawing.Size(290, 20)
+        Me.txtFastEntri.StyleController = Me.LayoutControl1
+        Me.txtFastEntri.TabIndex = 11
         '
         'TextEdit2
         '
@@ -274,10 +290,10 @@ Partial Class frmEntriJual
         '
         'txtCatatan
         '
-        Me.txtCatatan.Location = New System.Drawing.Point(12, 367)
+        Me.txtCatatan.Location = New System.Drawing.Point(12, 391)
         Me.txtCatatan.Name = "txtCatatan"
         Me.txtCatatan.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtCatatan.Size = New System.Drawing.Size(340, 124)
+        Me.txtCatatan.Size = New System.Drawing.Size(340, 100)
         Me.txtCatatan.StyleController = Me.LayoutControl1
         Me.txtCatatan.TabIndex = 13
         '
@@ -470,7 +486,7 @@ Partial Class frmEntriJual
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutControlGroup2, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.TabbedControlGroup1})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutControlGroup2, Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.TabbedControlGroup1, Me.LayoutControlItem19})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(907, 503)
@@ -680,12 +696,12 @@ Partial Class frmEntriJual
         '
         Me.LayoutControlItem13.Control = Me.txtCatatan
         Me.LayoutControlItem13.CustomizationFormText = "Catatan"
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 339)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 363)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
-        Me.LayoutControlItem13.Size = New System.Drawing.Size(344, 144)
+        Me.LayoutControlItem13.Size = New System.Drawing.Size(344, 120)
         Me.LayoutControlItem13.Text = "Catatan"
         Me.LayoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top
-        Me.LayoutControlItem13.TextSize = New System.Drawing.Size(39, 13)
+        Me.LayoutControlItem13.TextSize = New System.Drawing.Size(46, 13)
         '
         'TabbedControlGroup1
         '
@@ -740,6 +756,16 @@ Partial Class frmEntriJual
         Me.LayoutControlItem18.TextToControlDistance = 0
         Me.LayoutControlItem18.TextVisible = False
         '
+        'LayoutControlItem19
+        '
+        Me.LayoutControlItem19.Control = Me.txtFastEntri
+        Me.LayoutControlItem19.CustomizationFormText = "Fast Entri"
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(0, 339)
+        Me.LayoutControlItem19.Name = "LayoutControlItem19"
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(344, 24)
+        Me.LayoutControlItem19.Text = "Fast Entri"
+        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(46, 13)
+        '
         'BarManager1
         '
         Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar1, Me.Bar2})
@@ -748,9 +774,9 @@ Partial Class frmEntriJual
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.mnBaru, Me.mnEdit, Me.mnHapus, Me.mnRefresh, Me.mnTutup, Me.mnSimpan, Me.BarSubItem1, Me.mnSaveLayouts})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.mnBaru, Me.mnEdit, Me.mnHapus, Me.mnRefresh, Me.mnTutup, Me.mnSimpan, Me.BarSubItem1, Me.mnSaveLayouts, Me.mnFastEntri})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 8
+        Me.BarManager1.MaxItemId = 9
         '
         'Bar1
         '
@@ -758,7 +784,7 @@ Partial Class frmEntriJual
         Me.Bar1.DockCol = 0
         Me.Bar1.DockRow = 1
         Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.KeyTip, Me.mnBaru, "", False, True, True, 0, Nothing, DevExpress.XtraBars.BarItemPaintStyle.Standard, "F1", ""), New DevExpress.XtraBars.LinkPersistInfo(Me.mnEdit), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHapus), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.KeyTip, Me.mnBaru, "", False, True, True, 0, Nothing, DevExpress.XtraBars.BarItemPaintStyle.Standard, "F1", ""), New DevExpress.XtraBars.LinkPersistInfo(Me.mnEdit), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHapus), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup), New DevExpress.XtraBars.LinkPersistInfo(Me.mnFastEntri, True)})
         Me.Bar1.Text = "Tools"
         '
         'mnBaru
@@ -808,6 +834,13 @@ Partial Class frmEntriJual
         Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
         Me.mnTutup.Name = "mnTutup"
         Me.mnTutup.ShortcutKeyDisplayString = "F3"
+        '
+        'mnFastEntri
+        '
+        Me.mnFastEntri.Caption = "&Fast Entri (F7)"
+        Me.mnFastEntri.Id = 8
+        Me.mnFastEntri.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F7)
+        Me.mnFastEntri.Name = "mnFastEntri"
         '
         'Bar2
         '
@@ -881,6 +914,7 @@ Partial Class frmEntriJual
         Me.Text = "Entri Penjualan"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.txtFastEntri.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtGudang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -933,6 +967,7 @@ Partial Class frmEntriJual
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1005,4 +1040,7 @@ Partial Class frmEntriJual
     Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlGroup6 As DevExpress.XtraLayout.LayoutControlGroup
     Friend WithEvents LayoutControlItem18 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtFastEntri As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LayoutControlItem19 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents mnFastEntri As DevExpress.XtraBars.BarButtonItem
 End Class

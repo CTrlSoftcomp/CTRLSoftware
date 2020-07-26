@@ -36,12 +36,11 @@ Public Class frmDaftarBarang
     Dim reppicedit As New RepositoryItemPictureEdit
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        mnTutup.PerformClick()
     End Sub
 
     Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
-        RefreshData(-1)
+        mnRefresh.PerformClick()
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
@@ -113,19 +112,11 @@ Public Class frmDaftarBarang
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        Dim NamaFile As String = ""
-        NamaFile = Application.StartupPath & "\Report\Lap_MBarangAll.repx"
-        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Barang", "Lap_MBarangAll.repx", Me.ds)
+        mnPreview.PerformClick()
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
-        gridview = GridView1
-        If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-            End If
-        End If
+        mnHapus.PerformClick()
     End Sub
 
     Private Sub HapusData(ByVal NoID As Long)
@@ -161,19 +152,11 @@ Public Class frmDaftarBarang
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Using frm As New frmEntriBarang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                RefreshData(frm.NoID)
-            End If
-        End Using
+        mnEdit.PerformClick()
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Using frm As New frmEntriBarang(-1)
-            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                RefreshData(frm.NoID)
-            End If
-        End Using
+        mnBaru.PerformClick()
     End Sub
 
     Public Sub New(ByVal formName As String, ByVal caption As String)
@@ -350,5 +333,46 @@ Public Class frmDaftarBarang
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
+        Using frm As New frmEntriBarang(-1)
+            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                RefreshData(frm.NoID)
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
+        Using frm As New frmEntriBarang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+            If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                RefreshData(frm.NoID)
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
+        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+        gridview = GridView1
+        If gridview.RowCount >= 1 Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data Barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+            End If
+        End If
+    End Sub
+
+    Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
+        Dim NamaFile As String = ""
+        NamaFile = Application.StartupPath & "\Report\Lap_MBarangAll.repx"
+        ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Laporan Master Barang", "Lap_MBarangAll.repx", Me.ds)
+    End Sub
+
+    Private Sub mnRefresh_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnRefresh.ItemClick
+        RefreshData(-1)
+    End Sub
+
+    Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

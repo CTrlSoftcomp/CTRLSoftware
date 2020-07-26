@@ -37,12 +37,11 @@ Public Class frmDaftarTransaksi
     Private WithEvents frmHasilPosting As New frmHasilPosting(-1, -1)
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
+        mnTutup.PerformClick()
     End Sub
 
     Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
-        RefreshData(-1)
+        mnRefresh.PerformClick()
     End Sub
 
     Public Sub RefreshData(ByVal NoID As Long)
@@ -126,142 +125,11 @@ Public Class frmDaftarTransaksi
     End Sub
 
     Private Sub cmdCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCetak.Click
-        Dim NamaFile As String = "", Judul As String = ""
-        Using ds As New DataSet
-            Using con As New SqlConnection(StrKonSQL)
-                Using com As New SqlCommand
-                    Using oDA As New SqlDataAdapter
-                        Try
-                            con.Open()
-                            com.Connection = con
-                            com.CommandTimeout = con.ConnectionTimeout
-                            oDA.SelectCommand = com
-                            Select Case formName
-                                Case modMain.FormName.DaftarPO
-                                    Repository.PostingData.PostingPO(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMPO @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MPO.repx"
-                                    Judul = "Faktur Pesanan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarPembelian
-                                    Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMBeli @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MBeli.repx"
-                                    Judul = "Faktur Pembelian"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarReturPembelian
-                                    Repository.PostingData.PostingReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMReturBeli @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MReturBeli.repx"
-                                    Judul = "Faktur Retur Pembelian"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarPenjualan
-                                    Repository.PostingData.PostingJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMJual @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MJual.repx"
-                                    Judul = "Faktur Penjualan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarReturPenjualan
-                                    Repository.PostingData.PostingReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMReturJual @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MReturJual.repx"
-                                    Judul = "Faktur Retur Penjualan"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarMutasiGudang
-                                    Repository.PostingData.PostingMutasiGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMMutasiGudang @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MMutasiGudang.repx"
-                                    Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarPemakaian
-                                    Repository.PostingData.PostingPemakaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMPemakaian @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MPemakaian.repx"
-                                    Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                                Case modMain.FormName.DaftarPenyesuaian
-                                    Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-
-                                    com.CommandText = "spFakturMPenyesuaian @NoID"
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    oDA.Fill(ds, formName.ToString)
-                                    NamaFile = "Faktur_MPenyesuaian.repx"
-                                    Judul = "Faktur Mutasi Gudang"
-                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
-                            End Select
-                        Catch ex As Exception
-                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End Try
-                    End Using
-                End Using
-            End Using
-        End Using
+        mnPreview.PerformClick()
     End Sub
 
     Private Sub cmdHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdHapus.Click
-        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
-        gridview = GridView1
-        If gridview.RowCount >= 1 Then
-            Select Case formName
-                Case modMain.FormName.DaftarPO
-                    If XtraMessageBox.Show("Ingin menghapus data pesanan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarPembelian
-                    If XtraMessageBox.Show("Ingin menghapus data pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarReturPembelian
-                    If XtraMessageBox.Show("Ingin menghapus data retur pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarPenjualan
-                    If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarMutasiGudang
-                    If XtraMessageBox.Show("Ingin menghapus data mutasi gudang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarPemakaian
-                    If XtraMessageBox.Show("Ingin menghapus data pemakaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-                Case modMain.FormName.DaftarPenyesuaian
-                    If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
-                    End If
-            End Select
-        End If
+        mnHapus.PerformClick()
     End Sub
 
     Private Sub HapusData(ByVal NoID As Long)
@@ -357,93 +225,11 @@ Public Class frmDaftarTransaksi
     End Sub
 
     Private Sub cmdEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEdit.Click
-        Select Case formName
-            Case modMain.FormName.DaftarPO
-                Dim x As New frmEntriPO(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPembelian
-                Dim x As New frmEntriBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarReturPembelian
-                Dim x As New frmEntriReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPenjualan
-                Dim x As New frmEntriJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarReturPenjualan
-                Dim x As New frmEntriReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarMutasiGudang
-                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPemakaian
-                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPenyesuaian
-                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-        End Select
+        mnEdit.PerformClick()
     End Sub
 
     Private Sub cmdBaru_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBaru.Click
-        Select Case formName
-            Case modMain.FormName.DaftarPO
-                Dim x As New frmEntriPO(-1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPembelian
-                Dim x As New frmEntriBeli(-1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarReturPembelian
-                Dim x As New frmEntriReturBeli(-1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPenjualan
-                Dim x As New frmEntriJual(-1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarReturPenjualan
-                Dim x As New frmEntriReturJual(-1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarMutasiGudang
-                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, -1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPemakaian
-                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, -1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-            Case modMain.FormName.DaftarPenyesuaian
-                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, -1)
-                x.MdiParent = Me.MdiParent
-                x.Show()
-                x.Focus()
-        End Select
+        mnBaru.PerformClick()
     End Sub
 
     Public Sub New(ByVal formName As modMain.FormName, ByVal caption As String)
@@ -742,5 +528,243 @@ Public Class frmDaftarTransaksi
                 Cursor = MyCursor
             End Try
         End Using
+    End Sub
+
+    Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
+        Select Case formName
+            Case modMain.FormName.DaftarPO
+                Dim x As New frmEntriPO(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPembelian
+                Dim x As New frmEntriBeli(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarReturPembelian
+                Dim x As New frmEntriReturBeli(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenjualan
+                Dim x As New frmEntriJual(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarReturPenjualan
+                Dim x As New frmEntriReturJual(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarMutasiGudang
+                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, -1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPemakaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, -1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenyesuaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, -1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+        End Select
+    End Sub
+
+    Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
+        Select Case formName
+            Case modMain.FormName.DaftarPO
+                Dim x As New frmEntriPO(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPembelian
+                Dim x As New frmEntriBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarReturPembelian
+                Dim x As New frmEntriReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenjualan
+                Dim x As New frmEntriJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarReturPenjualan
+                Dim x As New frmEntriReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarMutasiGudang
+                Dim x As New frmEntriInternal(modMain.FormInternal.MutasiGudang, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPemakaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Pemakaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+            Case modMain.FormName.DaftarPenyesuaian
+                Dim x As New frmEntriInternal(modMain.FormInternal.Penyesuaian, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
+        End Select
+    End Sub
+
+    Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
+        Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+        gridview = GridView1
+        If gridview.RowCount >= 1 Then
+            Select Case formName
+                Case modMain.FormName.DaftarPO
+                    If XtraMessageBox.Show("Ingin menghapus data pesanan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPembelian
+                    If XtraMessageBox.Show("Ingin menghapus data pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarReturPembelian
+                    If XtraMessageBox.Show("Ingin menghapus data retur pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPenjualan
+                    If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarMutasiGudang
+                    If XtraMessageBox.Show("Ingin menghapus data mutasi gudang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPemakaian
+                    If XtraMessageBox.Show("Ingin menghapus data pemakaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarPenyesuaian
+                    If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+            End Select
+        End If
+    End Sub
+
+    Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
+        Dim NamaFile As String = "", Judul As String = ""
+        Using ds As New DataSet
+            Using con As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Try
+                            con.Open()
+                            com.Connection = con
+                            com.CommandTimeout = con.ConnectionTimeout
+                            oDA.SelectCommand = com
+                            Select Case formName
+                                Case modMain.FormName.DaftarPO
+                                    Repository.PostingData.PostingPO(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPO @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPO.repx"
+                                    Judul = "Faktur Pesanan"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPembelian
+                                    Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMBeli @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MBeli.repx"
+                                    Judul = "Faktur Pembelian"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarReturPembelian
+                                    Repository.PostingData.PostingReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMReturBeli @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MReturBeli.repx"
+                                    Judul = "Faktur Retur Pembelian"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPenjualan
+                                    Repository.PostingData.PostingJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMJual @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MJual.repx"
+                                    Judul = "Faktur Penjualan"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarReturPenjualan
+                                    Repository.PostingData.PostingReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMReturJual @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MReturJual.repx"
+                                    Judul = "Faktur Retur Penjualan"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarMutasiGudang
+                                    Repository.PostingData.PostingMutasiGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMMutasiGudang @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MMutasiGudang.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPemakaian
+                                    Repository.PostingData.PostingPemakaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPemakaian @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPemakaian.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarPenyesuaian
+                                    Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    com.CommandText = "spFakturMPenyesuaian @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MPenyesuaian.repx"
+                                    Judul = "Faktur Mutasi Gudang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                            End Select
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    Private Sub mnRefresh_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnRefresh.ItemClick
+        RefreshData(-1)
+    End Sub
+
+    Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

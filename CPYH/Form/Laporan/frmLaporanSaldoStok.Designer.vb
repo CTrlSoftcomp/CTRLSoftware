@@ -304,7 +304,7 @@ Partial Class frmLaporanSaldoStok
         '
         'mnCetak
         '
-        Me.mnCetak.Caption = "&Cetak (F8)"
+        Me.mnCetak.Caption = "&Preview (F8)"
         Me.mnCetak.Id = 4
         Me.mnCetak.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
         Me.mnCetak.Name = "mnCetak"

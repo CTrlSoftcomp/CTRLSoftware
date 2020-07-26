@@ -272,7 +272,7 @@ Namespace Repository
                                     For Each iRow As DataRow In dt.Rows
                                         Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
                                                                        .Kode = NullToStr(iRow.Item("Kode")), _
-                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                                                       .Nama = NullToStr(iRow.Item("Kode")) & "-" & NullToStr(iRow.Item("Nama"))})
                                     Next
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -306,7 +306,7 @@ Namespace Repository
                                     For Each iRow As DataRow In dt.Rows
                                         Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
                                                                        .Kode = NullToStr(iRow.Item("Kode")), _
-                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                                                       .Nama = NullToStr(iRow.Item("Kode")) & "-" & NullToStr(iRow.Item("Nama"))})
                                     Next
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -340,7 +340,7 @@ Namespace Repository
                                     For Each iRow As DataRow In dt.Rows
                                         Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
                                                                        .Kode = NullToStr(iRow.Item("Kode")), _
-                                                                       .Nama = NullToStr(iRow.Item("Nama")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                                                       .Nama = NullToStr(iRow.Item("Kode")) & "-" & NullToStr(iRow.Item("Nama"))})
                                     Next
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -369,6 +369,43 @@ Namespace Repository
                                     oDA.SelectCommand = com
 
                                     com.CommandText = "SELECT NoID, Kode, Nama FROM MMerk(NOLOCK) WHERE IsActive=1"
+                                    oDA.Fill(dt)
+
+                                    For Each iRow As DataRow In dt.Rows
+                                        Hasil.Add(New Model.Core With {.NoID = NullToLong(iRow.Item("NoID")), _
+                                                                       .Kode = NullToStr(iRow.Item("Kode")), _
+                                                                       .Nama = NullToStr(iRow.Item("Kode")) & "-" & NullToStr(iRow.Item("Nama"))})
+                                    Next
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                    Hasil.Clear()
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            Return Hasil
+        End Function
+        Public Shared Function GetBarangDetil(ByVal Barcode As String) As List(Of Model.Core)
+            Dim Hasil As New List(Of Model.Core)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using dt As New DataTable
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT B.NoID, B.Barcode Kode, A.Nama AS Nama FROM MBarang(NOLOCK) A INNER JOIN MBarangD(NOLOCK) B ON A.NoID=B.IDBarang WHERE A.IsActive=1 AND B.IsActive=1" & vbCrLf & _
+                                                      " AND (B.Barcode=@Barcode OR A.Kode=@Barcode) ORDER BY B.Konversi, A.Kode, B.Barcode"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@Barcode", SqlDbType.VarChar)).Value = Barcode
                                     oDA.Fill(dt)
 
                                     For Each iRow As DataRow In dt.Rows

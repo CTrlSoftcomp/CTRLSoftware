@@ -1,6 +1,6 @@
 ﻿<XtraSerializer version="1.0" application="LayoutControl">
   <property name="#LayoutVersion" />
-  <property name="Items" iskey="true" value="27">
+  <property name="Items" iskey="true" value="28">
     <property name="Item1" isnull="true" iskey="true">
       <property name="ExpandButtonMode">Normal</property>
       <property name="ExpandButtonVisible">false</property>
@@ -1244,10 +1244,10 @@
       <property name="TextVisible">true</property>
       <property name="ImageToTextDistance">5</property>
       <property name="MaxSize">@1,Width=0@1,Height=0</property>
-      <property name="MinSize">@2,Width=48@2,Height=44</property>
+      <property name="MinSize">@2,Width=57@2,Height=44</property>
       <property name="ShowInCustomizationForm">true</property>
-      <property name="Location">@1,X=0@3,Y=437</property>
-      <property name="Size">@3,Width=610@3,Height=156</property>
+      <property name="Location">@1,X=0@3,Y=465</property>
+      <property name="Size">@3,Width=610@3,Height=128</property>
       <property name="AppearanceItemCaption" isnull="true" iskey="true">
         <property name="Font">Segoe UI, 10pt</property>
         <property name="BackColor2" />
@@ -1278,7 +1278,7 @@
       <property name="TypeName">LayoutControlItem</property>
       <property name="ControlName">txtCatatan</property>
       <property name="SizeConstraintsType">Default</property>
-      <property name="TextSize">@2,Width=44@2,Height=17</property>
+      <property name="TextSize">@2,Width=53@2,Height=17</property>
       <property name="Visibility">Always</property>
       <property name="ImageIndex">-1</property>
       <property name="Image" isnull="true" />
@@ -1673,6 +1673,54 @@
       <property name="ImageIndex">-1</property>
       <property name="Image" isnull="true" />
       <property name="TextToControlDistance">0</property>
+      <property name="TextLocation">Left</property>
+    </property>
+    <property name="Item28" isnull="true" iskey="true">
+      <property name="ParentName">Root</property>
+      <property name="CustomizationFormText">Fast Entri</property>
+      <property name="Text">Fast Entri</property>
+      <property name="TextVisible">true</property>
+      <property name="ImageToTextDistance">5</property>
+      <property name="MaxSize">@1,Width=0@2,Height=28</property>
+      <property name="MinSize">@3,Width=110@2,Height=28</property>
+      <property name="ShowInCustomizationForm">true</property>
+      <property name="Location">@1,X=0@3,Y=437</property>
+      <property name="Size">@3,Width=610@2,Height=28</property>
+      <property name="AppearanceItemCaption" isnull="true" iskey="true">
+        <property name="Font">Segoe UI, 10pt</property>
+        <property name="BackColor2" />
+        <property name="BackColor" />
+        <property name="ForeColor" />
+        <property name="BorderColor" />
+        <property name="GradientMode">Horizontal</property>
+      </property>
+      <property name="OptionsCustomization" isnull="true" iskey="true">
+        <property name="AllowDrop">Default</property>
+        <property name="AllowDrag">Default</property>
+      </property>
+      <property name="OptionsToolTip" isnull="true" iskey="true">
+        <property name="IconToolTipTitle" />
+        <property name="IconToolTipIconType">None</property>
+        <property name="EnableIconToolTip">true</property>
+        <property name="IconToolTip" />
+        <property name="ToolTip" />
+        <property name="ToolTipTitle" />
+        <property name="ToolTipIconType">None</property>
+      </property>
+      <property name="ImageAlignment">MiddleLeft</property>
+      <property name="Padding">2, 2, 2, 2</property>
+      <property name="TextAlignMode">UseParentOptions</property>
+      <property name="Spacing">0, 0, 0, 0</property>
+      <property name="AllowHtmlStringInCaption">false</property>
+      <property name="Name">LayoutControlItem19</property>
+      <property name="TypeName">LayoutControlItem</property>
+      <property name="ControlName">txtFastEntri</property>
+      <property name="SizeConstraintsType">Default</property>
+      <property name="TextSize">@2,Width=53@2,Height=17</property>
+      <property name="Visibility">Always</property>
+      <property name="ImageIndex">-1</property>
+      <property name="Image" isnull="true" />
+      <property name="TextToControlDistance">3</property>
       <property name="TextLocation">Left</property>
     </property>
   </property>

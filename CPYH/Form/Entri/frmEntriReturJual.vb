@@ -747,7 +747,7 @@ Public Class frmEntriReturJual
     End Sub
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
-        If IIf(pStatus = pStatusForm.Baru, SimpanData(False), True) = True Then
+        If pStatusChange() Then
             Using frm As New frmEntriReturJualD(Me, -1, NoID, txtTypePajak.EditValue)
                 Try
                     If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
@@ -759,6 +759,14 @@ Public Class frmEntriReturJual
             End Using
         End If
     End Sub
+
+    Private Function pStatusChange() As Boolean
+        If pStatus = pStatusForm.Baru Then
+            Return SimpanData(False)
+        Else
+            Return True
+        End If
+    End Function
 
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick
         Using frm As New frmOtorisasi

@@ -34,6 +34,12 @@ Partial Class frmDaftarTransaksi
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
         Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
         Me.Bar1 = New DevExpress.XtraBars.Bar
+        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
+        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem
+        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
@@ -41,12 +47,6 @@ Partial Class frmDaftarTransaksi
         Me.mnPosting = New DevExpress.XtraBars.BarButtonItem
         Me.mnUnposting = New DevExpress.XtraBars.BarButtonItem
         Me.mnHasilPosting = New DevExpress.XtraBars.BarButtonItem
-        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
-        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem
-        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
-        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
-        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
         Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit
@@ -229,6 +229,48 @@ Partial Class frmDaftarTransaksi
         Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnBaru), New DevExpress.XtraBars.LinkPersistInfo(Me.mnEdit), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHapus), New DevExpress.XtraBars.LinkPersistInfo(Me.mnPreview, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup, True)})
         Me.Bar1.Text = "Custom 3"
         '
+        'mnBaru
+        '
+        Me.mnBaru.Caption = "&Baru (F1)"
+        Me.mnBaru.Id = 2
+        Me.mnBaru.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1)
+        Me.mnBaru.Name = "mnBaru"
+        '
+        'mnEdit
+        '
+        Me.mnEdit.Caption = "&Edit (F2)"
+        Me.mnEdit.Id = 3
+        Me.mnEdit.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
+        Me.mnEdit.Name = "mnEdit"
+        '
+        'mnHapus
+        '
+        Me.mnHapus.Caption = "&Hapus (F4)"
+        Me.mnHapus.Id = 4
+        Me.mnHapus.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F4)
+        Me.mnHapus.Name = "mnHapus"
+        '
+        'mnPreview
+        '
+        Me.mnPreview.Caption = "&Preview (F8)"
+        Me.mnPreview.Id = 5
+        Me.mnPreview.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
+        Me.mnPreview.Name = "mnPreview"
+        '
+        'mnRefresh
+        '
+        Me.mnRefresh.Caption = "&Refresh (F5)"
+        Me.mnRefresh.Id = 6
+        Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
+        Me.mnRefresh.Name = "mnRefresh"
+        '
+        'mnTutup
+        '
+        Me.mnTutup.Caption = "&Tutup (F3)"
+        Me.mnTutup.Id = 7
+        Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
+        Me.mnTutup.Name = "mnTutup"
+        '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
@@ -274,48 +316,6 @@ Partial Class frmDaftarTransaksi
         Me.mnHasilPosting.Caption = "&Hasil Posting"
         Me.mnHasilPosting.Id = 4
         Me.mnHasilPosting.Name = "mnHasilPosting"
-        '
-        'mnBaru
-        '
-        Me.mnBaru.Caption = "&Baru (F1)"
-        Me.mnBaru.Id = 2
-        Me.mnBaru.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1)
-        Me.mnBaru.Name = "mnBaru"
-        '
-        'mnEdit
-        '
-        Me.mnEdit.Caption = "&Edit (F2)"
-        Me.mnEdit.Id = 3
-        Me.mnEdit.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
-        Me.mnEdit.Name = "mnEdit"
-        '
-        'mnHapus
-        '
-        Me.mnHapus.Caption = "&Hapus (F4)"
-        Me.mnHapus.Id = 4
-        Me.mnHapus.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F4)
-        Me.mnHapus.Name = "mnHapus"
-        '
-        'mnPreview
-        '
-        Me.mnPreview.Caption = "&Preview (F8)"
-        Me.mnPreview.Id = 5
-        Me.mnPreview.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
-        Me.mnPreview.Name = "mnPreview"
-        '
-        'mnRefresh
-        '
-        Me.mnRefresh.Caption = "&Refresh (F5)"
-        Me.mnRefresh.Id = 6
-        Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
-        Me.mnRefresh.Name = "mnRefresh"
-        '
-        'mnTutup
-        '
-        Me.mnTutup.Caption = "&Tutup (F3)"
-        Me.mnTutup.Id = 7
-        Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
-        Me.mnTutup.Name = "mnTutup"
         '
         'LabelControl3
         '

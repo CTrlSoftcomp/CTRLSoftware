@@ -109,7 +109,7 @@ Public Class frmDaftarMaster
                                 If com.Transaction IsNot Nothing Then
                                     com.Transaction.Commit()
                                     com.Transaction = Nothing
-                                    cmdRefresh.PerformClick()
+                                    mnRefresh.PerformClick()
                                 End If
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

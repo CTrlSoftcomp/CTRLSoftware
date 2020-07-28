@@ -207,12 +207,19 @@ Public Class frmDaftarTransaksi
 
                                         com.CommandText = "DELETE FROM MPenyesuaian WHERE ISNULL(MPenyesuaian.IsPosted, 0)=0 AND MPenyesuaian.NoID=" & NoID
                                         com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarStockOpname
+                                        com.CommandText = "DELETE MStockOpnameD FROM MStockOpnameD INNER JOIN MStockOpname ON MStockOpname.NoID=MStockOpnameD.IDHeader WHERE ISNULL(MStockOpname.IsPosted, 0)=0 AND MStockOpname.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        com.CommandText = "DELETE FROM MStockOpname WHERE ISNULL(MStockOpname.IsPosted, 0)=0 AND MStockOpname.NoID=" & NoID
+                                        com.ExecuteNonQuery()
                                 End Select
 
                                 If com.Transaction IsNot Nothing Then
                                     com.Transaction.Commit()
                                     com.Transaction = Nothing
-                                    cmdRefresh.PerformClick()
+                                    mnRefresh.PerformClick()
                                 End If
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -391,7 +398,7 @@ Public Class frmDaftarTransaksi
                         Case Else
                             Exit For
                     End Select
-                    cmdRefresh.PerformClick()
+                    mnRefresh.PerformClick()
                 Next
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -455,7 +462,7 @@ Public Class frmDaftarTransaksi
                         Case Else
                             Exit For
                     End Select
-                    cmdRefresh.PerformClick()
+                    mnRefresh.PerformClick()
                 Next
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -572,6 +579,11 @@ Public Class frmDaftarTransaksi
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
+            Case modMain.FormName.DaftarStockOpname
+                Dim x As New frmEntriStockOpname(-1)
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
         End Select
     End Sub
 
@@ -617,6 +629,11 @@ Public Class frmDaftarTransaksi
                 x.MdiParent = Me.MdiParent
                 x.Show()
                 x.Focus()
+            Case modMain.FormName.DaftarStockOpname
+                Dim x As New frmEntriStockOpname(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                x.MdiParent = Me.MdiParent
+                x.Show()
+                x.Focus()
         End Select
     End Sub
 
@@ -651,6 +668,10 @@ Public Class frmDaftarTransaksi
                     End If
                 Case modMain.FormName.DaftarPenyesuaian
                     If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                    End If
+                Case modMain.FormName.DaftarStockOpname
+                    If XtraMessageBox.Show("Ingin menghapus data Stock Opname barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
             End Select
@@ -737,7 +758,7 @@ Public Class frmDaftarTransaksi
                                     com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MPemakaian.repx"
-                                    Judul = "Faktur Mutasi Gudang"
+                                    Judul = "Faktur Pemakaian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPenyesuaian
                                     Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
@@ -747,8 +768,18 @@ Public Class frmDaftarTransaksi
                                     com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                                     oDA.Fill(ds, formName.ToString)
                                     NamaFile = "Faktur_MPenyesuaian.repx"
-                                    Judul = "Faktur Mutasi Gudang"
+                                    Judul = "Faktur Penyesuaian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarStockOpname
+                                    'Repository.PostingData.PostingSt(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+
+                                    'com.CommandText = "spFakturMStockOpname @NoID"
+                                    'com.Parameters.Clear()
+                                    'com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    'oDA.Fill(ds, formName.ToString)
+                                    'NamaFile = "Faktur_MStockOpname.repx"
+                                    'Judul = "Faktur Stock Opname"
+                                    'ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -493,4 +493,8 @@ Public Class frmEntriJualD
             End Using
         End Using
     End Sub
+
+    Private Sub txtHarga_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtHarga.EditValueChanged
+
+    End Sub
 End Class

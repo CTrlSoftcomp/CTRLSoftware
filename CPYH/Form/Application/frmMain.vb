@@ -247,6 +247,19 @@ Public Class frmMain
                 End If
                 x.Show()
                 x.Focus()
+            Case "mnLapLabaRugi"
+                Dim x As frmLaporanLabaKotor = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmLaporanLabaKotor Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmLaporanLabaKotor(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1), UserLogin.TanggalSystem)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnSaldoStok"
                 Dim x As frmLaporanSaldoStok = Nothing
                 For Each frm In Me.MdiChildren

@@ -390,6 +390,18 @@
     <Compile Include="Form\frmDaftarMaster.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Laporan\frmLaporanPenjualanPalingLaku.Designer.vb">
+      <DependentUpon>frmLaporanPenjualanPalingLaku.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Laporan\frmLaporanPenjualanPalingLaku.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Laporan\frmLaporanLabaKotor.Designer.vb">
+      <DependentUpon>frmLaporanLabaKotor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Laporan\frmLaporanLabaKotor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Laporan\frmLaporanMutasiSaldoStok.Designer.vb">
       <DependentUpon>frmLaporanMutasiSaldoStok.vb</DependentUpon>
     </Compile>
@@ -544,6 +556,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDaftarMaster.resx">
       <DependentUpon>frmDaftarMaster.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Laporan\frmLaporanPenjualanPalingLaku.resx">
+      <DependentUpon>frmLaporanPenjualanPalingLaku.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Laporan\frmLaporanLabaKotor.resx">
+      <DependentUpon>frmLaporanLabaKotor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Laporan\frmLaporanMutasiSaldoStok.resx">
       <DependentUpon>frmLaporanMutasiSaldoStok.vb</DependentUpon>

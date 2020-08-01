@@ -113,7 +113,7 @@ Namespace Repository
                                                       "FROM MBarang" & vbCrLf & _
                                                       "INNER JOIN MBeliD ON MBeliD.IDBarang=MBarang.NoID" & vbCrLf & _
                                                       "INNER JOIN MBeli ON MBeliD.IDHeader=MBeli.NoID" & vbCrLf & _
-                                                      "WHERE ISNULL(MBeliD.Jumlah, 0)<>0 AND MBeli.NoID=" & NoID
+                                                      "WHERE (MBeliD.Qty*MBeliD.Konversi)<>0 AND ISNULL(MBeliD.Jumlah, 0)<>0 AND MBeli.NoID=" & NoID
                                     com.ExecuteNonQuery()
 
                                     com.Transaction.Commit()

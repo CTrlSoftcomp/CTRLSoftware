@@ -80,7 +80,9 @@ Public Class frmLaporanSaldoStok
                                     SQL = "SELECT DISTINCT MBarang.DefaultBarcode Barcode, MBarang.NoID, MBarang.Kode, MBarang.Nama, MBarang.Alias, MBarang.Keterangan, " & vbCrLf & _
                                             "CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END) Aktif, " & vbCrLf & _
                                             "MBarang.IsiCtn, MBarang.HargaBeliPcs, " & vbCrLf & _
-                                            "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori " & IIf(NamaFieldGudang = "", "", ", " & NamaFieldGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalFieldGudang = "", "", ", " & TotalFieldGudang.Replace("[", "TSaldoStok.[") & " AS TotalQty") & " " & vbCrLf & _
+                                            "MSupplier1.Nama Supplier, MSupplier2.Nama Supplier2, MSupplier3.Nama Supplier3, MTypePajak.TypePajak, MMerk.Nama AS [Merk], MKategori.Nama AS Kategori, " & vbCrLf & _
+                                            "MHistoryBeli.PembelianTerakhir, DATEDIFF(DAY, MHistoryBeli.PembelianTerakhir, '" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "') AS UmurBarang " & vbCrLf & _
+                                            IIf(NamaFieldGudang = "", "", ", " & NamaFieldGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalFieldGudang = "", "", ", " & TotalFieldGudang.Replace("[", "TSaldoStok.[") & " AS TotalQty") & " " & vbCrLf & _
                                             IIf(NamaNilaiGudang = "", "", ", " & NamaNilaiGudang.Replace("[", "TSaldoStok.[")) & " " & IIf(TotalNilaiGudang = "", "", ", " & TotalNilaiGudang.Replace("[", "TSaldoStok.[") & " AS NilaiPersediaan") & " " & vbCrLf & _
                                             "FROM MBarang (NOLOCK)" & vbCrLf & _
                                             "INNER JOIN MBarangD (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
@@ -90,6 +92,11 @@ Public Class frmLaporanSaldoStok
                                             "LEFT JOIN MAlamat MSupplier1 (NOLOCK) ON MSupplier1.NoID=MBarang.IDSupplier1" & vbCrLf & _
                                             "LEFT JOIN MAlamat MSupplier2 (NOLOCK) ON MSupplier2.NoID=MBarang.IDSupplier2" & vbCrLf & _
                                             "LEFT JOIN MAlamat MSupplier3 (NOLOCK) ON MSupplier3.NoID=MBarang.IDSupplier3" & vbCrLf & _
+                                            "LEFT JOIN (SELECT MAX(MBeli.Tanggal) AS PembelianTerakhir, MBeliD.IDBarang" & vbCrLf & _
+                                            "FROM MBeli(NOLOCK)" & vbCrLf & _
+                                            "INNER JOIN MBeliD(NOLOCK) ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
+                                            "WHERE CONVERT(DATE, MBeli.Tanggal)<='" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "'" & vbCrLf & _
+                                            "GROUP BY MBeliD.IDBarang) AS MHistoryBeli ON MHistoryBeli.IDBarang=MBarang.NoID" & vbCrLf & _
                                             IIf(NamaFieldGudang = "" AndAlso TotalFieldGudang = "", "", "LEFT JOIN (" & vbCrLf & _
                                             "SELECT IDBarang, " & TmpNamaFieldGudang & ", " & TmpTotalNilaiGudang & " FROM (SELECT * FROM (" & vbCrLf & _
                                             "SELECT A.IDBarang, B.Kode, 'Nilai ' + B.Kode AS Nilai, SUM(A.Konversi*(A.QtyMasuk-A.QtyKeluar)) AS SaldoAkhir, SUM(A.Debet-A.Kredit) AS NilaiAkhir" & vbCrLf & _

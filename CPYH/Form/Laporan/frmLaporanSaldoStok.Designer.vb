@@ -84,9 +84,9 @@ Partial Class frmLaporanSaldoStok
         Me.PanelControl1.Controls.Add(Me.cmdRefresh)
         Me.PanelControl1.Controls.Add(Me.cmdTutup)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 507)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 510)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(983, 51)
+        Me.PanelControl1.Size = New System.Drawing.Size(1008, 51)
         Me.PanelControl1.TabIndex = 0
         Me.PanelControl1.Visible = False
         '
@@ -107,7 +107,7 @@ Partial Class frmLaporanSaldoStok
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
         Me.cmdRefresh.ImageIndex = 3
-        Me.cmdRefresh.Location = New System.Drawing.Point(725, 5)
+        Me.cmdRefresh.Location = New System.Drawing.Point(750, 5)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
         Me.cmdRefresh.TabIndex = 4
@@ -119,7 +119,7 @@ Partial Class frmLaporanSaldoStok
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
         Me.cmdTutup.ImageIndex = 5
-        Me.cmdTutup.Location = New System.Drawing.Point(851, 5)
+        Me.cmdTutup.Location = New System.Drawing.Point(876, 5)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(120, 38)
         Me.cmdTutup.TabIndex = 5
@@ -140,13 +140,13 @@ Partial Class frmLaporanSaldoStok
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 51)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(983, 94)
+        Me.PanelControl2.Size = New System.Drawing.Size(1008, 94)
         Me.PanelControl2.TabIndex = 1
         '
         'LabelControl5
         '
         Me.LabelControl5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl5.Location = New System.Drawing.Point(399, 15)
+        Me.LabelControl5.Location = New System.Drawing.Point(424, 15)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl5.TabIndex = 11
@@ -156,7 +156,7 @@ Partial Class frmLaporanSaldoStok
         '
         Me.txtMerk.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMerk.EnterMoveNextControl = True
-        Me.txtMerk.Location = New System.Drawing.Point(428, 12)
+        Me.txtMerk.Location = New System.Drawing.Point(453, 12)
         Me.txtMerk.Name = "txtMerk"
         Me.txtMerk.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtMerk.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -175,7 +175,7 @@ Partial Class frmLaporanSaldoStok
         'LabelControl3
         '
         Me.LabelControl3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl3.Location = New System.Drawing.Point(701, 67)
+        Me.LabelControl3.Location = New System.Drawing.Point(726, 67)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(38, 13)
         Me.LabelControl3.TabIndex = 9
@@ -185,7 +185,7 @@ Partial Class frmLaporanSaldoStok
         '
         Me.txtSupplier.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSupplier.EnterMoveNextControl = True
-        Me.txtSupplier.Location = New System.Drawing.Point(745, 64)
+        Me.txtSupplier.Location = New System.Drawing.Point(770, 64)
         Me.txtSupplier.Name = "txtSupplier"
         Me.txtSupplier.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtSupplier.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -204,7 +204,7 @@ Partial Class frmLaporanSaldoStok
         'LabelControl4
         '
         Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl4.Location = New System.Drawing.Point(699, 41)
+        Me.LabelControl4.Location = New System.Drawing.Point(724, 41)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(40, 13)
         Me.LabelControl4.TabIndex = 7
@@ -214,7 +214,7 @@ Partial Class frmLaporanSaldoStok
         '
         Me.txtKategori.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtKategori.EnterMoveNextControl = True
-        Me.txtKategori.Location = New System.Drawing.Point(745, 38)
+        Me.txtKategori.Location = New System.Drawing.Point(770, 38)
         Me.txtKategori.Name = "txtKategori"
         Me.txtKategori.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtKategori.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -233,7 +233,7 @@ Partial Class frmLaporanSaldoStok
         'LabelControl2
         '
         Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl2.Location = New System.Drawing.Point(688, 15)
+        Me.LabelControl2.Location = New System.Drawing.Point(713, 15)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(51, 13)
         Me.LabelControl2.TabIndex = 3
@@ -244,7 +244,7 @@ Partial Class frmLaporanSaldoStok
         Me.DateEdit1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateEdit1.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
         Me.DateEdit1.EnterMoveNextControl = True
-        Me.DateEdit1.Location = New System.Drawing.Point(745, 12)
+        Me.DateEdit1.Location = New System.Drawing.Point(770, 12)
         Me.DateEdit1.MenuManager = Me.BarManager1
         Me.DateEdit1.Name = "DateEdit1"
         Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -328,28 +328,28 @@ Partial Class frmLaporanSaldoStok
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(983, 51)
+        Me.barDockControlTop.Size = New System.Drawing.Size(1008, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 558)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(983, 0)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 561)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1008, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 507)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 510)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(983, 51)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 507)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1008, 51)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 510)
         '
         'mnHistoryHarga
         '
@@ -366,7 +366,7 @@ Partial Class frmLaporanSaldoStok
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 15)
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 29)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(175, 25)
         Me.LabelControl1.TabIndex = 1
@@ -375,7 +375,7 @@ Partial Class frmLaporanSaldoStok
         'ckTdkAktif
         '
         Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 12)
+        Me.ckTdkAktif.Location = New System.Drawing.Point(876, 12)
         Me.ckTdkAktif.Name = "ckTdkAktif"
         Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
         Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
@@ -388,7 +388,7 @@ Partial Class frmLaporanSaldoStok
         Me.GridControl1.Location = New System.Drawing.Point(0, 145)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(983, 362)
+        Me.GridControl1.Size = New System.Drawing.Size(1008, 365)
         Me.GridControl1.TabIndex = 2
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -430,7 +430,7 @@ Partial Class frmLaporanSaldoStok
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(983, 558)
+        Me.ClientSize = New System.Drawing.Size(1008, 561)
         Me.Controls.Add(Me.GridControl1)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
@@ -438,6 +438,7 @@ Partial Class frmLaporanSaldoStok
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "frmLaporanSaldoStok"
         Me.Text = "Laporan Saldo Stok"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()

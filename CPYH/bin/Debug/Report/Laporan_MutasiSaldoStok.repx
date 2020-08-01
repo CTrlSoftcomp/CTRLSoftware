@@ -15,12 +15,16 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.XRTableCell tableCell8;
         private DevExpress.XtraReports.UI.XRTableCell tableCell9;
         private DevExpress.XtraReports.UI.XRTableCell tableCell10;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell14;
         private DevExpress.XtraReports.UI.XRTableCell tableCell11;
         private DevExpress.XtraReports.UI.XRTableCell tableCell12;
-        private DevExpress.XtraReports.UI.XRTableCell tableCell14;
         private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRLabel label13;
+        private DevExpress.XtraReports.UI.XRLabel label12;
+        private DevExpress.XtraReports.UI.XRLabel label11;
+        private DevExpress.XtraReports.UI.XRLabel label10;
         private DevExpress.XtraReports.UI.XRLabel label9;
         private DevExpress.XtraReports.UI.XRLabel label8;
         private DevExpress.XtraReports.UI.XRLabel label7;
@@ -37,15 +41,17 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.XRTableCell tableCell4;
         private DevExpress.XtraReports.UI.XRTableCell tableCell2;
         private DevExpress.XtraReports.UI.XRTableCell tableCell3;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell13;
         private DevExpress.XtraReports.UI.XRTableCell tableCell5;
         private DevExpress.XtraReports.UI.XRTableCell tableCell6;
-        private DevExpress.XtraReports.UI.XRTableCell tableCell13;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRLine line1;
         private DevExpress.XtraReports.UI.CalculatedField TglSampai;
         private DevExpress.XtraReports.UI.CalculatedField FilterKategori;
         private DevExpress.XtraReports.UI.CalculatedField FilterSupplier;
         private DevExpress.XtraReports.UI.CalculatedField FilterMerk;
+        private DevExpress.XtraReports.UI.CalculatedField TglDari;
+        private DevExpress.XtraReports.UI.CalculatedField FilterGudang;
         private System.Resources.ResourceManager _resources;
         public xtraReport1() {
             this.InitializeComponent();
@@ -75,10 +81,14 @@ namespace XtraReportSerialization {
             this.tableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.tableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.label13 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label12 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label11 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label10 = new DevExpress.XtraReports.UI.XRLabel();
             this.label9 = new DevExpress.XtraReports.UI.XRLabel();
             this.label8 = new DevExpress.XtraReports.UI.XRLabel();
             this.label7 = new DevExpress.XtraReports.UI.XRLabel();
@@ -94,14 +104,16 @@ namespace XtraReportSerialization {
             this.tableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.tableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
             this.line1 = new DevExpress.XtraReports.UI.XRLine();
             this.TglSampai = new DevExpress.XtraReports.UI.CalculatedField();
             this.FilterKategori = new DevExpress.XtraReports.UI.CalculatedField();
             this.FilterSupplier = new DevExpress.XtraReports.UI.CalculatedField();
             this.FilterMerk = new DevExpress.XtraReports.UI.CalculatedField();
+            this.TglDari = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterGudang = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -133,6 +145,10 @@ namespace XtraReportSerialization {
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label13,
+                        this.label12,
+                        this.label11,
+                        this.label10,
                         this.label9,
                         this.label8,
                         this.label7,
@@ -159,7 +175,7 @@ namespace XtraReportSerialization {
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
                         this.line1});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 37.04167F;
+            this.ReportFooter.HeightF = 34.39584F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // table2
@@ -188,9 +204,9 @@ namespace XtraReportSerialization {
                         this.tableCell8,
                         this.tableCell9,
                         this.tableCell10,
+                        this.tableCell14,
                         this.tableCell11,
-                        this.tableCell12,
-                        this.tableCell14});
+                        this.tableCell12});
             this.tableRow2.Dpi = 254F;
             this.tableRow2.Name = "tableRow2";
             this.tableRow2.Weight = 1;
@@ -229,51 +245,51 @@ namespace XtraReportSerialization {
             this.tableCell9.StylePriority.UseTextAlignment = false;
             this.tableCell9.Text = "Nama Barang";
             this.tableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.tableCell9.Weight = 1.2041665224891;
+            this.tableCell9.Weight = 1.09192988678536;
             // 
             // tableCell10
             // 
             this.tableCell10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.GD", "{0:n0}")});
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.SaldoAkhir", "{0:n0}")});
             this.tableCell10.Dpi = 254F;
             this.tableCell10.Name = "tableCell10";
             this.tableCell10.StylePriority.UseTextAlignment = false;
             this.tableCell10.Text = "GD";
             this.tableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell10.Weight = 0.29583245171442757;
-            // 
-            // tableCell11
-            // 
-            this.tableCell11.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.TK", "{0:n0}")});
-            this.tableCell11.Dpi = 254F;
-            this.tableCell11.Name = "tableCell11";
-            this.tableCell11.StylePriority.UseTextAlignment = false;
-            this.tableCell11.Text = "TK";
-            this.tableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell11.Weight = 0.2958269163650778;
-            // 
-            // tableCell12
-            // 
-            this.tableCell12.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.TotalQty", "{0:n0}")});
-            this.tableCell12.Dpi = 254F;
-            this.tableCell12.Name = "tableCell12";
-            this.tableCell12.StylePriority.UseTextAlignment = false;
-            this.tableCell12.Text = "TOTAL";
-            this.tableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell12.Weight = 0.29582663868981718;
+            this.tableCell10.Weight = 0.32701715157310329;
             // 
             // tableCell14
             // 
             this.tableCell14.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.UmurBarang", "{0:n0}")});
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.QtyMasuk", "{0:n0}")});
             this.tableCell14.Dpi = 254F;
             this.tableCell14.Name = "tableCell14";
             this.tableCell14.StylePriority.UseTextAlignment = false;
             this.tableCell14.Text = "tableCell14";
             this.tableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell14.Weight = 0.3083474002547778;
+            this.tableCell14.Weight = 0.32701715157310335;
+            // 
+            // tableCell11
+            // 
+            this.tableCell11.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.QtyKeluar", "{0:n0}")});
+            this.tableCell11.Dpi = 254F;
+            this.tableCell11.Name = "tableCell11";
+            this.tableCell11.StylePriority.UseTextAlignment = false;
+            this.tableCell11.Text = "TK";
+            this.tableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell11.Weight = 0.32701782760554282;
+            // 
+            // tableCell12
+            // 
+            this.tableCell12.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "MBarang.SaldoAkhir", "{0:n0}")});
+            this.tableCell12.Dpi = 254F;
+            this.tableCell12.Name = "tableCell12";
+            this.tableCell12.StylePriority.UseTextAlignment = false;
+            this.tableCell12.Text = "TOTAL";
+            this.tableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell12.Weight = 0.32701791197609109;
             // 
             // pageInfo1
             // 
@@ -284,6 +300,66 @@ namespace XtraReportSerialization {
             this.pageInfo1.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.pageInfo1.StylePriority.UseTextAlignment = false;
             this.pageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            // 
+            // label13
+            // 
+            this.label13.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterGudang", "{0:dd-MM-yyyy}")});
+            this.label13.Dpi = 254F;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label13.LocationFloat = new DevExpress.Utils.PointFloat(169.3333F, 159.1735F);
+            this.label13.Name = "label13";
+            this.label13.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label13.SizeF = new System.Drawing.SizeF(584.7292F, 58.42001F);
+            this.label13.StylePriority.UseFont = false;
+            this.label13.StylePriority.UsePadding = false;
+            this.label13.StylePriority.UseTextAlignment = false;
+            this.label13.Text = "Periode";
+            this.label13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // label12
+            // 
+            this.label12.Dpi = 254F;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.LocationFloat = new DevExpress.Utils.PointFloat(0F, 159.1735F);
+            this.label12.Name = "label12";
+            this.label12.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label12.SizeF = new System.Drawing.SizeF(169.3333F, 58.41999F);
+            this.label12.StylePriority.UseFont = false;
+            this.label12.StylePriority.UsePadding = false;
+            this.label12.StylePriority.UseTextAlignment = false;
+            this.label12.Text = "Gudang : ";
+            this.label12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Dpi = 254F;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label11.LocationFloat = new DevExpress.Utils.PointFloat(423.3333F, 100.7535F);
+            this.label11.Name = "label11";
+            this.label11.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label11.SizeF = new System.Drawing.SizeF(76.72916F, 58.41997F);
+            this.label11.StylePriority.UseFont = false;
+            this.label11.StylePriority.UsePadding = false;
+            this.label11.StylePriority.UseTextAlignment = false;
+            this.label11.Text = "s/d";
+            this.label11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "TglDari", "{0:dd-MM-yyyy}")});
+            this.label10.Dpi = 254F;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label10.LocationFloat = new DevExpress.Utils.PointFloat(169.3333F, 100.7535F);
+            this.label10.Name = "label10";
+            this.label10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.label10.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.label10.StylePriority.UseFont = false;
+            this.label10.StylePriority.UsePadding = false;
+            this.label10.StylePriority.UseTextAlignment = false;
+            this.label10.Text = "Periode";
+            this.label10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -381,7 +457,7 @@ namespace XtraReportSerialization {
                         new DevExpress.XtraReports.UI.XRBinding("Text", null, "TglSampai", "{0:dd-MM-yyyy}")});
             this.label3.Dpi = 254F;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(169.3333F, 100.7534F);
+            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(500.0625F, 100.7534F);
             this.label3.Name = "label3";
             this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
             this.label3.SizeF = new System.Drawing.SizeF(254F, 58.42F);
@@ -414,7 +490,7 @@ namespace XtraReportSerialization {
             this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label1.SizeF = new System.Drawing.SizeF(1905F, 100.7533F);
             this.label1.StylePriority.UseFont = false;
-            this.label1.Text = "LAPORAN SALDO PERSEDIAAN";
+            this.label1.Text = "LAPORAN MUTASI SALDO PERSEDIAAN";
             // 
             // table1
             // 
@@ -440,9 +516,9 @@ namespace XtraReportSerialization {
                         this.tableCell4,
                         this.tableCell2,
                         this.tableCell3,
+                        this.tableCell13,
                         this.tableCell5,
-                        this.tableCell6,
-                        this.tableCell13});
+                        this.tableCell6});
             this.tableRow1.Dpi = 254F;
             this.tableRow1.Name = "tableRow1";
             this.tableRow1.Weight = 1;
@@ -454,7 +530,7 @@ namespace XtraReportSerialization {
             this.tableCell1.StylePriority.UseTextAlignment = false;
             this.tableCell1.Text = "No.";
             this.tableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell1.Weight = 0.15416661246659008;
+            this.tableCell1.Weight = 0.13946247095208192;
             // 
             // tableCell4
             // 
@@ -463,7 +539,7 @@ namespace XtraReportSerialization {
             this.tableCell4.StylePriority.UseTextAlignment = false;
             this.tableCell4.Text = "Kode";
             this.tableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.tableCell4.Weight = 0.445833458020209;
+            this.tableCell4.Weight = 0.40331023094376595;
             // 
             // tableCell2
             // 
@@ -472,55 +548,55 @@ namespace XtraReportSerialization {
             this.tableCell2.StylePriority.UseTextAlignment = false;
             this.tableCell2.Text = "Nama Barang";
             this.tableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.tableCell2.Weight = 1.2041664504003329;
+            this.tableCell2.Weight = 0.98778241033807013;
             // 
             // tableCell3
             // 
             this.tableCell3.Dpi = 254F;
             this.tableCell3.Name = "tableCell3";
             this.tableCell3.StylePriority.UseTextAlignment = false;
-            this.tableCell3.Text = "GD";
+            this.tableCell3.Text = "Saldo Awal";
             this.tableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell3.Weight = 0.29583290827662007;
-            // 
-            // tableCell5
-            // 
-            this.tableCell5.Dpi = 254F;
-            this.tableCell5.Name = "tableCell5";
-            this.tableCell5.StylePriority.UseTextAlignment = false;
-            this.tableCell5.Text = "TK";
-            this.tableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell5.Weight = 0.29582677218754333;
-            // 
-            // tableCell6
-            // 
-            this.tableCell6.Dpi = 254F;
-            this.tableCell6.Name = "tableCell6";
-            this.tableCell6.StylePriority.UseTextAlignment = false;
-            this.tableCell6.Text = "TOTAL";
-            this.tableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell6.Weight = 0.29582678286735165;
+            this.tableCell3.Weight = 0.29582678887425251;
             // 
             // tableCell13
             // 
             this.tableCell13.Dpi = 254F;
             this.tableCell13.Name = "tableCell13";
             this.tableCell13.StylePriority.UseTextAlignment = false;
-            this.tableCell13.Text = "Umur";
+            this.tableCell13.Text = "Qty Masuk";
             this.tableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell13.Weight = 0.3083470157813526;
+            this.tableCell13.Weight = 0.29582677408484859;
+            // 
+            // tableCell5
+            // 
+            this.tableCell5.Dpi = 254F;
+            this.tableCell5.Name = "tableCell5";
+            this.tableCell5.StylePriority.UseTextAlignment = false;
+            this.tableCell5.Text = "Qty Keluar";
+            this.tableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell5.Weight = 0.29582680054097188;
+            // 
+            // tableCell6
+            // 
+            this.tableCell6.Dpi = 254F;
+            this.tableCell6.Name = "tableCell6";
+            this.tableCell6.StylePriority.UseTextAlignment = false;
+            this.tableCell6.Text = "Saldo Akhir";
+            this.tableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell6.Weight = 0.29582670036575842;
             // 
             // line1
             // 
             this.line1.Dpi = 254F;
             this.line1.LineWidth = 3;
-            this.line1.LocationFloat = new DevExpress.Utils.PointFloat(8.074442E-05F, 2.645833F);
+            this.line1.LocationFloat = new DevExpress.Utils.PointFloat(0.000565211F, 0F);
             this.line1.Name = "line1";
             this.line1.SizeF = new System.Drawing.SizeF(1905F, 34.39584F);
             // 
             // TglSampai
             // 
-            this.TglSampai.Expression = "#2020-08-01 13:13:16#";
+            this.TglSampai.Expression = "#2020-08-01 12:49:21#";
             this.TglSampai.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
             this.TglSampai.Name = "TglSampai";
             // 
@@ -542,6 +618,18 @@ namespace XtraReportSerialization {
             this.FilterMerk.FieldType = DevExpress.XtraReports.UI.FieldType.String;
             this.FilterMerk.Name = "FilterMerk";
             // 
+            // TglDari
+            // 
+            this.TglDari.Expression = "#2020-08-01 12:49:21#";
+            this.TglDari.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
+            this.TglDari.Name = "TglDari";
+            // 
+            // FilterGudang
+            // 
+            this.FilterGudang.Expression = "\'GD-GUDANG\'";
+            this.FilterGudang.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterGudang.Name = "FilterGudang";
+            // 
             // xtraReport1
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -555,11 +643,14 @@ namespace XtraReportSerialization {
                         this.TglSampai,
                         this.FilterKategori,
                         this.FilterSupplier,
-                        this.FilterMerk});
-            this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\LAPORAN_SALDOSTOK.xsd";
-            this.DisplayName = "Laporan_SaldoStok.repx";
+                        this.FilterMerk,
+                        this.TglDari,
+                        this.FilterGudang});
+            this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\LAPORAN_MUTASISALDOSTOK.xsd";
+            this.DisplayName = "Laporan_MutasiSaldoStok.repx";
             this.Dpi = 254F;
-            this.FilterString = "[TotalQty] <> 0.0m And [TotalQty] Is Not Null";
+            this.FilterString = "[SaldoAwal] <> 0.0m Or [QtyMasuk] <> 0.0m Or [QtyKeluar] <> 0.0m Or [SaldoAkhir] " +
+                "<> 0.0m";
             this.Margins = new System.Drawing.Printing.Margins(130, 124, 122, 127);
             this.Name = "xtraReport1";
             this.PageHeight = 2794;
@@ -573,9 +664,12 @@ namespace XtraReportSerialization {
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true)});
             this.SnapGridSize = 31.75F;
             this.Version = "10.2";
+            this.Watermark.Text = "DO NOT COPY CONTROL SOFTWARE";
             ((System.ComponentModel.ISupportInitialize)(this.table2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

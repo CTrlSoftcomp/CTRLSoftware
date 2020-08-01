@@ -242,7 +242,7 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmLaporanMutasiSaldoStok(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem)
+                    x = New frmLaporanMutasiSaldoStok(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1), UserLogin.TanggalSystem)
                     x.MdiParent = Me
                 End If
                 x.Show()

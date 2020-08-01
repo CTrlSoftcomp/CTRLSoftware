@@ -147,28 +147,28 @@ Partial Class frmLaporanKartuStok
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(684, 51)
+        Me.barDockControlTop.Size = New System.Drawing.Size(1008, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 461)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(684, 0)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 561)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1008, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 410)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 510)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(684, 51)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 410)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1008, 51)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 510)
         '
         'PanelControl2
         '
@@ -184,13 +184,13 @@ Partial Class frmLaporanKartuStok
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 51)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(684, 96)
+        Me.PanelControl2.Size = New System.Drawing.Size(1008, 94)
         Me.PanelControl2.TabIndex = 0
         '
         'LabelControl5
         '
         Me.LabelControl5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl5.Location = New System.Drawing.Point(402, 70)
+        Me.LabelControl5.Location = New System.Drawing.Point(726, 70)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl5.TabIndex = 7
@@ -199,7 +199,7 @@ Partial Class frmLaporanKartuStok
         'txtGudang
         '
         Me.txtGudang.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtGudang.Location = New System.Drawing.Point(445, 67)
+        Me.txtGudang.Location = New System.Drawing.Point(769, 67)
         Me.txtGudang.MenuManager = Me.BarManager1
         Me.txtGudang.Name = "txtGudang"
         Me.txtGudang.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -209,7 +209,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl4
         '
         Me.LabelControl4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl4.Location = New System.Drawing.Point(405, 44)
+        Me.LabelControl4.Location = New System.Drawing.Point(729, 44)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(34, 13)
         Me.LabelControl4.TabIndex = 5
@@ -219,7 +219,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.txtBarcode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBarcode.EnterMoveNextControl = True
-        Me.txtBarcode.Location = New System.Drawing.Point(445, 41)
+        Me.txtBarcode.Location = New System.Drawing.Point(769, 41)
         Me.txtBarcode.Name = "txtBarcode"
         Me.txtBarcode.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -240,7 +240,7 @@ Partial Class frmLaporanKartuStok
         Me.DateEdit2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateEdit2.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
         Me.DateEdit2.EnterMoveNextControl = True
-        Me.DateEdit2.Location = New System.Drawing.Point(572, 15)
+        Me.DateEdit2.Location = New System.Drawing.Point(896, 15)
         Me.DateEdit2.MenuManager = Me.BarManager1
         Me.DateEdit2.Name = "DateEdit2"
         Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -254,7 +254,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl3
         '
         Me.LabelControl3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl3.Location = New System.Drawing.Point(551, 19)
+        Me.LabelControl3.Location = New System.Drawing.Point(875, 19)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(15, 13)
         Me.LabelControl3.TabIndex = 3
@@ -263,7 +263,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl2
         '
         Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl2.Location = New System.Drawing.Point(403, 18)
+        Me.LabelControl2.Location = New System.Drawing.Point(727, 18)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(36, 13)
         Me.LabelControl2.TabIndex = 1
@@ -274,7 +274,7 @@ Partial Class frmLaporanKartuStok
         Me.DateEdit1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateEdit1.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
         Me.DateEdit1.EnterMoveNextControl = True
-        Me.DateEdit1.Location = New System.Drawing.Point(445, 15)
+        Me.DateEdit1.Location = New System.Drawing.Point(769, 15)
         Me.DateEdit1.MenuManager = Me.BarManager1
         Me.DateEdit1.Name = "DateEdit1"
         Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -288,7 +288,7 @@ Partial Class frmLaporanKartuStok
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 9)
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 32)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(174, 25)
         Me.LabelControl1.TabIndex = 0
@@ -305,9 +305,9 @@ Partial Class frmLaporanKartuStok
         Me.PanelControl1.Controls.Add(Me.lbSaldoAwal)
         Me.PanelControl1.Controls.Add(Me.LabelControl6)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 403)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 503)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(684, 58)
+        Me.PanelControl1.Size = New System.Drawing.Size(1008, 58)
         Me.PanelControl1.TabIndex = 4
         '
         'lbNilaiAkhir
@@ -316,7 +316,7 @@ Partial Class frmLaporanKartuStok
         Me.lbNilaiAkhir.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbNilaiAkhir.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.lbNilaiAkhir.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbNilaiAkhir.Location = New System.Drawing.Point(562, 32)
+        Me.lbNilaiAkhir.Location = New System.Drawing.Point(886, 32)
         Me.lbNilaiAkhir.Name = "lbNilaiAkhir"
         Me.lbNilaiAkhir.Size = New System.Drawing.Size(110, 21)
         Me.lbNilaiAkhir.TabIndex = 8
@@ -326,7 +326,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.LabelControl11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl11.Location = New System.Drawing.Point(483, 32)
+        Me.LabelControl11.Location = New System.Drawing.Point(807, 32)
         Me.LabelControl11.Name = "LabelControl11"
         Me.LabelControl11.Size = New System.Drawing.Size(73, 21)
         Me.LabelControl11.TabIndex = 7
@@ -338,7 +338,7 @@ Partial Class frmLaporanKartuStok
         Me.lbNilaiAwal.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbNilaiAwal.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.lbNilaiAwal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbNilaiAwal.Location = New System.Drawing.Point(562, 5)
+        Me.lbNilaiAwal.Location = New System.Drawing.Point(886, 5)
         Me.lbNilaiAwal.Name = "lbNilaiAwal"
         Me.lbNilaiAwal.Size = New System.Drawing.Size(110, 21)
         Me.lbNilaiAwal.TabIndex = 6
@@ -348,7 +348,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.LabelControl13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl13.Location = New System.Drawing.Point(483, 5)
+        Me.LabelControl13.Location = New System.Drawing.Point(807, 5)
         Me.LabelControl13.Name = "LabelControl13"
         Me.LabelControl13.Size = New System.Drawing.Size(70, 21)
         Me.LabelControl13.TabIndex = 5
@@ -360,7 +360,7 @@ Partial Class frmLaporanKartuStok
         Me.lbSaldoAkhir.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbSaldoAkhir.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.lbSaldoAkhir.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbSaldoAkhir.Location = New System.Drawing.Point(313, 32)
+        Me.lbSaldoAkhir.Location = New System.Drawing.Point(637, 32)
         Me.lbSaldoAkhir.Name = "lbSaldoAkhir"
         Me.lbSaldoAkhir.Size = New System.Drawing.Size(110, 21)
         Me.lbSaldoAkhir.TabIndex = 4
@@ -370,7 +370,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.LabelControl9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(227, 32)
+        Me.LabelControl9.Location = New System.Drawing.Point(551, 32)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(80, 21)
         Me.LabelControl9.TabIndex = 3
@@ -382,7 +382,7 @@ Partial Class frmLaporanKartuStok
         Me.lbSaldoAwal.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbSaldoAwal.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.lbSaldoAwal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
-        Me.lbSaldoAwal.Location = New System.Drawing.Point(313, 5)
+        Me.lbSaldoAwal.Location = New System.Drawing.Point(637, 5)
         Me.lbSaldoAwal.Name = "lbSaldoAwal"
         Me.lbSaldoAwal.Size = New System.Drawing.Size(110, 21)
         Me.lbSaldoAwal.TabIndex = 2
@@ -392,7 +392,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.LabelControl6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(227, 5)
+        Me.LabelControl6.Location = New System.Drawing.Point(551, 5)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(77, 21)
         Me.LabelControl6.TabIndex = 1
@@ -402,10 +402,10 @@ Partial Class frmLaporanKartuStok
         '
         Me.GridControl1.DataSource = Me.BindingSource1
         Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 147)
+        Me.GridControl1.Location = New System.Drawing.Point(0, 145)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(684, 256)
+        Me.GridControl1.Size = New System.Drawing.Size(1008, 358)
         Me.GridControl1.TabIndex = 5
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -431,7 +431,7 @@ Partial Class frmLaporanKartuStok
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(684, 461)
+        Me.ClientSize = New System.Drawing.Size(1008, 561)
         Me.Controls.Add(Me.GridControl1)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.PanelControl2)
@@ -439,7 +439,7 @@ Partial Class frmLaporanKartuStok
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.MinimumSize = New System.Drawing.Size(700, 500)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "frmLaporanKartuStok"
         Me.Text = "Laporan Kartu Stok"
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()

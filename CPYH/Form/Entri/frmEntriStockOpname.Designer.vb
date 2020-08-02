@@ -72,6 +72,7 @@ Partial Class frmEntriStockOpname
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.txtMerk.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -548,9 +549,9 @@ Partial Class frmEntriStockOpname
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.mnRefresh, Me.mnTutup, Me.mnSimpan, Me.BarSubItem1, Me.mnSaveLayouts, Me.mnGenerate})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.mnRefresh, Me.mnTutup, Me.mnSimpan, Me.BarSubItem1, Me.mnSaveLayouts, Me.mnGenerate, Me.mnPreview})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 9
+        Me.BarManager1.MaxItemId = 10
         '
         'Bar1
         '
@@ -558,7 +559,7 @@ Partial Class frmEntriStockOpname
         Me.Bar1.DockCol = 0
         Me.Bar1.DockRow = 1
         Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnGenerate, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnGenerate, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup), New DevExpress.XtraBars.LinkPersistInfo(Me.mnPreview, True)})
         Me.Bar1.Text = "Tools"
         '
         'mnGenerate
@@ -575,6 +576,7 @@ Partial Class frmEntriStockOpname
         Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
         Me.mnRefresh.Name = "mnRefresh"
         Me.mnRefresh.ShortcutKeyDisplayString = "F5"
+        Me.mnRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'mnSimpan
         '
@@ -649,6 +651,13 @@ Partial Class frmEntriStockOpname
         'DxErrorProvider1
         '
         Me.DxErrorProvider1.ContainerControl = Me
+        '
+        'mnPreview
+        '
+        Me.mnPreview.Caption = "&Preview (F8)"
+        Me.mnPreview.Id = 9
+        Me.mnPreview.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F8)
+        Me.mnPreview.Name = "mnPreview"
         '
         'frmEntriStockOpname
         '
@@ -758,4 +767,5 @@ Partial Class frmEntriStockOpname
     Friend WithEvents cmdGenerate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem5 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem6 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents mnPreview As DevExpress.XtraBars.BarButtonItem
 End Class

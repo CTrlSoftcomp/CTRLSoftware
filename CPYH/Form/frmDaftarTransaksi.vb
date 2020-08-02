@@ -395,6 +395,11 @@ Public Class frmDaftarTransaksi
                             If Not Repository.PostingData.PostingPenyesuaian(NoID) Then
                                 Exit For
                             End If
+                        Case modMain.FormName.DaftarStockOpname
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.PostingData.PostingStockOpname(NoID) Then
+                                Exit For
+                            End If
                         Case Else
                             Exit For
                     End Select
@@ -457,6 +462,11 @@ Public Class frmDaftarTransaksi
                         Case modMain.FormName.DaftarPenyesuaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             If Not Repository.UnPostingData.UnPostingPenyesuaian(NoID) Then
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarStockOpname
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            If Not Repository.UnPostingData.UnPostingStockOpname(NoID) Then
                                 Exit For
                             End If
                         Case Else
@@ -522,6 +532,12 @@ Public Class frmDaftarTransaksi
                         Case modMain.FormName.DaftarPenyesuaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             frmHasilPosting = New frmHasilPosting(NoID, 14)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarStockOpname
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 20)
                             frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
                             frmHasilPosting.Show()
                             frmHasilPosting.Focus()
@@ -771,15 +787,15 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Penyesuaian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarStockOpname
-                                    'Repository.PostingData.PostingSt(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    Repository.PostingData.PostingStockOpname(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
-                                    'com.CommandText = "spFakturMStockOpname @NoID"
-                                    'com.Parameters.Clear()
-                                    'com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                                    'oDA.Fill(ds, formName.ToString)
-                                    'NamaFile = "Faktur_MStockOpname.repx"
-                                    'Judul = "Faktur Stock Opname"
-                                    'ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                    com.CommandText = "spFakturMStockOpname @NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MStockOpname.repx"
+                                    Judul = "Faktur Stock Opname"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End Select
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

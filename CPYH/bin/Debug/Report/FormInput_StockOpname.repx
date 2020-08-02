@@ -1,0 +1,684 @@
+/// <XRTypeInfo>
+///   <AssemblyFullName>DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</AssemblyFullName>
+///   <AssemblyLocation>C:\WINDOWS\assembly\GAC_MSIL\DevExpress.XtraReports.v10.2\10.2.8.0__b88d1754d700e49a\DevExpress.XtraReports.v10.2.dll</AssemblyLocation>
+///   <TypeName>DevExpress.XtraReports.UI.XtraReport</TypeName>
+///   <Localization>en-US</Localization>
+/// </XRTypeInfo>
+namespace XtraReportSerialization {
+    
+    public class FORMINPUT_STOCKOPNAME : DevExpress.XtraReports.UI.XtraReport {
+        private DevExpress.XtraReports.UI.TopMarginBand topMarginBand1;
+        private DevExpress.XtraReports.UI.DetailBand detailBand1;
+        private DevExpress.XtraReports.UI.XRTable table2;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow2;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell7;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell8;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell9;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell10;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell11;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell12;
+        private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
+        private DevExpress.XtraReports.UI.XRLabel label18;
+        private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
+        private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRLabel label11;
+        private DevExpress.XtraReports.UI.XRLabel label10;
+        private DevExpress.XtraReports.UI.XRLabel label9;
+        private DevExpress.XtraReports.UI.XRLabel label8;
+        private DevExpress.XtraReports.UI.XRLabel label7;
+        private DevExpress.XtraReports.UI.XRLabel label6;
+        private DevExpress.XtraReports.UI.XRLabel label5;
+        private DevExpress.XtraReports.UI.XRLabel label4;
+        private DevExpress.XtraReports.UI.XRLabel label3;
+        private DevExpress.XtraReports.UI.XRLabel label2;
+        private DevExpress.XtraReports.UI.XRLabel label1;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
+        private DevExpress.XtraReports.UI.XRLabel label17;
+        private DevExpress.XtraReports.UI.XRLabel label16;
+        private DevExpress.XtraReports.UI.XRLabel label15;
+        private DevExpress.XtraReports.UI.XRLabel label14;
+        private DevExpress.XtraReports.UI.XRLabel label13;
+        private DevExpress.XtraReports.UI.XRLabel label12;
+        private DevExpress.XtraReports.UI.XRLine line1;
+        private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
+        private DevExpress.XtraReports.UI.XRTable table1;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow1;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell1;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell4;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell2;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell5;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell3;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell6;
+        private DevExpress.XtraReports.UI.CalculatedField Tanggal;
+        private DevExpress.XtraReports.UI.CalculatedField Gudang;
+        private DevExpress.XtraReports.UI.CalculatedField FilterKategori;
+        private DevExpress.XtraReports.UI.CalculatedField FilterMerk;
+        private DevExpress.XtraReports.UI.CalculatedField FilterSupplier;
+        private DevExpress.XtraReports.UI.CalculatedField PrintDate;
+        private System.Resources.ResourceManager _resources;
+        public FORMINPUT_STOCKOPNAME() {
+            this.InitializeComponent();
+        }
+        private System.Resources.ResourceManager resources {
+            get {
+                if (_resources == null) {
+                    string resourceString = "zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJza" +
+                        "W9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4O" +
+                        "SNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA";
+                    this._resources = new DevExpress.XtraReports.Serialization.XRResourceManager(resourceString);
+                }
+                return this._resources;
+            }
+        }
+        private void InitializeComponent() {
+            DevExpress.XtraReports.UI.XRSummary summary1 = new DevExpress.XtraReports.UI.XRSummary();
+            this.topMarginBand1 = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.detailBand1 = new DevExpress.XtraReports.UI.DetailBand();
+            this.bottomMarginBand1 = new DevExpress.XtraReports.UI.BottomMarginBand();
+            this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.table2 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.label18 = new DevExpress.XtraReports.UI.XRLabel();
+            this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.label11 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label10 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label9 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label8 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label7 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label4 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label17 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label16 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label15 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label14 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label13 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label12 = new DevExpress.XtraReports.UI.XRLabel();
+            this.line1 = new DevExpress.XtraReports.UI.XRLine();
+            this.table1 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.Tanggal = new DevExpress.XtraReports.UI.CalculatedField();
+            this.Gudang = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterKategori = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterMerk = new DevExpress.XtraReports.UI.CalculatedField();
+            this.FilterSupplier = new DevExpress.XtraReports.UI.CalculatedField();
+            this.PrintDate = new DevExpress.XtraReports.UI.CalculatedField();
+            ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            // 
+            // topMarginBand1
+            // 
+            this.topMarginBand1.Dpi = 254F;
+            this.topMarginBand1.HeightF = 127F;
+            this.topMarginBand1.Name = "topMarginBand1";
+            // 
+            // detailBand1
+            // 
+            this.detailBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table2});
+            this.detailBand1.Dpi = 254F;
+            this.detailBand1.HeightF = 82.02084F;
+            this.detailBand1.Name = "detailBand1";
+            // 
+            // bottomMarginBand1
+            // 
+            this.bottomMarginBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label18,
+                        this.pageInfo1});
+            this.bottomMarginBand1.Dpi = 254F;
+            this.bottomMarginBand1.HeightF = 127F;
+            this.bottomMarginBand1.Name = "bottomMarginBand1";
+            // 
+            // ReportHeader
+            // 
+            this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label11,
+                        this.label10,
+                        this.label9,
+                        this.label8,
+                        this.label7,
+                        this.label6,
+                        this.label5,
+                        this.label4,
+                        this.label3,
+                        this.label2,
+                        this.label1});
+            this.ReportHeader.Dpi = 254F;
+            this.ReportHeader.HeightF = 234.6559F;
+            this.ReportHeader.Name = "ReportHeader";
+            // 
+            // ReportFooter
+            // 
+            this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label17,
+                        this.label16,
+                        this.label15,
+                        this.label14,
+                        this.label13,
+                        this.label12,
+                        this.line1});
+            this.ReportFooter.Dpi = 254F;
+            this.ReportFooter.HeightF = 375.7083F;
+            this.ReportFooter.KeepTogether = true;
+            this.ReportFooter.Name = "ReportFooter";
+            this.ReportFooter.PrintAtBottom = true;
+            // 
+            // PageHeader
+            // 
+            this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table1});
+            this.PageHeader.Dpi = 254F;
+            this.PageHeader.HeightF = 82.02084F;
+            this.PageHeader.Name = "PageHeader";
+            // 
+            // table2
+            // 
+            this.table2.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.DashDot;
+            this.table2.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
+            this.table2.Dpi = 254F;
+            this.table2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table2.LocationFloat = new DevExpress.Utils.PointFloat(4.037221E-05F, 0F);
+            this.table2.Name = "table2";
+            this.table2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.table2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow2});
+            this.table2.SizeF = new System.Drawing.SizeF(1847F, 82.02084F);
+            this.table2.StylePriority.UseBorderDashStyle = false;
+            this.table2.StylePriority.UseBorders = false;
+            this.table2.StylePriority.UseFont = false;
+            this.table2.StylePriority.UsePadding = false;
+            this.table2.StylePriority.UseTextAlignment = false;
+            this.table2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // tableRow2
+            // 
+            this.tableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell7,
+                        this.tableCell8,
+                        this.tableCell9,
+                        this.tableCell10,
+                        this.tableCell11,
+                        this.tableCell12});
+            this.tableRow2.Dpi = 254F;
+            this.tableRow2.Name = "tableRow2";
+            this.tableRow2.Weight = 1;
+            // 
+            // tableCell7
+            // 
+            this.tableCell7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Detil.NoID")});
+            this.tableCell7.Dpi = 254F;
+            this.tableCell7.Name = "tableCell7";
+            this.tableCell7.StylePriority.UseTextAlignment = false;
+            summary1.FormatString = "{0:n0}";
+            summary1.Func = DevExpress.XtraReports.UI.SummaryFunc.RecordNumber;
+            summary1.IgnoreNullValues = true;
+            summary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.tableCell7.Summary = summary1;
+            this.tableCell7.Text = "tableCell7";
+            this.tableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell7.Weight = 0.19583331731360731;
+            // 
+            // tableCell8
+            // 
+            this.tableCell8.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Detil.Barcode")});
+            this.tableCell8.Dpi = 254F;
+            this.tableCell8.Name = "tableCell8";
+            this.tableCell8.StylePriority.UseTextAlignment = false;
+            this.tableCell8.Text = "Barcode";
+            this.tableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell8.Weight = 0.34999995194082184;
+            // 
+            // tableCell9
+            // 
+            this.tableCell9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Detil.KodeBarang")});
+            this.tableCell9.Dpi = 254F;
+            this.tableCell9.Name = "tableCell9";
+            this.tableCell9.StylePriority.UseTextAlignment = false;
+            this.tableCell9.Text = "Kode Barang";
+            this.tableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell9.Weight = 0.39166673074557085;
+            // 
+            // tableCell10
+            // 
+            this.tableCell10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Detil.NamaBarang")});
+            this.tableCell10.Dpi = 254F;
+            this.tableCell10.Name = "tableCell10";
+            this.tableCell10.StylePriority.UseTextAlignment = false;
+            this.tableCell10.Text = "Nama Barang";
+            this.tableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell10.Weight = 1.4124999999999999;
+            // 
+            // tableCell11
+            // 
+            this.tableCell11.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Detil.QtyKomputer", "{0:n0}")});
+            this.tableCell11.Dpi = 254F;
+            this.tableCell11.Name = "tableCell11";
+            this.tableCell11.StylePriority.UseTextAlignment = false;
+            this.tableCell11.Text = "Qty Komputer";
+            this.tableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell11.Weight = 0.38749999999999996;
+            // 
+            // tableCell12
+            // 
+            this.tableCell12.Dpi = 254F;
+            this.tableCell12.Name = "tableCell12";
+            this.tableCell12.StylePriority.UseTextAlignment = false;
+            this.tableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell12.Weight = 0.26249999999999996;
+            // 
+            // label18
+            // 
+            this.label18.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "PrintDate", "Print On : {0:dd-MM-yyyy HH:mm:ss}")});
+            this.label18.Dpi = 254F;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label18.LocationFloat = new DevExpress.Utils.PointFloat(13.22917F, 24.99993F);
+            this.label18.Name = "label18";
+            this.label18.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label18.SizeF = new System.Drawing.SizeF(879.604F, 58.41996F);
+            this.label18.StylePriority.UseFont = false;
+            this.label18.Text = "label18";
+            // 
+            // pageInfo1
+            // 
+            this.pageInfo1.Dpi = 254F;
+            this.pageInfo1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.pageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(1568F, 24.99993F);
+            this.pageInfo1.Name = "pageInfo1";
+            this.pageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.pageInfo1.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.pageInfo1.StylePriority.UseFont = false;
+            this.pageInfo1.StylePriority.UseTextAlignment = false;
+            this.pageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            // 
+            // label11
+            // 
+            this.label11.Dpi = 254F;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label11.LocationFloat = new DevExpress.Utils.PointFloat(1062.671F, 176.2359F);
+            this.label11.Name = "label11";
+            this.label11.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label11.SizeF = new System.Drawing.SizeF(193.146F, 58.42F);
+            this.label11.StylePriority.UseFont = false;
+            this.label11.Text = "Supplier";
+            // 
+            // label10
+            // 
+            this.label10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterSupplier", ": {0:}")});
+            this.label10.Dpi = 254F;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label10.LocationFloat = new DevExpress.Utils.PointFloat(1258.462F, 176.2359F);
+            this.label10.Name = "label10";
+            this.label10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label10.SizeF = new System.Drawing.SizeF(584.729F, 58.42F);
+            this.label10.StylePriority.UseFont = false;
+            this.label10.Text = "Tanggal";
+            // 
+            // label9
+            // 
+            this.label9.Dpi = 254F;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.LocationFloat = new DevExpress.Utils.PointFloat(1062.671F, 117.8159F);
+            this.label9.Name = "label9";
+            this.label9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label9.SizeF = new System.Drawing.SizeF(193.146F, 58.42F);
+            this.label9.StylePriority.UseFont = false;
+            this.label9.Text = "Merk";
+            // 
+            // label8
+            // 
+            this.label8.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterMerk", ": {0:}")});
+            this.label8.Dpi = 254F;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.LocationFloat = new DevExpress.Utils.PointFloat(1258.462F, 117.8159F);
+            this.label8.Name = "label8";
+            this.label8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label8.SizeF = new System.Drawing.SizeF(584.729F, 58.42F);
+            this.label8.StylePriority.UseFont = false;
+            this.label8.Text = "Tanggal";
+            // 
+            // label7
+            // 
+            this.label7.Dpi = 254F;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label7.LocationFloat = new DevExpress.Utils.PointFloat(1062.671F, 59.39592F);
+            this.label7.Name = "label7";
+            this.label7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label7.SizeF = new System.Drawing.SizeF(193.146F, 58.41999F);
+            this.label7.StylePriority.UseFont = false;
+            this.label7.Text = "Kategori";
+            // 
+            // label6
+            // 
+            this.label6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "FilterKategori", ": {0:}")});
+            this.label6.Dpi = 254F;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label6.LocationFloat = new DevExpress.Utils.PointFloat(1258.462F, 59.39592F);
+            this.label6.Name = "label6";
+            this.label6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label6.SizeF = new System.Drawing.SizeF(584.729F, 58.42F);
+            this.label6.StylePriority.UseFont = false;
+            this.label6.Text = "Tanggal";
+            // 
+            // label5
+            // 
+            this.label5.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Tanggal", ": {0:dd-MM-yyyy HH:mm:ss}")});
+            this.label5.Dpi = 254F;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label5.LocationFloat = new DevExpress.Utils.PointFloat(308.1042F, 117.8159F);
+            this.label5.Name = "label5";
+            this.label5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label5.SizeF = new System.Drawing.SizeF(584.729F, 58.42F);
+            this.label5.StylePriority.UseFont = false;
+            this.label5.Text = "Tanggal";
+            // 
+            // label4
+            // 
+            this.label4.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "Gudang", ": {0:}")});
+            this.label4.Dpi = 254F;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label4.LocationFloat = new DevExpress.Utils.PointFloat(308.1042F, 176.2359F);
+            this.label4.Name = "label4";
+            this.label4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label4.SizeF = new System.Drawing.SizeF(584.7291F, 58.41997F);
+            this.label4.StylePriority.UseFont = false;
+            this.label4.Text = "Gudang / Lokasi";
+            // 
+            // label3
+            // 
+            this.label3.Dpi = 254F;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(25.00001F, 176.2359F);
+            this.label3.Name = "label3";
+            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label3.SizeF = new System.Drawing.SizeF(283.1042F, 58.41997F);
+            this.label3.StylePriority.UseFont = false;
+            this.label3.Text = "Gudang / Lokasi";
+            // 
+            // label2
+            // 
+            this.label2.Dpi = 254F;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label2.LocationFloat = new DevExpress.Utils.PointFloat(25.00001F, 117.8159F);
+            this.label2.Name = "label2";
+            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label2.SizeF = new System.Drawing.SizeF(283.1042F, 58.42F);
+            this.label2.StylePriority.UseFont = false;
+            this.label2.Text = "Tanggal";
+            // 
+            // label1
+            // 
+            this.label1.AutoWidth = true;
+            this.label1.Dpi = 254F;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F);
+            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(25.00001F, 25.00001F);
+            this.label1.Name = "label1";
+            this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label1.SizeF = new System.Drawing.SizeF(867.8333F, 92.81584F);
+            this.label1.StylePriority.UseFont = false;
+            this.label1.Text = "Form Input Stock Opname";
+            // 
+            // label17
+            // 
+            this.label17.Dpi = 254F;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label17.LocationFloat = new DevExpress.Utils.PointFloat(1320.271F, 148.3783F);
+            this.label17.Name = "label17";
+            this.label17.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label17.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.label17.StylePriority.UseFont = false;
+            this.label17.Text = "Finish Take  : ";
+            // 
+            // label16
+            // 
+            this.label16.Dpi = 254F;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label16.LocationFloat = new DevExpress.Utils.PointFloat(1320.271F, 89.95834F);
+            this.label16.Name = "label16";
+            this.label16.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label16.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.label16.StylePriority.UseFont = false;
+            this.label16.Text = "Start Take   : ";
+            // 
+            // label15
+            // 
+            this.label15.Dpi = 254F;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F);
+            this.label15.LocationFloat = new DevExpress.Utils.PointFloat(509.1875F, 317.2884F);
+            this.label15.Name = "label15";
+            this.label15.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label15.SizeF = new System.Drawing.SizeF(383.6458F, 58.41999F);
+            this.label15.StylePriority.UseFont = false;
+            this.label15.StylePriority.UseTextAlignment = false;
+            this.label15.Text = "(                              )";
+            this.label15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // label14
+            // 
+            this.label14.Dpi = 254F;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F);
+            this.label14.LocationFloat = new DevExpress.Utils.PointFloat(1.187589F, 317.2884F);
+            this.label14.Name = "label14";
+            this.label14.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label14.SizeF = new System.Drawing.SizeF(383.6458F, 58.41999F);
+            this.label14.StylePriority.UseFont = false;
+            this.label14.StylePriority.UseTextAlignment = false;
+            this.label14.Text = "(                              )";
+            this.label14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // label13
+            // 
+            this.label13.Dpi = 254F;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F);
+            this.label13.LocationFloat = new DevExpress.Utils.PointFloat(509.1875F, 89.95834F);
+            this.label13.Name = "label13";
+            this.label13.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label13.SizeF = new System.Drawing.SizeF(383.6458F, 58.41999F);
+            this.label13.StylePriority.UseFont = false;
+            this.label13.StylePriority.UseTextAlignment = false;
+            this.label13.Text = "Admin,";
+            this.label13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.Dpi = 254F;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F);
+            this.label12.LocationFloat = new DevExpress.Utils.PointFloat(4.037221E-05F, 89.95834F);
+            this.label12.Name = "label12";
+            this.label12.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label12.SizeF = new System.Drawing.SizeF(383.6458F, 58.41999F);
+            this.label12.StylePriority.UseFont = false;
+            this.label12.StylePriority.UseTextAlignment = false;
+            this.label12.Text = "Penanggung Jawab,";
+            this.label12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // line1
+            // 
+            this.line1.Dpi = 254F;
+            this.line1.LineWidth = 3;
+            this.line1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.line1.Name = "line1";
+            this.line1.SizeF = new System.Drawing.SizeF(1847F, 31.75F);
+            // 
+            // table1
+            // 
+            this.table1.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.table1.Dpi = 254F;
+            this.table1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.table1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.table1.Name = "table1";
+            this.table1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 254F);
+            this.table1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow1});
+            this.table1.SizeF = new System.Drawing.SizeF(1847F, 82.02084F);
+            this.table1.StylePriority.UseBorders = false;
+            this.table1.StylePriority.UseFont = false;
+            this.table1.StylePriority.UsePadding = false;
+            this.table1.StylePriority.UseTextAlignment = false;
+            this.table1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // tableRow1
+            // 
+            this.tableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell1,
+                        this.tableCell4,
+                        this.tableCell2,
+                        this.tableCell5,
+                        this.tableCell3,
+                        this.tableCell6});
+            this.tableRow1.Dpi = 254F;
+            this.tableRow1.Name = "tableRow1";
+            this.tableRow1.Weight = 1;
+            // 
+            // tableCell1
+            // 
+            this.tableCell1.Dpi = 254F;
+            this.tableCell1.Name = "tableCell1";
+            this.tableCell1.StylePriority.UseTextAlignment = false;
+            this.tableCell1.Text = "No.";
+            this.tableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell1.Weight = 0.19583331731360731;
+            // 
+            // tableCell4
+            // 
+            this.tableCell4.Dpi = 254F;
+            this.tableCell4.Name = "tableCell4";
+            this.tableCell4.StylePriority.UseTextAlignment = false;
+            this.tableCell4.Text = "Barcode";
+            this.tableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell4.Weight = 0.34999995194082184;
+            // 
+            // tableCell2
+            // 
+            this.tableCell2.Dpi = 254F;
+            this.tableCell2.Name = "tableCell2";
+            this.tableCell2.StylePriority.UseTextAlignment = false;
+            this.tableCell2.Text = "Kode Barang";
+            this.tableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell2.Weight = 0.39166673074557085;
+            // 
+            // tableCell5
+            // 
+            this.tableCell5.Dpi = 254F;
+            this.tableCell5.Name = "tableCell5";
+            this.tableCell5.StylePriority.UseTextAlignment = false;
+            this.tableCell5.Text = "Nama Barang";
+            this.tableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell5.Weight = 1.4124999999999999;
+            // 
+            // tableCell3
+            // 
+            this.tableCell3.Dpi = 254F;
+            this.tableCell3.Name = "tableCell3";
+            this.tableCell3.StylePriority.UseTextAlignment = false;
+            this.tableCell3.Text = "Qty Komputer";
+            this.tableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell3.Weight = 0.38749999999999996;
+            // 
+            // tableCell6
+            // 
+            this.tableCell6.Dpi = 254F;
+            this.tableCell6.Name = "tableCell6";
+            this.tableCell6.StylePriority.UseTextAlignment = false;
+            this.tableCell6.Text = "Qty Fisik";
+            this.tableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell6.Weight = 0.26249999999999996;
+            // 
+            // Tanggal
+            // 
+            this.Tanggal.Expression = "#2020-01-01#";
+            this.Tanggal.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
+            this.Tanggal.Name = "Tanggal";
+            // 
+            // Gudang
+            // 
+            this.Gudang.Expression = "\'Gudang\'";
+            this.Gudang.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.Gudang.Name = "Gudang";
+            // 
+            // FilterKategori
+            // 
+            this.FilterKategori.Expression = "\'ALL\'";
+            this.FilterKategori.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterKategori.Name = "FilterKategori";
+            // 
+            // FilterMerk
+            // 
+            this.FilterMerk.Expression = "\'ALL\'";
+            this.FilterMerk.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterMerk.Name = "FilterMerk";
+            // 
+            // FilterSupplier
+            // 
+            this.FilterSupplier.Expression = "\'ALL\'";
+            this.FilterSupplier.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.FilterSupplier.Name = "FilterSupplier";
+            // 
+            // PrintDate
+            // 
+            this.PrintDate.Expression = "Now()";
+            this.PrintDate.FieldType = DevExpress.XtraReports.UI.FieldType.DateTime;
+            this.PrintDate.Name = "PrintDate";
+            // 
+            // FORMINPUT_STOCKOPNAME
+            // 
+            this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.topMarginBand1,
+                        this.detailBand1,
+                        this.bottomMarginBand1,
+                        this.ReportHeader,
+                        this.ReportFooter,
+                        this.PageHeader});
+            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
+                        this.Tanggal,
+                        this.Gudang,
+                        this.FilterKategori,
+                        this.FilterMerk,
+                        this.FilterSupplier,
+                        this.PrintDate});
+            this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\FORMINPUT_STOCKOPNAME.xsd";
+            this.DisplayName = "FormInput_StockOpname.repx";
+            this.Dpi = 254F;
+            this.Margins = new System.Drawing.Printing.Margins(127, 127, 127, 127);
+            this.Name = "FORMINPUT_STOCKOPNAME";
+            this.PageHeight = 2969;
+            this.PageWidth = 2101;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
+            this.SnapGridSize = 31.75F;
+            this.Version = "10.2";
+            this.Watermark.Text = "DRAFT FORM STOCK OPNAME";
+            ((System.ComponentModel.ISupportInitialize)(this.table2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+        }
+    }
+}

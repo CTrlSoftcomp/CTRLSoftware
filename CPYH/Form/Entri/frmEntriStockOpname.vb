@@ -4,6 +4,7 @@ Imports DevExpress.XtraEditors
 Imports System.Data
 Imports System.Data.SqlClient
 Imports DevExpress.Utils
+Imports CtrlSoft.CetakDX
 
 Public Class frmEntriStockOpname
     Private NoID As Long = -1
@@ -14,6 +15,9 @@ Public Class frmEntriStockOpname
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
     Dim repCalcEdit As New RepositoryItemCalcEdit
+
+    Private dsEntri As New DataSet
+    Private bsEntri As New BindingSource
 
     Private Property NamaForm() As String
         Get
@@ -125,6 +129,7 @@ Public Class frmEntriStockOpname
         End Using
     End Sub
     Private Sub RefreshDetil(Optional ByVal IDDetil As Long = -1)
+        Dim IsGenerateUlang As Boolean = True
         Using dlg As New DevExpress.Utils.WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
             Using cn As New SqlConnection(StrKonSQL)
                 Using com As New SqlCommand
@@ -139,7 +144,15 @@ Public Class frmEntriStockOpname
                                 com.CommandTimeout = cn.ConnectionTimeout
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "DECLARE @IDGudang AS BIGINT= " & NullToLong(txtGudangAsal.EditValue) & ";" & vbCrLf & _
+                                If RowHasChanged AndAlso _
+                                XtraMessageBox.Show("Ingin menggenerate ulang data yang telah diinput?" & vbCrLf & _
+                                                    "Entrian Qty Fisik akan dinolkan.", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) = _
+                                                    Windows.Forms.DialogResult.No Then
+                                    IsGenerateUlang = False
+                                End If
+
+                                If IsGenerateUlang Then
+                                    com.CommandText = "DECLARE @IDGudang AS BIGINT= " & NullToLong(txtGudangAsal.EditValue) & ";" & vbCrLf & _
                                                   "DECLARE @Tanggal AS DATETIME= '" & txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "';" & vbCrLf & _
                                                   "DECLARE @IDHeader AS BIGINT= " & NoID & ";" & vbCrLf & _
                                                   "SELECT MBarang.NoID, " & vbCrLf & _
@@ -180,53 +193,66 @@ Public Class frmEntriStockOpname
                                                   "GROUP BY MStockOpnameD.IDBarang" & vbCrLf & _
                                                   ") AS MStockOpnameD ON MStockOpnameD.IDBarang = MBarang.NoID" & vbCrLf & _
                                                   "WHERE (MBarang.IsActive=1 OR ISNULL(MSaldo.Saldo, 0)<>0 OR ISNULL(MStockOpnameD.QtyFisik, 0)<>0)"
-                                If NoID <= 0 Then
-                                    com.CommandText &= vbCrLf & " AND MBarang.NoID=-100"
-                                End If
-                                If NullToLong(txtKategori.EditValue) >= 1 Then
-                                    com.CommandText &= vbCrLf & " AND MBarang.IDKategori=" & NullToLong(txtKategori.EditValue)
-                                End If
-                                If NullToLong(txtSupplier.EditValue) >= 1 Then
-                                    com.CommandText &= vbCrLf & " AND (MBarang.IDSupplier1=" & NullToLong(txtKategori.EditValue) & " OR MBarang.IDSupplier2=" & NullToLong(txtKategori.EditValue) & " OR MBarang.IDSupplier3=" & NullToLong(txtKategori.EditValue) & ")"
-                                End If
-                                If NullToLong(txtMerk.EditValue) >= 1 Then
-                                    com.CommandText &= vbCrLf & " AND MBarang.IDMerk=" & NullToLong(txtMerk.EditValue)
-                                End If
-                                oDA.Fill(ds, "M" & NamaForm & "D")
-                                GridControl1.DataSource = ds.Tables("M" & NamaForm & "D")
-                                GridView1.RefreshData()
+                                    If NoID <= 0 Then
+                                        com.CommandText &= vbCrLf & " AND MBarang.NoID=-100"
+                                    End If
+                                    If NullToLong(txtKategori.EditValue) >= 1 Then
+                                        com.CommandText &= vbCrLf & " AND MBarang.IDKategori=" & NullToLong(txtKategori.EditValue)
+                                    End If
+                                    If NullToLong(txtSupplier.EditValue) >= 1 Then
+                                        com.CommandText &= vbCrLf & " AND (MBarang.IDSupplier1=" & NullToLong(txtKategori.EditValue) & " OR MBarang.IDSupplier2=" & NullToLong(txtKategori.EditValue) & " OR MBarang.IDSupplier3=" & NullToLong(txtKategori.EditValue) & ")"
+                                    End If
+                                    If NullToLong(txtMerk.EditValue) >= 1 Then
+                                        com.CommandText &= vbCrLf & " AND MBarang.IDMerk=" & NullToLong(txtMerk.EditValue)
+                                    End If
 
-                                GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), IDDetil.ToString("n0"))
-                                GridView1.SelectRow(GridView1.FocusedRowHandle)
+                                    dsEntri.Dispose()
+                                    dsEntri = New DataSet
 
-                                If ds.Tables("M" & NamaForm & "D").Rows.Count >= 1 Then
-                                    txtGudangAsal.Enabled = False
-                                    txtTanggal.Enabled = False
-                                Else
-                                    txtGudangAsal.Enabled = True
-                                    txtTanggal.Enabled = True
-                                End If
+                                    oDA.Fill(dsEntri, "Detil")
+                                    bsEntri.Dispose()
+                                    bsEntri = New BindingSource
+                                    bsEntri.DataSource = dsEntri.Tables("Detil")
 
-                                If pStatus = pStatusForm.Posted Then
-                                    mnGenerate.Enabled = False
-                                    cmdGenerate.Enabled = False
-                                    mnSimpan.Enabled = False
-                                Else
-                                    mnGenerate.Enabled = True
-                                    cmdGenerate.Enabled = True
-                                    mnSimpan.Enabled = True
-                                End If
+                                    GridControl1.DataSource = bsEntri
+                                    GridView1.RefreshData()
 
-                                com.CommandText = "SELECT SUM(M" & NamaForm & "D.Jumlah) Jumlah" & vbCrLf & _
-                                                  "FROM M" & NamaForm & "D INNER JOIN M" & NamaForm & " ON M" & NamaForm & ".NoID=M" & NamaForm & "D.IDHeader" & vbCrLf & _
-                                                  "WHERE M" & NamaForm & ".NoID=" & NoID & vbCrLf & _
-                                                  "GROUP BY M" & NamaForm & ".NoID"
-                                oDA.Fill(ds, "MHitung")
-                                If ds.Tables("MHitung").Rows.Count >= 1 Then
-                                    txtTotal.EditValue = NullToDbl(ds.Tables("MHitung").Rows(0).Item("Jumlah"))
-                                Else
-                                    txtTotal.EditValue = 0
+                                    GridView1.ClearSelection()
+                                    GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), IDDetil.ToString("n0"))
+                                    GridView1.SelectRow(GridView1.FocusedRowHandle)
+
+                                    If dsEntri.Tables("Detil").Rows.Count >= 1 Then
+                                        txtGudangAsal.Enabled = False
+                                        txtTanggal.Enabled = False
+                                    Else
+                                        txtGudangAsal.Enabled = True
+                                        txtTanggal.Enabled = True
+                                    End If
+
+                                    If pStatus = pStatusForm.Posted Then
+                                        mnGenerate.Enabled = False
+                                        cmdGenerate.Enabled = False
+                                        mnSimpan.Enabled = False
+                                        GridView1.OptionsBehavior.Editable = False
+                                        mnPreview.Enabled = False
+                                    Else
+                                        mnGenerate.Enabled = True
+                                        cmdGenerate.Enabled = True
+                                        mnSimpan.Enabled = True
+                                        GridView1.OptionsBehavior.Editable = True
+                                        mnPreview.Enabled = True
+                                    End If
+
+                                    com.CommandText = "SELECT SUM(M" & NamaForm & "D.Jumlah) Jumlah" & vbCrLf & _
+                                                      "FROM M" & NamaForm & "D INNER JOIN M" & NamaForm & " ON M" & NamaForm & ".NoID=M" & NamaForm & "D.IDHeader" & vbCrLf & _
+                                                      "WHERE M" & NamaForm & ".NoID=" & NoID & vbCrLf & _
+                                                      "GROUP BY M" & NamaForm & ".NoID"
+                                    oDA.Fill(ds, "MHitung")
+                                    If ds.Tables("MHitung").Rows.Count >= 1 Then
+                                        txtTotal.EditValue = NullToDbl(ds.Tables("MHitung").Rows(0).Item("Jumlah"))
+                                    Else
+                                        txtTotal.EditValue = 0
+                                    End If
                                 End If
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -275,6 +301,39 @@ Public Class frmEntriStockOpname
                                 End If
 
                                 If Not DxErrorProvider1.HasErrors Then
+                                    If pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
+                                        'Simpan Detil
+                                        com.CommandText = "DELETE FROM M" & NamaForm & "D WHERE IDHeader=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                        Dim IDDetil As Long = -1
+                                        com.CommandText = "SELECT MAX(NoID) FROM M" & NamaForm & "D(NOLOCK)"
+                                        IDDetil = NullToLong(com.ExecuteScalar())
+                                        For Each iRow As DataRow In dsEntri.Tables("Detil").Rows
+                                            If Not (NullToDbl(iRow.Item("QtyKomputer")) = 0 AndAlso NullToDbl(iRow.Item("QtyFisik")) = 0) Then
+                                                com.CommandText = "INSERT INTO M" & NamaForm & "D(NoID, IDHeader, IDBarangD, IDBarang, IDSatuan, Konversi, QtyKomputer, QtyFisik, Qty, HPP, Jumlah, Keterangan)" & vbCrLf & _
+                                                                  "SELECT ISNULL(@NoID, 0) + 1 NoID, @IDHeader IDHeader, MAX(MBarangD.NoID) IDBarangD, @IDBarang, MBarangD.IDSatuan, 1 Konversi, @QtyKomputer, @QtyFisik, @QtySelisih, @HPP, @Jumlah, @Keterangan" & vbCrLf & _
+                                                                  "FROM MBarang(NOLOCK)" & vbCrLf & _
+                                                                  "INNER JOIN MBarangD(NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                                                  "WHERE MBarang.NoID=@IDBarang AND MBarangD.Konversi=1" & vbCrLf & _
+                                                                  "GROUP BY MBarangD.IDSatuan"
+                                                com.Parameters.Clear()
+                                                IDDetil += 1
+                                                com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = IDDetil
+                                                com.Parameters.Add(New SqlParameter("@IDHeader", SqlDbType.BigInt)).Value = NoID
+                                                com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = NullToLong(iRow.Item("NoID"))
+                                                com.Parameters.Add(New SqlParameter("@QtyKomputer", SqlDbType.Decimal)).Value = NullToDbl(iRow.Item("QtyKomputer"))
+                                                com.Parameters.Add(New SqlParameter("@QtyFisik", SqlDbType.Decimal)).Value = NullToDbl(iRow.Item("QtyFisik"))
+                                                com.Parameters.Add(New SqlParameter("@QtySelisih", SqlDbType.Decimal)).Value = NullToDbl(iRow.Item("QtySelisih"))
+                                                com.Parameters.Add(New SqlParameter("@HPP", SqlDbType.Money)).Value = NullToDbl(iRow.Item("HargaBeliPcs"))
+                                                com.Parameters.Add(New SqlParameter("@Jumlah", SqlDbType.Money)).Value = NullToDbl(iRow.Item("Jumlah"))
+                                                com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = ""
+                                                com.ExecuteNonQuery()
+                                            End If
+                                            Application.DoEvents()
+                                        Next
+                                    End If
+
                                     com.CommandText = "EXEC [dbo].[spSimpanM" & NamaForm & "] @NoID,@Kode,@NoReff,@Tanggal,@Catatan,@Total,@IsPosted,@TglPosted,@IDUserPosted,@IDUserEntry,@IDUserEdit,@IDGudangAsal"
                                     com.Parameters.Clear()
                                     com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
@@ -384,8 +443,22 @@ Public Class frmEntriStockOpname
         End Try
     End Sub
 
+    Private IsHitung As Boolean = False, RowHasChanged As Boolean = False
     Private Sub GridView1_CellValueChanged(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GridView1.CellValueChanged
-
+        If Not IsHitung Then
+            IsHitung = True
+            Try
+                Select Case e.Column.FieldName.ToLower
+                    Case "QtyFisik".ToLower
+                        bsEntri.Current.Item("QtySelisih") = NullToDbl(bsEntri.Current.Item("QtyKomputer")) - NullToDbl(bsEntri.Current.Item("QtyFisik"))
+                        bsEntri.Current.Item("Jumlah") = Bulatkan(NullToDbl(bsEntri.Current.Item("HargaBeliPcs")) * NullToDbl(bsEntri.Current.Item("QtySelisih")), 2)
+                        RowHasChanged = True
+                End Select
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+            IsHitung = False
+        End If
     End Sub
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, _
@@ -489,9 +562,9 @@ Public Class frmEntriStockOpname
         'If txtTotal.EditValue < 0 Then
         '    DxErrorProvider1.SetError(txtTotal, "Total PeM" & NamaForm & "an salah!", DXErrorProvider.ErrorType.Critical)
         'End If
-        If Not pStatus = pStatusForm.Baru AndAlso Not CekDetil() Then
-            DxErrorProvider1.SetError(txtKode, "Item masih kosong!", DXErrorProvider.ErrorType.Critical)
-        End If
+        'If Not pStatus = pStatusForm.Baru AndAlso Not CekDetil() Then
+        '    DxErrorProvider1.SetError(txtKode, "Item masih kosong!", DXErrorProvider.ErrorType.Critical)
+        'End If
 
         Return Not DxErrorProvider1.HasErrors
     End Function
@@ -514,10 +587,8 @@ Public Class frmEntriStockOpname
         Select Case e.FocusedColumn.FieldName.ToLower
             Case "QtyFisik".ToLower
                 e.FocusedColumn.OptionsColumn.AllowEdit = True
-                GridView1.OptionsBehavior.Editable = True
             Case Else
                 e.FocusedColumn.OptionsColumn.AllowEdit = False
-                GridView1.OptionsBehavior.Editable = True
         End Select
     End Sub
 
@@ -527,5 +598,31 @@ Public Class frmEntriStockOpname
                 e.Column.AppearanceCell.BackColor = Color.YellowGreen
                 e.Column.AppearanceCell.BackColor2 = Color.YellowGreen
         End Select
+    End Sub
+
+    Private Sub mnPreview_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPreview.ItemClick
+        If pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
+            Dim NamaFile As String = ""
+            NamaFile = Application.StartupPath & "\Report\FormInput_StockOpname.repx"
+            Dim CalculateFields As New List(Of Model.CetakDX.CalculateFields)
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "Gudang", _
+                                                                        .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                        .Value = txtGudangAsal.Text})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "Tanggal", _
+                                                                        .Type = Model.CetakDX.CalculateFields.iType.VariantDateTime, _
+                                                                        .Value = txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss")})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterKategori", _
+                                                                        .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                        .Value = IIf(NullToLong(txtKategori.EditValue) >= 1, txtKategori.Text, "ALL")})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterSupplier", _
+                                                                        .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                        .Value = IIf(NullToLong(txtSupplier.EditValue) >= 1, txtSupplier.Text, "ALL")})
+            CalculateFields.Add(New Model.CetakDX.CalculateFields With {.Name = "FilterMerk", _
+                                                                        .Type = Model.CetakDX.CalculateFields.iType.String, _
+                                                                        .Value = IIf(NullToLong(txtMerk.EditValue) >= 1, txtMerk.Text, "ALL")})
+            ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), NamaFile, "Form Input Stock Opname", "FormInput_StockOpname.repx", Me.dsEntri, , CalculateFields)
+        Else
+            XtraMessageBox.Show("Posisi Preview masih tertutup, Klik Generate atau Unposting data Terlebih dahulu!", NamaAplikasi, MessageBoxButtons.OK)
+        End If
     End Sub
 End Class

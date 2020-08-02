@@ -551,5 +551,72 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function PostingStockOpname(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MStockOpnameD.*, MStockOpname.Total, MStockOpname.Tanggal, MStockOpname.IDGudang" & vbCrLf & _
+                                                  "FROM MStockOpnameD" & vbCrLf & _
+                                                  "INNER JOIN MStockOpname ON MStockOpname.NoID=MStockOpnameD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MStockOpname.IsPosted,0)=0 AND MStockOpname.NoID=" & NoID
+                                oDA.Fill(ds, "MStockOpname")
+                                If ds.Tables("MStockOpname").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MStockOpname SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 20 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    'Hitung Selisih, Jumlah, dan Total
+                                    com.CommandText = "UPDATE MStockOpnameD SET QtyKomputer=ISNULL(MSaldo.Saldo, 0), Qty=ISNULL(MSaldo.Saldo, 0)-ISNULL(MStockOpnameD.QtyFisik, 0), Jumlah=ROUND(ISNULL(MStockOpnameD.HPP, 0)*(ISNULL(MSaldo.Saldo, 0)-ISNULL(MStockOpnameD.QtyFisik, 0)), 2)" & vbCrLf & _
+                                                      "FROM MStockOpnameD" & vbCrLf & _
+                                                      "INNER JOIN MStockOpname ON MStockOpname.NoID=MStockOpnameD.IDHeader" & vbCrLf & _
+                                                      "LEFT JOIN (SELECT MKartuStok.IDBarang, SUM(MKartuStok.Konversi*(MKartuStok.QtyMasuk-MKartuStok.QtyKeluar)) AS Saldo FROM MKartuStok(NOLOCK) WHERE MKartuStok.IDGudang=@IDGudang AND MKartuStok.Tanggal<=@Tanggal GROUP BY MKartuStok.IDBarang) MSaldo ON MSaldo.IDBarang=MStockOpnameD.IDBarang" & vbCrLf & _
+                                                      "WHERE MStockOpname.NoID=@NoID"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                    com.Parameters.Add(New SqlParameter("@IDGudang", SqlDbType.Int)).Value = NullToLong(ds.Tables("MStockOpname").Rows(0).Item("IDGudang"))
+                                    com.Parameters.Add(New SqlParameter("@Tanggal", SqlDbType.DateTime)).Value = NullToDate(ds.Tables("MStockOpname").Rows(0).Item("Tanggal"))
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "UPDATE MStockOpname SET Total=ISNULL(MStockOpnameD.Jumlah, 0)" & vbCrLf & _
+                                                      "FROM MStockOpname " & vbCrLf & _
+                                                      "INNER JOIN (SELECT IDHeader, SUM(Jumlah) AS Jumlah FROM MStockOpnameD GROUP BY IDHeader) AS MStockOpnameD ON MStockOpnameD.IDHeader=MStockOpname.NoID " & vbCrLf & _
+                                                      "WHERE MStockOpname.NoID=" & NoID
+                                    com.Parameters.Clear()
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
+                                                      ",[NilaiAkhir])" & vbCrLf & _
+                                                      "SELECT MStockOpname.[Tanggal],MStockOpnameD.[IDBarang],MStockOpnameD.[IDBarangD],''[Varian],20 [IDJenisTransaksi],MStockOpname.NoID [IDTransaksi],MStockOpnameD.NoID [IDTransaksiD],MStockOpname.IDGudang [IDGudang]" & vbCrLf & _
+                                                      ",MStockOpnameD.IDSatuan [IDSatuan],MStockOpnameD.Konversi [Konversi],MStockOpnameD.Qty [QtyMasuk],0 [QtyKeluar],MStockOpnameD.Jumlah [Debet],0 [Kredit],0 [HargaBeli],MStockOpnameD.HPP [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
+                                                      "FROM MStockOpnameD" & vbCrLf & _
+                                                      "INNER JOIN MStockOpname ON MStockOpname.NoID=MStockOpnameD.IDHeader" & vbCrLf & _
+                                                      "WHERE MStockOpname.NoID=" & NullToLong(NoID)
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

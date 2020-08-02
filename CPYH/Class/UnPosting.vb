@@ -340,5 +340,42 @@ Namespace Repository
             End Using
             Return Hasil
         End Function
+        Public Shared Function UnPostingStockOpname(ByVal NoID As Long) As Boolean
+            Dim Hasil As Boolean = False
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MStockOpnameD.*, MStockOpname.Total, MStockOpname.Tanggal, MStockOpname.Kode AS KdTransaksi" & vbCrLf & _
+                                                  "FROM MStockOpnameD" & vbCrLf & _
+                                                  "INNER JOIN MStockOpname ON MStockOpname.NoID=MStockOpnameD.IDHeader" & vbCrLf & _
+                                                  "WHERE ISNULL(MStockOpname.IsPosted,0)=1 AND MStockOpname.NoID=" & NoID
+                                oDA.Fill(ds, "MStockOpname")
+                                If ds.Tables("MStockOpname").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MStockOpname SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 20 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    Hasil = True
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

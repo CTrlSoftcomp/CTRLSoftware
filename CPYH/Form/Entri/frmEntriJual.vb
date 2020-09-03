@@ -1,9 +1,11 @@
-﻿Imports CtrlSoft.Utils
-Imports DevExpress.XtraEditors.Repository
+﻿Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraEditors
 Imports System.Data
 Imports System.Data.SqlClient
 Imports DevExpress.Utils
+Imports CtrlSoft.Ini
+Imports CtrlSoft.Utils
+Imports CtrlSoft.CetakDX
 
 Public Class frmEntriJual
     Private NoID As Long = -1
@@ -155,11 +157,13 @@ Public Class frmEntriJual
                                     mnEdit.Enabled = False
                                     mnHapus.Enabled = False
                                     mnSimpan.Enabled = False
+                                    mnCetak.Enabled = True
                                 Else
                                     mnBaru.Enabled = True
                                     mnEdit.Enabled = True
                                     mnHapus.Enabled = True
                                     mnSimpan.Enabled = True
+                                    mnCetak.Enabled = False
                                 End If
 
                                 com.CommandText = "SELECT SUM(MJualD.JumlahBruto) JumlahBruto, SUM(MJualD.Jumlah) Jumlah, SUM(MJualD.DPP) DPP, SUM(MJualD.PPN) PPN" & vbCrLf & _
@@ -792,20 +796,22 @@ Public Class frmEntriJual
                 pStatus = pStatusForm.Edit
                 LoadData()
             ElseIf pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
-                Dim x As frmDaftarTransaksi = Nothing
-                For Each frm In Me.MdiParent.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
-                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPenjualan.ToString Then
-                        x = frm
-                    End If
-                Next
-                If x IsNot Nothing Then
-                    x.RefreshData(NoID)
-                    x.Show()
-                    x.Focus()
+                Repository.PostingData.PostingJual(NoID)
+                LoadData()
+                RefreshDetil()
+                If pStatus = pStatusForm.Posted Then
+                    mnBaru.Enabled = False
+                    mnEdit.Enabled = False
+                    mnHapus.Enabled = False
+                    mnSimpan.Enabled = False
+                    mnCetak.Enabled = True
+                Else
+                    mnBaru.Enabled = True
+                    mnEdit.Enabled = True
+                    mnHapus.Enabled = True
+                    mnSimpan.Enabled = True
+                    mnCetak.Enabled = False
                 End If
-                DialogResult = Windows.Forms.DialogResult.OK
-                Me.Close()
             End If
         End If
     End Sub
@@ -859,5 +865,36 @@ Public Class frmEntriJual
                     End If
                 End If
         End Select
+    End Sub
+
+    Private Sub mnCetak_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnCetak.ItemClick
+        Dim NamaFile As String = "", Judul As String = ""
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "SELECT IsPosted FROM MJual(NOLOCK) WHERE NoID=" & NoID
+                            If NullToBool(com.ExecuteScalar()) Then
+                                com.CommandText = "spFakturMJual @NoID"
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                oDA.Fill(ds, "MJual")
+                                NamaFile = "Faktur_MJual.repx"
+                                Judul = "Faktur Penjualan"
+                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                            End If
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
     End Sub
 End Class

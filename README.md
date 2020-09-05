@@ -1,4 +1,4 @@
-[CTRL Software]
+[CTRL Software][![Donate](https://drive.google.com/uc?id=1xMCT4JG2PnX-8QwXmwIwpxMalKejfQ0h)](https://github.com/mrthx89/CPYH/wiki/Cara-Berkontribusi)
 -------------------
 
 Apa itu CTRL Software?

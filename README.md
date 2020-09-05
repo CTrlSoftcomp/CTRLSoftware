@@ -1,4 +1,5 @@
 [CTRL Software]
+-------------------
 
 Apa itu CTRL Software?
 -------------------
@@ -30,9 +31,7 @@ Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukun
 
 Tool Development Lainnya
 -----------------------------------------------
-* [pgAdmin](https://www.pgadmin.org/) - PostgreSQL administration and management tools
-* [SQL Manager Lite for PostgreSQL](http://www.sqlmanager.net/products/postgresql/manager/download) - Database Management for PostgreSQL
-* [Liquibase](http://www.liquibase.org/) - Database Refactoring 
+* [Management Studio](https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms?view=sql-server-ver15) - SQL Server administration and management tools
 
 Lisensi
 -----------------------------------------------

@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DaftarPembelian">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NoID" type="xs:long" minOccurs="0" />
+              <xs:element name="Konversi" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Qty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Harga" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscProsen1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscProsen2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscProsen3" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscProsen4" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscProsen5" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscRp" type="xs:decimal" minOccurs="0" />
+              <xs:element name="JumlahBruto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DPP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PPN" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Jumlah" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Kode" type="xs:string" minOccurs="0" />
+              <xs:element name="UserEntry" type="xs:string" minOccurs="0" />
+              <xs:element name="UserEdit" type="xs:string" minOccurs="0" />
+              <xs:element name="UserPosted" type="xs:string" minOccurs="0" />
+              <xs:element name="KodeSupplier" type="xs:string" minOccurs="0" />
+              <xs:element name="NamaSupplier" type="xs:string" minOccurs="0" />
+              <xs:element name="TypePajak" type="xs:string" minOccurs="0" />
+              <xs:element name="NoReff" type="xs:string" minOccurs="0" />
+              <xs:element name="Tanggal" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Catatan" type="xs:string" minOccurs="0" />
+              <xs:element name="Subtotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscNotaProsen" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DiscNotaRp" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalBruto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DPPHeader" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PPNHeader" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IsPosted" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TglPosted" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="JatuhTempo" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IDHeader" type="xs:long" minOccurs="0" />
+              <xs:element name="KodeBarang" type="xs:string" minOccurs="0" />
+              <xs:element name="NamaBarang" type="xs:string" minOccurs="0" />
+              <xs:element name="Barcode" type="xs:string" minOccurs="0" />
+              <xs:element name="Satuan" type="xs:string" minOccurs="0" />
+              <xs:element name="NoPO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

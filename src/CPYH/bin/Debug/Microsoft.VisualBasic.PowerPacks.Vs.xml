@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.VisualBasic.PowerPacks.Vs</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm">
+      <summary>Enables printing an image of a Windows Form at run time.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.#ctor(System.ComponentModel.IContainer)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm" /> class, specifying the <see cref="T:System.ComponentModel.IContainer" /> in which it will be parented.</summary>
+      <param name="container">A <see cref="T:System.ComponentModel.IContainer" /> in which the component will be parented.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.#ctor(System.Windows.Forms.Form)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm" /> class, specifying the <see cref="T:System.Windows.Forms.Form" /> where it will be parented.</summary>
+      <param name="parentForm">A <see cref="T:System.Windows.Forms.Form" /> where the component will be parented.</param>
+    </member>
+    <member name="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.BeginPrint">
+      <summary>Occurs when the <see cref="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Print" /> method is called, before the first page of the document prints.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by a <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm" /> component and optionally releases the managed resources.</summary>
+      <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.DocumentName">
+      <summary>Gets or sets the document name to display (for example, in a print status dialog box or printer queue) while printing the document.</summary>
+      <returns>A String to display while printing the document. The default is "document".</returns>
+    </member>
+    <member name="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.EndPrint">
+      <summary>Occurs when the last page of the document has printed.</summary>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Form">
+      <summary>Gets or sets the form to be printed.</summary>
+      <returns>Returns a <see cref="T:System.Windows.Forms.Form" /> object.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.OnBeginPrint(System.Drawing.Printing.PrintEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.BeginPrint" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.OnEndPrint(System.Drawing.Printing.PrintEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.EndPrint" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.OnQueryPageSettings(System.Drawing.Printing.QueryPageSettingsEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.QueryPageSettings" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Print">
+      <summary>Sends an image of a Windows Form to the destination specified by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintAction" /> property.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Print(System.Windows.Forms.Form,Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption)">
+      <summary>Sends an image of a Windows Form to the destination specified by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintAction" /> property, specifying the form and printing options</summary>
+      <param name="printForm">The name of the <see cref="T:System.Windows.Forms.Form" /> to be printed.</param>
+      <param name="printFormOption">A <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption" /> enumeration that determines how the form will be printed.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintAction">
+      <summary>Gets or sets a value indicating whether the output is directed to a printer, to a print preview window, or to a file.</summary>
+      <returns>Returns a <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintAction" /> enumeration.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrinterSettings">
+      <summary>Gets or sets a <see cref="T:System.Drawing.Printing.PrinterSettings" /> object that you can use to specify various properties of a printer.</summary>
+      <returns>Returns a <see cref="T:System.Drawing.Printing.PrinterSettings" /> object. </returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintFileName">
+      <summary>Gets or sets the file name of an Encapsulated PostScript file and the path to which the file will be saved when the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintAction" /> property is set to <see cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />.</summary>
+      <returns>Returns a String that contains a file path and name.</returns>
+    </member>
+    <member name="E:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.QueryPageSettings">
+      <summary>Occurs immediately before each page is printed.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption">
+      <summary>The PrintOption enumeration specifies options for the <see cref="M:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.Print(System.Windows.Forms.Form,Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption)" /> method of a <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm" /> component.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption.CompatibleModeClientAreaOnly">
+      <summary>Uses the compatible printing implementation to print the currently visible client area.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption.CompatibleModeFullWindow">
+      <summary>Uses the compatible printing implementation to print the currently visible form. This includes the title bar, scroll bars, and border.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption.ClientAreaOnly">
+      <summary>Uses a new implementation to print the currently visible client area.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption.FullWindow">
+      <summary>Uses a new implementation to print the currently visible form. This includes the title bar, scroll bars, and border.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.PrintForm.PrintOption.Scrollable">
+      <summary>Uses a new implementation to print the full client area, even if part of it is scrolled out of view.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants">
+      <summary>Provides constants that map Visual Basic 6.0 color constants to their <see cref="T:System.Drawing.Color" /> equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbBlack">
+      <summary>Maps the Visual Basic 6.0 constant vbBlack to <see cref="P:System.Drawing.Color.Black" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbBlue">
+      <summary>Maps the Visual Basic 6.0 constant vbBlue to <see cref="P:System.Drawing.Color.Blue" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbCyan">
+      <summary>Maps the Visual Basic 6.0 constant vbCyan to <see cref="P:System.Drawing.Color.Cyan" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbGreen">
+      <summary>Maps the Visual Basic 6.0 constant vbGreen to <see cref="P:System.Drawing.Color.Green" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbMagenta">
+      <summary>Maps the Visual Basic 6.0 constant vbMagenta to <see cref="P:System.Drawing.Color.Magenta" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbRed">
+      <summary>Maps the Visual Basic 6.0 constant vbRed to <see cref="P:System.Drawing.Color.Red" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbWhite">
+      <summary>Maps the Visual Basic 6.0 constant vbWhite to <see cref="P:System.Drawing.Color.White" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ColorConstants.vbYellow">
+      <summary>Maps the Visual Basic 6.0 constant vbYellow to <see cref="P:System.Drawing.Color.Yellow" />.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants">
+      <summary>Provides constants that map Visual Basic 6.0 DrawStyle constants to their <see cref="P:System.Drawing.Pen.DashStyle" /> equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants.vbDash">
+      <summary>Maps the Visual Basic 6.0 constant vbDash to <see cref="F:System.Drawing.Drawing2D.DashStyle.Dash" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants.vbDashDot">
+      <summary>Maps the Visual Basic 6.0 constant vbDashDot to <see cref="F:System.Drawing.Drawing2D.DashStyle.DashDot" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants.vbDashDotDot">
+      <summary>Maps the Visual Basic 6.0 constant vbDashDotDot to <see cref="F:System.Drawing.Drawing2D.DashStyle.DashDotDot" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants.vbDot">
+      <summary>Maps the Visual Basic 6.0 constant vbDot to <see cref="F:System.Drawing.Drawing2D.DashStyle.Dot" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.DrawStyleConstants.vbSolid">
+      <summary>Maps the Visual Basic 6.0 constant vbDash to <see cref="F:System.Drawing.Drawing2D.DashStyle.Solid" />.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants">
+      <summary>Provides constants that map Visual Basic 6.0 FillStyle constants to their <see cref="T:System.Drawing.Drawing2D.HatchStyle" /> equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbCross">
+      <summary>Maps the Visual Basic 6.0 constant vbCross to <see cref="F:System.Drawing.Drawing2D.HatchStyle.Cross" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbDiagonalCross">
+      <summary>Maps the Visual Basic 6.0 constant vbDiagonalCross to <see cref="F:System.Drawing.Drawing2D.HatchStyle.DiagonalCross" /> .</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbDownwardDiagonal">
+      <summary>Maps the Visual Basic 6.0 constant vbDownwardDiagonal to <see cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbFSSolid">
+      <summary>Maps the Visual Basic 6.0 constant vbFSSolid to a solid color.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbFSTransparent">
+      <summary>Maps the Visual Basic 6.0 constant vbFSTransparent to an absence of patterns.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbHorizontalLine">
+      <summary>Maps the Visual Basic 6.0 constant vbHorizontalLine to <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbUpwardDiagonal">
+      <summary>Maps the Visual Basic 6.0 constant vbUpwardDiagonal to <see cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.FillStyleConstants.vbVerticalLine">
+      <summary>Maps the Visual Basic 6.0 constant vbVerticalLine to <see cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.GlobalModule">
+      <summary>This class supports the .NET Framework infrastructure and is not intended to be used directly from your code.</summary>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.GlobalModule.Printers">
+      <summary>This class supports the .NET Framework infrastructure and is not intended to be used directly from your code.</summary>
+      <returns>A <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection" /> for use during upgrade.</returns>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer">
+      <summary>Provides a Printer object for use by upgraded Visual Basic 6.0 printing code.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Circle(System.Boolean,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Single,System.Single)">
+      <summary>Prints a circle, an ellipse, or an arc on a page, specifying whether the center point is relative to the current location.</summary>
+      <param name="relativeStart">Boolean. If this parameter is set to true, the center of the circle, ellipse, or arc is printed relative to the coordinates specified in the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" /> properties of the object.</param>
+      <param name="x">Single value indicating the vertical coordinate for the center point of the circle, ellipse, or arc. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="y">Single value indicating the radius of the circle or ellipse. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="radius">Single value indicating the radius of the circle or ellipse. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color of the circle's outline. If this parameter is omitted, the value of <see cref="P:System.Drawing.Color.Black" /> is used.</param>
+      <param name="startAngle">Optional. Single-precision value. When an arc or a partial circle or ellipse is printed, <paramref name="startangle" /> and <paramref name="endAngle" /> specify (in radians) the start and end positions of the arc. The range for both is 2 * pi radians to 2 * pi radians. The default value for <paramref name="startAngle" /> is 0 radians; the default for <paramref name="endAngle" /> is 2 * pi radians.</param>
+      <param name="endAngle">Optional. Single-precision value. When an arc or a partial circle or ellipse is printed, <paramref name="startAngle" /> and <paramref name="endAngle" /> specify (in radians) the start and end positions of the arc. The range for both is 2 * pi radians to 2 * pi radians. The default value for <paramref name="startAngle" /> is 0 radians; the default for <paramref name="endAngle" /> is 2 * pi radians.</param>
+      <param name="aspect">Optional. Single-precision value indicating the aspect ratio of the circle or ellipse. The default value is 1.0, which yields a perfect (non-elliptical) circle on any screen.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Circle(System.Single,System.Single,System.Single,System.Int32,System.Single,System.Single,System.Single)">
+      <summary>Prints a circle, an ellipse, or an arc on a page.</summary>
+      <param name="x">Single value indicating the horizontal coordinate for the center point of the circle, ellipse, or arc. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="y">Single value indicating the vertical coordinate for the center point of the circle, ellipse, or arc. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="radius">Single value indicating the radius of the circle or ellipse. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measurement used.</param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color of the circle's outline. If this parameter is omitted, the value of <see cref="P:System.Drawing.Color.Black" /> is used.</param>
+      <param name="startAngle">Optional. Single-precision value. When an arc or a partial circle or ellipse is printed, <paramref name="startAngle" /> and <paramref name="endAngle" /> specify (in radians) the start and end positions of the arc. The range for both is 2 * pi radians to 2 * pi radians. The default value for <paramref name="startAngle" /> is 0 radians; the default for <paramref name="endAngle" /> is 2 * pi radians.</param>
+      <param name="endAngle">Optional. Single-precision value. When an arc or a partial circle or ellipse is printed, <paramref name="startAngle" /> and <paramref name="endAngle" /> specify (in radians) the start and end positions of the arc. The range for both is 2 * pi radians to 2 * pi radians. The default value for <paramref name="startAngle" /> is 0 radians; the default for <paramref name="endAngle" /> is 2 * pi radians.</param>
+      <param name="aspect">Optional. Single-precision value indicating the aspect ratio of the circle or ellipse. The default value is 1.0, which yields a perfect (non-elliptical) circle on any screen.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ColorMode">
+      <summary>Gets or sets a value specifying whether the output will print in color or in monochrome on a device that supports color.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Copies">
+      <summary>Gets or sets a value that determines the number of copies to be printed.</summary>
+      <returns>A Short representing the number of copies to be printed.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX">
+      <summary>Gets or sets the horizontal coordinates for the next printing or drawing method.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY">
+      <summary>Gets or sets the vertical coordinates for the next printing or drawing method.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.DeviceName">
+      <summary>Gets the name of the current printer.</summary>
+      <returns>Returns a String.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.DocumentName">
+      <summary>Gets or sets the document name to display (for example, in a print status dialog box or printer queue) while printing the document.</summary>
+      <returns>A String to display while printing the document. The default is "document".</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.DrawStyle">
+      <summary>Gets or sets a value that determines the line style for output from graphics methods.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.DrawWidth">
+      <summary>Gets or sets the line width for output from graphics methods.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Duplex">
+      <summary>Gets or sets a value that determines whether a page is printed on both sides (if the printer supports this feature).</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.EndDoc">
+      <summary>Ends a print operation sent to the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object, releasing the document to the print device or spooler.</summary>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillColor">
+      <summary>Gets or sets the color that is used to fill in shapes created by using the <see cref="Overload:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Circle" /> and <see cref="Overload:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Line" /> graphics methods.</summary>
+      <returns>Returns an Integer.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillStyle">
+      <summary>Gets or sets the pattern used to fill shapes created by using the <see cref="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Circle(System.Boolean,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Single,System.Single)" /> and <see cref="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Line(System.Boolean,System.Single,System.Single,System.Boolean,System.Single,System.Single,System.Int32,System.Boolean,System.Boolean)" /> graphics methods.</summary>
+      <returns>Returns a Short. The default is 1.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Font">
+      <summary>Gets or sets a FontFamily by name.</summary>
+      <returns>Returns a <see cref="T:System.Drawing.Font" />.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontBold">
+      <summary>Gets or sets the bold font style.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontCount">
+      <summary>Returns the number of fonts available for the current display device or active printer.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontItalic">
+      <summary>Gets or sets the italic font style.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontName">
+      <summary>Gets or sets the name of the font in which text is displayed for a printing operation.</summary>
+      <returns>Returns a String.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Fonts(System.Int32)">
+      <summary>Gets all font names that are available for the current printer.</summary>
+      <returns>Returns a String.</returns>
+      <param name="index">The index of the font within the collection.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontSize">
+      <summary>Gets or sets the size of the font that is used for text in a run-time printing operation.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontStrikethru">
+      <summary>Gets or sets the strikethrough font style.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontTransparent">
+      <summary>Gets or sets a value that determines whether background graphics on a Printer object are printed behind text characters.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FontUnderline">
+      <summary>Gets or sets the underlined font style.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ForeColor">
+      <summary>Gets or sets the color in which text and graphics are printed.</summary>
+      <returns>Returns an Integer.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Height">
+      <summary>Gets or sets the height of a page.</summary>
+      <returns>Returns an Integer.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.IsDefaultPrinter">
+      <summary>Returns a value that determines whether the currently selected printer is defined as the default printer in Control Panel.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.KillDoc">
+      <summary>Immediately stops the current print job.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Line(System.Boolean,System.Single,System.Single,System.Boolean,System.Single,System.Single,System.Int32,System.Boolean,System.Boolean)">
+      <summary>Prints lines, squares, or rectangles on a page.</summary>
+      <param name="relativeStart">Boolean. If this parameter is set to true, the starting coordinates are relative to the coordinates given by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" /> properties of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object.</param>
+      <param name="x1">Single value indicating the horizontal coordinate of the starting point for the line being printed.</param>
+      <param name="y1">Single value indicating the vertical coordinate of the starting point for the line being printed.</param>
+      <param name="relativeEnd">Boolean. If this parameter is set to true, the ending coordinates are relative to the coordinates given by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" /> properties of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object.</param>
+      <param name="x2">Single value indicating the horizontal coordinate of the endpoint for the line being printed. </param>
+      <param name="y2">Single value indicating the vertical coordinate of the endpoint for the line being printed. </param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color of the line. If this parameter is omitted, the value of <see cref="P:System.Drawing.Color.Black" /> is used.</param>
+      <param name="Box">Optional. Boolean. If this parameter is set to true, a rectangle is printed. The <paramref name="x1" />, <paramref name="y1" />, <paramref name="x2" />, and <paramref name="y2" /> coordinates specify opposite corners of the rectangle.</param>
+      <param name="fill">Optional. Boolean. If the <paramref name="box" /> parameter is used and the <paramref name="fill" /> parameter is set to true, the rectangle is filled with the same color used to print the rectangle. you cannot use <paramref name="fill" /> without <paramref name="box" />. If <paramref name="box" /> is used without <paramref name="fill" />, the current <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillColor" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillStyle" /> values are used to fill the rectangle. The default value for <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillStyle" /> is transparent.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Line(System.Single,System.Single)">
+      <summary>Prints lines on a page.</summary>
+      <param name="x2">Single value indicating the horizontal coordinate of the endpoint for the line being printed. The starting point for the line is determined by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" /> property values.</param>
+      <param name="y2">Single value indicating the vertical coordinate of the endpoint for the line being printed. The starting point for the line is determined by the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" /> property values.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Line(System.Single,System.Single,System.Single,System.Single,System.Int32,System.Boolean,System.Boolean)">
+      <summary>Prints lines, squares, or rectangles on a page.</summary>
+      <param name="x1">Single value indicating the horizontal coordinate of the starting point for the line being printed. </param>
+      <param name="y1">Single value indicating the vertical coordinate of the starting point for the line being printed. </param>
+      <param name="x2">Single value indicating the horizontal coordinate of the endpoint for the line being printed. </param>
+      <param name="y2">Single value indicating the vertical coordinate of the endpoint for the line being printed. </param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color of the line. If this parameter is omitted, the value of <see cref="P:System.Drawing.Color.Black" /> is used.</param>
+      <param name="box">Optional. Boolean. If this parameter is set to true, a rectangle is printed. The <paramref name="x1" />, <paramref name="y1" />, <paramref name="x2" />, and <paramref name="y2" /> coordinates specify opposite corners of the rectangle.</param>
+      <param name="fill">Optional. Boolean. If the <paramref name="box" /> parameter is used and the <paramref name="fill" /> parameter is set to true, the rectangle is filled with the same color used to print the rectangle. You cannot use <paramref name="fill" /> without <paramref name="box" />. If <paramref name="box" /> is used without <paramref name="fill" />, the current <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillColor" /> and <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillStyle" /> values are used to fill the rectangle. The default value for <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.FillStyle" /> is transparent.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.NewPage">
+      <summary>Stops the printing on the current page and resumes printing on a new page.</summary>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Orientation">
+      <summary>Gets or sets a value indicating whether documents are printed in portrait or landscape mode.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Page">
+      <summary>Returns the page number of the page that is currently being printed.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PaintPicture(System.Drawing.Image,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+      <summary>Prints the contents of an image file on a page.</summary>
+      <param name="picture">
+        <see cref="T:System.Drawing.Image" /> value representing the image to be printed.</param>
+      <param name="x1">Single value indicating the horizontal destination coordinates where the image will be printed. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measure used.</param>
+      <param name="y1">Single value indicating the vertical destination coordinates where the image will be printed. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property determines the units of measure used.</param>
+      <param name="width1">Optional. Single value indicating the destination width of the picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If the destination width is larger or smaller than the source width, picture is stretched or compressed to fit. If omitted, the source width is used.</param>
+      <param name="height1">Optional. Single value indicating the destination height of the picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If the destination height is larger or smaller than the source height, picture is stretched or compressed to fit. If omitted, the source height is used.</param>
+      <param name="x2">Optional. Single values indicating the coordinates (x-axis) of a clipping region within picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If omitted, 0 is assumed.</param>
+      <param name="y2">Optional. Single values indicating the coordinates (y-axis) of a clipping region within picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If omitted, 0 is assumed.</param>
+      <param name="width2">Optional. Single value indicating the source width of a clipping region within picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If omitted, the entire source width is used.</param>
+      <param name="height2">Optional. Single value indicating the source height of a clipping region within picture. The <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property of object determines the units of measurement used. If omitted, the entire source height is used.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PaperBin">
+      <summary>Gets or sets a value indicating the default paper bin on the printer from which paper is fed during print operations.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PaperSize">
+      <summary>Gets or sets a value indicating the paper size for the current printer.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Print(System.Object[])">
+      <summary>Prints text to a page.</summary>
+      <param name="args">A parameter array containing optional printing parameters.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PrintAction">
+      <summary>Gets or sets a value that determines whether the print output is directed to a printer, to a print preview window, or to a file.</summary>
+      <returns>Returns a <see cref="T:System.Drawing.Printing.PrintAction" /> enumeration.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PrintFileName">
+      <summary>Gets or sets a value that specifies the file name of an Encapsulated PostScript file and the path to which the file will be saved when the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PrintAction" /> property is set to <see cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />.</summary>
+      <returns>Returns a String that contains a file path and name.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PrintQuality">
+      <summary>Gets or sets a value that indicates the printer resolution.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PSet(System.Boolean,System.Single,System.Single,System.Int32)">
+      <summary>Prints a single point in a specified color on a page, optionally specifying a point relative to the current coordinates.</summary>
+      <param name="relativeStart">Boolean value indicating whether the coordinates are relative to the current graphics position (as set by <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentX" />, <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.CurrentY" />).</param>
+      <param name="x">Single value indicating the horizontal coordinates of the point to print.</param>
+      <param name="y">Single value indicating the vertical coordinates of the point to print.</param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color specified for the point. If this parameter is omitted, the current <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ForeColor" /> property setting is used.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PSet(System.Single,System.Single)">
+      <summary>Prints a single point on a page.</summary>
+      <param name="x">Single value indicating the horizontal coordinates of the point to print.</param>
+      <param name="y">Single value indicating the vertical coordinates of the point to print.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.PSet(System.Single,System.Single,System.Int32)">
+      <summary>Prints a single point in a specified color on a page.</summary>
+      <param name="x">Single value indicating the horizontal coordinates of the point to print.</param>
+      <param name="y">Single value indicating the vertical coordinates of the point to print.</param>
+      <param name="color">Optional. Integer value indicating the RGB (red-green-blue) color specified for the point. If this parameter is omitted, the current <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ForeColor" /> property setting is used.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.RightToLeft">
+      <summary>Gets or sets a Boolean value that indicates the text display direction on a right-to-left system.</summary>
+      <returns>Returns a Boolean.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Scale">
+      <summary>Defines the coordinate system of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Scale(System.Single,System.Single,System.Single,System.Single)">
+      <summary>Defines the coordinate system of the <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object.</summary>
+      <param name="x1">Single value indicating the horizontal coordinates that defines the upper-left corner of the object. Parentheses must enclose the values.</param>
+      <param name="y1">Single value indicating the vertical coordinates that defines the upper-left corner of the object. Parentheses must enclose the values.</param>
+      <param name="x2">Single value indicating the horizontal coordinates that defines the lower-right corner of the object. Parentheses must enclose the values.</param>
+      <param name="y2">Single value indicating the vertical coordinates that defines the lower-right corner of the object. Parentheses must enclose the values.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleHeight">
+      <summary>Gets or sets the number of units for the vertical measurement of the page when you use graphics methods.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleLeft">
+      <summary>Gets or sets the horizontal coordinates for the left edge of the page when you are using graphics methods.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode">
+      <summary>Gets or sets a value indicating the unit of measurement for the coordinates of an object when you are using graphics methods.</summary>
+      <returns>Returns a Short.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleTop">
+      <summary>Gets or sets the vertical coordinates for the top edge of the page when you are using graphics methods.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleWidth">
+      <summary>Gets or sets the number of units for the horizontal measurement of the page when you use graphics methods.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleX(System.Single,System.Int16,System.Int16)">
+      <summary>Converts the value for the width of a page from one of the units of measure of the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property to another.</summary>
+      <returns>Returns a Single.</returns>
+      <param name="value">Specify the number of units of measure to be converted.</param>
+      <param name="fromScale">Optional. A constant or value specifying the coordinate system from which the width of the object is to be converted. The possible values of <paramref name="fromScale" /> are the same as those for the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property.</param>
+      <param name="toScale">Optional. A constant or value specifying the coordinate system to which the width of the object is to be converted. The possible values of <paramref name="toScale" /> are the same as those for the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleY(System.Single,System.Int16,System.Int16)">
+      <summary>Converts the value for the height of a page from one of the units of measure of the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property to another.</summary>
+      <returns>Returns a Single.</returns>
+      <param name="value">Specify the number of units of measure to be converted.</param>
+      <param name="fromScale">Optional. A constant or value specifying the coordinate system from which the height of the object is to be converted. The possible values of <paramref name="fromScale" /> are the same as those for the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property.</param>
+      <param name="toScale">Optional. A constant or value specifying the coordinate system to which the height of the object is to be converted. The possible values of <paramref name="toScale" /> are the same as those for the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.ScaleMode" /> property.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.TextHeight(System.String)">
+      <summary>Returns the height of a text string as it would be printed in the current font.</summary>
+      <returns>Returns a Single.</returns>
+      <param name="text">The String to be measured.</param>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.TextWidth(System.String)">
+      <summary>Returns the width of a text string as it would be printed in the current font.</summary>
+      <returns>Returns a Single</returns>
+      <param name="text">The String to be measured.</param>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.TwipsPerPixelX">
+      <summary>Gets a value indicating the number of twips per pixel for an object measured horizontally.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.TwipsPerPixelY">
+      <summary>Gets a value indicating the number of twips per pixel for an object measured vertically.</summary>
+      <returns>Returns a Single.</returns>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Width">
+      <summary>Gets or sets the width of a page.</summary>
+      <returns>Returns an Integer.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer.Write(System.Object[])">
+      <summary>Prints text to a page without adding a carriage return.</summary>
+      <param name="args">A parameter array containing optional printing parameters.</param>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection">
+      <summary>Provides a collection of printers for use by upgraded Visual Basic 6.0 printing code.</summary>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection.#ctor">
+      <summary>Initializes a <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection" /> object.</summary>
+    </member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection.Count">
+      <summary>Returns the number of printers in the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.GlobalModule.Printers" /> collection.</summary>
+      <returns>An Integer representing the number of printers in the collection.</returns>
+    </member>
+    <member name="M:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection.System#Collections#IEnumerable#GetEnumerator"></member>
+    <member name="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterCollection.Item(System.Int32)">
+      <summary>Returns a specific member of the <see cref="P:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.GlobalModule.Printers" /> collection by index number.</summary>
+      <returns>A <see cref="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.Printer" /> object.</returns>
+      <param name="index">An Integer representing the index of the printer.</param>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants">
+      <summary>Provides constants that map Visual Basic 6.0 Printer constants to their <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNAuto">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNCassette">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNEnvelope">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNEnvManual">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNLargeCapacity">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNLargeFmt">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNLower">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNManual">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNMiddle">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNSmallFmt">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNTractor">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRBNUpper">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRCMColor">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRCMMonochrome">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRDPHorizontal">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRDPSimplex">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRDPVertical">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRORLandscape">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRORPortrait">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPQDraft">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPQHigh">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPQLow">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPQMedium">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPS10x14">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPS11x17">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSA3">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSA4">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSA4Small">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSA5">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSB4">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSB5">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSCSheet">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSDSheet">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnv10">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnv11">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnv12">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnv14">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnv9">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvB4">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvB5">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvB6">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvC3">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvC4">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvC5">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvC6">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvC65">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvDL">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvItaly">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvMonarch">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSEnvPersonal">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSESheet">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSExecutive">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSFanfoldLglGerman">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSFanfoldStdGerman">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSFanfoldUS">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSFolio">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSLedger">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSLegal">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSLetter">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSLetterSmall">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSNote">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSQuarto">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSStatement">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSTabloid">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.PrinterObjectConstants.vbPRPSUser">
+      <summary>Maps the Visual Basic 6.0 Printer constant to its <see cref="T:System.Drawing.Printing.PrinterSettings" /> equivalent.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants">
+      <summary>Provides constants that map Visual Basic 6.0 ScaleMode constants to their .NET Framework equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbCentimeters">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbCharacters">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbHimetric">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbInches">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbMillimeters">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbPixels">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbPoints">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbTwips">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.ScaleModeConstants.vbUser">
+      <summary>Provides an equivalent for the Visual Basic 6.0 ScaleMode constant of the same name.</summary>
+    </member>
+    <member name="T:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants">
+      <summary>Provides constants that map Visual Basic 6.0 color constants to their <see cref="T:System.Drawing.SystemColors" /> equivalents.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vb3DDKShadow">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vb3DFace">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vb3DHighlight">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vb3DLight">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vb3DShadow">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbActiveBorder">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbActiveTitleBar">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbActiveTitleBarText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbApplicationWorkspace">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbButtonFace">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbButtonShadow">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbButtonText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbDesktop">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbGrayText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbHighlight">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbHighlightText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInactiveBorder">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInactiveCaptionText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInactiveTitleBar">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInactiveTitleBarText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInfoBackground">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbInfoText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbMenuBar">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbMenuText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbScrollBars">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbTitleBarText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbWindowBackground">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbWindowFrame">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+    <member name="F:Microsoft.VisualBasic.PowerPacks.Printing.Compatibility.VB6.SystemColorConstants.vbWindowText">
+      <summary>Maps the Visual Basic 6.0 SystemColor constant to its <see cref="T:System.Drawing.SystemColors" /> equivalent.</summary>
+    </member>
+  </members>
+</doc>

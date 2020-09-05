@@ -1,23 +1,23 @@
-[CTRL Software][![Donate](https://drive.google.com/uc?id=1xMCT4JG2PnX-8QwXmwIwpxMalKejfQ0h)](https://github.com/mrthx89/CPYH/wiki/Cara-Berkontribusi)
+[CTRL Software][![Donate](https://drive.google.com/uc?id=1xMCT4JG2PnX-8QwXmwIwpxMalKejfQ0h)](https://github.com/mrthx89/CTRLSoftware/wiki/Cara-Berkontribusi)
 -------------------
 
 Apa itu CTRL Software?
 -------------------
 
-Saat ini pilihan software untuk usaha retil memang banyak ditambah lagi harga yang bervariasi mulai dari ratusan hingga jutaan rupiah. Tapi untuk software yang gratis, open source dan berkualitas mungkin [Ctrl Software](https://github.com/mrthx89/CPYH) adalah solusinya :-).
+Saat ini pilihan software untuk usaha retil memang banyak ditambah lagi harga yang bervariasi mulai dari ratusan hingga jutaan rupiah. Tapi untuk software yang gratis, open source dan berkualitas mungkin [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) adalah solusinya :-).
 
 Apakah aplikasi ini benar-benar gratis?
 ---------------------------------------
 
-Yuph, benar-benar gratis, bahkan lebih dari itu [Ctrl Software](https://github.com/mrthx89/CPYH) adalah software open source sehingga Anda bisa mendownload [kode sumbernya](https://github.com/mrthx89/CPYH/), mempelajari dan mengembangkan sendiri sesuai kebutuhan, tapi dengan syarat tidak boleh **menghapus** informasi asli tentang pembuat aplikasi ini. 
+Yuph, benar-benar gratis, bahkan lebih dari itu [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) adalah software open source sehingga Anda bisa mendownload [kode sumbernya](https://github.com/mrthx89/CTRLSoftware/), mempelajari dan mengembangkan sendiri sesuai kebutuhan, tapi dengan syarat tidak boleh **menghapus** informasi asli tentang pembuat aplikasi ini. 
 
 Prerequisites (Khusus software developer atau programmer)
 ---------------------------------------------------------
-[Ctrl Software](https://github.com/mrthx89/CPYH) adalah software gratis. Selain gratis [Ctrl Software](https://github.com/mrthx89/CPYH) juga merupakan software open source sehingga Anda bisa mendownload [kode sumbernya](https://github.com/mrthx89/CPYH/), mempelajari dan mengembangkan sendiri sesuai kebutuhan, tapi dengan syarat tidak boleh **menghapus** informasi asli tentang pembuat aplikasi ini.
+[Ctrl Software](https://github.com/mrthx89/CTRLSoftware) adalah software gratis. Selain gratis [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) juga merupakan software open source sehingga Anda bisa mendownload [kode sumbernya](https://github.com/mrthx89/CTRLSoftware/), mempelajari dan mengembangkan sendiri sesuai kebutuhan, tapi dengan syarat tidak boleh **menghapus** informasi asli tentang pembuat aplikasi ini.
 
-Untuk mengembangkan sendiri [Ctrl Software](https://github.com/mrthx89/CPYH) dibutuhkan keahlian khusus di bidang pemrograman, ditambah keahlian pendukungnya seperti database. [Ctrl Software](https://github.com/mrthx89/CPYH) dikembangkan/ditulis dengan menggunakan bahasa pemrograman [Visual Basic .NET](https://id.wikipedia.org/wiki/Visual_Basic_.NET)), salah satu bahasa pemrograman yang ada di platform [.NET](https://en.wikipedia.org/wiki/.NET_Framework), sehingga untuk saat ini [Ctrl Software](https://github.com/mrthx89/CPYH) hanya bisa di install untuk sistem operasi Windows, mulai dari windows XP, Windows Server 2003, Windows Vista, Windows Server 2008 dan Windows 7, windows 8, Windows Server 2012, Windows 10 dan Windows versi terbaru.
+Untuk mengembangkan sendiri [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) dibutuhkan keahlian khusus di bidang pemrograman, ditambah keahlian pendukungnya seperti database. [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) dikembangkan/ditulis dengan menggunakan bahasa pemrograman [Visual Basic .NET](https://id.wikipedia.org/wiki/Visual_Basic_.NET)), salah satu bahasa pemrograman yang ada di platform [.NET](https://en.wikipedia.org/wiki/.NET_Framework), sehingga untuk saat ini [Ctrl Software](https://github.com/mrthx89/CTRLSoftware) hanya bisa di install untuk sistem operasi Windows, mulai dari windows XP, Windows Server 2003, Windows Vista, Windows Server 2008 dan Windows 7, windows 8, Windows Server 2012, Windows 10 dan Windows versi terbaru.
 
-Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukung yang akan digunakan dalam proses pengembangannya. Berikut adalah tool-tool yang dibutuhkan untuk proses pengembangan [Ctrl Software](https://github.com/mrthx89/CPYH).
+Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukung yang akan digunakan dalam proses pengembangannya. Berikut adalah tool-tool yang dibutuhkan untuk proses pengembangan [Ctrl Software](https://github.com/mrthx89/CTRLSoftware).
 
 * [Visual Studio Community 2013](https://www.visualstudio.com/en-us/news/releasenotes/vs2013-community-vs) atau versi yang lebih tinggi
 * [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=17718) atau versi yang lebih tinggi

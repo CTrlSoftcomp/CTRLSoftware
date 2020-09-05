@@ -32,6 +32,7 @@ Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukun
 Tool Development Lainnya
 -----------------------------------------------
 * [Management Studio](https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms?view=sql-server-ver15) - SQL Server administration and management tools
+* [Inno Setup](https://jrsoftware.org/isdl.php) - Pembuatan Package Installasi
 
 Lisensi
 -----------------------------------------------

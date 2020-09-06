@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MBarang">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NoID" type="xs:long" minOccurs="0" />
+              <xs:element name="IDHeader" type="xs:long" minOccurs="0" />
+              <xs:element name="Kode" type="xs:string" minOccurs="0" />
+              <xs:element name="Customer" type="xs:string" minOccurs="0" />
+              <xs:element name="Tanggal" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Barcode" type="xs:string" minOccurs="0" />
+              <xs:element name="KodeBarang" type="xs:string" minOccurs="0" />
+              <xs:element name="NamaBarang" type="xs:string" minOccurs="0" />
+              <xs:element name="QtyJual" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HargaNetto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Supplier1" type="xs:string" minOccurs="0" />
+              <xs:element name="Supplier2" type="xs:string" minOccurs="0" />
+              <xs:element name="Supplier3" type="xs:string" minOccurs="0" />
+              <xs:element name="Modal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Jumlah" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LabaKotor" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HPP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ProvitMargin" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ProsenUp" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

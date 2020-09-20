@@ -2,7 +2,8 @@
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports CtrlSoft.Dto.Model
 
 Namespace Repository

@@ -2,7 +2,8 @@
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
 
 Public Class frmEntriKontak
@@ -131,8 +132,8 @@ Public Class frmEntriKontak
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml") Then
-                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml") Then
+                    .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -206,8 +207,8 @@ Public Class frmEntriKontak
     End Sub
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & tipe.ToString & ".xml")
             End If
         End With
     End Sub
@@ -216,7 +217,7 @@ Public Class frmEntriKontak
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & tipe.ToString & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & tipe.ToString & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

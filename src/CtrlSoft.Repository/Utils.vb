@@ -1,31 +1,9 @@
-﻿Imports DevExpress.XtraEditors
-Imports System.Net
-Imports DevExpress.XtraEditors.Repository
-Imports DevExpress.XtraGrid
+﻿Imports System.Net
 Imports CtrlSoft.Dto.Model
+Imports CtrlSoft.Dto.ViewModel
 
 Public Class Utils
     Public Shared Parser As New modParser
-    Public Shared NamaAplikasi As String = Application.ProductName.ToString
-    Public Shared StrKonSQL As String = ""
-    Public Shared UserLogin As New MUser
-    Public Shared SettingPerusahaan As New Model.SettingPerusahaan
-    Public Shared UserOtorisasi As New MUser
-    Public Shared IsEditReport As Boolean = False
-    Public Shared Dataset As New CtrlSoft.Dto.Model.DatasetLookUp
-
-    Public Enum pStatusForm
-        Baru = 0
-        Edit = 1
-        TempInsert = 2
-        Posted = 3
-    End Enum
-
-    Public Enum TypePajak
-        NonPajak = 0
-        Include = 1
-        Exclude = 2
-    End Enum
 
     Public Shared Function BuangSpasi(ByVal x) As String
         Dim i As Integer, Str As String = ""
@@ -123,12 +101,13 @@ Public Class Utils
     End Function
     'And to implement It you would need to call it like this,you can do whatever you want
     'with it as its very flexible
-    Public Shared Sub MYIPandHOST()
-        Dim host As String = System.Net.Dns.GetHostName
-        XtraMessageBox.Show("Name of the System is: " & host)
-        XtraMessageBox.Show("Your IP address is: " & GetIPAddress())
-    End Sub
-    Public Shared Sub BukaFile(ByVal nmfile As String)
+    'Public Shared Sub MYIPandHOST()
+    '    Dim host As String = System.Net.Dns.GetHostName
+    '    XtraMessageBox.Show("Name of the System is: " & host)
+    '    XtraMessageBox.Show("Your IP address is: " & GetIPAddress())
+    'End Sub
+    Public Shared Function BukaFile(ByVal nmfile As String) As JSONResult
+        Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = False, .JSONRows = 0, .JSONValue = Nothing}
         Try
             Dim p As New System.Diagnostics.ProcessStartInfo
             p.Verb = "Open"
@@ -136,11 +115,21 @@ Public Class Utils
             p.FileName = nmfile
             p.UseShellExecute = True
             System.Diagnostics.Process.Start(p)
+
+            With JSON
+                .JSONResult = True
+                .JSONMessage = "Proses Berhasil"
+            End With
         Catch ex As Exception
-            XtraMessageBox.Show("Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & "File : " & nmfile, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            With JSON
+                .JSONResult = False
+                .JSONMessage = "Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & "File : " & nmfile
+            End With
         End Try
-    End Sub
-    Public Shared Sub PrintFile(ByVal nmfile As String)
+        Return JSON
+    End Function
+    Public Shared Function PrintFile(ByVal nmfile As String) As JSONResult
+        Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = False, .JSONRows = 0, .JSONValue = Nothing}
         Try
             Dim p As New System.Diagnostics.ProcessStartInfo
             p.Verb = "Print"
@@ -149,18 +138,27 @@ Public Class Utils
             p.UseShellExecute = True
             System.Diagnostics.Process.Start(p)
         Catch ex As Exception
-            XtraMessageBox.Show("Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & "File : " & nmfile, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            With JSON
+                .JSONResult = False
+                .JSONMessage = "Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & "File : " & nmfile
+            End With
         End Try
-    End Sub
-    Public Shared Function ComTerbilang(ByVal Angka As Double) As String
-        Dim x As String = ""
+        Return JSON
+    End Function
+    Public Shared Function ComTerbilang(ByVal Angka As Double) As JSONResult
+        Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = False, .JSONRows = 0, .JSONValue = Nothing}
         Dim Bilang As New Terbilang
         Try
-            x = NullToStr(Bilang.UFLTerbilang(Angka))
+            JSON.JSONResult = True
+            JSON.JSONMessage = "proses berhasil"
+            JSON.JSONValue = NullToStr(Bilang.UFLTerbilang(Angka))
         Catch ex As Exception
-            XtraMessageBox.Show("Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & Angka, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            With JSON
+                .JSONResult = False
+                .JSONMessage = "Ada Kesalahan :" & vbCrLf & ex.Message & vbCrLf & Angka
+            End With
         End Try
-        Return x
+        Return JSON
     End Function
     Public Shared Function NullToDbl(ByVal Value As Object) As Double
         If IsDBNull(Value) Then
@@ -237,43 +235,6 @@ Public Class Utils
             Return "NULL"
         End If
     End Function
-    Public Shared Sub SetGridView(ByRef GridControl1 As DevExpress.XtraGrid.GridControl)
-        'Set Format Gridview Here
-        Dim repChekEdit As New RepositoryItemCheckEdit
-        Try
-            For i As Integer = 0 To GridControl1.ViewCollection.Count - 1
-                Dim view As DevExpress.XtraGrid.Views.Base.ColumnView
-                If i = 0 Then
-                    view = CType(GridControl1.DefaultView, Views.Base.ColumnView)
-                Else
-                    view = CType(GridControl1.ViewCollection(i), Views.Base.ColumnView)
-                End If
-                For x As Integer = 0 To view.Columns.Count - 1
-                    Select Case view.Columns(i).ColumnType.Name.ToLower
-                        Case "int32", "int64", "int"
-                            view.Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                            view.Columns(i).DisplayFormat.FormatString = "n2"
-                        Case "decimal", "single", "money", "double"
-                            view.Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                            view.Columns(i).DisplayFormat.FormatString = "n2"
-                        Case "string"
-                            view.Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.None
-                            view.Columns(i).DisplayFormat.FormatString = ""
-                        Case "date"
-                            view.Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                            view.Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy"
-                        Case "datetime"
-                            view.Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                            view.Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy HH:mm"
-                        Case "boolean"
-                            view.Columns(i).ColumnEdit = repChekEdit
-                    End Select
-                Next
-            Next
-        Catch ex As Exception
-
-        End Try
-    End Sub
     Public Shared Function Bulatkan(ByVal x As Double, ByVal Koma As Integer) As Double
         If Koma >= 0 Then
             Bulatkan = System.Math.Round(x, CInt(Koma))
@@ -362,6 +323,6 @@ Public Class Utils
         'Dim asm As [Assembly] = [Assembly].GetExecutingAssembly()
 
         'Return System.IO.Path.GetDirectoryName(asm.GetName().CodeBase)
-        Return Application.StartupPath
+        Return Environment.CurrentDirectory
     End Function
 End Class

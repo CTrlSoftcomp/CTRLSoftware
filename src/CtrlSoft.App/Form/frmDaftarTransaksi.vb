@@ -16,13 +16,17 @@ Imports DevExpress.Utils
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.LookAndFeel
 Imports CtrlSoft.App.Ini
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports CtrlSoft.App.CetakDX
+Imports CtrlSoft.Repository.Repository.PostingData
+Imports CtrlSoft.Repository.Repository.UnPostingData
 Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraGrid.Views.Grid.ViewInfo
+Imports CtrlSoft.Dto.ViewModel
 
 Public Class frmDaftarTransaksi
     Private formName As modMain.FormName
@@ -262,8 +266,8 @@ Public Class frmDaftarTransaksi
 
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -340,7 +344,7 @@ Public Class frmDaftarTransaksi
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -356,6 +360,7 @@ Public Class frmDaftarTransaksi
         Using dlg As New WaitDialogForm("Sedang memosting data ...", NamaAplikasi)
             Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
+            Dim JSON As JSONResult
             Try
                 Cursor = Cursors.WaitCursor
                 dlg.Show()
@@ -365,52 +370,72 @@ Public Class frmDaftarTransaksi
                     Select Case formName
                         Case modMain.FormName.DaftarSaldoAwalPersediaan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingSaldoAwalPersediaan(NoID) Then
+                            JSON = PostingSaldoAwalPersediaan(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPO
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingPO(NoID) Then
+                            JSON = PostingPO(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPembelian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingBeli(NoID) Then
+                            JSON = PostingBeli(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarReturPembelian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingReturBeli(NoID) Then
+                            JSON = PostingReturBeli(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPenjualan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingJual(NoID) Then
+                            JSON = PostingJual(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarReturPenjualan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingReturJual(NoID) Then
+                            JSON = PostingReturJual(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarMutasiGudang
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingMutasiGudang(NoID) Then
+                            JSON = PostingMutasiGudang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPemakaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingPemakaian(NoID) Then
+                            JSON = PostingPemakaian(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPenyesuaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingPenyesuaian(NoID) Then
+                            JSON = PostingPenyesuaian(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarStockOpname
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.PostingData.PostingStockOpname(NoID) Then
+                            JSON = PostingStockOpname(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case Else
@@ -430,6 +455,7 @@ Public Class frmDaftarTransaksi
         Using dlg As New WaitDialogForm("Sedang mengunposting data ...", NamaAplikasi)
             Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
+            Dim JSON As JSONResult
             Try
                 Cursor = Cursors.WaitCursor
                 dlg.Show()
@@ -439,52 +465,72 @@ Public Class frmDaftarTransaksi
                     Select Case formName
                         Case modMain.FormName.DaftarSaldoAwalPersediaan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingSaldoAwalPersediaan(NoID) Then
+                            JSON = UnPostingSaldoAwalPersediaan(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPO
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingPO(NoID) Then
+                            JSON = UnPostingPO(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPembelian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingBeli(NoID) Then
+                            JSON = UnPostingBeli(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarReturPembelian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingReturBeli(NoID) Then
+                            JSON = UnPostingReturBeli(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPenjualan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingJual(NoID) Then
+                            JSON = UnPostingJual(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarReturPenjualan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingReturJual(NoID) Then
+                            JSON = UnPostingReturJual(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarMutasiGudang
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingMutasiGudang(NoID) Then
+                            JSON = UnPostingMutasiGudang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPemakaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingPemakaian(NoID) Then
+                            JSON = UnPostingPemakaian(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarPenyesuaian
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingPenyesuaian(NoID) Then
+                            JSON = UnPostingPenyesuaian(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case modMain.FormName.DaftarStockOpname
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
-                            If Not Repository.UnPostingData.UnPostingStockOpname(NoID) Then
+                            JSON = UnPostingStockOpname(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                                 Exit For
                             End If
                         Case Else
@@ -764,9 +810,9 @@ Public Class frmDaftarTransaksi
                             Select Case formName
                                 Case modMain.FormName.DaftarSaldoAwalPersediaan
                                     For Each eRow As Integer In GridView1.GetSelectedRows
-                                        Repository.PostingData.PostingSaldoAwalPersediaan(NullToLong(GridView1.GetRowCellValue(eRow, "NoID")))
+                                        PostingSaldoAwalPersediaan(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(eRow, "NoID")))
                                     Next
-                                    
+
                                     com.CommandText = "spFakturMSaldoAwalPersediaan @TglDari, @TglSampai"
                                     com.Parameters.Clear()
                                     com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
@@ -776,7 +822,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Bukti Saldo Awal Periode"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPO
-                                    Repository.PostingData.PostingPO(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingPO(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMPO @NoID"
                                     com.Parameters.Clear()
@@ -786,7 +832,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Pesanan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPembelian
-                                    Repository.PostingData.PostingBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingBeli(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMBeli @NoID"
                                     com.Parameters.Clear()
@@ -796,7 +842,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Pembelian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarReturPembelian
-                                    Repository.PostingData.PostingReturBeli(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingReturBeli(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMReturBeli @NoID"
                                     com.Parameters.Clear()
@@ -806,7 +852,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Retur Pembelian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPenjualan
-                                    Repository.PostingData.PostingJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingJual(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMJual @NoID"
                                     com.Parameters.Clear()
@@ -816,7 +862,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Penjualan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarReturPenjualan
-                                    Repository.PostingData.PostingReturJual(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingReturJual(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMReturJual @NoID"
                                     com.Parameters.Clear()
@@ -826,7 +872,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Retur Penjualan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarMutasiGudang
-                                    Repository.PostingData.PostingMutasiGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingMutasiGudang(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMMutasiGudang @NoID"
                                     com.Parameters.Clear()
@@ -836,7 +882,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Mutasi Gudang"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPemakaian
-                                    Repository.PostingData.PostingPemakaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingPemakaian(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMPemakaian @NoID"
                                     com.Parameters.Clear()
@@ -846,7 +892,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Pemakaian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarPenyesuaian
-                                    Repository.PostingData.PostingPenyesuaian(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingPenyesuaian(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMPenyesuaian @NoID"
                                     com.Parameters.Clear()
@@ -856,7 +902,7 @@ Public Class frmDaftarTransaksi
                                     Judul = "Faktur Penyesuaian"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarStockOpname
-                                    Repository.PostingData.PostingStockOpname(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                                    PostingStockOpname(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
 
                                     com.CommandText = "spFakturMStockOpname @NoID"
                                     com.Parameters.Clear()

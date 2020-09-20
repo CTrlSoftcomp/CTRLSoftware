@@ -1,4 +1,5 @@
-﻿Imports CtrlSoft.App.Utils
+﻿Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraEditors
 Imports System.Data
@@ -332,11 +333,11 @@ Public Class frmEntriBeli
                 Try
                     If pStatus <> pStatusForm.Posted Then
                         txtBruto.EditValue = Bulatkan((txtSubtotal.EditValue * (1 - (txtDiscProsen.EditValue / 100))) - txtDiscRp.EditValue, 2)
-                        If txtTypePajak.EditValue = Utils.TypePajak.NonPajak Then
+                        If txtTypePajak.EditValue = [Public].TypePajak.NonPajak Then
                             txtDPP.EditValue = 0.0
                             txtPPN.EditValue = 0.0
                             txtTotal.EditValue = txtBruto.EditValue
-                        ElseIf txtTypePajak.EditValue = Utils.TypePajak.Include Then
+                        ElseIf txtTypePajak.EditValue = [Public].TypePajak.Include Then
                             txtDPP.EditValue = Bulatkan(txtBruto.EditValue / 1.1, 0)
                             txtPPN.EditValue = Bulatkan(txtDPP.EditValue * 0.1, 0)
                             txtTotal.EditValue = Bulatkan(txtDPP.EditValue + txtPPN.EditValue, 0)
@@ -735,8 +736,8 @@ Public Class frmEntriBeli
                 InitLoadLookUp()
                 LoadData()
                 RefreshDetil()
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
-                    LayoutControl1.RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
+                    LayoutControl1.RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
 
                 AddHandler txtSubtotal.LostFocus, AddressOf txt_LostFocus
@@ -798,8 +799,8 @@ Public Class frmEntriBeli
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvSupplier.DataSourceChanged, gvTypePajak.DataSourceChanged, gvPO.DataSourceChanged, gvGudang.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -888,12 +889,12 @@ Public Class frmEntriBeli
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvSupplier.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    gvPO.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvPO.Name & ".xml")
-                    gvGudang.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvGudang.Name & ".xml")
-                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvSupplier.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    gvPO.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvPO.Name & ".xml")
+                    gvGudang.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvGudang.Name & ".xml")
+                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -4,7 +4,8 @@ Imports System.Data
 Imports System.Data.SqlClient
 Imports DevExpress.Utils
 Imports CtrlSoft.App.Ini
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports CtrlSoft.App.CetakDX
 Imports CtrlSoft.Dto.Model
 
@@ -638,8 +639,8 @@ Public Class frmEntriJual
                 InitLoadLookUp()
                 LoadData()
                 RefreshDetil()
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
-                    LayoutControl1.RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml") Then
+                    LayoutControl1.RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -689,8 +690,8 @@ Public Class frmEntriJual
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvCustomer.DataSourceChanged, gvTypePajak.DataSourceChanged, GridView2.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -779,11 +780,11 @@ Public Class frmEntriJual
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvCustomer.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvCustomer.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
-                    GridView2.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView2.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvCustomer.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvCustomer.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    GridView2.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView2.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -797,7 +798,7 @@ Public Class frmEntriJual
                 pStatus = pStatusForm.Edit
                 LoadData()
             ElseIf pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
-                Repository.PostingData.PostingJual(NoID)
+                CtrlSoft.Repository.Repository.PostingData.PostingJual(StrKonSQL, [Public].UserLogin, NoID)
                 LoadData()
                 RefreshDetil()
                 If pStatus = pStatusForm.Posted Then
@@ -884,7 +885,7 @@ Public Class frmEntriJual
                             If NullToBool(com.ExecuteScalar()) Then
                                 com.CommandText = "spFakturMJual @NoID"
                                 com.Parameters.Clear()
-                                com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                                com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
                                 oDA.Fill(ds, "MJual")
                                 NamaFile = "Faktur_MJual.repx"
                                 Judul = "Faktur Penjualan"

@@ -16,7 +16,8 @@ Imports DevExpress.Utils
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.LookAndFeel
 Imports CtrlSoft.App.Ini
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraBars
 Imports CtrlSoft.Dto.Model
 Imports CtrlSoft.Dto.ViewModel

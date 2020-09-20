@@ -16,7 +16,8 @@ Imports DevExpress.Utils
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.LookAndFeel
 Imports CtrlSoft.App.Ini
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports CtrlSoft.App.CetakDX
 Imports DevExpress.XtraBars
 Imports System.Data.SqlClient
@@ -159,8 +160,8 @@ Public Class frmLaporanSaldoStok
     Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, _
     gvKategori.DataSourceChanged, gvSupplier.DataSourceChanged, gvMerk.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -226,10 +227,10 @@ Public Class frmLaporanSaldoStok
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
-                    gvKategori.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
-                    gvSupplier.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
-                    gvMerk.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvMerk.Name & ".xml")
+                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    gvKategori.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
+                    gvSupplier.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSupplier.Name & ".xml")
+                    gvMerk.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvMerk.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -1,4 +1,4 @@
-﻿Imports CtrlSoft.App.Utils
+﻿Imports CtrlSoft.Repository.Utils
 Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraEditors
 Imports System.Data

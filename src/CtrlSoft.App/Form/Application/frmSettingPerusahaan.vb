@@ -2,7 +2,8 @@
 Imports DevExpress.Utils
 Imports System.Data
 Imports System.Data.SqlClient
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports System.Data.Odbc
 
 Public Class frmSettingPerusahaan
@@ -27,7 +28,7 @@ Public Class frmSettingPerusahaan
                                                          .PathLayouts = TextEdit3.Text}
             Obj = Repository.RepConfig.SetSettingPerusahaan(Obj)
             If Obj IsNot Nothing Then
-                Utils.SettingPerusahaan = Obj
+                [Public].SettingPerusahaan = Obj
                 DialogResult = Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
@@ -53,10 +54,10 @@ Public Class frmSettingPerusahaan
 
     Private Sub frmSettingPerusahaan_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            TextEdit1.Text = Utils.SettingPerusahaan.NamaPerusahaan
-            TextEdit2.Text = Utils.SettingPerusahaan.KotaPerusahaan
-            TextEdit3.Text = Utils.SettingPerusahaan.PathLayouts
-            MemoEdit1.Text = Utils.SettingPerusahaan.AlamatPerusahaan
+            TextEdit1.Text = [Public].SettingPerusahaan.NamaPerusahaan
+            TextEdit2.Text = [Public].SettingPerusahaan.KotaPerusahaan
+            TextEdit3.Text = [Public].SettingPerusahaan.PathLayouts
+            MemoEdit1.Text = [Public].SettingPerusahaan.AlamatPerusahaan
         Catch ex As Exception
             XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Try

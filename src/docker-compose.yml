@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  ctrlsoft.webapi:
+    image: ${DOCKER_REGISTRY}ctrlsoftwebapi
+    build:
+      context: .\CtrlSoft.WebApi
+      dockerfile: Dockerfile

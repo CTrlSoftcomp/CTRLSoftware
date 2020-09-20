@@ -1,4 +1,7 @@
-﻿Public Class frmOtorisasi
+﻿Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
+
+Public Class frmOtorisasi
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
         DialogResult = Windows.Forms.DialogResult.Cancel
@@ -16,7 +19,7 @@
         If Not DxErrorProvider1.HasErrors Then
             Dim User As CtrlSoft.Dto.Model.MUser = Repository.RepSQLServer.GetOtorisasiSPV(TextEdit1.Text, TextEdit2.Text)
             If User IsNot Nothing Then
-                Utils.UserOtorisasi = User
+                [Public].UserOtorisasi = User
                 DialogResult = Windows.Forms.DialogResult.OK
                 Me.Close()
             Else

@@ -2,7 +2,8 @@
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
 
 Public Class frmEntriBarang
@@ -82,7 +83,7 @@ Public Class frmEntriBarang
 
                                     If Not DxErrorProvider1.HasErrors Then
                                         If pStatus = pStatusForm.Baru Then
-                                            IDUser = Utils.UserLogin.NoID
+                                            IDUser = [Public].UserLogin.NoID
 
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarang"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
@@ -215,8 +216,8 @@ Public Class frmEntriBarang
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -321,9 +322,9 @@ Public Class frmEntriBarang
                                     txtDiscProsen5.EditValue = NullToDbl(ds.Tables("MBarang").Rows(0).Item("DiscProsen5"))
                                     txtDiscRp.EditValue = NullToDbl(ds.Tables("MBarang").Rows(0).Item("DiscRp"))
 
-                                    txtModal.EditValue = Utils.Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Utils.Bulatkan(Utils.Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-                                    txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
+                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
 
                                     txtProsenUpA.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("ProsenUpA"))
                                     txtProsenUpB.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("ProsenUpB"))
@@ -340,9 +341,9 @@ Public Class frmEntriBarang
                                     txtProsenUpA.EditValue = -100.0
                                     txtProsenUpB.EditValue = -100.0
 
-                                    txtModal.EditValue = Utils.Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Utils.Bulatkan(Utils.Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-                                    txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
+                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
 
                                     Me.NoID = -1
 
@@ -406,10 +407,10 @@ Public Class frmEntriBarang
                                             GridView1.SetRowCellValue(i, "ProsenUpB", -100.0)
                                             GridView1.SetRowCellValue(i, "MarginGrosir", -100.0)
                                         Else
-                                            GridView1.SetRowCellValue(i, "ProsenUpA", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "MarginRetail", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "ProsenUpB", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
-                                            GridView1.SetRowCellValue(i, "MarginGrosir", Utils.Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "ProsenUpA", Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "MarginRetail", Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "ProsenUpB", Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
+                                            GridView1.SetRowCellValue(i, "MarginGrosir", Bulatkan(((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) / (txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")))) * 100, 2))
                                         End If
                                     End If
                                 Next
@@ -425,8 +426,8 @@ Public Class frmEntriBarang
     End Sub
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -435,15 +436,15 @@ Public Class frmEntriBarang
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvKategori.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
-                    gvSatuanBeli.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuanBeli.Name & ".xml")
-                    gvSatuanJual.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuanJual.Name & ".xml")
-                    gvSupplier1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier1.Name & ".xml")
-                    gvSupplier2.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier2.Name & ".xml")
-                    gvSupplier3.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSupplier3.Name & ".xml")
-                    gvTypePajak.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
-                    GridView1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvKategori.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
+                    gvSatuanBeli.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuanBeli.Name & ".xml")
+                    gvSatuanJual.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuanJual.Name & ".xml")
+                    gvSupplier1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSupplier1.Name & ".xml")
+                    gvSupplier2.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSupplier2.Name & ".xml")
+                    gvSupplier3.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSupplier3.Name & ".xml")
+                    gvTypePajak.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
+                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -456,8 +457,8 @@ Public Class frmEntriBarang
     gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged, _
     gvTypePajak.DataSourceChanged, gvMerk.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -497,9 +498,9 @@ Public Class frmEntriBarang
     txtDiscProsen2.LostFocus, txtDiscProsen3.LostFocus, txtDiscProsen4.LostFocus, txtDiscProsen5.LostFocus, _
     txtDiscRp.LostFocus, txtModal.LostFocus, txtTypePajak.LostFocus
         Try
-            txtModal.EditValue = Utils.Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Utils.Bulatkan(Utils.Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-            txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-            txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
+            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -507,7 +508,7 @@ Public Class frmEntriBarang
 
     Private Sub txtProsenUpA_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpA.LostFocus
         Try
-            txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
                     GridView1.SetRowCellValue(i, "ProsenUpA", txtProsenUpA.EditValue)
@@ -520,8 +521,8 @@ Public Class frmEntriBarang
                         GridView1.SetRowCellValue(i, "ProsenUpA", -100.0)
                         GridView1.SetRowCellValue(i, "MarginRetail", -100.0)
                     Else
-                        GridView1.SetRowCellValue(i, "ProsenUpA", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                        GridView1.SetRowCellValue(i, "MarginRetail", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "ProsenUpA", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "MarginRetail", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
                     End If
                 End If
             Next
@@ -532,7 +533,7 @@ Public Class frmEntriBarang
 
     Private Sub txtProsenUpB_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpB.LostFocus
         Try
-            txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
                     GridView1.SetRowCellValue(i, "ProsenUpB", txtProsenUpB.EditValue)
@@ -545,8 +546,8 @@ Public Class frmEntriBarang
                         GridView1.SetRowCellValue(i, "ProsenUpB", -100.0)
                         GridView1.SetRowCellValue(i, "MarginGrosir", -100.0)
                     Else
-                        GridView1.SetRowCellValue(i, "ProsenUpB", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                        GridView1.SetRowCellValue(i, "MarginGrosir", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "ProsenUpB", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "MarginGrosir", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
                     End If
                 End If
             Next
@@ -560,7 +561,7 @@ Public Class frmEntriBarang
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
             End If
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
@@ -574,8 +575,8 @@ Public Class frmEntriBarang
                         GridView1.SetRowCellValue(i, "ProsenUpA", -100.0)
                         GridView1.SetRowCellValue(i, "MarginRetail", -100.0)
                     Else
-                        GridView1.SetRowCellValue(i, "ProsenUpA", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                        GridView1.SetRowCellValue(i, "MarginRetail", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "ProsenUpA", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualA")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "MarginRetail", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaRetail")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
                     End If
                 End If
             Next
@@ -589,7 +590,7 @@ Public Class frmEntriBarang
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan((txtHargaJualA.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -601,7 +602,7 @@ Public Class frmEntriBarang
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
             End If
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
@@ -615,8 +616,8 @@ Public Class frmEntriBarang
                         GridView1.SetRowCellValue(i, "ProsenUpB", -100.0)
                         GridView1.SetRowCellValue(i, "MarginGrosir", -100.0)
                     Else
-                        GridView1.SetRowCellValue(i, "ProsenUpB", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
-                        GridView1.SetRowCellValue(i, "MarginGrosir", Utils.Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "ProsenUpB", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaJualB")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
+                        GridView1.SetRowCellValue(i, "MarginGrosir", Bulatkan((NullToDbl(GridView1.GetRowCellValue(i, "HargaGrosir")) - txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi"))) / txtModal.EditValue * NullToDbl(GridView1.GetRowCellValue(i, "Konversi")) * 100, 2))
                     End If
                 End If
             Next
@@ -630,7 +631,7 @@ Public Class frmEntriBarang
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan((txtHargaJualB.EditValue - txtModal.EditValue) / txtModal.EditValue * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -727,7 +728,7 @@ Public Class frmEntriBarang
 
                                     com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
                                     txtBarcode.Text = "8" & (NullToLong(com.ExecuteScalar()) + 1).ToString("000000")
-                                    txtBarcode.Text = Utils.EAN8_Checksum(txtBarcode.EditValue)
+                                    txtBarcode.Text = EAN8_Checksum(txtBarcode.EditValue)
                                 Catch ex As Exception
                                     XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End Try

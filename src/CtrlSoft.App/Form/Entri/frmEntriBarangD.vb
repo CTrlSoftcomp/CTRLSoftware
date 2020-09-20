@@ -2,7 +2,8 @@
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
 
 Public Class frmEntriBarangD
@@ -59,7 +60,7 @@ Public Class frmEntriBarangD
                                         com.CommandText = "UPDATE MBarang SET IDUser=@IDUser, TanggalUpdate=GETDATE() WHERE NoID=@IDBarang"
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
-                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = Utils.UserLogin.NoID
+                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = [Public].UserLogin.NoID
                                         com.ExecuteNonQuery()
 
                                         If pStatus = pStatusForm.Baru Then
@@ -129,8 +130,8 @@ Public Class frmEntriBarangD
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -173,8 +174,8 @@ Public Class frmEntriBarangD
                                     txtHargaJualA.EditValue = NullToDbl(ds.Tables("MBarangD").Rows(0).Item("HargaJualA"))
                                     txtHargaJualB.EditValue = NullToDbl(ds.Tables("MBarangD").Rows(0).Item("HargaJualB"))
 
-                                    txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
 
                                     ckAktif.Checked = NullToBool(ds.Tables("MBarangD").Rows(0).Item("IsActive"))
                                     ckIsDefault.Checked = NullToBool(ds.Tables("MBarangD").Rows(0).Item("IsDefault"))
@@ -197,8 +198,8 @@ Public Class frmEntriBarangD
     End Sub
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -207,8 +208,8 @@ Public Class frmEntriBarangD
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvSatuan.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvSatuan.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -226,7 +227,7 @@ Public Class frmEntriBarangD
 
     Private Sub txtProsenUpA_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpA.LostFocus
         Try
-            txtHargaJualA.EditValue = Utils.Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -234,7 +235,7 @@ Public Class frmEntriBarangD
 
     Private Sub txtProsenUpB_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpB.LostFocus
         Try
-            txtHargaJualB.EditValue = Utils.Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -245,7 +246,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -254,8 +255,8 @@ Public Class frmEntriBarangD
 
     Private Sub gvSatuan_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvSatuan.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
@@ -292,7 +293,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Utils.Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -304,7 +305,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -316,7 +317,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Utils.Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

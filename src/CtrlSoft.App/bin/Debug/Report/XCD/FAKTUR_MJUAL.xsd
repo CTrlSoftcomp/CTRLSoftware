@@ -3,7 +3,7 @@
   <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MJual">
+        <xs:element name="DaftarPenjualan">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NoID" type="xs:long" minOccurs="0" />

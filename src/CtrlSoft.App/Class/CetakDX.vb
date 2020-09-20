@@ -14,7 +14,9 @@ Imports DevExpress.XtraEditors.Repository
 Imports System.Collections.Generic
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraReports.Extensions
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 
 Public Class CetakDX
     Public Enum ActionPrint
@@ -93,11 +95,11 @@ Public Class CetakDX
                 For i As Integer = 0 To XtraReport.CalculatedFields.Count - 1
                     Select Case XtraReport.CalculatedFields(i).Name.ToUpper
                         Case "NamaPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.NamaPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi([Public].SettingPerusahaan.NamaPerusahaan) & "'"
                         Case "AlamatPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.AlamatPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi([Public].SettingPerusahaan.AlamatPerusahaan) & "'"
                         Case "KotaPerusahaan".ToUpper
-                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi(Utils.SettingPerusahaan.KotaPerusahaan) & "'"
+                            XtraReport.CalculatedFields(i).Expression = "'" & FixApostropi([Public].SettingPerusahaan.KotaPerusahaan) & "'"
                         Case Else 'Selain Settingan Default
                             If CalculateFields IsNot Nothing Then
                                 For Each item As Model.CetakDX.CalculateFields In CalculateFields

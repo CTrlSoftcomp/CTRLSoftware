@@ -1,7 +1,8 @@
 ﻿Imports System
 Imports System.Runtime.InteropServices
 Imports System.Net
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 
 Namespace TimeZoneInformation
     Public Class TimeZoneFunctionality

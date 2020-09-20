@@ -2,7 +2,7 @@
 Imports DevExpress.Utils
 Imports System.Data
 Imports System.Data.SqlClient
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
 Imports System.Data.Odbc
 
 Public Class frmDashboard

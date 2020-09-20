@@ -2,15 +2,16 @@
 Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
 
 Public Class frmEntriReturJualD
     Public NoID As Long = -1
     Public IDHeader As Long = -1
     Private frmPemanggil As frmEntriReturJual = Nothing
-    Private pStatus As Utils.pStatusForm
-    Private TypePajak As Utils.TypePajak
+    Private pStatus As [Public].pStatusForm
+    Private TypePajak As [Public].TypePajak
     Private QtySisa As Double = 0.0
 
     Dim repckedit As New RepositoryItemCheckEdit
@@ -175,7 +176,7 @@ Public Class frmEntriReturJualD
         Me.Close()
     End Sub
 
-    Public Sub New(ByVal formPemanggil As frmEntriReturJual, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As Utils.TypePajak)
+    Public Sub New(ByVal formPemanggil As frmEntriReturJual, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As [Public].TypePajak)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -207,8 +208,8 @@ Public Class frmEntriReturJualD
 
             LoadData(NoID)
             With LayoutControl1
-                If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                    .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+                If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                    .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
                 End If
             End With
         Catch ex As Exception
@@ -230,7 +231,7 @@ Public Class frmEntriReturJualD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = Utils.Dataset.SQLLookUpBarcode
+                                com.CommandText = [Public].Dataset.SQLLookUpBarcode
                                 oDA.Fill(ds, "MBarangD")
                                 txtBarcode.Properties.DataSource = ds.Tables("MBarangD")
                                 txtBarcode.Properties.DisplayMember = "Barcode"
@@ -289,11 +290,11 @@ Public Class frmEntriReturJualD
             HargaBruto = Bulatkan((txtHarga.EditValue * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100)) - txtDiscRp.EditValue, 2)
             TotalBruto = Bulatkan(HargaBruto * txtQty.EditValue, 2)
             HargaPcs = HargaBruto / txtKonversi.EditValue
-            If TypePajak = Utils.TypePajak.NonPajak Then
+            If TypePajak = [Public].TypePajak.NonPajak Then
                 DPP = 0.0
                 PPN = 0.0
                 txtJumlah.EditValue = TotalBruto
-            ElseIf TypePajak = Utils.TypePajak.Include Then
+            ElseIf TypePajak = [Public].TypePajak.Include Then
                 DPP = Bulatkan((HargaBruto * txtQty.EditValue) / 1.1, 0)
                 PPN = TotalBruto - DPP 'Bulatkan(DPP * 0.1, 0)
                 txtJumlah.EditValue = Bulatkan(DPP + PPN, 0)
@@ -309,8 +310,8 @@ Public Class frmEntriReturJualD
 
     Private Sub LayoutControl1_DefaultLayoutLoaded(ByVal sender As Object, ByVal e As System.EventArgs) Handles LayoutControl1.DefaultLayoutLoaded
         With LayoutControl1
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
         End With
     End Sub
@@ -319,9 +320,9 @@ Public Class frmEntriReturJualD
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    LayoutControl1.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
-                    gvBarcode.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
-                    gvSatuan.SaveLayoutToXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
+                    LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
+                    gvBarcode.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
+                    gvSatuan.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -335,8 +336,8 @@ Public Class frmEntriReturJualD
 
     Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvSatuan.DataSourceChanged, gvBarcode.DataSourceChanged
         With sender
-            If System.IO.File.Exists(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
-                .RestoreLayoutFromXml(Utils.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower

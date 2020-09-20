@@ -1,7 +1,8 @@
 ﻿Imports System.Globalization
 Imports DevExpress.XtraEditors
 Imports CtrlSoft.App.Ini
-Imports CtrlSoft.App.Utils
+Imports CtrlSoft.Repository.Utils
+Imports CtrlSoft.App.Public
 Imports System.Threading
 Imports System.IO
 

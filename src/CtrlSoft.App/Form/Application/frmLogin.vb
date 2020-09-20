@@ -16,8 +16,8 @@
         If Not DxErrorProvider1.HasErrors Then
             Dim User As CtrlSoft.Dto.Model.MUser = Repository.RepSQLServer.GetLogin(TextEdit1.Text, TextEdit2.Text)
             If User IsNot Nothing Then
-                Utils.UserLogin = User
-                Utils.SettingPerusahaan = Repository.RepConfig.GetSettingPerusahaan()
+                [Public].UserLogin = User
+                [Public].SettingPerusahaan = Repository.RepConfig.GetSettingPerusahaan()
                 DialogResult = Windows.Forms.DialogResult.OK
                 Me.Close()
             Else

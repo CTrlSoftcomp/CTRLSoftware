@@ -83,6 +83,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Posting.vb" />
+    <Compile Include="RepSQLServer.vb" />
     <Compile Include="Terbilang.vb" />
     <Compile Include="UnPosting.vb" />
     <Compile Include="Utils.vb" />
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\CtrlSoft.Dto\CtrlSoft.Dto.vbproj">
       <Project>{d9f2eb4a-c114-4a72-ad0e-8ddf635b4a07}</Project>
       <Name>CtrlSoft.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CtrlSoft.UpdateDB\CtrlSoft.UpdateDB.vbproj">
+      <Project>{320ce592-ef46-45c0-a7f9-9896d74d5ffb}</Project>
+      <Name>CtrlSoft.UpdateDB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -19,49 +19,49 @@ Partial Class frmDaftarKontak
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdEdit = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdBaru = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
+        Me.components = New System.ComponentModel.Container()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdEdit = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdBaru = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl
-        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage
-        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage
-        Me.GridControl2 = New DevExpress.XtraGrid.GridControl
+        Me.Bar2 = New DevExpress.XtraBars.Bar()
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem()
+        Me.Bar1 = New DevExpress.XtraBars.Bar()
+        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
+        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage
-        Me.GridControl3 = New DevExpress.XtraGrid.GridControl
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControl3 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.XtraTabPage4 = New DevExpress.XtraTab.XtraTabPage
-        Me.GridControl4 = New DevExpress.XtraGrid.GridControl
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XtraTabPage4 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControl4 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource4 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.Bar1 = New DevExpress.XtraBars.Bar
-        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
-        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem
-        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
-        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
-        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -193,10 +193,10 @@ Partial Class frmDaftarKontak
         'ckTdkAktif
         '
         Me.ckTdkAktif.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ckTdkAktif.Location = New System.Drawing.Point(843, 12)
+        Me.ckTdkAktif.Location = New System.Drawing.Point(851, 15)
         Me.ckTdkAktif.Name = "ckTdkAktif"
         Me.ckTdkAktif.Properties.Caption = "Tampilkan Tdk Aktif"
-        Me.ckTdkAktif.Size = New System.Drawing.Size(128, 19)
+        Me.ckTdkAktif.Size = New System.Drawing.Size(120, 19)
         Me.ckTdkAktif.TabIndex = 0
         '
         'GridControl1
@@ -260,141 +260,6 @@ Partial Class frmDaftarKontak
         Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F10))
         Me.mnSaveLayout.Name = "mnSaveLayout"
         '
-        'barDockControlTop
-        '
-        Me.barDockControlTop.CausesValidation = False
-        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
-        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(983, 51)
-        '
-        'barDockControlBottom
-        '
-        Me.barDockControlBottom.CausesValidation = False
-        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 558)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(983, 0)
-        '
-        'barDockControlLeft
-        '
-        Me.barDockControlLeft.CausesValidation = False
-        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 507)
-        '
-        'barDockControlRight
-        '
-        Me.barDockControlRight.CausesValidation = False
-        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(983, 51)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 507)
-        '
-        'XtraTabControl1
-        '
-        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 95)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(983, 412)
-        Me.XtraTabControl1.TabIndex = 7
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2, Me.XtraTabPage3, Me.XtraTabPage4})
-        '
-        'XtraTabPage1
-        '
-        Me.XtraTabPage1.Controls.Add(Me.GridControl1)
-        Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(977, 386)
-        Me.XtraTabPage1.Text = "All Kontak"
-        '
-        'XtraTabPage2
-        '
-        Me.XtraTabPage2.Controls.Add(Me.GridControl2)
-        Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(977, 415)
-        Me.XtraTabPage2.Text = "Customer"
-        '
-        'GridControl2
-        '
-        Me.GridControl2.DataSource = Me.BindingSource2
-        Me.GridControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl2.Location = New System.Drawing.Point(0, 0)
-        Me.GridControl2.MainView = Me.GridView2
-        Me.GridControl2.Name = "GridControl2"
-        Me.GridControl2.Size = New System.Drawing.Size(977, 415)
-        Me.GridControl2.TabIndex = 3
-        Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
-        '
-        'GridView2
-        '
-        Me.GridView2.GridControl = Me.GridControl2
-        Me.GridView2.Name = "GridView2"
-        Me.GridView2.OptionsBehavior.Editable = False
-        Me.GridView2.OptionsNavigation.EnterMoveNextColumn = True
-        Me.GridView2.OptionsSelection.MultiSelect = True
-        Me.GridView2.OptionsView.ColumnAutoWidth = False
-        Me.GridView2.OptionsView.ShowAutoFilterRow = True
-        Me.GridView2.OptionsView.ShowFooter = True
-        Me.GridView2.OptionsView.ShowGroupPanel = False
-        '
-        'XtraTabPage3
-        '
-        Me.XtraTabPage3.Controls.Add(Me.GridControl3)
-        Me.XtraTabPage3.Name = "XtraTabPage3"
-        Me.XtraTabPage3.Size = New System.Drawing.Size(977, 415)
-        Me.XtraTabPage3.Text = "Supplier"
-        '
-        'GridControl3
-        '
-        Me.GridControl3.DataSource = Me.BindingSource3
-        Me.GridControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl3.Location = New System.Drawing.Point(0, 0)
-        Me.GridControl3.MainView = Me.GridView3
-        Me.GridControl3.Name = "GridControl3"
-        Me.GridControl3.Size = New System.Drawing.Size(977, 415)
-        Me.GridControl3.TabIndex = 3
-        Me.GridControl3.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
-        '
-        'GridView3
-        '
-        Me.GridView3.GridControl = Me.GridControl3
-        Me.GridView3.Name = "GridView3"
-        Me.GridView3.OptionsBehavior.Editable = False
-        Me.GridView3.OptionsNavigation.EnterMoveNextColumn = True
-        Me.GridView3.OptionsSelection.MultiSelect = True
-        Me.GridView3.OptionsView.ColumnAutoWidth = False
-        Me.GridView3.OptionsView.ShowAutoFilterRow = True
-        Me.GridView3.OptionsView.ShowFooter = True
-        Me.GridView3.OptionsView.ShowGroupPanel = False
-        '
-        'XtraTabPage4
-        '
-        Me.XtraTabPage4.Controls.Add(Me.GridControl4)
-        Me.XtraTabPage4.Name = "XtraTabPage4"
-        Me.XtraTabPage4.Size = New System.Drawing.Size(977, 415)
-        Me.XtraTabPage4.Text = "Pegawai"
-        '
-        'GridControl4
-        '
-        Me.GridControl4.DataSource = Me.BindingSource4
-        Me.GridControl4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl4.Location = New System.Drawing.Point(0, 0)
-        Me.GridControl4.MainView = Me.GridView4
-        Me.GridControl4.Name = "GridControl4"
-        Me.GridControl4.Size = New System.Drawing.Size(977, 415)
-        Me.GridControl4.TabIndex = 3
-        Me.GridControl4.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView4})
-        '
-        'GridView4
-        '
-        Me.GridView4.GridControl = Me.GridControl4
-        Me.GridView4.Name = "GridView4"
-        Me.GridView4.OptionsBehavior.Editable = False
-        Me.GridView4.OptionsNavigation.EnterMoveNextColumn = True
-        Me.GridView4.OptionsSelection.MultiSelect = True
-        Me.GridView4.OptionsView.ColumnAutoWidth = False
-        Me.GridView4.OptionsView.ShowAutoFilterRow = True
-        Me.GridView4.OptionsView.ShowFooter = True
-        Me.GridView4.OptionsView.ShowGroupPanel = False
-        '
         'Bar1
         '
         Me.Bar1.BarName = "Custom 3"
@@ -445,6 +310,141 @@ Partial Class frmDaftarKontak
         Me.mnTutup.Id = 7
         Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
         Me.mnTutup.Name = "mnTutup"
+        '
+        'barDockControlTop
+        '
+        Me.barDockControlTop.CausesValidation = False
+        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Size = New System.Drawing.Size(983, 51)
+        '
+        'barDockControlBottom
+        '
+        Me.barDockControlBottom.CausesValidation = False
+        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 558)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(983, 0)
+        '
+        'barDockControlLeft
+        '
+        Me.barDockControlLeft.CausesValidation = False
+        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 507)
+        '
+        'barDockControlRight
+        '
+        Me.barDockControlRight.CausesValidation = False
+        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.barDockControlRight.Location = New System.Drawing.Point(983, 51)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 507)
+        '
+        'XtraTabControl1
+        '
+        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 95)
+        Me.XtraTabControl1.Name = "XtraTabControl1"
+        Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
+        Me.XtraTabControl1.Size = New System.Drawing.Size(983, 412)
+        Me.XtraTabControl1.TabIndex = 7
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2, Me.XtraTabPage3, Me.XtraTabPage4})
+        '
+        'XtraTabPage1
+        '
+        Me.XtraTabPage1.Controls.Add(Me.GridControl1)
+        Me.XtraTabPage1.Name = "XtraTabPage1"
+        Me.XtraTabPage1.Size = New System.Drawing.Size(977, 386)
+        Me.XtraTabPage1.Text = "All Kontak"
+        '
+        'XtraTabPage2
+        '
+        Me.XtraTabPage2.Controls.Add(Me.GridControl2)
+        Me.XtraTabPage2.Name = "XtraTabPage2"
+        Me.XtraTabPage2.Size = New System.Drawing.Size(977, 386)
+        Me.XtraTabPage2.Text = "Customer"
+        '
+        'GridControl2
+        '
+        Me.GridControl2.DataSource = Me.BindingSource2
+        Me.GridControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControl2.Location = New System.Drawing.Point(0, 0)
+        Me.GridControl2.MainView = Me.GridView2
+        Me.GridControl2.Name = "GridControl2"
+        Me.GridControl2.Size = New System.Drawing.Size(977, 386)
+        Me.GridControl2.TabIndex = 3
+        Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
+        '
+        'GridView2
+        '
+        Me.GridView2.GridControl = Me.GridControl2
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsBehavior.Editable = False
+        Me.GridView2.OptionsNavigation.EnterMoveNextColumn = True
+        Me.GridView2.OptionsSelection.MultiSelect = True
+        Me.GridView2.OptionsView.ColumnAutoWidth = False
+        Me.GridView2.OptionsView.ShowAutoFilterRow = True
+        Me.GridView2.OptionsView.ShowFooter = True
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'XtraTabPage3
+        '
+        Me.XtraTabPage3.Controls.Add(Me.GridControl3)
+        Me.XtraTabPage3.Name = "XtraTabPage3"
+        Me.XtraTabPage3.Size = New System.Drawing.Size(977, 386)
+        Me.XtraTabPage3.Text = "Supplier"
+        '
+        'GridControl3
+        '
+        Me.GridControl3.DataSource = Me.BindingSource3
+        Me.GridControl3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControl3.Location = New System.Drawing.Point(0, 0)
+        Me.GridControl3.MainView = Me.GridView3
+        Me.GridControl3.Name = "GridControl3"
+        Me.GridControl3.Size = New System.Drawing.Size(977, 386)
+        Me.GridControl3.TabIndex = 3
+        Me.GridControl3.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
+        '
+        'GridView3
+        '
+        Me.GridView3.GridControl = Me.GridControl3
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsBehavior.Editable = False
+        Me.GridView3.OptionsNavigation.EnterMoveNextColumn = True
+        Me.GridView3.OptionsSelection.MultiSelect = True
+        Me.GridView3.OptionsView.ColumnAutoWidth = False
+        Me.GridView3.OptionsView.ShowAutoFilterRow = True
+        Me.GridView3.OptionsView.ShowFooter = True
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'XtraTabPage4
+        '
+        Me.XtraTabPage4.Controls.Add(Me.GridControl4)
+        Me.XtraTabPage4.Name = "XtraTabPage4"
+        Me.XtraTabPage4.Size = New System.Drawing.Size(977, 386)
+        Me.XtraTabPage4.Text = "Pegawai"
+        '
+        'GridControl4
+        '
+        Me.GridControl4.DataSource = Me.BindingSource4
+        Me.GridControl4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControl4.Location = New System.Drawing.Point(0, 0)
+        Me.GridControl4.MainView = Me.GridView4
+        Me.GridControl4.Name = "GridControl4"
+        Me.GridControl4.Size = New System.Drawing.Size(977, 386)
+        Me.GridControl4.TabIndex = 3
+        Me.GridControl4.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView4})
+        '
+        'GridView4
+        '
+        Me.GridView4.GridControl = Me.GridControl4
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsBehavior.Editable = False
+        Me.GridView4.OptionsNavigation.EnterMoveNextColumn = True
+        Me.GridView4.OptionsSelection.MultiSelect = True
+        Me.GridView4.OptionsView.ColumnAutoWidth = False
+        Me.GridView4.OptionsView.ShowAutoFilterRow = True
+        Me.GridView4.OptionsView.ShowFooter = True
+        Me.GridView4.OptionsView.ShowGroupPanel = False
         '
         'frmDaftarKontak
         '

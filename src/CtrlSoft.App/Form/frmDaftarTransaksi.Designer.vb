@@ -19,41 +19,41 @@ Partial Class frmDaftarTransaksi
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdEdit = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdBaru = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit
+        Me.components = New System.ComponentModel.Container()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdHapus = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdEdit = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdBaru = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
-        Me.Bar1 = New DevExpress.XtraBars.Bar
-        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem
-        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem
-        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
-        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
-        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.mnPosting = New DevExpress.XtraBars.BarButtonItem
-        Me.mnUnposting = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHasilPosting = New DevExpress.XtraBars.BarButtonItem
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
+        Me.Bar2 = New DevExpress.XtraBars.Bar()
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem()
+        Me.Bar1 = New DevExpress.XtraBars.Bar()
+        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.mnPosting = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnUnposting = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHasilPosting = New DevExpress.XtraBars.BarButtonItem()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -178,7 +178,7 @@ Partial Class frmDaftarTransaksi
         Me.DateEdit2.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit2.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit2.TabIndex = 5
         '
@@ -347,7 +347,7 @@ Partial Class frmDaftarTransaksi
         Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit1.TabIndex = 2
         '

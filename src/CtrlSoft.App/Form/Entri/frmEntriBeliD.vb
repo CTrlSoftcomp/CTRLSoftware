@@ -8,7 +8,7 @@ Imports DevExpress.XtraEditors.Repository
 Imports CtrlSoft.Dto.Model
 
 Public Class frmEntriBeliD
-    Public NoID As Long = -1
+    Public NoID As Long = -1, IDBarangD As Long = -1
     Public IDHeader As Long = -1
     Private frmPemanggil As frmEntriBeli = Nothing
     Private pStatus As [Public].pStatusForm
@@ -171,7 +171,11 @@ Public Class frmEntriBeliD
         Me.Close()
     End Sub
 
-    Public Sub New(ByVal formPemanggil As frmEntriBeli, ByVal NoID As Long, ByVal IDHeader As Long, ByVal TypePajak As [Public].TypePajak)
+    Public Sub New(ByVal formPemanggil As frmEntriBeli,
+                   ByVal NoID As Long,
+                   ByVal IDHeader As Long,
+                   ByVal TypePajak As [Public].TypePajak,
+                   ByVal IDBarangD As Long)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -181,6 +185,7 @@ Public Class frmEntriBeliD
         Me.IDHeader = IDHeader
         Me.TypePajak = TypePajak
         Me.frmPemanggil = formPemanggil
+        Me.IDBarangD = IDBarangD
 
         AddHandler txtQty.LostFocus, AddressOf txtEdit_EditValueChanged
         AddHandler txtDiscProsen1.LostFocus, AddressOf txtEdit_EditValueChanged
@@ -266,10 +271,14 @@ Public Class frmEntriBeliD
                                     Me.NoID = -1
                                     IDBarang = -1
                                     txtPO.EditValue = -1
-                                    txtBarcode.EditValue = -1
                                     txtSatuan.EditValue = -1
                                     txtKonversi.EditValue = 1
+                                    txtBarcode.EditValue = IDBarangD
                                     txtQty.EditValue = 0
+                                    If NullToStr(txtBarcode.Text) <> "" OrElse IDBarangD >= 1 Then
+                                        LayoutControlItem16.Control.Focus()
+                                        txtQty.Focus()
+                                    End If
                                 End If
                                 HitungJumlah()
                             Catch ex As Exception

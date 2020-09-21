@@ -258,12 +258,12 @@ Public Class frmEntriBeli
                                 com.CommandTimeout = cn.ConnectionTimeout
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MBeliD.*, MPOD.Qty*MPOD.Konversi AS QtyOrder, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf & _
-                                                  "FROM MBeliD" & vbCrLf & _
-                                                  "LEFT JOIN MBarang ON MBarang.NoID=MBeliD.IDBarang" & vbCrLf & _
-                                                  "LEFT JOIN MBarangD ON MBarangD.NoID=MBeliD.IDBarangD" & vbCrLf & _
-                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MBeliD.IDSatuan" & vbCrLf & _
-                                                  "LEFT JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD" & vbCrLf & _
+                                com.CommandText = "SELECT MBeliD.*, MPOD.Qty*MPOD.Konversi AS QtyOrder, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf &
+                                                  "FROM MBeliD" & vbCrLf &
+                                                  "LEFT JOIN MBarang ON MBarang.NoID=MBeliD.IDBarang" & vbCrLf &
+                                                  "LEFT JOIN MBarangD ON MBarangD.NoID=MBeliD.IDBarangD" & vbCrLf &
+                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MBeliD.IDSatuan" & vbCrLf &
+                                                  "LEFT JOIN MPOD ON MPOD.NoID=MBeliD.IDPOD" & vbCrLf &
                                                   "WHERE MBeliD.IDHeader=" & NoID
                                 oDA.Fill(ds, "MBeliD")
                                 GridControl1.DataSource = ds.Tables("MBeliD")
@@ -301,9 +301,9 @@ Public Class frmEntriBeli
                                     txtDiscRp.Properties.ReadOnly = False
                                 End If
 
-                                com.CommandText = "SELECT SUM(MBeliD.JumlahBruto) JumlahBruto, SUM(MBeliD.Jumlah) Jumlah, SUM(MBeliD.DPP) DPP, SUM(MBeliD.PPN) PPN" & vbCrLf & _
-                                                  "FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf & _
-                                                  "WHERE MBeli.NoID=" & NoID & vbCrLf & _
+                                com.CommandText = "SELECT SUM(MBeliD.JumlahBruto) JumlahBruto, SUM(MBeliD.Jumlah) Jumlah, SUM(MBeliD.DPP) DPP, SUM(MBeliD.PPN) PPN" & vbCrLf &
+                                                  "FROM MBeliD INNER JOIN MBeli ON MBeli.NoID=MBeliD.IDHeader" & vbCrLf &
+                                                  "WHERE MBeli.NoID=" & NoID & vbCrLf &
                                                   "GROUP BY MBeli.NoID, MBeli.IDTypePajak"
                                 oDA.Fill(ds, "MHitung")
                                 If ds.Tables("MHitung").Rows.Count >= 1 Then
@@ -320,6 +320,8 @@ Public Class frmEntriBeli
                                 HitungJumlah()
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Finally
+                                mnFastEntri.PerformClick()
                             End Try
                         End Using
                     End Using
@@ -851,7 +853,7 @@ Public Class frmEntriBeli
 
     Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
-            Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
+            Using frm As New frmEntriBeliD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue, -1)
                 Try
                     If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
@@ -865,7 +867,7 @@ Public Class frmEntriBeli
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         If pStatusChange() Then
-            Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue)
+            Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue, -1)
                 Try
                     If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
@@ -973,5 +975,33 @@ Public Class frmEntriBeli
 
     Private Sub txt_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
         HitungJumlah()
+    End Sub
+
+    Private Sub mnFastEntri_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnFastEntri.ItemClick
+        txtFastEntri.Focus()
+    End Sub
+
+    Private Sub txtFastEntri_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFastEntri.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Enter
+                If txtFastEntri.Text <> "" AndAlso IIf(pStatus = pStatusForm.Baru, SimpanData(), True) = True Then
+                    Dim iList = Repository.RepSQLServer.GetBarangDetil(txtFastEntri.Text)
+                    If iList.Count >= 1 Then
+                        Using frm As New frmEntriBeliD(Me, -1, NoID, txtTypePajak.EditValue, iList(0).NoID)
+                            Try
+                                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                    RefreshDetil(frm.NoID)
+                                End If
+                            Catch ex As Exception
+                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
+                        End Using
+                        txtFastEntri.Text = ""
+                    Else
+                        XtraMessageBox.Show("Data tidak ditemukan.", NamaAplikasi, MessageBoxButtons.OK)
+                    End If
+                    mnFastEntri.PerformClick()
+                End If
+        End Select
     End Sub
 End Class

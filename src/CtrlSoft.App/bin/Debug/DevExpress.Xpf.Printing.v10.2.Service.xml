@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevExpress.Xpf.Printing.v10.2.Service</name>
+    </assembly>
+    <members>
+        <member name="T:DevExpress.Xpf.Printing.Service.ExportService">
+
+            <summary>
+                <para>Maintains WCF service and provides export functionality.
+
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.#ctor">
+            <summary>
+                <para>Initializes a new instance of the ExportService class with default settings.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.ClearDocument(DevExpress.Xpf.Printing.Service.DataContracts.DocumentId)">
+            <summary>
+                <para>Clears the specified document.
+</para>
+            </summary>
+            <param name="documentId">
+		A <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId"/> value that identifies the document.
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.GetExportedDocument(DevExpress.Xpf.Printing.Service.DataContracts.ExportId)">
+            <summary>
+                <para>Obtains the exported document from the service, and saves it to a stream.
+</para>
+            </summary>
+            <param name="exportId">
+		An <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportId"/> value that identifies the document.
+
+            </param>
+            <returns>A <see cref="T:System.IO.Stream"/> to where the document should be saved.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.GetExportingDocument(System.String)">
+            <summary>
+                <para>Obtains the exported document from the service, and saves it to a stream.
+</para>
+            </summary>
+            <param name="exportIdValue">
+		A <see cref="T:System.String"/> that contains the value of the <see cref="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportId.Value"/> property.
+
+            </param>
+            <returns>A <see cref="T:System.IO.Stream"/> to where the document should be saved.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.GetExportStatus(DevExpress.Xpf.Printing.Service.DataContracts.ExportId)">
+            <summary>
+                <para>Gets the current status of the exported document.
+</para>
+            </summary>
+            <param name="exportId">
+		An <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportId"/> value that identifies the document.
+
+            </param>
+            <returns>An <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus"/> object that contains information about the document's status.
+
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.StartExport(DevExpress.Xpf.Printing.Service.DataContracts.DocumentId,DevExpress.XtraPrinting.ExportFormat,System.Byte[])">
+            <summary>
+                <para>Starts exporting the document.
+</para>
+            </summary>
+            <param name="documentId">
+		A <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId"/> value that identifies the document.
+
+            </param>
+            <param name="format">
+		An <see cref="T:DevExpress.XtraPrinting.ExportFormat"/> enumeration value that specifies the required export format.
+
+            </param>
+            <param name="serializedExportOptions">
+		An array of serialized export options.
+
+            </param>
+            <returns>An <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportId"/> value that identifies the document.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.ExportService.UploadDocument(System.IO.Stream)">
+            <summary>
+                <para>Uploads the document to a stream.
+</para>
+            </summary>
+            <param name="stream">
+		A <see cref="T:System.IO.Stream"/> to where the document should be saved.
+
+            </param>
+            <returns>A <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId"/> value that identifies the document.
+</returns>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.PrintingServiceKnownTypeContainer">
+
+            <summary>
+                <para>Registers known types on a WCF-service.
+
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.PrintingServiceKnownTypeContainer.GetKnownTypes(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+                <para>For internal use.
+</para>
+            </summary>
+            <param name="provider">
+		@nbsp;
+
+            </param>
+            <returns>A list of <see cref="T:System.Type"/> enumeration values.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.PrintingServiceKnownTypeContainer.RegisterKnownType(System.Type[])">
+            <summary>
+                <para>Registers the specified parameter types.
+</para>
+            </summary>
+            <param name="types">
+		An array of <see cref="T:System.Type"/> enumeration values.
+
+            </param>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.PrintingServiceKnownTypeContainer.RegisterKnownType``1">
+            <summary>
+                <para>Registers a custom parameter type.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus">
+
+            <summary>
+                <para>Contains information about the status of the exported document.
+</para>
+            </summary>
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus.ExportId">
+            <summary>
+                <para>Specifies the exported document, to which the ExportStatus instance belongs.
+</para>
+            </summary>
+            <value>An <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportId"/> value that identifies the document.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus.Fault">
+            <summary>
+                <para>Provides information about service faults (if any).
+</para>
+            </summary>
+            <value>A <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault"/> object that contains information about the service faults. 
+
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus.ProgressPosition">
+            <summary>
+                <para>Specifies the current progress of the document export.
+
+</para>
+            </summary>
+            <value>An integer value, specifying the progress position.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportStatus.Status">
+            <summary>
+                <para>Specifies the current status of the exported document.
+</para>
+            </summary>
+            <value>A <see cref="T:DevExpress.Xpf.Printing.Service.DataContracts.TaskStatus"/> enumeration value.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.DataContracts.ExportId">
+
+            <summary>
+                <para>Contains information that identifies the exported document.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.ExportId.#ctor">
+            <summary>
+                <para>Initializes a new instance of the ExportId class with default settings.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.ExportId.#ctor(System.String)">
+            <summary>
+                <para>Initializes a new instance of the ExportId class with the specified value.
+</para>
+            </summary>
+            <param name="exportIdValue">
+		A <see cref="T:System.String"/> value. It is assigned to the <see cref="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportId.Value"/> property.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ExportId.Value">
+            <summary>
+                <para>Specifies the document ID.
+</para>
+            </summary>
+            <value>A <see cref="T:System.String"/> value.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId">
+
+            <summary>
+                <para>Identifies the report document.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId.#ctor">
+            <summary>
+                <para>Initializes a new instance of the DocumentId class with default settings.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId.#ctor(System.String)">
+            <summary>
+                <para>Initializes a new instance of the DocumentId class with the specified value.
+</para>
+            </summary>
+            <param name="value">
+		A <see cref="T:System.String"/> value. It is assigned to the <see cref="P:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId.Value"/> property.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.DocumentId.Value">
+            <summary>
+                <para>Specifies the document ID.
+</para>
+            </summary>
+            <value>A <see cref="T:System.String"/> value.
+</value>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault">
+
+            <summary>
+                <para>Contains information about the service faults.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.#ctor">
+            <summary>
+                <para>Initializes a new instance of the ServiceFault class with default settings.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.#ctor(System.Exception)">
+            <summary>
+                <para>Initializes a new instance of the ServiceFault class with the specified exception.
+</para>
+            </summary>
+            <param name="exception">
+		An <see cref="T:System.Exception"/> object.
+
+            </param>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.FullMessage">
+            <summary>
+                <para>Specifies the full message of the service fault. 
+</para>
+            </summary>
+            <value>A <see cref="T:System.String"/> value.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.Message">
+            <summary>
+                <para>Specifies the short message of the service fault. 
+</para>
+            </summary>
+            <value>A <see cref="T:System.String"/> value.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.Oid">
+            <summary>
+                <para>Specifies the object identifier (OID) of the service fault. 
+</para>
+            </summary>
+            <value>An integer value that identifies the service fault.
+</value>
+
+
+        </member>
+        <member name="M:DevExpress.Xpf.Printing.Service.DataContracts.ServiceFault.ToString">
+            <summary>
+                <para>Returns the text representation of the ServiceFault object.
+</para>
+            </summary>
+            <returns>A string representation of the current object.
+</returns>
+
+
+        </member>
+        <member name="T:DevExpress.Xpf.Printing.Service.DataContracts.TaskStatus">
+
+            <summary>
+                <para>Lists the values that describe various task statuses.
+</para>
+            </summary>
+
+        </member>
+        <member name="F:DevExpress.Xpf.Printing.Service.DataContracts.TaskStatus.Complete">
+            <summary>
+                <para>The task is compete.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Xpf.Printing.Service.DataContracts.TaskStatus.Fault">
+            <summary>
+                <para>The task is fault.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Xpf.Printing.Service.DataContracts.TaskStatus.InProgress">
+            <summary>
+                <para>The task is in progress.
+</para>
+            </summary>
+
+
+        </member>
+    </members>
+</doc>

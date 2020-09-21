@@ -271,8 +271,9 @@ Public Class frmEntriJualD
 
                                     txtBarcode.EditValue = IDBarangD
                                     txtQty.EditValue = 0
-                                    If NullToStr(txtBarcode.Text) <> "" Then
+                                    If NullToStr(txtBarcode.Text) <> "" OrElse IDBarangD >= 1 Then
                                         LayoutControlItem16.Control.Focus()
+                                        txtQty.Focus()
                                     End If
                                 End If
                                 HitungJumlah()

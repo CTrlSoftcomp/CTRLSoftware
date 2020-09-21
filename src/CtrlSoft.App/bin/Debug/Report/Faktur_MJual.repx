@@ -6,7 +6,7 @@
 /// </XRTypeInfo>
 namespace XtraReportSerialization {
     
-    public class FAKTUR_MJUAL : DevExpress.XtraReports.UI.XtraReport {
+    public class xtraReport1 : DevExpress.XtraReports.UI.XtraReport {
         private DevExpress.XtraReports.UI.TopMarginBand topMarginBand1;
         private DevExpress.XtraReports.UI.DetailBand detailBand1;
         private DevExpress.XtraReports.UI.XRLabel label5;
@@ -15,8 +15,10 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.XRLabel label2;
         private DevExpress.XtraReports.UI.XRLabel label1;
         private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
+        private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private System.Resources.ResourceManager _resources;
-        public FAKTUR_MJUAL() {
+        public xtraReport1() {
             this.InitializeComponent();
         }
         private System.Resources.ResourceManager resources {
@@ -34,6 +36,8 @@ namespace XtraReportSerialization {
             this.topMarginBand1 = new DevExpress.XtraReports.UI.TopMarginBand();
             this.detailBand1 = new DevExpress.XtraReports.UI.DetailBand();
             this.bottomMarginBand1 = new DevExpress.XtraReports.UI.BottomMarginBand();
+            this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.label5 = new DevExpress.XtraReports.UI.XRLabel();
             this.label4 = new DevExpress.XtraReports.UI.XRLabel();
             this.label3 = new DevExpress.XtraReports.UI.XRLabel();
@@ -44,7 +48,7 @@ namespace XtraReportSerialization {
             // topMarginBand1
             // 
             this.topMarginBand1.Dpi = 254F;
-            this.topMarginBand1.HeightF = 254F;
+            this.topMarginBand1.HeightF = 0F;
             this.topMarginBand1.Name = "topMarginBand1";
             // 
             // detailBand1
@@ -56,14 +60,26 @@ namespace XtraReportSerialization {
                         this.label2,
                         this.label1});
             this.detailBand1.Dpi = 254F;
-            this.detailBand1.HeightF = 58.42001F;
+            this.detailBand1.HeightF = 391.795F;
             this.detailBand1.Name = "detailBand1";
             // 
             // bottomMarginBand1
             // 
             this.bottomMarginBand1.Dpi = 254F;
-            this.bottomMarginBand1.HeightF = 254F;
+            this.bottomMarginBand1.HeightF = 0F;
             this.bottomMarginBand1.Name = "bottomMarginBand1";
+            // 
+            // ReportHeader
+            // 
+            this.ReportHeader.Dpi = 254F;
+            this.ReportHeader.HeightF = 254F;
+            this.ReportHeader.Name = "ReportHeader";
+            // 
+            // ReportFooter
+            // 
+            this.ReportFooter.Dpi = 254F;
+            this.ReportFooter.HeightF = 254F;
+            this.ReportFooter.Name = "ReportFooter";
             // 
             // label5
             // 
@@ -72,7 +88,7 @@ namespace XtraReportSerialization {
             this.label5.Dpi = 254F;
             this.label5.LocationFloat = new DevExpress.Utils.PointFloat(1288.521F, 0F);
             this.label5.Name = "label5";
-            this.label5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label5.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label5.Text = "label5";
             // 
@@ -83,7 +99,7 @@ namespace XtraReportSerialization {
             this.label4.Dpi = 254F;
             this.label4.LocationFloat = new DevExpress.Utils.PointFloat(971.0208F, 0F);
             this.label4.Name = "label4";
-            this.label4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label4.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label4.Text = "label4";
             // 
@@ -94,7 +110,7 @@ namespace XtraReportSerialization {
             this.label3.Dpi = 254F;
             this.label3.LocationFloat = new DevExpress.Utils.PointFloat(677.3333F, 0F);
             this.label3.Name = "label3";
-            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label3.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label3.Text = "label3";
             // 
@@ -105,7 +121,7 @@ namespace XtraReportSerialization {
             this.label2.Dpi = 254F;
             this.label2.LocationFloat = new DevExpress.Utils.PointFloat(254F, 0F);
             this.label2.Name = "label2";
-            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label2.SizeF = new System.Drawing.SizeF(423.3333F, 58.42001F);
             this.label2.Text = "label2";
             // 
@@ -116,25 +132,30 @@ namespace XtraReportSerialization {
             this.label1.Dpi = 254F;
             this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.label1.Name = "label1";
-            this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label1.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label1.Text = "label1";
             // 
-            // FAKTUR_MJUAL
+            // xtraReport1
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
                         this.topMarginBand1,
                         this.detailBand1,
-                        this.bottomMarginBand1});
-            this.DataSourceSchema = "D:\\CPYH\\2019 - CPYH\\CPYH\\bin\\Debug\\Report\\XCD\\FAKTUR_MJUAL.xsd";
+                        this.bottomMarginBand1,
+                        this.ReportHeader,
+                        this.ReportFooter});
+            this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\src\\CtrlSoft.App\\bin\\Debug\\Report\\XCD\\FAKTUR_MJUAL.xsd";
             this.DisplayName = "Faktur_MJual.repx";
             this.Dpi = 254F;
-            this.Margins = new System.Drawing.Printing.Margins(254, 254, 254, 254);
-            this.Name = "FAKTUR_MJUAL";
+            this.Margins = new System.Drawing.Printing.Margins(64, 66, 0, 0);
+            this.Name = "xtraReport1";
             this.PageHeight = 2794;
             this.PageWidth = 2159;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
+            this.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic;
+            this.ScriptSecurityPermissions.AddRange(new DevExpress.XtraReports.ScriptSecurityPermission[] {
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true)});
             this.SnapGridSize = 31.75F;
             this.Version = "10.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

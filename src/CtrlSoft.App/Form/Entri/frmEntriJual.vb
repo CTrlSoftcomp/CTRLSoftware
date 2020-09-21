@@ -132,11 +132,11 @@ Public Class frmEntriJual
                                 com.CommandTimeout = cn.ConnectionTimeout
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MJualD.*, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf & _
-                                                  "FROM MJualD" & vbCrLf & _
-                                                  "LEFT JOIN MBarang ON MBarang.NoID=MJualD.IDBarang" & vbCrLf & _
-                                                  "LEFT JOIN MBarangD ON MBarangD.NoID=MJualD.IDBarangD" & vbCrLf & _
-                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MJualD.IDSatuan" & vbCrLf & _
+                                com.CommandText = "SELECT MJualD.*, MSatuan.Kode AS Satuan, MBarangD.Barcode, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang" & vbCrLf &
+                                                  "FROM MJualD" & vbCrLf &
+                                                  "LEFT JOIN MBarang ON MBarang.NoID=MJualD.IDBarang" & vbCrLf &
+                                                  "LEFT JOIN MBarangD ON MBarangD.NoID=MJualD.IDBarangD" & vbCrLf &
+                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MJualD.IDSatuan" & vbCrLf &
                                                   "WHERE MJualD.IDHeader=" & NoID
                                 oDA.Fill(ds, "MJualD")
                                 GridControl1.DataSource = ds.Tables("MJualD")
@@ -160,17 +160,19 @@ Public Class frmEntriJual
                                     mnHapus.Enabled = False
                                     mnSimpan.Enabled = False
                                     mnCetak.Enabled = True
+                                    mnSuratJalan.Enabled = True
                                 Else
                                     mnBaru.Enabled = True
                                     mnEdit.Enabled = True
                                     mnHapus.Enabled = True
                                     mnSimpan.Enabled = True
                                     mnCetak.Enabled = False
+                                    mnSuratJalan.Enabled = False
                                 End If
 
-                                com.CommandText = "SELECT SUM(MJualD.JumlahBruto) JumlahBruto, SUM(MJualD.Jumlah) Jumlah, SUM(MJualD.DPP) DPP, SUM(MJualD.PPN) PPN" & vbCrLf & _
-                                                  "FROM MJualD INNER JOIN MJual ON MJual.NoID=MJualD.IDHeader" & vbCrLf & _
-                                                  "WHERE MJual.NoID=" & NoID & vbCrLf & _
+                                com.CommandText = "SELECT SUM(MJualD.JumlahBruto) JumlahBruto, SUM(MJualD.Jumlah) Jumlah, SUM(MJualD.DPP) DPP, SUM(MJualD.PPN) PPN" & vbCrLf &
+                                                  "FROM MJualD INNER JOIN MJual ON MJual.NoID=MJualD.IDHeader" & vbCrLf &
+                                                  "WHERE MJual.NoID=" & NoID & vbCrLf &
                                                   "GROUP BY MJual.NoID, MJual.IDTypePajak"
                                 oDA.Fill(ds, "MHitung")
                                 If ds.Tables("MHitung").Rows.Count >= 1 Then
@@ -185,9 +187,9 @@ Public Class frmEntriJual
                                     txtTotal.EditValue = 0
                                 End If
 
-                                com.CommandText = "SELECT SUM(MJualDBayar.ChargeRp) ChargeRp, SUM(MJualDBayar.Total) TotalBayar" & vbCrLf & _
-                                                  "FROM MJualDBayar INNER JOIN MJual ON MJual.NoID=MJualDBayar.IDHeader" & vbCrLf & _
-                                                  "WHERE MJual.NoID=" & NoID & vbCrLf & _
+                                com.CommandText = "SELECT SUM(MJualDBayar.ChargeRp) ChargeRp, SUM(MJualDBayar.Total) TotalBayar" & vbCrLf &
+                                                  "FROM MJualDBayar INNER JOIN MJual ON MJual.NoID=MJualDBayar.IDHeader" & vbCrLf &
+                                                  "WHERE MJual.NoID=" & NoID & vbCrLf &
                                                   "GROUP BY MJualDBayar.NoID"
                                 oDA.Fill(ds, "MBayar")
                                 If ds.Tables("MBayar").Rows.Count >= 1 Then
@@ -198,16 +200,18 @@ Public Class frmEntriJual
                                     TextEdit2.EditValue = Bulatkan(txtTotal.EditValue, 2)
                                 End If
 
-                                com.CommandText = "SELECT A.NoID, B.Nama Pembayaran, A.Total, A.Nominal, A.ChargeProsen [Charge (%)], A.ChargeRp [Charge (Rp)], A.NoRekening, A.AtasNama" & vbCrLf & _
-                                                  "FROM MJualDBayar A" & vbCrLf & _
-                                                  "LEFT JOIN MJenisPembayaran B ON B.NoID=A.IDJenisPembayaran" & vbCrLf & _
-                                                  "WHERE A.IDHeader=" & NoID & vbCrLf & _
+                                com.CommandText = "SELECT A.NoID, B.Nama Pembayaran, A.Total, A.Nominal, A.ChargeProsen [Charge (%)], A.ChargeRp [Charge (Rp)], A.NoRekening, A.AtasNama" & vbCrLf &
+                                                  "FROM MJualDBayar A" & vbCrLf &
+                                                  "LEFT JOIN MJenisPembayaran B ON B.NoID=A.IDJenisPembayaran" & vbCrLf &
+                                                  "WHERE A.IDHeader=" & NoID & vbCrLf &
                                                   "ORDER BY A.NoID"
                                 oDA.Fill(ds, "MJualDBayar")
                                 GridControl2.DataSource = ds.Tables("MJualDBayar")
                                 GridView2.RefreshData()
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Finally
+                                mnFastEntri.PerformClick()
                             End Try
                         End Using
                     End Using
@@ -807,12 +811,14 @@ Public Class frmEntriJual
                     mnHapus.Enabled = False
                     mnSimpan.Enabled = False
                     mnCetak.Enabled = True
+                    mnSuratJalan.Enabled = True
                 Else
                     mnBaru.Enabled = True
                     mnEdit.Enabled = True
                     mnHapus.Enabled = True
                     mnSimpan.Enabled = True
                     mnCetak.Enabled = False
+                    mnSuratJalan.Enabled = False
                 End If
             End If
         End If
@@ -864,7 +870,10 @@ Public Class frmEntriJual
                             End Try
                         End Using
                         txtFastEntri.Text = ""
+                    Else
+                        XtraMessageBox.Show("Data tidak ditemukan.", NamaAplikasi, MessageBoxButtons.OK)
                     End If
+                    mnFastEntri.PerformClick()
                 End If
         End Select
     End Sub
@@ -898,5 +907,40 @@ Public Class frmEntriJual
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub mnSuratJalan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSuratJalan.ItemClick
+        Dim NamaFile As String = "", Judul As String = ""
+        Using cn As New SqlConnection(StrKonSQL)
+            Using com As New SqlCommand
+                Using oDA As New SqlDataAdapter
+                    Using ds As New DataSet
+                        Try
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+                            oDA.SelectCommand = com
+
+                            com.CommandText = "SELECT IsPosted FROM MJual(NOLOCK) WHERE NoID=" & NoID
+                            If NullToBool(com.ExecuteScalar()) Then
+                                com.CommandText = "spFakturMJual @NoID"
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                oDA.Fill(ds, "MJual")
+                                NamaFile = "SuratJalan_MJual.repx"
+                                Judul = "Surat Jalan Penjualan"
+                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                            End If
+                        Catch ex As Exception
+                            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    Private Sub txtFastEntri_EditValueChanged(sender As Object, e As EventArgs) Handles txtFastEntri.EditValueChanged
+
     End Sub
 End Class

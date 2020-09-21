@@ -11,9 +11,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("CtrlSoft.Dto")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("CtrlSoft.Dto")> 
-<Assembly: AssemblyCopyright("Copyright ©  2020")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyProduct("CtrlSoft.Dto")>
+<Assembly: AssemblyCopyright("Copyright © CPYH 2020")>
+<Assembly: AssemblyTrademark("Copyright © CPYH 2020")>
 
 <Assembly: ComVisible(False)>
 

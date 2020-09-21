@@ -29,12 +29,26 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      child: Center(
-        child: Image.asset(
-          "assets/images/ctrl_soft.png",
-          width: size.height * 0.4,
-          height: size.height * 0.4,
-          color: kPrimaryDarkColor,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              "assets/images/ctrl_soft.png",
+              width: size.width * 0.5,
+              height: size.width * 0.5,
+              color: kPrimaryDarkColor,
+            ),
+            SizedBox(height: size.height * 0.01),
+            Text(
+              "Version 1.0",
+              maxLines: 1,
+              style: TextStyle(
+                color: kColorWhite,
+                fontSize: fontSize_Caption,
+              ),
+            ),
+          ],
         ),
       ),
     );

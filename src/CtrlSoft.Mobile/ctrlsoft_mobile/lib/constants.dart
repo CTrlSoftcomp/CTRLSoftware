@@ -11,3 +11,4 @@ Color cColorWhite = Hexcolor('#ffffff');
 Color cColorBlack = Hexcolor('#000000');
 
 const double fontSize_Button = 14.0;
+const double fontSize_Caption = 14.0;

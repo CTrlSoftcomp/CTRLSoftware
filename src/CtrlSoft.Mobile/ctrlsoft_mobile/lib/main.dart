@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kColorWhite,
-        primaryColorLight: kPrimaryLightColor,
-        primaryColorDark: kPrimaryDarkColor,
+        // primaryColorLight: kPrimaryLightColor,
+        // primaryColorDark: kPrimaryDarkColor,
         accentColor: Colors.grey[600],
 
         // Define the default font family.
@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          bodyText2: TextStyle(fontSize: 14.0),
+          bodyText1: TextStyle(fontSize: 16.0),
         ),
       ),
       home: SplashScreen(),

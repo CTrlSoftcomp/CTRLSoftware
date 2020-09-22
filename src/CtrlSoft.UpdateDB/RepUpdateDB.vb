@@ -25,9 +25,11 @@ Namespace Repository
                                     com.CommandText = "INSERT INTO TAppDB([DBVersion], [Tanggal]) VALUES (@DBVersion, @Tanggal)"
                                     com.ExecuteNonQuery()
 
-                                    com.CommandText = Obj.SQL
-                                    com.Parameters.Clear()
-                                    com.ExecuteNonQuery()
+                                    For Each Query In Obj.ListSQL
+                                        com.CommandText = Query
+                                        com.Parameters.Clear()
+                                        com.ExecuteNonQuery()
+                                    Next
 
                                     com.Transaction.Commit()
                                 Else
@@ -272,6 +274,7 @@ Namespace Repository
             Dim Hasil As New List(Of Model.UpdateDB)
             Dim Obj As New Model.UpdateDB
             Dim SQL As String = ""
+            Dim ListSQL As List(Of String) = Nothing
 
             SQL = "CREATE TABLE [dbo].[MJenisTransaksiD](" & vbCrLf & _
                   "[NoID] [int] NOT NULL," & vbCrLf & _
@@ -831,8 +834,11 @@ Namespace Repository
             Obj = New Model.UpdateDB With {.DBVersion = "spSimpanMSaldoAwalPiutang_200922", .TglUpdate = CDate("2020-09-22"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "DROP PROCEDURE [dbo].[spSaldoAwalPersediaan];" & vbCrLf &
-                  "-- =============================================" & vbCrLf &
+            SQL = "DROP PROCEDURE [dbo].[spSaldoAwalPersediaan];"
+            Obj = New Model.UpdateDB With {.DBVersion = "spSaldoAwalPersediaan_200922", .TglUpdate = CDate("2020-09-22"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "-- =============================================" & vbCrLf &
                   "-- Author: <Author,,Name>" & vbCrLf &
                   "-- Create date: <Create Date,,>" & vbCrLf &
                   "-- Description: <Description,,>" & vbCrLf &
@@ -895,6 +901,122 @@ Namespace Repository
                 "ORDER BY MSaldoAwalPiutang.Tanggal, MSaldoAwalPiutang.NoID" & vbCrLf &
                 "END"
             Obj = New Model.UpdateDB With {.DBVersion = "spDaftarSaldoAwalPiutang_200922", .TglUpdate = CDate("2020-09-22"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            ListSQL = New List(Of String)
+            ListSQL.Add("CREATE TABLE MKasIN" & vbCrLf &
+                    "(NoID        INT NOT NULL, " & vbCrLf &
+                    "Tanggal      DATETIME, " & vbCrLf &
+                    "IDKontak     INT, " & vbCrLf &
+                    "Kode         VARCHAR(50), " & vbCrLf &
+                    "KodeReff     VARCHAR(50), " & vbCrLf &
+                    "Keterangan   VARCHAR(MAX), " & vbCrLf &
+                    "Total        MONEY, " & vbCrLf &
+                    "IDUserEntry  INT," & vbCrLf &
+                    "TglEntry     DATETIME," & vbCrLf &
+                    "IDUserEdit   INT," & vbCrLf &
+                    "TglEdit      DATETIME," & vbCrLf &
+                    "IsPosted     BIT," & vbCrLf &
+                    "IDUserPosted INT," & vbCrLf &
+                    "TglPosted    DATETIME," & vbCrLf &
+                    "CONSTRAINT [PK_MKasIN] PRIMARY KEY CLUSTERED([NoID] ASC)" & vbCrLf &
+                    "WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY], " & vbCrLf &
+                    ")" & vbCrLf &
+                    "ON [PRIMARY];")
+            ListSQL.Add("CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MKasIN]" & vbCrLf &
+                        "([Kode] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]")
+            ListSQL.Add("CREATE TABLE [dbo].[MKasIND](" & vbCrLf &
+                    "[IDKasIN] [int] NOT NULL," & vbCrLf &
+                    "[NoUrut] [int] NOT NULL," & vbCrLf &
+                    "[ReffNoTransaksi] [varchar](50) NULL," & vbCrLf &
+                    "[ReffNoUrut] [smallint] NULL," & vbCrLf &
+                    "[Debet] [money] NULL," & vbCrLf &
+                    "[Kredit] [money] NULL," & vbCrLf &
+                    "[Keterangan] [varchar](max) NULL," & vbCrLf &
+                    "CONSTRAINT [PK_MKasIND] PRIMARY KEY CLUSTERED " & vbCrLf &
+                    "(" & vbCrLf &
+                    "[IDKasIN] ASC," & vbCrLf &
+                    "[NoUrut] ASC" & vbCrLf &
+                    ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
+                    ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];")
+            ListSQL.Add("CREATE TABLE [dbo].[MKasINDBayar](" & vbCrLf &
+                    "[IDKasIN] [int] NOT NULL," & vbCrLf &
+                    "[IDJenisPembayaran] [int] NOT NULL," & vbCrLf &
+                    "[AtasNama] [varchar](50) NULL," & vbCrLf &
+                    "[NoRekening] [varchar](150) NULL," & vbCrLf &
+                    "[Nominal] [money] NOT NULL," & vbCrLf &
+                    "[ChargeProsen] [numeric](18, 3) NULL," & vbCrLf &
+                    "[ChargeRp] [money] NULL," & vbCrLf &
+                    "[Total] [money] NULL," & vbCrLf &
+                    "CONSTRAINT [PK_MKasINDBayar] PRIMARY KEY CLUSTERED " & vbCrLf &
+                    "(" & vbCrLf &
+                    "[IDKasIN] ASC," & vbCrLf &
+                    "[IDJenisPembayaran] ASC" & vbCrLf &
+                    ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
+                    ") ON [PRIMARY];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasINDBayar] ADD  CONSTRAINT [DF_MKasINDBayar_Nominal]  DEFAULT ((0)) FOR [Nominal];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasINDBayar] ADD  CONSTRAINT [DF_MKasINDBayar_ChargeProsen]  DEFAULT ((0)) FOR [ChargeProsen];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasINDBayar] ADD  CONSTRAINT [DF_MKasINDBayar_ChargeRp]  DEFAULT ((0)) FOR [ChargeRp];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasINDBayar] ADD  CONSTRAINT [DF_MKasINDBayar_Total]  DEFAULT ((0)) FOR [Total];")
+            Obj = New Model.UpdateDB With {.DBVersion = "MKasIN_200922", .TglUpdate = CDate("2020-09-22"), .SQL = "", .ListSQL = ListSQL}
+            Hasil.Add(Obj)
+
+            ListSQL = New List(Of String)
+            ListSQL.Add("CREATE TABLE MKasOut" & vbCrLf &
+                    "(NoID        INT NOT NULL, " & vbCrLf &
+                    "Tanggal      DATETIME, " & vbCrLf &
+                    "IDKontak     INT, " & vbCrLf &
+                    "Kode         VARCHAR(50), " & vbCrLf &
+                    "KodeReff     VARCHAR(50), " & vbCrLf &
+                    "Keterangan   VARCHAR(MAX), " & vbCrLf &
+                    "Total        MONEY, " & vbCrLf &
+                    "IDUserEntry  INT," & vbCrLf &
+                    "TglEntry     DATETIME," & vbCrLf &
+                    "IDUserEdit   INT," & vbCrLf &
+                    "TglEdit      DATETIME," & vbCrLf &
+                    "IsPosted     BIT," & vbCrLf &
+                    "IDUserPosted INT," & vbCrLf &
+                    "TglPosted    DATETIME," & vbCrLf &
+                    "CONSTRAINT [PK_MKasOut] PRIMARY KEY CLUSTERED([NoID] ASC)" & vbCrLf &
+                    "WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY], " & vbCrLf &
+                    ")" & vbCrLf &
+                    "ON [PRIMARY];")
+            ListSQL.Add("CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MKasOut]" & vbCrLf &
+                        "([Kode] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]")
+            ListSQL.Add("CREATE TABLE [dbo].[MKasOutD](" & vbCrLf &
+                    "[IDKasOut] [int] NOT NULL," & vbCrLf &
+                    "[NoUrut] [int] NOT NULL," & vbCrLf &
+                    "[ReffNoTransaksi] [varchar](50) NULL," & vbCrLf &
+                    "[ReffNoUrut] [smallint] NULL," & vbCrLf &
+                    "[Debet] [money] NULL," & vbCrLf &
+                    "[Kredit] [money] NULL," & vbCrLf &
+                    "[Keterangan] [varchar](max) NULL," & vbCrLf &
+                    "CONSTRAINT [PK_MKasOutD] PRIMARY KEY CLUSTERED " & vbCrLf &
+                    "(" & vbCrLf &
+                    "[IDKasOut] ASC," & vbCrLf &
+                    "[NoUrut] ASC" & vbCrLf &
+                    ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
+                    ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];")
+            ListSQL.Add("CREATE TABLE [dbo].[MKasOutDBayar](" & vbCrLf &
+                    "[IDKasOut] [int] NOT NULL," & vbCrLf &
+                    "[IDJenisPembayaran] [int] NOT NULL," & vbCrLf &
+                    "[AtasNama] [varchar](50) NULL," & vbCrLf &
+                    "[NoRekening] [varchar](150) NULL," & vbCrLf &
+                    "[Nominal] [money] NOT NULL," & vbCrLf &
+                    "[ChargeProsen] [numeric](18, 3) NULL," & vbCrLf &
+                    "[ChargeRp] [money] NULL," & vbCrLf &
+                    "[Total] [money] NULL," & vbCrLf &
+                    "CONSTRAINT [PK_MKasOutDBayar] PRIMARY KEY CLUSTERED " & vbCrLf &
+                    "(" & vbCrLf &
+                    "[IDKasOut] ASC," & vbCrLf &
+                    "[IDJenisPembayaran] ASC" & vbCrLf &
+                    ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
+                    ") ON [PRIMARY];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_Nominal]  DEFAULT ((0)) FOR [Nominal];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_ChargeProsen]  DEFAULT ((0)) FOR [ChargeProsen];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_ChargeRp]  DEFAULT ((0)) FOR [ChargeRp];")
+            ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_Total]  DEFAULT ((0)) FOR [Total];")
+            Obj = New Model.UpdateDB With {.DBVersion = "MKasOut_200922", .TglUpdate = CDate("2020-09-22"), .SQL = "", .ListSQL = ListSQL}
             Hasil.Add(Obj)
 
             Return Hasil

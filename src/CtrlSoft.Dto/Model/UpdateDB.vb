@@ -3,6 +3,7 @@
         Private _DBVersion As String
         Private _TglUpdate As Date
         Private _SQL As String
+        Private _ListSQL As List(Of String)
 
         Public Property DBVersion() As String
             Get
@@ -31,10 +32,23 @@
             End Set
         End Property
 
+        Public Property ListSQL As List(Of String)
+            Get
+                If SQL <> "" Then
+                    _ListSQL.Add(SQL)
+                End If
+                Return _ListSQL
+            End Get
+            Set(value As List(Of String))
+                _ListSQL = value
+            End Set
+        End Property
+
         Public Sub New()
             Me.TglUpdate = Now()
             Me.SQL = ""
             Me.DBVersion = ""
+            Me.ListSQL = New List(Of String)
         End Sub
     End Class
 End Namespace

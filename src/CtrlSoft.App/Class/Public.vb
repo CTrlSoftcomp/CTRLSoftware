@@ -4,10 +4,10 @@ Public Class [Public]
     Public Shared NamaAplikasi As String = Application.ProductName.ToString
     Public Shared StrKonSQL As String = ""
     Public Shared UserLogin As New MUser
-    Public Shared SettingPerusahaan As New Model.SettingPerusahaan
+    Public Shared SettingPerusahaan As New SettingPerusahaan
     Public Shared UserOtorisasi As New MUser
     Public Shared IsEditReport As Boolean = False
-    Public Shared Dataset As New CtrlSoft.Dto.Model.DatasetLookUp
+    Public Shared Dataset As New DatasetLookUp
 
     Public Enum pStatusForm
         Baru = 0

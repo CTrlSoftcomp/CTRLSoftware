@@ -83,6 +83,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Posting.vb" />
+    <Compile Include="RepConfig.vb" />
     <Compile Include="RepSQLServer.vb" />
     <Compile Include="Terbilang.vb" />
     <Compile Include="UnPosting.vb" />

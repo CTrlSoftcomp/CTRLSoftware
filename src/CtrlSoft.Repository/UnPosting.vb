@@ -665,8 +665,8 @@ Namespace Repository
                                 com.Transaction = com.Connection.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MSaldoAwalPersediaan.*, MSaldoAwalPersediaan.Total, MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.Kode AS KdTransaksi" & vbCrLf & _
-                                                  "FROM MSaldoAwalPersediaan" & vbCrLf & _
+                                com.CommandText = "SELECT MSaldoAwalPersediaan.*, MSaldoAwalPersediaan.Total, MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.Kode AS KdTransaksi" & vbCrLf &
+                                                  "FROM MSaldoAwalPersediaan" & vbCrLf &
                                                   "WHERE ISNULL(MSaldoAwalPersediaan.IsPosted,0)=1 AND MSaldoAwalPersediaan.NoID=" & NoID
                                 oDA.Fill(ds, "MSaldoAwalPersediaan")
                                 If ds.Tables("MSaldoAwalPersediaan").Rows.Count >= 1 Then
@@ -703,6 +703,138 @@ Namespace Repository
                                           .AppName = My.Application.Info.AssemblyName,
                                           .Date = Now,
                                           .Event = "UnPostingSaldoAwalPersediaan",
+                                          .User = UserLogin.Nama,
+                                          .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
+                                      JSON)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return JSON
+        End Function
+        Public Shared Function UnPostingSaldoAwalHutang(ByVal StrKonSQL As String,
+                                                        ByVal UserLogin As MUser,
+                                                        ByVal NoID As Long) As JSONResult
+            Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = True, .JSONRows = 0, .JSONValue = Nothing}
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MSaldoAwalHutang.*, MSaldoAwalHutang.Total, MSaldoAwalHutang.Tanggal, MSaldoAwalHutang.Kode AS KdTransaksi" & vbCrLf &
+                                                  "FROM MSaldoAwalHutang" & vbCrLf &
+                                                  "WHERE ISNULL(MSaldoAwalHutang.IsPosted,0)=1 AND MSaldoAwalHutang.NoID=" & NoID
+                                oDA.Fill(ds, "MSaldoAwalHutang")
+                                If ds.Tables("MSaldoAwalHutang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MSaldoAwalHutang SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 1001 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi = 1001 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    With JSON
+                                        .JSONResult = True
+                                        .JSONMessage = "Data Saldo Awal Hutang NoID : " & NoID & " Berhasil diUnPosting"
+                                        .JSONRows = 1
+                                        .JSONValue = Nothing
+                                    End With
+                                Else
+                                    With JSON
+                                        .JSONResult = False
+                                        .JSONMessage = "Data Saldo Awal Hutang NoID : " & NoID & " Tidak ditemukan"
+                                        .JSONRows = 0
+                                        .JSONValue = Nothing
+                                    End With
+                                End If
+                            Catch ex As Exception
+                                With JSON
+                                    .JSONResult = False
+                                    .JSONMessage = ex.Message
+                                    .JSONRows = 0
+                                    .JSONValue = Nothing
+                                End With
+                            Finally
+                                InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
+                                          .AppName = My.Application.Info.AssemblyName,
+                                          .Date = Now,
+                                          .Event = "UnPostingSaldoAwalHutang",
+                                          .User = UserLogin.Nama,
+                                          .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
+                                      JSON)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return JSON
+        End Function
+        Public Shared Function UnPostingSaldoAwalPiutang(ByVal StrKonSQL As String,
+                                                        ByVal UserLogin As MUser,
+                                                        ByVal NoID As Long) As JSONResult
+            Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = True, .JSONRows = 0, .JSONValue = Nothing}
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MSaldoAwalPiutang.*, MSaldoAwalPiutang.Total, MSaldoAwalPiutang.Tanggal, MSaldoAwalPiutang.Kode AS KdTransaksi" & vbCrLf &
+                                                  "FROM MSaldoAwalPiutang" & vbCrLf &
+                                                  "WHERE ISNULL(MSaldoAwalPiutang.IsPosted,0)=1 AND MSaldoAwalPiutang.NoID=" & NoID
+                                oDA.Fill(ds, "MSaldoAwalPiutang")
+                                If ds.Tables("MSaldoAwalPiutang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MSaldoAwalPiutang SET IsPosted=0, TglPosted=NULL, IDUserPosted=NULL WHERE ISNULL(IsPosted, 0)=1 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 1002 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MPiutangPiutang] WHERE IDJenisTransaksi = 1002 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    With JSON
+                                        .JSONResult = True
+                                        .JSONMessage = "Data Saldo Awal Piutang NoID : " & NoID & " Berhasil diUnPosting"
+                                        .JSONRows = 1
+                                        .JSONValue = Nothing
+                                    End With
+                                Else
+                                    With JSON
+                                        .JSONResult = False
+                                        .JSONMessage = "Data Saldo Awal Piutang NoID : " & NoID & " Tidak ditemukan"
+                                        .JSONRows = 0
+                                        .JSONValue = Nothing
+                                    End With
+                                End If
+                            Catch ex As Exception
+                                With JSON
+                                    .JSONResult = False
+                                    .JSONMessage = ex.Message
+                                    .JSONRows = 0
+                                    .JSONValue = Nothing
+                                End With
+                            Finally
+                                InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
+                                          .AppName = My.Application.Info.AssemblyName,
+                                          .Date = Now,
+                                          .Event = "UnPostingSaldoAwalPiutang",
                                           .User = UserLogin.Nama,
                                           .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
                                       JSON)

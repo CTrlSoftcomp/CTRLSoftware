@@ -62,8 +62,18 @@ Public Class frmDaftarTransaksi
                                 oDA.SelectCommand = com
 
                                 Select Case formName
+                                    Case modMain.FormName.DaftarSaldoAwalHutang
+                                        SQL = "spDaftarSaldoAwalHutang @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    Case modMain.FormName.DaftarSaldoAwalPiutang
+                                        SQL = "spDaftarSaldoAwalPiutang @TglDari, @TglSampai"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                        com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
                                     Case modMain.FormName.DaftarSaldoAwalPersediaan
-                                        SQL = "spSaldoAwalPersediaan @TglDari, @TglSampai"
+                                        SQL = "spDaftarSaldoAwalPersediaan @TglDari, @TglSampai"
                                         com.Parameters.Clear()
                                         com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
                                         com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
@@ -156,9 +166,18 @@ Public Class frmDaftarTransaksi
                                 oDA.SelectCommand = com
 
                                 Select Case formName
-                                    Case modMain.FormName.DaftarPO
+                                    Case modMain.FormName.DaftarSaldoAwalHutang
+                                        com.CommandText = "DELETE FROM MSaldoAwalHutang WHERE ISNULL(MSaldoAwalHutang.IsPosted, 0)=0 AND MSaldoAwalHutang.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarSaldoAwalPiutang
+                                        com.CommandText = "DELETE FROM MSaldoAwalPiutang WHERE ISNULL(MSaldoAwalPiutang.IsPosted, 0)=0 AND MSaldoAwalPiutang.NoID=" & NoID
+                                        com.ExecuteNonQuery()
+
+                                    Case modMain.FormName.DaftarSaldoAwalPersediaan
                                         com.CommandText = "DELETE FROM MSaldoAwalPersediaan WHERE ISNULL(MSaldoAwalPersediaan.IsPosted, 0)=0 AND MSaldoAwalPersediaan.NoID=" & NoID
                                         com.ExecuteNonQuery()
+
                                     Case modMain.FormName.DaftarPO
                                         com.CommandText = "DELETE MPOD FROM MPOD INNER JOIN MPO ON MPO.NoID=MPOD.IDHeader WHERE ISNULL(MPO.IsPosted, 0)=0 AND MPO.NoID=" & NoID
                                         com.ExecuteNonQuery()
@@ -368,6 +387,20 @@ Public Class frmDaftarTransaksi
 
                 For Each iRow In GridView1.GetSelectedRows
                     Select Case formName
+                        Case modMain.FormName.DaftarSaldoAwalPiutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            JSON = PostingSaldoAwalPiutang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarSaldoAwalHutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            JSON = PostingSaldoAwalHutang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                Exit For
+                            End If
                         Case modMain.FormName.DaftarSaldoAwalPersediaan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             JSON = PostingSaldoAwalPersediaan(StrKonSQL, [Public].UserLogin, NoID)
@@ -463,6 +496,20 @@ Public Class frmDaftarTransaksi
 
                 For Each iRow In GridView1.GetSelectedRows
                     Select Case formName
+                        Case modMain.FormName.DaftarSaldoAwalHutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            JSON = UnPostingSaldoAwalHutang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                Exit For
+                            End If
+                        Case modMain.FormName.DaftarSaldoAwalPiutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            JSON = UnPostingSaldoAwalPiutang(StrKonSQL, [Public].UserLogin, NoID)
+                            If Not JSON.JSONResult Then
+                                XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                                Exit For
+                            End If
                         Case modMain.FormName.DaftarSaldoAwalPersediaan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             JSON = UnPostingSaldoAwalPersediaan(StrKonSQL, [Public].UserLogin, NoID)
@@ -557,6 +604,18 @@ Public Class frmDaftarTransaksi
 
                 For Each iRow In GridView1.GetSelectedRows
                     Select Case formName
+                        Case modMain.FormName.DaftarSaldoAwalPiutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 1002)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
+                        Case modMain.FormName.DaftarSaldoAwalHutang
+                            NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                            frmHasilPosting = New frmHasilPosting(NoID, 1001)
+                            frmHasilPosting.StartPosition = FormStartPosition.CenterScreen
+                            frmHasilPosting.Show()
+                            frmHasilPosting.Focus()
                         Case modMain.FormName.DaftarSaldoAwalPersediaan
                             NoID = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                             frmHasilPosting = New frmHasilPosting(NoID, 1)
@@ -625,6 +684,26 @@ Public Class frmDaftarTransaksi
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         Select Case formName
+            Case modMain.FormName.DaftarSaldoAwalPiutang
+                Using x As New frmEntriSaldoAwalPiutang(-1)
+                    Try
+                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            RefreshData(x.NoID)
+                        End If
+                    Catch ex As Exception
+                        XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            Case modMain.FormName.DaftarSaldoAwalHutang
+                Using x As New frmEntriSaldoAwalHutang(-1)
+                    Try
+                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            RefreshData(x.NoID)
+                        End If
+                    Catch ex As Exception
+                        XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
             Case modMain.FormName.DaftarSaldoAwalPersediaan
                 Using x As New frmEntriSaldoAwalPersediaan(-1)
                     Try
@@ -685,6 +764,26 @@ Public Class frmDaftarTransaksi
 
     Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
         Select Case formName
+            Case modMain.FormName.DaftarSaldoAwalPiutang
+                Using x As New frmEntriSaldoAwalPiutang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    Try
+                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            RefreshData(x.NoID)
+                        End If
+                    Catch ex As Exception
+                        XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            Case modMain.FormName.DaftarSaldoAwalHutang
+                Using x As New frmEntriSaldoAwalHutang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    Try
+                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            RefreshData(x.NoID)
+                        End If
+                    Catch ex As Exception
+                        XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
             Case modMain.FormName.DaftarSaldoAwalPersediaan
                 Using x As New frmEntriSaldoAwalPersediaan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     Try
@@ -748,6 +847,30 @@ Public Class frmDaftarTransaksi
         gridview = GridView1
         If gridview.RowCount >= 1 Then
             Select Case formName
+                Case modMain.FormName.DaftarSaldoAwalPiutang
+                    If gridview.GetSelectedRows.Count >= 1 Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                            For Each iRow As Integer In gridview.GetSelectedRows
+                                HapusData(NullToLong(gridview.GetRowCellValue(iRow, "NoID")))
+                            Next
+                        End If
+                    Else
+                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                            HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                        End If
+                    End If
+                Case modMain.FormName.DaftarSaldoAwalHutang
+                    If gridview.GetSelectedRows.Count >= 1 Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                            For Each iRow As Integer In gridview.GetSelectedRows
+                                HapusData(NullToLong(gridview.GetRowCellValue(iRow, "NoID")))
+                            Next
+                        End If
+                    Else
+                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                            HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
+                        End If
+                    End If
                 Case modMain.FormName.DaftarSaldoAwalPersediaan
                     If gridview.GetSelectedRows.Count >= 1 Then
                         If XtraMessageBox.Show("Ingin menghapus data saldo persediaan yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
@@ -808,6 +931,32 @@ Public Class frmDaftarTransaksi
                             com.CommandTimeout = con.ConnectionTimeout
                             oDA.SelectCommand = com
                             Select Case formName
+                                Case modMain.FormName.DaftarSaldoAwalPiutang
+                                    For Each eRow As Integer In GridView1.GetSelectedRows
+                                        PostingSaldoAwalPiutang(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(eRow, "NoID")))
+                                    Next
+
+                                    com.CommandText = "spFakturMSaldoAwalPiutang @TglDari, @TglSampai"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                    com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MSaldoAwalPiutang.repx"
+                                    Judul = "Bukti Saldo Awal Piutang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                Case modMain.FormName.DaftarSaldoAwalHutang
+                                    For Each eRow As Integer In GridView1.GetSelectedRows
+                                        PostingSaldoAwalHutang(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(eRow, "NoID")))
+                                    Next
+
+                                    com.CommandText = "spFakturMSaldoAwalHutang @TglDari, @TglSampai"
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@TglDari", SqlDbType.Date)).Value = DateEdit1.EditValue
+                                    com.Parameters.Add(New SqlParameter("@TglSampai", SqlDbType.Date)).Value = DateEdit2.EditValue
+                                    oDA.Fill(ds, formName.ToString)
+                                    NamaFile = "Faktur_MSaldoAwalHutang.repx"
+                                    Judul = "Bukti Saldo Awal Hutang"
+                                    ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                                 Case modMain.FormName.DaftarSaldoAwalPersediaan
                                     For Each eRow As Integer In GridView1.GetSelectedRows
                                         PostingSaldoAwalPersediaan(StrKonSQL, UserLogin, NullToLong(GridView1.GetRowCellValue(eRow, "NoID")))

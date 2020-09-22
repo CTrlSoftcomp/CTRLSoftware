@@ -183,12 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\CetakDX.vb" />
-    <Compile Include="Class\DBVersion.vb" />
     <Compile Include="Class\Ini.vb" />
     <Compile Include="Class\modMain.vb" />
-    <Compile Include="Class\modParser.vb" />
     <Compile Include="Class\Public.vb" />
-    <Compile Include="Class\Terbilang.vb" />
     <Compile Include="Class\TimeZone.vb" />
     <Compile Include="Form\Application\frmLogPerubahanHarga.Designer.vb">
       <DependentUpon>frmLogPerubahanHarga.vb</DependentUpon>
@@ -248,6 +245,18 @@
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmSettingPerusahaan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSaldoAwalPiutang.Designer.vb">
+      <DependentUpon>frmEntriSaldoAwalPiutang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSaldoAwalPiutang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSaldoAwalHutang.Designer.vb">
+      <DependentUpon>frmEntriSaldoAwalHutang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriSaldoAwalHutang.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriSaldoAwalPersediaan.Designer.vb">
@@ -448,7 +457,6 @@
     <Compile Include="Form\Laporan\frmLaporanSaldoStok.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\SettingPerusahaan.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -465,7 +473,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Repository\RepConfig.vb" />
-    <Compile Include="Repository\RepKode.vb" />
     <Compile Include="Repository\RepSQLServer.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -498,6 +505,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingPerusahaan.resx">
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriSaldoAwalPiutang.resx">
+      <DependentUpon>frmEntriSaldoAwalPiutang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriSaldoAwalHutang.resx">
+      <DependentUpon>frmEntriSaldoAwalHutang.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriSaldoAwalPersediaan.resx">
       <DependentUpon>frmEntriSaldoAwalPersediaan.vb</DependentUpon>

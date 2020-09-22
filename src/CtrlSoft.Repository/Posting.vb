@@ -905,8 +905,8 @@ Namespace Repository
                                 com.Transaction = com.Connection.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MSaldoAwalPersediaan.*, MSaldoAwalPersediaan.Jumlah AS Total, MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.IDGudang" & vbCrLf & _
-                                                  "FROM MSaldoAwalPersediaan" & vbCrLf & _
+                                com.CommandText = "SELECT MSaldoAwalPersediaan.*, MSaldoAwalPersediaan.Jumlah AS Total, MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.IDGudang" & vbCrLf &
+                                                  "FROM MSaldoAwalPersediaan" & vbCrLf &
                                                   "WHERE ISNULL(MSaldoAwalPersediaan.IsPosted,0)=0 AND MSaldoAwalPersediaan.NoID=" & NoID
                                 oDA.Fill(ds, "MSaldoAwalPersediaan")
                                 If ds.Tables("MSaldoAwalPersediaan").Rows.Count >= 1 Then
@@ -917,19 +917,19 @@ Namespace Repository
                                     com.ExecuteNonQuery()
 
                                     'Hitung Selisih, Jumlah, dan Total
-                                    com.CommandText = "UPDATE MSaldoAwalPersediaan SET Jumlah=ROUND(ISNULL(MSaldoAwalPersediaan.HargaPokok, 0)*ISNULL(MSaldoAwalPersediaan.Qty, 0), 2)" & vbCrLf & _
-                                                      "FROM MSaldoAwalPersediaan " & vbCrLf & _
+                                    com.CommandText = "UPDATE MSaldoAwalPersediaan SET Jumlah=ROUND(ISNULL(MSaldoAwalPersediaan.HargaPokok, 0)*ISNULL(MSaldoAwalPersediaan.Qty, 0), 2)" & vbCrLf &
+                                                      "FROM MSaldoAwalPersediaan " & vbCrLf &
                                                       "WHERE MSaldoAwalPersediaan.NoID=" & NoID
                                     com.Parameters.Clear()
                                     com.ExecuteNonQuery()
 
-                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf & _
-                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf & _
-                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf & _
-                                                      ",[NilaiAkhir])" & vbCrLf & _
-                                                      "SELECT MSaldoAwalPersediaan.[Tanggal],MSaldoAwalPersediaan.[IDBarang],MSaldoAwalPersediaan.[IDBarangD],''[Varian],1 [IDJenisTransaksi],MSaldoAwalPersediaan.NoID [IDTransaksi],MSaldoAwalPersediaan.NoID [IDTransaksiD],MSaldoAwalPersediaan.IDGudang [IDGudang]" & vbCrLf & _
-                                                      ",MSaldoAwalPersediaan.IDSatuan [IDSatuan],MSaldoAwalPersediaan.Konversi [Konversi],MSaldoAwalPersediaan.Qty [QtyMasuk],0 [QtyKeluar],MSaldoAwalPersediaan.Jumlah [Debet],0 [Kredit],0 [HargaBeli],MSaldoAwalPersediaan.HargaPokok [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf & _
-                                                      "FROM MSaldoAwalPersediaan" & vbCrLf & _
+                                    com.CommandText = "INSERT INTO [dbo].[MKartuStok] (" & vbCrLf &
+                                                      "[Tanggal],[IDBarang],[IDBarangD],[Varian],[IDJenisTransaksi],[IDTransaksi],[IDTransaksiD],[IDGudang]" & vbCrLf &
+                                                      ",[IDSatuan],[Konversi],[QtyMasuk],[QtyKeluar],[Debet],[Kredit],[HargaBeli],[HPP],[SaldoAkhir]" & vbCrLf &
+                                                      ",[NilaiAkhir])" & vbCrLf &
+                                                      "SELECT MSaldoAwalPersediaan.[Tanggal],MSaldoAwalPersediaan.[IDBarang],MSaldoAwalPersediaan.[IDBarangD],''[Varian],1 [IDJenisTransaksi],MSaldoAwalPersediaan.NoID [IDTransaksi],MSaldoAwalPersediaan.NoID [IDTransaksiD],MSaldoAwalPersediaan.IDGudang [IDGudang]" & vbCrLf &
+                                                      ",MSaldoAwalPersediaan.IDSatuan [IDSatuan],MSaldoAwalPersediaan.Konversi [Konversi],MSaldoAwalPersediaan.Qty [QtyMasuk],0 [QtyKeluar],MSaldoAwalPersediaan.Jumlah [Debet],0 [Kredit],0 [HargaBeli],MSaldoAwalPersediaan.HargaPokok [HPP],0 [SaldoAkhir],0 [NilaiAkhir]" & vbCrLf &
+                                                      "FROM MSaldoAwalPersediaan" & vbCrLf &
                                                       "WHERE MSaldoAwalPersediaan.NoID=" & NullToLong(NoID)
                                     com.ExecuteNonQuery()
 
@@ -959,7 +959,159 @@ Namespace Repository
                                 InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
                                           .AppName = My.Application.Info.AssemblyName,
                                           .Date = Now,
-                                          .Event = "PostingStockOpname",
+                                          .Event = "PostingSaldoAwalPersediaan",
+                                          .User = UserLogin.Nama,
+                                          .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
+                                      JSON)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return JSON
+        End Function
+        Public Shared Function PostingSaldoAwalHutang(ByVal StrKonSQL As String,
+                                                      ByVal UserLogin As MUser,
+                                                      ByVal NoID As Long) As JSONResult
+            Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = True, .JSONRows = 0, .JSONValue = Nothing}
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MSaldoAwalHutang.*, MSaldoAwalHutang.Jumlah AS Total, MSaldoAwalHutang.Tanggal " & vbCrLf &
+                                                  "FROM MSaldoAwalHutang" & vbCrLf &
+                                                  "WHERE ISNULL(MSaldoAwalHutang.IsPosted,0)=0 AND MSaldoAwalHutang.NoID=" & NoID
+                                oDA.Fill(ds, "MSaldoAwalHutang")
+                                If ds.Tables("MSaldoAwalHutang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MSaldoAwalHutang SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 1001 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MHutangPiutang] WHERE IDJenisTransaksi = 1001 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MHutangPiutang] (" & vbCrLf &
+                                                      "[IDAlamat],[IDTransaksi],[IDJenisTransaksi],[NoTransaksi],[NoUrut],[Tanggal],[JatuhTempo],[Debet]" & vbCrLf &
+                                                      ",[Kredit],[Saldo],[ReffNoTransaksi],[ReffNoUrut])" & vbCrLf &
+                                                      "SELECT MSaldoAwalHutang.IDSupplier, MSaldoAwalHutang.NoID, 1001 [IDJenisTransaksi],MSaldoAwalHutang.Kode [NoTransaksi],1 [NoUrut],MSaldoAwalHutang.[Tanggal],MSaldoAwalHutang.[JatuhTempo],CASE WHEN ISNULL(MSaldoAwalHutang.Jumlah, 0)<0 THEN ABS(MSaldoAwalHutang.Jumlah) ELSE 0 END [Debet]" & vbCrLf &
+                                                      ",CASE WHEN ISNULL(MSaldoAwalHutang.Jumlah, 0)>0 THEN ABS(MSaldoAwalHutang.Jumlah) ELSE 0 END [Kredit],-1*ISNULL(MSaldoAwalHutang.Jumlah, 0) [Saldo],'' [ReffNoTransaksi],-1 [ReffNoUrut]" & vbCrLf &
+                                                      "FROM MSaldoAwalHutang" & vbCrLf &
+                                                      "INNER JOIN MAlamat ON MAlamat.NoID=MSaldoAwalHutang.IDSupplier" & vbCrLf &
+                                                      "WHERE MSaldoAwalHutang.NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    With JSON
+                                        .JSONResult = True
+                                        .JSONMessage = "Data Saldo Awal Hutang NoID : " & NoID & " berhasil diposting"
+                                        .JSONRows = 1
+                                        .JSONValue = Nothing
+                                    End With
+                                Else
+                                    With JSON
+                                        .JSONResult = False
+                                        .JSONMessage = "Data Saldo Awal Hutang NoID : " & NoID & " Tidak ditemukan"
+                                        .JSONRows = 0
+                                        .JSONValue = Nothing
+                                    End With
+                                End If
+                            Catch ex As Exception
+                                With JSON
+                                    .JSONResult = False
+                                    .JSONMessage = ex.Message
+                                    .JSONRows = 0
+                                    .JSONValue = Nothing
+                                End With
+                            Finally
+                                InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
+                                          .AppName = My.Application.Info.AssemblyName,
+                                          .Date = Now,
+                                          .Event = "PostingSaldoAwalHutang",
+                                          .User = UserLogin.Nama,
+                                          .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
+                                      JSON)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return JSON
+        End Function
+        Public Shared Function PostingSaldoAwalPiutang(ByVal StrKonSQL As String,
+                                                      ByVal UserLogin As MUser,
+                                                      ByVal NoID As Long) As JSONResult
+            Dim JSON As New JSONResult With {.JSONMessage = "", .JSONResult = True, .JSONRows = 0, .JSONValue = Nothing}
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+                                com.Transaction = com.Connection.BeginTransaction
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT MSaldoAwalPiutang.*, MSaldoAwalPiutang.Jumlah AS Total, MSaldoAwalPiutang.Tanggal " & vbCrLf &
+                                                  "FROM MSaldoAwalPiutang" & vbCrLf &
+                                                  "WHERE ISNULL(MSaldoAwalPiutang.IsPosted,0)=0 AND MSaldoAwalPiutang.NoID=" & NoID
+                                oDA.Fill(ds, "MSaldoAwalPiutang")
+                                If ds.Tables("MSaldoAwalPiutang").Rows.Count >= 1 Then
+                                    com.CommandText = "UPDATE MSaldoAwalPiutang SET IsPosted=1, TglPosted=GETDATE(), IDUserPosted=" & UserLogin.NoID & " WHERE ISNULL(IsPosted, 0)=0 AND NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MKartuStok] WHERE IDJenisTransaksi = 1002 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "DELETE FROM [dbo].[MPiutangPiutang] WHERE IDJenisTransaksi = 1002 AND IDTransaksi=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.CommandText = "INSERT INTO [dbo].[MPiutangPiutang] (" & vbCrLf &
+                                                      "[IDAlamat],[IDTransaksi],[IDJenisTransaksi],[NoTransaksi],[NoUrut],[Tanggal],[JatuhTempo],[Debet]" & vbCrLf &
+                                                      ",[Kredit],[Saldo],[ReffNoTransaksi],[ReffNoUrut])" & vbCrLf &
+                                                      "SELECT MSaldoAwalPiutang.IDCustomer, MSaldoAwalPiutang.NoID, 1002 [IDJenisTransaksi],MSaldoAwalPiutang.Kode [NoTransaksi],1 [NoUrut],MSaldoAwalPiutang.[Tanggal],MSaldoAwalPiutang.[JatuhTempo],CASE WHEN ISNULL(MSaldoAwalPiutang.Jumlah, 0)>0 THEN ABS(MSaldoAwalPiutang.Jumlah) ELSE 0 END [Debet]" & vbCrLf &
+                                                      ",CASE WHEN ISNULL(MSaldoAwalPiutang.Jumlah, 0)<0 THEN ABS(MSaldoAwalPiutang.Jumlah) ELSE 0 END [Kredit],ISNULL(MSaldoAwalPiutang.Jumlah, 0) [Saldo],'' [ReffNoTransaksi],-1 [ReffNoUrut]" & vbCrLf &
+                                                      "FROM MSaldoAwalPiutang" & vbCrLf &
+                                                      "INNER JOIN MAlamat ON MAlamat.NoID=MSaldoAwalPiutang.IDCustomer" & vbCrLf &
+                                                      "WHERE MSaldoAwalPiutang.NoID=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+                                    With JSON
+                                        .JSONResult = True
+                                        .JSONMessage = "Data Saldo Awal Piutang NoID : " & NoID & " berhasil diposting"
+                                        .JSONRows = 1
+                                        .JSONValue = Nothing
+                                    End With
+                                Else
+                                    With JSON
+                                        .JSONResult = False
+                                        .JSONMessage = "Data Saldo Awal Piutang NoID : " & NoID & " Tidak ditemukan"
+                                        .JSONRows = 0
+                                        .JSONValue = Nothing
+                                    End With
+                                End If
+                            Catch ex As Exception
+                                With JSON
+                                    .JSONResult = False
+                                    .JSONMessage = ex.Message
+                                    .JSONRows = 0
+                                    .JSONValue = Nothing
+                                End With
+                            Finally
+                                InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
+                                          .AppName = My.Application.Info.AssemblyName,
+                                          .Date = Now,
+                                          .Event = "PostingSaldoAwalPiutang",
                                           .User = UserLogin.Nama,
                                           .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
                                       JSON)

@@ -67,6 +67,7 @@
     <Compile Include="Model\MUser.vb" />
     <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
+    <Compile Include="Model\SettingPerusahaan.vb" />
     <Compile Include="Model\UpdateDB.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

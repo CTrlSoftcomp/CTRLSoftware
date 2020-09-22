@@ -237,16 +237,46 @@ Public Class frmMain
 
     Private Sub rbItem_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Select Case NullToStr(e.Item.Name)
+            Case "mnDaftarSAPC"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarSaldoAwalPiutang.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarSaldoAwalPiutang,
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnDaftarSAHS"
+                Dim x As frmDaftarTransaksi = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarSaldoAwalHutang.ToString Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarSaldoAwalHutang,
+                                            e.Item.Caption)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case "mnDaftarSA"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarSaldoAwalPersediaan.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarSaldoAwalPersediaan, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarSaldoAwalPersediaan,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -307,13 +337,13 @@ Public Class frmMain
             Case "mnReturBeli"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarReturPembelian.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPembelian, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPembelian,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -322,13 +352,13 @@ Public Class frmMain
             Case "mnJual"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPenjualan.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenjualan, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenjualan,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -337,13 +367,13 @@ Public Class frmMain
             Case "mnReturJual"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarReturPenjualan.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPenjualan, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarReturPenjualan,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -352,13 +382,13 @@ Public Class frmMain
             Case "mnMutasiGudang"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarMutasiGudang.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarMutasiGudang, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarMutasiGudang,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -367,13 +397,13 @@ Public Class frmMain
             Case "mnStockOpname"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarStockOpname.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarStockOpname, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarStockOpname,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -382,13 +412,13 @@ Public Class frmMain
             Case "mnPenyesuaianMasuk"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPenyesuaian.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenyesuaian, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPenyesuaian,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -397,13 +427,13 @@ Public Class frmMain
             Case "mnPenyesuaianKeluar"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPemakaian.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPemakaian, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPemakaian,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -412,13 +442,13 @@ Public Class frmMain
             Case "mnBeli"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPembelian.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPembelian, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPembelian,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -427,13 +457,13 @@ Public Class frmMain
             Case "mnPO"
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name.ToString = modMain.FormName.DaftarPO.ToString Then
                         x = frm
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPO, _
+                    x = New frmDaftarTransaksi(modMain.FormName.DaftarPO,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -447,7 +477,7 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarBarang(e.Item.Name, _
+                    x = New frmDaftarBarang(e.Item.Name,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -461,7 +491,7 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarKontak(e.Item.Name, _
+                    x = New frmDaftarKontak(e.Item.Name,
                                             e.Item.Caption)
                     x.MdiParent = Me
                 End If
@@ -475,11 +505,11 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarMaster(e.Item.Name, _
-                                            e.Item.Caption, _
-                                            "MKategori", _
-                                            "SELECT MKategori.NoID, MKategori.Kode, MKategori.Nama, MKategori.IsActive Aktif, MParent.Kode + '-' + MParent.Nama KategoriUtama" & vbCrLf & _
-                                            "FROM MKategori" & vbCrLf & _
+                    x = New frmDaftarMaster(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MKategori",
+                                            "SELECT MKategori.NoID, MKategori.Kode, MKategori.Nama, MKategori.IsActive Aktif, MParent.Kode + '-' + MParent.Nama KategoriUtama" & vbCrLf &
+                                            "FROM MKategori" & vbCrLf &
                                             "LEFT JOIN MKategori MParent ON MParent.NoID=MKategori.IDParent ")
                     x.MdiParent = Me
                 End If
@@ -493,10 +523,10 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarMaster(e.Item.Name, _
-                                            e.Item.Caption, _
-                                            "MSatuan", _
-                                            "SELECT MSatuan.NoID, MSatuan.Kode, MSatuan.Nama, MSatuan.Konversi, MSatuan.IsActive Aktif " & vbCrLf & _
+                    x = New frmDaftarMaster(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MSatuan",
+                                            "SELECT MSatuan.NoID, MSatuan.Kode, MSatuan.Nama, MSatuan.Konversi, MSatuan.IsActive Aktif " & vbCrLf &
                                             "FROM MSatuan")
                     x.MdiParent = Me
                 End If
@@ -510,10 +540,10 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarMaster(e.Item.Name, _
-                                            e.Item.Caption, _
-                                            "MMerk", _
-                                            "SELECT MMerk.NoID, MMerk.Kode, MMerk.Nama, MMerk.IsActive Aktif " & vbCrLf & _
+                    x = New frmDaftarMaster(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MMerk",
+                                            "SELECT MMerk.NoID, MMerk.Kode, MMerk.Nama, MMerk.IsActive Aktif " & vbCrLf &
                                             "FROM MMerk")
                     x.MdiParent = Me
                 End If
@@ -527,10 +557,10 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmDaftarMaster(e.Item.Name, _
-                                            e.Item.Caption, _
-                                            "MGudang", _
-                                            "SELECT MGudang.NoID, MGudang.Kode, MGudang.Nama, MGudang.IsActive Aktif " & vbCrLf & _
+                    x = New frmDaftarMaster(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MGudang",
+                                            "SELECT MGudang.NoID, MGudang.Kode, MGudang.Nama, MGudang.IsActive Aktif " & vbCrLf &
                                             "FROM MGudang")
                     x.MdiParent = Me
                 End If

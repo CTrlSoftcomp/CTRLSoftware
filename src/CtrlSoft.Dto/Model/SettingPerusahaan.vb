@@ -37,7 +37,7 @@
                 If System.IO.Directory.Exists(PathLayouts_) Then
                     Return PathLayouts_
                 Else
-                    Return Application.StartupPath & "\System\Layouts\"
+                    Return Environment.CurrentDirectory & "\System\Layouts\"
                 End If
             End Get
             Set(ByVal value As String)
@@ -49,7 +49,7 @@
             NamaPerusahaan = "Nama Perusahaan anda"
             AlamatPerusahaan = "Jl. ABCDEFGHIJ No 1"
             KotaPerusahaan = "Surabaya"
-            PathLayouts = Application.StartupPath & "\System\Layouts\"
+            PathLayouts = Environment.CurrentDirectory & "\System\Layouts\"
         End Sub
     End Class
 End Namespace

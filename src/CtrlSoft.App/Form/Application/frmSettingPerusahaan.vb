@@ -5,6 +5,7 @@ Imports System.Data.SqlClient
 Imports CtrlSoft.Repository.Utils
 Imports CtrlSoft.App.Public
 Imports System.Data.Odbc
+Imports CtrlSoft.Dto.Model
 
 Public Class frmSettingPerusahaan
 
@@ -22,9 +23,9 @@ Public Class frmSettingPerusahaan
             DxErrorProvider1.SetError(TextEdit3, "Path Layouts tidak ditemukan!", DXErrorProvider.ErrorType.Information)
         End If
         If Not DxErrorProvider1.HasErrors Then
-            Dim Obj As New Model.SettingPerusahaan With {.NamaPerusahaan = TextEdit1.Text, _
-                                                         .AlamatPerusahaan = MemoEdit1.Text, _
-                                                         .KotaPerusahaan = TextEdit2.Text, _
+            Dim Obj As New SettingPerusahaan With {.NamaPerusahaan = TextEdit1.Text,
+                                                         .AlamatPerusahaan = MemoEdit1.Text,
+                                                         .KotaPerusahaan = TextEdit2.Text,
                                                          .PathLayouts = TextEdit3.Text}
             Obj = Repository.RepConfig.SetSettingPerusahaan(Obj)
             If Obj IsNot Nothing Then

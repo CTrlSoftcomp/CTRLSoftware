@@ -1,4 +1,4 @@
-[CTRL Software][![Donate](https://drive.google.com/uc?id=1xMCT4JG2PnX-8QwXmwIwpxMalKejfQ0h)](https://github.com/mrthx89/CTRLSoftware/wiki/Cara-Berkontribusi)
+[CTRL Software][![Donate](https://user-images.githubusercontent.com/3364498/93978382-1e1f7d00-fda6-11ea-9adc-8b9bc616dcd8.png)](https://github.com/mrthx89/CTRLSoftware/wiki/Cara-Berkontribusi)
 -------------------
 
 Apa itu CTRL Software?
@@ -19,14 +19,17 @@ Untuk mengembangkan sendiri [Ctrl Software](https://github.com/mrthx89/CTRLSoftw
 
 Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukung yang akan digunakan dalam proses pengembangannya. Berikut adalah tool-tool yang dibutuhkan untuk proses pengembangan [Ctrl Software](https://github.com/mrthx89/CTRLSoftware).
 
-* [Visual Studio Community 2013](https://www.visualstudio.com/en-us/news/releasenotes/vs2013-community-vs) atau versi yang lebih tinggi
+* [Visual Studio Community 2017](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes) atau versi yang lebih tinggi
+* [Android Studio](https://developer.android.com/studio) dengan Android SDK terbaru
+* [VS.Code](https://code.visualstudio.com)
+    * [Flutter SDK](https://flutter.dev/docs/get-started/install)
+    * [Flutter Installations](https://flutter.dev/docs/development/tools/vs-code)
 * [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) atau versi yang lebih tinggi
     * Windows XP SP3, Windows Vista, Windows 7, Windows 8 atau versi yang lebih tinggi
     * Windows Server 2008 R2, Windows Server 2008 SP2, Windows Server 2012 atau versi yang lebih tinggi
 * Library Pihak Ketiga
-	* [Json.NET](http://www.nuget.org/packages/Newtonsoft.Json/9.0.1)	    	
+    * [Json.NET](http://www.nuget.org/packages/Newtonsoft.Json/9.0.1)	    	
     * [Devexpress Universal 10.2.8](https://www.devexpress.com/)
-	
 * Database [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/) versi 2008 R2 atau yang lebih tinggi
 
 Tool Development Lainnya

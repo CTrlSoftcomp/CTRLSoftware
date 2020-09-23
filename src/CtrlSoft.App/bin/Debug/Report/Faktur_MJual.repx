@@ -13,10 +13,28 @@ namespace XtraReportSerialization {
         private DevExpress.XtraReports.UI.XRLabel label4;
         private DevExpress.XtraReports.UI.XRLabel label3;
         private DevExpress.XtraReports.UI.XRLabel label2;
-        private DevExpress.XtraReports.UI.XRLabel label1;
         private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRLabel label7;
+        private DevExpress.XtraReports.UI.XRLabel label6;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
+        private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
+        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
+        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter2;
+        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter3;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
+        private DevExpress.XtraReports.UI.DetailBand Detail;
+        private DevExpress.XtraReports.UI.XRLabel label1;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport1;
+        private DevExpress.XtraReports.UI.DetailBand Detail1;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport2;
+        private DevExpress.XtraReports.UI.DetailBand Detail2;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport3;
+        private DevExpress.XtraReports.UI.DetailBand Detail3;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport4;
+        private DevExpress.XtraReports.UI.DetailBand Detail4;
+        private DevExpress.XtraReports.UI.CalculatedField NamaPerusahaan;
+        private DevExpress.XtraReports.UI.CalculatedField AlamatPerusahaan;
         private System.Resources.ResourceManager _resources;
         public xtraReport1() {
             this.InitializeComponent();
@@ -38,11 +56,29 @@ namespace XtraReportSerialization {
             this.bottomMarginBand1 = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
+            this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.GroupFooter3 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.DetailReport3 = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.DetailReport4 = new DevExpress.XtraReports.UI.DetailReportBand();
             this.label5 = new DevExpress.XtraReports.UI.XRLabel();
             this.label4 = new DevExpress.XtraReports.UI.XRLabel();
             this.label3 = new DevExpress.XtraReports.UI.XRLabel();
             this.label2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label7 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.DetailReport1 = new DevExpress.XtraReports.UI.DetailReportBand();
             this.label1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
+            this.DetailReport2 = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.Detail2 = new DevExpress.XtraReports.UI.DetailBand();
+            this.Detail3 = new DevExpress.XtraReports.UI.DetailBand();
+            this.Detail4 = new DevExpress.XtraReports.UI.DetailBand();
+            this.NamaPerusahaan = new DevExpress.XtraReports.UI.CalculatedField();
+            this.AlamatPerusahaan = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // topMarginBand1
@@ -57,9 +93,9 @@ namespace XtraReportSerialization {
                         this.label5,
                         this.label4,
                         this.label3,
-                        this.label2,
-                        this.label1});
+                        this.label2});
             this.detailBand1.Dpi = 254F;
+            this.detailBand1.Expanded = false;
             this.detailBand1.HeightF = 391.795F;
             this.detailBand1.Name = "detailBand1";
             // 
@@ -71,6 +107,9 @@ namespace XtraReportSerialization {
             // 
             // ReportHeader
             // 
+            this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label7,
+                        this.label6});
             this.ReportHeader.Dpi = 254F;
             this.ReportHeader.HeightF = 254F;
             this.ReportHeader.Name = "ReportHeader";
@@ -80,6 +119,64 @@ namespace XtraReportSerialization {
             this.ReportFooter.Dpi = 254F;
             this.ReportFooter.HeightF = 254F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // PageFooter
+            // 
+            this.PageFooter.Dpi = 254F;
+            this.PageFooter.HeightF = 254F;
+            this.PageFooter.Name = "PageFooter";
+            // 
+            // GroupFooter1
+            // 
+            this.GroupFooter1.Dpi = 254F;
+            this.GroupFooter1.Expanded = false;
+            this.GroupFooter1.HeightF = 254F;
+            this.GroupFooter1.Name = "GroupFooter1";
+            // 
+            // GroupFooter2
+            // 
+            this.GroupFooter2.Dpi = 254F;
+            this.GroupFooter2.Expanded = false;
+            this.GroupFooter2.HeightF = 254F;
+            this.GroupFooter2.Level = 1;
+            this.GroupFooter2.Name = "GroupFooter2";
+            // 
+            // GroupFooter3
+            // 
+            this.GroupFooter3.Dpi = 254F;
+            this.GroupFooter3.Expanded = false;
+            this.GroupFooter3.HeightF = 254F;
+            this.GroupFooter3.Level = 2;
+            this.GroupFooter3.Name = "GroupFooter3";
+            // 
+            // DetailReport
+            // 
+            this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail,
+                        this.DetailReport1});
+            this.DetailReport.Dpi = 254F;
+            this.DetailReport.Expanded = false;
+            this.DetailReport.Level = 0;
+            this.DetailReport.Name = "DetailReport";
+            // 
+            // DetailReport3
+            // 
+            this.DetailReport3.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail3});
+            this.DetailReport3.Dpi = 254F;
+            this.DetailReport3.Expanded = false;
+            this.DetailReport3.Level = 1;
+            this.DetailReport3.Name = "DetailReport3";
+            // 
+            // DetailReport4
+            // 
+            this.DetailReport4.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail4});
+            this.DetailReport4.DataMember = "DaftarPenjualan";
+            this.DetailReport4.Dpi = 254F;
+            this.DetailReport4.Expanded = false;
+            this.DetailReport4.Level = 2;
+            this.DetailReport4.Name = "DetailReport4";
             // 
             // label5
             // 
@@ -125,16 +222,101 @@ namespace XtraReportSerialization {
             this.label2.SizeF = new System.Drawing.SizeF(423.3333F, 58.42001F);
             this.label2.Text = "label2";
             // 
+            // label7
+            // 
+            this.label7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DaftarPenjualan.AlamatPerusahaan")});
+            this.label7.Dpi = 254F;
+            this.label7.LocationFloat = new DevExpress.Utils.PointFloat(55.5625F, 58.42001F);
+            this.label7.Name = "label7";
+            this.label7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.label7.SizeF = new System.Drawing.SizeF(698.4999F, 58.42001F);
+            this.label7.Text = "label7";
+            // 
+            // label6
+            // 
+            this.label6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DaftarPenjualan.NamaPerusahaan")});
+            this.label6.Dpi = 254F;
+            this.label6.LocationFloat = new DevExpress.Utils.PointFloat(55.5625F, 0F);
+            this.label6.Name = "label6";
+            this.label6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.label6.SizeF = new System.Drawing.SizeF(698.5F, 58.42F);
+            this.label6.Text = "label6";
+            // 
+            // Detail
+            // 
+            this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label1});
+            this.Detail.Dpi = 254F;
+            this.Detail.HeightF = 254F;
+            this.Detail.Name = "Detail";
+            // 
+            // DetailReport1
+            // 
+            this.DetailReport1.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail1,
+                        this.DetailReport2});
+            this.DetailReport1.Dpi = 254F;
+            this.DetailReport1.Level = 0;
+            this.DetailReport1.Name = "DetailReport1";
+            // 
             // label1
             // 
             this.label1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
                         new DevExpress.XtraReports.UI.XRBinding("Text", null, "DaftarPenjualan.Barcode")});
             this.label1.Dpi = 254F;
-            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(25.00001F, 0F);
             this.label1.Name = "label1";
             this.label1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.label1.SizeF = new System.Drawing.SizeF(254F, 58.42F);
             this.label1.Text = "label1";
+            // 
+            // Detail1
+            // 
+            this.Detail1.Dpi = 254F;
+            this.Detail1.HeightF = 254F;
+            this.Detail1.Name = "Detail1";
+            // 
+            // DetailReport2
+            // 
+            this.DetailReport2.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail2});
+            this.DetailReport2.DataMember = "DaftarPenjualan";
+            this.DetailReport2.Dpi = 254F;
+            this.DetailReport2.Level = 0;
+            this.DetailReport2.Name = "DetailReport2";
+            // 
+            // Detail2
+            // 
+            this.Detail2.Dpi = 254F;
+            this.Detail2.HeightF = 254F;
+            this.Detail2.Name = "Detail2";
+            // 
+            // Detail3
+            // 
+            this.Detail3.Dpi = 254F;
+            this.Detail3.HeightF = 254F;
+            this.Detail3.Name = "Detail3";
+            // 
+            // Detail4
+            // 
+            this.Detail4.Dpi = 254F;
+            this.Detail4.HeightF = 254F;
+            this.Detail4.Name = "Detail4";
+            // 
+            // NamaPerusahaan
+            // 
+            this.NamaPerusahaan.DataMember = "DaftarPenjualan";
+            this.NamaPerusahaan.Expression = "\'PT.ABCDE\'";
+            this.NamaPerusahaan.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.NamaPerusahaan.Name = "NamaPerusahaan";
+            // 
+            // AlamatPerusahaan
+            // 
+            this.AlamatPerusahaan.DataMember = "DaftarPenjualan";
+            this.AlamatPerusahaan.FieldType = DevExpress.XtraReports.UI.FieldType.String;
+            this.AlamatPerusahaan.Name = "AlamatPerusahaan";
             // 
             // xtraReport1
             // 
@@ -143,7 +325,17 @@ namespace XtraReportSerialization {
                         this.detailBand1,
                         this.bottomMarginBand1,
                         this.ReportHeader,
-                        this.ReportFooter});
+                        this.ReportFooter,
+                        this.PageFooter,
+                        this.GroupFooter1,
+                        this.GroupFooter2,
+                        this.GroupFooter3,
+                        this.DetailReport,
+                        this.DetailReport3,
+                        this.DetailReport4});
+            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
+                        this.NamaPerusahaan,
+                        this.AlamatPerusahaan});
             this.DataSourceSchema = "E:\\DEVELOPER\\2019 - CPYH\\src\\CtrlSoft.App\\bin\\Debug\\Report\\XCD\\FAKTUR_MJUAL.xsd";
             this.DisplayName = "Faktur_MJual.repx";
             this.Dpi = 254F;
@@ -155,6 +347,8 @@ namespace XtraReportSerialization {
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic;
             this.ScriptSecurityPermissions.AddRange(new DevExpress.XtraReports.ScriptSecurityPermission[] {
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
+                        new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true),
                         new DevExpress.XtraReports.ScriptSecurityPermission("System.Security.Permissions.FileIOPermission", true)});
             this.SnapGridSize = 31.75F;
             this.Version = "10.2";

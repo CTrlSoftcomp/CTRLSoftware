@@ -59,7 +59,7 @@
 
         Public Property TanggalSystem() As Date
             Get
-                Return TanggalSystem_
+                Return Now()
             End Get
             Set(ByVal value As Date)
                 TanggalSystem_ = value

@@ -24,12 +24,12 @@ Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukun
 * [VS.Code](https://code.visualstudio.com)
     * [Flutter SDK](https://flutter.dev/docs/get-started/install)
     * [Flutter Installations](https://flutter.dev/docs/development/tools/vs-code)
-* [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) atau versi yang lebih tinggi
+* [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) atau versi yang lebih tinggi
     * Windows XP SP3, Windows Vista, Windows 7, Windows 8 atau versi yang lebih tinggi
     * Windows Server 2008 R2, Windows Server 2008 SP2, Windows Server 2012 atau versi yang lebih tinggi
 * Library Pihak Ketiga
     * [Json.NET](http://www.nuget.org/packages/Newtonsoft.Json/9.0.1)	    	
-    * [Devexpress Universal 10.2.8](https://www.devexpress.com/)
+    * [Devexpress Universal 17.1.3](https://www.devexpress.com/)
 * Database [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/) versi 2008 R2 atau yang lebih tinggi
 
 Tool Development Lainnya

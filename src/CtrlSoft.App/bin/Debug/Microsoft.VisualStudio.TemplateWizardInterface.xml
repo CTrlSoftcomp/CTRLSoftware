@@ -80,12 +80,9 @@
     </member>
     <member name="M:Microsoft.VisualStudio.TemplateWizard.WizardBackoutException.#ctor(System.String)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.TemplateWizard.WizardBackoutException" /> class with the specified error message.</summary>
-      <param name="errorMessage">A string that describes the error.</param>
     </member>
     <member name="M:Microsoft.VisualStudio.TemplateWizard.WizardBackoutException.#ctor(System.String,System.Exception)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.TemplateWizard.WizardBackoutException" /> class with the specified error message and a reference to the inner exception that is the cause of this exception.</summary>
-      <param name="errorMessage">A string that describes the error.</param>
-      <param name="exception">The exception that is the cause of the current exception. If the <paramref name="exception" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception.</param>
     </member>
     <member name="P:Microsoft.VisualStudio.TemplateWizard.WizardBackoutException.HResult">
       <summary>Gets or sets HRESULT, a coded numerical value that is assigned to a specific exception.</summary>
@@ -106,12 +103,9 @@
     </member>
     <member name="M:Microsoft.VisualStudio.TemplateWizard.WizardCancelledException.#ctor(System.String)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.TemplateWizard.WizardCancelledException" /> class with the specified error message.</summary>
-      <param name="errorMessage">A string that describes the error.</param>
     </member>
     <member name="M:Microsoft.VisualStudio.TemplateWizard.WizardCancelledException.#ctor(System.String,System.Exception)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.TemplateWizard.WizardCancelledException" /> class with the specified error message and a reference to the inner exception that is the cause of this exception.</summary>
-      <param name="errorMessage">A string that describes the error.</param>
-      <param name="exception">The exception that is the cause of the current exception. If the <paramref name="exception" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception.</param>
     </member>
     <member name="P:Microsoft.VisualStudio.TemplateWizard.WizardCancelledException.HResult">
       <summary>Gets or sets HRESULT, a coded numerical value that is assigned to a specific exception.</summary>
@@ -120,14 +114,14 @@
     <member name="T:Microsoft.VisualStudio.TemplateWizard.WizardRunKind">
       <summary>Specifies constants that define the different templates the template wizard can create.</summary>
     </member>
+    <member name="F:Microsoft.VisualStudio.TemplateWizard.WizardRunKind.AsMultiProject">
+      <summary>A new multi-project template.</summary>
+    </member>
     <member name="F:Microsoft.VisualStudio.TemplateWizard.WizardRunKind.AsNewItem">
       <summary>A new item template.</summary>
     </member>
     <member name="F:Microsoft.VisualStudio.TemplateWizard.WizardRunKind.AsNewProject">
       <summary>A new project template.</summary>
-    </member>
-    <member name="F:Microsoft.VisualStudio.TemplateWizard.WizardRunKind.AsMultiProject">
-      <summary>A new multi-project template.</summary>
     </member>
   </members>
 </doc>

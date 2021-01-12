@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ctrl Software"
-#define MyAppVersion "1.1"
+#define MyAppVersion "1.0.0.0"
 #define MyAppPublisher "CPYH Software Creative"
 #define MyAppURL "https://github.com/mrthx89/CPYH"
 #define MyAppExeName "CtrlSoft.App.exe"
@@ -437,6 +437,7 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Fil
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [Dirs]
+Name: "{app}\AppLog"
 Name: "{app}\System"
 Name: "{app}\Report"
 Name: "{app}\System\Layouts"

@@ -6,6 +6,7 @@ Imports System.Web.Http
 Public Module WebApiConfig
     Public Sub Register(ByVal config As HttpConfiguration)
         ' Web API configuration and services
+        config.Formatters.Remove(config.Formatters.XmlFormatter)
 
         ' Web API routes
         config.MapHttpAttributeRoutes()

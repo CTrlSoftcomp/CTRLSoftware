@@ -38,286 +38,394 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.App.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.App.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.BonusSkins.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Build.XamlResourceProcessing.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Charts.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.CodeParser.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.CodeRush.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Data.v10.2.Compact.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Data.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Data.v10.2.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Data.v10.2.Linq.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Data.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.DemoData.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Design.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.OfficeSkins.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v10.2.Adomd.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v10.2.Adomd.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v10.2.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Projects.v10.2.Installers.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.RichEdit.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.RichEdit.v10.2.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.SharePoint.2010.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.SharePoint.MOSS.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.SharePoint.WSS.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.SpellChecker.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.SpellChecker.v10.2.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Tutorials.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Utils.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Utils.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.Win.Projects.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraBars.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraBars.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraBars.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.UI.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.UI.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Web.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Web.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.Web.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraEditors.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraEditors.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraEditors.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Design.Win.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Presets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Win.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v10.2.Win.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGrid.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGrid.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraGrid.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraLayout.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraLayout.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraLayout.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraNavBar.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraNavBar.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraNavBar.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPivotGrid.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPivotGrid.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPivotGrid.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Service.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Service.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Web.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.Web.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v10.2.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v10.2.Printing.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.iCalendarExchange.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.iCalendarExchange.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.OutlookExchange.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.OutlookExchange.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Reporting.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Reporting.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Reporting.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.Reporting.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.VCalendarExchange.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraScheduler.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraSpellChecker.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraSpellChecker.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraSpellChecker.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraTreeList.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraTreeList.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraTreeList.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraVerticalGrid.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraVerticalGrid.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraVerticalGrid.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraWizard.v10.2.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraWizard.v10.2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\DevExpress.XtraWizard.v10.2.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Data.DataSetExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Deployment.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Windows.Forms.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System.Xml.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Faktur_MBeli.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Faktur_MJual.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Faktur_MPO.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\FormInput_StockOpname.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Laporan_Kartu_Stok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Laporan_LabaKotorPenjualan.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Laporan_MutasiSaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Laporan_SaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\Lap_MBarangAll.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MJUAL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MPO.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MRETURBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\FORMINPUT_STOCKOPNAME.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_KARTU_STOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_LABAKOTORPENJUALAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_MUTASISALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_SALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MBARANGALL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MKATEGORI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MSATUAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Setting.ini"; DestDir: "{app}\System"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\barManagementRoleGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\barManagementUserGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarMutasiGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPembelianGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPenjualanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPOGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarReturPembelianGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarReturPenjualanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\DaftarStockOpnameGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSatuanBeli.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSatuanJual.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvGudang.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvPO.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriGudangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDBayarGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualgvCustomer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKategoriLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1All.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Customer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Pegawai.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Supplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPODgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPODLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOgvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturBeliDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturBeliDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDBayarGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualgvCustomer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriRoleGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriRoleLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriSatuanLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnameGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnamegvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnameLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriUserLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmHasilPostingGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmHasilPostingGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmLaporanKartuStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\frmLaporanKartuStokgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSatuanBeli.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSatuanJual.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBarangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriKategoriLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKategoriGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView4.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnMerkGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnSatuanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnKategoriGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView4.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnLapLabaRugiGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnMerkGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnMutasiStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvMerk.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\System\Layouts\mnSatuanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Dapper.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Dapper.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\desktop\CtrlSoft.App\bin\Debug\Dapper.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.ReportAppServer.XmlSerialize.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.Shared.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.vshost.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.vshost.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Repository.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Repository.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Repository.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.UpdateDB.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Dapper.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Dapper.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Dapper.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.BonusSkins.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Charts.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.CodeParser.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Data.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Data.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.DataAccess.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.DataAccess.v17.1.UI.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.DataAccess.v17.1.UI.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.DataAccess.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Diagram.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Diagram.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Office.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Office.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Pdf.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Pdf.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.PivotGrid.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Printing.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Printing.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.RichEdit.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.RichEdit.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.RichEdit.v17.1.Export.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Sparkline.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Sparkline.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Utils.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Utils.v17.1.UI.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Utils.v17.1.UI.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Utils.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Xpo.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.Xpo.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraBars.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraBars.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v17.1.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v17.1.Wizard.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v17.1.Wizard.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraCharts.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraDiagram.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraDiagram.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraEditors.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraEditors.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v17.1.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraGauges.v17.1.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraGrid.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraGrid.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraLayout.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraLayout.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraNavBar.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraNavBar.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraPivotGrid.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraPivotGrid.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v17.1.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraPrinting.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.Service.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.Service.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraReports.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v17.1.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v17.1.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraRichEdit.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraTreeList.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraTreeList.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraVerticalGrid.v17.1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\DevExpress.XtraVerticalGrid.v17.1.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\EnvDTE.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\EnvDTE80.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.MSXML.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.CommandBars.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.Designer.Interfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.Designer.Interfaces.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.Shell.Interop.8.0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.Shell.Interop.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.8.0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\stdole.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Data.DataSetExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Deployment.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Windows.Forms.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System.Xml.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\VSLangProj.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Setting.ini"; DestDir: "{app}\System"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\barManagementRoleGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\barManagementUserGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarMutasiGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPembelianGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPenjualanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarPOGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarReturPembelianGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarReturPenjualanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\DaftarStockOpnameGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0DLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri0LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri1LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2DLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2GridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2gvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2gvGudangTujuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntri2LayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSatuanBeli.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSatuanJual.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvSupplier3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBaranggvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBarangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvGudang.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvPO.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeligvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriBeliLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriGudangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDBayarGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualgvCustomer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriJualLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKategoriLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1All.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Customer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Pegawai.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriKontakLayoutControl1Supplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPODgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPODLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOgvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriPOLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturBeliDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturBeliDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDBayarGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDgvSatuan.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualDLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualgvCustomer.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualgvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriReturJualLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriRoleGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriRoleLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriSatuanLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnameGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnamegvGudangAsal.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriStockOpnameLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmEntriUserLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmHasilPostingGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmHasilPostingGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmLaporanKartuStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\frmLaporanKartuStokgvBarcode.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSatuanBeli.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSatuanJual.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvSupplier3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBaranggvTypePajak.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriBarangLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsfrmEntriKategoriLayoutControl1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKategoriGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnKontakGridView4.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnMerkGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\LayoutsmnSatuanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnBarangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnGudangGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnKategoriGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView2.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView3.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnKontakGridView4.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnLapLabaRugiGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnMerkGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnMutasiStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvKategori.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvMerk.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnSaldoStokgvSupplier.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\System\Layouts\mnSatuanGridView1.xml"; DestDir: "{app}\System\Layouts"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MBeli.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MJual.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MPO.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\FormInput_StockOpname.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_Kartu_Stok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_LabaKotorPenjualan.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_MutasiSaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_SaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Lap_MBarangAll.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MJUAL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MPO.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MRETURBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FORMINPUT_STOCKOPNAME.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_KARTU_STOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_LABAKOTORPENJUALAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_MUTASISALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_SALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MBARANGALL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MKATEGORI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MSATUAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Data.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.DataAccess.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.DataAccess.v17.1.UI.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Diagram.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Office.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Pdf.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.PivotGrid.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Printing.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.RichEdit.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Sparkline.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Utils.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Utils.v17.1.UI.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.Xpo.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraBars.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraCharts.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraCharts.v17.1.Wizard.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraEditors.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraGauges.v17.1.Core.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraGrid.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraLayout.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraNavBar.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraPivotGrid.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraPrinting.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraReports.v17.1.Extensions.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraReports.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraRichEdit.v17.1.Extensions.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraRichEdit.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraTreeList.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\de\DevExpress.XtraVerticalGrid.v17.1.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Data.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.DataAccess.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.DataAccess.v17.1.UI.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Diagram.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Office.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Pdf.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.PivotGrid.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Printing.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.RichEdit.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Sparkline.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Utils.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Utils.v17.1.UI.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.Xpo.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraBars.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraCharts.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraCharts.v17.1.Wizard.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraEditors.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraGauges.v17.1.Core.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraGrid.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraLayout.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraNavBar.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraPivotGrid.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraPrinting.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraReports.v17.1.Extensions.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraReports.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraRichEdit.v17.1.Extensions.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraRichEdit.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraTreeList.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\es\DevExpress.XtraVerticalGrid.v17.1.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Data.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.DataAccess.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.DataAccess.v17.1.UI.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Diagram.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Office.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Pdf.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.PivotGrid.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Printing.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.RichEdit.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Sparkline.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Utils.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Utils.v17.1.UI.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.Xpo.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraBars.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraCharts.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraCharts.v17.1.Wizard.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraEditors.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraGauges.v17.1.Core.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraGrid.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraLayout.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraNavBar.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraPivotGrid.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraPrinting.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraReports.v17.1.Extensions.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraReports.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraRichEdit.v17.1.Extensions.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraRichEdit.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraTreeList.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ja\DevExpress.XtraVerticalGrid.v17.1.resources.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Data.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.DataAccess.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.DataAccess.v17.1.UI.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Diagram.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Office.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Pdf.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.PivotGrid.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Printing.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.RichEdit.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Sparkline.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Utils.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Utils.v17.1.UI.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.Xpo.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraBars.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraCharts.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraCharts.v17.1.Wizard.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraEditors.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraGauges.v17.1.Core.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraGrid.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraLayout.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraNavBar.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraPivotGrid.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraPrinting.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraReports.v17.1.Extensions.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraReports.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraRichEdit.v17.1.Extensions.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraRichEdit.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraTreeList.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraVerticalGrid.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -334,3 +442,98 @@ Name: "{app}\Report"
 Name: "{app}\System\Layouts"
 Name: "{app}\System\Image"
 Name: "{app}\Report\XCD"
+
+[Code]
+function IsDotNetDetected(version: string; service: cardinal): boolean;
+// Indicates whether the specified version and service pack of the .NET Framework is installed.
+//
+// version -- Specify one of these strings for the required .NET Framework version:
+//    'v1.1'          .NET Framework 1.1
+//    'v2.0'          .NET Framework 2.0
+//    'v3.0'          .NET Framework 3.0
+//    'v3.5'          .NET Framework 3.5
+//    'v4\Client'     .NET Framework 4.0 Client Profile
+//    'v4\Full'       .NET Framework 4.0 Full Installation
+//    'v4.5'          .NET Framework 4.5
+//    'v4.5.1'        .NET Framework 4.5.1
+//    'v4.5.2'        .NET Framework 4.5.2
+//    'v4.6'          .NET Framework 4.6
+//    'v4.6.1'        .NET Framework 4.6.1
+//    'v4.6.2'        .NET Framework 4.6.2
+//    'v4.7'          .NET Framework 4.7
+//    'v4.7.1'        .NET Framework 4.7.1
+//    'v4.7.2'        .NET Framework 4.7.2
+//    'v4.8'          .NET Framework 4.8
+//
+// service -- Specify any non-negative integer for the required service pack level:
+//    0               No service packs required
+//    1, 2, etc.      Service pack 1, 2, etc. required
+var
+    key, versionKey: string;
+    install, release, serviceCount, versionRelease: cardinal;
+    success: boolean;
+begin
+    versionKey := version;
+    versionRelease := 0;
+
+    // .NET 1.1 and 2.0 embed release number in version key
+    if version = 'v1.1' then begin
+        versionKey := 'v1.1.4322';
+    end else if version = 'v2.0' then begin
+        versionKey := 'v2.0.50727';
+    end
+
+    // .NET 4.5 and newer install as update to .NET 4.0 Full
+    else if Pos('v4.', version) = 1 then begin
+        versionKey := 'v4\Full';
+        case version of
+          'v4.5':   versionRelease := 378389;
+          'v4.5.1': versionRelease := 378675; // 378758 on Windows 8 and older
+          'v4.5.2': versionRelease := 379893;
+          'v4.6':   versionRelease := 393295; // 393297 on Windows 8.1 and older
+          'v4.6.1': versionRelease := 394254; // 394271 before Win10 November Update
+          'v4.6.2': versionRelease := 394802; // 394806 before Win10 Anniversary Update
+          'v4.7':   versionRelease := 460798; // 460805 before Win10 Creators Update
+          'v4.7.1': versionRelease := 461308; // 461310 before Win10 Fall Creators Update
+          'v4.7.2': versionRelease := 461808; // 461814 before Win10 April 2018 Update
+          'v4.8':   versionRelease := 528040; // 528049 before Win10 May 2019 Update
+        end;
+    end;
+
+    // installation key group for all .NET versions
+    key := 'SOFTWARE\Microsoft\NET Framework Setup\NDP\' + versionKey;
+
+    // .NET 3.0 uses value InstallSuccess in subkey Setup
+    if Pos('v3.0', version) = 1 then begin
+        success := RegQueryDWordValue(HKLM, key + '\Setup', 'InstallSuccess', install);
+    end else begin
+        success := RegQueryDWordValue(HKLM, key, 'Install', install);
+    end;
+
+    // .NET 4.0 and newer use value Servicing instead of SP
+    if Pos('v4', version) = 1 then begin
+        success := success and RegQueryDWordValue(HKLM, key, 'Servicing', serviceCount);
+    end else begin
+        success := success and RegQueryDWordValue(HKLM, key, 'SP', serviceCount);
+    end;
+
+    // .NET 4.5 and newer use additional value Release
+    if versionRelease > 0 then begin
+        success := success and RegQueryDWordValue(HKLM, key, 'Release', release);
+        success := success and (release >= versionRelease);
+    end;
+
+    result := success and (install = 1) and (serviceCount >= service);
+end;
+
+
+function InitializeSetup(): Boolean;
+begin
+    if not IsDotNetDetected('v4.5', 0) then begin
+        MsgBox('Ctrl Software membutuhkan Microsoft .NET Framework v4.5.'#13#13
+            'Lakukan update windows untuk mendapatkan .net Framework v4.5 ini,'#13
+            'lalu Jalankan ulang setup ini.', mbInformation, MB_OK);
+        result := false;
+    end else
+        result := true;
+end;

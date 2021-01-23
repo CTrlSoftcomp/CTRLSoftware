@@ -1,0 +1,6 @@
+CREATE DATABASE "dbctrl"
+WITH
+  OWNER = "postgres"
+  TEMPLATE = "postgres"
+  ENCODING = 'UTF8'
+;

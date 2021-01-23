@@ -2,7 +2,8 @@
 
 namespace CTrlSoft.Core.Repository
 {
-    public class Class1
+    public class Akun
     {
+
     }
 }

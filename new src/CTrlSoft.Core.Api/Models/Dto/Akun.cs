@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CTrlSoft.Core.Api.Models.Dto
 {
-    class Akun : Basic
+    public class Akun : Basic
     {
         public long idparent { get; set; }
         public int iddepartemen { get; set; }

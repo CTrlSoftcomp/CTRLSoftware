@@ -1,5 +1,6 @@
 ﻿using CTrlSoft.Core.Api.Bll;
 using CTrlSoft.Core.Api.Repository;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +27,30 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
             return _interface.GetAll();
+        }
+
+        // GET: api/Akun/{id}
+        [HttpGet("{id}", Name = "GetID")]
+        public ActionResult<Models.JsonResult> GetByID(long id)
+        {
+            _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+            return _interface.Get(id);
+        }
+
+        // GET: api/Akun/kode/{kode}
+        [HttpGet("kode/{kode}", Name = "GetKode")]
+        public ActionResult<Models.JsonResult> GetKode(string kode)
+        {
+            _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+            return _interface.GetByKode(kode);
+        }
+
+        // GET: api/Akun/nama/{nama}
+        [HttpGet("nama/{nama}", Name = "GetName")]
+        public ActionResult<Models.JsonResult> GetNama(string nama)
+        {
+            _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+            return _interface.GetByName(nama);
         }
 
     }

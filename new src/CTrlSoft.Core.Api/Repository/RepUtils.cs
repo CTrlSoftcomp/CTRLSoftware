@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace CTrlSoft.Core.Api.Repository
 {
     public class RepUtils
@@ -90,6 +89,10 @@ namespace CTrlSoft.Core.Api.Repository
             }
 
             return hasil;
+        }
+        public static string MapPath(string pathStr)
+        {
+            return pathStr;
         }
     }
 }

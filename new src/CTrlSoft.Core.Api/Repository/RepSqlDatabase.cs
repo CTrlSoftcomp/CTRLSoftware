@@ -25,10 +25,10 @@ namespace CTrlSoft.Core.Api.Repository
                         switch (item.Separator)
                         {
                             case DataFilters.SeparatorQuery.Or:
-                                com.CommandText += " or " + item.FieldName + " like @" + ifieldname;
+                                com.CommandText += " or " + item.FieldName + " ilike @" + ifieldname;
                                 break;
                             default:
-                                com.CommandText += " and " + item.FieldName + " like @" + ifieldname;
+                                com.CommandText += " and " + item.FieldName + " ilike @" + ifieldname;
                                 break;
                         }
                         com.Parameters.AddWithValue("@" + ifieldname, item.FieldValue);
@@ -128,7 +128,8 @@ namespace CTrlSoft.Core.Api.Repository
             Exception e)
         {
             DateTime dateTime = System.DateTime.Now;
-            string fileName = Path.Combine(environment.WebRootPath, "/Log/LogSQL_" + dateTime.ToString("yyMMdd") + ".txt");
+            
+            string fileName = Path.GetFullPath(environment.ContentRootPath + "/Log/LogSQL_" + dateTime.ToString("yyMMdd") + ".txt");
             await using (StreamWriter streamWriter = new StreamWriter(fileName, true))
             {
                 try

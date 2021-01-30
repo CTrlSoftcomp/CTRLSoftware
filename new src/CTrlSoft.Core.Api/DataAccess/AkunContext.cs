@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Npgsql;
 using System.Data;
-using Microsoft.AspNetCore.Hosting;
+using CTrlSoft.Core.Api.Repository;
 
-namespace CTrlSoft.Core.Api.Repository
+namespace CTrlSoft.Core.Api.DataAccess
 {
     public class AkunContext : IAkun
     {
@@ -31,70 +31,38 @@ namespace CTrlSoft.Core.Api.Repository
 
         JsonResult IBase<Akun>.GetAll()
         {
-            JsonResult hasil = new JsonResult { JSONResult = false, JSONMessage = "Data tidak ditemukan", JSONRows = 0, JSONValue = null };
-            List<Akun> list = new List<Akun>();
-            using (NpgsqlConnection conn = GetConnection())
+            JsonResult hasil = new JsonResult
             {
-                using (NpgsqlCommand com = new NpgsqlCommand())
+                JSONResult = false,
+                JSONMessage = "Data tidak ditemukan",
+                JSONRows = 0,
+                JSONValue = null
+            };
+            List<Akun> obj = getListAkun(new List<DataFilters>());
+            if (obj == null)
+            {
+                hasil = new JsonResult
                 {
-                    using (NpgsqlDataAdapter oDA = new NpgsqlDataAdapter())
-                    {
-                        using (DataTable dt = new DataTable())
-                        {
-                            try
-                            {
-                                conn.Open();
-                                com.Connection = conn;
-                                com.CommandTimeout = conn.ConnectionTimeout;
-                                oDA.SelectCommand = com;
-
-                                com.CommandText = "select makun.*" +
-                                                  " from makun";
-                                oDA.Fill(dt);
-
-                                list = (from DataRow x in dt.Rows
-                                        select new Akun()
-                                        {
-                                            id = RepUtils.NullToLong(x["id"]),
-                                            kode = RepUtils.NullToStr(x["kode"]),
-                                            nama = RepUtils.NullToStr(x["nama"]),
-                                            idparent = RepUtils.NullToLong(x["idparent"]),
-                                            iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
-                                            keterangan = RepUtils.NullToStr(x["keterangan"]),
-                                            idtype = RepUtils.NullToInt(x["idtype"]),
-                                            isdebet = RepUtils.NullToBool(x["isdebet"]),
-                                            iskasbank = RepUtils.NullToBool(x["iskasbank"]),
-                                            norekening = RepUtils.NullToStr(x["norekening"]),
-                                            atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
-                                            idtypebank = RepUtils.NullToInt(x["idtypebank"]),
-                                            isneraca = RepUtils.NullToBool(x["isneraca"])
-                                        }).ToList();
-                                hasil = new JsonResult
-                                {
-                                    JSONMessage = "Data ditemukan",
-                                    JSONResult = true,
-                                    JSONRows = list.Count,
-                                    JSONValue = list
-                                };
-                            }
-                            catch (Exception ex)
-                            {
-                                hasil = new JsonResult
-                                {
-                                    JSONMessage = ex.StackTrace,
-                                    JSONResult = false,
-                                    JSONRows = 0,
-                                    JSONValue = null
-                                };
-                            }
-                        }
-                    }
-                }
+                    JSONMessage = "Data tidak ditemukan",
+                    JSONResult = false,
+                    JSONRows = 0,
+                    JSONValue = null
+                };
+            }
+            else
+            {
+                hasil = new JsonResult
+                {
+                    JSONMessage = "Data ditemukan",
+                    JSONResult = true,
+                    JSONRows = (obj != null ? obj.Count : 0),
+                    JSONValue = obj
+                };
             }
             return hasil;
         }
 
-        JsonResult IAkun.GetByKode(IWebHostEnvironment environment, string kode)
+        JsonResult IAkun.GetByKode(string kode)
         {
             JsonResult hasil = new JsonResult
             {
@@ -111,7 +79,7 @@ namespace CTrlSoft.Core.Api.Repository
                 Operator = DataFilters.OperatorQuery.SamaDengan,
                 Separator = DataFilters.SeparatorQuery.And
             });
-            Akun obj = getDataAkun(environment, filters);
+            Akun obj = getDataAkun(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -135,7 +103,7 @@ namespace CTrlSoft.Core.Api.Repository
             return hasil;
         }
 
-        JsonResult IAkun.GetByNama(IWebHostEnvironment environment, string nama)
+        JsonResult IAkun.GetByNama(string nama)
         {
             JsonResult hasil = new JsonResult
             {
@@ -148,11 +116,11 @@ namespace CTrlSoft.Core.Api.Repository
             filters.Add(new DataFilters
             {
                 FieldName = "upper(nama)",
-                FieldValue = "%" + nama.ToUpper() + "%",
-                Operator = DataFilters.OperatorQuery.Like,
+                FieldValue = nama.ToUpper(),
+                Operator = DataFilters.OperatorQuery.SamaDengan,
                 Separator = DataFilters.SeparatorQuery.And
             });
-            Akun obj = getDataAkun(environment, filters);
+            Akun obj = getDataAkun(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -250,7 +218,7 @@ namespace CTrlSoft.Core.Api.Repository
             throw new NotImplementedException();
         }
 
-        JsonResult IAkun.Get(IWebHostEnvironment environment, long id)
+        JsonResult IAkun.Get(long id)
         {
             JsonResult hasil = new JsonResult { 
                 JSONResult = false, 
@@ -263,7 +231,7 @@ namespace CTrlSoft.Core.Api.Repository
                 FieldValue = id , 
                 Operator = DataFilters.OperatorQuery.SamaDengan, 
                 Separator = DataFilters.SeparatorQuery.And});
-            Akun obj = getDataAkun(environment, filters);
+            Akun obj = getDataAkun(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -286,7 +254,7 @@ namespace CTrlSoft.Core.Api.Repository
             return hasil;
         }
 
-        private Akun getDataAkun(IWebHostEnvironment environment, List<DataFilters> filters)
+        private Akun getDataAkun(List<DataFilters> filters)
         {
             Akun obj = new Akun();
             using (NpgsqlConnection conn = GetConnection())
@@ -297,41 +265,33 @@ namespace CTrlSoft.Core.Api.Repository
                     {
                         using (DataTable dt = new DataTable())
                         {
-                            try
-                            {
-                                conn.Open();
-                                com.Connection = conn;
-                                com.CommandTimeout = conn.ConnectionTimeout;
-                                oDA.SelectCommand = com;
+                            conn.Open();
+                            com.Connection = conn;
+                            com.CommandTimeout = conn.ConnectionTimeout;
+                            oDA.SelectCommand = com;
 
-                                com.CommandText = "select makun.*" +
-                                                  " from makun where 1=1";
-                                RepSqlDatabase.OperatorSQL(com, filters);
-                                oDA.Fill(dt);
+                            com.CommandText = "select makun.*" +
+                                              " from makun where 1=1";
+                            RepSqlDatabase.OperatorSQL(com, filters);
+                            oDA.Fill(dt);
 
-                                obj = (from DataRow x in dt.Rows
-                                       select new Akun()
-                                       {
-                                           id = RepUtils.NullToLong(x["id"]),
-                                           kode = RepUtils.NullToStr(x["kode"]),
-                                           nama = RepUtils.NullToStr(x["nama"]),
-                                           idparent = RepUtils.NullToLong(x["idparent"]),
-                                           iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
-                                           keterangan = RepUtils.NullToStr(x["keterangan"]),
-                                           idtype = RepUtils.NullToInt(x["idtype"]),
-                                           isdebet = RepUtils.NullToBool(x["isdebet"]),
-                                           iskasbank = RepUtils.NullToBool(x["iskasbank"]),
-                                           norekening = RepUtils.NullToStr(x["norekening"]),
-                                           atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
-                                           idtypebank = RepUtils.NullToInt(x["idtypebank"]),
-                                           isneraca = RepUtils.NullToBool(x["isneraca"])
-                                       }).SingleOrDefault();
-                            }
-                            catch (Exception ex)
-                            {
-                                RepSqlDatabase.LogErrorQuery(environment, ex.Source, ex);
-                                obj = null;
-                            }
+                            obj = (from DataRow x in dt.Rows
+                                   select new Akun()
+                                   {
+                                       id = RepUtils.NullToLong(x["id"]),
+                                       kode = RepUtils.NullToStr(x["kode"]),
+                                       nama = RepUtils.NullToStr(x["nama"]),
+                                       idparent = RepUtils.NullToLong(x["idparent"]),
+                                       iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
+                                       keterangan = RepUtils.NullToStr(x["keterangan"]),
+                                       idtype = RepUtils.NullToInt(x["idtype"]),
+                                       isdebet = RepUtils.NullToBool(x["isdebet"]),
+                                       iskasbank = RepUtils.NullToBool(x["iskasbank"]),
+                                       norekening = RepUtils.NullToStr(x["norekening"]),
+                                       atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
+                                       idtypebank = RepUtils.NullToInt(x["idtypebank"]),
+                                       isneraca = RepUtils.NullToBool(x["isneraca"])
+                                   }).SingleOrDefault();
                         }
                     }
                 }
@@ -339,5 +299,82 @@ namespace CTrlSoft.Core.Api.Repository
             return obj;
         }
 
+        private List<Akun> getListAkun(List<DataFilters> filters)
+        {
+            List<Akun> obj = new List<Akun>();
+            using (NpgsqlConnection conn = GetConnection())
+            {
+                using (NpgsqlCommand com = new NpgsqlCommand())
+                {
+                    using (NpgsqlDataAdapter oDA = new NpgsqlDataAdapter())
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            conn.Open();
+                            com.Connection = conn;
+                            com.CommandTimeout = conn.ConnectionTimeout;
+                            oDA.SelectCommand = com;
+
+                            com.CommandText = "select makun.*" +
+                                              " from makun where 1=1";
+                            RepSqlDatabase.OperatorSQL(com, filters);
+                            oDA.Fill(dt);
+
+                            obj = (from DataRow x in dt.Rows
+                                   select new Akun()
+                                   {
+                                       id = RepUtils.NullToLong(x["id"]),
+                                       kode = RepUtils.NullToStr(x["kode"]),
+                                       nama = RepUtils.NullToStr(x["nama"]),
+                                       idparent = RepUtils.NullToLong(x["idparent"]),
+                                       iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
+                                       keterangan = RepUtils.NullToStr(x["keterangan"]),
+                                       idtype = RepUtils.NullToInt(x["idtype"]),
+                                       isdebet = RepUtils.NullToBool(x["isdebet"]),
+                                       iskasbank = RepUtils.NullToBool(x["iskasbank"]),
+                                       norekening = RepUtils.NullToStr(x["norekening"]),
+                                       atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
+                                       idtypebank = RepUtils.NullToInt(x["idtypebank"]),
+                                       isneraca = RepUtils.NullToBool(x["isneraca"])
+                                   }).ToList();
+                        }
+                    }
+                }
+            }
+            return obj;
+        }
+
+        public JsonResult GetByFilter(List<DataFilters> filters)
+        {
+            JsonResult hasil = new JsonResult
+            {
+                JSONResult = false,
+                JSONMessage = "Data tidak ditemukan",
+                JSONRows = 0,
+                JSONValue = null
+            };
+            List<Akun> obj = getListAkun(filters);
+            if (obj == null)
+            {
+                hasil = new JsonResult
+                {
+                    JSONMessage = "Data tidak ditemukan",
+                    JSONResult = false,
+                    JSONRows = 0,
+                    JSONValue = null
+                };
+            }
+            else
+            {
+                hasil = new JsonResult
+                {
+                    JSONMessage = "Data ditemukan",
+                    JSONResult = true,
+                    JSONRows = (obj != null ? obj.Count : 0),
+                    JSONValue = obj
+                };
+            }
+            return hasil;
+        }
     }
 }

@@ -9,9 +9,10 @@ namespace CTrlSoft.Core.Api.Bll
 {
     interface IAkun : IBase<Akun>
     {
-        JsonResult Get(IWebHostEnvironment environment, long id);
-        JsonResult GetByKode(IWebHostEnvironment environment, string kode);
-        JsonResult GetByNama(IWebHostEnvironment environment, string name);
+        JsonResult Get(long id);
+        JsonResult GetByKode(string kode);
+        JsonResult GetByNama(string name);
+        JsonResult GetByFilter(List<DataFilters> filters);
 
         //JsonResult Save(Akun obj);
         JsonResult Save(Akun obj, ref ValidationError validationError);

@@ -12,7 +12,7 @@
  Target Server Version : 90504
  File Encoding         : 65001
 
- Date: 23/01/2021 22:42:24
+ Date: 30/01/2021 18:30:58
 */
 
 
@@ -393,6 +393,168 @@ CREATE TABLE "public"."mjurnalumumd" (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for mkasin
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasin";
+CREATE TABLE "public"."mkasin" (
+  "id" int4 NOT NULL,
+  "kode" varchar(50) COLLATE "pg_catalog"."default",
+  "tanggal" date,
+  "keterangan" varchar(255) COLLATE "pg_catalog"."default",
+  "idakun" int4 NOT NULL,
+  "iduserentri" int2,
+  "tglentri" date,
+  "iduseredit" int2,
+  "tgledit" date,
+  "isposted" bit(1),
+  "tglposted" date
+)
+;
+
+-- ----------------------------
+-- Records of mkasin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkasind
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasind";
+CREATE TABLE "public"."mkasind" (
+  "id" int2 NOT NULL,
+  "idkasin" int4 NOT NULL,
+  "idakun" int2,
+  "iddepartemen" int2,
+  "debet" money,
+  "credit" money,
+  "idkurs" int2,
+  "kurs" money,
+  "debeta" money,
+  "credita" money,
+  "keterangan" varchar(255) COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Records of mkasind
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkasindbayar
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasindbayar";
+CREATE TABLE "public"."mkasindbayar" (
+  "id" int2 NOT NULL,
+  "idkasin" int4 NOT NULL,
+  "idakun" int4 NOT NULL,
+  "idkontak" int4 NOT NULL,
+  "norekening" varchar(255) COLLATE "pg_catalog"."default",
+  "bank" varchar(255) COLLATE "pg_catalog"."default",
+  "atasnamarekening" varchar(255) COLLATE "pg_catalog"."default",
+  "tgltransfer" date,
+  "nobukti" varchar(255) COLLATE "pg_catalog"."default",
+  "tgljatuhtempo" date,
+  "nominal" money
+)
+;
+
+-- ----------------------------
+-- Records of mkasindbayar
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkasout
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasout";
+CREATE TABLE "public"."mkasout" (
+  "id" int4 NOT NULL,
+  "kode" varchar(50) COLLATE "pg_catalog"."default",
+  "tanggal" date,
+  "keterangan" varchar(255) COLLATE "pg_catalog"."default",
+  "idakun" int4 NOT NULL,
+  "iduserentri" int2,
+  "tglentri" date,
+  "iduseredit" int2,
+  "tgledit" date,
+  "isposted" bit(1),
+  "tglposted" date
+)
+;
+
+-- ----------------------------
+-- Records of mkasout
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkasoutd
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasoutd";
+CREATE TABLE "public"."mkasoutd" (
+  "id" int2 NOT NULL,
+  "idkasout" int4 NOT NULL,
+  "idakun" int2,
+  "iddepartemen" int2,
+  "debet" money,
+  "credit" money,
+  "idkurs" int2,
+  "kurs" money,
+  "debeta" money,
+  "credita" money,
+  "keterangan" varchar(255) COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Records of mkasoutd
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkasoutdbayar
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkasoutdbayar";
+CREATE TABLE "public"."mkasoutdbayar" (
+  "id" int2 NOT NULL,
+  "idkasout" int4 NOT NULL,
+  "idakun" int4 NOT NULL,
+  "idkontak" int4 NOT NULL,
+  "norekening" varchar(255) COLLATE "pg_catalog"."default",
+  "bank" varchar(255) COLLATE "pg_catalog"."default",
+  "atasnamarekening" varchar(255) COLLATE "pg_catalog"."default",
+  "tgltransfer" date,
+  "nobukti" varchar(255) COLLATE "pg_catalog"."default",
+  "tgljatuhtempo" date,
+  "nominal" money
+)
+;
+
+-- ----------------------------
+-- Records of mkasoutdbayar
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mkontak
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."mkontak";
+CREATE TABLE "public"."mkontak" (
+  "id" int4 NOT NULL,
+  "kode" varchar(50) COLLATE "pg_catalog"."default",
+  "nama" varchar(255) COLLATE "pg_catalog"."default",
+  "alamat1" varchar(255) COLLATE "pg_catalog"."default",
+  "alamat2" varchar(255) COLLATE "pg_catalog"."default",
+  "alamat3" varchar(255) COLLATE "pg_catalog"."default",
+  "hp" varchar(50) COLLATE "pg_catalog"."default",
+  "telpon" varchar(50) COLLATE "pg_catalog"."default",
+  "iswhatsapp" bit(1),
+  "norekening" varchar(255) COLLATE "pg_catalog"."default",
+  "bank" varchar(255) COLLATE "pg_catalog"."default",
+  "atasnamarekening" varchar(255) COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Records of mkontak
+-- ----------------------------
+
+-- ----------------------------
 -- Indexes structure for table makun
 -- ----------------------------
 CREATE INDEX "makun_idxidparent" ON "public"."makun" USING btree (
@@ -433,6 +595,13 @@ ALTER TABLE "public"."mjenistransaksid" ADD CONSTRAINT "mjenistransaksid_pkey" P
 ALTER TABLE "public"."mjurnal" ADD CONSTRAINT "mjurnal_pkey" PRIMARY KEY ("idtransaksi", "idjenistransaksid", "idpasangan", "idakun", "iddepartemen");
 
 -- ----------------------------
+-- Indexes structure for table mjurnalumum
+-- ----------------------------
+CREATE UNIQUE INDEX "idx_mjurnalumum_kode" ON "public"."mjurnalumum" USING btree (
+  "kode" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
 -- Primary Key structure for table mjurnalumum
 -- ----------------------------
 ALTER TABLE "public"."mjurnalumum" ADD CONSTRAINT "mjurnalumum_pkey" PRIMARY KEY ("id");
@@ -443,6 +612,92 @@ ALTER TABLE "public"."mjurnalumum" ADD CONSTRAINT "mjurnalumum_pkey" PRIMARY KEY
 ALTER TABLE "public"."mjurnalumumd" ADD CONSTRAINT "mjurnalumumd_pkey" PRIMARY KEY ("id", "idjurnalumum");
 
 -- ----------------------------
+-- Indexes structure for table mkasin
+-- ----------------------------
+CREATE UNIQUE INDEX "idx_mkasin_kode" ON "public"."mkasin" USING btree (
+  "kode" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table mkasin
+-- ----------------------------
+ALTER TABLE "public"."mkasin" ADD CONSTRAINT "mkasin_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table mkasind
+-- ----------------------------
+ALTER TABLE "public"."mkasind" ADD CONSTRAINT "mkasind_pkey" PRIMARY KEY ("id", "idkasin");
+
+-- ----------------------------
+-- Primary Key structure for table mkasindbayar
+-- ----------------------------
+ALTER TABLE "public"."mkasindbayar" ADD CONSTRAINT "mkasindbayar_pkey" PRIMARY KEY ("id", "idkasin");
+
+-- ----------------------------
+-- Indexes structure for table mkasout
+-- ----------------------------
+CREATE UNIQUE INDEX "idx_mkasout_kode" ON "public"."mkasout" USING btree (
+  "kode" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table mkasout
+-- ----------------------------
+ALTER TABLE "public"."mkasout" ADD CONSTRAINT "mkasout_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table mkasoutd
+-- ----------------------------
+ALTER TABLE "public"."mkasoutd" ADD CONSTRAINT "mkasoutd_pkey" PRIMARY KEY ("id", "idkasout");
+
+-- ----------------------------
+-- Primary Key structure for table mkasoutdbayar
+-- ----------------------------
+ALTER TABLE "public"."mkasoutdbayar" ADD CONSTRAINT "mkasoutdbayar_pkey" PRIMARY KEY ("id", "idkasout");
+
+-- ----------------------------
+-- Primary Key structure for table mkontak
+-- ----------------------------
+ALTER TABLE "public"."mkontak" ADD CONSTRAINT "mkontak_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
 -- Foreign Keys structure for table mjurnalumumd
 -- ----------------------------
+ALTER TABLE "public"."mjurnalumumd" ADD CONSTRAINT "fk_mjurnalumum_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "public"."mjurnalumumd" ADD CONSTRAINT "fk_mjurnalumumd_idjurnalumum" FOREIGN KEY ("idjurnalumum") REFERENCES "public"."mjurnalumum" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasin
+-- ----------------------------
+ALTER TABLE "public"."mkasin" ADD CONSTRAINT "fk_mkasin_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasind
+-- ----------------------------
+ALTER TABLE "public"."mkasind" ADD CONSTRAINT "fk_mkasind_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasind" ADD CONSTRAINT "fk_mkasind_idkasin" FOREIGN KEY ("idkasin") REFERENCES "public"."mkasin" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasindbayar
+-- ----------------------------
+ALTER TABLE "public"."mkasindbayar" ADD CONSTRAINT "fk_mkasindbayar_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasindbayar" ADD CONSTRAINT "fk_mkasindbayar_idkasin" FOREIGN KEY ("idkasin") REFERENCES "public"."mkasin" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasindbayar" ADD CONSTRAINT "fk_mkasindbayar_idkontak" FOREIGN KEY ("idkontak") REFERENCES "public"."mkontak" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasout
+-- ----------------------------
+ALTER TABLE "public"."mkasout" ADD CONSTRAINT "fk_mkasout_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasoutd
+-- ----------------------------
+ALTER TABLE "public"."mkasoutd" ADD CONSTRAINT "fk_mkasoutd_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasoutd" ADD CONSTRAINT "fk_mkasoutd_idkasout" FOREIGN KEY ("idkasout") REFERENCES "public"."mkasout" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table mkasoutdbayar
+-- ----------------------------
+ALTER TABLE "public"."mkasoutdbayar" ADD CONSTRAINT "fk_mkasoutdbayar_idakun" FOREIGN KEY ("idakun") REFERENCES "public"."makun" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasoutdbayar" ADD CONSTRAINT "fk_mkasoutdbayar_idkasout" FOREIGN KEY ("idkasout") REFERENCES "public"."mkasout" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."mkasoutdbayar" ADD CONSTRAINT "fk_mkasoutdbayar_idkontak" FOREIGN KEY ("idkontak") REFERENCES "public"."mkontak" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,12 +1,12 @@
-﻿using CTrlSoft.Core.Api.Bll;
+﻿using log4net;
+using System;
+
+using CTrlSoft.Core.Api.Bll;
+using CTrlSoft.Core.Api.Models.Dto;
 using CTrlSoft.Core.Api.Repository;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CTrlSoft.Core.Api.Controllers
 {
@@ -15,13 +15,16 @@ namespace CTrlSoft.Core.Api.Controllers
     public class AkunController : ControllerBase
     {
         private IAkun _interface;
+        private ILog _ilog;
+        private IWebHostEnvironment _hostEnvironment;
 
-        public AkunController(AkunContext context)
+        public AkunController(AkunContext context, ILog log, IWebHostEnvironment environment)
         {
             this._interface = context;
+            this._ilog = log;
+            this._hostEnvironment = environment;
         }
 
-        // GET: api/Akun
         [HttpGet]
         public ActionResult<Models.JsonResult> GetAll()
         {
@@ -29,29 +32,106 @@ namespace CTrlSoft.Core.Api.Controllers
             return _interface.GetAll();
         }
 
-        // GET: api/Akun/{id}
         [HttpGet("{id}", Name = "GetID")]
         public ActionResult<Models.JsonResult> GetByID(long id)
         {
             _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
-            return _interface.Get(id);
+            return _interface.Get(_hostEnvironment, id);
         }
 
-        // GET: api/Akun/kode/{kode}
-        [HttpGet("kode/{kode}", Name = "GetKode")]
-        public ActionResult<Models.JsonResult> GetKode(string kode)
+        [HttpGet, Route("get_by_kode")]
+        public ActionResult<Models.JsonResult> GetByKode(string kode)
+        {
+            if (kode.Trim() != "") { 
+                _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+                return _interface.GetByKode(_hostEnvironment, kode);
+            }else
+                return BadRequest("Error while creating");
+
+        }
+
+        [HttpGet, Route("get_by_name")]
+        public ActionResult<Models.JsonResult> GetByNama(string nama)
+        {
+            if (nama.Trim() != "")
+            {
+                _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+                return _interface.GetByNama(_hostEnvironment, nama);
+            }
+            else
+                return BadRequest("Error while creating");
+
+        }
+
+        [HttpPost, Route("save")]
+        public ActionResult<Models.JsonResult> Save([FromBody] Akun akun)
         {
             _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
-            return _interface.GetByKode(kode);
+            try
+            {
+                if (akun == null || akun.id <= 0)
+                {
+                    return BadRequest("Error while creating");
+                }
+                else
+                {
+                    return _interface.Save(akun);
+                }
+            } catch (Exception ex)
+            {
+                if (_ilog != null)
+                    _ilog.Error("Error :", ex);
+            }
+
+            return BadRequest("Error while creating");
         }
 
-        // GET: api/Akun/nama/{nama}
-        [HttpGet("nama/{nama}", Name = "GetName")]
-        public ActionResult<Models.JsonResult> GetNama(string nama)
+        [HttpPost, Route("update")]
+        public ActionResult<Models.JsonResult> Update([FromBody] Akun akun)
         {
             _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
-            return _interface.GetByName(nama);
+            try
+            {
+                if (akun == null || akun.id <= 0)
+                {
+                    return BadRequest("Error while creating");
+                }
+                else
+                {
+                    return _interface.Update(akun);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_ilog != null)
+                    _ilog.Error("Error :", ex);
+            }
+
+            return BadRequest("Error while creating");
         }
 
+        [HttpPost, Route("delete")]
+        public ActionResult<Models.JsonResult> Delete([FromBody] Akun akun)
+        {
+            _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
+            try
+            {
+                if (akun == null || akun.id <= 0)
+                {
+                    return BadRequest("Error while creating");
+                }
+                else
+                {
+                    return _interface.Delete(akun);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_ilog != null)
+                    _ilog.Error("Error :", ex);
+            }
+
+            return BadRequest("Error while creating");
+        }
     }
 }

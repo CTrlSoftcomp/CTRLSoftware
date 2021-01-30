@@ -1,6 +1,8 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 namespace CTrlSoft.Core.Api.Repository
@@ -90,9 +92,25 @@ namespace CTrlSoft.Core.Api.Repository
 
             return hasil;
         }
-        public static string MapPath(string pathStr)
+    }
+
+    public interface IPathProvider
+    {
+        string MapPath(string path);
+    }
+    public class PathProvider : IPathProvider
+    {
+        private IWebHostEnvironment _hostEnvironment;
+
+        public PathProvider(IWebHostEnvironment environment)
         {
-            return pathStr;
+            _hostEnvironment = environment;
+        }
+
+        public string MapPath(string path)
+        {
+            string filePath = Path.Combine(_hostEnvironment.WebRootPath, path);
+            return filePath;
         }
     }
 }

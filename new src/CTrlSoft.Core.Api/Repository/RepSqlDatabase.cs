@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace CTrlSoft.Core.Api.Repository
 {
@@ -121,15 +122,19 @@ namespace CTrlSoft.Core.Api.Repository
             return com;
         }
 
-        public async static void LogErrorQuery(string method, Exception e)
+        public async static void LogErrorQuery(
+            IWebHostEnvironment environment, 
+            string method, 
+            Exception e)
         {
-            string fileName = Path.Combine(Directory.GetCurrentDirectory(), "/Log/LogSQL_" + System.DateTime.Now.ToString("yyMMdd") + ".txt");
+            DateTime dateTime = System.DateTime.Now;
+            string fileName = Path.Combine(environment.WebRootPath, "/Log/LogSQL_" + dateTime.ToString("yyMMdd") + ".txt");
             await using (StreamWriter streamWriter = new StreamWriter(fileName, true))
             {
                 try
                 {
                     streamWriter.AutoFlush = true;
-                    streamWriter.WriteLine(e.Message);
+                    streamWriter.WriteLine(dateTime.ToString("yy-MM-dd HH:mm:ss") + " [" + method + "]" + e.Message);
                     streamWriter.Flush();
                 }
                 catch (Exception)

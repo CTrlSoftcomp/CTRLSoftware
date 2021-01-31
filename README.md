@@ -15,11 +15,11 @@ Prerequisites (Khusus software developer atau programmer)
 ---------------------------------------------------------
 [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) adalah software gratis. Selain gratis [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) juga merupakan software open source sehingga Anda bisa mendownload [kode sumbernya](https://github.com/CTrlSoftcomp/CTRLSoftware/), mempelajari dan mengembangkan sendiri sesuai kebutuhan, tapi dengan syarat tidak boleh **menghapus** informasi asli tentang pembuat aplikasi ini.
 
-Untuk mengembangkan sendiri [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) dibutuhkan keahlian khusus di bidang pemrograman, ditambah keahlian pendukungnya seperti database. [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) dikembangkan/ditulis dengan menggunakan bahasa pemrograman [Visual Basic .NET](https://id.wikipedia.org/wiki/Visual_Basic_.NET), salah satu bahasa pemrograman yang ada di platform [.NET](https://en.wikipedia.org/wiki/.NET_Framework), sehingga untuk saat ini [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) hanya bisa di install untuk sistem operasi Windows, mulai dari windows XP, Windows Server 2003, Windows Vista, Windows Server 2008 dan Windows 7, windows 8, Windows Server 2012, Windows 10 dan Windows versi terbaru.
+Untuk mengembangkan sendiri [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) dibutuhkan keahlian khusus di bidang pemrograman, ditambah keahlian pendukungnya seperti database. [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) dikembangkan/ditulis dengan menggunakan bahasa pemrograman [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), salah satu bahasa pemrograman yang ada di platform [.NET](https://en.wikipedia.org/wiki/.NET_Framework), sehingga untuk saat ini [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware) hanya bisa di install untuk sistem operasi Windows, mulai dari windows XP, Windows Server 2003, Windows Vista, Windows Server 2008 dan Windows 7, windows 8, Windows Server 2012, Windows 10 dan Windows versi terbaru.
 
 Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukung yang akan digunakan dalam proses pengembangannya. Berikut adalah tool-tool yang dibutuhkan untuk proses pengembangan [Ctrl Software](https://github.com/CTrlSoftcomp/CTRLSoftware).
 
-* [Visual Studio Community 2017](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes) atau versi yang lebih tinggi
+* [Visual Studio Community 2019](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes) atau versi yang lebih tinggi
 * [Android Studio](https://developer.android.com/studio) dengan Android SDK terbaru
 * [VS.Code](https://code.visualstudio.com)
     * [Flutter SDK](https://flutter.dev/docs/get-started/install)
@@ -29,12 +29,11 @@ Selain keahlian khusus di bidang pemrograman, dibutuhkan juga tool-tool pendukun
     * Windows Server 2008 R2, Windows Server 2008 SP2, Windows Server 2012 atau versi yang lebih tinggi
 * Library Pihak Ketiga
     * [Json.NET](http://www.nuget.org/packages/Newtonsoft.Json/9.0.1)	    	
-    * [Devexpress Universal 17.1.3](https://www.devexpress.com/)
-* Database [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/) versi 2008 R2 atau yang lebih tinggi
+    * [Syncfusion Community 18.3.0.35](https://www.syncfusion.com/account/downloads/studio/licensed/18_3_0_35)
+* Database [PostgreSQL 9.5](https://www.postgresql.org/docs/9.5/index.html) versi 9.5 atau yang lebih tinggi
 
 Tool Development Lainnya
 -----------------------------------------------
-* [Management Studio](https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms/) - SQL Server administration and management tools
 * [Inno Setup](https://jrsoftware.org/isdl.php) - Pembuatan Package Installasi
 
 Lisensi

@@ -1,8 +1,4 @@
 ﻿using CTrlSoft.Core.Api.Models;
-using CTrlSoft.Core.Api.Models.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CTrlSoft.Core.Api.Bll
 {

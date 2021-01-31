@@ -9,4 +9,10 @@ namespace CTrlSoft.Core.Api.Bll
         JsonResult Get(long id);
         JsonResult GetByFilter(List<DataFilters> filters);
     }
+
+    interface IRole : IBase<MRole>
+    {
+        JsonResult Get(long id);
+        JsonResult GetByFilter(List<DataFilters> filters);
+    }
 }

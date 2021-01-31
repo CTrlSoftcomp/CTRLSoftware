@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CTrlSoft.Core.Api.Models.Dto
 {
-    public class Akun : Basic
+    public class MAkun : Basic
     {
         public long idparent { get; set; }
         public int iddepartemen { get; set; }
@@ -21,7 +21,7 @@ namespace CTrlSoft.Core.Api.Models.Dto
         public bool isneraca { get; set; }
     }
 
-    public class AkunValidator : AbstractValidator<Akun>
+    public class AkunValidator : AbstractValidator<MAkun>
     {
         [Obsolete]
         public AkunValidator()

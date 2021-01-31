@@ -10,11 +10,11 @@ using CTrlSoft.Core.Api.Repository;
 
 namespace CTrlSoft.Core.Api.DataAccess
 {
-    public class AkunContext : IAkun
+    public class KontakContext : IKontak
     {
         public string ConnectionString { get; set; }
 
-        public AkunContext(string connectionString)
+        public KontakContext(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
@@ -24,12 +24,12 @@ namespace CTrlSoft.Core.Api.DataAccess
             return new NpgsqlConnection(ConnectionString);
         }
 
-        JsonResult IBase<MAkun>.Delete(Models.Dto.MAkun obj)
+        JsonResult IBase<MKontak>.Delete(Models.Dto.MKontak obj)
         {
             throw new NotImplementedException();
         }
 
-        JsonResult IBase<MAkun>.GetAll()
+        JsonResult IBase<MKontak>.GetAll()
         {
             JsonResult hasil = new JsonResult
             {
@@ -38,7 +38,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                 JSONRows = 0,
                 JSONValue = null
             };
-            List<MAkun> obj = getListAkun(new List<DataFilters>());
+            List<MKontak> obj = getListKontak(new List<DataFilters>());
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -62,7 +62,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        JsonResult IAkun.GetByKode(string kode)
+        JsonResult IKontak.GetByKode(string kode)
         {
             JsonResult hasil = new JsonResult
             {
@@ -79,7 +79,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                 Operator = DataFilters.OperatorQuery.SamaDengan,
                 Separator = DataFilters.SeparatorQuery.And
             });
-            MAkun obj = getDataAkun(filters);
+            MKontak obj = getDataKontak(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -103,7 +103,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        JsonResult IAkun.GetByNama(string nama)
+        JsonResult IKontak.GetByNama(string nama)
         {
             JsonResult hasil = new JsonResult
             {
@@ -120,7 +120,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                 Operator = DataFilters.OperatorQuery.SamaDengan,
                 Separator = DataFilters.SeparatorQuery.And
             });
-            MAkun obj = getDataAkun(filters);
+            MKontak obj = getDataKontak(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -144,15 +144,15 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        JsonResult IAkun.Save(Models.Dto.MAkun obj, ref ValidationError validationError)
+        JsonResult IKontak.Save(Models.Dto.MKontak obj, ref ValidationError validationError)
         {
             throw new NotImplementedException();
         }
 
-        JsonResult IBase<MAkun>.Save(Models.Dto.MAkun obj)
+        JsonResult IBase<MKontak>.Save(Models.Dto.MKontak obj)
         {
             JsonResult hasil = new JsonResult { JSONResult = false, JSONMessage = "Data tidak ditemukan", JSONRows = 0, JSONValue = null };
-            List<MAkun> list = new List<MAkun>();
+            List<MKontak> list = new List<MKontak>();
             using (NpgsqlConnection conn = GetConnection())
             {
                 using (NpgsqlCommand com = new NpgsqlCommand())
@@ -165,22 +165,21 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.Connection = conn;
                             com.CommandTimeout = conn.ConnectionTimeout;
 
-                            com.CommandText = "insert into makun (id,kode,nama,idparent,iddepartemen,keterangan,idtype,isdebet,iskasbank,norekening,atasnamarekening,idtypebank,isneraca)" +
-                                              "values (@id,@kode,@nama,@idparent,@iddepartemen,@keterangan,@idtype,@isdebet,@iskasbank,@norekening,@atasnamarekening,@idtypebank,@isneraca)";
+                            com.CommandText = "insert into mkontak (id,kode,nama,alamat1,alamat2,alamat3,hp,telpon,iswhatsapp,norekening,bank,atasnamarekening)" +
+                                              "values (@id,@kode,@nama,@alamat1,@alamat2,@alamat3,@hp,@telpon,@iswhatsapp,@norekening,@bank,@atasnamarekening)";
                             com.Parameters.Clear();
                             com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
                             com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.kode.Trim();
                             com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
-                            com.Parameters.Add("@idparent", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idparent;
-                            com.Parameters.Add("@iddepartemen", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.iddepartemen;
-                            com.Parameters.Add("@keterangan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.keterangan.Trim();
-                            com.Parameters.Add("@idtype", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idtype;
-                            com.Parameters.Add("@isdebet", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.isdebet;
-                            com.Parameters.Add("@iskasbank", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iskasbank;
+                            com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat1.Trim();
+                            com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat2.Trim();
+                            com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat3.Trim();
+                            com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
+                            com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
+                            com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
+                            com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
                             com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                             com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
-                            com.Parameters.Add("@idtypebank", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idtypebank;
-                            com.Parameters.Add("@isneraca", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.isneraca;
 
                             com.ExecuteNonQuery();
                             hasil = new JsonResult
@@ -208,15 +207,15 @@ namespace CTrlSoft.Core.Api.DataAccess
         }
 
 
-        JsonResult IAkun.Update(Models.Dto.MAkun obj, ref ValidationError validationError)
+        JsonResult IKontak.Update(Models.Dto.MKontak obj, ref ValidationError validationError)
         {
             throw new NotImplementedException();
         }
 
-        JsonResult IBase<MAkun>.Update(Models.Dto.MAkun obj)
+        JsonResult IBase<MKontak>.Update(Models.Dto.MKontak obj)
         {
             JsonResult hasil = new JsonResult { JSONResult = false, JSONMessage = "Data tidak ditemukan", JSONRows = 0, JSONValue = null };
-            List<MAkun> list = new List<MAkun>();
+            List<MKontak> list = new List<MKontak>();
             using (NpgsqlConnection conn = GetConnection())
             {
                 using (NpgsqlCommand com = new NpgsqlCommand())
@@ -229,21 +228,20 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.Connection = conn;
                             com.CommandTimeout = conn.ConnectionTimeout;
 
-                            com.CommandText = "update makun set kode=@kode,nama=@nama,idparent=@idparent,iddepartemen=@iddepartemen,keterangan=@keterangan,idtype=@idtype,isdebet=@isdebet,iskasbank=@iskasbank,norekening=@norekening,atasnamarekening=@atasnamarekening,idtypebank=@idtypebank,isneraca=@isneraca where id=@id";
+                            com.CommandText = "update mkontak set kode=@kode,nama=@nama,alamat1=@alamat1,alamat2=@alamat2,alamat3=@alamat3,hp=@hp,telpon=@telpon,iswhatsapp=@iswhatsapp,norekening=@norekening,bank=@bank,atasnamarekening=@atasnamarekening where id=@id";
                             com.Parameters.Clear();
                             com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
                             com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.kode.Trim();
                             com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
-                            com.Parameters.Add("@idparent", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idparent;
-                            com.Parameters.Add("@iddepartemen", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.iddepartemen;
-                            com.Parameters.Add("@keterangan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.keterangan.Trim();
-                            com.Parameters.Add("@idtype", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idtype;
-                            com.Parameters.Add("@isdebet", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.isdebet;
-                            com.Parameters.Add("@iskasbank", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iskasbank;
+                            com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat1.Trim();
+                            com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat2.Trim();
+                            com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat3.Trim();
+                            com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
+                            com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
+                            com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
+                            com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
                             com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                             com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
-                            com.Parameters.Add("@idtypebank", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idtypebank;
-                            com.Parameters.Add("@isneraca", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.isneraca;
 
                             com.ExecuteNonQuery();
                             hasil = new JsonResult
@@ -270,7 +268,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        JsonResult IAkun.Get(long id)
+        JsonResult IKontak.Get(long id)
         {
             JsonResult hasil = new JsonResult { 
                 JSONResult = false, 
@@ -283,7 +281,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                 FieldValue = id , 
                 Operator = DataFilters.OperatorQuery.SamaDengan, 
                 Separator = DataFilters.SeparatorQuery.And});
-            MAkun obj = getDataAkun(filters);
+            MKontak obj = getDataKontak(filters);
             if (obj == null)
             {
                 hasil = new JsonResult
@@ -306,9 +304,9 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        private MAkun getDataAkun(List<DataFilters> filters)
+        private MKontak getDataKontak(List<DataFilters> filters)
         {
-            MAkun obj = new MAkun();
+            MKontak obj = new MKontak();
             using (NpgsqlConnection conn = GetConnection())
             {
                 using (NpgsqlCommand com = new NpgsqlCommand())
@@ -322,27 +320,26 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.CommandTimeout = conn.ConnectionTimeout;
                             oDA.SelectCommand = com;
 
-                            com.CommandText = "select makun.*" +
-                                              " from makun where 1=1";
+                            com.CommandText = "select mkontak.*" +
+                                              " from mkontak where 1=1";
                             RepSqlDatabase.OperatorSQL(com, filters);
                             oDA.Fill(dt);
 
                             obj = (from DataRow x in dt.Rows
-                                   select new MAkun()
+                                   select new MKontak()
                                    {
                                        id = RepUtils.NullToLong(x["id"]),
                                        kode = RepUtils.NullToStr(x["kode"]),
                                        nama = RepUtils.NullToStr(x["nama"]),
-                                       idparent = RepUtils.NullToLong(x["idparent"]),
-                                       iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
-                                       keterangan = RepUtils.NullToStr(x["keterangan"]),
-                                       idtype = RepUtils.NullToInt(x["idtype"]),
-                                       isdebet = RepUtils.NullToBool(x["isdebet"]),
-                                       iskasbank = RepUtils.NullToBool(x["iskasbank"]),
+                                       alamat1 = RepUtils.NullToStr(x["alamat1"]),
+                                       alamat2 = RepUtils.NullToStr(x["alamat2"]),
+                                       alamat3 = RepUtils.NullToStr(x["alamat3"]),
+                                       hp = RepUtils.NullToStr(x["hp"]),
+                                       telpon = RepUtils.NullToStr(x["telpon"]),
+                                       iswhatsapp = RepUtils.NullToBool(x["iswhatsapp"]),
                                        norekening = RepUtils.NullToStr(x["norekening"]),
                                        atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
-                                       idtypebank = RepUtils.NullToInt(x["idtypebank"]),
-                                       isneraca = RepUtils.NullToBool(x["isneraca"])
+                                       bank = RepUtils.NullToStr(x["bank"])
                                    }).SingleOrDefault();
                         }
                     }
@@ -351,9 +348,9 @@ namespace CTrlSoft.Core.Api.DataAccess
             return obj;
         }
 
-        private List<MAkun> getListAkun(List<DataFilters> filters)
+        private List<MKontak> getListKontak(List<DataFilters> filters)
         {
-            List<MAkun> obj = new List<MAkun>();
+            List<MKontak> obj = new List<MKontak>();
             using (NpgsqlConnection conn = GetConnection())
             {
                 using (NpgsqlCommand com = new NpgsqlCommand())
@@ -367,27 +364,26 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.CommandTimeout = conn.ConnectionTimeout;
                             oDA.SelectCommand = com;
 
-                            com.CommandText = "select makun.*" +
-                                              " from makun where 1=1";
+                            com.CommandText = "select mkontak.*" +
+                                              " from mkontak where 1=1";
                             RepSqlDatabase.OperatorSQL(com, filters);
                             oDA.Fill(dt);
 
                             obj = (from DataRow x in dt.Rows
-                                   select new MAkun()
+                                   select new MKontak()
                                    {
                                        id = RepUtils.NullToLong(x["id"]),
                                        kode = RepUtils.NullToStr(x["kode"]),
                                        nama = RepUtils.NullToStr(x["nama"]),
-                                       idparent = RepUtils.NullToLong(x["idparent"]),
-                                       iddepartemen = RepUtils.NullToInt(x["iddepartemen"]),
-                                       keterangan = RepUtils.NullToStr(x["keterangan"]),
-                                       idtype = RepUtils.NullToInt(x["idtype"]),
-                                       isdebet = RepUtils.NullToBool(x["isdebet"]),
-                                       iskasbank = RepUtils.NullToBool(x["iskasbank"]),
+                                       alamat1 = RepUtils.NullToStr(x["alamat1"]),
+                                       alamat2 = RepUtils.NullToStr(x["alamat2"]),
+                                       alamat3 = RepUtils.NullToStr(x["alamat3"]),
+                                       hp = RepUtils.NullToStr(x["hp"]),
+                                       telpon = RepUtils.NullToStr(x["telpon"]),
+                                       iswhatsapp = RepUtils.NullToBool(x["iswhatsapp"]),
                                        norekening = RepUtils.NullToStr(x["norekening"]),
                                        atasnamarekening = RepUtils.NullToStr(x["atasnamarekening"]),
-                                       idtypebank = RepUtils.NullToInt(x["idtypebank"]),
-                                       isneraca = RepUtils.NullToBool(x["isneraca"])
+                                       bank = RepUtils.NullToStr(x["bank"])
                                    }).ToList();
                         }
                     }
@@ -405,7 +401,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                 JSONRows = 0,
                 JSONValue = null
             };
-            List<MAkun> obj = getListAkun(filters);
+            List<MKontak> obj = getListKontak(filters);
             if (obj == null)
             {
                 hasil = new JsonResult

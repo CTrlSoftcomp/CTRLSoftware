@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 namespace CTrlSoft.Core.Api.Repository
 {
     public class RepUtils
     {
+        public static string md5_watermark = "CTrl5";
+
         public static double NullToDbl(object value)
         {
             double hasil = 0.0;
@@ -92,8 +92,24 @@ namespace CTrlSoft.Core.Api.Repository
 
             return hasil;
         }
-    }
+        public static string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input + md5_watermark);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
 
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
+        }
+    }
     public interface IPathProvider
     {
         string MapPath(string path);

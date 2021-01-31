@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CTrlSoft.Dto.Model
+namespace CTrlSoft.Models.Dto
 {
-    class Basic
+   public class Basic
     {
         public long id { get; set; }
         public string kode { get; set; }

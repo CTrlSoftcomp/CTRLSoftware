@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CTrlSoft.App;
+using System;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.Windows.Forms;
 
 namespace CTrlSoft
 {
@@ -14,9 +16,12 @@ namespace CTrlSoft
         [STAThread]
         static void Main()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", false);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", false);
+            SfSkinManager.LoadAssembly(typeof(Office2016Theme).Assembly);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frmMain());
         }
     }
 }

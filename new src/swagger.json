@@ -1,0 +1,1119 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CTrlSoft.Core.Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Akun": {
+      "get": {
+        "tags": [
+          "Akun"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/{id}": {
+      "get": {
+        "tags": [
+          "Akun"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/get_by_kode": {
+      "get": {
+        "tags": [
+          "Akun"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kode",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/get_by_name": {
+      "get": {
+        "tags": [
+          "Akun"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nama",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/save": {
+      "post": {
+        "tags": [
+          "Akun"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MAkun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/update": {
+      "post": {
+        "tags": [
+          "Akun"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MAkun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/delete": {
+      "post": {
+        "tags": [
+          "Akun"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MAkun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Akun/list": {
+      "post": {
+        "tags": [
+          "Akun"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataFilters"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/JenisTransaksi": {
+      "get": {
+        "tags": [
+          "JenisTransaksi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/JenisTransaksi/{id}": {
+      "get": {
+        "tags": [
+          "JenisTransaksi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/JenisTransaksi/list": {
+      "post": {
+        "tags": [
+          "JenisTransaksi"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataFilters"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak": {
+      "get": {
+        "tags": [
+          "Kontak"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/{id}": {
+      "get": {
+        "tags": [
+          "Kontak"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/get_by_kode": {
+      "get": {
+        "tags": [
+          "Kontak"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kode",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/get_by_name": {
+      "get": {
+        "tags": [
+          "Kontak"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nama",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/save": {
+      "post": {
+        "tags": [
+          "Kontak"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MKontak"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/update": {
+      "post": {
+        "tags": [
+          "Kontak"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MKontak"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/delete": {
+      "post": {
+        "tags": [
+          "Kontak"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MKontak"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Kontak/list": {
+      "post": {
+        "tags": [
+          "Kontak"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataFilters"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Role": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Role/{id}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/Role/list": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataFilters"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/save": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/update": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/delete": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/list": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataFilters"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/login": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userid",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "pwd",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/changepassword": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oldpwd",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "newpwd",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JsonResult": {
+      "type": "object",
+      "properties": {
+        "jsonResult": {
+          "type": "boolean"
+        },
+        "jsonMessage": {
+          "type": "string"
+        },
+        "jsonRows": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "jsonValue": {
+          "type": "object"
+        }
+      }
+    },
+    "MAkun": {
+      "type": "object",
+      "properties": {
+        "idparent": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "iddepartemen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "keterangan": {
+          "type": "string"
+        },
+        "idtype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isdebet": {
+          "type": "boolean"
+        },
+        "iskasbank": {
+          "type": "boolean"
+        },
+        "norekening": {
+          "type": "string"
+        },
+        "atasnamarekening": {
+          "type": "string"
+        },
+        "idtypebank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isneraca": {
+          "type": "boolean"
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "kode": {
+          "type": "string"
+        },
+        "nama": {
+          "type": "string"
+        }
+      }
+    },
+    "OperatorQuery": {
+      "format": "int32",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "type": "integer"
+    },
+    "SeparatorQuery": {
+      "format": "int32",
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer"
+    },
+    "DataFilters": {
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "fieldValue": {
+          "type": "object"
+        },
+        "operator": {
+          "$ref": "#/definitions/OperatorQuery"
+        },
+        "separator": {
+          "$ref": "#/definitions/SeparatorQuery"
+        }
+      }
+    },
+    "MKontak": {
+      "type": "object",
+      "properties": {
+        "alamat1": {
+          "type": "string"
+        },
+        "alamat2": {
+          "type": "string"
+        },
+        "alamat3": {
+          "type": "string"
+        },
+        "hp": {
+          "type": "string"
+        },
+        "telpon": {
+          "type": "string"
+        },
+        "iswhatsapp": {
+          "type": "boolean"
+        },
+        "norekening": {
+          "type": "string"
+        },
+        "bank": {
+          "type": "string"
+        },
+        "atasnamarekening": {
+          "type": "string"
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "kode": {
+          "type": "string"
+        },
+        "nama": {
+          "type": "string"
+        }
+      }
+    },
+    "MUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "userid": {
+          "type": "string"
+        },
+        "pwd": {
+          "type": "string"
+        },
+        "nama": {
+          "type": "string"
+        },
+        "idkontak": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "idrole": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

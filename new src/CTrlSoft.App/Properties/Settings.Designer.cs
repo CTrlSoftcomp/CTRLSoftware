@@ -22,5 +22,14 @@ namespace CTrlSoft.App.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44364")]
+        public string Base_Url {
+            get {
+                return ((string)(this["Base_Url"]));
+            }
+        }
     }
 }

@@ -28,12 +28,14 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Role.GetAll", "GetAll");
+
                 _interface = HttpContext.RequestServices.GetService(typeof(RoleContext)) as RoleContext;
                 return _interface.GetAll();
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Akun.GetAll", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Role.GetAll", ex);
                 return BadRequest("Error while creating");
             }
         }
@@ -43,12 +45,14 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Role.Get", id.ToString());
+
                 _interface = HttpContext.RequestServices.GetService(typeof(RoleContext)) as RoleContext;
                 return _interface.Get(id);
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Akun.Get", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Role.Get", ex);
                 return BadRequest("Error while creating");
             }
         }
@@ -64,13 +68,15 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Role.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(RoleContext)) as RoleContext;
                     return _interface.GetByFilter(filters);
                 }
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Akun.Delete", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Role.List", ex);
                 return BadRequest("Error while creating");
             }
         }

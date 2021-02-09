@@ -28,6 +28,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.GetAll", "All Data");
+
                 _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                 return _interface.GetAll();
             }
@@ -43,6 +45,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get", id.ToString());
+
                 _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                 return _interface.Get(id);
             }
@@ -60,6 +64,8 @@ namespace CTrlSoft.Core.Api.Controllers
             {
                 try
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get_By_Kode", kode);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.GetByKode(kode);
                 }
@@ -81,6 +87,8 @@ namespace CTrlSoft.Core.Api.Controllers
             {
                 try
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get_By_Nama", nama);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.GetByNama(nama);
                 }
@@ -106,6 +114,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Save", Newtonsoft.Json.JsonConvert.SerializeObject(Kontak));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.Save(Kontak);
                 }
@@ -128,6 +138,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Update", Newtonsoft.Json.JsonConvert.SerializeObject(Kontak));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.Update(Kontak);
                 }
@@ -150,6 +162,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Delete", Newtonsoft.Json.JsonConvert.SerializeObject(Kontak));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.Delete(Kontak);
                 }
@@ -172,13 +186,15 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
                     return _interface.GetByFilter(filters);
                 }
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Kontak.Delete", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Kontak.List", ex);
                 return BadRequest("Error while creating");
             }
         }

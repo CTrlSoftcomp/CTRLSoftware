@@ -28,6 +28,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.GetAll", "All Data");
+
                 _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                 return _interface.GetAll();
             }
@@ -43,6 +45,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Get", id.ToString());
+
                 _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                 return _interface.Get(id);
             }
@@ -59,6 +63,8 @@ namespace CTrlSoft.Core.Api.Controllers
             if (kode.Trim() != "") {
                 try
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Get_By_Kode", kode);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.GetByKode(kode);
                 }
@@ -79,6 +85,8 @@ namespace CTrlSoft.Core.Api.Controllers
             {
                 try
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Get_By_Nama", nama);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.GetByNama(nama);
                 }
@@ -104,6 +112,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Save", Newtonsoft.Json.JsonConvert.SerializeObject(akun));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.Save(akun);
                 }
@@ -126,6 +136,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Update", Newtonsoft.Json.JsonConvert.SerializeObject(akun));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.Update(akun);
                 }
@@ -148,6 +160,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.Delete", Newtonsoft.Json.JsonConvert.SerializeObject(akun));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.Delete(akun);
                 }
@@ -170,13 +184,15 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Akun.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(AkunContext)) as AkunContext;
                     return _interface.GetByFilter(filters);
                 }
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Akun.Delete", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "Akun.List", ex);
                 return BadRequest("Error while creating");
             }
         }

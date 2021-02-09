@@ -28,6 +28,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.GetAll", "GetAll");
+
                 _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                 return _interface.GetAll();
             }
@@ -43,6 +45,8 @@ namespace CTrlSoft.Core.Api.Controllers
         {
             try
             {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Get", id.ToString());
+
                 _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                 return _interface.Get(id);
             }
@@ -64,6 +68,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Save", Newtonsoft.Json.JsonConvert.SerializeObject(User));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.Save(User);
                 }
@@ -86,6 +92,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Update", Newtonsoft.Json.JsonConvert.SerializeObject(User));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.Update(User);
                 }
@@ -108,6 +116,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Delete", Newtonsoft.Json.JsonConvert.SerializeObject(User));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.Delete(User);
                 }
@@ -130,13 +140,15 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.GetByFilter(filters);
                 }
             }
             catch (Exception ex)
             {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.Delete", ex);
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.List", ex);
                 return BadRequest("Error while creating");
             }
         }
@@ -156,6 +168,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Login", "UserID : " + userid + ", Pwd : " + pwd);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.GetLogin(userid, pwd);
                 }
@@ -186,6 +200,8 @@ namespace CTrlSoft.Core.Api.Controllers
                 }
                 else
                 {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.ChangePassword", Newtonsoft.Json.JsonConvert.SerializeObject(User) + ", PwdOld : " + oldpwd + ", PwdNew : " + newpwd);
+
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.GetChangePwd(User, oldpwd, newpwd);
                 }

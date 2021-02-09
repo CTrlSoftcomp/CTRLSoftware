@@ -144,5 +144,28 @@ namespace CTrlSoft.Core.Api.Repository
                 }
             }
         }
+
+        public async static void LogConnection(
+            IWebHostEnvironment environment,
+            string method,
+            string data)
+        {
+            DateTime dateTime = System.DateTime.Now;
+
+            string fileName = Path.GetFullPath(environment.ContentRootPath + "/Log/LogConnection_" + dateTime.ToString("yyMMdd") + ".txt");
+            await using (StreamWriter streamWriter = new StreamWriter(fileName, true))
+            {
+                try
+                {
+                    streamWriter.AutoFlush = true;
+                    streamWriter.WriteLine(dateTime.ToString("yy-MM-dd HH:mm:ss") + " [" + method + "] data JSON : " + data);
+                    streamWriter.Flush();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
     }
 }

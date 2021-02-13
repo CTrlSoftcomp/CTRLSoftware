@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/purple_500</color>
+    <color name="colorPrimaryLight">@color/purple_200</color>
+    <color name="colorPrimaryDark">@color/purple_700</color>
+    <color name="colorPrimaryText">@color/black</color>
+
+    <color name="colorSecondary">#000000</color>
+    <color name="colorSecondaryLight">#2c2c2c</color>
+    <color name="colorSecondaryDark">#000000</color>
+    <color name="colorSecondaryText">#FFFFFF</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    // Color Swipe Refresh Layout
+    <color name="refresh">#3fd93f</color>
+    <color name="refresh1">#008080</color>
+    <color name="refresh2">#800080</color>
+
+    <color name="grey_3">#f7f7f7</color>
+    <color name="grey_5">#f2f2f2</color>
+    <color name="grey_10">#e6e6e6</color>
+    <color name="grey_20">#CCCCCC</color>
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+    <color name="grey_80">#37474F</color>
+    <color name="grey_90">#263238</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#757575</color>
+    <color name="colorGreyLight">#E0E0E0</color>
+    <color name="colorGreyDark">#424242</color>
+    <color name="colorTeal">#009688</color>
+    <color name="colorAccent">#6d6e70</color>
+
+    <color name="colorBlack800">#121212</color>
+    <color name="colorBlack900">#000000</color>
+
+    <color name="color_white_50_alpha_060">#99ffffff</color>
+
+    <color name="color_blue_50_alpha_060">#99eef0f2</color>
+
+    <color name="color_black_900_alpha_020">#33000000</color>
+    <color name="color_black_900_alpha_087">#de000000</color>
+    <color name="color_black_900_alpha_060">#99000000</color>
+
+    <!--background protection for nav-bar, varied on Q+-->
+    <color name="immersive_sys_ui">#33000000</color>
+    <color name="nav_bar">@color/color_black_900_alpha_020</color>
+
+    <color name="icon_tint_1">#5A5F61</color>
+
+    <color name="light_green_40">#aed581</color>
+    <color name="light_green_50">#9ccc65</color>
+    <color name="light_green_60">#8bc34a</color>
+    <color name="light_green_70">#7cb342</color>
+    <color name="light_green_80">#689f38</color>
+    <color name="light_green_90">#558b2f</color>
+    <color name="light_green_100">#33691e</color>
+
+    <!-- dots active colors -->
+    <color name="dot_active">#000000</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#cccccc</color>
+</resources>

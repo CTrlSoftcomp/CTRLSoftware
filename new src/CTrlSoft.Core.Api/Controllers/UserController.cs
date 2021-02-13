@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using CTrlSoft.Core.Api.DataAccess;
-using System.Collections.Generic;
 
 namespace CTrlSoft.Core.Api.Controllers
 {
@@ -23,22 +22,22 @@ namespace CTrlSoft.Core.Api.Controllers
             this._hostEnvironment = environment;
         }
 
-        [HttpGet]
-        public ActionResult<Models.JsonResult> GetAll()
-        {
-            try
-            {
-                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.GetAll", "GetAll");
+        //[HttpGet]
+        //public ActionResult<Models.JsonResult> GetAll()
+        //{
+        //    try
+        //    {
+        //        Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.GetAll", "GetAll");
 
-                _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
-                return _interface.GetAll();
-            }
-            catch (Exception ex)
-            {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.GetAll", ex);
-                return BadRequest("Error while creating");
-            }
-        }
+        //        _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+        //        return _interface.GetAll();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.GetAll", ex);
+        //        return BadRequest("Error while creating");
+        //    }
+        //}
 
         [HttpGet("{id}")]
         public ActionResult<Models.JsonResult> GetByID(long id)
@@ -49,6 +48,23 @@ namespace CTrlSoft.Core.Api.Controllers
 
                 _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                 return _interface.Get(id);
+            }
+            catch (Exception ex)
+            {
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.Get", ex);
+                return BadRequest("Error while creating");
+            }
+        }
+
+        [HttpGet, Route("available")]
+        public ActionResult<Models.JsonResult> GetAvailableUser(string userid)
+        {
+            try
+            {
+                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Available", userid);
+
+                _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+                return _interface.GetAvailableUser(userid);
             }
             catch (Exception ex)
             {
@@ -129,29 +145,29 @@ namespace CTrlSoft.Core.Api.Controllers
             }
         }
 
-        [HttpPost, Route("list")]
-        public ActionResult<Models.JsonResult> List([FromBody] List<Models.DataFilters> filters)
-        {
-            try
-            {
-                if (filters == null)
-                {
-                    return BadRequest("Error while creating");
-                }
-                else
-                {
-                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
+        //[HttpPost, Route("list")]
+        //public ActionResult<Models.JsonResult> List([FromBody] List<Models.DataFilters> filters)
+        //{
+        //    try
+        //    {
+        //        if (filters == null)
+        //        {
+        //            return BadRequest("Error while creating");
+        //        }
+        //        else
+        //        {
+        //            Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
 
-                    _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
-                    return _interface.GetByFilter(filters);
-                }
-            }
-            catch (Exception ex)
-            {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.List", ex);
-                return BadRequest("Error while creating");
-            }
-        }
+        //            _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+        //            return _interface.GetByFilter(filters);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.List", ex);
+        //        return BadRequest("Error while creating");
+        //    }
+        //}
 
         [HttpGet, Route("login")]
         public ActionResult<Models.JsonResult> Login(string userid, string pwd)

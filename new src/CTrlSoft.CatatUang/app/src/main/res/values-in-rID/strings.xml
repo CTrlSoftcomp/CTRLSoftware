@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Catatan Keuangan</string>
+    <string name="hello" translatable="false">"Halo, "</string>
+    <string name="login" translatable="false">Silahkan Masuk</string>
+    <string name="login_1" translatable="false">Login</string>
+</resources>

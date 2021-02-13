@@ -349,16 +349,24 @@
         }
       }
     },
-    "/Kontak": {
+    "/Kontak/get_all": {
       "get": {
         "tags": [
           "Kontak"
         ],
-        "operationId": "Kontak",
+        "operationId": "get_all",
         "produces": [
           "text/plain",
           "application/json",
           "text/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -370,12 +378,12 @@
         }
       }
     },
-    "/Kontak/{id}": {
+    "/Kontak/get_by_id": {
       "get": {
         "tags": [
           "Kontak"
         ],
-        "operationId": "Kontak2",
+        "operationId": "get_by_id",
         "produces": [
           "text/plain",
           "application/json",
@@ -384,9 +392,14 @@
         "parameters": [
           {
             "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          },
+          {
+            "type": "integer",
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "format": "int64"
           }
         ],
@@ -412,6 +425,12 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          },
           {
             "type": "string",
             "name": "kode",
@@ -440,6 +459,12 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          },
           {
             "type": "string",
             "name": "nama",
@@ -547,6 +572,12 @@
         ],
         "parameters": [
           {
+            "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -582,6 +613,12 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "type": "integer",
+            "name": "iduser",
+            "in": "query",
+            "format": "int64"
+          },
           {
             "name": "body",
             "in": "body",
@@ -693,33 +730,12 @@
         }
       }
     },
-    "/User": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "operationId": "User",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JsonResult"
-            }
-          }
-        }
-      }
-    },
     "/User/{id}": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "User2",
+        "operationId": "User",
         "produces": [
           "text/plain",
           "application/json",
@@ -732,6 +748,34 @@
             "in": "path",
             "required": true,
             "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JsonResult"
+            }
+          }
+        }
+      }
+    },
+    "/User/available": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "available",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userid",
+            "in": "query"
           }
         ],
         "responses": {
@@ -839,45 +883,6 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/MUser"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JsonResult"
-            }
-          }
-        }
-      }
-    },
-    "/User/list": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "operationId": "list5",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DataFilters"
-              }
             }
           }
         ],
@@ -1137,7 +1142,7 @@
         },
         "idkontak": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "idrole": {
           "type": "integer",

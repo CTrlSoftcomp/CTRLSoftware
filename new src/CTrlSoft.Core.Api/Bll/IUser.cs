@@ -10,6 +10,7 @@ namespace CTrlSoft.Core.Api.Bll
         JsonResult GetLogin(string userid, string pwd);
         JsonResult GetByFilter(List<DataFilters> filters);
         JsonResult GetChangePwd(MUser user, string oldpwd, string newpwd);
+        JsonResult GetAvailableUser(string userid);
 
         //JsonResult Save(Kontak obj);
         JsonResult Save(MUser obj, ref ValidationError validationError);

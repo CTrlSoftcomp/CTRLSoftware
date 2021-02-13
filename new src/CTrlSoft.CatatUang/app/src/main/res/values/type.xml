@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Typography-->
+    <style name="TextAppearance.YH.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_black</item>
+    </style>
+
+    <style name="TextAppearance.YH.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:fontFamily">@font/sf_pro_display_light</item>
+    </style>
+
+    <style name="TextAppearance.YH.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+    </style>
+
+    <style name="TextAppearance.YH.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="TextAppearance.YH.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="TextAppearance.YH.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="TextAppearance.YH.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="TextAppearance.YH.Caption.12" parent="TextAppearance.YH.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="TextAppearance.YH.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_thin</item>
+    </style>
+
+    <style name="TextAppearance.YH.Overline.NoCaps" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_on_surface_emphasis_high</item>
+        <item name="android:fontFamily">@font/sf_pro_display_thin</item>
+    </style>
+
+    <style name="TextAppearance.YH.BottomNavigation" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:fontFamily">@font/sf_pro</item>
+    </style>
+
+    <style name="TextAppearance.YH.Custom1" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">8sp</item>
+        <item name="android:fontFamily">@font/sf_pro</item>
+    </style>
+</resources>

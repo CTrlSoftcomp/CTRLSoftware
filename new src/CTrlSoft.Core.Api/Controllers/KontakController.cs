@@ -23,15 +23,15 @@ namespace CTrlSoft.Core.Api.Controllers
             this._hostEnvironment = environment;
         }
 
-        [HttpGet]
-        public ActionResult<Models.JsonResult> GetAll()
+        [HttpGet, Route("get_all")]
+        public ActionResult<Models.JsonResult> GetAll(long iduser)
         {
             try
             {
                 Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.GetAll", "All Data");
 
                 _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                return _interface.GetAll();
+                return _interface.GetAll(iduser);
             }
             catch (Exception ex)
             {
@@ -40,15 +40,15 @@ namespace CTrlSoft.Core.Api.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Models.JsonResult> GetByID(long id)
+        [HttpGet, Route("get_by_id")]
+        public ActionResult<Models.JsonResult> GetByID(long iduser, long id)
         {
             try
             {
                 Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get", id.ToString());
 
                 _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                return _interface.Get(id);
+                return _interface.Get(iduser, id);
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace CTrlSoft.Core.Api.Controllers
         }
 
         [HttpGet, Route("get_by_kode")]
-        public ActionResult<Models.JsonResult> GetByKode(string kode)
+        public ActionResult<Models.JsonResult> GetByKode(long iduser, string kode)
         {
             if (kode.Trim() != "")
             {
@@ -67,7 +67,7 @@ namespace CTrlSoft.Core.Api.Controllers
                     Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get_By_Kode", kode);
 
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                    return _interface.GetByKode(kode);
+                    return _interface.GetByKode(iduser, kode);
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +81,7 @@ namespace CTrlSoft.Core.Api.Controllers
         }
 
         [HttpGet, Route("get_by_name")]
-        public ActionResult<Models.JsonResult> GetByNama(string nama)
+        public ActionResult<Models.JsonResult> GetByNama(long iduser, string nama)
         {
             if (nama.Trim() != "")
             {
@@ -90,7 +90,7 @@ namespace CTrlSoft.Core.Api.Controllers
                     Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Get_By_Nama", nama);
 
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                    return _interface.GetByNama(nama);
+                    return _interface.GetByNama(iduser, nama);
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +152,7 @@ namespace CTrlSoft.Core.Api.Controllers
         }
 
         [HttpPost, Route("delete")]
-        public ActionResult<Models.JsonResult> Delete([FromBody] MKontak Kontak)
+        public ActionResult<Models.JsonResult> Delete(long iduser, [FromBody] MKontak Kontak)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace CTrlSoft.Core.Api.Controllers
         }
 
         [HttpPost, Route("list")]
-        public ActionResult<Models.JsonResult> List([FromBody] List<Models.DataFilters> filters)
+        public ActionResult<Models.JsonResult> List(long iduser, [FromBody] List<Models.DataFilters> filters)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace CTrlSoft.Core.Api.Controllers
                     Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.List", Newtonsoft.Json.JsonConvert.SerializeObject(filters));
 
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                    return _interface.GetByFilter(filters);
+                    return _interface.GetByFilter(iduser, filters);
                 }
             }
             catch (Exception ex)

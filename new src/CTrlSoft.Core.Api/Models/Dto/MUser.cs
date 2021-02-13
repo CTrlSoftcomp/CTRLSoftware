@@ -11,7 +11,7 @@ namespace CTrlSoft.Core.Api.Models.Dto
         public string userid { get; set; }
         public string pwd { get; set; }
         public string nama { get; set; }
-        public int idkontak { get; set; }
+        public long idkontak { get; set; }
         public int idrole { get; set; }
     }
 

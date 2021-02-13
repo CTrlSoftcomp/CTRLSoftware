@@ -1,0 +1,77 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.CatatanKeuangan" parent="@style/Theme.Base"/>
+
+    <!-- Base application theme. -->
+    <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryLight</item>
+
+        <item name="android:colorBackground">@color/colorWhite</item>
+        <item name="colorSurface">@color/colorGreyLight</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
+        <item name="colorError">@color/colorAccent</item>
+
+        <item name="colorOnPrimary">@color/colorWhite</item>
+        <item name="colorOnSecondary">@color/colorBlack900</item>
+        <item name="colorOnBackground">@color/colorBlack900</item>
+        <item name="colorOnSurface">@color/colorBlack900</item>
+        <item name="colorOnError">@color/colorBlack900</item>
+
+        <!--Platform attributes-->
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:statusBarColor">@color/immersive_sys_ui</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.YH.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.YH.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>
+
+        <!--Typography-->
+        <item name="textAppearanceHeadline2">@style/TextAppearance.YH.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.YH.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.YH.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.YH.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.YH.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.YH.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.YH.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.YH.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.YH.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.YH.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.YH.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.YH.Overline</item>
+
+        <item name="emphasisHighAlpha">0.87</item>
+        <item name="emphasisMediumAlpha">0.60</item>
+        <item name="emphasisDisabledAlpha">0.38</item>
+
+        <item name="motionInterpolatorPersistent">@android:interpolator/fast_out_slow_in</item>
+        <item name="motionInterpolatorIncoming">@android:interpolator/decelerate_cubic</item>
+        <item name="motionInterpolatorOutgoing">@android:interpolator/accelerate_cubic</item>
+
+        <!--Styles-->
+        <item name="bottomAppBarStyle">@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface</item>
+        <item name="bottomSheetStyle">@style/Widget.YH.BottomSheetDialog</item>
+        <item name="navigationViewStyle">@style/Widget.YH.NavigationView</item>
+        <item name="bottomNavigationStyle">@style/Widget.YH.BottomNavigationView</item>
+        <item name="buttonStyle">@style/Widget.YH.Button</item>
+        <item name="materialButtonStyle">@style/Widget.YH.Button</item>
+        <item name="cardViewStyle">@style/Widget.YH.CardView.Light</item>
+        <item name="materialCardViewStyle">@style/Widget.YH.CardView.Light</item>
+        <item name="chipStyle">@style/Widget.YH.Chip.Choice</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+
+        <item name="android:fontFamily">@font/sf_pro</item>
+        <item name="fontFamily">@font/sf_pro</item>
+    </style>
+</resources>

@@ -1,0 +1,108 @@
+<resources>
+    <style name="Widget.YH.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <!--Remove any scrim insets applied by NavigationView for system bars-->
+        <item name="insetForeground">@android:color/transparent</item>
+        <!--Set the background color of NavigationView-->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
+        <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
+    </style>
+
+    <style name="Widget.YH.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+<!--    <style name="Widget.YH.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">-->
+<!--        <item name="closeIconSize">0dp</item>-->
+<!--        <item name="closeIconEnabled">false</item>-->
+<!--        <item name="chipIcon">@drawable/avatar_none</item>-->
+<!--        <item name="chipIconSize">@dimen/chip_icon_diameter</item>-->
+<!--        <item name="chipStartPadding">0dp</item>-->
+<!--        <item name="android:checkable">false</item>-->
+<!--    </style>-->
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="boxStrokeErrorColor">@color/colorSecondary</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="Widget.YH.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface">
+        <item name="labelVisibilityMode">unlabeled</item>
+        <item name="itemIconTint">@color/bottom_nav_item</item>
+        <item name="itemTextColor">@color/bottom_nav_item</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.YH.BottomNavigation</item>
+    </style>
+
+    <style name="Widget.YH.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
+
+    <style name="Widget.YH.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Disabling elevation overlays because when chip's default background/surface
+         composite are combined with elevation overlays in a highly elevated dialog,
+         the resulting color becomes too light and causes contrast
+         issues. -->
+    <style name="ThemeOverlay.YH.Chip.Choice" parent="">
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+
+    <style name="Widget.YH.ToolbarStyle.Black" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="background">@color/colorBlack</item>
+        <item name="android:background">@color/colorBlack</item>
+        <item name="actionMenuTextColor">@color/colorPrimary</item>
+        <item name="android:actionMenuTextColor">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/colorPrimary</item>
+        <item name="android:titleTextColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.YH.CardView.Light" parent="CardView.Light">
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="Widget.YH.CardView.Dark" parent="CardView.Dark">
+        <item name="cardBackgroundColor">#3A3D47</item>
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="Widget.YH.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:checkable">true</item>
+
+        <item name="chipIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+
+        <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_black</item>
+    </style>
+
+    <style name="Widget.YH.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:checkable">true</item>
+
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+
+        <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_black</item>
+
+        <item name="android:textColor">@color/mtrl_choice_chip_text_color</item>
+
+        <item name="chipBackgroundColor">@color/mtrl_choice_chip_background_color</item>
+        <item name="rippleColor">@color/mtrl_choice_chip_ripple_color</item>
+    </style>
+
+    <style name="Widget.YH.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="android:checkable">true</item>
+    </style>
+</resources>

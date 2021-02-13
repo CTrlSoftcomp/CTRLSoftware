@@ -17,4 +17,10 @@ namespace CTrlSoft.Core.Api.Models.Dto
         public string bank { get; set; }
         public string atasnamarekening { get; set; }
     }
+
+    public class MKontakD
+    {
+        public long idkontak { get; set; }
+        public long iduser { get; set; }
+    }
 }

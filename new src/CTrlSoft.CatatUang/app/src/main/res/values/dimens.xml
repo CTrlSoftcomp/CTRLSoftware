@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dp4" type="dimen">4dp</item>
+    <item name="dp8" type="dimen">8dp</item>
+    <item name="dp12" type="dimen">12dp</item>
+    <item name="dp16" type="dimen">16dp</item>
+    <item name="dp18" type="dimen">18dp</item>
+    <item name="dp20" type="dimen">20dp</item>
+    <item name="dp24" type="dimen">24dp</item>
+    <item name="dp32" type="dimen">32dp</item>
+    <item name="dp48" type="dimen">48dp</item>
+</resources>

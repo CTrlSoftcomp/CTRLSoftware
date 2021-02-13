@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">Catatan Keuangan</string>
+    <string name="app_version" translatable="false">App Version : 1.0 (BETA)</string>
+
+    <string name="hello" translatable="false">Halo, </string>
+    <string name="login" translatable="false">Silahkan Masuk</string>
+    <string name="login_1" translatable="false">Login</string>
+
+</resources>

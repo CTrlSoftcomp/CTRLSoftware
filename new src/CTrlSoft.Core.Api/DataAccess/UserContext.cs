@@ -83,6 +83,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                             conn.Open();
                             com.Connection = conn;
                             com.CommandTimeout = conn.ConnectionTimeout;
+                            com.Transaction = com.Connection.BeginTransaction();
 
                             com.CommandText = "insert into muser (id,userid,pwd,nama,idkontak,idrole)" +
                                               "values (@id,@userid,@pwd,@nama,@idkontak,@idrole)";
@@ -95,6 +96,44 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.Parameters.Add("@idrole", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idrole;
 
                             com.ExecuteNonQuery();
+
+                            //cek data sudah ada atau belum
+                            com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                            com.Parameters.Clear();
+                            com.Parameters.AddWithValue("@hp", obj.userid);
+                            long jml = RepUtils.NullToLong(com.ExecuteScalar());
+
+                            if (jml == 0)
+                            {
+                                com.CommandText = "select max(id) from mkontak";
+                                jml = RepUtils.NullToLong(com.ExecuteScalar()) + 1;
+                                com.CommandText = "insert into mkontak (id,kode,nama,alamat1,alamat2,alamat3,hp,telpon,iswhatsapp,norekening,bank,atasnamarekening)" +
+                                                  "values (@id,@kode,@nama,@alamat1,@alamat2,@alamat3,@hp,@telpon,@iswhatsapp,@norekening,@bank,@atasnamarekening)";
+                                com.Parameters.Clear();
+                                com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = jml;
+                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
+                                com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
+                                com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid;
+                                com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
+                                com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+
+                                com.ExecuteNonQuery();
+                            }
+
+                            obj.idkontak = jml;
+                            com.CommandText = "update muser set idkontak=@idkontak where id=@id";
+                            com.Parameters.Clear();
+                            com.Parameters.AddWithValue("@idkontak", obj.idkontak);
+                            com.Parameters.AddWithValue("@id", obj.id);
+                            com.ExecuteNonQuery();
+
+                            com.Transaction.Commit();
                             hasil = new JsonResult
                             {
                                 JSONMessage = "Data tersimpan",
@@ -139,6 +178,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                             conn.Open();
                             com.Connection = conn;
                             com.CommandTimeout = conn.ConnectionTimeout;
+                            com.Transaction = com.Connection.BeginTransaction();
 
                             com.CommandText = "update muser set nama=@nama,idkontak=@idkontak,idrole=@idrole where id=@id";
                             com.Parameters.Clear();
@@ -150,6 +190,44 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.Parameters.Add("@idrole", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idrole;
 
                             com.ExecuteNonQuery();
+
+                            //cek data sudah ada atau belum
+                            com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                            com.Parameters.Clear();
+                            com.Parameters.AddWithValue("@hp", obj.userid);
+                            long jml = RepUtils.NullToLong(com.ExecuteScalar());
+
+                            if (jml == 0)
+                            {
+                                com.CommandText = "select max(id) from mkontak";
+                                jml = RepUtils.NullToLong(com.ExecuteScalar()) + 1;
+                                com.CommandText = "insert into mkontak (id,kode,nama,alamat1,alamat2,alamat3,hp,telpon,iswhatsapp,norekening,bank,atasnamarekening)" +
+                                                  "values (@id,@kode,@nama,@alamat1,@alamat2,@alamat3,@hp,@telpon,@iswhatsapp,@norekening,@bank,@atasnamarekening)";
+                                com.Parameters.Clear();
+                                com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = jml;
+                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
+                                com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
+                                com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid;
+                                com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
+                                com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+                                com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
+
+                                com.ExecuteNonQuery();
+                            }
+
+                            obj.idkontak = jml;
+                            com.CommandText = "update muser set idkontak=@idkontak where id=@id";
+                            com.Parameters.Clear();
+                            com.Parameters.AddWithValue("@idkontak", obj.idkontak);
+                            com.Parameters.AddWithValue("@id", obj.id);
+                            com.ExecuteNonQuery();
+
+                            com.Transaction.Commit();
                             hasil = new JsonResult
                             {
                                 JSONMessage = "Data tersimpan",
@@ -465,6 +543,62 @@ namespace CTrlSoft.Core.Api.DataAccess
                             hasil = new JsonResult
                             {
                                 JSONMessage = "Password lama anda salah",
+                                JSONResult = false,
+                                JSONRows = 0,
+                                JSONValue = null
+                            };
+                        }
+                    }
+                }
+            }
+            return hasil;
+        }
+
+        public JsonResult GetAvailableUser(string userid)
+        {
+            JsonResult hasil = new JsonResult { JSONResult = true, JSONMessage = "Error unknow resource", JSONRows = 0, JSONValue = null };
+            long jmlData = 0;
+            using (NpgsqlConnection conn = GetConnection())
+            {
+                using (NpgsqlCommand com = new NpgsqlCommand())
+                {
+                    using (NpgsqlDataAdapter oDA = new NpgsqlDataAdapter())
+                    {
+                        try
+                        {
+                            conn.Open();
+                            com.Connection = conn;
+                            com.CommandTimeout = conn.ConnectionTimeout;
+
+                            com.CommandText = "select count(id) as jmldata from muser where upper(userid) = upper(@userid)";
+                            com.Parameters.Clear();
+                            com.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Varchar).Value = userid.ToUpper();
+                            jmlData = RepUtils.NullToLong(com.ExecuteScalar());
+                            if (jmlData >=1)
+                            {
+                                hasil = new JsonResult
+                                {
+                                    JSONMessage = "User is not Available",
+                                    JSONResult = false,
+                                    JSONRows = jmlData,
+                                    JSONValue = null
+                                };
+                            } else
+                            {
+                                hasil = new JsonResult
+                                {
+                                    JSONMessage = "User is Available",
+                                    JSONResult = true,
+                                    JSONRows = 0,
+                                    JSONValue = null
+                                };
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            hasil = new JsonResult
+                            {
+                                JSONMessage = ex.StackTrace,
                                 JSONResult = false,
                                 JSONRows = 0,
                                 JSONValue = null

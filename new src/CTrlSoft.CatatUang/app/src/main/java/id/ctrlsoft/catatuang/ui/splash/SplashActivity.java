@@ -69,10 +69,10 @@ public class SplashActivity extends AppCompatActivity {
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
-            txtAppVersion.setText("Ver : " + version);
+            txtAppVersion.setText(getString(R.string.app_version) + " : " + version);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            txtAppVersion.setText("Ver : -");
+            txtAppVersion.setText(getString(R.string.app_version) + " : -");
         }
         CheckUpdate();
     }

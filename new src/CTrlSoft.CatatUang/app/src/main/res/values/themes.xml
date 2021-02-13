@@ -4,35 +4,24 @@
     <!-- Base application theme. -->
     <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/teal_200</item>
 
         <!-- Customize your theme here. -->
         <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryLight</item>
-
         <item name="android:colorBackground">@color/colorWhite</item>
-        <item name="colorSurface">@color/colorGreyLight</item>
-        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
-        <item name="colorError">@color/colorAccent</item>
-
-        <item name="colorOnPrimary">@color/colorWhite</item>
-        <item name="colorOnSecondary">@color/colorBlack900</item>
-        <item name="colorOnBackground">@color/colorBlack900</item>
-        <item name="colorOnSurface">@color/colorBlack900</item>
-        <item name="colorOnError">@color/colorBlack900</item>
 
         <!--Platform attributes-->
         <item name="android:navigationBarColor">@color/nav_bar</item>
         <item name="android:statusBarColor">@color/immersive_sys_ui</item>
 
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.YH.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.YH.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>
+<!--        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.YH.SmallComponent</item>-->
+<!--        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.YH.MediumComponent</item>-->
+<!--        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>-->
 
         <!--Typography-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.YH.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.YH.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.YH.Headline3</item>
         <item name="textAppearanceHeadline4">@style/TextAppearance.YH.Headline4</item>

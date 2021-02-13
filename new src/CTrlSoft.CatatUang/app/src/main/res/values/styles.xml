@@ -9,7 +9,10 @@
     </style>
 
     <style name="Widget.YH.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.YH.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.YH.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>
     </style>
 
 <!--    <style name="Widget.YH.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">-->

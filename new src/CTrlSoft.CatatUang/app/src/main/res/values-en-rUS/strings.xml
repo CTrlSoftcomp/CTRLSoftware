@@ -4,4 +4,13 @@
     <string name="hello" translatable="false">"Hello, "</string>
     <string name="login" translatable="false">Login Please</string>
     <string name="login_1" translatable="false">Login</string>
+    <string name="app_version" translatable="false">App Version</string>
+    <string name="login_2" translatable="false">Wellcome Back,\nSign In to Continue</string>
+    <string name="no_handphone" translatable="false">Handphone</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="lupa_password" translatable="false">Forgot Password?</string>
+    <string name="dont_have_account" translatable="false">Don\'t have an account?</string>
+    <string name="create_account" translatable="false">Create Account</string>
+    <string name="login_1_1" translatable="false">Sign In</string>
+    <string name="data_aman" translatable="false">100% your data is safe</string>
 </resources>

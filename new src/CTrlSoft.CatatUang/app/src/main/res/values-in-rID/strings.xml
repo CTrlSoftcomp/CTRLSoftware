@@ -4,4 +4,13 @@
     <string name="hello" translatable="false">"Halo, "</string>
     <string name="login" translatable="false">Silahkan Masuk</string>
     <string name="login_1" translatable="false">Login</string>
+    <string name="app_version" translatable="false">Versi Aplikasi</string>
+    <string name="login_2" translatable="false">Selamat datang,\nLogin untuk melanjutkan</string>
+    <string name="no_handphone" translatable="false">Nomor Ponsel</string>
+    <string name="password" translatable="false">Kata Sandi</string>
+    <string name="lupa_password" translatable="false">Lupa Sandi?</string>
+    <string name="dont_have_account" translatable="false">Belum mempunyai Akun</string>
+    <string name="create_account" translatable="false">Membuat Akun Baru</string>
+    <string name="login_1_1" translatable="false">Masuk</string>
+    <string name="data_aman" translatable="false">100% data anda aman</string>
 </resources>

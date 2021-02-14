@@ -13,4 +13,12 @@
     <string name="create_account" translatable="false">Membuat Akun Baru</string>
     <string name="login_1_1" translatable="false">Masuk</string>
     <string name="data_aman" translatable="false">100% data anda aman</string>
+    <string name="register_1" translatable="false">Selamat datang di CTrlSoft,\nUntuk masuk silahkan isi formulir dibawah.</string>
+    <string name="register_name" translatable="false">Nama</string>
+    <string name="register_agree" translatable="false">Saya setuju dengan</string>
+    <string name="register_term" translatable="false">Syarat</string>
+    <string name="and" translatable="false">dan</string>
+    <string name="conditions" translatable="false">Kondisi</string>
+    <string name="register_already_have_account" translatable="false">Sudah mempunyai akun?</string>
+    <string name="register" translatable="false">Register</string>
 </resources>

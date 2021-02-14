@@ -13,4 +13,12 @@
     <string name="create_account" translatable="false">Create Account</string>
     <string name="login_1_1" translatable="false">Sign In</string>
     <string name="data_aman" translatable="false">100% your data is safe</string>
+    <string name="register_1" translatable="false">Welcome to CTrlSoft,\nTo enter please fill in the form below.</string>
+    <string name="register_name" translatable="false">Name</string>
+    <string name="register_agree" translatable="false">I agree with our</string>
+    <string name="register_term" translatable="false">Term</string>
+    <string name="and" translatable="false">and</string>
+    <string name="conditions" translatable="false">Conditions</string>
+    <string name="register_already_have_account" translatable="false">Already have an Account?</string>
+    <string name="register" translatable="false">Registration</string>
 </resources>

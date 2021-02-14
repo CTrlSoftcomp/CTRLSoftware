@@ -23,12 +23,20 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="adjustPan|adjustResize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="@string/login_1"/>
+
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:screenOrientation="portrait"
+            android:label="@string/register"/>
 
         <activity
             android:name=".ui.splash.SplashActivity"
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

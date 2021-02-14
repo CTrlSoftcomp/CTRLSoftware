@@ -3,6 +3,7 @@
     <string name="app_name" translatable="false">Catatan Keuangan</string>
     <string name="app_version" translatable="false">App Version : 1.0 (BETA)</string>
 
+    <!-- Login -->
     <string name="hello" translatable="false">Halo, </string>
     <string name="login" translatable="false">Silahkan Masuk</string>
     <string name="login_1" translatable="false">Login</string>
@@ -14,5 +15,17 @@
     <string name="dont_have_account" translatable="false">Don\'t have an account?</string>
     <string name="create_account" translatable="false">Create Account</string>
     <string name="data_aman" translatable="false">100% data anda aman</string>
+    <!-- Login -->
+
+    <!-- Register -->
+    <string name="register" translatable="false">Register</string>
+    <string name="register_1" translatable="false">Selamat datang di CTrlSoft, Untuk masuk silahkan isi formulir dibawah.</string>
+    <string name="register_name" translatable="false">Nama</string>
+    <string name="register_agree" translatable="false">I agree with our</string>
+    <string name="register_term" translatable="false">Term</string>
+    <string name="and" translatable="false">and</string>
+    <string name="conditions" translatable="false">Conditions</string>
+    <string name="register_already_have_account" translatable="false">Already have an Account?</string>
+    <!-- Login -->
 
 </resources>

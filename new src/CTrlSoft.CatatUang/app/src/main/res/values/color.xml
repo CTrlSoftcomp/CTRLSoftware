@@ -5,6 +5,11 @@
     <color name="colorPrimaryDark">#004fcb</color>
     <color name="colorPrimaryText">@color/black</color>
 
+    <color name="colorPrimaryNight">#e49e00</color>
+    <color name="colorPrimaryLightNight">#ad7000</color>
+    <color name="colorPrimaryDarkNight">#ffcf47</color>
+    <color name="colorPrimaryTextNight">@color/white</color>
+
     <color name="colorSecondary">#000000</color>
     <color name="colorSecondaryLight">#2c2c2c</color>
     <color name="colorSecondaryDark">#000000</color>

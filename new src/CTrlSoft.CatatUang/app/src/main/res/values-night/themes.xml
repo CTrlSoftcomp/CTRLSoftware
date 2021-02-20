@@ -4,12 +4,20 @@
     <!-- Base application theme. -->
     <style name="Theme.Base.Night" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimaryLight</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDarkNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryNight</item>
         <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimarySurface">@color/colorPrimaryDarkNight</item>
 
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimaryDarkNight</item>
+        <item name="android:colorControlNormal">@color/colorPrimaryDarkNight</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDarkNight</item>
+        <item name="android:textColorHighlight">@color/colorPrimaryDarkNight</item>
+        <item name="android:textColorLink">@color/colorPrimaryDarkNight</item>
+        <item name="android:textColor">@color/colorPrimaryDarkNight</item>
+        <item name="colorOnSurface">@color/colorPrimaryDarkNight</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDarkNight</item>
 
         <!--Platform attributes-->
 <!--        <item name="android:navigationBarColor">@color/nav_bar</item>-->
@@ -43,8 +51,8 @@
         <item name="bottomSheetStyle">@style/Widget.YH.BottomSheetDialog</item>
         <item name="navigationViewStyle">@style/Widget.YH.NavigationView</item>
         <item name="bottomNavigationStyle">@style/Widget.YH.BottomNavigationView</item>
-        <item name="buttonStyle">@style/Widget.YH.Button</item>
-        <item name="materialButtonStyle">@style/Widget.YH.Button</item>
+        <item name="buttonStyle">@style/Widget.YH.Button.Dark</item>
+        <item name="materialButtonStyle">@style/Widget.YH.Button.Dark</item>
         <item name="cardViewStyle">@style/Widget.YH.CardView.Light</item>
         <item name="materialCardViewStyle">@style/Widget.YH.CardView.Light</item>
         <item name="chipStyle">@style/Widget.YH.Chip.Choice</item>

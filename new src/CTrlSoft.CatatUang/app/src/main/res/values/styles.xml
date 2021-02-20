@@ -15,6 +15,13 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>
     </style>
 
+    <style name="Widget.YH.Button.Dark" parent="Widget.YH.Button">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.YH.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.YH.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.YH.LargeComponent</item>
+    </style>
+
 <!--    <style name="Widget.YH.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">-->
 <!--        <item name="closeIconSize">0dp</item>-->
 <!--        <item name="closeIconEnabled">false</item>-->
@@ -43,7 +50,7 @@
 
     <style name="Widget.YH.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:background">@color/colorWhite</item>
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
     </style>
 
     <!-- Disabling elevation overlays because when chip's default background/surface
@@ -57,15 +64,15 @@
     <style name="Widget.YH.ToolbarStyle.Black" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="background">@color/colorBlack</item>
         <item name="android:background">@color/colorBlack</item>
-        <item name="actionMenuTextColor">@color/colorPrimary</item>
-        <item name="android:actionMenuTextColor">@color/colorPrimary</item>
-        <item name="titleTextColor">@color/colorPrimary</item>
-        <item name="android:titleTextColor">@color/colorPrimary</item>
+        <item name="actionMenuTextColor">?attr/colorPrimary</item>
+        <item name="android:actionMenuTextColor">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorPrimary</item>
+        <item name="android:titleTextColor">?attr/colorPrimary</item>
     </style>
 
     <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:background">@color/colorWhite</item>
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
     </style>
 
     <style name="Widget.YH.CardView.Light" parent="CardView.Light">

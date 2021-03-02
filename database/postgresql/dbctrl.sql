@@ -12,7 +12,7 @@
  Target Server Version : 90504
  File Encoding         : 65001
 
- Date: 14/02/2021 17:44:21
+ Date: 02/03/2021 22:14:54
 */
 
 
@@ -612,6 +612,23 @@ INSERT INTO "public"."mrole" VALUES (2, 'ADM', '1');
 INSERT INTO "public"."mrole" VALUES (3, 'USER', '0');
 
 -- ----------------------------
+-- Table structure for msatuan
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."msatuan";
+CREATE TABLE "public"."msatuan" (
+  "id" int4 NOT NULL,
+  "kode" varchar(255) COLLATE "pg_catalog"."default",
+  "nama" varchar(255) COLLATE "pg_catalog"."default",
+  "konversi" int2,
+  "aktif" bit(1)
+)
+;
+
+-- ----------------------------
+-- Records of msatuan
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for muser
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."muser";
@@ -621,14 +638,31 @@ CREATE TABLE "public"."muser" (
   "pwd" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "nama" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "idkontak" int4 NOT NULL,
-  "idrole" int2 NOT NULL
+  "idrole" int2 NOT NULL,
+  "aktif" bit(1) NOT NULL
 )
 ;
 
 -- ----------------------------
 -- Records of muser
 -- ----------------------------
-INSERT INTO "public"."muser" VALUES (1, 'SYSADM', 'E30EF4D4853628BD61492AE1CADDC337', 'SYSADM', 1, 1);
+INSERT INTO "public"."muser" VALUES (1, 'SYSADM', 'E30EF4D4853628BD61492AE1CADDC337', 'SYSADM', 1, 1, '1');
+
+-- ----------------------------
+-- Table structure for tlog
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tlog";
+CREATE TABLE "public"."tlog" (
+  "id" int4 NOT NULL,
+  "message" json NOT NULL,
+  "user" json NOT NULL,
+  "date" date NOT NULL
+)
+;
+
+-- ----------------------------
+-- Records of tlog
+-- ----------------------------
 
 -- ----------------------------
 -- Primary Key structure for table __EFMigrationsHistory
@@ -759,6 +793,18 @@ ALTER TABLE "public"."mkontakd" ADD CONSTRAINT "mkontakd_pkey" PRIMARY KEY ("idu
 ALTER TABLE "public"."mrole" ADD CONSTRAINT "mrole_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
+-- Indexes structure for table msatuan
+-- ----------------------------
+CREATE UNIQUE INDEX "idx_msatuan_kode" ON "public"."msatuan" USING btree (
+  "kode" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table msatuan
+-- ----------------------------
+ALTER TABLE "public"."msatuan" ADD CONSTRAINT "msatuan_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
 -- Indexes structure for table muser
 -- ----------------------------
 CREATE UNIQUE INDEX "idx_muser_userid" ON "public"."muser" USING btree (
@@ -769,6 +815,11 @@ CREATE UNIQUE INDEX "idx_muser_userid" ON "public"."muser" USING btree (
 -- Primary Key structure for table muser
 -- ----------------------------
 ALTER TABLE "public"."muser" ADD CONSTRAINT "muser_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table tlog
+-- ----------------------------
+ALTER TABLE "public"."tlog" ADD CONSTRAINT "tlog_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Foreign Keys structure for table mjurnalumumd

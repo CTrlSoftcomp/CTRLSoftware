@@ -16,6 +16,8 @@ namespace CTrlSoft
         [STAThread]
         static void Main()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDA2MTk0QDMxMzgyZTM0MmUzMEJrSlFYM0JqaHQ1MFJaUTF1aGVkVzdYZGwzVUVPc0xGRlJKMzg0aTlOREE9");
+
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", false);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", false);
             SfSkinManager.LoadAssembly(typeof(Office2016Theme).Assembly);

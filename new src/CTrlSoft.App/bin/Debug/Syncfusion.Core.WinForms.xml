@@ -8572,11 +8572,18 @@
             <param name="sender">The object of the sender.</param>
             <param name="e">An <see cref="T:System.EventArgs"/> that contains event data.</param>
         </member>
-        <member name="M:Syncfusion.WinForms.Core.Utils.BusyIndicator.DrawImage(System.Object)">
+        <member name="M:Syncfusion.WinForms.Core.Utils.BusyIndicator.InvalidateControl(System.Object)">
             <summary>
             Draws the busy indicator for the attached control.
             </summary>
             <param name="sender">The object of the sender.</param>
+        </member>
+        <member name="M:Syncfusion.WinForms.Core.Utils.BusyIndicator.OnControlPaint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Draws the busy indicator in the control.
+            </summary>
+            <param name="sender">The object of sender</param>
+            <param name="e">An <see cref="T:EventArgs"/> that contains event data.</param>
         </member>
         <member name="M:Syncfusion.WinForms.Core.Utils.BusyIndicator.OnControlSizeChanged(System.Object,System.EventArgs)">
             <summary>
@@ -8595,7 +8602,7 @@
             Gets or sets the location of the busy indicator.
             </summary>
         </member>
-        <member name="T:Syncfusion.WinForms.Core.Utils.BusyIndicator.DrawImageEventHandler">
+        <member name="T:Syncfusion.WinForms.Core.Utils.BusyIndicator.InvalidateControlEventHandler">
             <summary>
             Specifies the delegate for drawing the busy indicator asynchronously.
             </summary>

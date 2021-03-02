@@ -792,6 +792,11 @@
             Signals the object that initialization is complete and hence resumes the data operations and reinitialize the view.   
             </summary>
         </member>
+        <member name="M:Syncfusion.Data.CollectionViewAdv.EnsureView">
+            <summary>
+            Ensures sorting, grouping and filtering by refreshing the view with updated collection.
+            </summary>
+        </member>
         <member name="M:Syncfusion.Data.CollectionViewAdv.CreateRecords">
             <summary>
             Creates the records for the items in the source of the collection view.
@@ -2117,6 +2122,14 @@
             <param name="index">The index at which the item is to be inserted.</param>
             <param name="isInSourceCollectionChange">A boolean value indicating whether the source collection 
             change is currently in progress.</param>
+        </member>
+        <member name="M:Syncfusion.Data.GroupDisplayElements.GetGroupSortedIndex(Syncfusion.Data.Group,Syncfusion.Data.Group)">
+            <summary>
+            Gets the sorted index of the new group.
+            </summary>
+            <param name="group">The base group.</param>
+            <param name="newGroup">The new group.</param>
+            <returns>Returns the sorted index of the new group.</returns>
         </member>
         <member name="M:Syncfusion.Data.GroupDisplayElements.Clear">
             <summary>
@@ -5238,6 +5251,11 @@
             Refreshes sorting in the underlying collection of the SfDataGrid.
             </summary>
         </member>
+        <member name="M:Syncfusion.Data.PagedCollectionView.EnsureView">
+            <summary>
+            Ensures sorting, grouping and filtering by refreshing the view with updated collection.
+            </summary>
+        </member>
         <member name="M:Syncfusion.Data.PagedCollectionView.GetGroupResult(System.String[])">
             <summary>
             Gets the IEnumerable collection of group result for the array of group-by.
@@ -6193,9 +6211,7 @@
             <exclude/>
         </member>
         <member name="T:Syncfusion.Dynamic.DynamicHelper">
-            <summary>
-            This class responsible to reflect dynamic and expando object. Also maintains cache for faster reflection.
-            </summary>
+            <exclude/>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Syncfusion.Dynamic.DynamicHelper.Dispose" -->
         <!-- Badly formed XML comment ignored for member "M:Syncfusion.Dynamic.DynamicHelper.Dispose(System.Boolean)" -->

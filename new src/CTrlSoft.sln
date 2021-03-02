@@ -11,6 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrlSoft.Core.Api", "CTrlSo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrlSoft.Repository", "CTrlSoft.Repository\CTrlSoft.Repository.csproj", "{0E71297E-7B27-49E0-85F9-60B89242129E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrlSoft.BLL.Master", "CTrlSoft.BLL\CTrlSoft.BLL.Master\CTrlSoft.BLL.Master.csproj", "{B4FE6808-F68E-4C42-A0C6-B73F8851EF09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CTrlSoft.BLL", "CTrlSoft.BLL", "{60C030EC-1D18-4254-987B-5A729BFEADE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CB0D53C9-E77D-440C-9D4B-8AC218BAF11A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrlSoft.BLL.System", "CTrlSoft.BLL\CTrlSoft.BLL.System\CTrlSoft.BLL.System.csproj", "{ED440B9B-1526-4F53-952F-F24F156DC4CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +44,21 @@ Global
 		{0E71297E-7B27-49E0-85F9-60B89242129E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E71297E-7B27-49E0-85F9-60B89242129E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E71297E-7B27-49E0-85F9-60B89242129E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4FE6808-F68E-4C42-A0C6-B73F8851EF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4FE6808-F68E-4C42-A0C6-B73F8851EF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4FE6808-F68E-4C42-A0C6-B73F8851EF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4FE6808-F68E-4C42-A0C6-B73F8851EF09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED440B9B-1526-4F53-952F-F24F156DC4CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED440B9B-1526-4F53-952F-F24F156DC4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED440B9B-1526-4F53-952F-F24F156DC4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED440B9B-1526-4F53-952F-F24F156DC4CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4FE6808-F68E-4C42-A0C6-B73F8851EF09} = {60C030EC-1D18-4254-987B-5A729BFEADE6}
+		{ED440B9B-1526-4F53-952F-F24F156DC4CA} = {60C030EC-1D18-4254-987B-5A729BFEADE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6157DA82-0070-459B-AD7F-FF7FCE32CD66}

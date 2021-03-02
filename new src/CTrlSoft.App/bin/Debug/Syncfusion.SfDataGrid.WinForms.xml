@@ -120,41 +120,6 @@
                 To retrieve the value from the base control until set AllowGrouping.
             </summary>
         </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowDragging">
-            <summary>
-                To retrieve the value from the base control until set AllowDragging.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowSorting">
-            <summary>
-                To retrieve the value from the base control until set AllowSorting.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnShowToolTip">
-            <summary>
-                To retrieve the value from the base control until set ShowToolTip.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnShowHeaderToolTip">
-            <summary>
-                To retrieve the value from the base control until set ShowHeaderToolTip.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowFiltering">
-            <summary>
-            To retrieve the value from the base control until set AllowFiltering.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowEditing">
-            <summary>
-            To retrieve the value from the base control until set AllowEditing.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowResizing">
-            <summary>
-            To retrieve the value from the base control until set AllowResizing.
-            </summary>
-        </member>
         <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnFilterRowCondition">
             <summary>
             To retrieve the default condition for the column until set the FilterRowCondition.
@@ -185,19 +150,9 @@
             Maintains the filter pop up mode for this column.
             </summary>
         </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isFilterPopupMode">
-            <summary>
-            Specifies whether the FilterPopupMode of the column is changed or not.
-            </summary>
-        </member>
         <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.advancedFilterType">
             <summary>
             Holds the advanced filter type of the column.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isAdvancedFilterType">
-            <summary>
-            Specifies the advanced filter type of the column.
             </summary>
         </member>
         <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.format">
@@ -228,11 +183,6 @@
         <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.autoSizeColumnsMode">
             <summary>
             The AutoSizeColumnsMode of the column.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.isColumnAllowValidationMode">
-            <summary>
-            To retrieve the value from the base control until set ValidationMode.
             </summary>
         </member>
         <member name="F:Syncfusion.WinForms.DataGrid.GridColumnBase.gridValidationMode">
@@ -769,6 +719,56 @@
         <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.Name">
             <summary>
             Gets or sets the name of the column.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowEditing">
+            <summary>
+            Gets or sets a value indicating whether the column AllowEditing property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowDragging">
+            <summary>
+            Gets or sets a value indicating whether the column AllowDragging property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowSorting">
+            <summary>
+            Gets or sets a value indicating whether the column AllowSorting property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnShowToolTip">
+            <summary>
+            Gets or sets a value indicating whether the column ShowToolTip property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnShowHeaderToolTip">
+            <summary>
+            Gets or sets a value indicating whether the column ShowHeaderToolTip property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowFiltering">
+            <summary>
+            Gets or sets a value indicating whether the column AllowFiltering property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowResizing">
+            <summary>
+            Gets or sets a value indicating whether the column AllowResizing property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsFilterPopupMode">
+            <summary>
+            Gets or sets a value indicating whether the column FilterPopupMode property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsAdvancedFilterType">
+            <summary>
+            Gets or sets a value indicating whether the column AdvancedFilterType property is changed.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.GridColumnBase.IsColumnAllowValidationMode">
+            <summary>
+            Gets or sets a value indicating whether the column ValidationMode property is changed.
             </summary>
         </member>
         <member name="T:Syncfusion.WinForms.DataGrid.Interactivity.ColumnChooser">
@@ -13216,6 +13216,58 @@
             Gets or sets a value indicating whether the Vertical scrollbar should be enabled while editing or not.
             </summary>
         </member>
+        <member name="T:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn">
+            <summary>
+            Represents a class that is used to serialize and deserialize GridTextColumn property settings.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.MinDateTime">
+            <summary>
+            Gets or sets the minimum value of the DateTime column.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.MaxDateTime">
+            <summary>
+            Gets or sets the maximum value of the DateTime column.  
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.NullValue">
+            <summary>
+            Gets or sets the DateTime value which needs to be displayed instead of the null value of the column.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.AllowNull">
+            <summary>
+            Gets or sets a value indicating whether the null values are allowed in the DateTime column or not.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.Pattern">
+            <summary>
+            Gets or sets the DateTime pattern for the column.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.AllowValueChangeOnMouseWheel">
+            <summary>
+            Gets or sets a value indicating whether the value change can occur on mouse wheel. 
+            </summary>
+            <remarks>Default value is false. It will work only when the <see cref="P:Syncfusion.WinForms.DataGrid.GridDateTimeColumn.DateTimeEditingMode"/> is set to DateTimeEditingMode.Default.</remarks>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.DateTimeEditingMode">
+            <summary>
+            Gets or sets the editing mode for the DateTime edit control.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.ShowDropDownButton">
+            <summary>
+            Gets or sets a value indicating whether the drop down button can be visible or not.
+            </summary>
+            <remarks>Default value is true.</remarks>
+        </member>
+        <member name="P:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridDateTimeColumn.InterceptArrowKeys">
+            <summary>
+            Gets or sets a value indicating whether the value can be changed using the UP ARROW and DOWN ARROW keys.
+            </summary>
+        </member>
         <member name="T:Syncfusion.WinForms.DataGrid.Serialization.SerializableGridMaskColumn">
             <summary>
             Represents a class that is used to serialize and deserialize GridMaskColumn property settings.
@@ -18900,6 +18952,11 @@
                 The rectangle region which needs to be dragged on the mouse move.
             </summary>
         </member>
+        <member name="F:Syncfusion.WinForms.DataGrid.GroupPanel.closeIconSize">
+            <summary>
+            Holds the size of close icon size.
+            </summary>
+        </member>
         <member name="F:Syncfusion.WinForms.DataGrid.GroupPanel.format">
             <summary>
                 The string format of the group panel.
@@ -19224,6 +19281,12 @@
             The <see cref="T:System.EventArgs"/> that contains the event data.
             </param>
         </member>
+        <member name="M:Syncfusion.WinForms.DataGrid.GroupPanel.OnMarginChanged(System.EventArgs)">
+            <summary>
+            Occur when margin value is changed.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
         <member name="M:Syncfusion.WinForms.DataGrid.GroupPanel.DrawGroupDropAreaBorder(System.Drawing.Graphics,System.Drawing.Rectangle,Syncfusion.WinForms.DataGrid.Styles.GridBordersInfo,System.Boolean)">
             <summary>
             Draws the border for GroupDropAreaItem.
@@ -19297,6 +19360,26 @@
             </param>
             <param name="column">
             The column which needs to be draws the sort icon.
+            </param>
+        </member>
+        <member name="M:Syncfusion.WinForms.DataGrid.GroupPanel.DrawSortIcon(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.ComponentModel.ListSortDirection,System.Drawing.Color,System.Int32)">
+            <summary>
+            Draws the sort icon for header and group drop area item.
+            </summary>
+            <param name="graphics">
+            The <see cref="T:System.Drawing.Graphics"/> for a header or group panel.
+            </param>
+            <param name="sortIconRect">
+            The rectangle region that needs to be draw the sort icon.
+            </param>
+            <param name="cellRect">
+            The cell rectangle that needs to be draw the sort icon.
+            </param>
+            <param name="direction">
+            The direction of sorting.
+            </param>
+            <param name="sortIconForeColor">
+            Color of the sort icon.
             </param>
         </member>
         <member name="M:Syncfusion.WinForms.DataGrid.GroupPanel.HScrollBar_ValueChanged(System.Object,System.EventArgs)">

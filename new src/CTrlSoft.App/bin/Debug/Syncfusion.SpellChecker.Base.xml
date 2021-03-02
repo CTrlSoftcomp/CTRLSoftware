@@ -31,14 +31,30 @@
         </member>
         <member name="T:Syncfusion.SpellChecker.Base.CustomDictionaryBase">
             <summary>
-            CustomDictionary is used to add custom dictionaries in the dictionary collection.
+            Represents a class that stores information about custom words
             </summary>
+            <remarks>
+            Extra words can be stored in custom dictionary. Any words added using ‘Add to dictionary’, is also stored in this custom dictionary.
+            </remarks>
+            <example>
+            var english = new HunspellDictionary();
+            english.Culture = new CultureInfo("en-us");
+            english.DictionaryUri = new Uri("/SpellCheckerDemo;component//english.dic");
+            english.GrammarUri = new Uri("/SpellCheckerDemo;component//english.aff");
+            
+            var custom = new CustomDictionary();
+            custom.Culture = new CultureInfo("en-us");
+            english.DictionaryUri = new Uri("/Resources/custom.dic");
+            
+            var dictionaries = new DictionaryCollection();
+            dictionaries.Add(english);
+            dictionaries.Add(custom);
+            
+            spellChecker.Dictionaries = dictionaries;
+            spellChecker.Culture = new CultureInfo("en-us");
+            </example>
         </member>
-        <member name="T:Syncfusion.SpellChecker.Base.DictionaryBase">
-            <summary>
-            DictionaryBase provides basic properties to add dictionary.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:Syncfusion.SpellChecker.Base.DictionaryBase" -->
         <member name="M:Syncfusion.SpellChecker.Base.DictionaryBase.GetDictionaryStream">
             <summary>
             Gets or Sets the dictionary uri of a dictionary.
@@ -49,14 +65,10 @@
             Gets or Sets the culture of a dictionary.
             </summary>
         </member>
-        <member name="T:Syncfusion.SpellChecker.Base.DictionaryCollection">
-            <summary>
-            DictionaryCollection is used to store the dictionaries that are added.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:Syncfusion.SpellChecker.Base.DictionaryCollection" -->
         <member name="T:Syncfusion.SpellChecker.Base.GrammarDictionaryBase">
             <summary>
-            GrammarDictionaryBase is used to load dictionary and generate list of words.
+            Represents base class that requires base dictionary file with affix file.
             </summary>
         </member>
         <member name="M:Syncfusion.SpellChecker.Base.GrammarDictionaryBase.GetGrammarStream">
@@ -74,8 +86,20 @@
         </member>
         <member name="T:Syncfusion.SpellChecker.Base.HunspellDictionaryBase">
             <summary>
-            HunspellDictionary is used to add hunspell dictionaries in the dictionary collection.
+            A class that requires base dictionary and affix file. It has algorithm that process file provided and loads words required for dictionary.
             </summary>
+            <example>
+            var english = new HunspellDictionary();
+            english.Culture = new CultureInfo("en-us");
+            english.DictionaryUri = new Uri("/SpellCheckerDemo;component//english.dic");
+            english.GrammarUri = new Uri("/SpellCheckerDemo;component//english.aff");
+            
+            var dictionaries = new DictionaryCollection();
+            dictionaries.Add(english);
+            
+            spellChecker.Dictionaries = dictionaries;
+            spellChecker.Culture = new CultureInfo("en-us");
+            </example>
         </member>
         <member name="M:Syncfusion.SpellChecker.Base.HunspellDictionaryBase.GrammerParser(System.IO.StreamReader)">
             <summary>
@@ -86,8 +110,20 @@
         </member>
         <member name="T:Syncfusion.SpellChecker.Base.IspellDictionaryBase">
             <summary>
-            IspellDictionary is used to add ispell dictionaries in the dictionary collection.
+            A class that requires base dictionary and affix file. It has algorithm that process file provided and loads words required for dictionary.
             </summary>
+            <example>
+            var french = new IspellDictionary();
+            french.Culture = new CultureInfo("fr");
+            french.DictionaryUri = new Uri("/SpellCheckerDemo;component//french.dic");
+            french.GrammarUri = new Uri("/SpellCheckerDemo;component//french.xlg");
+            
+            var dictionaries = new DictionaryCollection();
+            dictionaries.Add(french);
+            
+            spellChecker.Dictionaries = dictionaries;
+            spellChecker.Culture = new CultureInfo("fr");
+            </example>
         </member>
         <member name="M:Syncfusion.SpellChecker.Base.IspellDictionaryBase.GrammerParser(System.IO.StreamReader)">
             <summary>

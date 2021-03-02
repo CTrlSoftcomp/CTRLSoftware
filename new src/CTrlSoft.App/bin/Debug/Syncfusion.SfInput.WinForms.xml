@@ -8402,7 +8402,7 @@
         </member>
         <member name="F:Syncfusion.WinForms.Input.SfNumericTextBox.visualTheme">
             <summary>
-            It contains the value of the <see cref="!:IVisualStyle.VisualTheme"/> property.
+            It contains the value of the <see cref="P:Syncfusion.Windows.Forms.IVisualStyle.VisualTheme"/> property.
             </summary>
         </member>
         <member name="F:Syncfusion.WinForms.Input.SfNumericTextBox.canApplyTheme">

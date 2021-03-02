@@ -72,8 +72,12 @@ namespace CTrlSoft.App
 
         private void frmMain_Shown(Object sender, EventArgs e)
         {
-
             menuLoginOut();
+        }
+
+        private void imageStreamer1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

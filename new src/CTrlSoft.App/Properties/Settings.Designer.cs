@@ -31,5 +31,15 @@ namespace CTrlSoft.App.Properties {
                 return ((string)(this["Base_Url"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost;Port=5432;Database=dbctrl;User Id=postgres;Password=Sg1;")]
+        public string MyConn {
+            get {
+                return ((string)(this["MyConn"]));
+            }
+        }
     }
 }

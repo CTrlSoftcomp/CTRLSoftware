@@ -42,7 +42,7 @@ namespace CTrlSoft.App
             // 
             // txtUserID
             // 
-            this.txtUserID.BeforeTouchSize = new System.Drawing.Size(183, 20);
+            this.txtUserID.BeforeTouchSize = new System.Drawing.Size(276, 20);
             this.txtUserID.EnableTouchMode = true;
             this.txtUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.375F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserID.Location = new System.Drawing.Point(132, 37);
@@ -52,6 +52,7 @@ namespace CTrlSoft.App
             this.txtUserID.Size = new System.Drawing.Size(274, 26);
             this.txtUserID.TabIndex = 0;
             this.txtUserID.WordWrap = false;
+            this.txtUserID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserID_KeyDown);
             // 
             // autoLabel1
             // 
@@ -63,6 +64,7 @@ namespace CTrlSoft.App
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::CTrlSoft.App.Properties.Resources.logo_ctrl1;
             this.pictureBox1.Location = new System.Drawing.Point(21, 21);
             this.pictureBox1.Name = "pictureBox1";
@@ -81,7 +83,7 @@ namespace CTrlSoft.App
             // 
             // txtPassword
             // 
-            this.txtPassword.BeforeTouchSize = new System.Drawing.Size(183, 20);
+            this.txtPassword.BeforeTouchSize = new System.Drawing.Size(276, 20);
             this.txtPassword.EnableTouchMode = true;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.375F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(132, 100);
@@ -93,6 +95,7 @@ namespace CTrlSoft.App
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.WordWrap = false;
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // btnLogin
             // 
@@ -103,6 +106,7 @@ namespace CTrlSoft.App
             this.btnLogin.Size = new System.Drawing.Size(385, 57);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "&Login";
+            this.btnLogin.Click += new System.EventHandler(this.btnlogin_click);
             // 
             // frmLogin
             // 

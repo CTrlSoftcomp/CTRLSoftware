@@ -1,4 +1,4 @@
-[CTRL Software][![Donate](https://user-images.githubusercontent.com/3364498/93978382-1e1f7d00-fda6-11ea-9adc-8b9bc616dcd8.png)](https://github.com/CTrlSoftcomp/CTRLSoftware/wiki/Cara-Berkontribusi)
+[CTRL Software][![Donate](https://user-images.githubusercontent.com/3364498/93978382-1e1f7d00-fda6-11ea-9adc-8b9bc616dcd8.png)](https://github.com/CTrl-Soft/CTRLSoftware/wiki/Cara-Berkontribusi)
 -------------------
 
 Apa itu CTRL Software?

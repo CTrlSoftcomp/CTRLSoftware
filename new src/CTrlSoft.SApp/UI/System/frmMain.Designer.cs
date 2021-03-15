@@ -30,15 +30,16 @@ namespace CTrlSoft.SApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem5 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
-            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem6 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
+            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem4 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
             this.ribbonControlAdv1 = new Syncfusion.Windows.Forms.Tools.RibbonControlAdv();
             this.backStageView1 = new Syncfusion.Windows.Forms.BackStageView(this.components);
             this.backStage1 = new Syncfusion.Windows.Forms.BackStage();
             this.infobackStageTab = new Syncfusion.Windows.Forms.BackStageTab();
             this.toolStripTabItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.toolStripEx1 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripTabItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             this.toolStripEx2 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             this.toolStripTabItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
@@ -94,6 +95,7 @@ namespace CTrlSoft.SApp
             ((System.ComponentModel.ISupportInitialize)(this.backStage1)).BeginInit();
             this.backStage1.SuspendLayout();
             this.toolStripTabItem1.Panel.SuspendLayout();
+            this.toolStripEx1.SuspendLayout();
             this.toolStripTabItem2.Panel.SuspendLayout();
             this.toolStripTabItem3.Panel.SuspendLayout();
             this.toolStripTabItem4.Panel.SuspendLayout();
@@ -206,12 +208,23 @@ namespace CTrlSoft.SApp
             this.toolStripEx1.ForeColor = System.Drawing.Color.MidnightBlue;
             this.toolStripEx1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripEx1.Image = null;
+            this.toolStripEx1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
             this.toolStripEx1.Location = new System.Drawing.Point(0, 1);
             this.toolStripEx1.Name = "toolStripEx1";
             this.toolStripEx1.Office12Mode = false;
             this.toolStripEx1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx1.Size = new System.Drawing.Size(106, 139);
+            this.toolStripEx1.Size = new System.Drawing.Size(92, 139);
             this.toolStripEx1.TabIndex = 0;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(85, 122);
+            this.toolStripButton1.Text = "Master Satuan";
             // 
             // toolStripTabItem2
             // 
@@ -661,12 +674,12 @@ namespace CTrlSoft.SApp
             this.viewtoolStripGallery.ItemBackColor = System.Drawing.Color.Empty;
             this.viewtoolStripGallery.ItemImageSize = new System.Drawing.Size(35, 35);
             this.viewtoolStripGallery.ItemPadding = new System.Windows.Forms.Padding(4, 5, 4, 4);
-            toolStripGalleryItem5.Text = "Phone";
-            toolStripGalleryItem5.ToolTipText = "";
-            toolStripGalleryItem6.Text = "List";
-            toolStripGalleryItem6.ToolTipText = "";
-            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem5);
-            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem6);
+            toolStripGalleryItem3.Text = "Phone";
+            toolStripGalleryItem3.ToolTipText = "";
+            toolStripGalleryItem4.Text = "List";
+            toolStripGalleryItem4.ToolTipText = "";
+            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem3);
+            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem4);
             this.viewtoolStripGallery.ItemSize = new System.Drawing.Size(70, 90);
             this.viewtoolStripGallery.Margin = new System.Windows.Forms.Padding(5, 20, 0, 2);
             this.viewtoolStripGallery.Name = "viewtoolStripGallery";
@@ -757,11 +770,10 @@ namespace CTrlSoft.SApp
             this.tabbedMDIManager1.AttachedTo = this;
             this.tabbedMDIManager1.CloseButtonBackColor = System.Drawing.Color.White;
             this.tabbedMDIManager1.CloseButtonToolTip = "";
-            this.tabbedMDIManager1.CloseButtonVisible = false;
             this.tabbedMDIManager1.DropDownButtonToolTip = "";
             this.tabbedMDIManager1.ImageSize = new System.Drawing.Size(16, 16);
+            this.tabbedMDIManager1.NeedUpdateHostedForm = false;
             this.tabbedMDIManager1.ThemeName = "";
-            this.tabbedMDIManager1.ThemesEnabled = true;
             // 
             // frmMain
             // 
@@ -778,6 +790,7 @@ namespace CTrlSoft.SApp
             this.ShowApplicationIcon = false;
             this.Text = "CTRL Software Retail andalan";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this._formClossing);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControlAdv1)).EndInit();
             this.ribbonControlAdv1.ResumeLayout(false);
             this.ribbonControlAdv1.PerformLayout();
@@ -785,6 +798,8 @@ namespace CTrlSoft.SApp
             this.backStage1.ResumeLayout(false);
             this.toolStripTabItem1.Panel.ResumeLayout(false);
             this.toolStripTabItem1.Panel.PerformLayout();
+            this.toolStripEx1.ResumeLayout(false);
+            this.toolStripEx1.PerformLayout();
             this.toolStripTabItem2.Panel.ResumeLayout(false);
             this.toolStripTabItem2.Panel.PerformLayout();
             this.toolStripTabItem3.Panel.ResumeLayout(false);
@@ -863,6 +878,7 @@ namespace CTrlSoft.SApp
         private Syncfusion.Windows.Forms.Tools.ToolStripEx toolStripEx10;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusUser;
         private Syncfusion.Windows.Forms.Tools.TabbedMDIManager tabbedMDIManager1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

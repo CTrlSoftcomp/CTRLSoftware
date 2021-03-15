@@ -92,13 +92,16 @@ namespace CTrlSoft.BLL.System.User
             {
                 try
                 {
-                    jsonResult.JSONValue = db.Query<MUser>("select * from muser where id=@Id", new { noid }, null, true, db.ConnectionTimeout).SingleOrDefault();
-                    if (jsonResult.JSONValue != null)
+                    var data = db.Query<MUser>("select * from muser where id=@Id", new { Id = noid }, null, true, db.ConnectionTimeout).SingleOrDefault();
+                    if (data != null)
                     {
+                        data.roleuser = GetRole(data.idrole);
+                        data.roleuser.mrolesd = GetRoleD(data.idrole);
+
                         jsonResult.JSONMessage = "Data ditemukan.";
                         jsonResult.JSONResult = true;
                         jsonResult.JSONRows = 1;
-                        jsonResult.JSONValue = jsonResult.JSONValue;
+                        jsonResult.JSONValue = data;
                     }
                 }
                 catch (Exception e)
@@ -138,7 +141,7 @@ namespace CTrlSoft.BLL.System.User
                             {
                                 while (!reader.Read())
                                 {
-                                    list.Add(new MUser
+                                    MUser user = new MUser
                                     {
                                         id = reader.GetInt32(0),
                                         userid = reader.GetString(1),
@@ -146,8 +149,11 @@ namespace CTrlSoft.BLL.System.User
                                         nama = reader.GetString(3),
                                         idkontak = reader.GetInt32(4),
                                         idrole = reader.GetInt32(5),
-                                        aktif = reader.GetBoolean(6)
-                                    });
+                                        aktif = reader.GetBoolean(6),
+                                        roleuser = GetRole(reader.GetInt32(5))
+                                    };
+                                    user.roleuser.mrolesd = GetRoleD(reader.GetInt32(5));
+                                    list.Add(user);
                                 }
                             }
                             reader.Close();
@@ -375,16 +381,19 @@ namespace CTrlSoft.BLL.System.User
             {
                 try
                 {
-                    jsonResult.JSONValue = db.Query<MUser>("select * from muser where userid=@userid", new { UserID }, null, true, db.ConnectionTimeout).SingleOrDefault();
-                    if (jsonResult.JSONValue != null)
+                    var data = db.Query<MUser>("select * from muser where userid=@userid", new { UserID }, null, true, db.ConnectionTimeout).SingleOrDefault();
+                    if (data != null)
                     {
                         string md5Checker = Repository.RepUtils.CreateMD5(pwd.Trim());
-                        if (md5Checker.Equals(((MUser) jsonResult.JSONValue).pwd))
+                        if (md5Checker.Equals(data.pwd))
                         {
+                            data.roleuser = GetRole(data.idrole);
+                            data.roleuser.mrolesd = GetRoleD(data.idrole);
+
                             jsonResult.JSONMessage = "Data ditemukan.";
                             jsonResult.JSONResult = true;
                             jsonResult.JSONRows = 1;
-                            jsonResult.JSONValue = jsonResult.JSONValue;
+                            jsonResult.JSONValue = data;
                         } else
                         {
                             jsonResult.JSONMessage = "Password yang anda masukkan salah.";
@@ -403,6 +412,40 @@ namespace CTrlSoft.BLL.System.User
                 }
             }
             return jsonResult;
+        }
+
+        public MRole GetRole(int idrole)
+        {
+            MRole mRole = null;
+            using (IDbConnection db = new NpgsqlConnection(StrKon))
+            {
+                try
+                {
+                    mRole = db.Query<MRole>("select * from mrole where id=@Id", new { Id = idrole }, null, true, db.ConnectionTimeout).SingleOrDefault();
+                }
+                catch (Exception e)
+                {
+                    mRole = null;
+                }
+            }
+            return mRole;
+        }
+
+        public List<MRoleD> GetRoleD(int idrole)
+        {
+            List<MRoleD> mRoles = null;
+            using (IDbConnection db = new NpgsqlConnection(StrKon))
+            {
+                try
+                {
+                    mRoles = db.Query<MRoleD>("select * from mroled where idrole=@Id", new { Id = idrole }, null, true, db.ConnectionTimeout).ToList();
+                }
+                catch (Exception e)
+                {
+                    mRoles = null;
+                }
+            }
+            return mRoles;
         }
     }
 }

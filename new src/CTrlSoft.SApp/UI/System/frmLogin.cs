@@ -41,9 +41,9 @@ namespace CTrlSoft.SApp
                 RepLogger.ShowMessage(this, "User ID harus diisi!", MessageBoxIcon.Stop, MessageBoxButtons.OK);
                 txtUserID.Focus();
             }
-            else if (txtPassword.Text.Length < Repository.Utils.MinLenghtPassword)
+            else if (txtPassword.Text.Length < Constant.Public.MinLenghtPassword)
             {
-                RepLogger.ShowMessage(this, "Password minimal harus " + Repository.Utils.MinLenghtPassword + " digit!", MessageBoxIcon.Stop, MessageBoxButtons.OK);
+                RepLogger.ShowMessage(this, "Password minimal harus " + Constant.Public.MinLenghtPassword + " digit!", MessageBoxIcon.Stop, MessageBoxButtons.OK);
                 txtPassword.Focus();
             }
             else
@@ -51,8 +51,8 @@ namespace CTrlSoft.SApp
                 var hasil = rep.GetLogin(txtUserID.Text, txtPassword.Text);
                 if (hasil.JSONResult)
                 {
-                    Repository.Utils.UserLogin = (Models.Dto.MUser)hasil.JSONValue;
-                    RepLogger.ShowMessage(this, "Selamat datang " + Repository.Utils.UserLogin.nama + ", selamat beraktifitas.", MessageBoxIcon.Information, MessageBoxButtons.OK);
+                    Constant.Public.UserLogin = (Models.Dto.MUser)hasil.JSONValue;
+                    RepLogger.ShowMessage(this, "Selamat datang " + Constant.Public.UserLogin.nama + ", selamat beraktifitas.", MessageBoxIcon.Information, MessageBoxButtons.OK);
 
                     DialogResult = DialogResult.OK;
                     Close();

@@ -29,5 +29,10 @@ namespace CTrlSoft.SApp
             this.Style.TitleBar.TextHorizontalAlignment = HorizontalAlignment.Center;
             this.Style.TitleBar.TextVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
         }
+
+        private void _onClossing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

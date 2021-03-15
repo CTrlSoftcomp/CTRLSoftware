@@ -256,7 +256,7 @@ namespace CTrlSoft.BLL.Master.Satuan
             }
             else
             {
-                jsonResult.JSONMessage = "User untuk hapus data harus diisi";
+                jsonResult.JSONMessage = "User untuk save data harus diisi";
                 jsonResult.JSONResult = false;
                 jsonResult.JSONRows = 0;
                 jsonResult.JSONValue = null;
@@ -360,7 +360,7 @@ namespace CTrlSoft.BLL.Master.Satuan
             }
             else
             {
-                jsonResult.JSONMessage = "User untuk hapus data harus diisi";
+                jsonResult.JSONMessage = "User untuk update data harus diisi";
                 jsonResult.JSONResult = false;
                 jsonResult.JSONRows = 0;
                 jsonResult.JSONValue = null;

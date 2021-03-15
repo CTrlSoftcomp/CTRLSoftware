@@ -16,5 +16,10 @@ namespace CTrlSoft.BLL.System.User
         JsonResult Save(MUser obj, MUser user);
         JsonResult Delete(MUser obj, MUser user);
         JsonResult Update(MUser obj, MUser user);
+
+        #region "Role User"
+        MRole GetRole(int idrole);
+        List<MRoleD> GetRoleD(int idrole);
+        #endregion
     }
 }

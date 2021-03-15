@@ -10,7 +10,6 @@ namespace CTrlSoft.SApp.Repository
 {
     class Utils
     {
-        public static MUser UserLogin = new MUser();
-        public static int MinLenghtPassword = 8;
+        
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CTrlSoft.Models.Dto
 {
@@ -14,6 +11,11 @@ namespace CTrlSoft.Models.Dto
         public int idkontak { get; set; }
         public int idrole { get; set; }
         public bool aktif { get; set; }
+        public MRole roleuser { get; set; }
+        public MUser()
+        {
+            this.roleuser = new MRole();
+        }
     }
 
     public class MRole
@@ -21,5 +23,17 @@ namespace CTrlSoft.Models.Dto
         public int id { get; set; }
         public string role { get; set; }
         public bool issupervisor { get; set; }
+        public List<MRoleD> mrolesd { get; set; }
+        public MRole()
+        {
+            this.mrolesd = new List<MRoleD>();
+        }
+    }
+
+    public class MRoleD
+    {
+        public int idrole { get; set; }
+        public int idmenu { get; set; }
+        public bool aktif { get; set; }
     }
 }

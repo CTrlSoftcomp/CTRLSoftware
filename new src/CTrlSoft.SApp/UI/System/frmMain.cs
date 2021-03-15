@@ -11,6 +11,8 @@ using Syncfusion.Windows.Forms.Grid.Grouping;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms;
 using CTrlSoft.Repository;
+using CTrlSoft.SApp.Repository;
+using MessageBox = CTrlSoft.SApp.Repository.MessageBox;
 
 namespace CTrlSoft.SApp
 {
@@ -34,11 +36,12 @@ namespace CTrlSoft.SApp
         private void initHandler()
         {
             Shown += frmMain_Shown;
+            toolStripButton1.Click += menu_action;
         }
 
         private void menuLoginOut()
         {
-            if (Repository.Utils.UserLogin != null || Repository.Utils.UserLogin.id <= 0)
+            if (Constant.Public.UserLogin != null || Constant.Public.UserLogin.id <= 0)
             {
                 using (frmLogin frm = new frmLogin())
                 {
@@ -46,7 +49,7 @@ namespace CTrlSoft.SApp
                     {
                         if (frm.ShowDialog(this) == DialogResult.OK)
                         {
-
+                            //Gak Ngapa-ngapain
                         }
                     }
                     catch (Exception ex)
@@ -61,12 +64,33 @@ namespace CTrlSoft.SApp
             }
         }
 
-        private void frmMain_Shown(Object sender, EventArgs e)
+        private void frmMain_Shown(object sender, EventArgs e)
         {
             frmDashboard.MdiParent = this;
             frmDashboard.Show();
 
             menuLoginOut();
+        }
+
+        private void menu_action(object sender, EventArgs e)
+        {
+            frmSatuan x = new frmSatuan();
+            x.MdiParent = this;
+            x.Show();
+            x.Focus();
+        }
+
+        private void _formClossing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Tampil(this, 
+                "Ingin keluar applikasi?" + Environment.NewLine + "Jika ingin keluar maka seluruh transaksi yang terpending akan hilang, ingin meneruskannya?",
+                MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Question, 
+                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                frmDashboard.Dispose();
+                e.Cancel = false;
+            }
         }
     }
 }

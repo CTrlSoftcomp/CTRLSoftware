@@ -50,7 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu\IMenu.cs" />
+    <Compile Include="Menu\MMenu.cs" />
+    <Compile Include="Menu\RepMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\IRole.cs" />
+    <Compile Include="Role\RepRole.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="User\RepUser.cs" />
   </ItemGroup>

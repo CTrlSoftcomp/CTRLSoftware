@@ -38,6 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister         = findViewById(R.id.btnRegister);
         ckAgree             = findViewById(R.id.ckAgree);
 
+        //Disable inputan
+        ckAgree.setKeyListener(null);
+
         tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

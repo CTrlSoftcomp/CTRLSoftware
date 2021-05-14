@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 
@@ -131,6 +135,40 @@ public class mdlPublic {
             dialog.show();
         } catch (Exception e) {
             Log.e("ERR", e.getMessage(), e);
+        }
+    }
+
+    public static void ShowMessage(Context context, String Message) {
+        try {
+            View getView = ((Activity)context).findViewById(android.R.id.content);
+            if (getView == null) {
+                Toast.makeText(context, Message, Toast.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(getView, Message, BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            LogError(context, e);
+        }
+    }
+
+    public static Snackbar ShowMessage(Context context, String Message, String Button1) {
+        try {
+            View getView = ((Activity)context).findViewById(android.R.id.content);
+            if (getView == null) {
+                Toast.makeText(context, Message, Toast.LENGTH_LONG).show();
+                return null;
+            } else {
+                return Snackbar.make(getView, Message, BaseTransientBottomBar.LENGTH_LONG)
+                        .setAction(Button1, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                baction = 0;
+                            }
+                        })
+                        .show();
+            }
+        } catch (Exception e) {
+            LogError(context, e);
         }
     }
 }

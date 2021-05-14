@@ -21,4 +21,6 @@
     <string name="conditions" translatable="false">Conditions</string>
     <string name="register_already_have_account" translatable="false">Already have an Account?</string>
     <string name="register" translatable="false">Registration</string>
+    <string name="login_txtHP" translatable="false">Phone Number is required</string>
+    <string name="login_txtPwd" translatable="false">Password must be inputted with a minimum 8 digits</string>
 </resources>

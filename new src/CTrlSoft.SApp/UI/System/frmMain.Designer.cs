@@ -31,8 +31,8 @@ namespace CTrlSoft.SApp
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
-            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem4 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
+            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
+            Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem toolStripGalleryItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripGalleryItem();
             this.ribbonControlAdv1 = new Syncfusion.Windows.Forms.Tools.RibbonControlAdv();
             this.backStageView1 = new Syncfusion.Windows.Forms.BackStageView(this.components);
             this.backStage1 = new Syncfusion.Windows.Forms.BackStage();
@@ -674,12 +674,12 @@ namespace CTrlSoft.SApp
             this.viewtoolStripGallery.ItemBackColor = System.Drawing.Color.Empty;
             this.viewtoolStripGallery.ItemImageSize = new System.Drawing.Size(35, 35);
             this.viewtoolStripGallery.ItemPadding = new System.Windows.Forms.Padding(4, 5, 4, 4);
-            toolStripGalleryItem3.Text = "Phone";
-            toolStripGalleryItem3.ToolTipText = "";
-            toolStripGalleryItem4.Text = "List";
-            toolStripGalleryItem4.ToolTipText = "";
-            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem3);
-            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem4);
+            toolStripGalleryItem1.Text = "Phone";
+            toolStripGalleryItem1.ToolTipText = "";
+            toolStripGalleryItem2.Text = "List";
+            toolStripGalleryItem2.ToolTipText = "";
+            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem1);
+            this.viewtoolStripGallery.Items.Add(toolStripGalleryItem2);
             this.viewtoolStripGallery.ItemSize = new System.Drawing.Size(70, 90);
             this.viewtoolStripGallery.Margin = new System.Windows.Forms.Padding(5, 20, 0, 2);
             this.viewtoolStripGallery.Name = "viewtoolStripGallery";

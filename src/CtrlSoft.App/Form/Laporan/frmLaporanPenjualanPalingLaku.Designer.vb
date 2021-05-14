@@ -19,49 +19,50 @@ Partial Class frmLaporanPenjualanPalingLaku
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl
-        Me.txtGudang = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.gvGudang = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
-        Me.txtSupplier = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.gvSupplier = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl
-        Me.txtMerk = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.gvMerk = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit
+        Me.components = New System.ComponentModel.Container()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.cmdCetak = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtGudang = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvGudang = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtSupplier = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvSupplier = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtMerk = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvMerk = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
-        Me.Bar1 = New DevExpress.XtraBars.Bar
-        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem
-        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem
-        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHitungUlangSaldo = New DevExpress.XtraBars.BarButtonItem
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.txtKategori = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.gvKategori = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
+        Me.Bar2 = New DevExpress.XtraBars.Bar()
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem()
+        Me.Bar1 = New DevExpress.XtraBars.Bar()
+        Me.mnPreview = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.mnHistoryHarga = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHitungUlangSaldo = New DevExpress.XtraBars.BarButtonItem()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.txtKategori = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvKategori = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.ckTdkAktif = New DevExpress.XtraEditors.CheckEdit()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.rbSort = New DevExpress.XtraEditors.RadioGroup()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,12 +73,12 @@ Partial Class frmLaporanPenjualanPalingLaku
         CType(Me.gvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtMerk.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvMerk, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,6 +86,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rbSort.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -103,7 +105,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         '
         Me.cmdCetak.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdCetak.Appearance.Options.UseFont = True
-        Me.cmdCetak.ImageIndex = 6
+        Me.cmdCetak.ImageOptions.ImageIndex = 6
         Me.cmdCetak.Location = New System.Drawing.Point(12, 5)
         Me.cmdCetak.Name = "cmdCetak"
         Me.cmdCetak.Size = New System.Drawing.Size(120, 38)
@@ -115,7 +117,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
-        Me.cmdRefresh.ImageIndex = 3
+        Me.cmdRefresh.ImageOptions.ImageIndex = 3
         Me.cmdRefresh.Location = New System.Drawing.Point(750, 5)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
@@ -127,7 +129,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.cmdTutup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
-        Me.cmdTutup.ImageIndex = 5
+        Me.cmdTutup.ImageOptions.ImageIndex = 5
         Me.cmdTutup.Location = New System.Drawing.Point(876, 5)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(120, 38)
@@ -136,6 +138,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.rbSort)
         Me.PanelControl2.Controls.Add(Me.LabelControl7)
         Me.PanelControl2.Controls.Add(Me.txtGudang)
         Me.PanelControl2.Controls.Add(Me.LabelControl6)
@@ -153,7 +156,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 51)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(1008, 94)
+        Me.PanelControl2.Size = New System.Drawing.Size(1008, 111)
         Me.PanelControl2.TabIndex = 1
         '
         'LabelControl7
@@ -261,10 +264,10 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.DateEdit2.MenuManager = Me.BarManager1
         Me.DateEdit2.Name = "DateEdit2"
         Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit2.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DateEdit2.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit2.TabIndex = 9
         '
@@ -341,6 +344,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Manager = Me.BarManager1
         Me.barDockControlTop.Size = New System.Drawing.Size(1008, 51)
         '
         'barDockControlBottom
@@ -348,6 +352,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 561)
+        Me.barDockControlBottom.Manager = Me.BarManager1
         Me.barDockControlBottom.Size = New System.Drawing.Size(1008, 0)
         '
         'barDockControlLeft
@@ -355,6 +360,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Manager = Me.BarManager1
         Me.barDockControlLeft.Size = New System.Drawing.Size(0, 510)
         '
         'barDockControlRight
@@ -362,6 +368,7 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1008, 51)
+        Me.barDockControlRight.Manager = Me.BarManager1
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 510)
         '
         'mnHistoryHarga
@@ -423,21 +430,22 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.DateEdit1.MenuManager = Me.BarManager1
         Me.DateEdit1.Name = "DateEdit1"
         Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit1.TabIndex = 4
         '
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.LabelControl1.Location = New System.Drawing.Point(12, 29)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(270, 25)
+        Me.LabelControl1.Size = New System.Drawing.Size(227, 25)
         Me.LabelControl1.TabIndex = 1
-        Me.LabelControl1.Text = "Laporan Laba Kotor Penjualan"
+        Me.LabelControl1.Text = "Laporan Penjualan Rekap"
         '
         'ckTdkAktif
         '
@@ -452,10 +460,10 @@ Partial Class frmLaporanPenjualanPalingLaku
         '
         Me.GridControl1.DataSource = Me.BindingSource1
         Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 145)
+        Me.GridControl1.Location = New System.Drawing.Point(0, 162)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1008, 365)
+        Me.GridControl1.Size = New System.Drawing.Size(1008, 348)
         Me.GridControl1.TabIndex = 2
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -464,6 +472,8 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsCustomization.AllowGroup = False
+        Me.GridView1.OptionsCustomization.AllowSort = False
         Me.GridView1.OptionsNavigation.EnterMoveNextColumn = True
         Me.GridView1.OptionsSelection.MultiSelect = True
         Me.GridView1.OptionsView.ColumnAutoWidth = False
@@ -481,7 +491,19 @@ Partial Class frmLaporanPenjualanPalingLaku
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
-        'frmLaporanLabaKotor
+        'rbSort
+        '
+        Me.rbSort.Location = New System.Drawing.Point(12, 67)
+        Me.rbSort.MenuManager = Me.BarManager1
+        Me.rbSort.Name = "rbSort"
+        Me.rbSort.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.rbSort.Properties.Appearance.Options.UseBackColor = True
+        Me.rbSort.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.rbSort.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(Nothing, "Qty Tertinggi"), New DevExpress.XtraEditors.Controls.RadioGroupItem(Nothing, "Qty Terendah"), New DevExpress.XtraEditors.Controls.RadioGroupItem(Nothing, "Menguntungkan"), New DevExpress.XtraEditors.Controls.RadioGroupItem(Nothing, "Nota Terbanyak")})
+        Me.rbSort.Size = New System.Drawing.Size(527, 30)
+        Me.rbSort.TabIndex = 19
+        '
+        'frmLaporanPenjualanPalingLaku
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -494,8 +516,8 @@ Partial Class frmLaporanPenjualanPalingLaku
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
         Me.MinimumSize = New System.Drawing.Size(1024, 600)
-        Me.Name = "frmLaporanLabaKotor"
-        Me.Text = "Laporan Laba Kotor Penjualan"
+        Me.Name = "frmLaporanPenjualanPalingLaku"
+        Me.Text = "Laporan Penjualan Rekap"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -507,12 +529,12 @@ Partial Class frmLaporanPenjualanPalingLaku
         CType(Me.gvSupplier, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtMerk.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvMerk, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtKategori.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvKategori, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ckTdkAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -520,7 +542,9 @@ Partial Class frmLaporanPenjualanPalingLaku
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rbSort.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
@@ -565,4 +589,5 @@ Partial Class frmLaporanPenjualanPalingLaku
     Friend WithEvents txtGudang As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents gvGudang As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
+    Friend WithEvents rbSort As DevExpress.XtraEditors.RadioGroup
 End Class

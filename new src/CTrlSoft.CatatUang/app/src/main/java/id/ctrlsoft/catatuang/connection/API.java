@@ -1,7 +1,9 @@
 package id.ctrlsoft.catatuang.connection;
 
 import id.ctrlsoft.catatuang.connection.model.Callbacks;
+import id.ctrlsoft.catatuang.connection.model.CallbacksUser;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -14,19 +16,24 @@ public interface API {
     String TYPE = "Content-Type: application/x-www-form-urlencoded";
 
     @Headers({CACHE, TYPE})
-    @GET("MasterJSONService.asmx/GetListKategori")
-    Call<Callbacks> getListKategori(
-            @Query("IDParent") long idparent
+    @GET("User/login")
+    Call<CallbacksUser> User_Login(
+            @Query("userid") String userid,
+            @Query("pwd") String pwd
+    );
+
+    @Headers({CACHE, TYPE})
+    @GET("User/login")
+    Call<Callbacks> User_Avaiable(
+            @Query("userid") String userid
     );
 
     @Headers({CACHE, TYPE})
     @FormUrlEncoded
     @POST("MasterJSONService.asmx/GetListProdukGuest")
-    Call<Callbacks> getListProdukGuest(
-            @Field("IDJenisHarga") int idjenisharga,
-            @Field("HP") String hp,
-            @Field("StrFilter") String filter,
-            @Field("StrSort") String sort,
-            @Field("Page") int page
+    Call<Callbacks> User_Save(
+            @Query("oldpwd") String oldpwd,
+            @Query("newpwd") String newpwd,
+            @Body String body
     );
 }

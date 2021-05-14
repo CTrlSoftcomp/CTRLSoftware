@@ -59,10 +59,10 @@ Partial Class frmDaftarTransaksi
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,7 +81,7 @@ Partial Class frmDaftarTransaksi
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl1.Location = New System.Drawing.Point(0, 507)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(983, 51)
+        Me.PanelControl1.Size = New System.Drawing.Size(1069, 51)
         Me.PanelControl1.TabIndex = 0
         Me.PanelControl1.Visible = False
         '
@@ -89,7 +89,7 @@ Partial Class frmDaftarTransaksi
         '
         Me.cmdCetak.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdCetak.Appearance.Options.UseFont = True
-        Me.cmdCetak.ImageIndex = 6
+        Me.cmdCetak.ImageOptions.ImageIndex = 6
         Me.cmdCetak.Location = New System.Drawing.Point(390, 6)
         Me.cmdCetak.Name = "cmdCetak"
         Me.cmdCetak.Size = New System.Drawing.Size(120, 38)
@@ -100,7 +100,7 @@ Partial Class frmDaftarTransaksi
         '
         Me.cmdHapus.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdHapus.Appearance.Options.UseFont = True
-        Me.cmdHapus.ImageIndex = 2
+        Me.cmdHapus.ImageOptions.ImageIndex = 2
         Me.cmdHapus.Location = New System.Drawing.Point(264, 6)
         Me.cmdHapus.Name = "cmdHapus"
         Me.cmdHapus.Size = New System.Drawing.Size(120, 38)
@@ -111,7 +111,7 @@ Partial Class frmDaftarTransaksi
         '
         Me.cmdEdit.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdEdit.Appearance.Options.UseFont = True
-        Me.cmdEdit.ImageIndex = 1
+        Me.cmdEdit.ImageOptions.ImageIndex = 1
         Me.cmdEdit.Location = New System.Drawing.Point(138, 6)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(120, 38)
@@ -122,7 +122,7 @@ Partial Class frmDaftarTransaksi
         '
         Me.cmdBaru.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdBaru.Appearance.Options.UseFont = True
-        Me.cmdBaru.ImageIndex = 0
+        Me.cmdBaru.ImageOptions.ImageIndex = 0
         Me.cmdBaru.Location = New System.Drawing.Point(12, 6)
         Me.cmdBaru.Name = "cmdBaru"
         Me.cmdBaru.Size = New System.Drawing.Size(120, 38)
@@ -134,8 +134,8 @@ Partial Class frmDaftarTransaksi
         Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRefresh.Appearance.Options.UseFont = True
-        Me.cmdRefresh.ImageIndex = 3
-        Me.cmdRefresh.Location = New System.Drawing.Point(725, 6)
+        Me.cmdRefresh.ImageOptions.ImageIndex = 3
+        Me.cmdRefresh.Location = New System.Drawing.Point(811, 6)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
         Me.cmdRefresh.TabIndex = 4
@@ -146,8 +146,8 @@ Partial Class frmDaftarTransaksi
         Me.cmdTutup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTutup.Appearance.Options.UseFont = True
-        Me.cmdTutup.ImageIndex = 5
-        Me.cmdTutup.Location = New System.Drawing.Point(851, 6)
+        Me.cmdTutup.ImageOptions.ImageIndex = 5
+        Me.cmdTutup.Location = New System.Drawing.Point(937, 6)
         Me.cmdTutup.Name = "cmdTutup"
         Me.cmdTutup.Size = New System.Drawing.Size(120, 38)
         Me.cmdTutup.TabIndex = 5
@@ -163,7 +163,7 @@ Partial Class frmDaftarTransaksi
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 51)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(983, 40)
+        Me.PanelControl2.Size = New System.Drawing.Size(1069, 40)
         Me.PanelControl2.TabIndex = 1
         '
         'DateEdit2
@@ -171,14 +171,14 @@ Partial Class frmDaftarTransaksi
         Me.DateEdit2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateEdit2.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
         Me.DateEdit2.EnterMoveNextControl = True
-        Me.DateEdit2.Location = New System.Drawing.Point(871, 15)
+        Me.DateEdit2.Location = New System.Drawing.Point(957, 15)
         Me.DateEdit2.MenuManager = Me.BarManager1
         Me.DateEdit2.Name = "DateEdit2"
         Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit2.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit2.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit2.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit2.TabIndex = 5
         '
@@ -276,27 +276,31 @@ Partial Class frmDaftarTransaksi
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(983, 51)
+        Me.barDockControlTop.Manager = Me.BarManager1
+        Me.barDockControlTop.Size = New System.Drawing.Size(1069, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 558)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(983, 0)
+        Me.barDockControlBottom.Manager = Me.BarManager1
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1069, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Manager = Me.BarManager1
         Me.barDockControlLeft.Size = New System.Drawing.Size(0, 507)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(983, 51)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1069, 51)
+        Me.barDockControlRight.Manager = Me.BarManager1
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 507)
         '
         'mnPosting
@@ -320,7 +324,7 @@ Partial Class frmDaftarTransaksi
         'LabelControl3
         '
         Me.LabelControl3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl3.Location = New System.Drawing.Point(850, 19)
+        Me.LabelControl3.Location = New System.Drawing.Point(936, 19)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(15, 13)
         Me.LabelControl3.TabIndex = 4
@@ -329,7 +333,7 @@ Partial Class frmDaftarTransaksi
         'LabelControl2
         '
         Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl2.Location = New System.Drawing.Point(686, 19)
+        Me.LabelControl2.Location = New System.Drawing.Point(772, 19)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(36, 13)
         Me.LabelControl2.TabIndex = 3
@@ -340,20 +344,21 @@ Partial Class frmDaftarTransaksi
         Me.DateEdit1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateEdit1.EditValue = New Date(2019, 8, 24, 21, 31, 53, 120)
         Me.DateEdit1.EnterMoveNextControl = True
-        Me.DateEdit1.Location = New System.Drawing.Point(744, 15)
+        Me.DateEdit1.Location = New System.Drawing.Point(830, 15)
         Me.DateEdit1.MenuManager = Me.BarManager1
         Me.DateEdit1.Name = "DateEdit1"
         Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit1.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DateEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret
         Me.DateEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.DateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateEdit1.Size = New System.Drawing.Size(100, 20)
         Me.DateEdit1.TabIndex = 2
         '
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.LabelControl1.Location = New System.Drawing.Point(12, 9)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(56, 25)
@@ -367,7 +372,7 @@ Partial Class frmDaftarTransaksi
         Me.GridControl1.Location = New System.Drawing.Point(0, 91)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(983, 416)
+        Me.GridControl1.Size = New System.Drawing.Size(1069, 416)
         Me.GridControl1.TabIndex = 2
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -393,7 +398,7 @@ Partial Class frmDaftarTransaksi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(983, 558)
+        Me.ClientSize = New System.Drawing.Size(1069, 558)
         Me.Controls.Add(Me.GridControl1)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
@@ -408,16 +413,17 @@ Partial Class frmDaftarTransaksi
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.DateEdit2.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateEdit1.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl

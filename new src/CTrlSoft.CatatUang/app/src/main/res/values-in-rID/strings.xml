@@ -21,4 +21,6 @@
     <string name="conditions" translatable="false">Kondisi</string>
     <string name="register_already_have_account" translatable="false">Sudah mempunyai akun?</string>
     <string name="register" translatable="false">Register</string>
+    <string name="login_txtHP" translatable="false">Nomor Handphone harus diisi</string>
+    <string name="login_txtPwd" translatable="false">Password harus diisi minimum 8 Digit</string>
 </resources>

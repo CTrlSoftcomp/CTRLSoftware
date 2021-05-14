@@ -290,7 +290,10 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmLaporanMutasiSaldoStok(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1), UserLogin.TanggalSystem)
+                    x = New frmLaporanMutasiSaldoStok(e.Item.Name,
+                                                      e.Item.Caption,
+                                                      UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1),
+                                                      UserLogin.TanggalSystem)
                     x.MdiParent = Me
                 End If
                 x.Show()
@@ -303,7 +306,26 @@ Public Class frmMain
                     End If
                 Next
                 If x Is Nothing Then
-                    x = New frmLaporanLabaKotor(e.Item.Name, e.Item.Caption, UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1), UserLogin.TanggalSystem)
+                    x = New frmLaporanLabaKotor(e.Item.Name,
+                                                e.Item.Caption,
+                                                UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1),
+                                                UserLogin.TanggalSystem)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
+            Case "mnLapJualLaku"
+                Dim x As frmLaporanPenjualanPalingLaku = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmLaporanPenjualanPalingLaku Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmLaporanPenjualanPalingLaku(e.Item.Name,
+                                                          e.Item.Caption,
+                                                          UserLogin.TanggalSystem.AddDays((UserLogin.TanggalSystem.Day * -1) + 1),
+                                                          UserLogin.TanggalSystem)
                     x.MdiParent = Me
                 End If
                 x.Show()

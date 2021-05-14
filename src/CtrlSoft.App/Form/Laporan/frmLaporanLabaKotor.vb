@@ -70,105 +70,105 @@ Public Class frmLaporanLabaKotor
                                     com.CommandTimeout = cn.ConnectionTimeout
                                     oDA.SelectCommand = com
 
-                                    SQL = "DECLARE @TglDari AS DATE= '" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "';" & vbCrLf & _
-                                            "DECLARE @TglSampai AS DATE= '" & DateEdit2.DateTime.ToString("yyyy-MM-dd") & "';" & vbCrLf & _
-                                            "SELECT MJual.NoID, " & vbCrLf & _
-                                            "MJual.IDHeader, " & vbCrLf & _
-                                            "MJual.Kode, " & vbCrLf & _
-                                            "MCustomer.Nama AS Customer, " & vbCrLf & _
-                                            "MJual.Tanggal, " & vbCrLf & _
-                                            "MBarangD.Barcode, " & vbCrLf & _
-                                            "MBarang.Kode KodeBarang, " & vbCrLf & _
-                                            "MBarang.Nama NamaBarang, " & vbCrLf & _
-                                            "MJual.Qty * MJual.Konversi AS QtyJual," & vbCrLf & _
-                                            "CASE" & vbCrLf & _
-                                            "WHEN ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0) = 0" & vbCrLf & _
-                                            "THEN 0" & vbCrLf & _
-                                            "ELSE MJual.Jumlah / (ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0))" & vbCrLf & _
-                                            "END AS HargaNetto, " & vbCrLf & _
-                                            "MSupplier1.Nama AS Supplier1, " & vbCrLf & _
-                                            "MSupplier2.Nama AS Supplier2, " & vbCrLf & _
-                                            "MSupplier3.Nama AS Supplier3, " & vbCrLf & _
-                                            "MPersediaan.Persediaan AS Modal, " & vbCrLf & _
-                                            "MJual.Jumlah, " & vbCrLf & _
-                                            "ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0) AS LabaKotor," & vbCrLf & _
-                                            "CASE" & vbCrLf & _
-                                            "WHEN ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0) = 0" & vbCrLf & _
-                                            "THEN 0" & vbCrLf & _
-                                            "ELSE ISNULL(MPersediaan.Persediaan, 0) / (ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0))" & vbCrLf & _
-                                            "END AS HPP," & vbCrLf & _
-                                            "CASE" & vbCrLf & _
-                                            "WHEN ISNULL(MJual.Jumlah, 0) = 0" & vbCrLf & _
-                                            "THEN 0" & vbCrLf & _
-                                            "ELSE(ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0)) / ISNULL(MJual.Jumlah, 0) * 100" & vbCrLf & _
-                                            "END AS ProvitMargin," & vbCrLf & _
-                                            "CASE" & vbCrLf & _
-                                            "WHEN ISNULL(MPersediaan.Persediaan, 0) = 0" & vbCrLf & _
-                                            "THEN 0" & vbCrLf & _
-                                            "ELSE(ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0)) / ISNULL(MPersediaan.Persediaan, 0) * 100" & vbCrLf & _
-                                            "END AS ProsenUp" & vbCrLf & _
-                                            "FROM" & vbCrLf & _
-                                            "(" & vbCrLf & _
-                                            "SELECT 6 AS IDJenisTransaksi, " & vbCrLf & _
-                                            "MJualD.IDHeader, " & vbCrLf & _
-                                            "MJualD.NoID, " & vbCrLf & _
-                                            "MJualD.IDBarang, " & vbCrLf & _
-                                            "MJualD.IDBarangD, " & vbCrLf & _
-                                            "MJualD.Konversi, " & vbCrLf & _
-                                            "MJualD.Qty, " & vbCrLf & _
-                                            "MJualD.Jumlah, " & vbCrLf & _
-                                            "MJual.Kode, " & vbCrLf & _
-                                            "MJual.Tanggal, " & vbCrLf & _
-                                            "MJual.IDGudang, " & vbCrLf & _
-                                            "MJual.IDCustomer" & vbCrLf & _
-                                            "FROM MJualD(NOLOCK)" & vbCrLf & _
-                                            "INNER JOIN MJual(NOLOCK) ON MJual.NoID = MJualD.IDHeader" & vbCrLf & _
-                                            "WHERE MJual.IsPosted = 1" & vbCrLf & _
-                                            "AND CONVERT(DATE, MJual.Tanggal) >= @TglDari" & vbCrLf & _
-                                            "AND CONVERT(DATE, MJual.Tanggal) <= @TglSampai" & vbCrLf & _
-                                            "UNION ALL" & vbCrLf & _
-                                            "SELECT 7 AS IDJenisTransaksi, " & vbCrLf & _
-                                            "MJualD.IDHeader, " & vbCrLf & _
-                                            "MJualD.NoID, " & vbCrLf & _
-                                            "MJualD.IDBarang, " & vbCrLf & _
-                                            "MJualD.IDBarangD, " & vbCrLf & _
-                                            "MJualD.Konversi, " & vbCrLf & _
-                                            "-1 * MJualD.Qty, " & vbCrLf & _
-                                            "-1 * MJualD.Jumlah, " & vbCrLf & _
-                                            "MJual.Kode, " & vbCrLf & _
-                                            "MJual.Tanggal, " & vbCrLf & _
-                                            "MJual.IDGudang, " & vbCrLf & _
-                                            "MJual.IDCustomer" & vbCrLf & _
-                                            "FROM MReturJualD MJualD(NOLOCK)" & vbCrLf & _
-                                            "INNER JOIN MReturJual MJual(NOLOCK) ON MJual.NoID = MJualD.IDHeader" & vbCrLf & _
-                                            "WHERE MJual.IsPosted = 1" & vbCrLf & _
-                                            "AND CONVERT(DATE, MJual.Tanggal) >= @TglDari" & vbCrLf & _
-                                            "AND CONVERT(DATE, MJual.Tanggal) <= @TglSampai" & vbCrLf & _
-                                            ") AS MJual" & vbCrLf & _
-                                            "INNER JOIN MAlamat MCustomer(NOLOCK) ON MJual.IDCustomer = MCustomer.NoID" & vbCrLf & _
-                                            "LEFT JOIN MBarang(NOLOCK) ON MBarang.NoID = MJual.IDBarang" & vbCrLf & _
-                                            "LEFT JOIN MBarangD(NOLOCK) ON MBarangD.NoID = MJual.IDBarangD" & vbCrLf & _
-                                            "LEFT JOIN MKategori(NOLOCK) ON MKategori.NoID = MBarang.IDKategori" & vbCrLf & _
-                                            "LEFT JOIN MAlamat MSupplier1(NOLOCK) ON MSupplier1.NoID = MBarang.IDSupplier1" & vbCrLf & _
-                                            "LEFT JOIN MAlamat MSupplier2(NOLOCK) ON MSupplier2.NoID = MBarang.IDSupplier2" & vbCrLf & _
-                                            "LEFT JOIN MAlamat MSupplier3(NOLOCK) ON MSupplier3.NoID = MBarang.IDSupplier3" & vbCrLf & _
-                                            "LEFT JOIN" & vbCrLf & _
-                                            "(" & vbCrLf & _
-                                            "SELECT MKartuStok.IDJenisTransaksi, " & vbCrLf & _
-                                            "MKartuStok.IDTransaksiD, " & vbCrLf & _
-                                            "MKartuStok.IDTransaksi, " & vbCrLf & _
-                                            "SUM(MKartuStok.Kredit - MKartuStok.Debet) AS Persediaan" & vbCrLf & _
-                                            "FROM MKartuStok(NOLOCK)" & vbCrLf & _
-                                            "WHERE(MKartuStok.IDJenisTransaksi = 6" & vbCrLf & _
-                                            "OR MKartuStok.IDJenisTransaksi = 7)" & vbCrLf & _
-                                            "AND CONVERT(DATE, MKartuStok.Tanggal) >= @TglDari" & vbCrLf & _
-                                            "AND CONVERT(DATE, MKartuStok.Tanggal) <= @TglSampai" & vbCrLf & _
-                                            "GROUP BY MKartuStok.IDJenisTransaksi, " & vbCrLf & _
-                                            "MKartuStok.IDTransaksiD, " & vbCrLf & _
-                                            "MKartuStok.IDTransaksi" & vbCrLf & _
-                                            ") AS MPersediaan ON MPersediaan.IDTransaksi = MJual.IDHeader" & vbCrLf & _
-                                            "AND MPersediaan.IDTransaksiD = MJual.NoID" & vbCrLf & _
-                                            "AND MPersediaan.IDJenisTransaksi = MJual.IDJenisTransaksi" & vbCrLf & _
+                                    SQL = "DECLARE @TglDari AS DATE= '" & DateEdit1.DateTime.ToString("yyyy-MM-dd") & "';" & vbCrLf &
+                                            "DECLARE @TglSampai AS DATE= '" & DateEdit2.DateTime.ToString("yyyy-MM-dd") & "';" & vbCrLf &
+                                            "SELECT MJual.NoID, " & vbCrLf &
+                                            "MJual.IDHeader, " & vbCrLf &
+                                            "MJual.Kode, " & vbCrLf &
+                                            "MCustomer.Nama AS Customer, " & vbCrLf &
+                                            "MJual.Tanggal, " & vbCrLf &
+                                            "MBarangD.Barcode, " & vbCrLf &
+                                            "MBarang.Kode KodeBarang, " & vbCrLf &
+                                            "MBarang.Nama NamaBarang, " & vbCrLf &
+                                            "MJual.Qty * MJual.Konversi AS QtyJual," & vbCrLf &
+                                            "CASE" & vbCrLf &
+                                            "WHEN ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0) = 0" & vbCrLf &
+                                            "THEN 0" & vbCrLf &
+                                            "ELSE MJual.Jumlah / (ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0))" & vbCrLf &
+                                            "END AS HargaNetto, " & vbCrLf &
+                                            "MSupplier1.Nama AS Supplier1, " & vbCrLf &
+                                            "MSupplier2.Nama AS Supplier2, " & vbCrLf &
+                                            "MSupplier3.Nama AS Supplier3, " & vbCrLf &
+                                            "MPersediaan.Persediaan AS Modal, " & vbCrLf &
+                                            "MJual.Jumlah, " & vbCrLf &
+                                            "ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0) AS LabaKotor," & vbCrLf &
+                                            "CASE" & vbCrLf &
+                                            "WHEN ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0) = 0" & vbCrLf &
+                                            "THEN 0" & vbCrLf &
+                                            "ELSE ISNULL(MPersediaan.Persediaan, 0) / (ISNULL(MJual.Qty, 0) * ISNULL(MJual.Konversi, 0))" & vbCrLf &
+                                            "END AS HPP," & vbCrLf &
+                                            "CASE" & vbCrLf &
+                                            "WHEN ISNULL(MJual.Jumlah, 0) = 0" & vbCrLf &
+                                            "THEN 0" & vbCrLf &
+                                            "ELSE(ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0)) / ISNULL(MJual.Jumlah, 0) * 100" & vbCrLf &
+                                            "END AS ProvitMargin," & vbCrLf &
+                                            "CASE" & vbCrLf &
+                                            "WHEN ISNULL(MPersediaan.Persediaan, 0) = 0" & vbCrLf &
+                                            "THEN 0" & vbCrLf &
+                                            "ELSE(ISNULL(MJual.Jumlah, 0) - ISNULL(MPersediaan.Persediaan, 0)) / ISNULL(MPersediaan.Persediaan, 0) * 100" & vbCrLf &
+                                            "END AS ProsenUp" & vbCrLf &
+                                            "FROM" & vbCrLf &
+                                            "(" & vbCrLf &
+                                            "SELECT 6 AS IDJenisTransaksi, " & vbCrLf &
+                                            "MJualD.IDHeader, " & vbCrLf &
+                                            "MJualD.NoID, " & vbCrLf &
+                                            "MJualD.IDBarang, " & vbCrLf &
+                                            "MJualD.IDBarangD, " & vbCrLf &
+                                            "MJualD.Konversi, " & vbCrLf &
+                                            "MJualD.Qty, " & vbCrLf &
+                                            "MJualD.Jumlah, " & vbCrLf &
+                                            "MJual.Kode, " & vbCrLf &
+                                            "MJual.Tanggal, " & vbCrLf &
+                                            "MJual.IDGudang, " & vbCrLf &
+                                            "MJual.IDCustomer" & vbCrLf &
+                                            "FROM MJualD(NOLOCK)" & vbCrLf &
+                                            "INNER JOIN MJual(NOLOCK) ON MJual.NoID = MJualD.IDHeader" & vbCrLf &
+                                            "WHERE MJual.IsPosted = 1" & vbCrLf &
+                                            "AND CONVERT(DATE, MJual.Tanggal) >= @TglDari" & vbCrLf &
+                                            "AND CONVERT(DATE, MJual.Tanggal) <= @TglSampai" & vbCrLf &
+                                            "UNION ALL" & vbCrLf &
+                                            "SELECT 7 AS IDJenisTransaksi, " & vbCrLf &
+                                            "MJualD.IDHeader, " & vbCrLf &
+                                            "MJualD.NoID, " & vbCrLf &
+                                            "MJualD.IDBarang, " & vbCrLf &
+                                            "MJualD.IDBarangD, " & vbCrLf &
+                                            "MJualD.Konversi, " & vbCrLf &
+                                            "-1 * MJualD.Qty, " & vbCrLf &
+                                            "-1 * MJualD.Jumlah, " & vbCrLf &
+                                            "MJual.Kode, " & vbCrLf &
+                                            "MJual.Tanggal, " & vbCrLf &
+                                            "MJual.IDGudang, " & vbCrLf &
+                                            "MJual.IDCustomer" & vbCrLf &
+                                            "FROM MReturJualD MJualD(NOLOCK)" & vbCrLf &
+                                            "INNER JOIN MReturJual MJual(NOLOCK) ON MJual.NoID = MJualD.IDHeader" & vbCrLf &
+                                            "WHERE MJual.IsPosted = 1" & vbCrLf &
+                                            "AND CONVERT(DATE, MJual.Tanggal) >= @TglDari" & vbCrLf &
+                                            "AND CONVERT(DATE, MJual.Tanggal) <= @TglSampai" & vbCrLf &
+                                            ") AS MJual" & vbCrLf &
+                                            "LEFT JOIN MAlamat MCustomer(NOLOCK) ON MJual.IDCustomer = MCustomer.NoID" & vbCrLf &
+                                            "LEFT JOIN MBarang(NOLOCK) ON MBarang.NoID = MJual.IDBarang" & vbCrLf &
+                                            "LEFT JOIN MBarangD(NOLOCK) ON MBarangD.NoID = MJual.IDBarangD" & vbCrLf &
+                                            "LEFT JOIN MKategori(NOLOCK) ON MKategori.NoID = MBarang.IDKategori" & vbCrLf &
+                                            "LEFT JOIN MAlamat MSupplier1(NOLOCK) ON MSupplier1.NoID = MBarang.IDSupplier1" & vbCrLf &
+                                            "LEFT JOIN MAlamat MSupplier2(NOLOCK) ON MSupplier2.NoID = MBarang.IDSupplier2" & vbCrLf &
+                                            "LEFT JOIN MAlamat MSupplier3(NOLOCK) ON MSupplier3.NoID = MBarang.IDSupplier3" & vbCrLf &
+                                            "LEFT JOIN" & vbCrLf &
+                                            "(" & vbCrLf &
+                                            "SELECT MKartuStok.IDJenisTransaksi, " & vbCrLf &
+                                            "MKartuStok.IDTransaksiD, " & vbCrLf &
+                                            "MKartuStok.IDTransaksi, " & vbCrLf &
+                                            "SUM(MKartuStok.Kredit - MKartuStok.Debet) AS Persediaan" & vbCrLf &
+                                            "FROM MKartuStok(NOLOCK)" & vbCrLf &
+                                            "WHERE(MKartuStok.IDJenisTransaksi = 6" & vbCrLf &
+                                            "OR MKartuStok.IDJenisTransaksi = 7)" & vbCrLf &
+                                            "AND CONVERT(DATE, MKartuStok.Tanggal) >= @TglDari" & vbCrLf &
+                                            "AND CONVERT(DATE, MKartuStok.Tanggal) <= @TglSampai" & vbCrLf &
+                                            "GROUP BY MKartuStok.IDJenisTransaksi, " & vbCrLf &
+                                            "MKartuStok.IDTransaksiD, " & vbCrLf &
+                                            "MKartuStok.IDTransaksi" & vbCrLf &
+                                            ") AS MPersediaan ON MPersediaan.IDTransaksi = MJual.IDHeader" & vbCrLf &
+                                            "AND MPersediaan.IDTransaksiD = MJual.NoID" & vbCrLf &
+                                            "AND MPersediaan.IDJenisTransaksi = MJual.IDJenisTransaksi" & vbCrLf &
                                             "WHERE 1=1 "
                                     If Not ckTdkAktif.Checked Then
                                         SQL &= " AND CONVERT(BIT, CASE WHEN MBarang.IsActive=1 AND MBarangD.IsActive=1 THEN 1 ELSE 0 END)=1"

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name" translatable="false">Catatan Keuangan</string>
     <string name="app_version" translatable="false">App Version : 1.0 (BETA)</string>
+    <string name="app_disconnect" translatable="false">Connection is unavailable. Please check your internet connection.</string>
 
     <!-- Login -->
     <string name="hello" translatable="false">Halo, </string>
@@ -15,6 +16,8 @@
     <string name="dont_have_account" translatable="false">Don\'t have an account?</string>
     <string name="create_account" translatable="false">Create Account</string>
     <string name="data_aman" translatable="false">100% data anda aman</string>
+    <string name="login_txtHP" translatable="false">Nomor Handphone harus diisi</string>
+    <string name="login_txtPwd" translatable="false">Password harus diisi minimum 8 Digit</string>
     <!-- Login -->
 
     <!-- Register -->
@@ -26,6 +29,6 @@
     <string name="and" translatable="false">and</string>
     <string name="conditions" translatable="false">Conditions</string>
     <string name="register_already_have_account" translatable="false">Already have an Account?</string>
-    <!-- Login -->
+    <!-- Register -->
 
 </resources>

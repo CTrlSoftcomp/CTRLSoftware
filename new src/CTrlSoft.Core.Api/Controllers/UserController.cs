@@ -177,7 +177,7 @@ namespace CTrlSoft.Core.Api.Controllers
                 if (userid == null || userid.Length <= 0)
                 {
                     return BadRequest("Error while creating");
-                } 
+                }
                 else if (pwd == null || pwd.Length < 8)
                 {
                     return BadRequest("Error while creating");
@@ -188,6 +188,30 @@ namespace CTrlSoft.Core.Api.Controllers
 
                     _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
                     return _interface.GetLogin(userid, pwd);
+                }
+            }
+            catch (Exception ex)
+            {
+                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.Login", ex);
+                return BadRequest("Error while creating");
+            }
+        }
+
+        [HttpGet, Route("available")]
+        public ActionResult<Models.JsonResult> Available(string userid)
+        {
+            try
+            {
+                if (userid == null || userid.Length <= 0)
+                {
+                    return BadRequest("Error while creating");
+                }
+                else
+                {
+                    Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Available", "UserID : " + userid);
+
+                    _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+                    return _interface.GetAvailableUser(userid);
                 }
             }
             catch (Exception ex)

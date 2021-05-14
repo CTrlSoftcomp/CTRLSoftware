@@ -8,11 +8,13 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using CTrlSoft.API;
 
 namespace CTrlSoft.Core.Api.Repository
 {
     public class RepSqlDatabase
     {
+        private static RepLogger telegramBot = new RepLogger(ConfigurationManager.AppSetting["BotConfiguration:BotToken"], ConfigurationManager.AppSetting["BotConfiguration:ChannelID"]);
         public static NpgsqlCommand OperatorSQL(NpgsqlCommand com, List<DataFilters> filters)
         {
             int ifieldname = 0;
@@ -141,6 +143,9 @@ namespace CTrlSoft.Core.Api.Repository
                 catch (Exception)
                 {
 
+                } finally
+                {
+                    telegramBot.BOT_SendMessageAsync(e);
                 }
             }
         }
@@ -164,6 +169,9 @@ namespace CTrlSoft.Core.Api.Repository
                 catch (Exception)
                 {
 
+                } finally
+                {
+                    telegramBot.BOT_SendMessageAsync(data);
                 }
             }
         }

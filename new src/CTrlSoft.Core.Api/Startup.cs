@@ -36,6 +36,7 @@ namespace CTrlSoft.API
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(c =>
             {
+                c.RouteTemplate = "/swagger/{documentName}/swagger.json";
                 c.SerializeAsV2 = true;
             });
 
@@ -43,7 +44,7 @@ namespace CTrlSoft.API
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CTrlSoft.Core.Api.V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CTrlSoftApi");
                 c.RoutePrefix = string.Empty;
             });
 

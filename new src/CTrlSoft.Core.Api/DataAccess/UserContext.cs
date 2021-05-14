@@ -89,8 +89,8 @@ namespace CTrlSoft.Core.Api.DataAccess
                                               "values (@id,@userid,@pwd,@nama,@idkontak,@idrole)";
                             com.Parameters.Clear();
                             com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
-                            com.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
-                            com.Parameters.Add("@pwd", NpgsqlTypes.NpgsqlDbType.Varchar).Value = RepUtils.CreateMD5(obj.pwd.Trim());
+                            com.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper().Trim();
+                            com.Parameters.Add("@pwd", NpgsqlTypes.NpgsqlDbType.Varchar).Value = RepUtils.CreateMD5(obj.pwd.ToUpper().Trim());
                             com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
                             com.Parameters.Add("@idkontak", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idkontak;
                             com.Parameters.Add("@idrole", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idrole;
@@ -98,9 +98,9 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.ExecuteNonQuery();
 
                             //cek data sudah ada atau belum
-                            com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                            com.CommandText = "select top 1 id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp";
                             com.Parameters.Clear();
-                            com.Parameters.AddWithValue("@hp", obj.userid);
+                            com.Parameters.AddWithValue("@hp", obj.userid.ToUpper());
                             long jml = RepUtils.NullToLong(com.ExecuteScalar());
 
                             if (jml == 0)
@@ -111,12 +111,12 @@ namespace CTrlSoft.Core.Api.DataAccess
                                                   "values (@id,@kode,@nama,@alamat1,@alamat2,@alamat3,@hp,@telpon,@iswhatsapp,@norekening,@bank,@atasnamarekening)";
                                 com.Parameters.Clear();
                                 com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = jml;
-                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
+                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper().Trim();
                                 com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
                                 com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
-                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid;
+                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper();
                                 com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
@@ -183,8 +183,8 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.CommandText = "update muser set nama=@nama,idkontak=@idkontak,idrole=@idrole where id=@id";
                             com.Parameters.Clear();
                             com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
-                            com.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
-                            com.Parameters.Add("@pwd", NpgsqlTypes.NpgsqlDbType.Varchar).Value = RepUtils.CreateMD5(obj.pwd.Trim());
+                            com.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper().Trim();
+                            com.Parameters.Add("@pwd", NpgsqlTypes.NpgsqlDbType.Varchar).Value = RepUtils.CreateMD5(obj.pwd.ToUpper().Trim());
                             com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
                             com.Parameters.Add("@idkontak", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idkontak;
                             com.Parameters.Add("@idrole", NpgsqlTypes.NpgsqlDbType.Integer).Value = obj.idrole;
@@ -192,9 +192,9 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.ExecuteNonQuery();
 
                             //cek data sudah ada atau belum
-                            com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                            com.CommandText = "select top 1 id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp";
                             com.Parameters.Clear();
-                            com.Parameters.AddWithValue("@hp", obj.userid);
+                            com.Parameters.AddWithValue("@hp", obj.userid.ToUpper());
                             long jml = RepUtils.NullToLong(com.ExecuteScalar());
 
                             if (jml == 0)
@@ -205,12 +205,12 @@ namespace CTrlSoft.Core.Api.DataAccess
                                                   "values (@id,@kode,@nama,@alamat1,@alamat2,@alamat3,@hp,@telpon,@iswhatsapp,@norekening,@bank,@atasnamarekening)";
                                 com.Parameters.Clear();
                                 com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = jml;
-                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.Trim();
+                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper().Trim();
                                 com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
                                 com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
-                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid;
+                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper();
                                 com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
@@ -409,8 +409,8 @@ namespace CTrlSoft.Core.Api.DataAccess
             List<DataFilters> filters = new List<DataFilters>();
             filters.Add(new DataFilters
             {
-                FieldName = "userid",
-                FieldValue = userid,
+                FieldName = "upper(userid)",
+                FieldValue = userid.ToUpper(),
                 Operator = DataFilters.OperatorQuery.SamaDengan,
                 Separator = DataFilters.SeparatorQuery.And
             });
@@ -428,7 +428,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             else
             {
                 //Cek Pwdnya
-                string PwdMD5Old = "", PwdMD5New = RepUtils.CreateMD5(pwd);
+                string PwdMD5Old = "", PwdMD5New = RepUtils.CreateMD5(pwd.ToUpper());
                 using (Npgsql.NpgsqlConnection con = GetConnection())
                 {
                     using (Npgsql.NpgsqlCommand com = new NpgsqlCommand())
@@ -510,7 +510,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             else
             {
                 //Cek Pwdnya
-                string PwdMD5Old = RepUtils.CreateMD5(oldpwd), PwdMD5New = RepUtils.CreateMD5(newpwd);
+                string PwdMD5Old = RepUtils.CreateMD5(oldpwd.ToUpper()), PwdMD5New = RepUtils.CreateMD5(newpwd.ToUpper());
                 using (Npgsql.NpgsqlConnection con = GetConnection())
                 {
                     using (Npgsql.NpgsqlCommand com = new NpgsqlCommand())

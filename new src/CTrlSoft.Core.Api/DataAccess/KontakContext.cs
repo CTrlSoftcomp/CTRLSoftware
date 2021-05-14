@@ -146,7 +146,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             return hasil;
         }
 
-        JsonResult IKontak.Save(long iduser, Models.Dto.MKontak obj, ref ValidationError validationError)
+        JsonResult IKontak.Save(long iduser, Models.Dto.MKontak obj)
         {
             JsonResult hasil = new JsonResult { JSONResult = false, JSONMessage = "Data tidak ditemukan", JSONRows = 0, JSONValue = null };
             List<MKontak> list = new List<MKontak>();
@@ -166,7 +166,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                 com.Transaction = com.Connection.BeginTransaction();
 
                                 //cek data sudah ada atau belum
-                                com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                                com.CommandText = "select id from mkontak where right(hp, LENGTH(hp)-2) = @hp LIMIT 1";
                                 com.Parameters.Clear();
                                 com.Parameters.AddWithValue("@hp", obj.hp);
                                 long jml = RepUtils.NullToLong(com.ExecuteScalar());
@@ -187,7 +187,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                     com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
                                     com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
                                     com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
-                                    com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
+                                    com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = obj.iswhatsapp;
                                     com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                                     com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
 
@@ -210,7 +210,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                 com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
                                 com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
                                 com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
-                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
+                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = obj.iswhatsapp;
                                 com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                                 com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
 
@@ -229,10 +229,10 @@ namespace CTrlSoft.Core.Api.DataAccess
                             {
                                 hasil = new JsonResult
                                 {
-                                    JSONMessage = ex.StackTrace,
+                                    JSONMessage = ex.Message,
                                     JSONResult = false,
                                     JSONRows = 0,
-                                    JSONValue = null
+                                    JSONValue = ex
                                 };
                             }
                         }
@@ -247,7 +247,7 @@ namespace CTrlSoft.Core.Api.DataAccess
             throw new NotImplementedException();
         }
 
-        JsonResult IKontak.Update(long iduser, Models.Dto.MKontak obj, ref ValidationError validationError)
+        JsonResult IKontak.Update(long iduser, Models.Dto.MKontak obj)
         {
             JsonResult hasil = new JsonResult { JSONResult = false, JSONMessage = "Data tidak ditemukan", JSONRows = 0, JSONValue = null };
             List<MKontak> list = new List<MKontak>();
@@ -271,29 +271,29 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.ExecuteNonQuery();
 
                             //cek data sudah ada atau belum
-                            com.CommandText = "select top 1 id from mkontak where right(hp, LENGTH(hp)-2) = @hp";
+                            com.CommandText = "select id from mkontak where right(hp, LENGTH(hp)-2) = @hp LIMIT 1";
                             com.Parameters.Clear();
                             com.Parameters.AddWithValue("@hp", obj.hp);
                             long jml = RepUtils.NullToLong(com.ExecuteScalar());
 
                             if (jml == obj.id)
                             {
-                                com.CommandText = "update mkontak set kode=@kode,nama=@nama,alamat1=@alamat1,alamat2=@alamat2,alamat3=@alamat3,hp=@hp,telpon=@telpon,iswhatsapp=@iswhatsapp,norekening=@norekening,bank=@bank,atasnamarekening=@atasnamarekening where id=@id";
-                                com.Parameters.Clear();
-                                com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
-                                com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.kode.Trim();
-                                com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
-                                com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat1.Trim();
-                                com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat2.Trim();
-                                com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat3.Trim();
-                                com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
-                                com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
-                                com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
-                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
-                                com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
-                                com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
+                                //com.CommandText = "update mkontak set kode=@kode,nama=@nama,alamat1=@alamat1,alamat2=@alamat2,alamat3=@alamat3,hp=@hp,telpon=@telpon,iswhatsapp=@iswhatsapp,norekening=@norekening,bank=@bank,atasnamarekening=@atasnamarekening where id=@id";
+                                //com.Parameters.Clear();
+                                //com.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Bigint).Value = obj.id;
+                                //com.Parameters.Add("@kode", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.kode.Trim();
+                                //com.Parameters.Add("@nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.nama.Trim();
+                                //com.Parameters.Add("@alamat1", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat1.Trim();
+                                //com.Parameters.Add("@alamat2", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat2.Trim();
+                                //com.Parameters.Add("@alamat3", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.alamat3.Trim();
+                                //com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
+                                //com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
+                                //com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
+                                //com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = obj.iswhatsapp;
+                                //com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
+                                //com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
 
-                                com.ExecuteNonQuery();
+                                //com.ExecuteNonQuery();
                             } else
                             {
                                 if (jml == 0)
@@ -312,7 +312,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                     com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
                                     com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
                                     com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
-                                    com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
+                                    com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = obj.iswhatsapp;
                                     com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                                     com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
 
@@ -336,7 +336,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.hp.Trim();
                             com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.telpon.Trim();
                             com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.bank.Trim();
-                            com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = obj.iswhatsapp;
+                            com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = obj.iswhatsapp;
                             com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.norekening.Trim();
                             com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.atasnamarekening.Trim();
 
@@ -355,10 +355,10 @@ namespace CTrlSoft.Core.Api.DataAccess
                         {
                             hasil = new JsonResult
                             {
-                                JSONMessage = ex.StackTrace,
+                                JSONMessage = ex.Message,
                                 JSONResult = false,
                                 JSONRows = 0,
-                                JSONValue = null
+                                JSONValue = ex
                             };
                         }
                     }

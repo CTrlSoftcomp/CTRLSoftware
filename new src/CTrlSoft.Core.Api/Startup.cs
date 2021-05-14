@@ -25,7 +25,7 @@ namespace CTrlSoft.API
             services.Add(new ServiceDescriptor(typeof(KontakContext), new KontakContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(RoleContext), new RoleContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(UserContext), new UserContext(Configuration.GetConnectionString("DefaultConnection"))));
-
+            
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
         }

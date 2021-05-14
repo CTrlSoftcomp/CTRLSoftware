@@ -98,7 +98,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.ExecuteNonQuery();
 
                             //cek data sudah ada atau belum
-                            com.CommandText = "select top 1 id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp";
+                            com.CommandText = "select id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp LIMIT 1";
                             com.Parameters.Clear();
                             com.Parameters.AddWithValue("@hp", obj.userid.ToUpper());
                             long jml = RepUtils.NullToLong(com.ExecuteScalar());
@@ -119,7 +119,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                 com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper();
                                 com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
-                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
+                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = false;
                                 com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
 
@@ -146,10 +146,10 @@ namespace CTrlSoft.Core.Api.DataAccess
                         {
                             hasil = new JsonResult
                             {
-                                JSONMessage = ex.StackTrace,
+                                JSONMessage = ex.Message,
                                 JSONResult = false,
                                 JSONRows = 0,
-                                JSONValue = null
+                                JSONValue = ex
                             };
                         }
                     }
@@ -192,7 +192,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                             com.ExecuteNonQuery();
 
                             //cek data sudah ada atau belum
-                            com.CommandText = "select top 1 id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp";
+                            com.CommandText = "select id from mkontak where right(upper(hp), LENGTH(upper(hp))-2) = @hp LIMIT 1";
                             com.Parameters.Clear();
                             com.Parameters.AddWithValue("@hp", obj.userid.ToUpper());
                             long jml = RepUtils.NullToLong(com.ExecuteScalar());
@@ -213,7 +213,7 @@ namespace CTrlSoft.Core.Api.DataAccess
                                 com.Parameters.Add("@hp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = obj.userid.ToUpper();
                                 com.Parameters.Add("@telpon", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@bank", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
-                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Boolean).Value = false;
+                                com.Parameters.Add("@iswhatsapp", NpgsqlTypes.NpgsqlDbType.Bit).Value = false;
                                 com.Parameters.Add("@norekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
                                 com.Parameters.Add("@atasnamarekening", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "";
 
@@ -240,10 +240,10 @@ namespace CTrlSoft.Core.Api.DataAccess
                         {
                             hasil = new JsonResult
                             {
-                                JSONMessage = ex.StackTrace,
+                                JSONMessage = ex.Message,
                                 JSONResult = false,
                                 JSONRows = 0,
-                                JSONValue = null
+                                JSONValue = ex
                             };
                         }
                     }
@@ -598,10 +598,10 @@ namespace CTrlSoft.Core.Api.DataAccess
                         {
                             hasil = new JsonResult
                             {
-                                JSONMessage = ex.StackTrace,
+                                JSONMessage = ex.Message,
                                 JSONResult = false,
                                 JSONRows = 0,
-                                JSONValue = null
+                                JSONValue = ex
                             };
                         }
                     }

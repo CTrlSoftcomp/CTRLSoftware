@@ -166,12 +166,9 @@ namespace CTrlSoft.Core.Api.Repository
                     streamWriter.WriteLine(dateTime.ToString("yy-MM-dd HH:mm:ss") + " [" + method + "] data JSON : " + data);
                     streamWriter.Flush();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                } finally
-                {
-                    telegramBot.BOT_SendMessageAsync(data);
+                    telegramBot.BOT_SendMessageAsync(ex);
                 }
             }
         }

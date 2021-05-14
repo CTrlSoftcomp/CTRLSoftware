@@ -104,7 +104,7 @@ namespace CTrlSoft.Core.Api.Controllers
         }
 
         [HttpPost, Route("save")]
-        public ActionResult<Models.JsonResult> Save([FromBody] MKontak Kontak)
+        public ActionResult<Models.JsonResult> Save(long iduser, [FromBody] MKontak Kontak)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace CTrlSoft.Core.Api.Controllers
                     Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "Kontak.Save", Newtonsoft.Json.JsonConvert.SerializeObject(Kontak));
 
                     _interface = HttpContext.RequestServices.GetService(typeof(KontakContext)) as KontakContext;
-                    return _interface.Save(Kontak);
+                    return _interface.Save(iduser, Kontak);
                 }
             }
             catch (Exception ex)

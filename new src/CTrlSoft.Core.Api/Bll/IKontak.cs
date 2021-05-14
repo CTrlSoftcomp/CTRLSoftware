@@ -13,7 +13,7 @@ namespace CTrlSoft.Core.Api.Bll
         JsonResult GetByFilter(long iduser, List<DataFilters> filters);
 
         //JsonResult Save(Kontak obj);
-        JsonResult Save(long iduser, MKontak obj, ref ValidationError validationError);
-        JsonResult Update(long iduser, MKontak obj, ref ValidationError validationError);
+        JsonResult Save(long iduser, MKontak obj);
+        JsonResult Update(long iduser, MKontak obj);
     }
 }

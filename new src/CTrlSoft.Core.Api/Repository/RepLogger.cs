@@ -25,7 +25,7 @@ namespace CTrlSoft.Core.Api.Repository
             {
                 if (botClient is null)
                 {
-                    botClient = new TelegramBotClient("");
+                    botClient = new TelegramBotClient(BOT_API_KEY);
                 }
 
                 if (checkInternet())

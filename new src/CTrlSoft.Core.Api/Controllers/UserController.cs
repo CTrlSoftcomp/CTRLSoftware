@@ -56,23 +56,6 @@ namespace CTrlSoft.Core.Api.Controllers
             }
         }
 
-        [HttpGet, Route("available")]
-        public ActionResult<Models.JsonResult> GetAvailableUser(string userid)
-        {
-            try
-            {
-                Repository.RepSqlDatabase.LogConnection(_hostEnvironment, "User.Available", userid);
-
-                _interface = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
-                return _interface.GetAvailableUser(userid);
-            }
-            catch (Exception ex)
-            {
-                Repository.RepSqlDatabase.LogErrorQuery(_hostEnvironment, "User.Get", ex);
-                return BadRequest("Error while creating");
-            }
-        }
-
         [HttpPost, Route("save")]
         public ActionResult<Models.JsonResult> Save([FromBody] MUser User)
         {

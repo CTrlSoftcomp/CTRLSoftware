@@ -210,8 +210,21 @@ Public Class frmEntriSaldoAwalPersediaan
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                
-                                com.CommandText = "SELECT MSatuan.NoID, MSatuan.Kode Satuan, MSatuan.Konversi FROM MSatuan(NOLOCK) INNER JOIN MBarangD(NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan WHERE MBarangD.IDBarang=" & IDBarang & " AND MBarangD.IsActive=1"
+
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf &
+                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf &
+                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf &
+                                                  "FROM (" & vbCrLf &
+                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf &
+                                                  "FROM MBarangD" & vbCrLf &
+                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
+                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf &
+                                                  "UNION ALL" & vbCrLf &
+                                                  "SELECT MBarang.IDSatuanBeli, MBarang.IsiCtn" & vbCrLf &
+                                                  "FROM MBarang" & vbCrLf &
+                                                  "WHERE MBarang.NoID=@IDBarang AND MBarang.IsActive=1) AS X" & vbCrLf &
+                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf &
+                                                  "GROUP BY X.NoID, X.Konversi, MSatuan.Kode"
                                 oDA.Fill(ds, "MSatuan")
                                 txtSatuan.Properties.DataSource = ds.Tables("MSatuan")
                                 txtSatuan.Properties.DisplayMember = "Satuan"
@@ -274,7 +287,21 @@ Public Class frmEntriSaldoAwalPersediaan
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MSatuan.NoID, MSatuan.Kode Satuan, MSatuan.Konversi FROM MSatuan(NOLOCK) INNER JOIN MBarangD(NOLOCK) ON MSatuan.NoID=MBarangD.IDSatuan WHERE MBarangD.NoID=" & NullToLong(txtBarcode.EditValue)
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf &
+                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf &
+                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf &
+                                                  "FROM (" & vbCrLf &
+                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf &
+                                                  "FROM MBarangD" & vbCrLf &
+                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
+                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf &
+                                                  "UNION ALL" & vbCrLf &
+                                                  "SELECT MBarang.IDSatuanBeli, MBarang.IsiCtn" & vbCrLf &
+                                                  "FROM MBarang" & vbCrLf &
+                                                  "WHERE MBarang.NoID=@IDBarang AND MBarang.IsActive=1) AS X" & vbCrLf &
+                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf &
+                                                  "GROUP BY X.NoID, X.Konversi, MSatuan.Kode" & vbCrLf &
+                                                  "HAVING X.NoID=" & NullToLong(txtSatuan.EditValue)
                                 oDA.Fill(ds, "MSatuan")
                                 If ds.Tables("MSatuan").Rows.Count >= 1 Then
                                     Dim iRow As DataRow = ds.Tables("MSatuan").Rows(0)

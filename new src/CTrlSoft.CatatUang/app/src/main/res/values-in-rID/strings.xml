@@ -23,4 +23,7 @@
     <string name="register" translatable="false">Register</string>
     <string name="login_txtHP" translatable="false">Nomor Handphone harus diisi</string>
     <string name="login_txtPwd" translatable="false">Password harus diisi minimum 8 Digit</string>
+    <string name="app_disconnect" translatable="false">Koneksi tidak tersedia. Mohon untuk cek koneksi internet.</string>
+    <string name="register_user_available" translatable="false">User Tersedia</string>
+    <string name="register_user_notavailable" translatable="false">User tidak Tersedia</string>
 </resources>

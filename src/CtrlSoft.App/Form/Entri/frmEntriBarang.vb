@@ -323,8 +323,8 @@ Public Class frmEntriBarang
                                     txtDiscRp.EditValue = NullToDbl(ds.Tables("MBarang").Rows(0).Item("DiscRp"))
 
                                     txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100) * 100.0
+                                    txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100) * 100.0
 
                                     txtProsenUpA.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("ProsenUpA"))
                                     txtProsenUpB.EditValue = NullTolInt(ds.Tables("MBarang").Rows(0).Item("ProsenUpB"))
@@ -342,8 +342,8 @@ Public Class frmEntriBarang
                                     txtProsenUpB.EditValue = -100.0
 
                                     txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100) * 100.0
+                                    txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100) * 100.0
 
                                     Me.NoID = -1
 
@@ -375,9 +375,9 @@ Public Class frmEntriBarang
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT MBarangD.*, MSatuan.Kode Satuan, MBarangD.ProsenUpA [MarginRetail], MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB [MarginGrosir], MBarangD.HargaJualB HargaGrosir " & vbCrLf & _
-                                                  "FROM MBarangD " & vbCrLf & _
-                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MBarangD.IDSatuan " & vbCrLf & _
+                                com.CommandText = "SELECT MBarangD.*, MSatuan.Kode Satuan, MBarangD.ProsenUpA [MarginRetail], MBarangD.HargaJualA HargaRetail, MBarangD.ProsenUpB [MarginGrosir], MBarangD.HargaJualB HargaGrosir " & vbCrLf &
+                                                  "FROM MBarangD " & vbCrLf &
+                                                  "LEFT JOIN MSatuan ON MSatuan.NoID=MBarangD.IDSatuan " & vbCrLf &
                                                   "WHERE MBarangD.IDBarang=" & NoID
                                 If Not ckTampilkanSemua.Checked Then
                                     com.CommandText &= " AND MBarangD.IsActive=1"
@@ -452,9 +452,9 @@ Public Class frmEntriBarang
         End Using
     End Sub
 
-    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvKategori.DataSourceChanged, gvSatuanBeli.DataSourceChanged, _
-    gvSatuanJual.DataSourceChanged, gvSupplier1.DataSourceChanged, _
-    gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged, _
+    Private Sub gv_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged, gvKategori.DataSourceChanged, gvSatuanBeli.DataSourceChanged,
+    gvSatuanJual.DataSourceChanged, gvSupplier1.DataSourceChanged,
+    gvSupplier1.DataSourceChanged, gvSupplier2.DataSourceChanged,
     gvTypePajak.DataSourceChanged, gvMerk.DataSourceChanged
         With sender
             If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
@@ -494,13 +494,13 @@ Public Class frmEntriBarang
 
     End Sub
 
-    Private Sub txtHargaBeli_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtHargaBeli.LostFocus, txtIsiCtn.LostFocus, txtDiscProsen1.LostFocus, _
-    txtDiscProsen2.LostFocus, txtDiscProsen3.LostFocus, txtDiscProsen4.LostFocus, txtDiscProsen5.LostFocus, _
+    Private Sub txtHargaBeli_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtHargaBeli.LostFocus, txtIsiCtn.LostFocus, txtDiscProsen1.LostFocus,
+    txtDiscProsen2.LostFocus, txtDiscProsen3.LostFocus, txtDiscProsen4.LostFocus, txtDiscProsen5.LostFocus,
     txtDiscRp.LostFocus, txtModal.LostFocus, txtTypePajak.LostFocus
         Try
             txtModal.EditValue = Bulatkan(IIf(txtTypePajak.EditValue = 2, 1.1, 1) * Bulatkan(Bulatkan(txtHargaBeli.EditValue / txtIsiCtn.EditValue, 2) * (1 - txtDiscProsen1.EditValue / 100) * (1 - txtDiscProsen2.EditValue / 100) * (1 - txtDiscProsen3.EditValue / 100) * (1 - txtDiscProsen4.EditValue / 100) * (1 - txtDiscProsen5.EditValue / 100) - txtDiscRp.EditValue, 2), 2)
-            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100) * 100.0
+            txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100) * 100.0
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -508,7 +508,7 @@ Public Class frmEntriBarang
 
     Private Sub txtProsenUpA_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpA.LostFocus
         Try
-            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+            txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100) * 100.0
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
                     GridView1.SetRowCellValue(i, "ProsenUpA", txtProsenUpA.EditValue)
@@ -533,7 +533,7 @@ Public Class frmEntriBarang
 
     Private Sub txtProsenUpB_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpB.LostFocus
         Try
-            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100) * 100.0
             For i As Integer = 0 To GridView1.RowCount - 1
                 If NullToBool(GridView1.GetRowCellValue(i, "IsDefault")) Then
                     GridView1.SetRowCellValue(i, "ProsenUpB", txtProsenUpB.EditValue)

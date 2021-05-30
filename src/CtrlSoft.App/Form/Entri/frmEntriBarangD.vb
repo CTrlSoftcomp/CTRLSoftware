@@ -174,8 +174,8 @@ Public Class frmEntriBarangD
                                     txtHargaJualA.EditValue = NullToDbl(ds.Tables("MBarangD").Rows(0).Item("HargaJualA"))
                                     txtHargaJualB.EditValue = NullToDbl(ds.Tables("MBarangD").Rows(0).Item("HargaJualB"))
 
-                                    txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
-                                    txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+                                    txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100.0) * 100.0
+                                    txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100.0) * 100.0
 
                                     ckAktif.Checked = NullToBool(ds.Tables("MBarangD").Rows(0).Item("IsActive"))
                                     ckIsDefault.Checked = NullToBool(ds.Tables("MBarangD").Rows(0).Item("IsDefault"))
@@ -227,7 +227,7 @@ Public Class frmEntriBarangD
 
     Private Sub txtProsenUpA_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpA.LostFocus
         Try
-            txtHargaJualA.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpA.EditValue / 100), 0)
+            txtHargaJualA.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1.0 + txtProsenUpA.EditValue / 100.0), 0) / 100.0) * 100.0
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -235,7 +235,7 @@ Public Class frmEntriBarangD
 
     Private Sub txtProsenUpB_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtProsenUpB.LostFocus
         Try
-            txtHargaJualB.EditValue = Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1 + txtProsenUpB.EditValue / 100), 0)
+            txtHargaJualB.EditValue = System.Math.Ceiling(Bulatkan(txtModal.EditValue * txtKonversi.EditValue * (1.0 + txtProsenUpB.EditValue / 100.0), 0) / 100.0) * 100.0
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -246,7 +246,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100.0, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -293,7 +293,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpA.EditValue = -100.0
             Else
-                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpA.EditValue = Bulatkan(((txtHargaJualA.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100.0, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -305,7 +305,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100.0, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -317,7 +317,7 @@ Public Class frmEntriBarangD
             If NullToDbl(txtModal.EditValue) = 0 Then
                 txtProsenUpB.EditValue = -100.0
             Else
-                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100, 2)
+                txtProsenUpB.EditValue = Bulatkan(((txtHargaJualB.EditValue - txtModal.EditValue * txtKonversi.EditValue) / (txtModal.EditValue * txtKonversi.EditValue)) * 100.0, 2)
             End If
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

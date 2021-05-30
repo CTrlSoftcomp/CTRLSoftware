@@ -109,6 +109,10 @@ namespace CTrlSoft.Core.Api.Repository
                 return sb.ToString();
             }
         }
+        public static Guid NewGuid()
+        {
+            return Guid.NewGuid();
+        }
     }
     public interface IPathProvider
     {

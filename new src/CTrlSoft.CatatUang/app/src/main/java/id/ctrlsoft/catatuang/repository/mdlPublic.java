@@ -13,8 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.json.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -151,7 +151,7 @@ public class mdlPublic {
         }
     }
 
-    public static Snackbar ShowMessage(Context context, String Message, String Button1) {
+    public static Snackbar ShowMessage(Context context, String Message, String Button1, View.OnClickListener onClick) {
         try {
             View getView = ((Activity)context).findViewById(android.R.id.content);
             if (getView == null) {
@@ -159,16 +159,16 @@ public class mdlPublic {
                 return null;
             } else {
                 return Snackbar.make(getView, Message, BaseTransientBottomBar.LENGTH_LONG)
-                        .setAction(Button1, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                baction = 0;
-                            }
-                        })
-                        .show();
+                        .setAction(Button1, onClick);
             }
         } catch (Exception e) {
             LogError(context, e);
         }
+        return null;
+    }
+
+    public static String toJson(Object obj) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        return gson.toJson(obj);
     }
 }

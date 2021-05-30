@@ -22,6 +22,8 @@
 
     <!-- Register -->
     <string name="register" translatable="false">Register</string>
+    <string name="register_user_available" translatable="false">User Available</string>
+    <string name="register_user_notavailable" translatable="false">User not Available</string>
     <string name="register_1" translatable="false">Selamat datang di CTrlSoft, Untuk masuk silahkan isi formulir dibawah.</string>
     <string name="register_name" translatable="false">Nama</string>
     <string name="register_agree" translatable="false">I agree with our</string>

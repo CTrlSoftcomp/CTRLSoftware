@@ -2,6 +2,7 @@ package id.ctrlsoft.catatuang.connection;
 
 import id.ctrlsoft.catatuang.connection.model.Callbacks;
 import id.ctrlsoft.catatuang.connection.model.CallbacksUser;
+import id.ctrlsoft.catatuang.repository.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -23,17 +24,15 @@ public interface API {
     );
 
     @Headers({CACHE, TYPE})
-    @GET("User/login")
+    @GET("User/available")
     Call<Callbacks> User_Avaiable(
             @Query("userid") String userid
     );
 
     @Headers({CACHE, TYPE})
     @FormUrlEncoded
-    @POST("MasterJSONService.asmx/GetListProdukGuest")
-    Call<Callbacks> User_Save(
-            @Query("oldpwd") String oldpwd,
-            @Query("newpwd") String newpwd,
-            @Body String body
+    @POST("User/save")
+    Call<CallbacksUser> User_Save(
+            @Body User user
     );
 }

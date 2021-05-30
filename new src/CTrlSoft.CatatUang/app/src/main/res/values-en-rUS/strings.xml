@@ -23,4 +23,7 @@
     <string name="register" translatable="false">Registration</string>
     <string name="login_txtHP" translatable="false">Phone Number is required</string>
     <string name="login_txtPwd" translatable="false">Password must be inputted with a minimum 8 digits</string>
+    <string name="app_disconnect" translatable="false">Connection is unavailable. Please check your internet connection.</string>
+    <string name="register_user_available" translatable="false">User Available</string>
+    <string name="register_user_notavailable" translatable="false">User not Available</string>
 </resources>

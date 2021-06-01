@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="17.1.3.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="DaftarPenjualan1" SnapGridSize="25" ReportUnit="TenthsOfAMillimeter" Margins="0, 0, 0, 0" PaperKind="Custom" PageWidth="480" PageHeight="2794" ScriptLanguage="VisualBasic" Version="17.1" Dpi="254">
+  <Bands>
+    <Item1 Ref="1" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" Dpi="254" />
+    <Item2 Ref="2" ControlType="DetailBand" Name="Detail" HeightF="34.6075" Dpi="254">
+      <Controls>
+        <Item1 Ref="3" ControlType="XRLabel" Name="label15" Text="[DaftarPenjualan1.NamaPembayaran]" TextAlignment="TopLeft" SizeF="297.080231,34.6075" LocationFloat="0, 0" Dpi="254" Font="Tahoma, 8pt" Padding="5,5,0,0,254">
+          <StylePriority Ref="4" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="5" ControlType="XRLabel" Name="label16" Text="[DaftarPenjualan1.Total!n0]" TextAlignment="TopRight" SizeF="182.919769,34.6075" LocationFloat="297.080231, 0" Dpi="254" Font="Tahoma, 8pt" Padding="5,5,0,0,254">
+          <Summary Ref="6" FormatString="{0:n0}" />
+          <StylePriority Ref="7" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item2>
+    <Item3 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="0" Dpi="254" />
+  </Bands>
+</XtraReportsLayoutSerializer>

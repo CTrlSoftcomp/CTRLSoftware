@@ -11,9 +11,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Ctrl Software")> 
 <Assembly: AssemblyDescription("Software Retail dan Grosir")> 
 <Assembly: AssemblyCompany("CPYH Software")> 
-<Assembly: AssemblyProduct("CPYH")> 
-<Assembly: AssemblyCopyright("Copyright © CPYH 2019")> 
-<Assembly: AssemblyTrademark("Copyright © CPYH 2019")> 
+<Assembly: AssemblyProduct("CPYH")>
+<Assembly: AssemblyCopyright("Copyright © CPYH 2021")>
+<Assembly: AssemblyTrademark("Copyright © CPYH 2021")>
 
 <Assembly: ComVisible(False)>
 

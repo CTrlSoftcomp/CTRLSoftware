@@ -5,22 +5,30 @@ Imports CtrlSoft.Repository.Utils
 Imports CtrlSoft.App.Public
 Imports System.Threading
 Imports System.IO
+Imports DevExpress.XtraReports.Security
 
 Public Class modMain
 
-    <STAThread()> _
-        Shared Sub Main()
+    <STAThread()>
+    Shared Sub Main()
         Try
             'Default System
             InitFolders()
 
-            StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") & _
-                        ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") & _
-                        ";User ID=" & BacaIni("DBConfig", "Username", "sa") & _
-                        ";Password=" & BacaIni("DBConfig", "Password", "Sg1") & _
+            Dim DBSetting = [Public].DBSetting.List.Where(Function(m) m.Default = True).SingleOrDefault
+            If (DBSetting IsNot Nothing) Then
+                StrKonSQL = DBSetting.KoneksiString
+            Else
+                StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
+                        ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
+                        ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
+                        ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
                         ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+            End If
 
-            DevExpress.UserSkins.OfficeSkins.Register()
+            'DevExpress.UserSkins.OfficeSkins.Register()
+            ScriptPermissionManager.GlobalInstance = New ScriptPermissionManager(ExecutionMode.Unrestricted)
+
             DevExpress.UserSkins.BonusSkins.Register()
             Application.EnableVisualStyles()
             Application.SetCompatibleTextRenderingDefault(False)
@@ -30,10 +38,10 @@ Public Class modMain
             Thread.CurrentThread.CurrentCulture = culture
             Thread.CurrentThread.CurrentUICulture = culture
 
-            DevExpress.Utils.AppearanceObject.DefaultFont = New Font("Segoe UI", 11)
-            DevExpress.Utils.AppearanceObject.ControlAppearance.Font = New Font("Segoe UI", 11)
-            DevExpress.Utils.AppearanceObject.EmptyAppearance.Font = New Font("Segoe UI", 11)
-            
+            'DevExpress.Utils.AppearanceObject.DefaultFont = New Font("Segoe UI", 11)
+            'DevExpress.Utils.AppearanceObject.ControlAppearance.Font = New Font("Segoe UI", 11)
+            'DevExpress.Utils.AppearanceObject.EmptyAppearance.Font = New Font("Segoe UI", 11)
+
             Application.Run(New frmMain())
         Catch ex As Exception
             XtraMessageBox.Show("System error : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

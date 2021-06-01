@@ -53,11 +53,16 @@ Public Class frmMain
         Using frm As New frmSettingDB
             Try
                 If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                    StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") & _
-                                ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") & _
-                                ";User ID=" & BacaIni("DBConfig", "Username", "sa") & _
-                                ";Password=" & BacaIni("DBConfig", "Password", "Sg1") & _
-                                ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+                    Dim DBSetting = [Public].DBSetting.List.Where(Function(m) m.Default = True).SingleOrDefault
+                    If (DBSetting IsNot Nothing) Then
+                        StrKonSQL = DBSetting.KoneksiString
+                    Else
+                        StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
+                        ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
+                        ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
+                        ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
+                        ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+                    End If
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, "Admin Says", MessageBoxButtons.OK, MessageBoxIcon.Error)

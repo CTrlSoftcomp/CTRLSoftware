@@ -19,31 +19,31 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl
+        Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.ApplicationMenu1 = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
-        Me.barSetting = New DevExpress.XtraBars.BarButtonItem
-        Me.barLoginOut = New DevExpress.XtraBars.BarButtonItem
-        Me.barExit = New DevExpress.XtraBars.BarButtonItem
+        Me.barSetting = New DevExpress.XtraBars.BarButtonItem()
+        Me.barLoginOut = New DevExpress.XtraBars.BarButtonItem()
+        Me.barExit = New DevExpress.XtraBars.BarButtonItem()
         Me.ImageCollectionSmall = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.rgbiSkins = New DevExpress.XtraBars.RibbonGalleryBarItem
-        Me.barStaticUID = New DevExpress.XtraBars.BarStaticItem
-        Me.barStaticJam = New DevExpress.XtraBars.BarStaticItem
-        Me.barSettingPerusahaan = New DevExpress.XtraBars.BarButtonItem
-        Me.barEditReport = New DevExpress.XtraBars.BarEditItem
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.barManagementUser = New DevExpress.XtraBars.BarButtonItem
-        Me.barManagementRole = New DevExpress.XtraBars.BarButtonItem
+        Me.rgbiSkins = New DevExpress.XtraBars.RibbonGalleryBarItem()
+        Me.barStaticUID = New DevExpress.XtraBars.BarStaticItem()
+        Me.barStaticJam = New DevExpress.XtraBars.BarStaticItem()
+        Me.barSettingPerusahaan = New DevExpress.XtraBars.BarButtonItem()
+        Me.barEditReport = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.barManagementUser = New DevExpress.XtraBars.BarButtonItem()
+        Me.barManagementRole = New DevExpress.XtraBars.BarButtonItem()
         Me.ImageCollectionLarge = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory
-        Me.RibbonPage6 = New DevExpress.XtraBars.Ribbon.RibbonPage
-        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup
-        Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup
-        Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar
+        Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
+        Me.RibbonPage6 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
         Me.defaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ICButtons = New DevExpress.Utils.ImageCollection(Me.components)
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -59,11 +59,7 @@ Partial Class frmMain
         '
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ApplicationButtonText = Nothing
-        '
-        '
-        '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.ExpandCollapseItem.Name = ""
         Me.RibbonControl.Images = Me.ImageCollectionSmall
         Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.barEditReport, Me.barManagementUser, Me.barManagementRole})
         Me.RibbonControl.LargeImages = Me.ImageCollectionLarge
@@ -73,8 +69,7 @@ Partial Class frmMain
         Me.RibbonControl.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
         Me.RibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
-        Me.RibbonControl.SelectedPage = Me.RibbonPage6
-        Me.RibbonControl.Size = New System.Drawing.Size(1151, 145)
+        Me.RibbonControl.Size = New System.Drawing.Size(1151, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'ApplicationMenu1
@@ -89,28 +84,28 @@ Partial Class frmMain
         '
         Me.barSetting.Caption = "Setting Koneksi"
         Me.barSetting.Id = 14
-        Me.barSetting.ImageIndex = 11
+        Me.barSetting.ImageOptions.ImageIndex = 11
+        Me.barSetting.ImageOptions.LargeImageIndex = 11
         Me.barSetting.ItemShortcut = New DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-                        Or System.Windows.Forms.Keys.S))
-        Me.barSetting.LargeImageIndex = 11
+                Or System.Windows.Forms.Keys.S))
         Me.barSetting.Name = "barSetting"
         '
         'barLoginOut
         '
         Me.barLoginOut.Caption = "Login"
         Me.barLoginOut.Id = 13
-        Me.barLoginOut.ImageIndex = 12
+        Me.barLoginOut.ImageOptions.ImageIndex = 12
+        Me.barLoginOut.ImageOptions.LargeImageIndex = 12
         Me.barLoginOut.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L))
-        Me.barLoginOut.LargeImageIndex = 12
         Me.barLoginOut.Name = "barLoginOut"
         '
         'barExit
         '
         Me.barExit.Caption = "Keluar"
         Me.barExit.Id = 15
-        Me.barExit.ImageIndex = 13
+        Me.barExit.ImageOptions.ImageIndex = 13
+        Me.barExit.ImageOptions.LargeImageIndex = 13
         Me.barExit.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4))
-        Me.barExit.LargeImageIndex = 13
         Me.barExit.Name = "barExit"
         '
         'ImageCollectionSmall
@@ -142,7 +137,6 @@ Partial Class frmMain
         Me.barStaticUID.Caption = "User : (none)"
         Me.barStaticUID.Id = 2
         Me.barStaticUID.Name = "barStaticUID"
-        Me.barStaticUID.TextAlignment = System.Drawing.StringAlignment.Near
         '
         'barStaticJam
         '
@@ -150,14 +144,13 @@ Partial Class frmMain
         Me.barStaticJam.Caption = "Tanggal System : (none)"
         Me.barStaticJam.Id = 3
         Me.barStaticJam.Name = "barStaticJam"
-        Me.barStaticJam.TextAlignment = System.Drawing.StringAlignment.Near
         '
         'barSettingPerusahaan
         '
         Me.barSettingPerusahaan.Caption = "Setting Perusahaan"
         Me.barSettingPerusahaan.Id = 16
-        Me.barSettingPerusahaan.ImageIndex = 8
-        Me.barSettingPerusahaan.LargeImageIndex = 8
+        Me.barSettingPerusahaan.ImageOptions.ImageIndex = 8
+        Me.barSettingPerusahaan.ImageOptions.LargeImageIndex = 8
         Me.barSettingPerusahaan.Name = "barSettingPerusahaan"
         Me.barSettingPerusahaan.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
@@ -178,14 +171,14 @@ Partial Class frmMain
         '
         Me.barManagementUser.Caption = "Management User"
         Me.barManagementUser.Id = 19
-        Me.barManagementUser.ImageIndex = 10
+        Me.barManagementUser.ImageOptions.ImageIndex = 10
         Me.barManagementUser.Name = "barManagementUser"
         '
         'barManagementRole
         '
         Me.barManagementRole.Caption = "Role User"
         Me.barManagementRole.Id = 20
-        Me.barManagementRole.ImageIndex = 9
+        Me.barManagementRole.ImageOptions.ImageIndex = 9
         Me.barManagementRole.Name = "barManagementRole"
         '
         'ImageCollectionLarge
@@ -296,6 +289,7 @@ Partial Class frmMain
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ICButtons, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

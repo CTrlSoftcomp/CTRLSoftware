@@ -164,13 +164,15 @@ Public Class CetakDX
                 ' Add this permission to a report's list of permissions for scripts.
                 XtraReport.ScriptSecurityPermissions.Add(permission)
                 'For Each i In XtraReport.ScriptSecurityPermissions
-                '    XtraReport.ScriptSecurityPermissions.Item(i).Deny = True
+                '    XtraReport.ScriptSecurityPermissions.Item(i).Deny = False
                 'Next
 
                 'XtraReport.ScriptsSource.ToString()
                 XtraReport.Name = RptName
                 XtraReport.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.ClosePreview, DevExpress.XtraPrinting.CommandVisibility.None)
                 XtraReport.DisplayName = RptName
+                XtraReport.ShowPrintMarginsWarning = False
+                XtraReport.ShowPrintStatusDialog = False
                 'XtraReport.CreateDocument(True)
 
                 If Action = ActionPrint.Edit Then

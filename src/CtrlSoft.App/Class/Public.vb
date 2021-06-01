@@ -8,6 +8,8 @@ Public Class [Public]
     Public Shared UserOtorisasi As New MUser
     Public Shared IsEditReport As Boolean = False
     Public Shared Dataset As New DatasetLookUp
+    Public Shared DBCache As Cache.ICache = New Cache.RepCache()
+    Public Shared DBSetting As DBSettings.IDBSetting = New DBSettings.RepDBSetting()
 
     Public Enum pStatusForm
         Baru = 0

@@ -1,91 +1,141 @@
 ﻿Imports DevExpress.XtraEditors
-Imports DevExpress.Utils
-Imports System.Data
-Imports System.Data.SqlClient
-Imports CtrlSoft.Repository.Utils
+Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraGrid.Views.Tile
 Imports CtrlSoft.App.Public
-Imports System.Data.Odbc
 
 Public Class frmSettingDB
+    Dim repckedit As New RepositoryItemCheckEdit
+    Dim repdateedit As New RepositoryItemDateEdit
+    Dim reptextedit As New RepositoryItemTextEdit
+    Dim reppicedit As New RepositoryItemPictureEdit
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
-        DxErrorProvider1.ClearErrors()
-        If TextEdit1.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit1, "Server harus diisi!")
-        End If
-        If TextEdit2.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit2, "Database harus diisi!")
-        End If
-        If TextEdit3.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit3, "User ID harus diisi!")
-        End If
-        If TextEdit4.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit4, "Password harus diisi!")
-        End If
-        If TextEdit5.Text = "" OrElse NullToLong(TextEdit5.Value) <= 0 Then
-            DxErrorProvider1.SetError(TextEdit5, "Timeout harus lebih dari 0!")
-        End If
-        If TextEdit6.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit6, "ODBC harus diisi!")
-        End If
-        If Not DxErrorProvider1.HasErrors Then
-            Using cn As New SqlConnection("Data Source=" & TextEdit1.Text & _
-                        ";initial Catalog=" & TextEdit2.Text & _
-                        ";User ID=" & TextEdit3.Text & _
-                        ";Password=" & TextEdit4.Text & _
-                        ";Connect Timeout=" & NullToLong(TextEdit5.Value))
-                Using cnODBC As New OdbcConnection
-                    Try
-                        cn.Open()
+    Private Data As New List(Of DBSettings.MDBSetting)
 
-                        ''Create ODBC
-                        'ODBC.CreateSystemDSN(TextEdit6.Text, TextEdit1.Text, TextEdit3.Text, TextEdit4.Text, TextEdit2.Text)
-                        'Test ODBC
-                        cnODBC.ConnectionString = "Dsn=" & TextEdit6.Text & ";uid=" & TextEdit3.Text & ";pwd=" & TextEdit4.Text
-                        cnODBC.Open()
+    Private Sub mnRefresh_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnRefresh.ItemClick
+        Data = DBSetting.List.ToList()
+        MDBSettingBindingSource.DataSource = Data
+        GridControl1.DataSource = MDBSettingBindingSource
+        GridControl1.RefreshDataSource()
+    End Sub
 
-                        'Save Koneksi
-                        Ini.TulisIni("DBConfig", "Server", TextEdit1.Text)
-                        Ini.TulisIni("DBConfig", "Database", TextEdit2.Text)
-                        Ini.TulisIni("DBConfig", "Username", TextEdit3.Text)
-                        Ini.TulisIni("DBConfig", "Password", TextEdit4.Text)
-                        Ini.TulisIni("DBConfig", "TimeOut", NullToLong(TextEdit5.Value))
-                        Ini.TulisIni("DBConfig", "ODBC", TextEdit6.Text)
+    Private Sub frmSettingDB_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnRefresh.PerformClick()
+    End Sub
 
-                        DialogResult = Windows.Forms.DialogResult.OK
-                        Close()
-                    Catch ex As Exception
-                        XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End Try
-                End Using
+    Private Sub TileView1_DataSourceChanged(sender As Object, e As EventArgs) Handles TileView1.DataSourceChanged
+        With TileView1
+            If System.IO.File.Exists(SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            End If
+            For i As Integer = 0 To .Columns.Count - 1
+                Select Case .Columns(i).ColumnType.Name.ToLower
+                    Case "int32", "int64", "int"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).DisplayFormat.FormatString = "n0"
+                    Case "decimal", "single", "money", "double"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).DisplayFormat.FormatString = "n2"
+                    Case "string"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.None
+                        .Columns(i).DisplayFormat.FormatString = ""
+                    Case "date"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy"
+                    Case "datetime"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy HH:mm"
+                    Case "byte[]"
+                        reppicedit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze
+                        .Columns(i).OptionsColumn.AllowGroup = False
+                        .Columns(i).OptionsColumn.AllowSort = False
+                        .Columns(i).OptionsFilter.AllowFilter = False
+                        .Columns(i).ColumnEdit = reppicedit
+                    Case "boolean"
+                        .Columns(i).ColumnEdit = repckedit
+                End Select
+            Next
+        End With
+    End Sub
+
+    Private Sub mnBaru_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
+        Using frm As New frmSettingDBEntri("")
+            Try
+                If frm.ShowDialog(Me) = DialogResult.OK Then
+                    mnRefresh.PerformClick()
+
+                    'TileView1.ClearSelection()
+                    'TileView1.FocusedRowHandle = TileView1.LocateByDisplayText(0, colId, frm.DBSetting.Id)
+                    'TileView1.SelectRow(TileView1.FocusedRowHandle)
+                End If
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
+    End Sub
+
+    Private Sub mnEdit_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
+        Dim Obj As DBSettings.MDBSetting = MDBSettingBindingSource.Current
+        If Obj IsNot Nothing Then
+            Using frm As New frmSettingDBEntri(Obj.Id)
+                Try
+                    If frm.ShowDialog(Me) = DialogResult.OK Then
+                        mnRefresh.PerformClick()
+
+                        'TileView1.ClearSelection()
+                        'TileView1.FocusedRowHandle = TileView1.LocateByDisplayText(0, colId, frm.DBSetting.Id)
+                        'TileView1.SelectRow(TileView1.FocusedRowHandle)
+                    End If
+                Catch ex As Exception
+                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
             End Using
         End If
-        Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
-    Private Sub TextEdit6_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles TextEdit6.ButtonClick
-        If e.Button.Index = 0 Then
-            RunODBC()
-        End If
+    Private Sub mnHapus_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
+        Try
+            If DBSetting.List.Count > 1 Then
+                Dim Obj As DBSettings.MDBSetting = MDBSettingBindingSource.Current
+
+                If Obj IsNot Nothing AndAlso Not Obj.Id.Equals("DEFAULT") Then
+                    Obj = DBSetting.Delete(Obj.Id)
+                    If Obj IsNot Nothing Then
+                        mnRefresh.PerformClick()
+                    End If
+                Else
+                    XtraMessageBox.Show("Setting koneksi utama tidak dapat dihapus.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                XtraMessageBox.Show("Setting koneksi hanya yang utama.", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub frmSettingDB_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        TextEdit1.Text = Ini.BacaIni("DBConfig", "Server", "localhost")
-        TextEdit2.Text = Ini.BacaIni("DBConfig", "Database", "dbpos")
-        TextEdit3.Text = Ini.BacaIni("DBConfig", "Username", "sa")
-        TextEdit4.Text = Ini.BacaIni("DBConfig", "Password", "Sg1")
-        TextEdit5.Value = Ini.BacaIni("DBConfig", "Timeout", "15")
-        TextEdit6.Text = Ini.BacaIni("DBConfig", "ODBC", "DBPOS")
-    End Sub
-
-    Sub RunODBC()
-        Shell("odbcad32.exe", AppWinStyle.NormalFocus, False)
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = DialogResult.Cancel
         Me.Close()
+    End Sub
+
+    Private Sub TileView1_ItemDoubleClick(sender As Object, e As TileViewItemClickEventArgs) Handles TileView1.ItemDoubleClick
+        mnEdit.PerformClick()
+    End Sub
+
+    Private Sub mnPilih_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPilih.ItemClick
+        Try
+            Dim Obj = MDBSettingBindingSource.Current
+
+            If Obj IsNot Nothing Then
+                TryCast(Obj, DBSettings.MDBSetting).Default = True
+                Obj = DBSetting.Save(Obj)
+                If Obj IsNot Nothing Then
+                    DialogResult = DialogResult.OK
+                    Me.Close()
+                End If
+            End If
+        Catch ex As Exception
+            XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class

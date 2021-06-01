@@ -1007,6 +1007,12 @@ Public Class frmDaftarTransaksi
                                     com.Parameters.Clear()
                                     com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
                                     oDA.Fill(ds, formName.ToString)
+                                    If ds.Tables(formName.ToString) IsNot Nothing AndAlso ds.Tables(formName.ToString & "2") IsNot Nothing Then
+                                        ds.Relations.Add(New DataRelation("IX_IDSales", ds.Tables(formName.ToString & "2").Columns("NoID"), ds.Tables(formName.ToString).Columns("IDHeader")))
+                                    End If
+                                    If ds.Tables(formName.ToString) IsNot Nothing AndAlso ds.Tables(formName.ToString & "1") IsNot Nothing Then
+                                        ds.Relations.Add(New DataRelation("IX_IDSalesDBayar", ds.Tables(formName.ToString & "2").Columns("NoID"), ds.Tables(formName.ToString & "1").Columns("IDHeader")))
+                                    End If
                                     NamaFile = "Faktur_MJual.repx"
                                     Judul = "Faktur Penjualan"
                                     ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)

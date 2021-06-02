@@ -895,10 +895,18 @@ Public Class frmEntriJual
                                 com.CommandText = "spFakturMJual @NoID"
                                 com.Parameters.Clear()
                                 com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
-                                oDA.Fill(ds, "MJual")
+                                oDA.Fill(ds, "DaftarPenjualan")
+
+                                If ds.Tables("DaftarPenjualan2") IsNot Nothing AndAlso ds.Tables("DaftarPenjualan") IsNot Nothing Then
+                                    ds.Relations.Add(New DataRelation("IX_IDSales", ds.Tables("DaftarPenjualan2").Columns("NoID"), ds.Tables("DaftarPenjualan").Columns("IDHeader")))
+                                End If
+                                If ds.Tables("DaftarPenjualan2") IsNot Nothing AndAlso ds.Tables("DaftarPenjualan1") IsNot Nothing Then
+                                    ds.Relations.Add(New DataRelation("IX_IDSalesDBayar", ds.Tables("DaftarPenjualan2").Columns("NoID"), ds.Tables("DaftarPenjualan1").Columns("IDHeader")))
+                                End If
+
                                 NamaFile = "Faktur_MJual.repx"
                                 Judul = "Faktur Penjualan"
-                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Print), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End If
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -926,10 +934,17 @@ Public Class frmEntriJual
                                 com.CommandText = "spFakturMJual @NoID"
                                 com.Parameters.Clear()
                                 com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
-                                oDA.Fill(ds, "MJual")
+                                oDA.Fill(ds, "DaftarPenjualan")
+
+                                If ds.Tables("DaftarPenjualan2") IsNot Nothing AndAlso ds.Tables("DaftarPenjualan") IsNot Nothing Then
+                                    ds.Relations.Add(New DataRelation("IX_IDSales", ds.Tables("DaftarPenjualan2").Columns("NoID"), ds.Tables("DaftarPenjualan").Columns("IDHeader")))
+                                End If
+                                If ds.Tables("DaftarPenjualan2") IsNot Nothing AndAlso ds.Tables("DaftarPenjualan1") IsNot Nothing Then
+                                    ds.Relations.Add(New DataRelation("IX_IDSalesDBayar", ds.Tables("DaftarPenjualan2").Columns("NoID"), ds.Tables("DaftarPenjualan1").Columns("IDHeader")))
+                                End If
                                 NamaFile = "SuratJalan_MJual.repx"
                                 Judul = "Surat Jalan Penjualan"
-                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Preview), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
+                                ViewXtraReport(Me.MdiParent, IIf(IsEditReport, ActionPrint.Edit, ActionPrint.Print), Application.StartupPath & "\Report\" & NamaFile, Judul, NamaFile, ds)
                             End If
                         Catch ex As Exception
                             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)

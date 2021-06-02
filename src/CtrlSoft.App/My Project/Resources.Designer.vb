@@ -69,5 +69,27 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to USE [master];
+        '''GO
+        '''
+        '''/****** Object:  Database [DBPOS]    Script Date: 6/2/2021 2:40:56 PM ******/
+        '''
+        '''CREATE DATABASE [DBPOS] ON PRIMARY
+        '''(
+        '''                                   NAME = N&apos;DBPOS&apos;, 
+        '''                                   FILENAME = N&apos;C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_data.mdf&apos;, 
+        '''                                   SIZE = 3520 KB, 
+        '''                                   MAXSIZE = UNLIMITED, 
+        '''                                   FILEGROWTH = 1024 KB
+        ''') LOG ON
+        ''' [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Migration() As String
+            Get
+                Return ResourceManager.GetString("Migration", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

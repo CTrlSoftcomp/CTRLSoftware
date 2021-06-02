@@ -27,6 +27,24 @@ CtrlSoft.App
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:CtrlSoft.App.My.Resources.Resources.Migration">
+<summary>
+  Looks up a localized string similar to USE [master];
+GO
+
+/****** Object:  Database [DBPOS]    Script Date: 6/2/2021 2:40:56 PM ******/
+
+CREATE DATABASE [DBPOS] ON PRIMARY
+(
+                                   NAME = N&apos;DBPOS&apos;, 
+                                   FILENAME = N&apos;C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_data.mdf&apos;, 
+                                   SIZE = 3520 KB, 
+                                   MAXSIZE = UNLIMITED, 
+                                   FILEGROWTH = 1024 KB
+) LOG ON
+ [rest of string was truncated]&quot;;.
+</summary>
+</member>
 <member name="M:CtrlSoft.App.TimeZoneInformation.TimeZoneFunctionality.GetTimeZoneInformation(CtrlSoft.App.TimeZoneInformation.TimeZoneFunctionality.TimeZoneInformation@)">
  <summary>
  [Win32 API call]

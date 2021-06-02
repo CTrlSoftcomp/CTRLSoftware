@@ -3,8 +3,8 @@
 
 #define MyAppName "Ctrl Software"
 #define MyAppVersion "1.0.0.0"
-#define MyAppPublisher "CPYH Software Creative"
-#define MyAppURL "https://github.com/mrthx89/CPYH"
+#define MyAppPublisher "Ctrl Software Creative"
+#define MyAppURL "https://github.com/CTrl-Soft/CTRLSoftware"
 #define MyAppExeName "CtrlSoft.App.exe"
 
 [Setup]
@@ -21,14 +21,15 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-LicenseFile=E:\DEVELOPER\2019 - CPYH\package\Inno Setup\License.txt
-OutputDir=E:\DEVELOPER\2019 - CPYH\package\Inno Setup\Output
+LicenseFile=E:\DEVELOPER\2021 - CTRLSoftware\package\Inno Setup\License.txt
+OutputDir=E:\DEVELOPER\2021 - CTRLSoftware\package\Inno Setup\Output
 OutputBaseFilename=Setup_CTRL
-SetupIconFile=E:\DEVELOPER\2019 - CPYH\package\Inno Setup\kissclipart-install-icon-ico-clipart-installation-computer-ic-7cd43ab7f42453c3.ico
+SetupIconFile=E:\DEVELOPER\2021 - CTRLSoftware\package\Inno Setup\kissclipart-install-icon-ico-clipart-installation-computer-ic-7cd43ab7f42453c3.ico
 SolidCompression=yes
 AllowRootDirectory=True
 EnableDirDoesntExistWarning=True
 InternalCompressLevel=ultra
+Compression=lzma2/ultra
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -55,8 +56,6 @@ Source: "..\..\src\CtrlSoft.App\bin\Debug\CrystalDecisions.Shared.dll"; DestDir:
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.vshost.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.vshost.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.App.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\CtrlSoft.Dto.pdb"; DestDir: "{app}"; Flags: ignoreversion
@@ -426,6 +425,61 @@ Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraRichEdit.v17.1.Exten
 Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraRichEdit.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraTreeList.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 Source: "..\..\src\CtrlSoft.App\bin\Debug\ru\DevExpress.XtraVerticalGrid.v17.1.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\x64\SQLite.Interop.dll"; DestDir: "{app}\x64"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\x86\SQLite.Interop.dll"; DestDir: "{app}\x86"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MBeli.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MJual.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MJualDBayar.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MPO.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\FormInput_StockOpname.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_Kartu_Stok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_LabaKotorPenjualan.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_MutasiSaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Laporan_SaldoStok.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Lap_MBarangAll.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\Faktur_MJualDBayar.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\SuratJalan_MJual.repx"; DestDir: "{app}\Report"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MJUAL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MPO.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FAKTUR_MRETURBELI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\FORMINPUT_STOCKOPNAME.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_KARTU_STOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_LABAKOTORPENJUALAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_MUTASISALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAPORAN_SALDOSTOK.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MBARANGALL.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MKATEGORI.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "..\..\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MSATUAN.xsd"; DestDir: "{app}\Report\XCD"; Flags: ignoreversion
+Source: "C:\Windows\Fonts\segmdl2.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe MDL2 Assets"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoe.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Condensed"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeb.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Condensed Bold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeMarker.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Marker"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoepr.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Print"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeprb.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Print Bold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoesc.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Script"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoescb.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe Script Bold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeui.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeuib.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Bold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeuii.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeuil.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Light"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeuisl.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Semilight"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\segoeuiz.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Bold Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP-Black.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP Black"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP-Bold.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP Bold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP-Light.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP Light"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP-Semibold.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP Semibold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP-Semilight.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP SemiLight"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\SegoeWP.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe WP"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguibl.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Black"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguibli.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Black Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguiemj.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Emoji"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguihis.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Historic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguili.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Light Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguisb.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Semibold"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguisbi.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Semibold Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguisli.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Semilight Italic"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\seguisym.ttf"; DestDir: "{fonts}"; FontInstall: "Segoe UI Symbol"; Flags: onlyifdoesntexist uninsneveruninstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

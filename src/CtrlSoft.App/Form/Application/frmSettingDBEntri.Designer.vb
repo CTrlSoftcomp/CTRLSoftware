@@ -20,62 +20,63 @@ Partial Class frmSettingDBEntri
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.txtID = New DevExpress.XtraEditors.TextEdit()
+        Me.ckDefault = New DevExpress.XtraEditors.CheckEdit()
         Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
-        Me.TextEdit4 = New DevExpress.XtraEditors.TextEdit()
-        Me.TextEdit3 = New DevExpress.XtraEditors.TextEdit()
-        Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
-        Me.TextEdit5 = New DevExpress.XtraEditors.SpinEdit()
+        Me.txtPassword = New DevExpress.XtraEditors.TextEdit()
+        Me.txtUserID = New DevExpress.XtraEditors.TextEdit()
+        Me.txtServer = New DevExpress.XtraEditors.TextEdit()
+        Me.txtTimeout = New DevExpress.XtraEditors.SpinEdit()
+        Me.txtDatabase = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem8 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
-        Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.txtID = New DevExpress.XtraEditors.TextEdit()
         Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
-        CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ckDefault.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtPassword.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtTimeout.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtDatabase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
         Me.LayoutControl1.Controls.Add(Me.txtID)
-        Me.LayoutControl1.Controls.Add(Me.CheckEdit1)
+        Me.LayoutControl1.Controls.Add(Me.ckDefault)
         Me.LayoutControl1.Controls.Add(Me.SimpleButton2)
         Me.LayoutControl1.Controls.Add(Me.SimpleButton1)
-        Me.LayoutControl1.Controls.Add(Me.TextEdit4)
-        Me.LayoutControl1.Controls.Add(Me.TextEdit3)
-        Me.LayoutControl1.Controls.Add(Me.TextEdit2)
-        Me.LayoutControl1.Controls.Add(Me.TextEdit1)
-        Me.LayoutControl1.Controls.Add(Me.TextEdit5)
+        Me.LayoutControl1.Controls.Add(Me.txtPassword)
+        Me.LayoutControl1.Controls.Add(Me.txtUserID)
+        Me.LayoutControl1.Controls.Add(Me.txtServer)
+        Me.LayoutControl1.Controls.Add(Me.txtTimeout)
+        Me.LayoutControl1.Controls.Add(Me.txtDatabase)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControl1.Name = "LayoutControl1"
@@ -85,6 +86,25 @@ Partial Class frmSettingDBEntri
         Me.LayoutControl1.Size = New System.Drawing.Size(358, 273)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'txtID
+        '
+        Me.txtID.EnterMoveNextControl = True
+        Me.txtID.Location = New System.Drawing.Point(61, 12)
+        Me.txtID.Name = "txtID"
+        Me.txtID.Properties.ReadOnly = True
+        Me.txtID.Size = New System.Drawing.Size(285, 20)
+        Me.txtID.StyleController = Me.LayoutControl1
+        Me.txtID.TabIndex = 9
+        '
+        'ckDefault
+        '
+        Me.ckDefault.Location = New System.Drawing.Point(12, 156)
+        Me.ckDefault.Name = "ckDefault"
+        Me.ckDefault.Properties.Caption = "Default Connection"
+        Me.ckDefault.Size = New System.Drawing.Size(334, 19)
+        Me.ckDefault.StyleController = Me.LayoutControl1
+        Me.ckDefault.TabIndex = 8
         '
         'SimpleButton2
         '
@@ -108,64 +128,65 @@ Partial Class frmSettingDBEntri
         Me.SimpleButton1.TabIndex = 6
         Me.SimpleButton1.Text = "&Simpan"
         '
-        'TextEdit4
+        'txtPassword
         '
-        Me.TextEdit4.EnterMoveNextControl = True
-        Me.TextEdit4.Location = New System.Drawing.Point(61, 108)
-        Me.TextEdit4.Name = "TextEdit4"
-        Me.TextEdit4.Properties.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.TextEdit4.Size = New System.Drawing.Size(285, 20)
-        Me.TextEdit4.StyleController = Me.LayoutControl1
-        Me.TextEdit4.TabIndex = 5
+        Me.txtPassword.EnterMoveNextControl = True
+        Me.txtPassword.Location = New System.Drawing.Point(61, 84)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Properties.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.Size = New System.Drawing.Size(285, 20)
+        Me.txtPassword.StyleController = Me.LayoutControl1
+        Me.txtPassword.TabIndex = 5
         '
-        'TextEdit3
+        'txtUserID
         '
-        Me.TextEdit3.EnterMoveNextControl = True
-        Me.TextEdit3.Location = New System.Drawing.Point(61, 84)
-        Me.TextEdit3.Name = "TextEdit3"
-        Me.TextEdit3.Size = New System.Drawing.Size(285, 20)
-        Me.TextEdit3.StyleController = Me.LayoutControl1
-        Me.TextEdit3.TabIndex = 5
+        Me.txtUserID.EnterMoveNextControl = True
+        Me.txtUserID.Location = New System.Drawing.Point(61, 60)
+        Me.txtUserID.Name = "txtUserID"
+        Me.txtUserID.Size = New System.Drawing.Size(285, 20)
+        Me.txtUserID.StyleController = Me.LayoutControl1
+        Me.txtUserID.TabIndex = 5
         '
-        'TextEdit2
+        'txtServer
         '
-        Me.TextEdit2.EnterMoveNextControl = True
-        Me.TextEdit2.Location = New System.Drawing.Point(61, 60)
-        Me.TextEdit2.Name = "TextEdit2"
-        Me.TextEdit2.Size = New System.Drawing.Size(285, 20)
-        Me.TextEdit2.StyleController = Me.LayoutControl1
-        Me.TextEdit2.TabIndex = 5
+        Me.txtServer.EnterMoveNextControl = True
+        Me.txtServer.Location = New System.Drawing.Point(61, 36)
+        Me.txtServer.Name = "txtServer"
+        Me.txtServer.Size = New System.Drawing.Size(285, 20)
+        Me.txtServer.StyleController = Me.LayoutControl1
+        Me.txtServer.TabIndex = 4
         '
-        'TextEdit1
+        'txtTimeout
         '
-        Me.TextEdit1.EnterMoveNextControl = True
-        Me.TextEdit1.Location = New System.Drawing.Point(61, 36)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Size = New System.Drawing.Size(285, 20)
-        Me.TextEdit1.StyleController = Me.LayoutControl1
-        Me.TextEdit1.TabIndex = 4
+        Me.txtTimeout.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.txtTimeout.EnterMoveNextControl = True
+        Me.txtTimeout.Location = New System.Drawing.Point(61, 108)
+        Me.txtTimeout.Name = "txtTimeout"
+        Me.txtTimeout.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtTimeout.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtTimeout.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.txtTimeout.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.txtTimeout.Properties.Mask.EditMask = "n0"
+        Me.txtTimeout.Size = New System.Drawing.Size(285, 20)
+        Me.txtTimeout.StyleController = Me.LayoutControl1
+        Me.txtTimeout.TabIndex = 5
         '
-        'TextEdit5
+        'txtDatabase
         '
-        Me.TextEdit5.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TextEdit5.EnterMoveNextControl = True
-        Me.TextEdit5.Location = New System.Drawing.Point(61, 132)
-        Me.TextEdit5.Name = "TextEdit5"
-        Me.TextEdit5.Properties.Appearance.Options.UseTextOptions = True
-        Me.TextEdit5.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.TextEdit5.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.TextEdit5.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
-        Me.TextEdit5.Properties.Mask.EditMask = "n0"
-        Me.TextEdit5.Size = New System.Drawing.Size(285, 20)
-        Me.TextEdit5.StyleController = Me.LayoutControl1
-        Me.TextEdit5.TabIndex = 5
+        Me.txtDatabase.Location = New System.Drawing.Point(61, 132)
+        Me.txtDatabase.Name = "txtDatabase"
+        Me.txtDatabase.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, True, True, False, EditorButtonImageOptions1, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), "Membuat Database Baru")})
+        Me.txtDatabase.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        Me.txtDatabase.Size = New System.Drawing.Size(285, 20)
+        Me.txtDatabase.StyleController = Me.LayoutControl1
+        Me.txtDatabase.TabIndex = 5
         '
         'LayoutControlGroup1
         '
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem7, Me.EmptySpaceItem1, Me.LayoutControlItem8, Me.LayoutControlItem6, Me.LayoutControlItem9})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem7, Me.EmptySpaceItem1, Me.LayoutControlItem8, Me.LayoutControlItem6, Me.LayoutControlItem9, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(358, 273)
@@ -173,7 +194,7 @@ Partial Class frmSettingDBEntri
         '
         'LayoutControlItem1
         '
-        Me.LayoutControlItem1.Control = Me.TextEdit1
+        Me.LayoutControlItem1.Control = Me.txtServer
         Me.LayoutControlItem1.CustomizationFormText = "Server"
         Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 24)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
@@ -183,43 +204,13 @@ Partial Class frmSettingDBEntri
         '
         'LayoutControlItem2
         '
-        Me.LayoutControlItem2.Control = Me.TextEdit2
+        Me.LayoutControlItem2.Control = Me.txtDatabase
         Me.LayoutControlItem2.CustomizationFormText = "Database"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 120)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(338, 24)
         Me.LayoutControlItem2.Text = "Database"
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(46, 13)
-        '
-        'LayoutControlItem3
-        '
-        Me.LayoutControlItem3.Control = Me.TextEdit3
-        Me.LayoutControlItem3.CustomizationFormText = "User ID"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 72)
-        Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(338, 24)
-        Me.LayoutControlItem3.Text = "User ID"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(46, 13)
-        '
-        'LayoutControlItem4
-        '
-        Me.LayoutControlItem4.Control = Me.TextEdit4
-        Me.LayoutControlItem4.CustomizationFormText = "Password"
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 96)
-        Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(338, 24)
-        Me.LayoutControlItem4.Text = "Password"
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(46, 13)
-        '
-        'LayoutControlItem5
-        '
-        Me.LayoutControlItem5.Control = Me.TextEdit5
-        Me.LayoutControlItem5.CustomizationFormText = "Timeout"
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 120)
-        Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(338, 24)
-        Me.LayoutControlItem5.Text = "Timeout"
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(46, 13)
         '
         'LayoutControlItem7
         '
@@ -250,37 +241,14 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem8.TextVisible = False
         '
-        'DxErrorProvider1
-        '
-        Me.DxErrorProvider1.ContainerControl = Me
-        '
-        'CheckEdit1
-        '
-        Me.CheckEdit1.Location = New System.Drawing.Point(12, 156)
-        Me.CheckEdit1.Name = "CheckEdit1"
-        Me.CheckEdit1.Properties.Caption = "Default Connection"
-        Me.CheckEdit1.Size = New System.Drawing.Size(334, 19)
-        Me.CheckEdit1.StyleController = Me.LayoutControl1
-        Me.CheckEdit1.TabIndex = 8
-        '
         'LayoutControlItem6
         '
-        Me.LayoutControlItem6.Control = Me.CheckEdit1
+        Me.LayoutControlItem6.Control = Me.ckDefault
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 144)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
         Me.LayoutControlItem6.Size = New System.Drawing.Size(338, 23)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
-        '
-        'txtID
-        '
-        Me.txtID.EnterMoveNextControl = True
-        Me.txtID.Location = New System.Drawing.Point(61, 12)
-        Me.txtID.Name = "txtID"
-        Me.txtID.Properties.ReadOnly = True
-        Me.txtID.Size = New System.Drawing.Size(285, 20)
-        Me.txtID.StyleController = Me.LayoutControl1
-        Me.txtID.TabIndex = 9
         '
         'LayoutControlItem9
         '
@@ -291,59 +259,93 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlItem9.Text = "Id"
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(46, 13)
         '
-        'frmSettingDB
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.txtUserID
+        Me.LayoutControlItem3.CustomizationFormText = "User ID"
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(338, 24)
+        Me.LayoutControlItem3.Text = "User ID"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(46, 13)
+        '
+        'LayoutControlItem4
+        '
+        Me.LayoutControlItem4.Control = Me.txtPassword
+        Me.LayoutControlItem4.CustomizationFormText = "Password"
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 72)
+        Me.LayoutControlItem4.Name = "LayoutControlItem4"
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(338, 24)
+        Me.LayoutControlItem4.Text = "Password"
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(46, 13)
+        '
+        'LayoutControlItem5
+        '
+        Me.LayoutControlItem5.Control = Me.txtTimeout
+        Me.LayoutControlItem5.CustomizationFormText = "Timeout"
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 96)
+        Me.LayoutControlItem5.Name = "LayoutControlItem5"
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(338, 24)
+        Me.LayoutControlItem5.Text = "Timeout"
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(46, 13)
+        '
+        'DxErrorProvider1
+        '
+        Me.DxErrorProvider1.ContainerControl = Me
+        '
+        'frmSettingDBEntri
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(358, 273)
         Me.Controls.Add(Me.LayoutControl1)
-        Me.Name = "frmSettingDB"
+        Me.Name = "frmSettingDBEntri"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Setting Koneksi"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
-        CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ckDefault.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtPassword.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtTimeout.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtDatabase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents LayoutControl1 As DevExpress.XtraLayout.LayoutControl
-    Friend WithEvents TextEdit4 As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents TextEdit3 As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents TextEdit2 As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtPassword As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtUserID As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtServer As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlGroup1 As DevExpress.XtraLayout.LayoutControlGroup
     Friend WithEvents LayoutControlItem1 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem2 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem5 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents TextEdit5 As DevExpress.XtraEditors.SpinEdit
+    Friend WithEvents txtTimeout As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlItem8 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
-    Friend WithEvents CheckEdit1 As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents ckDefault As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents txtID As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem9 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtDatabase As DevExpress.XtraEditors.ComboBoxEdit
 End Class

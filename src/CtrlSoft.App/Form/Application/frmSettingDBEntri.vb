@@ -5,9 +5,13 @@ Imports System.Data.SqlClient
 Imports CtrlSoft.Repository.Utils
 Imports CtrlSoft.App.Public
 Imports System.Data.Odbc
+Imports Dapper
+Imports DevExpress.XtraEditors.Controls
 
 Public Class frmSettingDBEntri
     Public DBSetting As DBSettings.MDBSetting
+
+    Private ListDB As New List(Of DBSettings.DBName)
 
     Public Sub New(ByVal Id As String)
 
@@ -22,37 +26,37 @@ Public Class frmSettingDBEntri
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         DxErrorProvider1.ClearErrors()
-        If TextEdit1.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit1, "Server harus diisi!")
+        If txtServer.Text = "" Then
+            DxErrorProvider1.SetError(txtServer, "Server harus diisi!")
         End If
-        If TextEdit2.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit2, "Database harus diisi!")
+        If txtDatabase.Text = "" Then
+            DxErrorProvider1.SetError(txtDatabase, "Database harus diisi!")
         End If
-        If TextEdit3.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit3, "User ID harus diisi!")
+        If txtUserID.Text = "" Then
+            DxErrorProvider1.SetError(txtUserID, "User ID harus diisi!")
         End If
-        If TextEdit4.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit4, "Password harus diisi!")
+        If txtPassword.Text = "" Then
+            DxErrorProvider1.SetError(txtPassword, "Password harus diisi!")
         End If
-        If TextEdit5.Text = "" OrElse NullToLong(TextEdit5.Value) <= 0 Then
-            DxErrorProvider1.SetError(TextEdit5, "Timeout harus lebih dari 0!")
+        If txtTimeout.Text = "" OrElse NullToLong(txtTimeout.Value) <= 0 Then
+            DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
         End If
         If Not DxErrorProvider1.HasErrors Then
-            Using cn As New SqlConnection("Data Source=" & TextEdit1.Text &
-                        ";initial Catalog=" & TextEdit2.Text &
-                        ";User ID=" & TextEdit3.Text &
-                        ";Password=" & TextEdit4.Text &
-                        ";Connect Timeout=" & NullToLong(TextEdit5.Value))
+            Using cn As New SqlConnection("Data Source=" & txtServer.Text &
+                        ";initial Catalog=" & txtDatabase.Text &
+                        ";User ID=" & txtUserID.Text &
+                        ";Password=" & txtPassword.Text &
+                        ";Connect Timeout=" & NullToLong(txtTimeout.Value))
                 Try
                     cn.Open()
 
                     'Save Koneksi
-                    DBSetting.Server = TextEdit1.Text
-                    DBSetting.Database = TextEdit2.Text
-                    DBSetting.UserID = TextEdit3.Text
-                    DBSetting.Password = TextEdit4.Text
-                    DBSetting.Timeout = NullTolInt(TextEdit5.EditValue)
-                    DBSetting.Default = CheckEdit1.Checked
+                    DBSetting.Server = txtServer.Text
+                    DBSetting.Database = txtDatabase.Text
+                    DBSetting.UserID = txtUserID.Text
+                    DBSetting.Password = txtPassword.Text
+                    DBSetting.Timeout = NullTolInt(txtTimeout.EditValue)
+                    DBSetting.Default = ckDefault.Checked
 
                     DBSetting = [Public].DBSetting.Save(DBSetting)
 
@@ -69,26 +73,126 @@ Public Class frmSettingDBEntri
     Private Sub frmSettingDB_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If DBSetting IsNot Nothing Then
             txtID.Text = DBSetting.Id
-            TextEdit1.Text = DBSetting.Server
-            TextEdit2.Text = DBSetting.Database
-            TextEdit3.Text = DBSetting.UserID
-            TextEdit4.Text = DBSetting.Password
-            TextEdit5.Value = DBSetting.Timeout
-            CheckEdit1.Checked = DBSetting.Default
+            txtServer.Text = DBSetting.Server
+            txtDatabase.Text = DBSetting.Database
+            txtUserID.Text = DBSetting.UserID
+            txtPassword.Text = DBSetting.Password
+            txtTimeout.Value = DBSetting.Timeout
+            ckDefault.Checked = DBSetting.Default
         Else
             DBSetting = New DBSettings.MDBSetting With {.Id = ""}
             txtID.Text = DBSetting.Id
-            TextEdit1.Text = Ini.BacaIni("DBConfig", "Server", "localhost")
-            TextEdit2.Text = Ini.BacaIni("DBConfig", "Database", "dbpos")
-            TextEdit3.Text = Ini.BacaIni("DBConfig", "Username", "sa")
-            TextEdit4.Text = Ini.BacaIni("DBConfig", "Password", "Sg1")
-            TextEdit5.Value = Ini.BacaIni("DBConfig", "Timeout", "15")
-            CheckEdit1.Checked = True
+            txtServer.Text = Ini.BacaIni("DBConfig", "Server", "localhost")
+            txtDatabase.Text = Ini.BacaIni("DBConfig", "Database", "dbpos")
+            txtUserID.Text = Ini.BacaIni("DBConfig", "Username", "sa")
+            txtPassword.Text = Ini.BacaIni("DBConfig", "Password", "Sg1")
+            txtTimeout.Value = Ini.BacaIni("DBConfig", "Timeout", "15")
+            ckDefault.Checked = True
         End If
+        LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
     End Sub
 
     Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
         DialogResult = Windows.Forms.DialogResult.Cancel
         Me.Close()
+    End Sub
+
+    Private Sub LookUpDB(ByVal Server As String, ByVal UserID As String, ByVal Pwd As String)
+        Dim ListDB As New List(Of DBSettings.DBName)
+        Using dlg As New WaitDialogForm("Sedang menghubungkan ke database", NamaAplikasi)
+            Using cn As New SqlConnection("Server=" & Server & ";Database=master;User Id=" & UserID & ";Password=" & Pwd & ";Timeout=3;")
+                Using ds As New DataSet
+                    Using com As New SqlCommand
+                        Try
+                            dlg.Show()
+
+                            cn.Open()
+                            com.Connection = cn
+                            com.CommandTimeout = cn.ConnectionTimeout
+
+                            ListDB = cn.Query(Of DBSettings.DBName)("SELECT T.[name] DBName FROM [sysdatabases] T WHERE T.[name] NOT IN ('master', 'tempdb', 'model', 'msdb', 'ReportServer', 'ReportServerTempDB')", Nothing)
+
+                            Me.ListDB.Clear()
+                            txtDatabase.Properties.Items.Clear()
+
+                            For Each db In ListDB
+                                com.CommandText = "SELECT COUNT([name]) AS X FROM [" & db.DBName & "].sys.tables WHERE name = 'TAppDB' OR name = 'MKartuStokOnHand'"
+                                If NullToLong(com.ExecuteScalar()) >= 2 Then
+                                    'DBnya CtrlSoft
+                                    Me.ListDB.Add(db)
+                                End If
+                            Next
+
+                            Dim temp As New List(Of String)
+                            temp = (From x In Me.ListDB.ToList()
+                                    Select x.DBName).ToList()
+                            txtDatabase.Properties.Items.AddRange(temp)
+                        Catch ex As Exception
+                            XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End Try
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtServer.LostFocus, txtUserID.LostFocus, txtPassword.LostFocus
+        LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
+    End Sub
+
+    Private Sub txtDatabase_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtDatabase.ButtonClick
+        Select Case e.Button.Index
+            Case 1
+                CreateNewDB()
+        End Select
+    End Sub
+
+    Private Sub CreateNewDB()
+        Dim sqlBatch As String = String.Empty
+        Dim Script As String = String.Empty
+        Dim DBName As String = InputBox("Isikan nama Database Baru Anda", NamaAplikasi, "")
+        If DBName <> "" Then
+            Using dlg As New WaitDialogForm("Sedang membuatkan database", NamaAplikasi)
+                Using cn As New SqlConnection("Server=" & txtServer.Text & ";Database=master;User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;")
+                    Using ds As New DataSet
+                        Using com As New SqlCommand
+                            Try
+                                dlg.Show()
+
+                                cn.Open()
+                                com.Connection = cn
+                                com.CommandTimeout = cn.ConnectionTimeout
+
+                                'Script = System.IO.File.ReadAllText(Environment.CurrentDirectory & "\Migration\Migration.SQL")
+
+                                Script = My.Resources.Migration.
+                                         Replace("[DBPOS]", "[" & DBName.Replace(" ", "") & "]").
+                                         Replace("'DBPOS'", "'" & DBName.Replace(" ", "") & "'").
+                                         Replace("N'@PathsLayouts'", "N'" & Environment.CurrentDirectory & "\System\Layouts\'").
+                                         Replace("C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_", Environment.CurrentDirectory & "\System\" & DBName.Replace(" ", "") & "_")
+                                For Each line As String In Script.Split(New String(1) {vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+                                    If line.ToUpperInvariant().Trim() = "GO" Then
+                                        com.CommandText = sqlBatch
+                                        com.ExecuteNonQuery()
+                                        sqlBatch = String.Empty
+                                    Else
+                                        sqlBatch += line & vbLf
+                                    End If
+
+                                    Application.DoEvents()
+                                Next
+                                XtraMessageBox.Show("Sukses membuat database baru!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                                'Sukses
+                                LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
+                                txtDatabase.Text = DBName.Replace(" ", "")
+                            Catch ex As Exception
+                                XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
     End Sub
 End Class

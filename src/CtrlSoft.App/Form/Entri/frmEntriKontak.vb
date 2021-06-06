@@ -119,6 +119,16 @@ Public Class frmEntriKontak
         ' Add any initialization after the InitializeComponent() call.
         Me.NoID = NoID
         Me.tipe = tipe
+        Select Case Me.tipe
+            Case tipeKontak.Customer
+                Me.Text = "Entri Customer"
+            Case tipeKontak.Supplier
+                Me.Text = "Entri Supplier"
+            Case tipeKontak.Pegawai
+                Me.Text = "Entri Pegawai"
+            Case Else
+                Me.Text = "Entri Kontak"
+        End Select
     End Sub
 
     Private Sub frmEntriRole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

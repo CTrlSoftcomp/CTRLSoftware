@@ -5,6 +5,7 @@ Imports DevExpress.Utils
 Imports CtrlSoft.Repository.Utils
 Imports CtrlSoft.App.Public
 Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraEditors.Controls
 
 Public Class frmEntriBarang
     Public NoID As Long = -1
@@ -88,26 +89,26 @@ Public Class frmEntriBarang
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarang"
                                             NoID = NullToLong(com.ExecuteScalar()) + 1
 
-                                            com.CommandText = "INSERT INTO [dbo].[MBarang]" & vbCrLf & _
-                                                              "([IDMerk],[IDUser],[TanggalUpdate],[IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf & _
-                                                              ",[Keterangan],[IsActive],[IDTypePajak],[IDSupplier1]" & vbCrLf & _
-                                                              ",[IDSupplier2],[IDSupplier3],[HargaBeli],[IDSatuanBeli]" & vbCrLf & _
-                                                              ",[IsiCtn],[HargaBeliPcsBruto],[DiscProsen1],[DiscProsen2],[DiscProsen3]" & vbCrLf & _
-                                                              ",[DiscProsen4],[DiscProsen5],[DiscRp],[HargaBeliPcs],[IDSatuan],[ProsenUpA]" & vbCrLf & _
-                                                              ",[HargaJualA],[ProsenUpB],[HargaJualB]) VALUES" & vbCrLf & _
-                                                              "(@IDMerk,@IDUsera,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf & _
-                                                              ",@Keterangan,@IsActive,@IDTypePajak,@IDSupplier1" & vbCrLf & _
-                                                              ",@IDSupplier2,@IDSupplier3,@HargaBeli,@IDSatuanBeli" & vbCrLf & _
-                                                              ",@IsiCtn,@HargaBeliPcsBruto,@DiscProsen1,@DiscProsen2,@DiscProsen3" & vbCrLf & _
-                                                              ",@DiscProsen4,@DiscProsen5,@DiscRp,@HargaBeliPcs,@IDSatuan,@ProsenUpA" & vbCrLf & _
+                                            com.CommandText = "INSERT INTO [dbo].[MBarang]" & vbCrLf &
+                                                              "([IDMerk],[IDUser],[TanggalUpdate],[IDKategori],[NoID],[Kode],[Nama],[DefaultBarcode],[Alias]" & vbCrLf &
+                                                              ",[Keterangan],[IsActive],[IDTypePajak],[IDSupplier1]" & vbCrLf &
+                                                              ",[IDSupplier2],[IDSupplier3],[HargaBeli],[IDSatuanBeli]" & vbCrLf &
+                                                              ",[IsiCtn],[HargaBeliPcsBruto],[DiscProsen1],[DiscProsen2],[DiscProsen3]" & vbCrLf &
+                                                              ",[DiscProsen4],[DiscProsen5],[DiscRp],[HargaBeliPcs],[IDSatuan],[ProsenUpA]" & vbCrLf &
+                                                              ",[HargaJualA],[ProsenUpB],[HargaJualB]) VALUES" & vbCrLf &
+                                                              "(@IDMerk,@IDUsera,GETDATE(),@IDKategori,@NoID,@Kode,@Nama,@DefaultBarcode,@Alias" & vbCrLf &
+                                                              ",@Keterangan,@IsActive,@IDTypePajak,@IDSupplier1" & vbCrLf &
+                                                              ",@IDSupplier2,@IDSupplier3,@HargaBeli,@IDSatuanBeli" & vbCrLf &
+                                                              ",@IsiCtn,@HargaBeliPcsBruto,@DiscProsen1,@DiscProsen2,@DiscProsen3" & vbCrLf &
+                                                              ",@DiscProsen4,@DiscProsen5,@DiscRp,@HargaBeliPcs,@IDSatuan,@ProsenUpA" & vbCrLf &
                                                               ",@HargaJualA,@ProsenUpB,@HargaJualB)"
                                         Else
-                                            com.CommandText = "UPDATE [dbo].[MBarang] SET " & vbCrLf & _
-                                                              "[IDMerk]=@IDMerk,[IDUser]=@IDUsera,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf & _
-                                                              ",[Keterangan]=@Keterangan,[IsActive]=@IsActive,[IDTypePajak]=@IDTypePajak,[IDSupplier1]=@IDSupplier1" & vbCrLf & _
-                                                              ",[IDSupplier2]=@IDSupplier2,[IDSupplier3]=@IDSupplier3,[HargaBeli]=@HargaBeli,[IDSatuanBeli]=@IDSatuanBeli" & vbCrLf & _
-                                                              ",[IsiCtn]=@IsiCtn,[HargaBeliPcsBruto]=@HargaBeliPcsBruto,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3" & vbCrLf & _
-                                                              ",[DiscProsen4]=@DiscProsen4,[DiscProsen5]=@DiscProsen5,[DiscRp]=@DiscRp,[HargaBeliPcs]=@HargaBeliPcs,[IDSatuan]=@IDSatuan,[ProsenUpA]=@ProsenUpA" & vbCrLf & _
+                                            com.CommandText = "UPDATE [dbo].[MBarang] SET " & vbCrLf &
+                                                              "[IDMerk]=@IDMerk,[IDUser]=@IDUsera,[TanggalUpdate]=GETDATE(),[IDKategori]=@IDKategori,[Kode]=@Kode,[Nama]=@Nama,[DefaultBarcode]=@DefaultBarcode,[Alias]=@Alias" & vbCrLf &
+                                                              ",[Keterangan]=@Keterangan,[IsActive]=@IsActive,[IDTypePajak]=@IDTypePajak,[IDSupplier1]=@IDSupplier1" & vbCrLf &
+                                                              ",[IDSupplier2]=@IDSupplier2,[IDSupplier3]=@IDSupplier3,[HargaBeli]=@HargaBeli,[IDSatuanBeli]=@IDSatuanBeli" & vbCrLf &
+                                                              ",[IsiCtn]=@IsiCtn,[HargaBeliPcsBruto]=@HargaBeliPcsBruto,[DiscProsen1]=@DiscProsen1,[DiscProsen2]=@DiscProsen2,[DiscProsen3]=@DiscProsen3" & vbCrLf &
+                                                              ",[DiscProsen4]=@DiscProsen4,[DiscProsen5]=@DiscProsen5,[DiscRp]=@DiscRp,[HargaBeliPcs]=@HargaBeliPcs,[IDSatuan]=@IDSatuan,[ProsenUpA]=@ProsenUpA" & vbCrLf &
                                                               ",[HargaJualA]=@HargaJualA,[ProsenUpB]=@ProsenUpB,[HargaJualB]=@HargaJualB WHERE NoID=@NoID"
                                         End If
                                         com.Parameters.Clear()
@@ -147,9 +148,9 @@ Public Class frmEntriBarang
                                             com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
                                             com.Parameters.Clear()
                                             IDBarangD = NullToLong(com.ExecuteScalar()) + 1
-                                            com.CommandText = "INSERT INTO [dbo].[MBarangD] ([NoID],[IDBarang],[IDSatuan],[Konversi],[Barcode],[IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB])" & vbCrLf & _
-                                                              "SELECT " & IDBarangD & " [NoID]," & Me.NoID & " [IDBarang],[IDSatuan],1 [Konversi],MBarang.DefaultBarcode [Barcode],1 [IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB]" & vbCrLf & _
-                                                              "FROM MBarang (NOLOCK)" & vbCrLf & _
+                                            com.CommandText = "INSERT INTO [dbo].[MBarangD] ([NoID],[IDBarang],[IDSatuan],[Konversi],[Barcode],[IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB])" & vbCrLf &
+                                                              "SELECT " & IDBarangD & " [NoID]," & Me.NoID & " [IDBarang],[IDSatuan],1 [Konversi],MBarang.DefaultBarcode [Barcode],1 [IsDefault],[IsActive],[ProsenUpA],[HargaJualA],[ProsenUpB],[HargaJualB]" & vbCrLf &
+                                                              "FROM MBarang (NOLOCK)" & vbCrLf &
                                                               "WHERE MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
                                             com.Transaction.Commit()
@@ -160,14 +161,19 @@ Public Class frmEntriBarang
                                             cmdHapus.Enabled = True
 
                                             RefreshDetil(IDBarangD)
+
+                                            If XtraMessageBox.Show(Me, "Ingin meneruskan atau ingin mengubah data detil dari Master Barang yang baru ini?" & vbCrLf & "Yes : Tidak menutup Entrian, No : Menutup Entrian", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                                                DialogResult = Windows.Forms.DialogResult.OK
+                                                Me.Close()
+                                            End If
                                         Else
-                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET IDSatuan=MBarang.IDSatuan, Konversi=1, ProsenUpA=MBarang.ProsenUpA, HargaJualA=MBarang.HargaJualA, ProsenUpB=MBarang.ProsenUpB, HargaJualB=MBarang.HargaJualB" & vbCrLf & _
-                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET IDSatuan=MBarang.IDSatuan, Konversi=1, ProsenUpA=MBarang.ProsenUpA, HargaJualA=MBarang.HargaJualA, ProsenUpB=MBarang.ProsenUpB, HargaJualB=MBarang.HargaJualB" & vbCrLf &
+                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
                                                               "WHERE MBarangD.IsDefault=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
 
-                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET ProsenUpA=ROUND(((MBarangD.HargaJualA-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2), ProsenUpB=ROUND(((MBarangD.HargaJualB-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2)" & vbCrLf & _
-                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
+                                            com.CommandText = "UPDATE [dbo].[MBarangD] SET ProsenUpA=ROUND(((MBarangD.HargaJualA-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2), ProsenUpB=ROUND(((MBarangD.HargaJualB-(MBarang.HargaBeliPcs*MBarangD.Konversi))/(MBarang.HargaBeliPcs*MBarangD.Konversi))*100, 2)" & vbCrLf &
+                                                              "FROM MBarangD (NOLOCK) INNER JOIN MBarang (NOLOCK) ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
                                                               "WHERE ISNULL(MBarangD.IsDefault,0)=1 AND MBarang.NoID=" & Me.NoID
                                             com.ExecuteNonQuery()
                                             com.Transaction.Commit()
@@ -240,55 +246,7 @@ Public Class frmEntriBarang
                                 com.Transaction = cn.BeginTransaction
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "SELECT NoID, Kode FROM MSatuan WHERE IsActive=1"
-                                oDA.Fill(ds, "MSatuan")
-                                txtSatuanBeli.Properties.DataSource = ds.Tables("MSatuan")
-                                txtSatuanBeli.Properties.ValueMember = "NoID"
-                                txtSatuanBeli.Properties.DisplayMember = "Kode"
-                                txtSatuanBeli.EditValue = -1
-
-                                txtSatuanJual.Properties.DataSource = ds.Tables("MSatuan")
-                                txtSatuanJual.Properties.ValueMember = "NoID"
-                                txtSatuanJual.Properties.DisplayMember = "Kode"
-                                txtSatuanJual.EditValue = -1
-
-                                com.CommandText = "SELECT NoID, TypePajak FROM MTypePajak"
-                                oDA.Fill(ds, "MtypePajak")
-                                txtTypePajak.Properties.DataSource = ds.Tables("MtypePajak")
-                                txtTypePajak.Properties.ValueMember = "NoID"
-                                txtTypePajak.Properties.DisplayMember = "TypePajak"
-                                txtTypePajak.EditValue = 0
-
-                                com.CommandText = "SELECT NoID, Kode, Nama FROM MKategori WHERE IsActive=1 AND NoID NOT IN (SELECT IDParent FROM MKategori)"
-                                oDA.Fill(ds, "MKategori")
-                                txtKategori.Properties.DataSource = ds.Tables("MKategori")
-                                txtKategori.Properties.ValueMember = "NoID"
-                                txtKategori.Properties.DisplayMember = "Nama"
-                                txtKategori.EditValue = -1
-
-                                com.CommandText = "SELECT NoID, Kode, Nama FROM MMerk WHERE IsActive=1"
-                                oDA.Fill(ds, "MMerk")
-                                txtMerk.Properties.DataSource = ds.Tables("MMerk")
-                                txtMerk.Properties.ValueMember = "NoID"
-                                txtMerk.Properties.DisplayMember = "Nama"
-                                txtMerk.EditValue = -1
-
-                                com.CommandText = "SELECT NoID, Kode, Nama FROM MAlamat WHERE IsActive=1 AND IsSupplier=1"
-                                oDA.Fill(ds, "MSupplier")
-                                txtSupplier1.Properties.DataSource = ds.Tables("MSupplier")
-                                txtSupplier1.Properties.ValueMember = "NoID"
-                                txtSupplier1.Properties.DisplayMember = "Nama"
-                                txtSupplier1.EditValue = -1
-
-                                txtSupplier2.Properties.DataSource = ds.Tables("MSupplier")
-                                txtSupplier2.Properties.ValueMember = "NoID"
-                                txtSupplier2.Properties.DisplayMember = "Nama"
-                                txtSupplier2.EditValue = -1
-
-                                txtSupplier3.Properties.DataSource = ds.Tables("MSupplier")
-                                txtSupplier3.Properties.ValueMember = "NoID"
-                                txtSupplier3.Properties.DisplayMember = "Nama"
-                                txtSupplier3.EditValue = -1
+                                LoadLookUp(com, oDA, ds, True, True, True, True, True)
 
                                 com.CommandText = "SELECT * FROM MBarang WHERE NoID=" & NoID
                                 oDA.Fill(ds, "MBarang")
@@ -361,6 +319,72 @@ Public Class frmEntriBarang
                 End Using
             End Using
         End Using
+    End Sub
+    Private Sub LoadLookUp(com As SqlCommand, oDA As SqlDataAdapter, ds As DataSet,
+                           Satuan As Boolean,
+                           TypePajak As Boolean,
+                           Kategori As Boolean,
+                           Merk As Boolean,
+                           Supplier As Boolean)
+        If Satuan Then
+            com.CommandText = "SELECT NoID, Kode FROM MSatuan WHERE IsActive=1"
+            oDA.Fill(ds, "MSatuan")
+            txtSatuanBeli.Properties.DataSource = ds.Tables("MSatuan")
+            txtSatuanBeli.Properties.ValueMember = "NoID"
+            txtSatuanBeli.Properties.DisplayMember = "Kode"
+            txtSatuanBeli.EditValue = -1
+
+            txtSatuanJual.Properties.DataSource = ds.Tables("MSatuan")
+            txtSatuanJual.Properties.ValueMember = "NoID"
+            txtSatuanJual.Properties.DisplayMember = "Kode"
+            txtSatuanJual.EditValue = -1
+        End If
+
+        If TypePajak Then
+            com.CommandText = "SELECT NoID, TypePajak FROM MTypePajak"
+            oDA.Fill(ds, "MtypePajak")
+            txtTypePajak.Properties.DataSource = ds.Tables("MtypePajak")
+            txtTypePajak.Properties.ValueMember = "NoID"
+            txtTypePajak.Properties.DisplayMember = "TypePajak"
+            txtTypePajak.EditValue = 0
+        End If
+
+        If Kategori Then
+            com.CommandText = "SELECT NoID, Kode, Nama FROM MKategori WHERE IsActive=1 AND NoID NOT IN (SELECT IDParent FROM MKategori)"
+            oDA.Fill(ds, "MKategori")
+            txtKategori.Properties.DataSource = ds.Tables("MKategori")
+            txtKategori.Properties.ValueMember = "NoID"
+            txtKategori.Properties.DisplayMember = "Nama"
+            txtKategori.EditValue = -1
+        End If
+
+        If Merk Then
+            com.CommandText = "SELECT NoID, Kode, Nama FROM MMerk WHERE IsActive=1"
+            oDA.Fill(ds, "MMerk")
+            txtMerk.Properties.DataSource = ds.Tables("MMerk")
+            txtMerk.Properties.ValueMember = "NoID"
+            txtMerk.Properties.DisplayMember = "Nama"
+            txtMerk.EditValue = -1
+        End If
+
+        If Supplier Then
+            com.CommandText = "SELECT NoID, Kode, Nama FROM MAlamat WHERE IsActive=1 AND IsSupplier=1"
+            oDA.Fill(ds, "MSupplier")
+            txtSupplier1.Properties.DataSource = ds.Tables("MSupplier")
+            txtSupplier1.Properties.ValueMember = "NoID"
+            txtSupplier1.Properties.DisplayMember = "Nama"
+            txtSupplier1.EditValue = -1
+
+            txtSupplier2.Properties.DataSource = ds.Tables("MSupplier")
+            txtSupplier2.Properties.ValueMember = "NoID"
+            txtSupplier2.Properties.DisplayMember = "Nama"
+            txtSupplier2.EditValue = -1
+
+            txtSupplier3.Properties.DataSource = ds.Tables("MSupplier")
+            txtSupplier3.Properties.ValueMember = "NoID"
+            txtSupplier3.Properties.DisplayMember = "Nama"
+            txtSupplier3.EditValue = -1
+        End If
     End Sub
     Public Sub RefreshDetil(ByVal IDBarangD As Long)
         Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
@@ -742,5 +766,137 @@ Public Class frmEntriBarang
 
     Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
         cmdEdit.PerformClick()
+    End Sub
+
+    Private Sub txtKategori_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtKategori.ButtonClick
+        Select Case e.Button.Index
+            Case 1
+                Using frm As New frmEntriKategori(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                            Using cn As New SqlConnection(StrKonSQL)
+                                Using com As New SqlCommand
+                                    Using oDA As New SqlDataAdapter
+                                        Using ds As New DataSet
+                                            Try
+                                                dlg.Show()
+                                                dlg.Focus()
+
+                                                cn.Open()
+                                                com.Connection = cn
+                                                oDA.SelectCommand = com
+
+                                                LoadLookUp(com, oDA, ds, False, False, True, False, False)
+                                                txtKategori.EditValue = frm.NoID
+                                            Catch ex As Exception
+                                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            End Try
+                                        End Using
+                                    End Using
+                                End Using
+                            End Using
+                        End Using
+                    End If
+                End Using
+        End Select
+    End Sub
+
+    Private Sub txtMerk_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtMerk.ButtonClick
+        Select Case e.Button.Index
+            Case 1
+                Using frm As New frmEntriMerk(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                            Using cn As New SqlConnection(StrKonSQL)
+                                Using com As New SqlCommand
+                                    Using oDA As New SqlDataAdapter
+                                        Using ds As New DataSet
+                                            Try
+                                                dlg.Show()
+                                                dlg.Focus()
+
+                                                cn.Open()
+                                                com.Connection = cn
+                                                oDA.SelectCommand = com
+
+                                                LoadLookUp(com, oDA, ds, False, False, False, True, False)
+                                                txtMerk.EditValue = frm.NoID
+                                            Catch ex As Exception
+                                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            End Try
+                                        End Using
+                                    End Using
+                                End Using
+                            End Using
+                        End Using
+                    End If
+                End Using
+        End Select
+    End Sub
+
+    Private Sub txtSatuanBeli_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtSatuanBeli.ButtonClick, txtSatuanJual.ButtonClick
+        Select Case e.Button.Index
+            Case 1
+                Using frm As New frmEntriSatuan(-1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                            Using cn As New SqlConnection(StrKonSQL)
+                                Using com As New SqlCommand
+                                    Using oDA As New SqlDataAdapter
+                                        Using ds As New DataSet
+                                            Try
+                                                dlg.Show()
+                                                dlg.Focus()
+
+                                                cn.Open()
+                                                com.Connection = cn
+                                                oDA.SelectCommand = com
+
+                                                LoadLookUp(com, oDA, ds, True, False, False, False, False)
+                                                sender.EditValue = frm.NoID
+                                            Catch ex As Exception
+                                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            End Try
+                                        End Using
+                                    End Using
+                                End Using
+                            End Using
+                        End Using
+                    End If
+                End Using
+        End Select
+    End Sub
+
+    Private Sub txtSupplier1_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtSupplier1.ButtonClick, txtSupplier2.ButtonClick, txtSupplier3.ButtonClick
+        Select Case e.Button.Index
+            Case 1
+                Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
+                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                            Using cn As New SqlConnection(StrKonSQL)
+                                Using com As New SqlCommand
+                                    Using oDA As New SqlDataAdapter
+                                        Using ds As New DataSet
+                                            Try
+                                                dlg.Show()
+                                                dlg.Focus()
+
+                                                cn.Open()
+                                                com.Connection = cn
+                                                oDA.SelectCommand = com
+
+                                                LoadLookUp(com, oDA, ds, False, False, False, False, True)
+                                                sender.EditValue = frm.NoID
+                                            Catch ex As Exception
+                                                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            End Try
+                                        End Using
+                                    End Using
+                                End Using
+                            End Using
+                        End Using
+                    End If
+                End Using
+        End Select
     End Sub
 End Class

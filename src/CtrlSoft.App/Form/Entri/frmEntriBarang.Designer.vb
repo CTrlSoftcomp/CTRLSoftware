@@ -258,7 +258,7 @@ Partial Class frmEntriBarang
         Me.txtMerk.EnterMoveNextControl = True
         Me.txtMerk.Location = New System.Drawing.Point(104, 241)
         Me.txtMerk.Name = "txtMerk"
-        Me.txtMerk.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtMerk.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtMerk.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtMerk.Properties.NullText = ""
         Me.txtMerk.Properties.View = Me.gvMerk
@@ -416,7 +416,7 @@ Partial Class frmEntriBarang
         Me.txtSatuanJual.EnterMoveNextControl = True
         Me.txtSatuanJual.Location = New System.Drawing.Point(829, 42)
         Me.txtSatuanJual.Name = "txtSatuanJual"
-        Me.txtSatuanJual.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSatuanJual.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtSatuanJual.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtSatuanJual.Properties.NullText = ""
         Me.txtSatuanJual.Properties.View = Me.gvSatuanJual
@@ -542,7 +542,7 @@ Partial Class frmEntriBarang
         Me.txtSatuanBeli.EnterMoveNextControl = True
         Me.txtSatuanBeli.Location = New System.Drawing.Point(414, 138)
         Me.txtSatuanBeli.Name = "txtSatuanBeli"
-        Me.txtSatuanBeli.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSatuanBeli.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtSatuanBeli.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtSatuanBeli.Properties.NullText = ""
         Me.txtSatuanBeli.Properties.View = Me.gvSatuanBeli
@@ -562,7 +562,7 @@ Partial Class frmEntriBarang
         Me.txtSupplier3.EnterMoveNextControl = True
         Me.txtSupplier3.Location = New System.Drawing.Point(414, 90)
         Me.txtSupplier3.Name = "txtSupplier3"
-        Me.txtSupplier3.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSupplier3.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtSupplier3.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtSupplier3.Properties.NullText = ""
         Me.txtSupplier3.Properties.View = Me.gvSupplier3
@@ -582,7 +582,7 @@ Partial Class frmEntriBarang
         Me.txtSupplier2.EnterMoveNextControl = True
         Me.txtSupplier2.Location = New System.Drawing.Point(414, 66)
         Me.txtSupplier2.Name = "txtSupplier2"
-        Me.txtSupplier2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSupplier2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtSupplier2.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtSupplier2.Properties.NullText = ""
         Me.txtSupplier2.Properties.View = Me.gvSupplier2
@@ -602,7 +602,7 @@ Partial Class frmEntriBarang
         Me.txtSupplier1.EnterMoveNextControl = True
         Me.txtSupplier1.Location = New System.Drawing.Point(414, 42)
         Me.txtSupplier1.Name = "txtSupplier1"
-        Me.txtSupplier1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSupplier1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtSupplier1.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtSupplier1.Properties.NullText = ""
         Me.txtSupplier1.Properties.View = Me.gvSupplier1
@@ -716,7 +716,7 @@ Partial Class frmEntriBarang
         Me.txtKategori.EnterMoveNextControl = True
         Me.txtKategori.Location = New System.Drawing.Point(104, 42)
         Me.txtKategori.Name = "txtKategori"
-        Me.txtKategori.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtKategori.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)})
         Me.txtKategori.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtKategori.Properties.NullText = ""
         Me.txtKategori.Properties.View = Me.gvKategori

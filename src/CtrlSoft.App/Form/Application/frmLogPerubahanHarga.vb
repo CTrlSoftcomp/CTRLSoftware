@@ -54,9 +54,6 @@ Public Class frmLogPerubahanHarga
 
     Private Sub frmHasilPosting_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            cmdRefresh.ImageList = frmMain.ICButtons
-            cmdTutup.ImageList = frmMain.ICButtons
-
             RefreshData(-1)
         Catch ex As Exception
 
@@ -149,11 +146,11 @@ Public Class frmLogPerubahanHarga
         End With
     End Sub
 
-    Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
+    Private Sub mnRefresh_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnRefresh.ItemClick
         RefreshData(-1)
     End Sub
 
-    Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
+    Private Sub mnTutup_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnTutup.ItemClick
         Me.Close()
         DialogResult = Windows.Forms.DialogResult.Cancel
     End Sub

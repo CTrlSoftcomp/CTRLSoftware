@@ -15,65 +15,6 @@ Public Class frmEntriKategori
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        DxErrorProvider1.ClearErrors()
-        If txtUserID.Text = "" Then
-            DxErrorProvider1.SetError(txtUserID, "Kategori ID harus diisi!")
-        End If
-        If txtNama.Text = "" Then
-            DxErrorProvider1.SetError(txtNama, "Nama harus diisi!")
-        End If
-
-        If Not DxErrorProvider1.HasErrors Then
-            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
-                Using cn As New SqlConnection(StrKonSQL)
-                    Using com As New SqlCommand
-                        Using oDA As New SqlDataAdapter
-                            Using ds As New DataSet
-                                Try
-                                    dlg.Show()
-                                    dlg.Focus()
-                                    cn.Open()
-                                    com.Connection = cn
-                                    com.Transaction = cn.BeginTransaction
-                                    oDA.SelectCommand = com
-
-                                    If pStatus = pStatusForm.Baru Then
-                                        com.CommandText = "SELECT MAX(NoID) FROM MKategori"
-                                        NoID = NullToLong(com.ExecuteScalar()) + 1
-
-                                        com.CommandText = "INSERT INTO MKategori (NoID, Kode, Nama, IDParent, IsActive) VALUES (@NoID, @Kode, @Nama, @IDParent, @IsActive)"
-                                    Else
-                                        com.CommandText = "UPDATE MKategori SET Kode=@Kode, Nama=@Nama, IDParent=@IDParent, IsActive=@IsActive WHERE NoID=@NoID"
-                                    End If
-                                    com.Parameters.Clear()
-                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
-                                    com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtUserID.Text
-                                    com.Parameters.Add(New SqlParameter("@Nama", SqlDbType.VarChar)).Value = txtNama.Text
-                                    com.Parameters.Add(New SqlParameter("@IDParent", SqlDbType.Int)).Value = NullToLong(txtParent.EditValue)
-                                    com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
-                                    com.ExecuteNonQuery()
-
-                                    com.Transaction.Commit()
-
-                                    DialogResult = Windows.Forms.DialogResult.OK
-                                    Me.Close()
-                                Catch ex As Exception
-                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                End Try
-                            End Using
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End If
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
-    End Sub
-
     Public Sub New(ByVal NoID As Long)
 
         ' This call is required by the Windows Form Designer.
@@ -87,10 +28,6 @@ Public Class frmEntriKategori
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
-            SimpleButton1.ImageList = frmMain.ICButtons
-            SimpleButton1.ImageIndex = 8
-            SimpleButton2.ImageList = frmMain.ICButtons
-            SimpleButton2.ImageIndex = 5
 
             LoadData(NoID)
             With LayoutControl1
@@ -167,5 +104,64 @@ Public Class frmEntriKategori
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Using
+    End Sub
+
+    Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
+        DxErrorProvider1.ClearErrors()
+        If txtUserID.Text = "" Then
+            DxErrorProvider1.SetError(txtUserID, "Kategori ID harus diisi!")
+        End If
+        If txtNama.Text = "" Then
+            DxErrorProvider1.SetError(txtNama, "Nama harus diisi!")
+        End If
+
+        If Not DxErrorProvider1.HasErrors Then
+            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    com.Transaction = cn.BeginTransaction
+                                    oDA.SelectCommand = com
+
+                                    If pStatus = pStatusForm.Baru Then
+                                        com.CommandText = "SELECT MAX(NoID) FROM MKategori"
+                                        NoID = NullToLong(com.ExecuteScalar()) + 1
+
+                                        com.CommandText = "INSERT INTO MKategori (NoID, Kode, Nama, IDParent, IsActive) VALUES (@NoID, @Kode, @Nama, @IDParent, @IsActive)"
+                                    Else
+                                        com.CommandText = "UPDATE MKategori SET Kode=@Kode, Nama=@Nama, IDParent=@IDParent, IsActive=@IsActive WHERE NoID=@NoID"
+                                    End If
+                                    com.Parameters.Clear()
+                                    com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                    com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = txtUserID.Text
+                                    com.Parameters.Add(New SqlParameter("@Nama", SqlDbType.VarChar)).Value = txtNama.Text
+                                    com.Parameters.Add(New SqlParameter("@IDParent", SqlDbType.Int)).Value = NullToLong(txtParent.EditValue)
+                                    com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
+                                    com.ExecuteNonQuery()
+
+                                    com.Transaction.Commit()
+
+                                    DialogResult = Windows.Forms.DialogResult.OK
+                                    Me.Close()
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

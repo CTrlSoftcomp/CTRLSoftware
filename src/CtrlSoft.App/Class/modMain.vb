@@ -6,12 +6,16 @@ Imports CtrlSoft.App.Public
 Imports System.Threading
 Imports System.IO
 Imports DevExpress.XtraReports.Security
+Imports DevExpress.Skins
 
 Public Class modMain
 
     <STAThread()>
     Shared Sub Main()
         Try
+            Application.EnableVisualStyles()
+            Application.SetCompatibleTextRenderingDefault(False)
+
             'Default System
             InitFolders()
 
@@ -30,8 +34,8 @@ Public Class modMain
             ScriptPermissionManager.GlobalInstance = New ScriptPermissionManager(ExecutionMode.Unrestricted)
 
             DevExpress.UserSkins.BonusSkins.Register()
-            Application.EnableVisualStyles()
-            Application.SetCompatibleTextRenderingDefault(False)
+            SkinManager.EnableFormSkins()
+
             ' Change current culture
             Dim culture As CultureInfo
             culture = CultureInfo.CreateSpecificCulture("en-US")

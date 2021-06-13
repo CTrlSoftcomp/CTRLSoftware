@@ -19,51 +19,46 @@ Partial Class frmEntriKategori
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl
-        Me.txtNama = New DevExpress.XtraEditors.TextEdit
-        Me.txtUserID = New DevExpress.XtraEditors.TextEdit
-        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton
-        Me.txtParent = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup
-        Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem
-        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem
-        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem
+        Me.components = New System.ComponentModel.Container()
+        Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.ckAktif = New DevExpress.XtraEditors.CheckEdit()
+        Me.txtNama = New DevExpress.XtraEditors.TextEdit()
+        Me.txtUserID = New DevExpress.XtraEditors.TextEdit()
+        Me.txtParent = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
+        Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.ckAktif = New DevExpress.XtraEditors.CheckEdit
-        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem
+        Me.Bar2 = New DevExpress.XtraBars.Bar()
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem()
+        Me.Bar1 = New DevExpress.XtraBars.Bar()
+        Me.mnSimpan = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtParent.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -71,69 +66,55 @@ Partial Class frmEntriKategori
         Me.LayoutControl1.Controls.Add(Me.ckAktif)
         Me.LayoutControl1.Controls.Add(Me.txtNama)
         Me.LayoutControl1.Controls.Add(Me.txtUserID)
-        Me.LayoutControl1.Controls.Add(Me.SimpleButton2)
-        Me.LayoutControl1.Controls.Add(Me.SimpleButton1)
         Me.LayoutControl1.Controls.Add(Me.txtParent)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl1.Location = New System.Drawing.Point(0, 22)
+        Me.LayoutControl1.Location = New System.Drawing.Point(0, 51)
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(941, 332, 250, 350)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(382, 194)
+        Me.LayoutControl1.Size = New System.Drawing.Size(382, 165)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'ckAktif
+        '
+        Me.ckAktif.EditValue = True
+        Me.ckAktif.Location = New System.Drawing.Point(12, 84)
+        Me.ckAktif.Name = "ckAktif"
+        Me.ckAktif.Properties.Caption = "Aktif"
+        Me.ckAktif.Size = New System.Drawing.Size(358, 19)
+        Me.ckAktif.StyleController = Me.LayoutControl1
+        Me.ckAktif.TabIndex = 12
         '
         'txtNama
         '
         Me.txtNama.EnterMoveNextControl = True
-        Me.txtNama.Location = New System.Drawing.Point(86, 36)
+        Me.txtNama.Location = New System.Drawing.Point(85, 36)
         Me.txtNama.Name = "txtNama"
         Me.txtNama.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtNama.Size = New System.Drawing.Size(284, 20)
+        Me.txtNama.Size = New System.Drawing.Size(285, 20)
         Me.txtNama.StyleController = Me.LayoutControl1
         Me.txtNama.TabIndex = 10
         '
         'txtUserID
         '
         Me.txtUserID.EnterMoveNextControl = True
-        Me.txtUserID.Location = New System.Drawing.Point(86, 12)
+        Me.txtUserID.Location = New System.Drawing.Point(85, 12)
         Me.txtUserID.Name = "txtUserID"
         Me.txtUserID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtUserID.Size = New System.Drawing.Size(284, 20)
+        Me.txtUserID.Size = New System.Drawing.Size(285, 20)
         Me.txtUserID.StyleController = Me.LayoutControl1
         Me.txtUserID.TabIndex = 9
         '
-        'SimpleButton2
-        '
-        Me.SimpleButton2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SimpleButton2.Appearance.Options.UseFont = True
-        Me.SimpleButton2.Location = New System.Drawing.Point(274, 159)
-        Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(96, 23)
-        Me.SimpleButton2.StyleController = Me.LayoutControl1
-        Me.SimpleButton2.TabIndex = 8
-        Me.SimpleButton2.Text = "&Tutup"
-        '
-        'SimpleButton1
-        '
-        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SimpleButton1.Appearance.Options.UseFont = True
-        Me.SimpleButton1.Location = New System.Drawing.Point(174, 159)
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(96, 23)
-        Me.SimpleButton1.StyleController = Me.LayoutControl1
-        Me.SimpleButton1.TabIndex = 7
-        Me.SimpleButton1.Text = "&Simpan"
-        '
         'txtParent
         '
-        Me.txtParent.Location = New System.Drawing.Point(86, 60)
+        Me.txtParent.Location = New System.Drawing.Point(85, 60)
         Me.txtParent.Name = "txtParent"
         Me.txtParent.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtParent.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtParent.Properties.NullText = ""
         Me.txtParent.Properties.View = Me.SearchLookUpEdit1View
-        Me.txtParent.Size = New System.Drawing.Size(284, 20)
+        Me.txtParent.Size = New System.Drawing.Size(285, 20)
         Me.txtParent.StyleController = Me.LayoutControl1
         Me.txtParent.TabIndex = 10
         '
@@ -149,42 +130,11 @@ Partial Class frmEntriKategori
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem4, Me.EmptySpaceItem1, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.EmptySpaceItem3, Me.LayoutControlItem3})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.EmptySpaceItem1, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem3})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(382, 194)
-        Me.LayoutControlGroup1.Text = "Root"
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(382, 165)
         Me.LayoutControlGroup1.TextVisible = False
-        '
-        'LayoutControlItem1
-        '
-        Me.LayoutControlItem1.Control = Me.SimpleButton1
-        Me.LayoutControlItem1.CustomizationFormText = "LayoutControlItem1"
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(162, 147)
-        Me.LayoutControlItem1.MaxSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem1.MinSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem1.Text = "LayoutControlItem1"
-        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem1.TextToControlDistance = 0
-        Me.LayoutControlItem1.TextVisible = False
-        '
-        'LayoutControlItem2
-        '
-        Me.LayoutControlItem2.Control = Me.SimpleButton2
-        Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(262, 147)
-        Me.LayoutControlItem2.MaxSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem2.MinSize = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(100, 27)
-        Me.LayoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem2.Text = "LayoutControlItem2"
-        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem2.TextToControlDistance = 0
-        Me.LayoutControlItem2.TextVisible = False
         '
         'LayoutControlItem4
         '
@@ -198,11 +148,11 @@ Partial Class frmEntriKategori
         '
         'EmptySpaceItem1
         '
+        Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 95)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(362, 52)
-        Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(362, 50)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem5
@@ -225,14 +175,15 @@ Partial Class frmEntriKategori
         Me.LayoutControlItem6.Text = "Induk Kategori"
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(70, 13)
         '
-        'EmptySpaceItem3
+        'LayoutControlItem3
         '
-        Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 147)
-        Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(162, 27)
-        Me.EmptySpaceItem3.Text = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem3.Control = Me.ckAktif
+        Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 72)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(362, 23)
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem3.TextVisible = False
         '
         'DxErrorProvider1
         '
@@ -240,15 +191,15 @@ Partial Class frmEntriKategori
         '
         'BarManager1
         '
-        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2})
+        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2, Me.Bar1})
         Me.BarManager1.DockControls.Add(Me.barDockControlTop)
         Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnSimpan, Me.mnTutup})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 2
+        Me.BarManager1.MaxItemId = 4
         '
         'Bar2
         '
@@ -276,55 +227,60 @@ Partial Class frmEntriKategori
         Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F10)
         Me.mnSaveLayout.Name = "mnSaveLayout"
         '
+        'Bar1
+        '
+        Me.Bar1.BarName = "Custom 3"
+        Me.Bar1.DockCol = 0
+        Me.Bar1.DockRow = 1
+        Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
+        Me.Bar1.Text = "Custom 3"
+        '
+        'mnSimpan
+        '
+        Me.mnSimpan.Caption = "&Simpan (F6)"
+        Me.mnSimpan.Id = 2
+        Me.mnSimpan.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F6)
+        Me.mnSimpan.Name = "mnSimpan"
+        '
+        'mnTutup
+        '
+        Me.mnTutup.Caption = "&Tutup (F3)"
+        Me.mnTutup.Id = 3
+        Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
+        Me.mnTutup.Name = "mnTutup"
+        '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(382, 22)
+        Me.barDockControlTop.Manager = Me.BarManager1
+        Me.barDockControlTop.Size = New System.Drawing.Size(382, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 216)
+        Me.barDockControlBottom.Manager = Me.BarManager1
         Me.barDockControlBottom.Size = New System.Drawing.Size(382, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 22)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 194)
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Manager = Me.BarManager1
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 165)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(382, 22)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 194)
-        '
-        'ckAktif
-        '
-        Me.ckAktif.EditValue = True
-        Me.ckAktif.Location = New System.Drawing.Point(12, 84)
-        Me.ckAktif.Name = "ckAktif"
-        Me.ckAktif.Properties.Caption = "Aktif"
-        Me.ckAktif.Size = New System.Drawing.Size(358, 19)
-        Me.ckAktif.StyleController = Me.LayoutControl1
-        Me.ckAktif.TabIndex = 12
-        '
-        'LayoutControlItem3
-        '
-        Me.LayoutControlItem3.Control = Me.ckAktif
-        Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 72)
-        Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(362, 23)
-        Me.LayoutControlItem3.Text = "LayoutControlItem3"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem3.TextToControlDistance = 0
-        Me.LayoutControlItem3.TextVisible = False
+        Me.barDockControlRight.Location = New System.Drawing.Point(382, 51)
+        Me.barDockControlRight.Manager = Me.BarManager1
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 165)
         '
         'frmEntriKategori
         '
@@ -341,31 +297,25 @@ Partial Class frmEntriKategori
         Me.Text = "Entri Kategori"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtParent.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents LayoutControl1 As DevExpress.XtraLayout.LayoutControl
     Friend WithEvents LayoutControlGroup1 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LayoutControlItem1 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LayoutControlItem2 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents txtUserID As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
@@ -383,7 +333,9 @@ Partial Class frmEntriKategori
     Friend WithEvents txtParent As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents EmptySpaceItem3 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents ckAktif As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents Bar1 As DevExpress.XtraBars.Bar
+    Friend WithEvents mnSimpan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnTutup As DevExpress.XtraBars.BarButtonItem
 End Class

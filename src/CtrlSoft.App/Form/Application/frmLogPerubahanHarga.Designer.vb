@@ -19,30 +19,30 @@ Partial Class frmLogPerubahanHarga
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl
-        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl
+        Me.components = New System.ComponentModel.Container()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage
-        Me.GridControl2 = New DevExpress.XtraGrid.GridControl
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
         Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.cmdRefresh = New DevExpress.XtraEditors.SimpleButton
-        Me.cmdTutup = New DevExpress.XtraEditors.SimpleButton
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar2 = New DevExpress.XtraBars.Bar
-        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem
-        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl
-        Me.mnPosting = New DevExpress.XtraBars.BarButtonItem
-        Me.mnUnposting = New DevExpress.XtraBars.BarButtonItem
-        Me.mnHasilPosting = New DevExpress.XtraBars.BarButtonItem
+        Me.Bar2 = New DevExpress.XtraBars.Bar()
+        Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
+        Me.mnSaveLayout = New DevExpress.XtraBars.BarButtonItem()
+        Me.Bar1 = New DevExpress.XtraBars.Bar()
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnTutup = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.mnPosting = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnUnposting = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHasilPosting = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
@@ -54,8 +54,6 @@ Partial Class frmLogPerubahanHarga
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -63,10 +61,10 @@ Partial Class frmLogPerubahanHarga
         'XtraTabControl1
         '
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 22)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 51)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(968, 428)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(968, 450)
         Me.XtraTabControl1.TabIndex = 0
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2})
         '
@@ -74,7 +72,7 @@ Partial Class frmLogPerubahanHarga
         '
         Me.XtraTabPage1.Controls.Add(Me.GridControl1)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(962, 402)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(962, 422)
         Me.XtraTabPage1.Text = "Harga Jual"
         '
         'GridControl1
@@ -84,7 +82,7 @@ Partial Class frmLogPerubahanHarga
         Me.GridControl1.Location = New System.Drawing.Point(0, 0)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(962, 402)
+        Me.GridControl1.Size = New System.Drawing.Size(962, 422)
         Me.GridControl1.TabIndex = 3
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -104,7 +102,7 @@ Partial Class frmLogPerubahanHarga
         '
         Me.XtraTabPage2.Controls.Add(Me.GridControl2)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(578, 193)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(962, 371)
         Me.XtraTabPage2.Text = "Harga Beli"
         '
         'GridControl2
@@ -114,7 +112,7 @@ Partial Class frmLogPerubahanHarga
         Me.GridControl2.Location = New System.Drawing.Point(0, 0)
         Me.GridControl2.MainView = Me.GridView2
         Me.GridControl2.Name = "GridControl2"
-        Me.GridControl2.Size = New System.Drawing.Size(578, 193)
+        Me.GridControl2.Size = New System.Drawing.Size(962, 371)
         Me.GridControl2.TabIndex = 3
         Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
         '
@@ -130,51 +128,17 @@ Partial Class frmLogPerubahanHarga
         Me.GridView2.OptionsView.ShowFooter = True
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
-        'PanelControl1
-        '
-        Me.PanelControl1.Controls.Add(Me.cmdRefresh)
-        Me.PanelControl1.Controls.Add(Me.cmdTutup)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 450)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(968, 51)
-        Me.PanelControl1.TabIndex = 1
-        '
-        'cmdRefresh
-        '
-        Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdRefresh.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRefresh.Appearance.Options.UseFont = True
-        Me.cmdRefresh.ImageIndex = 3
-        Me.cmdRefresh.Location = New System.Drawing.Point(710, 6)
-        Me.cmdRefresh.Name = "cmdRefresh"
-        Me.cmdRefresh.Size = New System.Drawing.Size(120, 38)
-        Me.cmdRefresh.TabIndex = 6
-        Me.cmdRefresh.Text = "&Refresh"
-        '
-        'cmdTutup
-        '
-        Me.cmdTutup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdTutup.Appearance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdTutup.Appearance.Options.UseFont = True
-        Me.cmdTutup.ImageIndex = 5
-        Me.cmdTutup.Location = New System.Drawing.Point(836, 6)
-        Me.cmdTutup.Name = "cmdTutup"
-        Me.cmdTutup.Size = New System.Drawing.Size(120, 38)
-        Me.cmdTutup.TabIndex = 7
-        Me.cmdTutup.Text = "&Tutup"
-        '
         'BarManager1
         '
-        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2})
+        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar2, Me.Bar1})
         Me.BarManager1.DockControls.Add(Me.barDockControlTop)
         Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnPosting, Me.mnUnposting, Me.mnHasilPosting})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnPosting, Me.mnUnposting, Me.mnHasilPosting, Me.mnRefresh, Me.mnTutup})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 5
+        Me.BarManager1.MaxItemId = 7
         '
         'Bar2
         '
@@ -202,33 +166,60 @@ Partial Class frmLogPerubahanHarga
         Me.mnSaveLayout.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F10))
         Me.mnSaveLayout.Name = "mnSaveLayout"
         '
+        'Bar1
+        '
+        Me.Bar1.BarName = "Custom 3"
+        Me.Bar1.DockCol = 0
+        Me.Bar1.DockRow = 1
+        Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
+        Me.Bar1.Text = "Custom 3"
+        '
+        'mnRefresh
+        '
+        Me.mnRefresh.Caption = "&Refresh (F5)"
+        Me.mnRefresh.Id = 5
+        Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
+        Me.mnRefresh.Name = "mnRefresh"
+        '
+        'mnTutup
+        '
+        Me.mnTutup.Caption = "&Tutup (F3)"
+        Me.mnTutup.Id = 6
+        Me.mnTutup.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
+        Me.mnTutup.Name = "mnTutup"
+        '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(968, 22)
+        Me.barDockControlTop.Manager = Me.BarManager1
+        Me.barDockControlTop.Size = New System.Drawing.Size(968, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 501)
+        Me.barDockControlBottom.Manager = Me.BarManager1
         Me.barDockControlBottom.Size = New System.Drawing.Size(968, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 22)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 479)
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
+        Me.barDockControlLeft.Manager = Me.BarManager1
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 450)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(968, 22)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 479)
+        Me.barDockControlRight.Location = New System.Drawing.Point(968, 51)
+        Me.barDockControlRight.Manager = Me.BarManager1
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 450)
         '
         'mnPosting
         '
@@ -260,7 +251,6 @@ Partial Class frmLogPerubahanHarga
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(968, 501)
         Me.Controls.Add(Me.XtraTabControl1)
-        Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
@@ -278,19 +268,15 @@ Partial Class frmLogPerubahanHarga
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XtraTabPage1 As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XtraTabPage2 As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents cmdRefresh As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents cmdTutup As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridControl2 As DevExpress.XtraGrid.GridControl
@@ -309,4 +295,7 @@ Partial Class frmLogPerubahanHarga
     Friend WithEvents mnUnposting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnHasilPosting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
+    Friend WithEvents Bar1 As DevExpress.XtraBars.Bar
+    Friend WithEvents mnRefresh As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnTutup As DevExpress.XtraBars.BarButtonItem
 End Class

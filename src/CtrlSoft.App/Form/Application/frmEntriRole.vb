@@ -15,68 +15,6 @@ Public Class frmEntriRole
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        DxErrorProvider1.ClearErrors()
-        If TextEdit1.Text = "" Then
-            DxErrorProvider1.SetError(TextEdit1, "Role harus diisi!")
-        End If
-
-        If Not DxErrorProvider1.HasErrors Then
-            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
-                Using cn As New SqlConnection(StrKonSQL)
-                    Using com As New SqlCommand
-                        Using oDA As New SqlDataAdapter
-                            Using ds As New DataSet
-                                Try
-                                    dlg.Show()
-                                    dlg.Focus()
-                                    cn.Open()
-                                    com.Connection = cn
-                                    com.Transaction = cn.BeginTransaction
-                                    oDA.SelectCommand = com
-
-                                    If pStatus = pStatusForm.Baru Then
-                                        com.CommandText = "SELECT MAX(NoID) FROM MRole"
-                                        NoID = NullToLong(com.ExecuteScalar()) + 1
-
-                                        com.CommandText = "INSERT INTO MRole (NoID, [Role], IsSupervisor) VALUES (" & NoID & ", '" & FixApostropi(TextEdit1.Text) & "', " & IIf(CheckEdit1.Checked, 1, 0) & ")"
-                                        com.ExecuteNonQuery()
-                                    Else
-                                        com.CommandText = "UPDATE MRole SET [Role]='" & FixApostropi(TextEdit1.Text) & "', IsSupervisor=" & IIf(CheckEdit1.Checked, 1, 0) & " WHERE NoID=" & NoID
-                                        com.ExecuteNonQuery()
-                                    End If
-
-                                    com.CommandText = "DELETE FROM MRoleD WHERE IDRole=" & NoID
-                                    com.ExecuteNonQuery()
-
-                                    For Each row In BindingSource1.List
-                                        com.CommandText = "INSERT INTO [dbo].[MRoleD] ([IDRole],[IDMenu],[IsActive]) VALUES (@IDRole,@IDMenu,@IsActive)"
-                                        com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@IDRole", SqlDbType.BigInt)).Value = NoID
-                                        com.Parameters.Add(New SqlParameter("@IDMenu", SqlDbType.Int)).Value = NullTolInt(row.Item("NoID"))
-                                        com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = NullToBool(row.Item("Aktif"))
-                                        com.ExecuteNonQuery()
-                                    Next
-                                    com.Transaction.Commit()
-
-                                    DialogResult = Windows.Forms.DialogResult.OK
-                                    Me.Close()
-                                Catch ex As Exception
-                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                End Try
-                            End Using
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End If
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
-    End Sub
-
     Public Sub New(ByVal NoID As Long)
 
         ' This call is required by the Windows Form Designer.
@@ -90,11 +28,6 @@ Public Class frmEntriRole
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
-            SimpleButton1.ImageList = frmMain.ICButtons
-            SimpleButton1.ImageIndex = 8
-            SimpleButton2.ImageList = frmMain.ICButtons
-            SimpleButton2.ImageIndex = 5
-
             LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
@@ -130,9 +63,9 @@ Public Class frmEntriRole
                                     CheckEdit1.Checked = NullToBool(ds.Tables("MRole").Rows(0).Item("IsSupervisor"))
 
                                     If TextEdit1.Text = "ALL" OrElse TextEdit1.Text = "SU" Then
-                                        SimpleButton1.Enabled = False
+                                        mnSimpan.Enabled = False
                                     Else
-                                        SimpleButton1.Enabled = True
+                                        mnSimpan.Enabled = True
                                     End If
 
                                     com.CommandText = "EXEC [dbo].[spGenerateMenu] " & NoID
@@ -246,5 +179,67 @@ Public Class frmEntriRole
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Using
+    End Sub
+
+    Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
+        DxErrorProvider1.ClearErrors()
+        If TextEdit1.Text = "" Then
+            DxErrorProvider1.SetError(TextEdit1, "Role harus diisi!")
+        End If
+
+        If Not DxErrorProvider1.HasErrors Then
+            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    com.Transaction = cn.BeginTransaction
+                                    oDA.SelectCommand = com
+
+                                    If pStatus = pStatusForm.Baru Then
+                                        com.CommandText = "SELECT MAX(NoID) FROM MRole"
+                                        NoID = NullToLong(com.ExecuteScalar()) + 1
+
+                                        com.CommandText = "INSERT INTO MRole (NoID, [Role], IsSupervisor) VALUES (" & NoID & ", '" & FixApostropi(TextEdit1.Text) & "', " & IIf(CheckEdit1.Checked, 1, 0) & ")"
+                                        com.ExecuteNonQuery()
+                                    Else
+                                        com.CommandText = "UPDATE MRole SET [Role]='" & FixApostropi(TextEdit1.Text) & "', IsSupervisor=" & IIf(CheckEdit1.Checked, 1, 0) & " WHERE NoID=" & NoID
+                                        com.ExecuteNonQuery()
+                                    End If
+
+                                    com.CommandText = "DELETE FROM MRoleD WHERE IDRole=" & NoID
+                                    com.ExecuteNonQuery()
+
+                                    For Each row In BindingSource1.List
+                                        com.CommandText = "INSERT INTO [dbo].[MRoleD] ([IDRole],[IDMenu],[IsActive]) VALUES (@IDRole,@IDMenu,@IsActive)"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@IDRole", SqlDbType.BigInt)).Value = NoID
+                                        com.Parameters.Add(New SqlParameter("@IDMenu", SqlDbType.Int)).Value = NullTolInt(row.Item("NoID"))
+                                        com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = NullToBool(row.Item("Aktif"))
+                                        com.ExecuteNonQuery()
+                                    Next
+                                    com.Transaction.Commit()
+
+                                    DialogResult = Windows.Forms.DialogResult.OK
+                                    Me.Close()
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

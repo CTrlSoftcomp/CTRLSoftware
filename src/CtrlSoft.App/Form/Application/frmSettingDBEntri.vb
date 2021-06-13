@@ -22,54 +22,6 @@ Public Class frmSettingDBEntri
         DBSetting = [Public].DBSetting.Get(Id)
     End Sub
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
-        DxErrorProvider1.ClearErrors()
-        If txtServer.Text = "" Then
-            DxErrorProvider1.SetError(txtServer, "Server harus diisi!")
-        End If
-        If txtDatabase.Text = "" Then
-            DxErrorProvider1.SetError(txtDatabase, "Database harus diisi!")
-        End If
-        If txtUserID.Text = "" Then
-            DxErrorProvider1.SetError(txtUserID, "User ID harus diisi!")
-        End If
-        If txtPassword.Text = "" Then
-            DxErrorProvider1.SetError(txtPassword, "Password harus diisi!")
-        End If
-        If txtTimeout.Text = "" OrElse NullToLong(txtTimeout.Value) <= 0 Then
-            DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
-        End If
-        If Not DxErrorProvider1.HasErrors Then
-            Using cn As New SqlConnection("Data Source=" & txtServer.Text &
-                        ";initial Catalog=" & txtDatabase.Text &
-                        ";User ID=" & txtUserID.Text &
-                        ";Password=" & txtPassword.Text &
-                        ";Connect Timeout=" & NullToLong(txtTimeout.Value))
-                Try
-                    cn.Open()
-
-                    'Save Koneksi
-                    DBSetting.Server = txtServer.Text
-                    DBSetting.Database = txtDatabase.Text
-                    DBSetting.UserID = txtUserID.Text
-                    DBSetting.Password = txtPassword.Text
-                    DBSetting.Timeout = NullTolInt(txtTimeout.EditValue)
-                    DBSetting.Default = ckDefault.Checked
-
-                    DBSetting = [Public].DBSetting.Save(DBSetting)
-
-                    DialogResult = Windows.Forms.DialogResult.OK
-                    Close()
-                Catch ex As Exception
-                    XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End Try
-            End Using
-        End If
-        Windows.Forms.Cursor.Current = curentcursor
-    End Sub
-
     Private Sub frmSettingDB_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If DBSetting IsNot Nothing Then
             txtID.Text = DBSetting.Id
@@ -90,11 +42,6 @@ Public Class frmSettingDBEntri
             ckDefault.Checked = True
         End If
         LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
     End Sub
 
     Private Sub LookUpDB(ByVal Server As String, ByVal UserID As String, ByVal Pwd As String)
@@ -194,5 +141,58 @@ Public Class frmSettingDBEntri
                 End Using
             End Using
         End If
+    End Sub
+
+    Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
+        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
+        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        DxErrorProvider1.ClearErrors()
+        If txtServer.Text = "" Then
+            DxErrorProvider1.SetError(txtServer, "Server harus diisi!")
+        End If
+        If txtDatabase.Text = "" Then
+            DxErrorProvider1.SetError(txtDatabase, "Database harus diisi!")
+        End If
+        If txtUserID.Text = "" Then
+            DxErrorProvider1.SetError(txtUserID, "User ID harus diisi!")
+        End If
+        If txtPassword.Text = "" Then
+            DxErrorProvider1.SetError(txtPassword, "Password harus diisi!")
+        End If
+        If txtTimeout.Text = "" OrElse NullToLong(txtTimeout.Value) <= 0 Then
+            DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
+        End If
+        If Not DxErrorProvider1.HasErrors Then
+            Using cn As New SqlConnection("Data Source=" & txtServer.Text &
+                        ";initial Catalog=" & txtDatabase.Text &
+                        ";User ID=" & txtUserID.Text &
+                        ";Password=" & txtPassword.Text &
+                        ";Connect Timeout=" & NullToLong(txtTimeout.Value))
+                Try
+                    cn.Open()
+
+                    'Save Koneksi
+                    DBSetting.Server = txtServer.Text
+                    DBSetting.Database = txtDatabase.Text
+                    DBSetting.UserID = txtUserID.Text
+                    DBSetting.Password = txtPassword.Text
+                    DBSetting.Timeout = NullTolInt(txtTimeout.EditValue)
+                    DBSetting.Default = ckDefault.Checked
+
+                    DBSetting = [Public].DBSetting.Save(DBSetting)
+
+                    DialogResult = Windows.Forms.DialogResult.OK
+                    Close()
+                Catch ex As Exception
+                    XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End Try
+            End Using
+        End If
+        Windows.Forms.Cursor.Current = curentcursor
+    End Sub
+
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

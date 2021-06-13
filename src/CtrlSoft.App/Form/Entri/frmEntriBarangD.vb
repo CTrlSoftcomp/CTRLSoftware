@@ -16,98 +16,6 @@ Public Class frmEntriBarangD
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        DxErrorProvider1.ClearErrors()
-        If txtBarcode.Text = "" Then
-            DxErrorProvider1.SetError(txtBarcode, "Barcode harus diisi!")
-        End If
-        If txtSatuan.Text = "" Then
-            DxErrorProvider1.SetError(txtSatuan, "Satuan harus diisi!")
-        End If
-        If txtKonversi.EditValue <= 0 Then
-            DxErrorProvider1.SetError(txtKonversi, "Isi Ctn salah!")
-        End If
-        If txtHargaJualA.EditValue < txtModal.EditValue * txtKonversi.EditValue Then
-            DxErrorProvider1.SetError(txtHargaJualA, "Harga Jual Retail dibawah modal!")
-        End If
-        If txtHargaJualB.EditValue <> 0 AndAlso txtHargaJualB.EditValue < txtModal.EditValue Then
-            DxErrorProvider1.SetError(txtHargaJualB, "Harga Jual Grosir dibawah modal!")
-        End If
-        If txtKonversi.EditValue <> 1 AndAlso ckIsDefault.Checked Then
-            DxErrorProvider1.SetError(txtKonversi, "Jika dijadikan default maka konversi harus 1!")
-        End If
-
-        If Not DxErrorProvider1.HasErrors Then
-            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
-                Using cn As New SqlConnection(StrKonSQL)
-                    Using com As New SqlCommand
-                        Using oDA As New SqlDataAdapter
-                            Using ds As New DataSet
-                                Try
-                                    dlg.Show()
-                                    dlg.Focus()
-                                    cn.Open()
-                                    com.Connection = cn
-                                    com.Transaction = cn.BeginTransaction
-                                    oDA.SelectCommand = com
-
-                                    com.CommandText = "SELECT COUNT(NoID) FROM MBarangD WHERE Barcode='" & FixApostropi(txtBarcode.Text) & "' AND NoID<>" & Me.NoID
-                                    If NullToLong(com.ExecuteScalar()) >= 1 Then
-                                        DxErrorProvider1.SetError(txtBarcode, "Barcode sudah dipakai!")
-                                    End If
-
-                                    If Not DxErrorProvider1.HasErrors Then
-                                        com.CommandText = "UPDATE MBarang SET IDUser=@IDUser, TanggalUpdate=GETDATE() WHERE NoID=@IDBarang"
-                                        com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
-                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = [Public].UserLogin.NoID
-                                        com.ExecuteNonQuery()
-
-                                        If pStatus = pStatusForm.Baru Then
-                                            com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
-                                            NoID = NullToLong(com.ExecuteScalar()) + 1
-
-                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (" & vbCrLf & _
-                                                              "@NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
-                                        Else
-                                            com.CommandText = "UPDATE MBarangD SET Barcode=@Barcode, IDBarang=@IDBarang, IDSatuan=@IDSatuan, Konversi=@Konversi, ProsenUpA=@ProsenUpA, ProsenUpB=@ProsenUpB, HargaJualA=@HargaJualA, HargaJualB=@HargaJualB, IsActive=@IsActive, IsDefault=@IsDefault WHERE NoID=@NoID"
-                                        End If
-                                        com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
-                                        com.Parameters.Add(New SqlParameter("@Barcode", SqlDbType.VarChar)).Value = txtBarcode.Text
-                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
-                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.Int)).Value = NullTolInt(txtSatuan.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@Konversi", SqlDbType.Int)).Value = NullToDbl(txtKonversi.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@ProsenUpA", SqlDbType.Float)).Value = Bulatkan(txtProsenUpA.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@ProsenUpB", SqlDbType.Float)).Value = Bulatkan(txtProsenUpB.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@HargaJualA", SqlDbType.Float)).Value = Bulatkan(txtHargaJualA.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@HargaJualB", SqlDbType.Float)).Value = Bulatkan(txtHargaJualB.EditValue, 2)
-                                        com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
-                                        com.Parameters.Add(New SqlParameter("@IsDefault", SqlDbType.Bit)).Value = ckIsDefault.Checked
-                                        com.ExecuteNonQuery()
-
-                                        
-                                        com.Transaction.Commit()
-
-                                        DialogResult = Windows.Forms.DialogResult.OK
-                                        Me.Close()
-                                    End If
-                                Catch ex As Exception
-                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                End Try
-                            End Using
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End If
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
-    End Sub
-
     Public Sub New(ByVal NoID As Long, ByVal IDBarang As Long, ByVal ModalPcs As Double)
 
         ' This call is required by the Windows Form Designer.
@@ -123,11 +31,6 @@ Public Class frmEntriBarangD
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
-            SimpleButton1.ImageList = frmMain.ICButtons
-            SimpleButton1.ImageIndex = 8
-            SimpleButton2.ImageList = frmMain.ICButtons
-            SimpleButton2.ImageIndex = 5
-
             LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
@@ -322,5 +225,97 @@ Public Class frmEntriBarangD
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
+        DxErrorProvider1.ClearErrors()
+        If txtBarcode.Text = "" Then
+            DxErrorProvider1.SetError(txtBarcode, "Barcode harus diisi!")
+        End If
+        If txtSatuan.Text = "" Then
+            DxErrorProvider1.SetError(txtSatuan, "Satuan harus diisi!")
+        End If
+        If txtKonversi.EditValue <= 0 Then
+            DxErrorProvider1.SetError(txtKonversi, "Isi Ctn salah!")
+        End If
+        If txtHargaJualA.EditValue < txtModal.EditValue * txtKonversi.EditValue Then
+            DxErrorProvider1.SetError(txtHargaJualA, "Harga Jual Retail dibawah modal!")
+        End If
+        If txtHargaJualB.EditValue <> 0 AndAlso txtHargaJualB.EditValue < txtModal.EditValue Then
+            DxErrorProvider1.SetError(txtHargaJualB, "Harga Jual Grosir dibawah modal!")
+        End If
+        If txtKonversi.EditValue <> 1 AndAlso ckIsDefault.Checked Then
+            DxErrorProvider1.SetError(txtKonversi, "Jika dijadikan default maka konversi harus 1!")
+        End If
+
+        If Not DxErrorProvider1.HasErrors Then
+            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    com.Transaction = cn.BeginTransaction
+                                    oDA.SelectCommand = com
+
+                                    com.CommandText = "SELECT COUNT(NoID) FROM MBarangD WHERE Barcode='" & FixApostropi(txtBarcode.Text) & "' AND NoID<>" & Me.NoID
+                                    If NullToLong(com.ExecuteScalar()) >= 1 Then
+                                        DxErrorProvider1.SetError(txtBarcode, "Barcode sudah dipakai!")
+                                    End If
+
+                                    If Not DxErrorProvider1.HasErrors Then
+                                        com.CommandText = "UPDATE MBarang SET IDUser=@IDUser, TanggalUpdate=GETDATE() WHERE NoID=@IDBarang"
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
+                                        com.Parameters.Add(New SqlParameter("@IDUser", SqlDbType.Int)).Value = [Public].UserLogin.NoID
+                                        com.ExecuteNonQuery()
+
+                                        If pStatus = pStatusForm.Baru Then
+                                            com.CommandText = "SELECT MAX(NoID) FROM MBarangD"
+                                            NoID = NullToLong(com.ExecuteScalar()) + 1
+
+                                            com.CommandText = "INSERT INTO MBarangD (NoID, Barcode, IDBarang, IDSatuan, Konversi, ProsenUpA, ProsenUpB, HargaJualA, HargaJualB, IsActive, IsDefault) VALUES (" & vbCrLf &
+                                                              "@NoID, @Barcode, @IDBarang, @IDSatuan, @Konversi, @ProsenUpA, @ProsenUpB, @HargaJualA, @HargaJualB, @IsActive, @IsDefault)"
+                                        Else
+                                            com.CommandText = "UPDATE MBarangD SET Barcode=@Barcode, IDBarang=@IDBarang, IDSatuan=@IDSatuan, Konversi=@Konversi, ProsenUpA=@ProsenUpA, ProsenUpB=@ProsenUpB, HargaJualA=@HargaJualA, HargaJualB=@HargaJualB, IsActive=@IsActive, IsDefault=@IsDefault WHERE NoID=@NoID"
+                                        End If
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                        com.Parameters.Add(New SqlParameter("@Barcode", SqlDbType.VarChar)).Value = txtBarcode.Text
+                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
+                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.Int)).Value = NullTolInt(txtSatuan.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@Konversi", SqlDbType.Int)).Value = NullToDbl(txtKonversi.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@ProsenUpA", SqlDbType.Float)).Value = Bulatkan(txtProsenUpA.EditValue, 2)
+                                        com.Parameters.Add(New SqlParameter("@ProsenUpB", SqlDbType.Float)).Value = Bulatkan(txtProsenUpB.EditValue, 2)
+                                        com.Parameters.Add(New SqlParameter("@HargaJualA", SqlDbType.Float)).Value = Bulatkan(txtHargaJualA.EditValue, 2)
+                                        com.Parameters.Add(New SqlParameter("@HargaJualB", SqlDbType.Float)).Value = Bulatkan(txtHargaJualB.EditValue, 2)
+                                        com.Parameters.Add(New SqlParameter("@IsActive", SqlDbType.Bit)).Value = ckAktif.Checked
+                                        com.Parameters.Add(New SqlParameter("@IsDefault", SqlDbType.Bit)).Value = ckIsDefault.Checked
+                                        com.ExecuteNonQuery()
+
+
+                                        com.Transaction.Commit()
+
+                                        DialogResult = Windows.Forms.DialogResult.OK
+                                        Me.Close()
+                                    End If
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

@@ -649,4 +649,38 @@ Public Class frmMain
     Private Sub barEditReport_ItemPress(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barEditReport.ItemPress
 
     End Sub
+
+    Private Sub mnUpdate_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnUpdate.ItemClick
+        Dim TempFolder As String = ""
+        Try
+            TempFolder = My.Computer.FileSystem.CombinePath(My.Computer.FileSystem.SpecialDirectories.Temp.ToString, My.Application.Info.ProductName.ToString)
+            If (System.IO.Directory.Exists(TempFolder)) Then
+                System.IO.Directory.Delete(TempFolder, True)
+            End If
+
+            System.IO.Directory.CreateDirectory(TempFolder)
+            If System.IO.File.Exists(Application.StartupPath & "\System\CtrlSoft.AppUpdate.7z") Then
+                System.IO.File.Copy(Application.StartupPath & "\System\CtrlSoft.AppUpdate.7z", TempFolder & "\CtrlSoft.AppUpdate.7z")
+                Ini.TulisIniPath(TempFolder & "\System.ini", "AppUpdate", "AppPath", Application.StartupPath)
+                cls7z.TheExtractor(TempFolder & "\CtrlSoft.AppUpdate.7z", TempFolder)
+
+                If (System.IO.File.Exists(TempFolder + "\CtrlSoft.AppUpdate.exe")) Then
+                    Dim newP As System.Diagnostics.ProcessStartInfo = New System.Diagnostics.ProcessStartInfo() With {
+                        .Verb = "Open",
+                        .WindowStyle = ProcessWindowStyle.Normal,
+                        .FileName = TempFolder + "\CtrlSoft.AppUpdate.exe",
+                        .WorkingDirectory = TempFolder,
+                        .UseShellExecute = True
+                        }
+                    Process.Start(newP)
+                Else
+                    XtraMessageBox.Show("App Update belum terdistribusi! Hubungi Support Kami. Terima Kasih", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                XtraMessageBox.Show("App Update belum terdistribusi! Hubungi Support Kami. Terima Kasih", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            XtraMessageBox.Show("Error : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Try
+    End Sub
 End Class

@@ -35,6 +35,7 @@ Partial Class frmMain
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.barManagementUser = New DevExpress.XtraBars.BarButtonItem()
         Me.barManagementRole = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnUpdate = New DevExpress.XtraBars.BarButtonItem()
         Me.ImageCollectionLarge = New DevExpress.Utils.ImageCollection(Me.components)
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage6 = New DevExpress.XtraBars.Ribbon.RibbonPage()
@@ -61,10 +62,10 @@ Partial Class frmMain
         Me.RibbonControl.ApplicationButtonText = Nothing
         Me.RibbonControl.ExpandCollapseItem.Id = 0
         Me.RibbonControl.Images = Me.ImageCollectionSmall
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.barEditReport, Me.barManagementUser, Me.barManagementRole})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.rgbiSkins, Me.barStaticUID, Me.barStaticJam, Me.barLoginOut, Me.barSetting, Me.barExit, Me.barSettingPerusahaan, Me.barEditReport, Me.barManagementUser, Me.barManagementRole, Me.mnUpdate})
         Me.RibbonControl.LargeImages = Me.ImageCollectionLarge
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 21
+        Me.RibbonControl.MaxItemId = 22
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
         Me.RibbonControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
@@ -125,6 +126,8 @@ Partial Class frmMain
         Me.ImageCollectionSmall.Images.SetKeyName(11, "connect_to_database.png")
         Me.ImageCollectionSmall.Images.SetKeyName(12, "key.png")
         Me.ImageCollectionSmall.Images.SetKeyName(13, "close.png")
+        Me.ImageCollectionSmall.InsertGalleryImage("refreshallpivottable_16x16.png", "images/spreadsheet/refreshallpivottable_16x16.png", DevExpress.Images.ImageResourceCache.Default.GetImage("images/spreadsheet/refreshallpivottable_16x16.png"), 14)
+        Me.ImageCollectionSmall.Images.SetKeyName(14, "refreshallpivottable_16x16.png")
         '
         'rgbiSkins
         '
@@ -181,6 +184,13 @@ Partial Class frmMain
         Me.barManagementRole.ImageOptions.ImageIndex = 9
         Me.barManagementRole.Name = "barManagementRole"
         '
+        'mnUpdate
+        '
+        Me.mnUpdate.Caption = "&Update Applikasi"
+        Me.mnUpdate.Id = 21
+        Me.mnUpdate.ImageOptions.ImageIndex = 14
+        Me.mnUpdate.Name = "mnUpdate"
+        '
         'ImageCollectionLarge
         '
         Me.ImageCollectionLarge.ImageSize = New System.Drawing.Size(32, 32)
@@ -227,6 +237,7 @@ Partial Class frmMain
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementUser, True)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barManagementRole)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.barEditReport, True)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.mnUpdate)
         Me.RibbonPageGroup5.Name = "RibbonPageGroup5"
         Me.RibbonPageGroup5.Text = "Setting Applikasi"
         '
@@ -318,6 +329,6 @@ Partial Class frmMain
     Friend WithEvents barManagementUser As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents barManagementRole As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ICButtons As DevExpress.Utils.ImageCollection
-
+    Friend WithEvents mnUpdate As DevExpress.XtraBars.BarButtonItem
 
 End Class

@@ -54,98 +54,6 @@ Public Class frmEntriInternalD
         End Set
     End Property
 
-    Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        DxErrorProvider1.ClearErrors()
-        If txtBarcode.Text = "" Then
-            DxErrorProvider1.SetError(txtBarcode, "Barcode harus diisi!")
-        End If
-        If txtSatuan.Text = "" Then
-            DxErrorProvider1.SetError(txtSatuan, "Satuan harus diisi!")
-        End If
-        If txtKonversi.EditValue <= 0 Then
-            DxErrorProvider1.SetError(txtKonversi, "Konversi salah!")
-        End If
-        If txtJumlah.EditValue < 0.0 Then
-            DxErrorProvider1.SetError(txtHPP, "Nilai HPP salah!")
-        End If
-
-        If Not DxErrorProvider1.HasErrors Then
-            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
-                Using cn As New SqlConnection(StrKonSQL)
-                    Using com As New SqlCommand
-                        Using oDA As New SqlDataAdapter
-                            Using ds As New DataSet
-                                Try
-                                    dlg.Show()
-                                    dlg.Focus()
-                                    cn.Open()
-                                    com.Connection = cn
-                                    com.Transaction = cn.BeginTransaction
-                                    oDA.SelectCommand = com
-
-                                    If pForm = modMain.FormInternal.Penyesuaian Then
-                                    Else
-                                        com.CommandText = "EXEC spCekSaldoStok " & NullToLong(IDBarang) & ", " & NullToLong(frmPemanggil.txtGudangAsal.EditValue) & ", '" & frmPemanggil.txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
-                                        If NullToDbl(com.ExecuteScalar()) < (txtQty.EditValue * txtKonversi.EditValue) Then
-                                            DxErrorProvider1.SetError(txtQty, "Saldo Stok Tidak Cukup!")
-                                        End If
-                                    End If
-                                    
-                                    If Not DxErrorProvider1.HasErrors Then
-                                        If pStatus = pStatusForm.Baru Then
-                                            com.CommandText = "SELECT MAX(NoID) FROM M" & NamaForm & "D"
-                                            NoID = NullToLong(com.ExecuteScalar()) + 1
-
-                                            com.CommandText = "INSERT INTO [dbo].[M" & NamaForm & "D] ([NoID],[IDHeader],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty]" & vbCrLf & _
-                                                              ",[HPP],[Jumlah],[Keterangan]) VALUES (" & vbCrLf & _
-                                                              "@NoID,@IDHeader,@IDBarangD,@IDBarang,@IDSatuan,@Konversi,@Qty" & vbCrLf & _
-                                                              ",@HPP,@Jumlah,@Keterangan)"
-                                        Else
-                                            com.CommandText = "UPDATE [dbo].[M" & NamaForm & "D] SET [IDBarangD]=@IDBarangD,[IDBarang]=@IDBarang,[IDSatuan]=@IDSatuan,[Konversi]=@Konversi,[Qty]=@Qty" & vbCrLf & _
-                                                              ",[HPP]=@HPP,[Jumlah]=@Jumlah,[Keterangan]=@Keterangan WHERE NoID=@NoID"
-                                        End If
-                                        com.Parameters.Clear()
-                                        com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
-                                        com.Parameters.Add(New SqlParameter("@IDHeader", SqlDbType.BigInt)).Value = IDHeader
-                                        com.Parameters.Add(New SqlParameter("@IDBarangD", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
-                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.Int)).Value = NullTolInt(txtSatuan.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@Konversi", SqlDbType.Int)).Value = NullToDbl(txtKonversi.EditValue)
-                                        com.Parameters.Add(New SqlParameter("@Qty", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtQty.EditValue), 3)
-                                        com.Parameters.Add(New SqlParameter("@HPP", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtHPP.EditValue), 2)
-                                        com.Parameters.Add(New SqlParameter("@Jumlah", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtJumlah.EditValue), 2)
-                                        com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = NullToStr(txtKeterangan.Text)
-                                        com.ExecuteNonQuery()
-
-                                        com.Parameters.Clear()
-
-                                        com.CommandText = "UPDATE M" & NamaForm & " SET Total=ISNULL(M" & NamaForm & "D.Jumlah, 0) " & vbCrLf & _
-                                                          "FROM M" & NamaForm & " " & vbCrLf & _
-                                                          "INNER JOIN (SELECT IDHeader, SUM(Jumlah) AS Jumlah FROM M" & NamaForm & "D GROUP BY IDHeader) AS M" & NamaForm & "D ON M" & NamaForm & "D.IDHeader=M" & NamaForm & ".NoID " & vbCrLf & _
-                                                          "WHERE M" & NamaForm & ".NoID=" & IDHeader
-                                        com.ExecuteNonQuery()
-
-                                        com.Transaction.Commit()
-
-                                        DialogResult = Windows.Forms.DialogResult.OK
-                                        Me.Close()
-                                    End If
-                                Catch ex As Exception
-                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                End Try
-                            End Using
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End If
-    End Sub
-
-    Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton2.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
-        Me.Close()
-    End Sub
-
     Public Sub New(ByVal pForm As modMain.FormInternal, ByVal formPemanggil As frmEntriInternal, ByVal NoID As Long, ByVal IDHeader As Long)
 
         ' This call is required by the Windows Form Designer.
@@ -167,11 +75,6 @@ Public Class frmEntriInternalD
         Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
         Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
-            SimpleButton1.ImageList = frmMain.ICButtons
-            SimpleButton1.ImageIndex = 8
-            SimpleButton2.ImageList = frmMain.ICButtons
-            SimpleButton2.ImageIndex = 5
-
             LoadData(NoID)
             With LayoutControl1
                 If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
@@ -424,5 +327,97 @@ Public Class frmEntriInternalD
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
+        DxErrorProvider1.ClearErrors()
+        If txtBarcode.Text = "" Then
+            DxErrorProvider1.SetError(txtBarcode, "Barcode harus diisi!")
+        End If
+        If txtSatuan.Text = "" Then
+            DxErrorProvider1.SetError(txtSatuan, "Satuan harus diisi!")
+        End If
+        If txtKonversi.EditValue <= 0 Then
+            DxErrorProvider1.SetError(txtKonversi, "Konversi salah!")
+        End If
+        If txtJumlah.EditValue < 0.0 Then
+            DxErrorProvider1.SetError(txtHPP, "Nilai HPP salah!")
+        End If
+
+        If Not DxErrorProvider1.HasErrors Then
+            Using dlg As New WaitDialogForm("Sedang menyimpan data ...", NamaAplikasi)
+                Using cn As New SqlConnection(StrKonSQL)
+                    Using com As New SqlCommand
+                        Using oDA As New SqlDataAdapter
+                            Using ds As New DataSet
+                                Try
+                                    dlg.Show()
+                                    dlg.Focus()
+                                    cn.Open()
+                                    com.Connection = cn
+                                    com.Transaction = cn.BeginTransaction
+                                    oDA.SelectCommand = com
+
+                                    If pForm = modMain.FormInternal.Penyesuaian Then
+                                    Else
+                                        com.CommandText = "EXEC spCekSaldoStok " & NullToLong(IDBarang) & ", " & NullToLong(frmPemanggil.txtGudangAsal.EditValue) & ", '" & frmPemanggil.txtTanggal.DateTime.ToString("yyyy-MM-dd HH:mm:ss") & "'"
+                                        If NullToDbl(com.ExecuteScalar()) < (txtQty.EditValue * txtKonversi.EditValue) Then
+                                            DxErrorProvider1.SetError(txtQty, "Saldo Stok Tidak Cukup!")
+                                        End If
+                                    End If
+
+                                    If Not DxErrorProvider1.HasErrors Then
+                                        If pStatus = pStatusForm.Baru Then
+                                            com.CommandText = "SELECT MAX(NoID) FROM M" & NamaForm & "D"
+                                            NoID = NullToLong(com.ExecuteScalar()) + 1
+
+                                            com.CommandText = "INSERT INTO [dbo].[M" & NamaForm & "D] ([NoID],[IDHeader],[IDBarangD],[IDBarang],[IDSatuan],[Konversi],[Qty]" & vbCrLf &
+                                                              ",[HPP],[Jumlah],[Keterangan]) VALUES (" & vbCrLf &
+                                                              "@NoID,@IDHeader,@IDBarangD,@IDBarang,@IDSatuan,@Konversi,@Qty" & vbCrLf &
+                                                              ",@HPP,@Jumlah,@Keterangan)"
+                                        Else
+                                            com.CommandText = "UPDATE [dbo].[M" & NamaForm & "D] SET [IDBarangD]=@IDBarangD,[IDBarang]=@IDBarang,[IDSatuan]=@IDSatuan,[Konversi]=@Konversi,[Qty]=@Qty" & vbCrLf &
+                                                              ",[HPP]=@HPP,[Jumlah]=@Jumlah,[Keterangan]=@Keterangan WHERE NoID=@NoID"
+                                        End If
+                                        com.Parameters.Clear()
+                                        com.Parameters.Add(New SqlParameter("@NoID", SqlDbType.BigInt)).Value = NoID
+                                        com.Parameters.Add(New SqlParameter("@IDHeader", SqlDbType.BigInt)).Value = IDHeader
+                                        com.Parameters.Add(New SqlParameter("@IDBarangD", SqlDbType.BigInt)).Value = NullToLong(txtBarcode.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@IDBarang", SqlDbType.BigInt)).Value = IDBarang
+                                        com.Parameters.Add(New SqlParameter("@IDSatuan", SqlDbType.Int)).Value = NullTolInt(txtSatuan.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@Konversi", SqlDbType.Int)).Value = NullToDbl(txtKonversi.EditValue)
+                                        com.Parameters.Add(New SqlParameter("@Qty", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtQty.EditValue), 3)
+                                        com.Parameters.Add(New SqlParameter("@HPP", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtHPP.EditValue), 2)
+                                        com.Parameters.Add(New SqlParameter("@Jumlah", SqlDbType.Float)).Value = Bulatkan(NullToDbl(txtJumlah.EditValue), 2)
+                                        com.Parameters.Add(New SqlParameter("@Keterangan", SqlDbType.VarChar)).Value = NullToStr(txtKeterangan.Text)
+                                        com.ExecuteNonQuery()
+
+                                        com.Parameters.Clear()
+
+                                        com.CommandText = "UPDATE M" & NamaForm & " SET Total=ISNULL(M" & NamaForm & "D.Jumlah, 0) " & vbCrLf &
+                                                          "FROM M" & NamaForm & " " & vbCrLf &
+                                                          "INNER JOIN (SELECT IDHeader, SUM(Jumlah) AS Jumlah FROM M" & NamaForm & "D GROUP BY IDHeader) AS M" & NamaForm & "D ON M" & NamaForm & "D.IDHeader=M" & NamaForm & ".NoID " & vbCrLf &
+                                                          "WHERE M" & NamaForm & ".NoID=" & IDHeader
+                                        com.ExecuteNonQuery()
+
+                                        com.Transaction.Commit()
+
+                                        DialogResult = Windows.Forms.DialogResult.OK
+                                        Me.Close()
+                                    End If
+                                Catch ex As Exception
+                                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End Using
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
+        DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.Close()
     End Sub
 End Class

@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using IWshRuntimeLibrary;
 
 namespace CtrlSoft.AppUpdate
 {
@@ -37,6 +39,26 @@ namespace CtrlSoft.AppUpdate
         {
             //Untuk Ngetest aja
             //ftpClient.PathProgram = @"E:\DEVELOPER\2021 - CTRLSoftware\src\CtrlSoft.App\bin\Debug";
+            bool createShortcut = false;
+            if (ftpClient.PathProgram.Equals(""))
+            {
+                using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+                {
+                    dialog.ShowNewFolderButton = true;
+                    dialog.Description = "Pilih Folder CtrlSoft.App ditempatkan.";
+                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        ftpClient.PathProgram = dialog.SelectedPath;
+                        createShortcut = true;
+                    }
+                }
+                if (ftpClient.PathProgram.Equals(""))
+                {
+                    DevExpress.XtraEditors.XtraMessageBox.Show("Pilih directory dahulu untuk menginstall CtrlSoft.App, Terima Kasih!");
+
+                    Application.Exit();
+                }
+            }
 
             labelControl2.Text = "Path : " + ftpClient.PathProgram;
             if (ftpClient.PathProgram.Length >= 1 &&
@@ -101,6 +123,12 @@ namespace CtrlSoft.AppUpdate
                 //    streamWriter.WriteLine("" + ftpClient.PathProgram + "\\CtrlSoft.App.exe" + "");
                 //    streamWriter.Flush();
                 //}
+
+                if (createShortcut)
+                {
+                    CreateShortcut("CTrlSoft.App", ftpClient.PathProgram + "\\CtrlSoft.App.exe", ftpClient.PathProgram);
+                }
+
                 System.Diagnostics.ProcessStartInfo newP = new System.Diagnostics.ProcessStartInfo();
                 newP.Verb = "Open";
                 newP.WindowStyle = ProcessWindowStyle.Normal;
@@ -112,6 +140,32 @@ namespace CtrlSoft.AppUpdate
             }
 
             Application.Exit();
+        }
+
+        private void CreateShortcut(string linkName, 
+                                    string fileLocation,
+                                    string workingDirectory)
+        {
+            try
+            {
+                object shDesktop = (object)"Desktop";
+                WshShell shell = new WshShell();
+                string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + "\\" + linkName + ".lnk";
+                if (System.IO.File.Exists(shortcutAddress))
+                {
+                    System.IO.File.Delete(shortcutAddress);
+                }
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+                shortcut.Description = "New shortcut for a CTrlSoft.App";
+                shortcut.Hotkey = "Ctrl+Shift+N";
+                shortcut.TargetPath = fileLocation;
+                shortcut.WorkingDirectory = workingDirectory;
+                shortcut.Save();
+
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void copy(string dirSource, string dirDestination)
@@ -132,7 +186,11 @@ namespace CtrlSoft.AppUpdate
                 iPos += 1;
                 progressBarControl1.EditValue = (double)((double) iPos / (double) directoryInfo.GetDirectories().Length) * 100.0;
                 Application.DoEvents();
-                
+
+                if (!System.IO.Directory.Exists(dirDestination + "\\" + item.Name))
+                {
+                    System.IO.Directory.CreateDirectory(dirDestination + "\\" + item.Name);
+                }
                 copy(item.FullName, dirDestination + "\\" + item.Name);
             }
         }

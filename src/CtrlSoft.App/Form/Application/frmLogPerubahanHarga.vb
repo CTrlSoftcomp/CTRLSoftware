@@ -101,7 +101,7 @@ Public Class frmLogPerubahanHarga
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                     GridView2.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView2.Name & ".xml")
                 End If
@@ -152,6 +152,6 @@ Public Class frmLogPerubahanHarga
 
     Private Sub mnTutup_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnTutup.ItemClick
         Me.Close()
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 End Class

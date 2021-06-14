@@ -228,7 +228,7 @@ Public Class frmLaporanMutasiSaldoStok
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -246,7 +246,7 @@ Public Class frmLaporanMutasiSaldoStok
         'If View Is Nothing Then Return
         '' obtaining hit info
         'Dim hitInfo As GridHitInfo = View.CalcHitInfo(New System.Drawing.Point(e.X, e.Y))
-        'If (e.Button = Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
+        'If (e.Button = System.Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
         '  (Not View.IsGroupRow(hitInfo.RowHandle)) Then
         '    PopupMenu1.ShowPopup(Control.MousePosition)
         'End If
@@ -255,7 +255,7 @@ Public Class frmLaporanMutasiSaldoStok
     Private WithEvents frmLogHistoryPerubahanHarga As New frmLogPerubahanHarga(-1)
     Private Sub mnHistoryHarga_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHistoryHarga.ItemClick
         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
-            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim MyCursor As Cursor = System.Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
             Try
                 Cursor = Cursors.WaitCursor
@@ -295,22 +295,22 @@ Public Class frmLaporanMutasiSaldoStok
 
                                 com.CommandText = "DELETE T FROM TSaldoStok T INNER JOIN MBarang d ON d.NoID = T.IDBarang"
                                 com.ExecuteNonQuery()
-                                com.CommandText = "INSERT INTO TSaldoStok (" & vbCrLf & _
-                                                  "IDBarang" & vbCrLf & _
-                                                  ",IDGudang" & vbCrLf & _
-                                                  ",SaldoAkhir" & vbCrLf & _
-                                                  ")" & vbCrLf & _
-                                                  "Select d.NoID" & vbCrLf & _
-                                                  ",MSaldoStok.IDGudang" & vbCrLf & _
-                                                  ",ISNULL(MSaldoStok.Saldo, 0)" & vbCrLf & _
-                                                  "FROM MBarang d" & vbCrLf & _
-                                                  "RIGHT JOIN (" & vbCrLf & _
-                                                  "Select IDBarang" & vbCrLf & _
-                                                  ",IDGudang" & vbCrLf & _
-                                                  ",SUM(Konversi * (QtyMasuk - QtyKeluar)) AS Saldo" & vbCrLf & _
-                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf & _
-                                                  "GROUP BY IDBarang" & vbCrLf & _
-                                                  ",IDGudang" & vbCrLf & _
+                                com.CommandText = "INSERT INTO TSaldoStok (" & vbCrLf &
+                                                  "IDBarang" & vbCrLf &
+                                                  ",IDGudang" & vbCrLf &
+                                                  ",SaldoAkhir" & vbCrLf &
+                                                  ")" & vbCrLf &
+                                                  "Select d.NoID" & vbCrLf &
+                                                  ",MSaldoStok.IDGudang" & vbCrLf &
+                                                  ",ISNULL(MSaldoStok.Saldo, 0)" & vbCrLf &
+                                                  "FROM MBarang d" & vbCrLf &
+                                                  "RIGHT JOIN (" & vbCrLf &
+                                                  "Select IDBarang" & vbCrLf &
+                                                  ",IDGudang" & vbCrLf &
+                                                  ",SUM(Konversi * (QtyMasuk - QtyKeluar)) AS Saldo" & vbCrLf &
+                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf &
+                                                  "GROUP BY IDBarang" & vbCrLf &
+                                                  ",IDGudang" & vbCrLf &
                                                   ") MSaldoStok ON MSaldoStok.IDBarang = d.NoID"
                                 com.ExecuteNonQuery()
 
@@ -330,7 +330,7 @@ Public Class frmLaporanMutasiSaldoStok
     End Sub
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 

@@ -26,8 +26,8 @@ Public Class frmEntriBarang
     End Sub
 
     Private Sub frmEntriRole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
+        System.Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
             LoadData(NoID)
             With LayoutControl1
@@ -38,7 +38,7 @@ Public Class frmEntriBarang
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Windows.Forms.Cursor.Current = curentcursor
+        System.Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
     Public Sub LoadData(ByVal NoID As Long)
@@ -268,7 +268,7 @@ Public Class frmEntriBarang
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvKategori.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvKategori.Name & ".xml")
                     gvSatuanBeli.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuanBeli.Name & ".xml")
@@ -547,7 +547,7 @@ Public Class frmEntriBarang
         Select Case e.Button.Index
             Case 1
                 Using frm As New frmEntriKategori(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
                             Using cn As New SqlConnection(StrKonSQL)
                                 Using com As New SqlCommand
@@ -580,7 +580,7 @@ Public Class frmEntriBarang
         Select Case e.Button.Index
             Case 1
                 Using frm As New frmEntriMerk(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
                             Using cn As New SqlConnection(StrKonSQL)
                                 Using com As New SqlCommand
@@ -613,7 +613,7 @@ Public Class frmEntriBarang
         Select Case e.Button.Index
             Case 1
                 Using frm As New frmEntriSatuan(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
                             Using cn As New SqlConnection(StrKonSQL)
                                 Using com As New SqlCommand
@@ -646,7 +646,7 @@ Public Class frmEntriBarang
         Select Case e.Button.Index
             Case 1
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
                             Using cn As New SqlConnection(StrKonSQL)
                                 Using com As New SqlCommand
@@ -678,7 +678,7 @@ Public Class frmEntriBarang
     Private Sub mnBaru_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         If pStatus = pStatusForm.Edit Then
             Using frm As New frmEntriBarangD(-1, Me.NoID, txtModal.EditValue)
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     RefreshDetil(frm.NoID)
                 End If
             End Using
@@ -688,7 +688,7 @@ Public Class frmEntriBarang
     Private Sub mnEdit_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
         If pStatus = pStatusForm.Edit Then
             Using frm As New frmEntriBarangD(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), Me.NoID, txtModal.EditValue)
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     RefreshDetil(frm.NoID)
                 End If
             End Using
@@ -699,7 +699,7 @@ Public Class frmEntriBarang
         Dim gridview As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
         gridview = GridView1
         If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data barcode " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Barcode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data barcode " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Barcode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                 HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
             End If
         End If
@@ -856,7 +856,7 @@ Public Class frmEntriBarang
                                             RefreshDetil(IDBarangD)
 
                                             If XtraMessageBox.Show(Me, "Ingin meneruskan atau ingin mengubah data detil dari Master Barang yang baru ini?" & vbCrLf & "Yes : Tidak menutup Entrian, No : Menutup Entrian", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-                                                DialogResult = Windows.Forms.DialogResult.OK
+                                                DialogResult = System.Windows.Forms.DialogResult.OK
                                                 Me.Close()
                                             End If
                                         Else
@@ -871,7 +871,7 @@ Public Class frmEntriBarang
                                             com.ExecuteNonQuery()
                                             com.Transaction.Commit()
 
-                                            DialogResult = Windows.Forms.DialogResult.OK
+                                            DialogResult = System.Windows.Forms.DialogResult.OK
                                             Me.Close()
                                         End If
                                     End If
@@ -887,7 +887,7 @@ Public Class frmEntriBarang
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

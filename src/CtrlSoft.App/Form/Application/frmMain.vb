@@ -39,7 +39,7 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
-            If XtraMessageBox.Show("Yakin anda ingin keluar dari aplikasi?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+            If XtraMessageBox.Show("Yakin anda ingin keluar dari aplikasi?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.No Then
                 e.Cancel = True
             Else
                 Ini.TulisIni("Application", "Skins", defaultLookAndFeel1.LookAndFeel.SkinName)
@@ -52,7 +52,7 @@ Public Class frmMain
     Private Sub barSetting_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barSetting.ItemClick
         Using frm As New frmSettingDB
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     Dim DBSetting = [Public].DBSetting.List.Where(Function(m) m.Default = True).SingleOrDefault
                     If (DBSetting IsNot Nothing) Then
                         StrKonSQL = DBSetting.KoneksiString
@@ -136,7 +136,7 @@ Public Class frmMain
 
     Private Sub barExit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barExit.ItemClick
         Me.Close()
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
     Private Sub barLoginOut_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barLoginOut.ItemClick
@@ -149,7 +149,7 @@ Public Class frmMain
         Else
             Using frm As New frmLogin
                 Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         InitMenu()
                         barSetting.Enabled = True
                         barLoginOut.Enabled = True
@@ -203,7 +203,7 @@ Public Class frmMain
 
             RibbonPageCategory1.Visible = IIf(UserLogin.Supervisor, True, False)
             barLoginOut.Caption = "Logout"
-            
+
             UserLogin.TanggalSystem = Repository.RepSQLServer.GetTimeServer()
             TimeZoneInformation.TimeZoneFunctionality.SetTime(System.TimeZone.CurrentTimeZone.ToLocalTime(UserLogin.TanggalSystem))
             UserLogin.TanggalSystem = Now()
@@ -231,7 +231,7 @@ Public Class frmMain
     Private Sub barSettingPerusahaan_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barSettingPerusahaan.ItemClick
         Using frm As New frmSettingPerusahaan
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
 
                 End If
             Catch ex As Exception

@@ -29,8 +29,8 @@ Public Class frmEntriSaldoAwalPersediaan
     End Sub
 
     Private Sub frmEntriRole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
+        System.Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
             LoadData(NoID)
             With LayoutControl1
@@ -41,7 +41,7 @@ Public Class frmEntriSaldoAwalPersediaan
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Windows.Forms.Cursor.Current = curentcursor
+        System.Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
     Private Sub LoadData(ByVal NoID As Long)
@@ -145,7 +145,7 @@ Public Class frmEntriSaldoAwalPersediaan
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvGudang.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvGudang.Name & ".xml")
                     gvBarcode.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
@@ -230,19 +230,19 @@ Public Class frmEntriSaldoAwalPersediaan
                                 txtSatuan.Properties.DisplayMember = "Satuan"
                                 txtSatuan.Properties.ValueMember = "NoID"
 
-                                com.CommandText = "DECLARE @IDBarang AS BIGINT = " & IDBarang & ", @Tanggal AS DATETIME = '" & NullToDate(txtTanggal.EditValue).ToString("yyyy-MM-dd HH:mm:ss") & "';" & vbCrLf & _
-                                                  "SELECT TOP 1 MKartuStok.HPP" & vbCrLf & _
-                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf & _
-                                                  "LEFT JOIN MJenisTransaksi(NOLOCK) ON MKartuStok.IDJenisTransaksi=MJenisTransaksi.ID" & vbCrLf & _
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = " & IDBarang & ", @Tanggal AS DATETIME = '" & NullToDate(txtTanggal.EditValue).ToString("yyyy-MM-dd HH:mm:ss") & "';" & vbCrLf &
+                                                  "SELECT TOP 1 MKartuStok.HPP" & vbCrLf &
+                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf &
+                                                  "LEFT JOIN MJenisTransaksi(NOLOCK) ON MKartuStok.IDJenisTransaksi=MJenisTransaksi.ID" & vbCrLf &
                                                   "WHERE MKartuStok.IDBarang=@IDBarang AND MKartuStok.Tanggal<=@Tanggal ORDER BY MKartuStok.Tanggal DESC, MJenisTransaksi.NoUrut DESC"
 
 
-                                com.CommandText = "DECLARE @IDBarang AS BIGINT = " & IDBarang & ", @Tanggal AS DATETIME = '" & NullToDate(txtTanggal.EditValue).ToString("yyyy-MM-dd HH:mm:ss") & "';" & vbCrLf & _
-                                                  "SELECT MBarangD.IDBarang, MBarang.Kode, MBarang.Nama + ISNULL(' (' + MSatuan.Kode + ')', '') AS Nama, MBarangD.IDSatuan, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, " & vbCrLf & _
-                                                  "ISNULL((SELECT TOP 1 MKartuStok.HPP" & vbCrLf & _
-                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf & _
-                                                  "LEFT JOIN MJenisTransaksi(NOLOCK) ON MKartuStok.IDJenisTransaksi=MJenisTransaksi.ID" & vbCrLf & _
-                                                  "WHERE MKartuStok.IDBarang=@IDBarang AND MKartuStok.Tanggal<=@Tanggal ORDER BY MKartuStok.Tanggal DESC, MJenisTransaksi.NoUrut DESC), 0) AS HPP" & vbCrLf & _
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = " & IDBarang & ", @Tanggal AS DATETIME = '" & NullToDate(txtTanggal.EditValue).ToString("yyyy-MM-dd HH:mm:ss") & "';" & vbCrLf &
+                                                  "SELECT MBarangD.IDBarang, MBarang.Kode, MBarang.Nama + ISNULL(' (' + MSatuan.Kode + ')', '') AS Nama, MBarangD.IDSatuan, MBarang.HargaBeli, MBarang.DiscProsen1, MBarang.DiscProsen2, MBarang.DiscProsen3, MBarang.DiscProsen4, MBarang.DiscProsen5, MBarang.DiscRp, " & vbCrLf &
+                                                  "ISNULL((SELECT TOP 1 MKartuStok.HPP" & vbCrLf &
+                                                  "FROM MKartuStok(NOLOCK)" & vbCrLf &
+                                                  "LEFT JOIN MJenisTransaksi(NOLOCK) ON MKartuStok.IDJenisTransaksi=MJenisTransaksi.ID" & vbCrLf &
+                                                  "WHERE MKartuStok.IDBarang=@IDBarang AND MKartuStok.Tanggal<=@Tanggal ORDER BY MKartuStok.Tanggal DESC, MJenisTransaksi.NoUrut DESC), 0) AS HPP" & vbCrLf &
                                                   "FROM MBarang INNER JOIN MBarangD ON MBarang.NoID=MBarangD.IDBarang LEFT JOIN MSatuan ON MSatuan.NoID=MBarangD.IDSatuan WHERE MBarangD.NoID=" & NullToLong(txtBarcode.EditValue)
                                 oDA.Fill(ds, "MBarang")
                                 If ds.Tables("MBarang").Rows.Count >= 1 Then
@@ -382,22 +382,22 @@ Public Class frmEntriSaldoAwalPersediaan
                                                 End If
                                             End If
 
-                                            com.CommandText = "[dbo].[spSimpanMSaldoAwalPersediaan] " & vbCrLf & _
-                                                              "@NoID " & vbCrLf & _
-                                                              ",@Kode " & vbCrLf & _
-                                                              ",@Tanggal " & vbCrLf & _
-                                                              ",@Keterangan " & vbCrLf & _
-                                                              ",@IDGudang " & vbCrLf & _
-                                                              ",@IDBarangD " & vbCrLf & _
-                                                              ",@IDBarang " & vbCrLf & _
-                                                              ",@IDSatuan " & vbCrLf & _
-                                                              ",@Qty " & vbCrLf & _
-                                                              ",@Konversi " & vbCrLf & _
-                                                              ",@HargaPokok " & vbCrLf & _
-                                                              ",@IsPosted " & vbCrLf & _
-                                                              ",@TglPosted " & vbCrLf & _
-                                                              ",@IDUserPosted " & vbCrLf & _
-                                                              ",@IDUserEntry " & vbCrLf & _
+                                            com.CommandText = "[dbo].[spSimpanMSaldoAwalPersediaan] " & vbCrLf &
+                                                              "@NoID " & vbCrLf &
+                                                              ",@Kode " & vbCrLf &
+                                                              ",@Tanggal " & vbCrLf &
+                                                              ",@Keterangan " & vbCrLf &
+                                                              ",@IDGudang " & vbCrLf &
+                                                              ",@IDBarangD " & vbCrLf &
+                                                              ",@IDBarang " & vbCrLf &
+                                                              ",@IDSatuan " & vbCrLf &
+                                                              ",@Qty " & vbCrLf &
+                                                              ",@Konversi " & vbCrLf &
+                                                              ",@HargaPokok " & vbCrLf &
+                                                              ",@IsPosted " & vbCrLf &
+                                                              ",@TglPosted " & vbCrLf &
+                                                              ",@IDUserPosted " & vbCrLf &
+                                                              ",@IDUserEntry " & vbCrLf &
                                                               ",@IDUserEdit"
 
 
@@ -426,7 +426,7 @@ Public Class frmEntriSaldoAwalPersediaan
                                             com.Transaction.Commit()
 
                                             If Tutup Then
-                                                DialogResult = Windows.Forms.DialogResult.OK
+                                                DialogResult = System.Windows.Forms.DialogResult.OK
                                                 Me.Close()
                                             Else
                                                 NoID = -1
@@ -446,7 +446,7 @@ Public Class frmEntriSaldoAwalPersediaan
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 

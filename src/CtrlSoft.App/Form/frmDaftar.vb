@@ -209,7 +209,7 @@ Public Class frmDaftar
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -223,7 +223,7 @@ Public Class frmDaftar
     End Sub
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -231,13 +231,13 @@ Public Class frmDaftar
         Select Case tableName
             Case "MUser"
                 Using frm As New frmEntriUser(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MRole"
                 Using frm As New frmEntriRole(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -250,13 +250,13 @@ Public Class frmDaftar
         Select Case tableName
             Case "MUser"
                 Using frm As New frmEntriUser(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MRole"
                 Using frm As New frmEntriRole(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -269,11 +269,11 @@ Public Class frmDaftar
         If GridView1.RowCount >= 1 Then
             Select Case tableName
                 Case "MUser"
-                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case "MRole"
-                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case Else

@@ -26,13 +26,13 @@ namespace CtrlSoft.AppUpdate
         public string FtpPassword { get; set; }
         public int FtpPort { get; set; }
 
-        public bool DownloadUpdate(DevExpress.XtraEditors.ProgressBarControl progress)
+        public bool DownloadUpdate(DevExpress.XtraEditors.ProgressBarControl progress, DevExpress.XtraEditors.LabelControl labelControl)
         {
             try
             {
                 NetworkCredential credentials = new NetworkCredential(this.FtpUserID, this.FtpPassword);
                 string url = FtpServer;
-                return DownloadFtpDirectory(progress, url, credentials, Environment.CurrentDirectory + "/Update/");
+                return DownloadFtpDirectory(progress, labelControl, url, credentials, Environment.CurrentDirectory + "/Update/");
             }
             catch (Exception ex)
             {
@@ -42,6 +42,7 @@ namespace CtrlSoft.AppUpdate
         }
 
         private bool DownloadFtpDirectory(DevExpress.XtraEditors.ProgressBarControl progress,
+            DevExpress.XtraEditors.LabelControl labelControl,
             string url, 
             NetworkCredential credentials, 
             string localPath)
@@ -96,7 +97,7 @@ namespace CtrlSoft.AppUpdate
                                 Directory.CreateDirectory(localFilePath);
                             }
 
-                            DownloadFtpDirectory(progress, fileUrl + "/", credentials, localFilePath);
+                            DownloadFtpDirectory(progress, labelControl, fileUrl + "/", credentials, localFilePath);
                         }
                         else
                         {
@@ -113,6 +114,7 @@ namespace CtrlSoft.AppUpdate
                                 int read;
                                 while ((read = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
                                 {
+                                    labelControl.Text = "File : " + ((System.IO.FileStream)targetStream).Name;
                                     targetStream.Write(buffer, 0, read);
                                     Application.DoEvents();
                                 }

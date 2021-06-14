@@ -1,7 +1,7 @@
 ﻿Public Class frmLogin 
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -18,7 +18,7 @@
             If User IsNot Nothing Then
                 [Public].UserLogin = User
                 [Public].SettingPerusahaan = Repository.RepConfig.GetSettingPerusahaan()
-                DialogResult = Windows.Forms.DialogResult.OK
+                DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             Else
                 DxErrorProvider1.SetError(TextEdit1, "User dan Password Salah!", DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information)

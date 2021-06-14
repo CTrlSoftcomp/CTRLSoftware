@@ -8,14 +8,14 @@ Namespace DBSettings
     Public Class RepDBSetting
         Implements IDBSetting
 
-        Private NamaFileDB As String = Environment.CurrentDirectory & "\System\DBSetting.db"
+        Public Shared NamaFileDB As String = Environment.CurrentDirectory & "\System\DBSetting.db"
         Private StrKonSQL As String = "Data Source=" & NamaFileDB & ";Version=3;New=True;Compress=True;"
 
         Public Sub New()
-            SeederDatabase()
+            SeederDatabase(False)
         End Sub
 
-        Public Sub SeederDatabase()
+        Public Sub SeederDatabase(ByVal CreateDB As Boolean)
             Dim cn As New SQLiteConnection(StrKonSQL)
             Dim com As New SQLiteCommand
             Dim IsAdaDB As Boolean = False
@@ -49,15 +49,17 @@ Namespace DBSettings
                     com.CommandText = "INSERT INTO _dbMigration (DBVersion) VALUES ('1.0')"
                     com.ExecuteNonQuery()
 
-                    com.CommandText = "INSERT INTO DBSetting ([Id], [Server], [Database], [UserID], [Password], [Timeout], [Default]) VALUES (@Id, @Server, @Database, @UserID, @Password, @Timeout, 1)"
-                    com.Parameters.Clear()
-                    com.Parameters.Add(New SQLiteParameter("@Id", "DEFAULT"))
-                    com.Parameters.Add(New SQLiteParameter("@Server", BacaIni("DBConfig", "Server", "localhost")))
-                    com.Parameters.Add(New SQLiteParameter("@Database", BacaIni("DBConfig", "Database", "dbpos")))
-                    com.Parameters.Add(New SQLiteParameter("@UserID", BacaIni("DBConfig", "Username", "sa")))
-                    com.Parameters.Add(New SQLiteParameter("@Password", BacaIni("DBConfig", "Password", "Sg1")))
-                    com.Parameters.Add(New SQLiteParameter("@Timeout", BacaIni("DBConfig", "Timeout", "15")))
-                    com.ExecuteNonQuery()
+                    If CreateDB Then
+                        com.CommandText = "INSERT INTO DBSetting ([Id], [Server], [Database], [UserID], [Password], [Timeout], [Default]) VALUES (@Id, @Server, @Database, @UserID, @Password, @Timeout, 1)"
+                        com.Parameters.Clear()
+                        com.Parameters.Add(New SQLiteParameter("@Id", "DEFAULT"))
+                        com.Parameters.Add(New SQLiteParameter("@Server", BacaIni("DBConfig", "Server", "(localdb)\MSSQLLocalDB")))
+                        com.Parameters.Add(New SQLiteParameter("@Database", BacaIni("DBConfig", "Database", "dbpos")))
+                        com.Parameters.Add(New SQLiteParameter("@UserID", BacaIni("DBConfig", "Username", "sa")))
+                        com.Parameters.Add(New SQLiteParameter("@Password", BacaIni("DBConfig", "Password", "1234123412")))
+                        com.Parameters.Add(New SQLiteParameter("@Timeout", BacaIni("DBConfig", "Timeout", "15")))
+                        com.ExecuteNonQuery()
+                    End If
                 End If
             Catch ex As Exception
                 MessageBox.Show("Error : " & ex.Message, Environment.MachineName)

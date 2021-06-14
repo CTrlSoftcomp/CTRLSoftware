@@ -145,10 +145,10 @@ Public Class frmEntriStockOpname
                                 com.CommandTimeout = cn.ConnectionTimeout
                                 oDA.SelectCommand = com
 
-                                If RowHasChanged AndAlso _
-                                XtraMessageBox.Show("Ingin menggenerate ulang data yang telah diinput?" & vbCrLf & _
-                                                    "Entrian Qty Fisik akan dinolkan.", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) = _
-                                                    Windows.Forms.DialogResult.No Then
+                                If RowHasChanged AndAlso
+                                XtraMessageBox.Show("Ingin menggenerate ulang data yang telah diinput?" & vbCrLf &
+                                                    "Entrian Qty Fisik akan dinolkan.", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) =
+                                                    System.Windows.Forms.DialogResult.No Then
                                     IsGenerateUlang = False
                                 End If
 
@@ -511,13 +511,13 @@ Public Class frmEntriStockOpname
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
         Me.Close()
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvGudangAsal.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvGudangAsal.Name & ".xml")
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
@@ -536,7 +536,7 @@ Public Class frmEntriStockOpname
             ElseIf pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiParent.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
                     TryCast(frm, frmDaftarTransaksi).Name = modMain.FormName.DaftarStockOpname.ToString Then
                         x = frm
                     End If
@@ -546,7 +546,7 @@ Public Class frmEntriStockOpname
                     x.Show()
                     x.Focus()
                 End If
-                DialogResult = Windows.Forms.DialogResult.OK
+                DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         End If

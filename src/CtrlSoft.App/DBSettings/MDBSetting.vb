@@ -16,7 +16,11 @@
             End Set
         End Property
         Public Function KoneksiString() As String
-            Return "Server=" & Server & ";Initial Catalog=" & Database & ";User Id=" & UserID & ";Password=" & Password & ";Asynchronous Processing=True;Connect Timeout=" & TimeOut & ";Application Name=" & Id.ToString() & ";"
+            If (Server.Equals("(localdb)\MSSQLLocalDB")) Then
+                Return "Server=" & Server & ";Initial Catalog=" & Database & ";Asynchronous Processing=True;Connect Timeout=" & Timeout & ";Application Name=" & Id.ToString() & ";"
+            Else
+                Return "Server=" & Server & ";Initial Catalog=" & Database & ";User Id=" & UserID & ";Password=" & Password & ";Asynchronous Processing=True;Connect Timeout=" & Timeout & ";Application Name=" & Id.ToString() & ";"
+            End If
         End Function
     End Class
     Public Class DBName

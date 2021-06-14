@@ -7,19 +7,34 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
+using DevExpress.XtraEditors;
 using IWshRuntimeLibrary;
+using Microsoft.Win32;
 
 namespace CtrlSoft.AppUpdate
 {
     public partial class frmMain : DevExpress.XtraEditors.XtraForm
     {
+        private string UrlYoutube = "https://www.youtube.com/watch?v=p6qIGeBInoA";
+
+        private string VideoId
+        {
+            get
+            {
+                var yMatch = new Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)").Match(UrlYoutube);
+                return (yMatch.Success ? yMatch.Groups[1].Value : String.Empty);
+            }
+        }
+
         private FTP ftpClient = new FTP();
 
         public frmMain(String[] args)
         {
             InitializeComponent();
-
             if (args.Length >= 1)
             {
                 ftpClient.PathProgram = (string)args.GetValue(0);
@@ -35,10 +50,38 @@ namespace CtrlSoft.AppUpdate
             System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "/Update/");
         }
 
+        public ChromiumWebBrowser browser;
+        public void InitBrowser(string URL)
+        {
+            Cef.Initialize(new CefSettings());
+            browser = new ChromiumWebBrowser(URL);
+            panelControl2.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+        }
+
         private void frmMain_Shown(object sender, EventArgs e)
         {
+
             //Untuk Ngetest aja
             //ftpClient.PathProgram = @"E:\DEVELOPER\2021 - CTRLSoftware\src\CtrlSoft.App\bin\Debug";
+
+            if (IsVC2015Installed())
+            {
+                InitBrowser($"https://youtube.com/v/{VideoId}?version=3");
+            } else
+            {
+                if (XtraMessageBox.Show($"Mohon untuk menginstall <b>[Microsoft Visual C++ 2015 (x86)]</b>," + Environment.NewLine +
+                                        $"Silahkan download <href=https://ctrlsoft.id/perquisite/VC_redist.x86.exe>link berikut.</href>", 
+                                        "WARNING", 
+                                        MessageBoxButtons.YesNo, 
+                                        MessageBoxIcon.Warning, 
+                                        DevExpress.Utils.DefaultBoolean.True) == DialogResult.Yes)
+                {
+                    Process.Start($"https://ctrlsoft.id/perquisite/VC_redist.x86.exe");
+                    Application.Exit();
+                    Environment.Exit(1);
+                };
+            }
             bool createShortcut = false;
             if (ftpClient.PathProgram.Equals(""))
             {
@@ -64,8 +107,11 @@ namespace CtrlSoft.AppUpdate
             if (ftpClient.PathProgram.Length >= 1 &&
                 System.IO.Directory.Exists(ftpClient.PathProgram))
             {
+                //webBrowser.Navigate($"https://youtube.com/v/{VideoId}");
+                //webBrowser.Navigate(@"http://google.com");
+                //webBrowser.Navigate("https://www.youtube.com/watch?v=p6qIGeBInoA");
                 CreateStruktur();
-                bool sukses = ftpClient.DownloadUpdate(progressBarControl1);
+                bool sukses = ftpClient.DownloadUpdate(progressBarControl1, lbFile);
 
                 if (sukses)
                 {
@@ -94,6 +140,7 @@ namespace CtrlSoft.AppUpdate
                     {
                         iPos += 1;
                         progressBarControl1.EditValue = (double)((double) iPos / (double) directoryInfo.GetFiles().Length) * 100.0;
+                        lbFile.Text = "File : " + item.Name;
                         Application.DoEvents();
 
                         System.IO.File.Copy(item.FullName, ftpClient.PathProgram + "\\" + item.Name, true);
@@ -127,6 +174,32 @@ namespace CtrlSoft.AppUpdate
                 if (createShortcut)
                 {
                     CreateShortcut("CTrlSoft.App", ftpClient.PathProgram + "\\CtrlSoft.App.exe", ftpClient.PathProgram);
+
+                    //Check MSSQLLocalDB
+                    if (Environment.Is64BitOperatingSystem)
+                    {
+                        if (XtraMessageBox.Show($"Mohon untuk menginstall database engine <b>[MSSQLLocalDB 2016 (x64)]</b>," + Environment.NewLine +
+                                                $"Silahkan download <href=https://ctrlsoft.id/perquisite/SqlLocalDB_2016_x64.msi>link berikut.</href>",
+                                        "WARNING",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Warning,
+                                        DevExpress.Utils.DefaultBoolean.True) == DialogResult.Yes)
+                        {
+                            Process.Start($"https://ctrlsoft.id/perquisite/SqlLocalDB_2016_x64.msi");
+                        };
+                    }
+                    else
+                    {
+                        if (XtraMessageBox.Show($"Mohon untuk menginstall database engine <b>[MSSQLLocalDB 2016 (x86)]</b>," + Environment.NewLine +
+                                                $"Silahkan download <href=https://ctrlsoft.id/perquisite/SqlLocalDB_2016_x86.msi>link berikut.</href>",
+                                        "WARNING",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Warning,
+                                        DevExpress.Utils.DefaultBoolean.True) == DialogResult.Yes)
+                        {
+                            Process.Start($"https://ctrlsoft.id/perquisite/SqlLocalDB_2016_x86.msi");
+                        };
+                    }
                 }
 
                 System.Diagnostics.ProcessStartInfo newP = new System.Diagnostics.ProcessStartInfo();
@@ -176,6 +249,7 @@ namespace CtrlSoft.AppUpdate
             {
                 iPos += 1;
                 progressBarControl1.EditValue = (double)((double) iPos / (double) directoryInfo.GetFiles().Length) * 100.0;
+                lbFile.Text = "File : " + item.Name;
                 Application.DoEvents();
 
                 System.IO.File.Copy(item.FullName, dirDestination + "\\" + item.Name, true);
@@ -193,6 +267,49 @@ namespace CtrlSoft.AppUpdate
                 }
                 copy(item.FullName, dirDestination + "\\" + item.Name);
             }
+        }
+
+        private void frmMain_FormClossing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+            Environment.Exit(1);
+        }
+
+        public static bool IsVC2015Installed()
+        {
+            string dependenciesPath = @"SOFTWARE\Classes\Installer\Dependencies";
+
+            using (RegistryKey dependencies = Registry.LocalMachine.OpenSubKey(dependenciesPath))
+            {
+                if (dependencies == null) return false;
+
+                foreach (string subKeyName in dependencies.GetSubKeyNames().Where(n => !n.ToLower().Contains("dotnet") && !n.ToLower().Contains("microsoft")))
+                {
+                    using (RegistryKey subDir = Registry.LocalMachine.OpenSubKey(dependenciesPath + "\\" + subKeyName))
+                    {
+                        var value = subDir.GetValue("DisplayName")?.ToString() ?? null;
+                        if (string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                        if (Environment.Is64BitOperatingSystem)
+                        {
+                            if (Regex.IsMatch(value, @"C\+\+ 2015.*\((x64|x86)\)"))
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            if (Regex.IsMatch(value, @"C\+\+ 2015.*\(x86\)"))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }

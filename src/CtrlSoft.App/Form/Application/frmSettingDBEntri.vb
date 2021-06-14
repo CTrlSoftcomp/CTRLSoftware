@@ -20,6 +20,13 @@ Public Class frmSettingDBEntri
 
         ' Add any initialization after the InitializeComponent() call.
         DBSetting = [Public].DBSetting.Get(Id)
+
+        Dim str As String() = {"(localdb)\MSSQLLocalDB", "(local)", "127.0.0.1", "localhost", "."}
+        Dim collection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
+        collection.AddRange(str)
+        txtServer.MaskBox.AutoCompleteCustomSource = collection
+        txtServer.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource
+        txtServer.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
     End Sub
 
     Private Sub frmSettingDB_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -34,11 +41,11 @@ Public Class frmSettingDBEntri
         Else
             DBSetting = New DBSettings.MDBSetting With {.Id = ""}
             txtID.Text = DBSetting.Id
-            txtServer.Text = Ini.BacaIni("DBConfig", "Server", "localhost")
-            txtDatabase.Text = Ini.BacaIni("DBConfig", "Database", "dbpos")
-            txtUserID.Text = Ini.BacaIni("DBConfig", "Username", "sa")
-            txtPassword.Text = Ini.BacaIni("DBConfig", "Password", "Sg1")
-            txtTimeout.Value = Ini.BacaIni("DBConfig", "Timeout", "15")
+            txtServer.Text = "(localdb)\MSSQLLocalDB"
+            txtDatabase.Text = "dbpos"
+            txtUserID.Text = "sa"
+            txtPassword.Text = "1234123412"
+            txtTimeout.Value = 15
             ckDefault.Checked = True
         End If
         LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
@@ -47,11 +54,21 @@ Public Class frmSettingDBEntri
     Private Sub LookUpDB(ByVal Server As String, ByVal UserID As String, ByVal Pwd As String)
         Dim ListDB As New List(Of DBSettings.DBName)
         Using dlg As New WaitDialogForm("Sedang menghubungkan ke database", NamaAplikasi)
-            Using cn As New SqlConnection("Server=" & Server & ";Database=master;User Id=" & UserID & ";Password=" & Pwd & ";Timeout=3;")
+            Using cn As New SqlConnection(IIf(Not Server.Equals("(localdb)\MSSQLLocalDB"),
+                                              "Server=" & Server & ";Database=master;User Id=" & UserID & ";Password=" & Pwd & ";Timeout=3;",
+                                              "Server=" & Server & ";Database=master;Integrated Security=true;Timeout=3;"))
                 Using ds As New DataSet
                     Using com As New SqlCommand
                         Try
                             dlg.Show()
+
+                            If (Server.Equals("(localdb)\MSSQLLocalDB")) Then
+                                txtUserID.Properties.ReadOnly = True
+                                txtPassword.Properties.ReadOnly = True
+                            Else
+                                txtUserID.Properties.ReadOnly = False
+                                txtPassword.Properties.ReadOnly = False
+                            End If
 
                             cn.Open()
                             com.Connection = cn
@@ -100,7 +117,9 @@ Public Class frmSettingDBEntri
         Dim DBName As String = InputBox("Isikan nama Database Baru Anda", NamaAplikasi, "")
         If DBName <> "" Then
             Using dlg As New WaitDialogForm("Sedang membuatkan database", NamaAplikasi)
-                Using cn As New SqlConnection("Server=" & txtServer.Text & ";Database=master;User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;")
+                Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
+                                              "Server=" & txtServer.Text & ";Database=master;User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;",
+                                              "Server=" & txtServer.Text & ";Database=master;Integrated Security=true;Timeout=3;"))
                     Using ds As New DataSet
                         Using com As New SqlCommand
                             Try
@@ -144,8 +163,8 @@ Public Class frmSettingDBEntri
     End Sub
 
     Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
+        System.Windows.Forms.Cursor.Current = Cursors.WaitCursor
         DxErrorProvider1.ClearErrors()
         If txtServer.Text = "" Then
             DxErrorProvider1.SetError(txtServer, "Server harus diisi!")
@@ -163,11 +182,9 @@ Public Class frmSettingDBEntri
             DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
         End If
         If Not DxErrorProvider1.HasErrors Then
-            Using cn As New SqlConnection("Data Source=" & txtServer.Text &
-                        ";initial Catalog=" & txtDatabase.Text &
-                        ";User ID=" & txtUserID.Text &
-                        ";Password=" & txtPassword.Text &
-                        ";Connect Timeout=" & NullToLong(txtTimeout.Value))
+            Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
+                                              "Server=" & txtServer.Text & ";Database=" & txtDatabase.Text & ";User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;",
+                                              "Server=" & txtServer.Text & ";Database=" & txtDatabase.Text & ";Integrated Security=true;Timeout=3;"))
                 Try
                     cn.Open()
 
@@ -181,18 +198,22 @@ Public Class frmSettingDBEntri
 
                     DBSetting = [Public].DBSetting.Save(DBSetting)
 
-                    DialogResult = Windows.Forms.DialogResult.OK
+                    DialogResult = System.Windows.Forms.DialogResult.OK
                     Close()
                 Catch ex As Exception
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End Try
             End Using
         End If
-        Windows.Forms.Cursor.Current = curentcursor
+        System.Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
+    End Sub
+
+    Private Sub txtServer_EditValueChanged(sender As Object, e As EventArgs) Handles txtServer.EditValueChanged
+
     End Sub
 End Class

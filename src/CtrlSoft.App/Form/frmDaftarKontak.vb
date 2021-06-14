@@ -232,7 +232,7 @@ Public Class frmDaftarKontak
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                     GridView2.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView2.Name & ".xml")
                     GridView3.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView3.Name & ".xml")
@@ -252,25 +252,25 @@ Public Class frmDaftarKontak
         Select Case XtraTabControl1.SelectedTabPageIndex
             Case 1
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case 2
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case 3
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case Else
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, -1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -281,25 +281,25 @@ Public Class frmDaftarKontak
         Select Case XtraTabControl1.SelectedTabPageIndex
             Case 1
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Customer, NullToLong(GridView2.GetRowCellValue(GridView2.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case 2
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Supplier, NullToLong(GridView3.GetRowCellValue(GridView3.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case 3
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.Pegawai, NullToLong(GridView4.GetRowCellValue(GridView4.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case Else
                 Using frm As New frmEntriKontak(frmEntriKontak.tipeKontak.All, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -319,7 +319,7 @@ Public Class frmDaftarKontak
                 gridview = GridView1
         End Select
         If gridview.RowCount >= 1 Then
-            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show("Ingin menonaktifkan data Kontak " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                 HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
             End If
         End If
@@ -344,7 +344,7 @@ Public Class frmDaftarKontak
     End Sub
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

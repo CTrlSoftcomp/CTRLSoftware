@@ -16,6 +16,11 @@ Public Class modMain
             Application.EnableVisualStyles()
             Application.SetCompatibleTextRenderingDefault(False)
 
+            'SeederDB
+            If (Not NullToBool(BacaIni("AppConfig", "DefaultDB", False))) Then
+                InitSeeder()
+            End If
+
             'Default System
             InitFolders()
 
@@ -23,10 +28,10 @@ Public Class modMain
             If (DBSetting IsNot Nothing) Then
                 StrKonSQL = DBSetting.KoneksiString
             Else
-                StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
+                StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "(localdb)\MSSQLLocalDB") &
                         ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
                         ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
-                        ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
+                        ";Password=" & BacaIni("DBConfig", "Password", "1234123412") &
                         ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
             End If
 
@@ -50,6 +55,21 @@ Public Class modMain
         Catch ex As Exception
             XtraMessageBox.Show("System error : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Shared Sub InitSeeder()
+        Using frm As New frmSettingDBEntri("")
+            Try
+                If frm.ShowDialog() = DialogResult.OK Then
+                    TulisIni("AppConfig", "DefaultDB", True)
+                Else
+                    XtraMessageBox.Show("Buka lagi applikasinya dan pastikan terkoneksi dengan benar.", [Public].NamaAplikasi)
+                    Application.Exit()
+                End If
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
     End Sub
 
     Private Shared Sub InitFolders()

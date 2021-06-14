@@ -327,7 +327,7 @@ Public Class frmDaftarTransaksi
         If View Is Nothing Then Return
         ' obtaining hit info
         Dim hitInfo As GridHitInfo = View.CalcHitInfo(New System.Drawing.Point(e.X, e.Y))
-        If (e.Button = Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And _
+        If (e.Button = System.Windows.Forms.MouseButtons.Right) And (hitInfo.InRow) And
           (Not View.IsGroupRow(hitInfo.RowHandle)) Then
             PopupMenu1.ShowPopup(Control.MousePosition)
         End If
@@ -362,7 +362,7 @@ Public Class frmDaftarTransaksi
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -377,7 +377,7 @@ Public Class frmDaftarTransaksi
 
     Private Sub mnPosting_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnPosting.ItemClick
         Using dlg As New WaitDialogForm("Sedang memosting data ...", NamaAplikasi)
-            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim MyCursor As Cursor = System.Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
             Dim JSON As JSONResult
             Try
@@ -486,7 +486,7 @@ Public Class frmDaftarTransaksi
 
     Private Sub mnUnposting_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnUnposting.ItemClick
         Using dlg As New WaitDialogForm("Sedang mengunposting data ...", NamaAplikasi)
-            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim MyCursor As Cursor = System.Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
             Dim JSON As JSONResult
             Try
@@ -595,7 +595,7 @@ Public Class frmDaftarTransaksi
 
     Private Sub mnHasilPosting_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHasilPosting.ItemClick
         Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
-            Dim MyCursor As Cursor = Windows.Forms.Cursor.Current
+            Dim MyCursor As Cursor = System.Windows.Forms.Cursor.Current
             Dim NoID As Long = -1
             Try
                 Cursor = Cursors.WaitCursor
@@ -687,7 +687,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalPiutang
                 Using x As New frmEntriSaldoAwalPiutang(-1)
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -697,7 +697,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalHutang
                 Using x As New frmEntriSaldoAwalHutang(-1)
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -707,7 +707,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalPersediaan
                 Using x As New frmEntriSaldoAwalPersediaan(-1)
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -767,7 +767,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalPiutang
                 Using x As New frmEntriSaldoAwalPiutang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -777,7 +777,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalHutang
                 Using x As New frmEntriSaldoAwalHutang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -787,7 +787,7 @@ Public Class frmDaftarTransaksi
             Case modMain.FormName.DaftarSaldoAwalPersediaan
                 Using x As New frmEntriSaldoAwalPersediaan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     Try
-                        If x.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If x.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             RefreshData(x.NoID)
                         End If
                     Catch ex As Exception
@@ -849,70 +849,70 @@ Public Class frmDaftarTransaksi
             Select Case formName
                 Case modMain.FormName.DaftarSaldoAwalPiutang
                     If gridview.GetSelectedRows.Count >= 1 Then
-                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             For Each iRow As Integer In gridview.GetSelectedRows
                                 HapusData(NullToLong(gridview.GetRowCellValue(iRow, "NoID")))
                             Next
                         End If
                     Else
-                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo piutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                         End If
                     End If
                 Case modMain.FormName.DaftarSaldoAwalHutang
                     If gridview.GetSelectedRows.Count >= 1 Then
-                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             For Each iRow As Integer In gridview.GetSelectedRows
                                 HapusData(NullToLong(gridview.GetRowCellValue(iRow, "NoID")))
                             Next
                         End If
                     Else
-                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo hutang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                         End If
                     End If
                 Case modMain.FormName.DaftarSaldoAwalPersediaan
                     If gridview.GetSelectedRows.Count >= 1 Then
-                        If XtraMessageBox.Show("Ingin menghapus data saldo persediaan yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo persediaan yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             For Each iRow As Integer In gridview.GetSelectedRows
                                 HapusData(NullToLong(gridview.GetRowCellValue(iRow, "NoID")))
                             Next
                         End If
                     Else
-                        If XtraMessageBox.Show("Ingin menghapus data saldo persediaan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show("Ingin menghapus data saldo persediaan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                             HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                         End If
                     End If
                 Case modMain.FormName.DaftarPO
-                    If XtraMessageBox.Show("Ingin menghapus data pesanan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data pesanan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarPembelian
-                    If XtraMessageBox.Show("Ingin menghapus data pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarReturPembelian
-                    If XtraMessageBox.Show("Ingin menghapus data retur pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data retur pembelian " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarPenjualan
-                    If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data penjualan " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarMutasiGudang
-                    If XtraMessageBox.Show("Ingin menghapus data mutasi gudang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data mutasi gudang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarPemakaian
-                    If XtraMessageBox.Show("Ingin menghapus data pemakaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data pemakaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarPenyesuaian
-                    If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data penyesuaian barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
                 Case modMain.FormName.DaftarStockOpname
-                    If XtraMessageBox.Show("Ingin menghapus data Stock Opname barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menghapus data Stock Opname barang " & NullToStr(gridview.GetRowCellValue(gridview.FocusedRowHandle, "Kode")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(gridview.GetRowCellValue(gridview.FocusedRowHandle, "NoID")))
                     End If
             End Select
@@ -1081,7 +1081,7 @@ Public Class frmDaftarTransaksi
     End Sub
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

@@ -298,7 +298,7 @@ Public Class frmEntriJual
                                     Next
                                     If MunculkanPembayaran Then
                                         frm = New frmEntriJualDBayar(txtCustomer.EditValue, txtTotal.EditValue, ListPembayaran)
-                                        If frm.ShowDialog(Me) <> Windows.Forms.DialogResult.OK Then
+                                        If frm.ShowDialog(Me) <> System.Windows.Forms.DialogResult.OK Then
                                             DxErrorProvider1.SetError(txtKode, "Pembayaran dibatalkan!")
                                         Else
                                             ListPembayaran = frm.iList
@@ -733,7 +733,7 @@ Public Class frmEntriJual
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
         Me.Close()
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
     Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
@@ -748,7 +748,7 @@ Public Class frmEntriJual
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
             Using frm As New frmEntriJualD(Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID, txtTypePajak.EditValue)
                 Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
                     End If
                 Catch ex As Exception
@@ -762,7 +762,7 @@ Public Class frmEntriJual
         If pStatusChange() Then
             Using frm As New frmEntriJualD(Me, -1, NoID, txtTypePajak.EditValue)
                 Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
                     End If
                 Catch ex As Exception
@@ -783,7 +783,7 @@ Public Class frmEntriJual
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvCustomer.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvCustomer.Name & ".xml")
                     gvTypePajak.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvTypePajak.Name & ".xml")
@@ -862,7 +862,7 @@ Public Class frmEntriJual
                     If iList.Count >= 1 Then
                         Using frm As New frmEntriJualD(Me, -1, NoID, txtTypePajak.EditValue, iList(0).NoID)
                             Try
-                                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                                     RefreshDetil(frm.NoID)
                                 End If
                             Catch ex As Exception

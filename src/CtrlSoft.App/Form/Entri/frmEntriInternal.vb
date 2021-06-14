@@ -493,7 +493,7 @@ Public Class frmEntriInternal
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
         Me.Close()
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
     Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
@@ -508,7 +508,7 @@ Public Class frmEntriInternal
         If (pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert) AndAlso GridView1.RowCount >= 1 Then
             Using frm As New frmEntriInternalD(Me.pForm, Me, NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")), NoID)
                 Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
                     End If
                 Catch ex As Exception
@@ -522,7 +522,7 @@ Public Class frmEntriInternal
         If pStatusChange() Then
             Using frm As New frmEntriInternalD(Me.pForm, Me, -1, NoID)
                 Try
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshDetil(frm.NoID)
                     End If
                 Catch ex As Exception
@@ -543,7 +543,7 @@ Public Class frmEntriInternal
     Private Sub mnSaveLayouts_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayouts.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvGudangAsal.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvGudangAsal.Name & ".xml")
                     gvGudangTujuan.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvGudangTujuan.Name & ".xml")
@@ -563,8 +563,8 @@ Public Class frmEntriInternal
             ElseIf pStatus = pStatusForm.Edit OrElse pStatus = pStatusForm.TempInsert Then
                 Dim x As frmDaftarTransaksi = Nothing
                 For Each frm In Me.MdiParent.MdiChildren
-                    If TypeOf frm Is frmDaftarTransaksi AndAlso _
-                    TryCast(frm, frmDaftarTransaksi).Name.ToString = IIf(pForm = modMain.FormInternal.MutasiGudang, modMain.FormName.DaftarMutasiGudang.ToString, _
+                    If TypeOf frm Is frmDaftarTransaksi AndAlso
+                    TryCast(frm, frmDaftarTransaksi).Name.ToString = IIf(pForm = modMain.FormInternal.MutasiGudang, modMain.FormName.DaftarMutasiGudang.ToString,
                                                                          IIf(pForm = modMain.FormInternal.Pemakaian, modMain.FormName.DaftarPemakaian, modMain.FormName.DaftarPenyesuaian)).ToString Then
                         x = frm
                     End If
@@ -574,7 +574,7 @@ Public Class frmEntriInternal
                     x.Show()
                     x.Focus()
                 End If
-                DialogResult = Windows.Forms.DialogResult.OK
+                DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         End If

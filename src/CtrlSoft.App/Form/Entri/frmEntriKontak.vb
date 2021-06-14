@@ -44,8 +44,8 @@ Public Class frmEntriKontak
     End Sub
 
     Private Sub frmEntriRole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
+        System.Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
 
             LoadData(NoID)
@@ -57,7 +57,7 @@ Public Class frmEntriKontak
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Windows.Forms.Cursor.Current = curentcursor
+        System.Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
     Public Sub LoadData(ByVal NoID As Long)
@@ -134,7 +134,7 @@ Public Class frmEntriKontak
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & tipe.ToString & ".xml")
                 End If
             Catch ex As Exception
@@ -212,7 +212,7 @@ Public Class frmEntriKontak
 
                                         com.Transaction.Commit()
 
-                                        DialogResult = Windows.Forms.DialogResult.OK
+                                        DialogResult = System.Windows.Forms.DialogResult.OK
                                         Me.Close()
                                     End If
                                 Catch ex As Exception
@@ -227,7 +227,7 @@ Public Class frmEntriKontak
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

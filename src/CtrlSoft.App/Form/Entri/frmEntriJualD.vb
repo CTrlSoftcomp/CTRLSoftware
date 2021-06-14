@@ -44,8 +44,8 @@ Public Class frmEntriJualD
     End Sub
 
     Private Sub frmEntriRole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim curentcursor As Cursor = Windows.Forms.Cursor.Current
-        Windows.Forms.Cursor.Current = Cursors.WaitCursor
+        Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
+        System.Windows.Forms.Cursor.Current = Cursors.WaitCursor
         Try
             With LayoutControl1
                 If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
@@ -56,7 +56,7 @@ Public Class frmEntriJualD
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Windows.Forms.Cursor.Current = curentcursor
+        System.Windows.Forms.Cursor.Current = curentcursor
     End Sub
 
     Private Sub LoadData(ByVal NoID As Long)
@@ -166,7 +166,7 @@ Public Class frmEntriJualD
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     LayoutControl1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & LayoutControl1.Name & ".xml")
                     gvBarcode.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvBarcode.Name & ".xml")
                     gvSatuan.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & gvSatuan.Name & ".xml")
@@ -231,16 +231,16 @@ Public Class frmEntriJualD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf & _
-                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf & _
-                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf & _
-                                                  "FROM (" & vbCrLf & _
-                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf & _
-                                                  "FROM MBarangD" & vbCrLf & _
-                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
-                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf & _
-                                                  ") AS X" & vbCrLf & _
-                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf & _
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf &
+                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf &
+                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf &
+                                                  "FROM (" & vbCrLf &
+                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf &
+                                                  "FROM MBarangD" & vbCrLf &
+                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
+                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf &
+                                                  ") AS X" & vbCrLf &
+                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf &
                                                   "GROUP BY X.NoID, X.Konversi, MSatuan.Kode"
                                 oDA.Fill(ds, "MSatuan")
                                 txtSatuan.Properties.DataSource = ds.Tables("MSatuan")
@@ -305,17 +305,17 @@ Public Class frmEntriJualD
                                 com.Connection = cn
                                 oDA.SelectCommand = com
 
-                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf & _
-                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf & _
-                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf & _
-                                                  "FROM (" & vbCrLf & _
-                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf & _
-                                                  "FROM MBarangD" & vbCrLf & _
-                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf & _
-                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf & _
-                                                  ") AS X" & vbCrLf & _
-                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf & _
-                                                  "GROUP BY X.NoID, X.Konversi, MSatuan.Kode" & vbCrLf & _
+                                com.CommandText = "DECLARE @IDBarang AS BIGINT = -1, @IDBarangD AS BIGINT = " & NullToLong(txtBarcode.EditValue) & ";" & vbCrLf &
+                                                  "SELECT @IDBarang = MBarangD.IDBarang FROM MBarangD WHERE MBarangD.NoID=@IDBarangD;" & vbCrLf &
+                                                  "SELECT X.NoID, MSatuan.Kode Satuan, X.Konversi " & vbCrLf &
+                                                  "FROM (" & vbCrLf &
+                                                  "SELECT MBarangD.IDSatuan NoID, MBarangD.Konversi " & vbCrLf &
+                                                  "FROM MBarangD" & vbCrLf &
+                                                  "INNER JOIN MBarang ON MBarang.NoID=MBarangD.IDBarang" & vbCrLf &
+                                                  "WHERE MBarangD.IDBarang=@IDBarang AND MBarang.IsActive=1 AND MBarangD.IsActive=1" & vbCrLf &
+                                                  ") AS X" & vbCrLf &
+                                                  "INNER JOIN MSatuan ON MSatuan.NoID=X.NoID" & vbCrLf &
+                                                  "GROUP BY X.NoID, X.Konversi, MSatuan.Kode" & vbCrLf &
                                                   "HAVING X.NoID=" & NullToLong(txtSatuan.EditValue)
                                 oDA.Fill(ds, "MSatuan")
                                 If ds.Tables("MSatuan").Rows.Count >= 1 Then
@@ -476,7 +476,7 @@ Public Class frmEntriJualD
 
                                         com.Transaction.Commit()
 
-                                        DialogResult = Windows.Forms.DialogResult.OK
+                                        DialogResult = System.Windows.Forms.DialogResult.OK
                                         Me.Close()
                                     End If
                                 Catch ex As Exception
@@ -491,7 +491,7 @@ Public Class frmEntriJualD
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

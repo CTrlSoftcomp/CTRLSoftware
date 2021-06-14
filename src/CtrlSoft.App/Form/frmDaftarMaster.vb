@@ -206,7 +206,7 @@ Public Class frmDaftarMaster
     Private Sub mnSaveLayout_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSaveLayout.ItemClick
         Using frm As New frmOtorisasi
             Try
-                If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                     GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
                 End If
             Catch ex As Exception
@@ -223,25 +223,25 @@ Public Class frmDaftarMaster
         Select Case tableName
             Case "MGudang"
                 Using frm As New frmEntriGudang(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MMerk"
                 Using frm As New frmEntriMerk(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MSatuan"
                 Using frm As New frmEntriSatuan(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MKategori"
                 Using frm As New frmEntriKategori(-1)
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -254,25 +254,25 @@ Public Class frmDaftarMaster
         Select Case tableName
             Case "MGudang"
                 Using frm As New frmEntriGudang(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MMerk"
                 Using frm As New frmEntriMerk(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MSatuan"
                 Using frm As New frmEntriSatuan(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
             Case "MKategori"
                 Using frm As New frmEntriKategori(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         RefreshData(frm.NoID)
                     End If
                 End Using
@@ -285,19 +285,19 @@ Public Class frmDaftarMaster
         If GridView1.RowCount >= 1 Then
             Select Case tableName
                 Case "MKategori"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Kategori " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menonaktifkan data Kategori " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case "MSatuan"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Satuan " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menonaktifkan data Satuan " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case "MMerk"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Merk " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menonaktifkan data Merk " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case "MGudang"
-                    If XtraMessageBox.Show("Ingin menonaktifkan data Gudang " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show("Ingin menonaktifkan data Gudang " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case Else
@@ -317,7 +317,7 @@ Public Class frmDaftarMaster
     End Sub
 
     Private Sub mnTutup_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

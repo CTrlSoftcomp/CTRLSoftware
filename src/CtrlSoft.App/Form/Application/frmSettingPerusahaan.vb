@@ -16,7 +16,7 @@ Public Class frmSettingPerusahaan
                                                            .SelectedPath = TextEdit3.Text,
                                                            .Description = "Pilih Folder Untuk Layouts"}
                     Try
-                        If frm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                        If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                             TextEdit3.Text = frm.SelectedPath
                         End If
                     Catch ex As Exception
@@ -53,14 +53,14 @@ Public Class frmSettingPerusahaan
             Obj = Repository.RepConfig.SetSettingPerusahaan(Obj)
             If Obj IsNot Nothing Then
                 [Public].SettingPerusahaan = Obj
-                DialogResult = Windows.Forms.DialogResult.OK
+                DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         End If
     End Sub
 
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
-        DialogResult = Windows.Forms.DialogResult.Cancel
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 End Class

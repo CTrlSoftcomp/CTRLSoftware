@@ -53,51 +53,51 @@ Public Class frmSettingDBEntri
 
     Private Sub LookUpDB(ByVal Server As String, ByVal UserID As String, ByVal Pwd As String)
         Dim ListDB As New List(Of DBSettings.DBName)
-        Using dlg As New WaitDialogForm("Sedang menghubungkan ke database", NamaAplikasi)
-            Using cn As New SqlConnection(IIf(Not Server.Equals("(localdb)\MSSQLLocalDB"),
+        'Using dlg As New WaitDialogForm("Sedang menghubungkan ke database", NamaAplikasi)
+        Using cn As New SqlConnection(IIf(Not Server.Equals("(localdb)\MSSQLLocalDB"),
                                               "Server=" & Server & ";Database=master;User Id=" & UserID & ";Password=" & Pwd & ";Timeout=3;",
                                               "Server=" & Server & ";Database=master;Integrated Security=true;Timeout=3;"))
-                Using ds As New DataSet
-                    Using com As New SqlCommand
-                        Try
-                            dlg.Show()
+            Using ds As New DataSet
+                Using com As New SqlCommand
+                    Try
+                        'dlg.Show()
 
-                            If (Server.Equals("(localdb)\MSSQLLocalDB")) Then
-                                txtUserID.Properties.ReadOnly = True
-                                txtPassword.Properties.ReadOnly = True
-                            Else
-                                txtUserID.Properties.ReadOnly = False
-                                txtPassword.Properties.ReadOnly = False
+                        If (Server.Equals("(localdb)\MSSQLLocalDB")) Then
+                            txtUserID.Properties.ReadOnly = True
+                            txtPassword.Properties.ReadOnly = True
+                        Else
+                            txtUserID.Properties.ReadOnly = False
+                            txtPassword.Properties.ReadOnly = False
+                        End If
+
+                        cn.Open()
+                        com.Connection = cn
+                        com.CommandTimeout = cn.ConnectionTimeout
+
+                        ListDB = cn.Query(Of DBSettings.DBName)("SELECT T.[name] DBName FROM [sysdatabases] T WHERE T.[name] NOT IN ('master', 'tempdb', 'model', 'msdb', 'ReportServer', 'ReportServerTempDB')", Nothing)
+
+                        Me.ListDB.Clear()
+                        txtDatabase.Properties.Items.Clear()
+
+                        For Each db In ListDB
+                            com.CommandText = "SELECT COUNT([name]) AS X FROM [" & db.DBName & "].sys.tables WHERE name = 'TAppDB' OR name = 'MKartuStokOnHand'"
+                            If NullToLong(com.ExecuteScalar()) >= 2 Then
+                                'DBnya CtrlSoft
+                                Me.ListDB.Add(db)
                             End If
+                        Next
 
-                            cn.Open()
-                            com.Connection = cn
-                            com.CommandTimeout = cn.ConnectionTimeout
-
-                            ListDB = cn.Query(Of DBSettings.DBName)("SELECT T.[name] DBName FROM [sysdatabases] T WHERE T.[name] NOT IN ('master', 'tempdb', 'model', 'msdb', 'ReportServer', 'ReportServerTempDB')", Nothing)
-
-                            Me.ListDB.Clear()
-                            txtDatabase.Properties.Items.Clear()
-
-                            For Each db In ListDB
-                                com.CommandText = "SELECT COUNT([name]) AS X FROM [" & db.DBName & "].sys.tables WHERE name = 'TAppDB' OR name = 'MKartuStokOnHand'"
-                                If NullToLong(com.ExecuteScalar()) >= 2 Then
-                                    'DBnya CtrlSoft
-                                    Me.ListDB.Add(db)
-                                End If
-                            Next
-
-                            Dim temp As New List(Of String)
-                            temp = (From x In Me.ListDB.ToList()
-                                    Select x.DBName).ToList()
-                            txtDatabase.Properties.Items.AddRange(temp)
-                        Catch ex As Exception
-                            XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        End Try
-                    End Using
+                        Dim temp As New List(Of String)
+                        temp = (From x In Me.ListDB.ToList()
+                                Select x.DBName).ToList()
+                        txtDatabase.Properties.Items.AddRange(temp)
+                    Catch ex As Exception
+                        'XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End Try
                 End Using
             End Using
         End Using
+        'End Using
     End Sub
 
     Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtServer.LostFocus, txtUserID.LostFocus, txtPassword.LostFocus
@@ -214,6 +214,10 @@ Public Class frmSettingDBEntri
     End Sub
 
     Private Sub txtServer_EditValueChanged(sender As Object, e As EventArgs) Handles txtServer.EditValueChanged
+
+    End Sub
+
+    Private Sub txtDatabase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDatabase.SelectedIndexChanged
 
     End Sub
 End Class

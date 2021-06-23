@@ -1,21 +1,21 @@
 ﻿USE [master];
 GO
 
-/****** Object:  Database [DBPOS]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Database [DBPOS]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE DATABASE [DBPOS] ON PRIMARY
 (
                                    NAME = N'DBPOS', 
                                    FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_data.mdf', 
-                                   SIZE = 3520 KB, 
+                                   SIZE = 5440 KB, 
                                    MAXSIZE = UNLIMITED, 
                                    FILEGROWTH = 1024 KB
 ) LOG ON
 (
                                    NAME = N'DBPOS_log', 
-                                   FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_log.LDF', 
-                                   SIZE = 504 KB, 
-                                   MAXSIZE = UNLIMITED, 
+                                   FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_log.ldf', 
+                                   SIZE = 11136 KB, 
+                                   MAXSIZE = 2048 GB, 
                                    FILEGROWTH = 10%
 );
 GO
@@ -71,7 +71,7 @@ ALTER DATABASE [DBPOS] SET READ_COMMITTED_SNAPSHOT OFF;
 GO
 ALTER DATABASE [DBPOS] SET HONOR_BROKER_PRIORITY OFF; 
 GO
-ALTER DATABASE [DBPOS] SET RECOVERY SIMPLE; 
+ALTER DATABASE [DBPOS] SET RECOVERY FULL; 
 GO
 ALTER DATABASE [DBPOS] SET MULTI_USER; 
 GO
@@ -86,7 +86,7 @@ GO
 USE [DBPOS];
 GO
 
-/****** Object:  UserDefinedFunction [dbo].[fnBulatkanNew]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[fnBulatkanNew]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -151,7 +151,7 @@ AS
      END;
 GO
 
-/****** Object:  UserDefinedFunction [dbo].[sfn_ean_chkdigit]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[sfn_ean_chkdigit]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -205,7 +205,7 @@ AS
      END;
 GO
 
-/****** Object:  Table [dbo].[IMP_BRG]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[IMP_BRG]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -228,7 +228,7 @@ CREATE TABLE [dbo].[IMP_BRG]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[IMP_BRG2]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[IMP_BRG2]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -255,7 +255,7 @@ CREATE TABLE [dbo].[IMP_BRG2]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MAlamat]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MAlamat]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -286,7 +286,123 @@ CREATE TABLE [dbo].[MAlamat]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MBarang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MAssembly]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MAssembly]
+([NoID]         [BIGINT] NOT NULL, 
+ [Kode]         [VARCHAR](50) NOT NULL, 
+ [Tanggal]      [DATETIME] NOT NULL, 
+ [IDWOAssembly] [UNIQUEIDENTIFIER] NULL, 
+ [IDMaterial]   [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDPegawai]    [BIGINT] NOT NULL, 
+ [IDGudang]     [INT] NOT NULL, 
+ [Catatan]      [VARCHAR](150) NOT NULL, 
+ [IDBarangD]    [BIGINT] NOT NULL, 
+ [IDBarang]     [BIGINT] NOT NULL, 
+ [IDSatuan]     [INT] NOT NULL, 
+ [Konversi]     [NUMERIC](18, 0) NOT NULL, 
+ [Qty]          [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok]   [MONEY] NOT NULL, 
+ [Jumlah]       [MONEY] NOT NULL, 
+ [IsPosted]     [BIT] NULL, 
+ [TglPosted]    [DATETIME] NULL, 
+ [IDUserPosted] [INT] NULL, 
+ [IDUserEntry]  [INT] NULL, 
+ [IDUserEdit]   [INT] NULL, 
+ CONSTRAINT [PK_MAssembly] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MAssemblyD]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MAssemblyD]
+([NoID]         [BIGINT] NOT NULL, 
+ [IDHeader]     [BIGINT] NOT NULL, 
+ [IDMaterialD]  [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDBarangD]    [BIGINT] NOT NULL, 
+ [Tanggal]      [DATETIME] NOT NULL, 
+ [IDBarang]     [BIGINT] NOT NULL, 
+ [IDSatuan]     [INT] NOT NULL, 
+ [Konversi]     [NUMERIC](18, 0) NOT NULL, 
+ [Qty]          [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok]   [MONEY] NOT NULL, 
+ [Jumlah]       [MONEY] NOT NULL, 
+ [IsPosted]     [BIT] NULL, 
+ [TglPosted]    [DATETIME] NULL, 
+ [IDUserPosted] [INT] NULL, 
+ [IDUserEntry]  [INT] NULL, 
+ [IDUserEdit]   [INT] NULL, 
+ CONSTRAINT [PK_MAssemblyD] PRIMARY KEY CLUSTERED([NoID] ASC, [IDHeader] ASC, [IDMaterialD] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MAssemblyDBiaya]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MAssemblyDBiaya]
+([NoID]             [BIGINT] NOT NULL, 
+ [IDHeader]         [BIGINT] NOT NULL, 
+ [IDMaterialDBiaya] [UNIQUEIDENTIFIER] NOT NULL, 
+ [Tanggal]          [DATETIME] NOT NULL, 
+ [IDAkun]           [BIGINT] NOT NULL, 
+ [Jumlah]           [MONEY] NOT NULL, 
+ [Keterangan]       [VARCHAR](150) NULL, 
+ [IsPosted]         [BIT] NULL, 
+ [TglPosted]        [DATETIME] NULL, 
+ [IDUserPosted]     [INT] NULL, 
+ [IDUserEntry]      [INT] NULL, 
+ [IDUserEdit]       [INT] NULL, 
+ CONSTRAINT [PK_MAssemblyDBiaya] PRIMARY KEY CLUSTERED([NoID] ASC, [IDHeader] ASC, [IDMaterialDBiaya] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MAssemblyDSisa]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MAssemblyDSisa]
+([NoID]            [BIGINT] NOT NULL, 
+ [IDHeader]        [BIGINT] NOT NULL, 
+ [IDMaterialDSisa] [UNIQUEIDENTIFIER] NOT NULL, 
+ [Tanggal]         [DATETIME] NOT NULL, 
+ [IDBarangD]       [BIGINT] NOT NULL, 
+ [IDBarang]        [BIGINT] NOT NULL, 
+ [IDSatuan]        [INT] NOT NULL, 
+ [Konversi]        [NUMERIC](18, 0) NOT NULL, 
+ [Qty]             [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok]      [MONEY] NOT NULL, 
+ [Jumlah]          [MONEY] NOT NULL, 
+ [IsPosted]        [BIT] NULL, 
+ [TglPosted]       [DATETIME] NULL, 
+ [IDUserPosted]    [INT] NULL, 
+ [IDUserEntry]     [INT] NULL, 
+ [IDUserEdit]      [INT] NULL, 
+ CONSTRAINT [PK_MAssemblyDSisa] PRIMARY KEY CLUSTERED([NoID] ASC, [IDHeader] ASC, [IDMaterialDSisa] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MBarang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -332,7 +448,7 @@ CREATE TABLE [dbo].[MBarang]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MBarangD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MBarangD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -356,7 +472,7 @@ CREATE TABLE [dbo].[MBarangD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MBeli]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -391,7 +507,7 @@ CREATE TABLE [dbo].[MBeli]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MBeliD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MBeliD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -425,7 +541,7 @@ CREATE TABLE [dbo].[MBeliD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MGudang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -442,7 +558,7 @@ CREATE TABLE [dbo].[MGudang]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MHutangPiutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MHutangPiutang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -468,7 +584,7 @@ CREATE TABLE [dbo].[MHutangPiutang]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJenisPembayaran]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJenisPembayaran]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -486,7 +602,7 @@ CREATE TABLE [dbo].[MJenisPembayaran]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJenisTransaksi]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJenisTransaksi]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -507,7 +623,7 @@ CREATE TABLE [dbo].[MJenisTransaksi]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJenisTransaksiD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJenisTransaksiD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -524,7 +640,7 @@ CREATE TABLE [dbo].[MJenisTransaksiD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJual]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -560,7 +676,7 @@ CREATE TABLE [dbo].[MJual]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJualD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJualD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -593,7 +709,7 @@ CREATE TABLE [dbo].[MJualD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MJualDBayar]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MJualDBayar]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -615,7 +731,7 @@ CREATE TABLE [dbo].[MJualDBayar]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKartuStok]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKartuStok]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -647,7 +763,7 @@ CREATE TABLE [dbo].[MKartuStok]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKartuStokOnHand]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKartuStokOnHand]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -678,7 +794,7 @@ CREATE TABLE [dbo].[MKartuStokOnHand]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasIN]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasIN]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -705,7 +821,7 @@ CREATE TABLE [dbo].[MKasIN]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasIND]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasIND]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -725,7 +841,7 @@ CREATE TABLE [dbo].[MKasIND]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasINDBayar]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasINDBayar]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -746,7 +862,7 @@ CREATE TABLE [dbo].[MKasINDBayar]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasOut]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasOut]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -773,7 +889,7 @@ CREATE TABLE [dbo].[MKasOut]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasOutD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasOutD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -793,7 +909,7 @@ CREATE TABLE [dbo].[MKasOutD]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKasOutDBayar]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKasOutDBayar]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -814,7 +930,7 @@ CREATE TABLE [dbo].[MKasOutDBayar]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MKategori]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MKategori]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -832,7 +948,96 @@ CREATE TABLE [dbo].[MKategori]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MMenu]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MMaterial]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MMaterial]
+([NoID]          [UNIQUEIDENTIFIER] NOT NULL, 
+ [Kode]          [VARCHAR](50) NOT NULL, 
+ [Nama]          [VARCHAR](150) NOT NULL, 
+ [Keterangan]    [VARCHAR](150) NOT NULL, 
+ [IsActive]      [BIT] NOT NULL, 
+ [IDBarangD]     [BIGINT] NOT NULL, 
+ [IDBarang]      [BIGINT] NOT NULL, 
+ [IDSatuan]      [INT] NOT NULL, 
+ [Konversi]      [NUMERIC](18, 0) NOT NULL, 
+ [Qty]           [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok]    [MONEY] NOT NULL, 
+ [Jumlah]        [MONEY] NOT NULL, 
+ [IDUser]        [INT] NOT NULL, 
+ [TanggalUpdate] [DATETIME] NOT NULL, 
+ CONSTRAINT [PK_MMaterial] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MMaterialD]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MMaterialD]
+([NoID]       [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDMaterial] [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDBarangD]  [BIGINT] NOT NULL, 
+ [IDBarang]   [BIGINT] NOT NULL, 
+ [IDSatuan]   [INT] NOT NULL, 
+ [Konversi]   [NUMERIC](18, 0) NOT NULL, 
+ [Qty]        [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok] [MONEY] NOT NULL, 
+ [Jumlah]     [MONEY] NOT NULL, 
+ CONSTRAINT [PK_MMaterialD] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MMaterialDBiaya]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MMaterialDBiaya]
+([NoID]       [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDMaterial] [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDAkun]     [BIGINT] NOT NULL, 
+ [Jumlah]     [MONEY] NOT NULL, 
+ [Keterangan] [VARCHAR](150) NULL, 
+ CONSTRAINT [PK_MMaterialDBiaya] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MMaterialDSisa]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MMaterialDSisa]
+([NoID]       [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDMaterial] [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDBarangD]  [BIGINT] NOT NULL, 
+ [IDBarang]   [BIGINT] NOT NULL, 
+ [IDSatuan]   [INT] NOT NULL, 
+ [Konversi]   [NUMERIC](18, 0) NOT NULL, 
+ [Qty]        [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok] [MONEY] NOT NULL, 
+ [Jumlah]     [MONEY] NOT NULL, 
+ CONSTRAINT [PK_MMaterialDSisa] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[MMenu]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -853,7 +1058,7 @@ CREATE TABLE [dbo].[MMenu]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MMerk]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MMerk]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -870,7 +1075,7 @@ CREATE TABLE [dbo].[MMerk]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MMutasiGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MMutasiGudang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -896,7 +1101,7 @@ CREATE TABLE [dbo].[MMutasiGudang]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MMutasiGudangD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MMutasiGudangD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -919,7 +1124,7 @@ CREATE TABLE [dbo].[MMutasiGudangD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPemakaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPemakaian]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -944,7 +1149,7 @@ CREATE TABLE [dbo].[MPemakaian]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPemakaianD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPemakaianD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -967,7 +1172,7 @@ CREATE TABLE [dbo].[MPemakaianD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPenyesuaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPenyesuaian]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -992,7 +1197,7 @@ CREATE TABLE [dbo].[MPenyesuaian]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPenyesuaianD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPenyesuaianD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1015,7 +1220,7 @@ CREATE TABLE [dbo].[MPenyesuaianD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPO]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPO]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1049,7 +1254,7 @@ CREATE TABLE [dbo].[MPO]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPOD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPOD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1082,7 +1287,7 @@ CREATE TABLE [dbo].[MPOD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MPOS]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MPOS]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1102,7 +1307,7 @@ CREATE TABLE [dbo].[MPOS]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReset]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReset]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1130,7 +1335,7 @@ CREATE TABLE [dbo].[MReset]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MResetD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MResetD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1147,7 +1352,7 @@ CREATE TABLE [dbo].[MResetD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReturBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReturBeli]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1181,7 +1386,7 @@ CREATE TABLE [dbo].[MReturBeli]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReturBeliD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReturBeliD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1215,7 +1420,7 @@ CREATE TABLE [dbo].[MReturBeliD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReturJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReturJual]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1251,7 +1456,7 @@ CREATE TABLE [dbo].[MReturJual]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReturJualD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReturJualD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1284,7 +1489,7 @@ CREATE TABLE [dbo].[MReturJualD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MReturJualDBayar]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MReturJualDBayar]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1306,7 +1511,7 @@ CREATE TABLE [dbo].[MReturJualDBayar]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MRole]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MRole]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1322,7 +1527,7 @@ CREATE TABLE [dbo].[MRole]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MRoleD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MRoleD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1339,7 +1544,7 @@ CREATE TABLE [dbo].[MRoleD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MSaldoAwalHutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MSaldoAwalHutang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1367,7 +1572,7 @@ CREATE TABLE [dbo].[MSaldoAwalHutang]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MSaldoAwalPersediaan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MSaldoAwalPersediaan]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1401,7 +1606,7 @@ CREATE TABLE [dbo].[MSaldoAwalPersediaan]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MSaldoAwalPiutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MSaldoAwalPiutang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1429,7 +1634,7 @@ CREATE TABLE [dbo].[MSaldoAwalPiutang]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MSatuan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MSatuan]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1447,7 +1652,7 @@ CREATE TABLE [dbo].[MSatuan]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MSetting]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MSetting]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1462,7 +1667,7 @@ CREATE TABLE [dbo].[MSetting]
 ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MStockOpname]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MStockOpname]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1487,7 +1692,7 @@ CREATE TABLE [dbo].[MStockOpname]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MStockOpnameD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MStockOpnameD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1512,7 +1717,7 @@ CREATE TABLE [dbo].[MStockOpnameD]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MTypeHarga]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MTypeHarga]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1528,7 +1733,7 @@ CREATE TABLE [dbo].[MTypeHarga]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MTypePajak]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MTypePajak]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1543,7 +1748,7 @@ CREATE TABLE [dbo].[MTypePajak]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[MUser]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MUser]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1562,7 +1767,40 @@ CREATE TABLE [dbo].[MUser]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[TAppDB]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[MWOAssembly]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE TABLE [dbo].[MWOAssembly]
+([NoID]         [UNIQUEIDENTIFIER] NOT NULL, 
+ [Kode]         [VARCHAR](50) NOT NULL, 
+ [Tanggal]      [DATETIME] NOT NULL, 
+ [TanggalWO]    [DATETIME] NOT NULL, 
+ [IDMaterial]   [UNIQUEIDENTIFIER] NOT NULL, 
+ [IDPegawai]    [BIGINT] NOT NULL, 
+ [IDGudang]     [INT] NOT NULL, 
+ [Catatan]      [VARCHAR](150) NOT NULL, 
+ [IDBarangD]    [BIGINT] NOT NULL, 
+ [IDBarang]     [BIGINT] NOT NULL, 
+ [IDSatuan]     [INT] NOT NULL, 
+ [Konversi]     [NUMERIC](18, 0) NOT NULL, 
+ [Qty]          [NUMERIC](18, 3) NOT NULL, 
+ [HargaPokok]   [MONEY] NOT NULL, 
+ [Jumlah]       [MONEY] NOT NULL, 
+ [IsPosted]     [BIT] NULL, 
+ [TglPosted]    [DATETIME] NULL, 
+ [IDUserPosted] [INT] NULL, 
+ [IDUserEntry]  [INT] NULL, 
+ [IDUserEdit]   [INT] NULL, 
+ CONSTRAINT [PK_MWOAssembly] PRIMARY KEY CLUSTERED([NoID] ASC)
+ WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+ON [PRIMARY];
+GO
+
+/****** Object:  Table [dbo].[TAppDB]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1578,7 +1816,7 @@ CREATE TABLE [dbo].[TAppDB]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[TLogPerubahanHargaBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[TLogPerubahanHargaBeli]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1599,7 +1837,7 @@ CREATE TABLE [dbo].[TLogPerubahanHargaBeli]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[TLogPerubahanHargaJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[TLogPerubahanHargaJual]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1628,7 +1866,7 @@ CREATE TABLE [dbo].[TLogPerubahanHargaJual]
 ON [PRIMARY];
 GO
 
-/****** Object:  Table [dbo].[TSaldoStok]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Table [dbo].[TSaldoStok]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1644,7 +1882,7 @@ CREATE TABLE [dbo].[TSaldoStok]
 ON [PRIMARY];
 GO
 
-/****** Object:  UserDefinedFunction [dbo].[fnSplitString]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[fnSplitString]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1676,7 +1914,16 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Barcode]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MAssembly]
+([Kode] ASC
+) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
+GO
+SET ANSI_PADDING ON;
+GO
+
+/****** Object:  Index [IX_Barcode]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Barcode] ON [dbo].[MBarang]
 ([DefaultBarcode] ASC
@@ -1685,7 +1932,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Kode]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MBarang]
 ([Kode] ASC
@@ -1694,7 +1941,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Barcode]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Barcode]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Barcode] ON [dbo].[MBarangD]
 ([Barcode] ASC
@@ -1703,7 +1950,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MGudang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MGudang] ON [dbo].[MGudang]
 ([Kode] ASC
@@ -1712,21 +1959,21 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_IDBarang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_IDBarang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_IDBarang] ON [dbo].[MKartuStok]
 ([IDBarang] ASC, [IDBarangD] ASC, [Varian] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
 
-/****** Object:  Index [IX_IDGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_IDGudang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_IDGudang] ON [dbo].[MKartuStok]
 ([IDGudang] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
 
-/****** Object:  Index [IX_IDTransaksi]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_IDTransaksi]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_IDTransaksi] ON [dbo].[MKartuStok]
 ([IDJenisTransaksi] ASC, [IDTransaksi] ASC, [IDTransaksiD] ASC
@@ -1735,14 +1982,14 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Barang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Barang]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_Barang] ON [dbo].[MKartuStokOnHand]
 ([IDBarang] ASC, [IDBarangD] ASC, [Varian] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
 
-/****** Object:  Index [IX_Transaksi]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Transaksi]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_Transaksi] ON [dbo].[MKartuStokOnHand]
 ([IDJenisTransaksi] ASC, [IDTransaksi] ASC, [IDTransaksiD] ASC
@@ -1751,7 +1998,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Kode]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MKasIN]
 ([Kode] ASC
@@ -1760,7 +2007,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_Kode]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MKasOut]
 ([Kode] ASC
@@ -1769,7 +2016,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MKategori]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MKategori]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MKategori] ON [dbo].[MKategori]
 ([Kode] ASC
@@ -1778,7 +2025,30 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MMenu]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MMaterial]
+([Kode] ASC
+) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
+GO
+
+/****** Object:  Index [IX_IDMaterial]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_IDMaterial] ON [dbo].[MMaterialD]
+([IDBarangD] ASC, [IDMaterial] ASC
+) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
+GO
+
+/****** Object:  Index [IX_IDMaterial]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_IDMaterial] ON [dbo].[MMaterialDSisa]
+([IDMaterial] ASC, [IDBarangD] ASC
+) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
+GO
+SET ANSI_PADDING ON;
+GO
+
+/****** Object:  Index [IX_MMenu]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MMenu] ON [dbo].[MMenu]
 ([Name] ASC
@@ -1787,7 +2057,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MMerk]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MMerk]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MMerk] ON [dbo].[MMerk]
 ([Kode] ASC
@@ -1796,14 +2066,14 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MPO]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MPO]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MPO] ON [dbo].[MPO]
 ([Kode] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
 
-/****** Object:  Index [IX_MPOD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MPOD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE NONCLUSTERED INDEX [IX_MPOD] ON [dbo].[MPOD]
 ([IDHeader] ASC, [IDBarang] ASC, [IDBarangD] ASC
@@ -1812,14 +2082,14 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MRole]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MRole]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MRole] ON [dbo].[MRole]
 ([Role] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
 
-/****** Object:  Index [IX_MRoleD]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MRoleD]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MRoleD] ON [dbo].[MRoleD]
 ([IDMenu] ASC, [IDRole] ASC
@@ -1828,7 +2098,7 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MSatuan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MSatuan]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MSatuan] ON [dbo].[MSatuan]
 ([Kode] ASC
@@ -1837,9 +2107,18 @@ GO
 SET ANSI_PADDING ON;
 GO
 
-/****** Object:  Index [IX_MUser]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  Index [IX_MUser]    Script Date: 6/23/2021 11:20:17 AM ******/
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_MUser] ON [dbo].[MUser]
+([Kode] ASC
+) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
+GO
+SET ANSI_PADDING ON;
+GO
+
+/****** Object:  Index [IX_Kode]    Script Date: 6/23/2021 11:20:17 AM ******/
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Kode] ON [dbo].[MWOAssembly]
 ([Kode] ASC
 ) WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
@@ -1906,6 +2185,9 @@ GO
 ALTER TABLE [dbo].[MKasOutDBayar]
 ADD CONSTRAINT [DF_MKasOutDBayar_Total] DEFAULT((0)) FOR [Total];
 GO
+ALTER TABLE [dbo].[MMaterial]
+ADD CONSTRAINT [DF_MMaterial_IsActive] DEFAULT((0)) FOR [IsActive];
+GO
 ALTER TABLE [dbo].[MMenu]
 ADD CONSTRAINT [DF_MMenu_NoUrut] DEFAULT((0)) FOR [NoUrut];
 GO
@@ -1930,8 +2212,80 @@ GO
 ALTER TABLE [dbo].[MReturJualDBayar]
 ADD DEFAULT((0)) FOR [Total];
 GO
+ALTER TABLE [dbo].[MAssembly]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssembly_MMaterial] FOREIGN KEY([IDMaterial]) REFERENCES [dbo].[MMaterial]([NoID]);
+GO
+ALTER TABLE [dbo].[MAssembly] CHECK CONSTRAINT [FK_MAssembly_MMaterial];
+GO
+ALTER TABLE [dbo].[MAssembly]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssembly_MWOAssembly] FOREIGN KEY([IDWOAssembly]) REFERENCES [dbo].[MWOAssembly]([NoID]);
+GO
+ALTER TABLE [dbo].[MAssembly] CHECK CONSTRAINT [FK_MAssembly_MWOAssembly];
+GO
+ALTER TABLE [dbo].[MAssemblyD]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyD_MAssembly] FOREIGN KEY([IDHeader]) REFERENCES [dbo].[MAssembly]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyD] CHECK CONSTRAINT [FK_MAssemblyD_MAssembly];
+GO
+ALTER TABLE [dbo].[MAssemblyD]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyD_MMaterialD] FOREIGN KEY([IDMaterialD]) REFERENCES [dbo].[MMaterialD]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyD] CHECK CONSTRAINT [FK_MAssemblyD_MMaterialD];
+GO
+ALTER TABLE [dbo].[MAssemblyDBiaya]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyDBiaya_MAssembly] FOREIGN KEY([IDHeader]) REFERENCES [dbo].[MAssembly]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyDBiaya] CHECK CONSTRAINT [FK_MAssemblyDBiaya_MAssembly];
+GO
+ALTER TABLE [dbo].[MAssemblyDBiaya]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyDBiaya_MMaterialDBiaya] FOREIGN KEY([IDMaterialDBiaya]) REFERENCES [dbo].[MMaterialDBiaya]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyDBiaya] CHECK CONSTRAINT [FK_MAssemblyDBiaya_MMaterialDBiaya];
+GO
+ALTER TABLE [dbo].[MAssemblyDSisa]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyDSisa_MAssemblyDSisa] FOREIGN KEY([IDHeader]) REFERENCES [dbo].[MAssembly]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyDSisa] CHECK CONSTRAINT [FK_MAssemblyDSisa_MAssemblyDSisa];
+GO
+ALTER TABLE [dbo].[MAssemblyDSisa]
+WITH CHECK
+ADD CONSTRAINT [FK_MAssemblyDSisa_MMaterialDSisa] FOREIGN KEY([IDMaterialDSisa]) REFERENCES [dbo].[MMaterialDSisa]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MAssemblyDSisa] CHECK CONSTRAINT [FK_MAssemblyDSisa_MMaterialDSisa];
+GO
+ALTER TABLE [dbo].[MMaterialD]
+WITH CHECK
+ADD CONSTRAINT [FK_MMaterialD_MMaterial] FOREIGN KEY([IDMaterial]) REFERENCES [dbo].[MMaterial]([NoID]) ON UPDATE CASCADE ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[MMaterialD] CHECK CONSTRAINT [FK_MMaterialD_MMaterial];
+GO
+ALTER TABLE [dbo].[MMaterialDBiaya]
+WITH CHECK
+ADD CONSTRAINT [FK_MMaterialDBiaya_MMaterial] FOREIGN KEY([IDMaterial]) REFERENCES [dbo].[MMaterial]([NoID]) ON UPDATE CASCADE ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[MMaterialDBiaya] CHECK CONSTRAINT [FK_MMaterialDBiaya_MMaterial];
+GO
+ALTER TABLE [dbo].[MMaterialDSisa]
+WITH CHECK
+ADD CONSTRAINT [FK_MMaterialDSisa_MMaterial] FOREIGN KEY([IDMaterial]) REFERENCES [dbo].[MMaterial]([NoID]) ON UPDATE CASCADE ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[MMaterialDSisa] CHECK CONSTRAINT [FK_MMaterialDSisa_MMaterial];
+GO
+ALTER TABLE [dbo].[MWOAssembly]
+WITH CHECK
+ADD CONSTRAINT [FK_MWOAssembly_MMaterial] FOREIGN KEY([IDMaterial]) REFERENCES [dbo].[MMaterial]([NoID]) ON UPDATE CASCADE;
+GO
+ALTER TABLE [dbo].[MWOAssembly] CHECK CONSTRAINT [FK_MWOAssembly_MMaterial];
+GO
 
-/****** Object:  StoredProcedure [dbo].[procRepairHPPPerBarang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[procRepairHPPPerBarang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -1950,7 +2304,6 @@ AS
         DECLARE @rCount INT= 0;
         DECLARE @DefdigitDecimal AS INT= 2;
         DECLARE @ispkp AS BIT= 0;
-        --Select @ispkp = IsNull(IsPKP,0) From MSetting
         DECLARE @Temp AS TABLE
         (NoID             INT IDENTITY(1, 1) PRIMARY KEY, 
          IDKartuStok      BIGINT, 
@@ -2007,7 +2360,7 @@ AS
                         MKartuStok.QtyMasuk DESC, 
                         MKartuStok.QtyKeluar, 
                         MKartuStok.NoID;
-        DECLARE @HPP AS NUMERIC(18, 2)= 0, @HargaBeli AS NUMERIC(18, 2)= 0, @NilaiAkhir AS NUMERIC(18, 2)= 0, @SaldoAkhir AS NUMERIC(18, 3)= 0;
+        DECLARE @HPP AS NUMERIC(18, 2)= 0, @HargaBeli AS NUMERIC(18, 2)= 0, @NilaiAkhir AS NUMERIC(18, 2)= 0, @SaldoAkhir AS NUMERIC(18, 3)= 0, @SaldoAwal AS NUMERIC(18, 3), @NilaiAwal AS NUMERIC(18, 3);
         DECLARE @IDJenisTransaksi AS INT= 0, @QtyIn NUMERIC(18, 2)= 0, @QtyOut NUMERIC(18, 2)= 0, @Tanggal DATETIME;
         DECLARE @i AS INT, @iMax AS INT;
         SELECT @i = 1, 
@@ -2015,12 +2368,12 @@ AS
         FROM @Temp T;
         WHILE(@i <= @iMax)
             BEGIN
-                IF(@i = 1)
+                IF(@i <= 1)
                     BEGIN
                         --HargaBeli Ambil Dari
-                        SELECT TOP 1 @HargaBeli = ISNULL(HargaBeli, 0) --,@HPP=ISNULL(HPP,0)
+                        SELECT TOP 1 @HargaBeli = ISNULL(HargaBeli, 0)
                         FROM MKartuStok(NOLOCK)
-                             LEFT JOIN MJenisTransaksi ON MKartuStok.IDJenisTransaksi = MJenisTransaksi.ID
+                             LEFT JOIN MJenisTransaksi(NOLOCK) ON MKartuStok.IDJenisTransaksi = MJenisTransaksi.ID
                         WHERE CONVERT(DATE, Tanggal) < CONVERT(DATE, @TanggalDari)
                               AND IDBarang = @IDBarang
                               AND (IDJenisTransaksi = 2
@@ -2050,14 +2403,14 @@ AS
                                         WHERE MBarang.NoID = @IDBarang;
                                     END;
                             END;
-                        SELECT @SaldoAkhir = SUM((MKartuStok.QtyMasuk - MKartuStok.QtyKeluar) * MKartuStok.Konversi), 
-                               @NilaiAkhir = SUM(ISNULL(MKartuStok.Debet, 0) - ISNULL(MKartuStok.Kredit, 0))
+                        SELECT @SaldoAwal = SUM((MKartuStok.QtyMasuk - MKartuStok.QtyKeluar) * MKartuStok.Konversi), 
+                               @NilaiAwal = SUM(ISNULL(MKartuStok.Debet, 0) - ISNULL(MKartuStok.Kredit, 0))
                         FROM MKartuStok(NOLOCK)
                              INNER JOIN MBarang(NOLOCK) ON MBarang.NoID = MKartuStok.IDBarang
-                        WHERE CONVERT(DATE, tanggal) < CONVERT(DATE, @TanggalDari)
+                        WHERE CONVERT(DATE, MKartuStok.Tanggal) < CONVERT(DATE, @TanggalDari)
                               AND MBarang.NoID = @IDBarang;
                         SELECT TOP 1 @HPP = ISNULL(HPP, 0)
-                        FROM mkartustok(NOLOCK)
+                        FROM MKartuStok(NOLOCK)
                              LEFT JOIN MJenisTransaksi ON MKartuStok.IDJenisTransaksi = MJenisTransaksi.ID
                         WHERE CONVERT(DATE, Tanggal) < CONVERT(DATE, @TanggalDari)
                               AND IDBarang = @IDBarang
@@ -2065,54 +2418,74 @@ AS
                                  mjenistransaksi.nourut DESC, 
                                  MKartuStok.NoID;
                     END;
-                SELECT @IDJenisTransaksi = IDJenisTransaksi, 
-                       @SaldoAkhir = ISNULL(@SaldoAkhir, 0) + T.QtyMasuk - T.QtyKeluar, 
-                       @QtyIn = QtyMasuk, 
-                       @QtyOut = QtyKeluar, 
+                --PRINT CONVERT(VARCHAR, @i) + ', Cek Data Saldo Awal ' + CONVERT(VARCHAR, ISNULL(@SaldoAwal, 0));
+                UPDATE T
+                  SET 
+                      SaldoAwal = ISNULL(@SaldoAwal, 0), 
+                      NilaiAwal = ISNULL(@NilaiAwal, 0), 
+                      SaldoAkhir = ISNULL(@SaldoAwal, 0) + T.QtyMasuk - T.QtyKeluar, 
+                      NilaiAkhir = ISNULL(@NilaiAkhir, 0), 
+                      HPP = @HPP
+                FROM @Temp T
+                WHERE T.NoID = @i;
+                SELECT @SaldoAwal = T.SaldoAkhir, 
+                       @SaldoAkhir = ISNULL(@SaldoAkhir, 0), 
+                       @NilaiAwal = T.NilaiAkhir, 
+                       @NilaiAkhir = ISNULL(T.NilaiAkhir, 0), 
+                       @IDJenisTransaksi = T.IDJenisTransaksi, 
+                       @QtyIn = ISNULL(QtyMasuk, 0), 
+                       @QtyOut = ISNULL(QtyKeluar, 0), 
                        @Tanggal = T.Tanggal
                 FROM @Temp T
                 WHERE T.NoID = @i;
                 SET @NilaiAkhir = ISNULL(@NilaiAkhir, 0);
                 SET @SaldoAkhir = ISNULL(@SaldoAkhir, 0);
                 SET @HargaBeli = ISNULL(@HargaBeli, 0);
+                SET @NilaiAwal = ISNULL(@NilaiAwal, 0);
+                SET @SaldoAwal = ISNULL(@SaldoAwal, 0);
 
                 --Yang In diambilkan dari Transaksi
                 IF(@IDJenisTransaksi = 1)
                     BEGIN
-                        --HargaDef Harga Per Satuan.
-                        --UPDATE T
-                        --SET SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk
-                        --	,SaldoAkhir = @SaldoAkhir
-                        --	,Debet = ROUND(ISNULL(MSaldoAwalPersediaanD.Jumlah, 0), @DefdigitDecimal)
-                        --	,Kredit = 0
-                        --	,HargaBeli = ROUND(MSaldoAwalPersediaanD.HargaPokok, @DefdigitDecimal)
-                        --	,JumlahBeli = ROUND(MSaldoAwalPersediaanD.HargaPokok * MSaldoAwalPersediaanD.Qty * MSaldoAwalPersediaanD.Konversi, @DefdigitDecimal)
-                        --	,NilaiAwal = @NilaiAkhir
-                        --	,NilaiAkhir = @NilaiAkhir + ROUND(ISNULL(MSaldoAwalPersediaanD.Jumlah, 0), @DefdigitDecimal)
-                        --FROM @Temp T
-                        --INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                        --INNER JOIN (
-                        --	MSaldoAwalPersediaan INNER JOIN MSaldoAwalPersediaanD ON MSaldoAwalPersediaan.NoID = MSaldoAwalPersediaanD.IDHeader
-                        --	) ON MSaldoAwalPersediaan.NoID = MKartuStok.IDTransaksi
-                        --	AND MSaldoAwalPersediaanD.NoID = MKartuStok.IDTransaksiD
-                        --	AND MKartuStok.IDJenisTransaksi = 1
-                        --WHERE T.NoID = @i
-                        --Hitung HPP
+                        --               --HargaDef Harga Per Satuan.
+                        --               --UPDATE T
+                        --               --SET SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk
+                        --               --	,SaldoAkhir = @SaldoAkhir
+                        --               --	,Debet = ROUND(ISNULL(MSaldoAwalPersediaanD.Jumlah, 0), @DefdigitDecimal)
+                        --               --	,Kredit = 0
+                        --               --	,HargaBeli = ROUND(MSaldoAwalPersediaanD.HargaPokok, @DefdigitDecimal)
+                        --               --	,JumlahBeli = ROUND(MSaldoAwalPersediaanD.HargaPokok * MSaldoAwalPersediaanD.Qty * MSaldoAwalPersediaanD.Konversi, @DefdigitDecimal)
+                        --               --	,NilaiAwal = @NilaiAkhir
+                        --               --	,NilaiAkhir = @NilaiAkhir + ROUND(ISNULL(MSaldoAwalPersediaanD.Jumlah, 0), @DefdigitDecimal)
+                        --               --FROM @Temp T
+                        --               --INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
+                        --               --INNER JOIN (
+                        --               --	MSaldoAwalPersediaan INNER JOIN MSaldoAwalPersediaanD ON MSaldoAwalPersediaan.NoID = MSaldoAwalPersediaanD.IDHeader
+                        --               --	) ON MSaldoAwalPersediaan.NoID = MKartuStok.IDTransaksi
+                        --               --	AND MSaldoAwalPersediaanD.NoID = MKartuStok.IDTransaksiD
+                        --               --	AND MKartuStok.IDJenisTransaksi = 1
+                        --               --WHERE T.NoID = @i
+                        --               --Hitung HPP
+                        --               UPDATE T
+                        --                 SET 
+                        --                     Debet = MSaldoAwalPersediaanD.Jumlah,
+                        --Kredit = 0,
+                        --HargaBeli = ROUND(MSaldoAwalPersediaanD.Jumlah / (ISNULL(T.QtyMasuk, 0) - ISNULL(T.QtyKeluar, 0)), @DefdigitDecimal),
+                        --JumlahBeli = MSaldoAwalPersediaanD.Jumlah,
+                        --NilaiAkhir = @NilaiAwal + MSaldoAwalPersediaanD.Jumlah
+                        --               FROM @Temp T
+                        --                    INNER JOIN MKartuStok(NOLOCK) ON MKartuStok.NoID = T.IDKartuStok
+                        --                    INNER JOIN MSaldoAwalPersediaanD(NOLOCK) ON MSaldoAwalPersediaanD.NoID = MKartuStok.IDTransaksiD
+                        --                                                                AND MSaldoAwalPersediaanD.IDHeader = MKartuStok.IDTransaksi
+                        --                                                                AND MKartuStok.IDJenisTransaksi = 1
+                        --               WHERE T.NoID = @i;
                         SELECT @HPP = ROUND(CASE
                                                 WHEN T.SaldoAkhir = 0
                                                 THEN 0
                                                 ELSE T.NilaiAkhir / T.SaldoAkhir
                                             END, @DefdigitDecimal), 
-                               @HargaBeli = ISNULL(HargaBeli, 0), 
-                               @SaldoAkhir = T.SaldoAkhir, 
-                               @NilaiAkhir = T.NilaiAkhir
+                               @HargaBeli = ISNULL(HargaBeli, 0)
                         FROM @Temp T
-                        WHERE T.NoID = @i;
-                        UPDATE T
-                          SET 
-                              HPP = @HPP
-                        FROM @Temp T
-                             INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
                         WHERE T.NoID = @i;
                     END;
                     ELSE
@@ -2121,34 +2494,15 @@ AS
                             --HargaDef Harga Per Satuan.
                             UPDATE T
                               SET 
-                                  SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk, 
-                                  SaldoAkhir = @SaldoAkhir, 
-                                  Debet = ROUND(CASE
-                                                    WHEN MBeli.IDTypePajak = 0
-                                                         OR @ispkp = 0
-                                                    THEN ISNULL(MBeliD.Jumlah, 0)
-                                                    ELSE ISNULL(MBeliD.DPP, 0)
-                                                END, @DefdigitDecimal), 
+                                  Debet = ROUND(MBeliD.Jumlah, @DefdigitDecimal), 
                                   Kredit = 0, 
-                                  HargaBeli = ROUND((ROUND(CASE
-                                                               WHEN MBeli.IDTypePajak = 0
-                                                                    OR @ispkp = 0
-                                                               THEN ISNULL(MBeliD.Jumlah, 0)
-                                                               ELSE ISNULL(MBeliD.DPP, 0)
-                                                           END, @DefdigitDecimal)) / (MKartuStok.QtyMasuk * MKartuStok.Konversi), @DefdigitDecimal), 
-                                  JumlahBeli = ROUND(CASE
-                                                         WHEN MBeli.IDTypePajak = 0
-                                                              OR @ispkp = 0
-                                                         THEN ISNULL(MBeliD.Jumlah, 0)
-                                                         ELSE ISNULL(MBeliD.DPP, 0)
-                                                     END, @DefdigitDecimal), 
-                                  NilaiAwal = @NilaiAkhir, 
-                                  NilaiAkhir = @NilaiAkhir + ROUND(CASE
-                                                                       WHEN MBeli.IDTypePajak = 0
-                                                                            OR @ispkp = 0
-                                                                       THEN ISNULL(MBeliD.Jumlah, 0)
-                                                                       ELSE ISNULL(MBeliD.DPP, 0)
-                                                                   END, @DefdigitDecimal)
+                                  HargaBeli = CASE
+                                                  WHEN(MKartuStok.QtyMasuk * MKartuStok.Konversi) = 0
+                                                  THEN @HargaBeli
+                                                  ELSE ROUND((ROUND(MBeliD.Jumlah, @DefdigitDecimal)) / (MKartuStok.QtyMasuk * MKartuStok.Konversi), @DefdigitDecimal)
+                                              END, 
+                                  JumlahBeli = ROUND(MBeliD.Jumlah, @DefdigitDecimal), 
+                                  NilaiAkhir = @NilaiAwal + ROUND(MBeliD.Jumlah, @DefdigitDecimal)
                             FROM MKartuStok(NOLOCK)
                                  INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
                                  INNER JOIN(MBeliD
@@ -2168,46 +2522,29 @@ AS
                                    @NilaiAkhir = T.NilaiAkhir
                             FROM @Temp T
                             WHERE T.NoID = @i;
-                            UPDATE T
-                              SET 
-                                  HPP = @HPP
-                            FROM @Temp T
-                                 INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                            WHERE T.NoID = @i;
                         END;
                         ELSE
                         IF(@IDJenisTransaksi = 3)
                             BEGIN
                                 UPDATE T
                                   SET 
-                                      SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk, 
-                                      SaldoAkhir = @SaldoAkhir, 
                                       Debet = 0, 
-                                      Kredit = ROUND(CASE
-                                                         WHEN MReturBeli.IDTypePajak = 0
-                                                              OR @ispkp = 0
-                                                         THEN ISNULL(MReturBeliD.Jumlah, 0)
-                                                         ELSE ISNULL(MReturBelid.DPP, 0)
-                                                     END, @DefdigitDecimal), 
-                                      HargaBeli = ROUND((ROUND(CASE
-                                                                   WHEN MReturBeli.IDTypePajak = 0
-                                                                        OR @ispkp = 0
-                                                                   THEN ISNULL(MReturBeliD.Jumlah, 0)
-                                                                   ELSE ISNULL(MReturBeliD.DPP, 0)
-                                                               END, @DefdigitDecimal)) / (MKartuStok.QtyKeluar * MKartuStok.Konversi), @DefdigitDecimal), 
-                                      JumlahBeli = -1 * ROUND(CASE
-                                                                  WHEN MReturBeli.IDTypePajak = 0
-                                                                       OR @ispkp = 0
-                                                                  THEN ISNULL(MReturBeliD.Jumlah, 0)
-                                                                  ELSE ISNULL(MReturBeliD.DPP, 0)
-                                                              END, @DefdigitDecimal), 
-                                      NilaiAwal = @NilaiAkhir, 
-                                      NilaiAkhir = @NilaiAkhir - ROUND(CASE
-                                                                           WHEN MReturBeli.IDTypePajak = 0
-                                                                                OR @ispkp = 0
-                                                                           THEN ISNULL(MReturBeliD.Jumlah, 0)
-                                                                           ELSE ISNULL(MReturBelid.DPP, 0)
-                                                                       END, @DefdigitDecimal)
+                                      Kredit = CASE
+                                                   WHEN ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal) > @NilaiAwal
+                                                   THEN @NilaiAwal
+                                                   ELSE ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal)
+                                               END, 
+                                      HargaBeli = CASE
+                                                      WHEN(MKartuStok.QtyKeluar * MKartuStok.Konversi) = 0
+                                                      THEN @HargaBeli
+                                                      ELSE ROUND((ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal)) / (MKartuStok.QtyKeluar * MKartuStok.Konversi), @DefdigitDecimal)
+                                                  END, 
+                                      JumlahBeli = -1 * ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal), 
+                                      NilaiAkhir = @NilaiAwal - CASE
+                                                                    WHEN ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal) > @NilaiAwal
+                                                                    THEN @NilaiAwal
+                                                                    ELSE ROUND(ISNULL(MReturBeliD.Jumlah, 0), @DefdigitDecimal)
+                                                                END
                                 FROM MKartuStok(NOLOCK)
                                      INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
                                      INNER JOIN(MReturBeliD
@@ -2227,33 +2564,26 @@ AS
                                        @NilaiAkhir = T.NilaiAkhir
                                 FROM @Temp T
                                 WHERE T.NoID = @i;
-                                UPDATE T
-                                  SET 
-                                      HPP = @HPP
-                                FROM @Temp T
-                                     INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                                WHERE T.NoID = @i;
                             END;
                             ELSE
                             IF(@IDJenisTransaksi = 14)
                                 BEGIN
-                                    --UPDATE T
-                                    --SET SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk
-                                    --	,SaldoAkhir = @SaldoAkhir
-                                    --	,Debet = ROUND(MPenyesuaianD.HargaPokok * MPenyesuaianD.Qty * MPenyesuaianD.Konversi, @DefdigitDecimal)
-                                    --	,Kredit = 0
-                                    --	,HargaBeli = ROUND(MPenyesuaianD.HargaPokok, @DefdigitDecimal)
-                                    --	,JumlahBeli = ROUND(MPenyesuaianD.Jumlah, @DefdigitDecimal)
-                                    --	,NilaiAwal = @NilaiAkhir
-                                    --	,NilaiAkhir = @NilaiAkhir + ROUND(MPenyesuaianD.HargaPokok * MPenyesuaianD.Qty * MPenyesuaianD.Konversi, @DefdigitDecimal)
-                                    --FROM MKartuStok(NOLOCK)
-                                    --INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
-                                    --INNER JOIN (
-                                    --	MPenyesuaian INNER JOIN MPenyesuaianD ON MPenyesuaianD.IDHeader = MPenyesuaian.NoID
-                                    --	) ON MKartuStok.IDTransaksi = MPenyesuaian.NoID
-                                    --	AND MKartuStok.IDJenisTransaksi = 14
-                                    --	AND MKartuStok.IDTransaksiD = MPenyesuaianD.NoID
-                                    --WHERE T.NoID = @i
+                                    SELECT Debet = ROUND(ISNULL(MPenyesuaianD.Jumlah, 0), 2), 
+                                           Kredit = 0, 
+                                           HargaBeli = CASE
+                                                           WHEN(ISNULL(T.QtyMasuk, 0) - ISNULL(T.QtyKeluar, 0)) = 0
+                                                           THEN @HargaBeli
+                                                           ELSE ROUND(ROUND(ISNULL(MPenyesuaianD.Jumlah, 0), 2) / (ISNULL(T.QtyMasuk, 0) - ISNULL(T.QtyKeluar, 0)), @DefdigitDecimal)
+                                                       END, 
+                                           JumlahBeli = ROUND(ISNULL(MPenyesuaianD.Jumlah, 0), 2), 
+                                           NilaiAkhir = @NilaiAwal - ROUND(ISNULL(MPenyesuaianD.Jumlah, 0), 2)
+                                    FROM @Temp T
+                                         INNER JOIN MKartuStok(NOLOCK) ON MKartuStok.NoID = T.IDKartuStok
+                                         INNER JOIN MPenyesuaianD(NOLOCK) ON MPenyesuaianD.NoID = MKartuStok.IDTransaksiD
+                                                                             AND MPenyesuaianD.IDHeader = MKartuStok.IDTransaksi
+                                                                             AND MKartuStok.IDJenisTransaksi = 14
+                                    WHERE T.NoID = @i;
+
                                     --Hitung HPP
                                     SELECT @HPP = ROUND(CASE
                                                             WHEN T.SaldoAkhir = 0
@@ -2264,12 +2594,6 @@ AS
                                            @SaldoAkhir = T.SaldoAkhir, 
                                            @NilaiAkhir = T.NilaiAkhir
                                     FROM @Temp T
-                                    WHERE T.NoID = @i;
-                                    UPDATE T
-                                      SET 
-                                          HPP = @HPP
-                                    FROM @Temp T
-                                         INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
                                     WHERE T.NoID = @i;
                                 END;
                                 ELSE
@@ -2294,6 +2618,7 @@ AS
                                         --	AND MKartuStok.IDJenisTransaksi = 19
                                         --WHERE T.NoID = @i
                                         --Hitung HPP
+                                        --Hitung HPP
                                         SELECT @HPP = ROUND(CASE
                                                                 WHEN T.SaldoAkhir = 0
                                                                 THEN 0
@@ -2303,12 +2628,6 @@ AS
                                                @SaldoAkhir = T.SaldoAkhir, 
                                                @NilaiAkhir = T.NilaiAkhir
                                         FROM @Temp T
-                                        WHERE T.NoID = @i;
-                                        UPDATE T
-                                          SET 
-                                              HPP = @HPP
-                                        FROM @Temp T
-                                             INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
                                         WHERE T.NoID = @i;
                                     END;
                                     ELSE
@@ -2337,7 +2656,7 @@ AS
                                                     --	AND MKartuStok.IDJenisTransaksi = 20
                                                     --INNER JOIN MBarang ON MStokOpnameOnline.IDBarang = MBarang.NoID
                                                     --WHERE T.NoID = @i
-
+                                                    --Hitung HPP
                                                     SELECT @HPP = ROUND(CASE
                                                                             WHEN T.SaldoAkhir = 0
                                                                             THEN 0
@@ -2345,18 +2664,8 @@ AS
                                                                         END, @DefdigitDecimal), 
                                                            @HargaBeli = ISNULL(HargaBeli, 0), 
                                                            @SaldoAkhir = T.SaldoAkhir, 
-                                                           @NilaiAkhir = ROUND(CASE
-                                                                                   WHEN T.SaldoAkhir = 0
-                                                                                   THEN 0
-                                                                                   ELSE T.NilaiAkhir
-                                                                               END, @DefdigitDecimal)
+                                                           @NilaiAkhir = T.NilaiAkhir
                                                     FROM @Temp T
-                                                    WHERE T.NoID = @i;
-                                                    UPDATE T
-                                                      SET 
-                                                          HPP = @HPP
-                                                    FROM @Temp T
-                                                         INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
                                                     WHERE T.NoID = @i;
                                                 END;
                                                 ELSE
@@ -2390,12 +2699,6 @@ AS
                                                            @NilaiAkhir = T.NilaiAkhir
                                                     FROM @Temp T
                                                     WHERE T.NoID = @i;
-                                                    UPDATE T
-                                                      SET 
-                                                          HPP = @HPP
-                                                    FROM @Temp T
-                                                         INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                                                    WHERE T.NoID = @i;
                                                 END;
                                         END
                                                     --Selain Transaksi Masuk, pakai Qty Mines Atau Tidak;
@@ -2403,52 +2706,12 @@ AS
                                         IF(@SaldoAkhir < 0
                                            AND ISNULL(@QtyIn, 0) - ISNULL(@QtyOut, 0) < 0)
                                             BEGIN
-                                                --S
-                                                --Jupuk Pembelian Sebelumnya + Cek Row Count
-                                                SELECT TOP 1 @HPP = ROUND(HargaBeli, @DefdigitDecimal)
-                                                FROM MKartuStok(NOLOCK)
-                                                WHERE MKartuStok.Tanggal < @Tanggal
-                                                      AND MKartuStok.IDBarang = @IDBarang
-                                                      AND MKartuStok.IDJenisTransaksi = 2
-                                                ORDER BY MKartuStok.Tanggal DESC;
-                                                SELECT TOP 1 @rCount = COUNT(MKartuStok.NoID)
-                                                FROM MKartuStok(NOLOCK)
-                                                WHERE MKartuStok.Tanggal < @Tanggal
-                                                      AND MKartuStok.IDBarang = @IDBarang
-                                                      AND MKartuStok.IDJenisTransaksi = 2;
-                                                IF(ISNULL(@HPP, 0) = 0)
-                                                  AND (@rCount = 0)
-                                                --Jika Tidak ada Ambil Pembelian Setelahnya
-                                                    BEGIN
-                                                        SELECT TOP 1 @rCount = COUNT(MKartuStok.NoID)
-                                                        FROM MKartuStok(NOLOCK)
-                                                        WHERE MKartuStok.Tanggal > @Tanggal
-                                                              AND MKartuStok.IDBarang = @IDBarang
-                                                              AND MKartuStok.IDJenisTransaksi = 2;
-                                                        SELECT TOP 1 @HPP = ROUND(HargaBeli, @DefdigitDecimal)
-                                                        FROM MKartuStok(NOLOCK)
-                                                        WHERE MKartuStok.Tanggal > @Tanggal
-                                                              AND MKartuStok.IDBarang = @IDBarang
-                                                              AND MKartuStok.IDJenisTransaksi = 2
-                                                        ORDER BY MKartuStok.Tanggal ASC;
-                                                        IF(ISNULL(@HPP, 0) = 0)
-                                                          AND (@rCount = 0)
-                                                        --Jika Tidak ada Ambil master Barang
-                                                            BEGIN
-                                                                SELECT @HPP = ROUND(HargaBeliPcs, @DefdigitDecimal)
-                                                                FROM MBarang(NOLOCK)
-                                                                WHERE MBarang.NoID = @IDBarang;
-                                                            END;
-                                                    END;
                                                 UPDATE T
                                                   SET 
-                                                      SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk, 
-                                                      SaldoAkhir = @SaldoAkhir, 
                                                       Debet = ROUND(ISNULL(@HPP, 0) * T.QtyMasuk, @DefdigitDecimal), 
                                                       Kredit = ROUND(ISNULL(@HPP, 0) * T.QtyKeluar, @DefdigitDecimal), 
                                                       HargaBeli = @HargaBeli, 
                                                       JumlahBeli = ROUND(@HargaBeli * (ISNULL(@QtyIn, 0) - ISNULL(@QtyOut, 0)), @DefdigitDecimal), 
-                                                      NilaiAwal = @NilaiAkhir, 
                                                       NilaiAkhir = @NilaiAkhir + ROUND(ISNULL(@HPP, 0) * T.QtyMasuk, @DefdigitDecimal) - ROUND(ISNULL(@HPP, 0) * T.QtyKeluar, @DefdigitDecimal)
                                                 FROM MKartuStok(NOLOCK)
                                                      INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
@@ -2461,12 +2724,6 @@ AS
                                                        @NilaiAkhir = T.NilaiAkhir
                                                 FROM @Temp T
                                                 WHERE T.NoID = @i;
-                                                UPDATE T
-                                                  SET 
-                                                      HPP = @HPP
-                                                FROM @Temp T
-                                                     INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                                                WHERE T.NoID = @i;
                                             END;
                                             ELSE
                                             IF(@SaldoAkhir = 0
@@ -2475,31 +2732,21 @@ AS
                                                     --Jupuk Nilai Persediaan Sakdurunge
                                                     UPDATE T
                                                       SET 
-                                                          SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk, 
-                                                          SaldoAkhir = @SaldoAkhir, 
                                                           Debet = 0, 
-                                                          Kredit = @NilaiAkhir, 
+                                                          Kredit = @NilaiAwal, 
                                                           HargaBeli = @HargaBeli, 
                                                           JumlahBeli = ROUND(@HargaBeli * (ISNULL(@QtyIn, 0) - ISNULL(@QtyOut, 0)), @DefdigitDecimal), 
-                                                          NilaiAwal = @NilaiAkhir, 
-                                                          NilaiAkhir = @NilaiAkhir - @NilaiAkhir
+                                                          NilaiAkhir = @NilaiAwal - @NilaiAwal
                                                     FROM MKartuStok(NOLOCK)
                                                          INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
                                                     WHERE T.NoID = @i;
 
                                                     --Hitung HPP
-                                                    --SELECT @HPP = 0, 
                                                     SELECT @HPP = @HPP, 
                                                            @HargaBeli = ISNULL(HargaBeli, 0), 
                                                            @SaldoAkhir = T.SaldoAkhir, 
                                                            @NilaiAkhir = T.NilaiAkhir
                                                     FROM @Temp T
-                                                    WHERE T.NoID = @i;
-                                                    UPDATE T
-                                                      SET 
-                                                          HPP = @HPP
-                                                    FROM @Temp T
-                                                         INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
                                                     WHERE T.NoID = @i;
                                                 END;
                                                 ELSE
@@ -2507,58 +2754,51 @@ AS
                                                     --Selain Case diatas
                                                     UPDATE T
                                                       SET 
-                                                          SaldoAwal = @SaldoAkhir + T.QtyKeluar - T.QtyMasuk, 
-                                                          SaldoAkhir = @SaldoAkhir, 
                                                           Debet = ROUND(@HPP * T.QtyMasuk, @DefdigitDecimal), 
                                                           Kredit = ROUND(@HPP * T.QtyKeluar, @DefdigitDecimal), 
                                                           HargaBeli = @HargaBeli, 
                                                           JumlahBeli = ROUND(@HargaBeli * (ISNULL(@QtyIn, 0) - ISNULL(@QtyOut, 0)), @DefdigitDecimal), 
-                                                          NilaiAwal = @NilaiAkhir, 
                                                           NilaiAkhir = @NilaiAkhir + ROUND(@HPP * T.QtyMasuk, @DefdigitDecimal) - ROUND(@HPP * T.QtyKeluar, @DefdigitDecimal)
                                                     FROM MKartuStok(NOLOCK)
                                                          INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID
                                                     WHERE T.NoID = @i;
 
                                                     --Hitung HPP
-                                                    SELECT @HPP = ROUND(CASE
-                                                                            WHEN T.SaldoAkhir = 0
-                                                                            THEN 0
-                                                                            ELSE T.NilaiAkhir / T.SaldoAkhir
-                                                                        END, @DefdigitDecimal), --@HPP,
+                                                    SELECT @HPP = @HPP, 
                                                            @HargaBeli = ISNULL(HargaBeli, 0), 
                                                            @SaldoAkhir = T.SaldoAkhir, 
                                                            @NilaiAkhir = T.NilaiAkhir
                                                     FROM @Temp T
                                                     WHERE T.NoID = @i;
-                                                    UPDATE T
-                                                      SET 
-                                                          HPP = @HPP
-                                                    FROM @Temp T
-                                                         INNER JOIN MKartuStok ON T.IDKartuStok = MKartuStok.NoID
-                                                    WHERE T.NoID = @i;
                                                 END;
+                -- Final Di Setting Juga
+                UPDATE T
+                  SET 
+                      SaldoAwal = ISNULL(@SaldoAwal, 0), 
+                      NilaiAwal = ISNULL(@NilaiAwal, 0), 
+                      SaldoAkhir = ISNULL(@SaldoAwal, 0) + T.QtyMasuk - T.QtyKeluar, 
+                      NilaiAkhir = ISNULL(@NilaiAkhir, 0), 
+                      HPP = @HPP
+                FROM @Temp T
+                WHERE T.NoID = @i;
                 SET @i = @i + 1;
             END;
         UPDATE MKartuStok
           SET 
               Debet = T.Debet, 
-              Kredit = T.Kredit
-              ,
-              --,QtyAwal = T.SaldoAwal
-              --,QtyAkhir = T.SaldoAkhir 
+              Kredit = T.Kredit, 
+              SaldoAkhir = T.SaldoAkhir, 
               HPP = T.HPP, 
               HargaBeli = T.HargaBeli
-        --,TotHPPRataRata = T.NilaiAkhir
-        --,JumlahBeli = T.JumlahBeli
         FROM MKartuStok
              INNER JOIN @Temp T ON T.IDKartuStok = MKartuStok.NoID;
-
-        --SELECT * FROM @Temp
+        --SELECT *
+        --FROM @Temp;
         DELETE FROM @Temp;
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spCekSaldoStok]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spCekSaldoStok]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2584,7 +2824,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2629,7 +2869,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2671,7 +2911,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarMutasiGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarMutasiGudang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2710,7 +2950,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarPemakaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarPemakaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2748,7 +2988,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarPenyesuaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarPenyesuaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2786,7 +3026,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarPO]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarPO]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2826,7 +3066,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarReturBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarReturBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2869,7 +3109,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarReturJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarReturJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2905,7 +3145,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalHutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalHutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2942,7 +3182,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalPersediaan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalPersediaan]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -2982,7 +3222,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalPiutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarSaldoAwalPiutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3019,7 +3259,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spDaftarStockOpname]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDaftarStockOpname]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3054,7 +3294,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3130,7 +3370,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3190,10 +3430,7 @@ AS
                dbo.MBarangD.Barcode, 
                dbo.MSatuan.Kode AS Satuan, 
                dbo.MJual.Sisa, 
-               dbo.MJual.Bayar, 
-               ISNULL(MBayarTunai.Total, 0) Tunai, 
-               ISNULL(MBayarDebet.Total, 0) Debet, 
-               ISNULL(MBayarLainnya.Total, 0) BayarLainnya
+               dbo.MJual.Bayar
         FROM((dbo.MJual
               INNER JOIN dbo.MJualD ON dbo.MJualD.IDHeader = dbo.MJual.NoID)
               LEFT JOIN dbo.MBarangD ON dbo.MJualD.IDBarangD = dbo.MBarangD.NoID)
@@ -3204,45 +3441,6 @@ AS
               LEFT JOIN dbo.MUser AS UserPosted ON UserPosted.NoID = dbo.MJual.IDUserPosted
               LEFT JOIN dbo.MUser AS UserEntry ON dbo.MJual.IDUserEntry = UserEntry.NoID
               LEFT JOIN dbo.MUser AS UserEdit ON dbo.MJual.IDUserEdit = UserEdit.NoID
-              LEFT JOIN
-        (
-            SELECT MJualDBayar.IDHeader, 
-                   MJenisPembayaran.Kode KodePembayaran, 
-                   MJenisPembayaran.Nama NamaPembayaran, 
-                   SUM(MJualDBayar.Total) AS Total
-            FROM MJualDBayar(NOLOCK)
-                 LEFT JOIN MJenisPembayaran(NOLOCK) ON MJenisPembayaran.NoID = MJualDBayar.IDJenisPembayaran
-            WHERE MJenisPembayaran.NoID = 1
-            GROUP BY MJualDBayar.IDHeader, 
-                     MJenisPembayaran.Kode, 
-                     MJenisPembayaran.Nama
-        ) AS MBayarTunai ON MBayarTunai.IDHeader = MJual.NoID
-              LEFT JOIN
-        (
-            SELECT MJualDBayar.IDHeader, 
-                   MJenisPembayaran.Kode KodePembayaran, 
-                   MJenisPembayaran.Nama NamaPembayaran, 
-                   SUM(MJualDBayar.Total) AS Total
-            FROM MJualDBayar(NOLOCK)
-                 LEFT JOIN MJenisPembayaran(NOLOCK) ON MJenisPembayaran.NoID = MJualDBayar.IDJenisPembayaran
-            WHERE MJenisPembayaran.NoID IN(2, 3, 4, 5)
-            GROUP BY MJualDBayar.IDHeader, 
-                     MJenisPembayaran.Kode, 
-                     MJenisPembayaran.Nama
-        ) AS MBayarDebet ON MBayarDebet.IDHeader = MJual.NoID
-              LEFT JOIN
-        (
-            SELECT MJualDBayar.IDHeader, 
-                   MJenisPembayaran.Kode KodePembayaran, 
-                   MJenisPembayaran.Nama NamaPembayaran, 
-                   SUM(MJualDBayar.Total) AS Total
-            FROM MJualDBayar(NOLOCK)
-                 LEFT JOIN MJenisPembayaran(NOLOCK) ON MJenisPembayaran.NoID = MJualDBayar.IDJenisPembayaran
-            WHERE MJenisPembayaran.NoID > 5
-            GROUP BY MJualDBayar.IDHeader, 
-                     MJenisPembayaran.Kode, 
-                     MJenisPembayaran.Nama
-        ) AS MBayarLainnya ON MBayarLainnya.IDHeader = MJual.NoID
         WHERE dbo.MJual.IsPosted = 1
               AND dbo.MJual.NoID = @NoID;
         SELECT MJualDBayar.*, 
@@ -3252,13 +3450,10 @@ AS
              LEFT JOIN MJenisPembayaran(NOLOCK) ON MJualDBayar.IDJenisPembayaran = MJenisPembayaran.NoID
         WHERE MJualDBayar.IDHeader = @NoID
         ORDER BY MJualDBayar.NoID;
-        SELECT MJual.*
-        FROM MJual(NOLOCK)
-        WHERE MJual.NoID = @NoID;
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMMutasiGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMMutasiGudang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3310,7 +3505,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMPemakaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMPemakaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3361,7 +3556,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMPenyesuaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMPenyesuaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3412,7 +3607,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMPO]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMPO]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3486,7 +3681,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMReturBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMReturBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3563,7 +3758,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMReturJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMReturJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3629,7 +3824,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalHutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalHutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3666,7 +3861,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalPersediaan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalPersediaan]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3707,7 +3902,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalPiutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMSaldoAwalPiutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3744,7 +3939,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spFakturMStockOpname]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFakturMStockOpname]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3790,7 +3985,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spGenerateMenu]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGenerateMenu]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3868,7 +4063,7 @@ AS
          END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spHasilPosting]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spHasilPosting]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -3932,12 +4127,13 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spLapKartuStok]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spLapKartuStok]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
 SET QUOTED_IDENTIFIER ON;
 GO
+
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
@@ -4016,7 +4212,8 @@ AS
                    FROM dbo.fnSplitString(REPLACE(@IDGudang, ' ', ''), ',')
                )
                AND CONVERT(DATE, MKartuStok.Tanggal) >= CONVERT(DATE, @TglDari)
-               AND CONVERT(DATE, MKartuStok.Tanggal) <= CONVERT(DATE, @TglSampai);
+               AND CONVERT(DATE, MKartuStok.Tanggal) <= CONVERT(DATE, @TglSampai)
+               ORDER BY MKartuStok.Tanggal;
         SELECT @i = 1, 
                @iMax = MAX(PKID)
         FROM @Temp T;
@@ -4086,11 +4283,12 @@ AS
              LEFT JOIN MBarangD B(NOLOCK) ON B.NoID = K.IDBarangD
              LEFT JOIN MSatuan C(NOLOCK) ON C.NoID = K.IDSatuan
              LEFT JOIN MJenisTransaksi D(NOLOCK) ON D.ID = T.IDJenisTransaksi
-             LEFT JOIN MGudang E(NOLOCK) ON E.NoID = K.IDGudang;
+             LEFT JOIN MGudang E(NOLOCK) ON E.NoID = K.IDGudang
+        ORDER BY K.Tanggal;
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spLogPerubahanHarga]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spLogPerubahanHarga]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4136,7 +4334,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4263,7 +4461,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4393,7 +4591,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMMutasiGudang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMMutasiGudang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4484,7 +4682,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMPemakaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMPemakaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4571,7 +4769,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMPenyesuaian]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMPenyesuaian]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4658,7 +4856,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMPO]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMPO]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4781,7 +4979,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMReturBeli]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMReturBeli]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -4904,7 +5102,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMReturJual]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMReturJual]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -5034,7 +5232,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalHutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalHutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -5136,7 +5334,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalPersediaan]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalPersediaan]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -5253,7 +5451,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalPiutang]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMSaldoAwalPiutang]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -5355,7 +5553,7 @@ AS
     END;
 GO
 
-/****** Object:  StoredProcedure [dbo].[spSimpanMStockOpname]    Script Date: 6/2/2021 2:40:56 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSimpanMStockOpname]    Script Date: 6/23/2021 11:20:18 AM ******/
 
 SET ANSI_NULLS ON;
 GO
@@ -5532,9 +5730,10 @@ INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGr
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (3, -1, 3, N'mnPembelian', N'Pembelian', 0, 0, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (4, -1, 4, N'mnPenjualan', N'Penjualan', 0, 0, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (5, -1, 5, N'mnInternal', N'Internal', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (6, -1, 6, N'mnKasBank', N'Keuangan', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (7, -1, 7, N'mnAccounting', N'Akuntansi', 0, 0, 0)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (8, -1, 8, N'mnLaporan', N'Laporan', 0, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (6, -1, 7, N'mnKasBank', N'Keuangan', 0, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (7, -1, 8, N'mnAccounting', N'Akuntansi', 0, 0, 0)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (8, -1, 9, N'mnLaporan', N'Laporan', 0, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (9, -1, 6, N'mnPabrikasi', N'Pabrikasi', 0, 0, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (101, 1, 1, N'mnKategori', N'Data Kategori', 0, 0, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (102, 1, 2, N'mnSatuan', N'Data Satuan', 0, 0, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (103, 1, 3, N'mnMerk', N'Data Merk', 0, 0, 1)
@@ -5569,6 +5768,12 @@ INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGr
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (807, 8, 7, N'mnLapAgingPiutang', N'Laporan Aging Piutang', 1, 1, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (808, 8, 8, N'mnLapLabaRugi', N'Laporan Laba Rugi (Kotor)', 1, 1, 1)
 INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (809, 8, 9, N'mnLapJualLaku', N'Laporan Penjualan Paling Laku', 1, 1, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (901, 9, 1, N'mnMaterial', N'Daftar Material / Formula', 1, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (902, 9, 2, N'mnWOAssembly', N'Work Order', 1, 1, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (903, 9, 3, N'mnAssemblyOut', N'Daftar Pengeluaran Bahan', 1, 1, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (904, 9, 4, N'mnAssemblyBiaya', N'Daftar Pencatatan Biaya', 1, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (905, 9, 5, N'mnAssemblyHasil', N'Daftar Hasil Produksi', 1, 0, 1)
+INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (906, 9, 6, N'mnAssembly', N'Daftar Produksi (Langsung)', 1, 1, 1)
 GO
 
 --
@@ -5583,152 +5788,192 @@ GO
 --
 -- Inserting data into table dbo.MRoleD
 --
-SET IDENTITY_INSERT [DBPOS].dbo.MRoleD ON
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (1, 1, 1, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (2, 1, 3, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (3, 1, 4, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (4, 1, 5, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (5, 1, 8, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (37, 1, 101, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (38, 1, 102, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (39, 1, 103, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (40, 1, 104, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (41, 1, 105, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (132, 1, 106, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (179, 1, 201, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (186, 1, 301, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (187, 1, 302, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (188, 1, 303, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (216, 1, 401, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (217, 1, 402, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (218, 1, 403, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (219, 1, 501, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (220, 1, 502, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (221, 1, 503, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (222, 1, 601, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (223, 1, 602, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (224, 1, 603, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (225, 1, 801, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (226, 1, 802, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (227, 1, 803, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (228, 1, 804, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (229, 1, 805, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (230, 1, 806, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (231, 1, 807, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (232, 1, 808, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (233, 1, 809, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (303, 1, 304, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (340, 1, 504, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (342, 2, 1, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (343, 2, 3, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (344, 2, 4, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (345, 2, 5, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (346, 2, 8, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (347, 2, 101, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (348, 2, 102, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (349, 2, 103, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (350, 2, 104, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (351, 2, 105, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (352, 2, 106, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (353, 2, 201, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (354, 2, 301, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (355, 2, 302, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (356, 2, 303, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (357, 2, 304, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (358, 2, 401, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (359, 2, 402, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (360, 2, 403, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (361, 2, 501, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (362, 2, 502, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (363, 2, 503, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (364, 2, 504, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (365, 2, 601, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (366, 2, 602, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (367, 2, 603, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (368, 2, 801, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (369, 2, 802, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (370, 2, 803, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (371, 2, 804, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (372, 2, 805, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (373, 2, 806, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (374, 2, 807, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (375, 2, 808, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (376, 2, 809, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (378, 3, 1, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (379, 3, 3, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (380, 3, 4, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (381, 3, 5, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (382, 3, 8, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (383, 3, 101, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (384, 3, 102, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (385, 3, 103, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (386, 3, 104, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (387, 3, 105, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (388, 3, 106, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (389, 3, 201, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (390, 3, 301, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (391, 3, 302, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (392, 3, 303, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (393, 3, 304, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (394, 3, 401, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (395, 3, 402, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (396, 3, 403, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (397, 3, 501, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (398, 3, 502, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (399, 3, 503, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (400, 3, 504, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (401, 3, 601, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (402, 3, 602, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (403, 3, 603, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (404, 3, 801, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (405, 3, 802, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (406, 3, 803, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (407, 3, 804, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (408, 3, 805, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (409, 3, 806, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (410, 3, 807, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (411, 3, 808, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (412, 3, 809, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (415, 4, 1, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (416, 4, 3, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (417, 4, 4, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (418, 4, 5, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (419, 4, 8, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (420, 4, 101, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (421, 4, 102, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (422, 4, 103, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (423, 4, 104, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (424, 4, 105, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (425, 4, 106, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (426, 4, 201, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (427, 4, 301, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (428, 4, 302, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (429, 4, 303, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (430, 4, 304, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (431, 4, 401, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (432, 4, 402, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (433, 4, 403, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (434, 4, 501, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (435, 4, 502, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (436, 4, 503, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (437, 4, 504, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (438, 4, 601, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (439, 4, 602, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (440, 4, 603, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (441, 4, 801, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (442, 4, 802, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (443, 4, 803, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (444, 4, 804, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (445, 4, 805, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (446, 4, 806, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (447, 4, 807, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (448, 4, 808, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (449, 4, 809, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (450, 1, 2, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (451, 1, 6, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (452, 1, 202, 1)
-INSERT [DBPOS].dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (453, 1, 203, 1)
-SET IDENTITY_INSERT [DBPOS].dbo.MRoleD OFF
+SET IDENTITY_INSERT dbo.MRoleD ON
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (1, 1, 1, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (2, 1, 2, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (3, 1, 3, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (4, 1, 4, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (5, 1, 5, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (6, 1, 6, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (7, 1, 8, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (8, 1, 9, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (9, 1, 101, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (10, 1, 102, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (11, 1, 103, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (12, 1, 104, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (13, 1, 105, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (14, 1, 106, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (15, 1, 201, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (16, 1, 202, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (17, 1, 203, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (18, 1, 301, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (19, 1, 302, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (20, 1, 303, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (21, 1, 304, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (22, 1, 401, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (23, 1, 402, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (24, 1, 403, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (25, 1, 501, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (26, 1, 502, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (27, 1, 503, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (28, 1, 504, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (29, 1, 601, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (30, 1, 602, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (31, 1, 603, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (32, 1, 801, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (33, 1, 802, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (34, 1, 803, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (35, 1, 804, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (36, 1, 805, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (37, 1, 806, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (38, 1, 807, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (39, 1, 808, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (40, 1, 809, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (41, 1, 901, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (42, 1, 902, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (43, 1, 903, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (44, 1, 904, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (45, 1, 905, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (46, 1, 906, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (47, 2, 1, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (48, 2, 2, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (49, 2, 3, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (50, 2, 4, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (51, 2, 5, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (52, 2, 6, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (53, 2, 8, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (54, 2, 9, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (55, 2, 101, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (56, 2, 102, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (57, 2, 103, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (58, 2, 104, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (59, 2, 105, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (60, 2, 106, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (61, 2, 201, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (62, 2, 202, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (63, 2, 203, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (64, 2, 301, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (65, 2, 302, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (66, 2, 303, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (67, 2, 304, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (68, 2, 401, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (69, 2, 402, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (70, 2, 403, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (71, 2, 501, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (72, 2, 502, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (73, 2, 503, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (74, 2, 504, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (75, 2, 601, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (76, 2, 602, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (77, 2, 603, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (78, 2, 801, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (79, 2, 802, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (80, 2, 803, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (81, 2, 804, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (82, 2, 805, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (83, 2, 806, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (84, 2, 807, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (85, 2, 808, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (86, 2, 809, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (87, 2, 901, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (88, 2, 902, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (89, 2, 903, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (90, 2, 904, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (91, 2, 905, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (92, 2, 906, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (93, 3, 1, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (94, 3, 2, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (95, 3, 3, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (96, 3, 4, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (97, 3, 5, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (98, 3, 6, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (99, 3, 8, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (100, 3, 9, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (101, 3, 101, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (102, 3, 102, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (103, 3, 103, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (104, 3, 104, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (105, 3, 105, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (106, 3, 106, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (107, 3, 201, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (108, 3, 202, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (109, 3, 203, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (110, 3, 301, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (111, 3, 302, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (112, 3, 303, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (113, 3, 304, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (114, 3, 401, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (115, 3, 402, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (116, 3, 403, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (117, 3, 501, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (118, 3, 502, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (119, 3, 503, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (120, 3, 504, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (121, 3, 601, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (122, 3, 602, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (123, 3, 603, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (124, 3, 801, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (125, 3, 802, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (126, 3, 803, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (127, 3, 804, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (128, 3, 805, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (129, 3, 806, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (130, 3, 807, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (131, 3, 808, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (132, 3, 809, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (133, 3, 901, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (134, 3, 902, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (135, 3, 903, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (136, 3, 904, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (137, 3, 905, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (138, 3, 906, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (139, 4, 1, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (140, 4, 2, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (141, 4, 3, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (142, 4, 4, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (143, 4, 5, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (144, 4, 6, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (145, 4, 8, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (146, 4, 9, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (147, 4, 101, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (148, 4, 102, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (149, 4, 103, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (150, 4, 104, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (151, 4, 105, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (152, 4, 106, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (153, 4, 201, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (154, 4, 202, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (155, 4, 203, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (156, 4, 301, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (157, 4, 302, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (158, 4, 303, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (159, 4, 304, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (160, 4, 401, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (161, 4, 402, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (162, 4, 403, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (163, 4, 501, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (164, 4, 502, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (165, 4, 503, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (166, 4, 504, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (167, 4, 601, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (168, 4, 602, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (169, 4, 603, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (170, 4, 801, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (171, 4, 802, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (172, 4, 803, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (173, 4, 804, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (174, 4, 805, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (175, 4, 806, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (176, 4, 807, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (177, 4, 808, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (178, 4, 809, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (179, 4, 901, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (180, 4, 902, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (181, 4, 903, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (182, 4, 904, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (183, 4, 905, 1)
+INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (184, 4, 906, 1)
+SET IDENTITY_INSERT dbo.MRoleD OFF
 GO
 
 --
@@ -5811,5 +6056,14 @@ INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (45, '2020-09-22 00:0
 INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (46, '2020-09-22 00:00:00.000', N'spDaftarSaldoAwalPiutang_200922')
 INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (47, '2020-09-22 00:00:00.000', N'MKasIN_200922')
 INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (48, '2020-09-22 00:00:00.000', N'MKasOut_200922')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (49, '2021-06-23 00:00:00.000', N'MMaterial_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (50, '2021-06-23 00:00:00.000', N'MWOAssembly_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (51, '2021-06-23 00:00:00.000', N'MAssembly_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (52, '2021-06-23 00:00:00.000', N'MMaterialDSisa_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (53, '2021-06-23 00:00:00.000', N'MAssemblyDSisa_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (54, '2021-06-23 00:00:00.000', N'MMaterialDBiaya_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (55, '2021-06-23 00:00:00.000', N'MAssemblyDBiaya_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (56, '2021-06-23 00:00:00.000', N'MMaterialD_210623')
+INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (57, '2021-06-23 00:00:00.000', N'MAssemblyD_210623')
 SET IDENTITY_INSERT [DBPOS].dbo.TAppDB OFF
 GO

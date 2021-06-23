@@ -93,7 +93,7 @@ Public Class frmMain
         Try
             For Each frm In Me.MdiChildren
                 If Not TypeOf frm Is frmDashboard Then
-                    frm.Close()
+                    frm.Dispose()
                 End If
             Next
 
@@ -151,7 +151,7 @@ Public Class frmMain
                 Try
                     If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         InitMenu()
-                        barSetting.Enabled = True
+                        barSetting.Enabled = False
                         barLoginOut.Enabled = True
                         barExit.Enabled = True
                     End If
@@ -537,7 +537,8 @@ Public Class frmMain
                                             "MKategori",
                                             "SELECT MKategori.NoID, MKategori.Kode, MKategori.Nama, MKategori.IsActive Aktif, MParent.Kode + '-' + MParent.Nama KategoriUtama" & vbCrLf &
                                             "FROM MKategori" & vbCrLf &
-                                            "LEFT JOIN MKategori MParent ON MParent.NoID=MKategori.IDParent ")
+                                            "LEFT JOIN MKategori MParent ON MParent.NoID=MKategori.IDParent ",
+                                            frmDaftarMaster.TypePrimary.BigInt)
                     x.MdiParent = Me
                 End If
                 x.Show()
@@ -554,7 +555,8 @@ Public Class frmMain
                                             e.Item.Caption,
                                             "MSatuan",
                                             "SELECT MSatuan.NoID, MSatuan.Kode, MSatuan.Nama, MSatuan.Konversi, MSatuan.IsActive Aktif " & vbCrLf &
-                                            "FROM MSatuan")
+                                            "FROM MSatuan",
+                                            frmDaftarMaster.TypePrimary.BigInt)
                     x.MdiParent = Me
                 End If
                 x.Show()
@@ -571,7 +573,8 @@ Public Class frmMain
                                             e.Item.Caption,
                                             "MMerk",
                                             "SELECT MMerk.NoID, MMerk.Kode, MMerk.Nama, MMerk.IsActive Aktif " & vbCrLf &
-                                            "FROM MMerk")
+                                            "FROM MMerk",
+                                            frmDaftarMaster.TypePrimary.BigInt)
                     x.MdiParent = Me
                 End If
                 x.Show()
@@ -588,7 +591,8 @@ Public Class frmMain
                                             e.Item.Caption,
                                             "MGudang",
                                             "SELECT MGudang.NoID, MGudang.Kode, MGudang.Nama, MGudang.IsActive Aktif " & vbCrLf &
-                                            "FROM MGudang")
+                                            "FROM MGudang",
+                                            frmDaftarMaster.TypePrimary.BigInt)
                     x.MdiParent = Me
                 End If
                 x.Show()

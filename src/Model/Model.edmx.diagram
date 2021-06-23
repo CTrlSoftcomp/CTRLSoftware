@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="986f289790e547b080ba3968d923dc00" Name="Diagram1">
+        <EntityTypeShape EntityType="DBPOS1Model.MAssembly" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MAssemblyD" Width="1.5" PointX="7.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MAssemblyDBiaya" Width="1.5" PointX="7.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MAssemblyDSisa" Width="1.5" PointX="10.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MMaterial" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MMaterialD" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MMaterialDBiaya" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MMaterialDSisa" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBPOS1Model.MWOAssembly" Width="1.5" PointX="3" PointY="27.25" IsExpanded="true" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssembly_MMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssembly_MWOAssembly" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyD_MAssembly" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyDBiaya_MAssembly" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyDSisa_MAssemblyDSisa" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyD_MMaterialD" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyDBiaya_MMaterialDBiaya" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MAssemblyDSisa_MMaterialDSisa" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MMaterialD_MMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MMaterialDBiaya_MMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MMaterialDSisa_MMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="DBPOS1Model.FK_MWOAssembly_MMaterial" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

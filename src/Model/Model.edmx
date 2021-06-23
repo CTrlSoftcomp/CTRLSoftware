@@ -1,0 +1,1003 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBPOS1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MAssembly">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="bigint" Nullable="false" />
+          <Property Name="Kode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tanggal" Type="datetime" Nullable="false" />
+          <Property Name="IDWOAssembly" Type="uniqueidentifier" />
+          <Property Name="IDMaterial" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDPegawai" Type="bigint" Nullable="false" />
+          <Property Name="IDGudang" Type="int" Nullable="false" />
+          <Property Name="Catatan" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="TglPosted" Type="datetime" />
+          <Property Name="IDUserPosted" Type="int" />
+          <Property Name="IDUserEntry" Type="int" />
+          <Property Name="IDUserEdit" Type="int" />
+        </EntityType>
+        <EntityType Name="MAssemblyD">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialD" />
+          </Key>
+          <Property Name="NoID" Type="bigint" Nullable="false" />
+          <Property Name="IDHeader" Type="bigint" Nullable="false" />
+          <Property Name="IDMaterialD" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="Tanggal" Type="datetime" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="TglPosted" Type="datetime" />
+          <Property Name="IDUserPosted" Type="int" />
+          <Property Name="IDUserEntry" Type="int" />
+          <Property Name="IDUserEdit" Type="int" />
+        </EntityType>
+        <EntityType Name="MAssemblyDBiaya">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialDBiaya" />
+          </Key>
+          <Property Name="NoID" Type="bigint" Nullable="false" />
+          <Property Name="IDHeader" Type="bigint" Nullable="false" />
+          <Property Name="IDMaterialDBiaya" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tanggal" Type="datetime" Nullable="false" />
+          <Property Name="IDAkun" Type="bigint" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="150" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="TglPosted" Type="datetime" />
+          <Property Name="IDUserPosted" Type="int" />
+          <Property Name="IDUserEntry" Type="int" />
+          <Property Name="IDUserEdit" Type="int" />
+        </EntityType>
+        <EntityType Name="MAssemblyDSisa">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialDSisa" />
+          </Key>
+          <Property Name="NoID" Type="bigint" Nullable="false" />
+          <Property Name="IDHeader" Type="bigint" Nullable="false" />
+          <Property Name="IDMaterialDSisa" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tanggal" Type="datetime" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="TglPosted" Type="datetime" />
+          <Property Name="IDUserPosted" Type="int" />
+          <Property Name="IDUserEntry" Type="int" />
+          <Property Name="IDUserEdit" Type="int" />
+        </EntityType>
+        <EntityType Name="MMaterial">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Kode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="TanggalUpdate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MMaterialD">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDMaterial" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MMaterialDBiaya">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDMaterial" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDAkun" Type="bigint" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="MMaterialDSisa">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDMaterial" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MWOAssembly">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Kode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tanggal" Type="datetime" Nullable="false" />
+          <Property Name="TanggalWO" Type="datetime" Nullable="false" />
+          <Property Name="IDMaterial" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDPegawai" Type="bigint" Nullable="false" />
+          <Property Name="IDGudang" Type="int" Nullable="false" />
+          <Property Name="Catatan" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IDBarangD" Type="bigint" Nullable="false" />
+          <Property Name="IDBarang" Type="bigint" Nullable="false" />
+          <Property Name="IDSatuan" Type="int" Nullable="false" />
+          <Property Name="Konversi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="money" Nullable="false" />
+          <Property Name="Jumlah" Type="money" Nullable="false" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="TglPosted" Type="datetime" />
+          <Property Name="IDUserPosted" Type="int" />
+          <Property Name="IDUserEntry" Type="int" />
+          <Property Name="IDUserEdit" Type="int" />
+        </EntityType>
+        <Association Name="FK_MAssembly_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1" />
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssembly">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssembly_MWOAssembly">
+          <End Role="MWOAssembly" Type="Self.MWOAssembly" Multiplicity="0..1" />
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MWOAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssembly">
+              <PropertyRef Name="IDWOAssembly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyD_MAssembly">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyD" Type="Self.MAssemblyD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyD">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyD_MMaterialD">
+          <End Role="MMaterialD" Type="Self.MMaterialD" Multiplicity="1" />
+          <End Role="MAssemblyD" Type="Self.MAssemblyD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialD">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyD">
+              <PropertyRef Name="IDMaterialD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDBiaya_MAssembly">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyDBiaya" Type="Self.MAssemblyDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDBiaya">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDBiaya_MMaterialDBiaya">
+          <End Role="MMaterialDBiaya" Type="Self.MMaterialDBiaya" Multiplicity="1" />
+          <End Role="MAssemblyDBiaya" Type="Self.MAssemblyDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialDBiaya">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDBiaya">
+              <PropertyRef Name="IDMaterialDBiaya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDSisa_MAssemblyDSisa">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyDSisa" Type="Self.MAssemblyDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDSisa">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDSisa_MMaterialDSisa">
+          <End Role="MMaterialDSisa" Type="Self.MMaterialDSisa" Multiplicity="1" />
+          <End Role="MAssemblyDSisa" Type="Self.MAssemblyDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialDSisa">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDSisa">
+              <PropertyRef Name="IDMaterialDSisa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialD_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialD" Type="Self.MMaterialD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialD">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialDBiaya_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialDBiaya" Type="Self.MMaterialDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialDBiaya">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialDSisa_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialDSisa" Type="Self.MMaterialDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialDSisa">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MWOAssembly_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1" />
+          <End Role="MWOAssembly" Type="Self.MWOAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MWOAssembly">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBPOS1ModelStoreContainer">
+          <EntitySet Name="MAssembly" EntityType="Self.MAssembly" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAssemblyD" EntityType="Self.MAssemblyD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAssemblyDBiaya" EntityType="Self.MAssemblyDBiaya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAssemblyDSisa" EntityType="Self.MAssemblyDSisa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MMaterial" EntityType="Self.MMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MMaterialD" EntityType="Self.MMaterialD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MMaterialDBiaya" EntityType="Self.MMaterialDBiaya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MMaterialDSisa" EntityType="Self.MMaterialDSisa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MWOAssembly" EntityType="Self.MWOAssembly" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MAssembly_MMaterial" Association="Self.FK_MAssembly_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterial" />
+            <End Role="MAssembly" EntitySet="MAssembly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssembly_MWOAssembly" Association="Self.FK_MAssembly_MWOAssembly">
+            <End Role="MWOAssembly" EntitySet="MWOAssembly" />
+            <End Role="MAssembly" EntitySet="MAssembly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyD_MAssembly" Association="Self.FK_MAssemblyD_MAssembly">
+            <End Role="MAssembly" EntitySet="MAssembly" />
+            <End Role="MAssemblyD" EntitySet="MAssemblyD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyD_MMaterialD" Association="Self.FK_MAssemblyD_MMaterialD">
+            <End Role="MMaterialD" EntitySet="MMaterialD" />
+            <End Role="MAssemblyD" EntitySet="MAssemblyD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDBiaya_MAssembly" Association="Self.FK_MAssemblyDBiaya_MAssembly">
+            <End Role="MAssembly" EntitySet="MAssembly" />
+            <End Role="MAssemblyDBiaya" EntitySet="MAssemblyDBiaya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDBiaya_MMaterialDBiaya" Association="Self.FK_MAssemblyDBiaya_MMaterialDBiaya">
+            <End Role="MMaterialDBiaya" EntitySet="MMaterialDBiaya" />
+            <End Role="MAssemblyDBiaya" EntitySet="MAssemblyDBiaya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDSisa_MAssemblyDSisa" Association="Self.FK_MAssemblyDSisa_MAssemblyDSisa">
+            <End Role="MAssembly" EntitySet="MAssembly" />
+            <End Role="MAssemblyDSisa" EntitySet="MAssemblyDSisa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDSisa_MMaterialDSisa" Association="Self.FK_MAssemblyDSisa_MMaterialDSisa">
+            <End Role="MMaterialDSisa" EntitySet="MMaterialDSisa" />
+            <End Role="MAssemblyDSisa" EntitySet="MAssemblyDSisa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialD_MMaterial" Association="Self.FK_MMaterialD_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterial" />
+            <End Role="MMaterialD" EntitySet="MMaterialD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialDBiaya_MMaterial" Association="Self.FK_MMaterialDBiaya_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterial" />
+            <End Role="MMaterialDBiaya" EntitySet="MMaterialDBiaya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialDSisa_MMaterial" Association="Self.FK_MMaterialDSisa_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterial" />
+            <End Role="MMaterialDSisa" EntitySet="MMaterialDSisa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MWOAssembly_MMaterial" Association="Self.FK_MWOAssembly_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterial" />
+            <End Role="MWOAssembly" EntitySet="MWOAssembly" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBPOS1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MAssembly">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Int64" Nullable="false" />
+          <Property Name="Kode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDWOAssembly" Type="Guid" />
+          <Property Name="IDMaterial" Type="Guid" Nullable="false" />
+          <Property Name="IDPegawai" Type="Int64" Nullable="false" />
+          <Property Name="IDGudang" Type="Int32" Nullable="false" />
+          <Property Name="Catatan" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="TglPosted" Type="DateTime" Precision="3" />
+          <Property Name="IDUserPosted" Type="Int32" />
+          <Property Name="IDUserEntry" Type="Int32" />
+          <Property Name="IDUserEdit" Type="Int32" />
+          <NavigationProperty Name="MMaterial" Relationship="Self.FK_MAssembly_MMaterial" FromRole="MAssembly" ToRole="MMaterial" />
+          <NavigationProperty Name="MWOAssembly" Relationship="Self.FK_MAssembly_MWOAssembly" FromRole="MAssembly" ToRole="MWOAssembly" />
+          <NavigationProperty Name="MAssemblyDs" Relationship="Self.FK_MAssemblyD_MAssembly" FromRole="MAssembly" ToRole="MAssemblyD" />
+          <NavigationProperty Name="MAssemblyDBiayas" Relationship="Self.FK_MAssemblyDBiaya_MAssembly" FromRole="MAssembly" ToRole="MAssemblyDBiaya" />
+          <NavigationProperty Name="MAssemblyDSisas" Relationship="Self.FK_MAssemblyDSisa_MAssemblyDSisa" FromRole="MAssembly" ToRole="MAssemblyDSisa" />
+        </EntityType>
+        <EntityType Name="MAssemblyD">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialD" />
+          </Key>
+          <Property Name="NoID" Type="Int64" Nullable="false" />
+          <Property Name="IDHeader" Type="Int64" Nullable="false" />
+          <Property Name="IDMaterialD" Type="Guid" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="TglPosted" Type="DateTime" Precision="3" />
+          <Property Name="IDUserPosted" Type="Int32" />
+          <Property Name="IDUserEntry" Type="Int32" />
+          <Property Name="IDUserEdit" Type="Int32" />
+          <NavigationProperty Name="MAssembly" Relationship="Self.FK_MAssemblyD_MAssembly" FromRole="MAssemblyD" ToRole="MAssembly" />
+          <NavigationProperty Name="MMaterialD" Relationship="Self.FK_MAssemblyD_MMaterialD" FromRole="MAssemblyD" ToRole="MMaterialD" />
+        </EntityType>
+        <EntityType Name="MAssemblyDBiaya">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialDBiaya" />
+          </Key>
+          <Property Name="NoID" Type="Int64" Nullable="false" />
+          <Property Name="IDHeader" Type="Int64" Nullable="false" />
+          <Property Name="IDMaterialDBiaya" Type="Guid" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDAkun" Type="Int64" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="TglPosted" Type="DateTime" Precision="3" />
+          <Property Name="IDUserPosted" Type="Int32" />
+          <Property Name="IDUserEntry" Type="Int32" />
+          <Property Name="IDUserEdit" Type="Int32" />
+          <NavigationProperty Name="MAssembly" Relationship="Self.FK_MAssemblyDBiaya_MAssembly" FromRole="MAssemblyDBiaya" ToRole="MAssembly" />
+          <NavigationProperty Name="MMaterialDBiaya" Relationship="Self.FK_MAssemblyDBiaya_MMaterialDBiaya" FromRole="MAssemblyDBiaya" ToRole="MMaterialDBiaya" />
+        </EntityType>
+        <EntityType Name="MAssemblyDSisa">
+          <Key>
+            <PropertyRef Name="NoID" />
+            <PropertyRef Name="IDHeader" />
+            <PropertyRef Name="IDMaterialDSisa" />
+          </Key>
+          <Property Name="NoID" Type="Int64" Nullable="false" />
+          <Property Name="IDHeader" Type="Int64" Nullable="false" />
+          <Property Name="IDMaterialDSisa" Type="Guid" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="TglPosted" Type="DateTime" Precision="3" />
+          <Property Name="IDUserPosted" Type="Int32" />
+          <Property Name="IDUserEntry" Type="Int32" />
+          <Property Name="IDUserEdit" Type="Int32" />
+          <NavigationProperty Name="MAssembly" Relationship="Self.FK_MAssemblyDSisa_MAssemblyDSisa" FromRole="MAssemblyDSisa" ToRole="MAssembly" />
+          <NavigationProperty Name="MMaterialDSisa" Relationship="Self.FK_MAssemblyDSisa_MMaterialDSisa" FromRole="MAssemblyDSisa" ToRole="MMaterialDSisa" />
+        </EntityType>
+        <EntityType Name="MMaterial">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Guid" Nullable="false" />
+          <Property Name="Kode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="TanggalUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MAssemblies" Relationship="Self.FK_MAssembly_MMaterial" FromRole="MMaterial" ToRole="MAssembly" />
+          <NavigationProperty Name="MMaterialDs" Relationship="Self.FK_MMaterialD_MMaterial" FromRole="MMaterial" ToRole="MMaterialD" />
+          <NavigationProperty Name="MMaterialDBiayas" Relationship="Self.FK_MMaterialDBiaya_MMaterial" FromRole="MMaterial" ToRole="MMaterialDBiaya" />
+          <NavigationProperty Name="MMaterialDSisas" Relationship="Self.FK_MMaterialDSisa_MMaterial" FromRole="MMaterial" ToRole="MMaterialDSisa" />
+          <NavigationProperty Name="MWOAssemblies" Relationship="Self.FK_MWOAssembly_MMaterial" FromRole="MMaterial" ToRole="MWOAssembly" />
+        </EntityType>
+        <EntityType Name="MMaterialD">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Guid" Nullable="false" />
+          <Property Name="IDMaterial" Type="Guid" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="MAssemblyDs" Relationship="Self.FK_MAssemblyD_MMaterialD" FromRole="MMaterialD" ToRole="MAssemblyD" />
+          <NavigationProperty Name="MMaterial" Relationship="Self.FK_MMaterialD_MMaterial" FromRole="MMaterialD" ToRole="MMaterial" />
+        </EntityType>
+        <EntityType Name="MMaterialDBiaya">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Guid" Nullable="false" />
+          <Property Name="IDMaterial" Type="Guid" Nullable="false" />
+          <Property Name="IDAkun" Type="Int64" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MAssemblyDBiayas" Relationship="Self.FK_MAssemblyDBiaya_MMaterialDBiaya" FromRole="MMaterialDBiaya" ToRole="MAssemblyDBiaya" />
+          <NavigationProperty Name="MMaterial" Relationship="Self.FK_MMaterialDBiaya_MMaterial" FromRole="MMaterialDBiaya" ToRole="MMaterial" />
+        </EntityType>
+        <EntityType Name="MMaterialDSisa">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Guid" Nullable="false" />
+          <Property Name="IDMaterial" Type="Guid" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="MAssemblyDSisas" Relationship="Self.FK_MAssemblyDSisa_MMaterialDSisa" FromRole="MMaterialDSisa" ToRole="MAssemblyDSisa" />
+          <NavigationProperty Name="MMaterial" Relationship="Self.FK_MMaterialDSisa_MMaterial" FromRole="MMaterialDSisa" ToRole="MMaterial" />
+        </EntityType>
+        <EntityType Name="MWOAssembly">
+          <Key>
+            <PropertyRef Name="NoID" />
+          </Key>
+          <Property Name="NoID" Type="Guid" Nullable="false" />
+          <Property Name="Kode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TanggalWO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDMaterial" Type="Guid" Nullable="false" />
+          <Property Name="IDPegawai" Type="Int64" Nullable="false" />
+          <Property Name="IDGudang" Type="Int32" Nullable="false" />
+          <Property Name="Catatan" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDBarangD" Type="Int64" Nullable="false" />
+          <Property Name="IDBarang" Type="Int64" Nullable="false" />
+          <Property Name="IDSatuan" Type="Int32" Nullable="false" />
+          <Property Name="Konversi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HargaPokok" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Jumlah" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="TglPosted" Type="DateTime" Precision="3" />
+          <Property Name="IDUserPosted" Type="Int32" />
+          <Property Name="IDUserEntry" Type="Int32" />
+          <Property Name="IDUserEdit" Type="Int32" />
+          <NavigationProperty Name="MAssemblies" Relationship="Self.FK_MAssembly_MWOAssembly" FromRole="MWOAssembly" ToRole="MAssembly" />
+          <NavigationProperty Name="MMaterial" Relationship="Self.FK_MWOAssembly_MMaterial" FromRole="MWOAssembly" ToRole="MMaterial" />
+        </EntityType>
+        <Association Name="FK_MAssembly_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1" />
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssembly">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssembly_MWOAssembly">
+          <End Role="MWOAssembly" Type="Self.MWOAssembly" Multiplicity="0..1" />
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MWOAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssembly">
+              <PropertyRef Name="IDWOAssembly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyD_MAssembly">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyD" Type="Self.MAssemblyD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyD">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDBiaya_MAssembly">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyDBiaya" Type="Self.MAssemblyDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDBiaya">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDSisa_MAssemblyDSisa">
+          <End Role="MAssembly" Type="Self.MAssembly" Multiplicity="1" />
+          <End Role="MAssemblyDSisa" Type="Self.MAssemblyDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAssembly">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDSisa">
+              <PropertyRef Name="IDHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyD_MMaterialD">
+          <End Role="MMaterialD" Type="Self.MMaterialD" Multiplicity="1" />
+          <End Role="MAssemblyD" Type="Self.MAssemblyD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialD">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyD">
+              <PropertyRef Name="IDMaterialD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDBiaya_MMaterialDBiaya">
+          <End Role="MMaterialDBiaya" Type="Self.MMaterialDBiaya" Multiplicity="1" />
+          <End Role="MAssemblyDBiaya" Type="Self.MAssemblyDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialDBiaya">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDBiaya">
+              <PropertyRef Name="IDMaterialDBiaya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAssemblyDSisa_MMaterialDSisa">
+          <End Role="MMaterialDSisa" Type="Self.MMaterialDSisa" Multiplicity="1" />
+          <End Role="MAssemblyDSisa" Type="Self.MAssemblyDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterialDSisa">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MAssemblyDSisa">
+              <PropertyRef Name="IDMaterialDSisa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialD_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialD" Type="Self.MMaterialD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialD">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialDBiaya_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialDBiaya" Type="Self.MMaterialDBiaya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialDBiaya">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MMaterialDSisa_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MMaterialDSisa" Type="Self.MMaterialDSisa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MMaterialDSisa">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MWOAssembly_MMaterial">
+          <End Role="MMaterial" Type="Self.MMaterial" Multiplicity="1" />
+          <End Role="MWOAssembly" Type="Self.MWOAssembly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MMaterial">
+              <PropertyRef Name="NoID" />
+            </Principal>
+            <Dependent Role="MWOAssembly">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBPOS1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MAssemblies" EntityType="Self.MAssembly" />
+          <EntitySet Name="MAssemblyDs" EntityType="Self.MAssemblyD" />
+          <EntitySet Name="MAssemblyDBiayas" EntityType="Self.MAssemblyDBiaya" />
+          <EntitySet Name="MAssemblyDSisas" EntityType="Self.MAssemblyDSisa" />
+          <EntitySet Name="MMaterials" EntityType="Self.MMaterial" />
+          <EntitySet Name="MMaterialDs" EntityType="Self.MMaterialD" />
+          <EntitySet Name="MMaterialDBiayas" EntityType="Self.MMaterialDBiaya" />
+          <EntitySet Name="MMaterialDSisas" EntityType="Self.MMaterialDSisa" />
+          <EntitySet Name="MWOAssemblies" EntityType="Self.MWOAssembly" />
+          <AssociationSet Name="FK_MAssembly_MMaterial" Association="Self.FK_MAssembly_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterials" />
+            <End Role="MAssembly" EntitySet="MAssemblies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssembly_MWOAssembly" Association="Self.FK_MAssembly_MWOAssembly">
+            <End Role="MWOAssembly" EntitySet="MWOAssemblies" />
+            <End Role="MAssembly" EntitySet="MAssemblies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyD_MAssembly" Association="Self.FK_MAssemblyD_MAssembly">
+            <End Role="MAssembly" EntitySet="MAssemblies" />
+            <End Role="MAssemblyD" EntitySet="MAssemblyDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDBiaya_MAssembly" Association="Self.FK_MAssemblyDBiaya_MAssembly">
+            <End Role="MAssembly" EntitySet="MAssemblies" />
+            <End Role="MAssemblyDBiaya" EntitySet="MAssemblyDBiayas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDSisa_MAssemblyDSisa" Association="Self.FK_MAssemblyDSisa_MAssemblyDSisa">
+            <End Role="MAssembly" EntitySet="MAssemblies" />
+            <End Role="MAssemblyDSisa" EntitySet="MAssemblyDSisas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyD_MMaterialD" Association="Self.FK_MAssemblyD_MMaterialD">
+            <End Role="MMaterialD" EntitySet="MMaterialDs" />
+            <End Role="MAssemblyD" EntitySet="MAssemblyDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDBiaya_MMaterialDBiaya" Association="Self.FK_MAssemblyDBiaya_MMaterialDBiaya">
+            <End Role="MMaterialDBiaya" EntitySet="MMaterialDBiayas" />
+            <End Role="MAssemblyDBiaya" EntitySet="MAssemblyDBiayas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAssemblyDSisa_MMaterialDSisa" Association="Self.FK_MAssemblyDSisa_MMaterialDSisa">
+            <End Role="MMaterialDSisa" EntitySet="MMaterialDSisas" />
+            <End Role="MAssemblyDSisa" EntitySet="MAssemblyDSisas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialD_MMaterial" Association="Self.FK_MMaterialD_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterials" />
+            <End Role="MMaterialD" EntitySet="MMaterialDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialDBiaya_MMaterial" Association="Self.FK_MMaterialDBiaya_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterials" />
+            <End Role="MMaterialDBiaya" EntitySet="MMaterialDBiayas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MMaterialDSisa_MMaterial" Association="Self.FK_MMaterialDSisa_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterials" />
+            <End Role="MMaterialDSisa" EntitySet="MMaterialDSisas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MWOAssembly_MMaterial" Association="Self.FK_MWOAssembly_MMaterial">
+            <End Role="MMaterial" EntitySet="MMaterials" />
+            <End Role="MWOAssembly" EntitySet="MWOAssemblies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBPOS1ModelStoreContainer" CdmEntityContainer="DBPOS1Entities">
+          <EntitySetMapping Name="MAssemblies">
+            <EntityTypeMapping TypeName="DBPOS1Model.MAssembly">
+              <MappingFragment StoreEntitySet="MAssembly">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="Kode" ColumnName="Kode" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="IDWOAssembly" ColumnName="IDWOAssembly" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="IDPegawai" ColumnName="IDPegawai" />
+                <ScalarProperty Name="IDGudang" ColumnName="IDGudang" />
+                <ScalarProperty Name="Catatan" ColumnName="Catatan" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TglPosted" ColumnName="TglPosted" />
+                <ScalarProperty Name="IDUserPosted" ColumnName="IDUserPosted" />
+                <ScalarProperty Name="IDUserEntry" ColumnName="IDUserEntry" />
+                <ScalarProperty Name="IDUserEdit" ColumnName="IDUserEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAssemblyDs">
+            <EntityTypeMapping TypeName="DBPOS1Model.MAssemblyD">
+              <MappingFragment StoreEntitySet="MAssemblyD">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDHeader" ColumnName="IDHeader" />
+                <ScalarProperty Name="IDMaterialD" ColumnName="IDMaterialD" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TglPosted" ColumnName="TglPosted" />
+                <ScalarProperty Name="IDUserPosted" ColumnName="IDUserPosted" />
+                <ScalarProperty Name="IDUserEntry" ColumnName="IDUserEntry" />
+                <ScalarProperty Name="IDUserEdit" ColumnName="IDUserEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAssemblyDBiayas">
+            <EntityTypeMapping TypeName="DBPOS1Model.MAssemblyDBiaya">
+              <MappingFragment StoreEntitySet="MAssemblyDBiaya">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDHeader" ColumnName="IDHeader" />
+                <ScalarProperty Name="IDMaterialDBiaya" ColumnName="IDMaterialDBiaya" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="IDAkun" ColumnName="IDAkun" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TglPosted" ColumnName="TglPosted" />
+                <ScalarProperty Name="IDUserPosted" ColumnName="IDUserPosted" />
+                <ScalarProperty Name="IDUserEntry" ColumnName="IDUserEntry" />
+                <ScalarProperty Name="IDUserEdit" ColumnName="IDUserEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAssemblyDSisas">
+            <EntityTypeMapping TypeName="DBPOS1Model.MAssemblyDSisa">
+              <MappingFragment StoreEntitySet="MAssemblyDSisa">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDHeader" ColumnName="IDHeader" />
+                <ScalarProperty Name="IDMaterialDSisa" ColumnName="IDMaterialDSisa" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TglPosted" ColumnName="TglPosted" />
+                <ScalarProperty Name="IDUserPosted" ColumnName="IDUserPosted" />
+                <ScalarProperty Name="IDUserEntry" ColumnName="IDUserEntry" />
+                <ScalarProperty Name="IDUserEdit" ColumnName="IDUserEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MMaterials">
+            <EntityTypeMapping TypeName="DBPOS1Model.MMaterial">
+              <MappingFragment StoreEntitySet="MMaterial">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="Kode" ColumnName="Kode" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="TanggalUpdate" ColumnName="TanggalUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MMaterialDs">
+            <EntityTypeMapping TypeName="DBPOS1Model.MMaterialD">
+              <MappingFragment StoreEntitySet="MMaterialD">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MMaterialDBiayas">
+            <EntityTypeMapping TypeName="DBPOS1Model.MMaterialDBiaya">
+              <MappingFragment StoreEntitySet="MMaterialDBiaya">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="IDAkun" ColumnName="IDAkun" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MMaterialDSisas">
+            <EntityTypeMapping TypeName="DBPOS1Model.MMaterialDSisa">
+              <MappingFragment StoreEntitySet="MMaterialDSisa">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MWOAssemblies">
+            <EntityTypeMapping TypeName="DBPOS1Model.MWOAssembly">
+              <MappingFragment StoreEntitySet="MWOAssembly">
+                <ScalarProperty Name="NoID" ColumnName="NoID" />
+                <ScalarProperty Name="Kode" ColumnName="Kode" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="TanggalWO" ColumnName="TanggalWO" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="IDPegawai" ColumnName="IDPegawai" />
+                <ScalarProperty Name="IDGudang" ColumnName="IDGudang" />
+                <ScalarProperty Name="Catatan" ColumnName="Catatan" />
+                <ScalarProperty Name="IDBarangD" ColumnName="IDBarangD" />
+                <ScalarProperty Name="IDBarang" ColumnName="IDBarang" />
+                <ScalarProperty Name="IDSatuan" ColumnName="IDSatuan" />
+                <ScalarProperty Name="Konversi" ColumnName="Konversi" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="HargaPokok" ColumnName="HargaPokok" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TglPosted" ColumnName="TglPosted" />
+                <ScalarProperty Name="IDUserPosted" ColumnName="IDUserPosted" />
+                <ScalarProperty Name="IDUserEntry" ColumnName="IDUserEntry" />
+                <ScalarProperty Name="IDUserEdit" ColumnName="IDUserEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

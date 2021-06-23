@@ -67,9 +67,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Dataset.vb" />
+    <Compile Include="Model\MAssembly.vb" />
+    <Compile Include="Model\MAssemblyD.vb" />
+    <Compile Include="Model\MAssemblyDBiaya.vb" />
+    <Compile Include="Model\MAssemblyDSisa.vb" />
+    <Compile Include="Model\MMaterial.vb" />
+    <Compile Include="Model\MMaterialD.vb" />
+    <Compile Include="Model\MMaterialDBiaya.vb" />
+    <Compile Include="Model\MMaterialDSisa.vb" />
     <Compile Include="Model\MPOS.vb" />
     <Compile Include="Model\MReset.vb" />
     <Compile Include="Model\MUser.vb" />
+    <Compile Include="Model\MWOAssembly.vb" />
     <Compile Include="Model\Pembayaran.vb" />
     <Compile Include="Model\PurchaseOrder.vb" />
     <Compile Include="Model\SettingPerusahaan.vb" />

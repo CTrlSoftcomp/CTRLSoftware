@@ -28,12 +28,18 @@ Public Class frmDaftarMaster
     Private tableName As String
     Private ds As New DataSet
 
-    Private SQL As String
+    Private SQL As String = ""
+    Private PKType As TypePrimary = TypePrimary.BigInt
 
     Dim repckedit As New RepositoryItemCheckEdit
     Dim repdateedit As New RepositoryItemDateEdit
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
+
+    Public Enum TypePrimary
+        BigInt = 0
+        Guid = 1
+    End Enum
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
         mnTutup.PerformClick()
@@ -43,7 +49,7 @@ Public Class frmDaftarMaster
         mnRefresh.PerformClick()
     End Sub
 
-    Public Sub RefreshData(ByVal NoID As Long)
+    Public Sub RefreshData(ByVal NoID As Object)
         Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
             Using cn As New SqlConnection(StrKonSQL)
                 Using com As New SqlCommand
@@ -65,7 +71,11 @@ Public Class frmDaftarMaster
                                 BindingSource1.DataSource = ds.Tables(tableName)
 
                                 GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
+                                If (PKType = TypePrimary.BigInt) Then
+                                    GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
+                                Else
+                                    GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString)
+                                End If
                                 GridView1.SelectRow(GridView1.FocusedRowHandle)
 
                                 Me.ds = ds
@@ -87,7 +97,7 @@ Public Class frmDaftarMaster
         mnHapus.PerformClick()
     End Sub
 
-    Private Sub HapusData(ByVal NoID As Long)
+    Private Sub HapusData(ByVal NoID As Object)
         Using dlg As New WaitDialogForm("Sedang merefresh data ...", NamaAplikasi)
             Using cn As New SqlConnection(StrKonSQL)
                 Using com As New SqlCommand
@@ -102,8 +112,10 @@ Public Class frmDaftarMaster
                                 oDA.SelectCommand = com
 
                                 Select Case tableName
-                                    Case "MKategori", "MSatuan", "MMerk", "MGudang"
-                                        com.CommandText = "UPDATE " & tableName & " SET IsActive=0 WHERE NoID=" & NoID
+                                    Case "MKategori", "MSatuan", "MMerk", "MGudang", "MMaterial"
+                                        com.CommandText = "UPDATE " & tableName & " SET IsActive=0 WHERE NoID=@NoID"
+                                        com.Parameters.Clear()
+                                        com.Parameters.AddWithValue("@NoID", NoID)
                                         com.ExecuteNonQuery()
                                 End Select
 
@@ -130,7 +142,11 @@ Public Class frmDaftarMaster
         mnBaru.PerformClick()
     End Sub
 
-    Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
+    Public Sub New(ByVal formName As String,
+                   ByVal caption As String,
+                   ByVal tableName As String,
+                   ByVal SQL As String,
+                   ByVal PKType As TypePrimary)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -140,6 +156,7 @@ Public Class frmDaftarMaster
         Me.tableName = tableName
         Me.formName = formName
         Me.SQL = SQL
+        Me.PKType = PKType
         Me.Tag = Me.formName
         Me.Name = Me.formName
     End Sub

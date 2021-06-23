@@ -31,12 +31,18 @@ Namespace Repository
                                         com.ExecuteNonQuery()
                                     Next
 
-                                    com.Transaction.Commit()
+                                    If com.Transaction IsNot Nothing Then
+                                        com.Transaction.Commit()
+                                    End If
                                 Else
-                                    com.Transaction.Rollback()
+                                    If com.Transaction IsNot Nothing Then
+                                        com.Transaction.Rollback()
+                                    End If
                                 End If
                             Catch ex As Exception
-                                com.Transaction.Rollback()
+                                If com.Transaction IsNot Nothing Then
+                                    com.Transaction.Rollback()
+                                End If
                                 With JSON
                                     .JSONMessage = "Error Update " & Obj.DBVersion & vbCrLf & "Reason : " & ex.Message
                                     .JSONResult = False
@@ -63,6 +69,7 @@ Namespace Repository
             Dim iList As New List(Of Model.UpdateDB)
             iList.AddRange(ListUpdate_July_2020)
             iList.AddRange(ListUpdate_September_2020)
+            iList.AddRange(ListUpdate_Juni_2021)
 
             Return ExecUpdateDB(StrKonSQL, iList)
         End Function
@@ -276,272 +283,272 @@ Namespace Repository
             Dim SQL As String = ""
             Dim ListSQL As List(Of String) = Nothing
 
-            SQL = "CREATE TABLE [dbo].[MJenisTransaksiD](" & vbCrLf & _
-                  "[NoID] [int] NOT NULL," & vbCrLf & _
-                  "[IDJenisTransaksi] [int] NOT NULL," & vbCrLf & _
-                  "[Kode] [varchar](50) NULL," & vbCrLf & _
-                  "[Nama] [varchar](50) NULL," & vbCrLf & _
-                  "CONSTRAINT [PK_MJenisTransaksiD] PRIMARY KEY CLUSTERED" & vbCrLf & _
-                  "(" & vbCrLf & _
-                  "[NoID] Asc" & vbCrLf & _
-                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf & _
+            SQL = "CREATE TABLE [dbo].[MJenisTransaksiD](" & vbCrLf &
+                  "[NoID] [int] NOT NULL," & vbCrLf &
+                  "[IDJenisTransaksi] [int] NOT NULL," & vbCrLf &
+                  "[Kode] [varchar](50) NULL," & vbCrLf &
+                  "[Nama] [varchar](50) NULL," & vbCrLf &
+                  "CONSTRAINT [PK_MJenisTransaksiD] PRIMARY KEY CLUSTERED" & vbCrLf &
+                  "(" & vbCrLf &
+                  "[NoID] Asc" & vbCrLf &
+                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
                   ") ON [PRIMARY]"
             Obj = New Model.UpdateDB With {.DBVersion = "MJenisTransaksiD_200906", .TglUpdate = CDate("2020-09-06"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "CREATE TABLE [dbo].[MPOS](" & vbCrLf & _
-                  "[NoID] [int] NOT NULL," & vbCrLf & _
-                  "[Kode] [varchar](50) NULL," & vbCrLf & _
-                  "[Nama] [varchar](50) NULL," & vbCrLf & _
-                  "[IsActive] [bit] NULL," & vbCrLf & _
-                  "[IDJenisPenjualan] [int] NULL," & vbCrLf & _
-                  "[LastConnected] [datetime] NULL," & vbCrLf & _
-                  "[LastTransaction] [datetime] NULL," & vbCrLf & _
-                  "CONSTRAINT [PK_MPOS] PRIMARY KEY CLUSTERED " & vbCrLf & _
-                  "(" & vbCrLf & _
-                  "[NoID] Asc" & vbCrLf & _
-                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf & _
+            SQL = "CREATE TABLE [dbo].[MPOS](" & vbCrLf &
+                  "[NoID] [int] NOT NULL," & vbCrLf &
+                  "[Kode] [varchar](50) NULL," & vbCrLf &
+                  "[Nama] [varchar](50) NULL," & vbCrLf &
+                  "[IsActive] [bit] NULL," & vbCrLf &
+                  "[IDJenisPenjualan] [int] NULL," & vbCrLf &
+                  "[LastConnected] [datetime] NULL," & vbCrLf &
+                  "[LastTransaction] [datetime] NULL," & vbCrLf &
+                  "CONSTRAINT [PK_MPOS] PRIMARY KEY CLUSTERED " & vbCrLf &
+                  "(" & vbCrLf &
+                  "[NoID] Asc" & vbCrLf &
+                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
                   ") ON [PRIMARY]"
             Obj = New Model.UpdateDB With {.DBVersion = "MPOS_200906", .TglUpdate = CDate("2020-09-06"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "CREATE TABLE [dbo].[MReset](" & vbCrLf & _
-                "[NoID] [bigint] NOT NULL," & vbCrLf & _
-                "[Kode] [varchar](50) NULL," & vbCrLf & _
-                "[IDKasir] [int] NULL," & vbCrLf & _
-                "[Tanggal] [date] NULL," & vbCrLf & _
-                "[Shift] [smallint] NULL," & vbCrLf & _
-                "[IDPOS] [int] NULL," & vbCrLf & _
-                "[JumlahNota] [int] NULL," & vbCrLf & _
-                "[Subtotal] [money] NULL," & vbCrLf & _
-                "[Tunai] [money] NULL," & vbCrLf & _
-                "[SetorTunai] [money] NULL," & vbCrLf & _
-                "[IsPosted] [bit] NULL," & vbCrLf & _
-                "[TglPosted] [datetime] NULL," & vbCrLf & _
-                "[IDUserPosted] [int] NULL," & vbCrLf & _
-                "[IDUserEntry] [int] NULL," & vbCrLf & _
-                "[IDUserEdit] [int] NULL," & vbCrLf & _
-                "CONSTRAINT [PK_MReset] PRIMARY KEY CLUSTERED " & vbCrLf & _
-                "(" & vbCrLf & _
-                "[NoID] ASC" & vbCrLf & _
-                ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf & _
+            SQL = "CREATE TABLE [dbo].[MReset](" & vbCrLf &
+                "[NoID] [bigint] NOT NULL," & vbCrLf &
+                "[Kode] [varchar](50) NULL," & vbCrLf &
+                "[IDKasir] [int] NULL," & vbCrLf &
+                "[Tanggal] [date] NULL," & vbCrLf &
+                "[Shift] [smallint] NULL," & vbCrLf &
+                "[IDPOS] [int] NULL," & vbCrLf &
+                "[JumlahNota] [int] NULL," & vbCrLf &
+                "[Subtotal] [money] NULL," & vbCrLf &
+                "[Tunai] [money] NULL," & vbCrLf &
+                "[SetorTunai] [money] NULL," & vbCrLf &
+                "[IsPosted] [bit] NULL," & vbCrLf &
+                "[TglPosted] [datetime] NULL," & vbCrLf &
+                "[IDUserPosted] [int] NULL," & vbCrLf &
+                "[IDUserEntry] [int] NULL," & vbCrLf &
+                "[IDUserEdit] [int] NULL," & vbCrLf &
+                "CONSTRAINT [PK_MReset] PRIMARY KEY CLUSTERED " & vbCrLf &
+                "(" & vbCrLf &
+                "[NoID] ASC" & vbCrLf &
+                ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
                 ") ON [PRIMARY]"
             Obj = New Model.UpdateDB With {.DBVersion = "MReset_200906", .TglUpdate = CDate("2020-09-06"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "CREATE TABLE [dbo].[MResetD](" & vbCrLf & _
-                "[IDReset] [bigint] NOT NULL," & vbCrLf & _
-                "[IDJenisPembayaran] [int] NOT NULL," & vbCrLf & _
-                "[JumlahNota] [int] NULL," & vbCrLf & _
-                "[Subtotal] [money] NULL," & vbCrLf & _
-                "CONSTRAINT [PK_MResetD] PRIMARY KEY CLUSTERED " & vbCrLf & _
-                "(" & vbCrLf & _
-                "[IDReset] ASC," & vbCrLf & _
-                "[IDJenisPembayaran] ASC" & vbCrLf & _
-                ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf & _
+            SQL = "CREATE TABLE [dbo].[MResetD](" & vbCrLf &
+                "[IDReset] [bigint] NOT NULL," & vbCrLf &
+                "[IDJenisPembayaran] [int] NOT NULL," & vbCrLf &
+                "[JumlahNota] [int] NULL," & vbCrLf &
+                "[Subtotal] [money] NULL," & vbCrLf &
+                "CONSTRAINT [PK_MResetD] PRIMARY KEY CLUSTERED " & vbCrLf &
+                "(" & vbCrLf &
+                "[IDReset] ASC," & vbCrLf &
+                "[IDJenisPembayaran] ASC" & vbCrLf &
+                ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
                 ") ON [PRIMARY]"
             Obj = New Model.UpdateDB With {.DBVersion = "MResetD_200906", .TglUpdate = CDate("2020-09-06"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "UPDATE MMenu SET [Caption]='Keuangan', IsActive=1 WHERE NoID=6;" & vbCrLf & _
-                  "UPDATE MMenu SET [Caption]='Pelunasan Hutang dan Kas Keluar', IsActive=1 WHERE NoID=601;" & vbCrLf & _
+            SQL = "UPDATE MMenu SET [Caption]='Keuangan', IsActive=1 WHERE NoID=6;" & vbCrLf &
+                  "UPDATE MMenu SET [Caption]='Pelunasan Hutang dan Kas Keluar', IsActive=1 WHERE NoID=601;" & vbCrLf &
                   "UPDATE MMenu SET [Caption]='Pelunasan Piutang dan Kas Masuk', IsActive=1 WHERE NoID=602;"
             Obj = New Model.UpdateDB With {.DBVersion = "spKasBank_2000916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "UPDATE MMenu SET IsActive=1 WHERE NoID=2;" & vbCrLf & _
-                  "INSERT INTO MMenu (NoID, IDParent, NoUrut, [Name], Caption, IsBig, IsBeginGroup, IsActive) VALUES" & vbCrLf & _
-                  "(202, 2, 2, 'mnDaftarSAHS', 'Daftar Saldo Awal Hutang', 1, 1, 1)," & vbCrLf & _
+            SQL = "UPDATE MMenu SET IsActive=1 WHERE NoID=2;" & vbCrLf &
+                  "INSERT INTO MMenu (NoID, IDParent, NoUrut, [Name], Caption, IsBig, IsBeginGroup, IsActive) VALUES" & vbCrLf &
+                  "(202, 2, 2, 'mnDaftarSAHS', 'Daftar Saldo Awal Hutang', 1, 1, 1)," & vbCrLf &
                   "(203, 2, 3, 'mnDaftarSAPC', 'Daftar Saldo Awal Piutang', 1, 0, 1);"
             Obj = New Model.UpdateDB With {.DBVersion = "mnSaldoAwal_2000916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "CREATE TABLE [dbo].[MSaldoAwalPersediaan](" & vbCrLf & _
-                  "[NoID] [int] NOT NULL," & vbCrLf & _
-                  "[IDGudang] [int] NOT NULL," & vbCrLf & _
-                  "[IDBarangD] [bigint] NOT NULL," & vbCrLf & _
-                  "[IDBarang] [bigint] NOT NULL," & vbCrLf & _
-                  "[Kode] [varchar](15) NOT NULL," & vbCrLf & _
-                  "[Tanggal] [datetime] NOT NULL," & vbCrLf & _
-                  "[Qty] [numeric](18, 3) NOT NULL," & vbCrLf & _
-                  "[IDSatuan] [int] NOT NULL," & vbCrLf & _
-                  "[Konversi] [numeric](18, 0) NOT NULL," & vbCrLf & _
-                  "[HargaPokok] [money] NOT NULL," & vbCrLf & _
-                  "[Jumlah] [money] NOT NULL," & vbCrLf & _
-                  "[IDUserEntry] [int] NOT NULL," & vbCrLf & _
-                  "[TglEntry] [datetime] NOT NULL," & vbCrLf & _
-                  "[IDUserEdit] [int] NULL," & vbCrLf & _
-                  "[TglEdit] [datetime] NULL," & vbCrLf & _
-                  "[IsPosted] [bit] NULL," & vbCrLf & _
-                  "[IDUserPosted] [int] NULL," & vbCrLf & _
-                  "[TglPosted] [datetime] NULL," & vbCrLf & _
-                  "[Keterangan] [varchar](250) NULL," & vbCrLf & _
-                  "CONSTRAINT [PK_MSaldoAwalPersediaan] PRIMARY KEY CLUSTERED" & vbCrLf & _
-                  "(" & vbCrLf & _
-                  "[NoID] Asc" & vbCrLf & _
-                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]," & vbCrLf & _
-                  "CONSTRAINT [IX_Kode] UNIQUE NONCLUSTERED" & vbCrLf & _
-                  "(" & vbCrLf & _
-                  "[Kode] Asc" & vbCrLf & _
-                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf & _
+            SQL = "CREATE TABLE [dbo].[MSaldoAwalPersediaan](" & vbCrLf &
+                  "[NoID] [int] NOT NULL," & vbCrLf &
+                  "[IDGudang] [int] NOT NULL," & vbCrLf &
+                  "[IDBarangD] [bigint] NOT NULL," & vbCrLf &
+                  "[IDBarang] [bigint] NOT NULL," & vbCrLf &
+                  "[Kode] [varchar](15) NOT NULL," & vbCrLf &
+                  "[Tanggal] [datetime] NOT NULL," & vbCrLf &
+                  "[Qty] [numeric](18, 3) NOT NULL," & vbCrLf &
+                  "[IDSatuan] [int] NOT NULL," & vbCrLf &
+                  "[Konversi] [numeric](18, 0) NOT NULL," & vbCrLf &
+                  "[HargaPokok] [money] NOT NULL," & vbCrLf &
+                  "[Jumlah] [money] NOT NULL," & vbCrLf &
+                  "[IDUserEntry] [int] NOT NULL," & vbCrLf &
+                  "[TglEntry] [datetime] NOT NULL," & vbCrLf &
+                  "[IDUserEdit] [int] NULL," & vbCrLf &
+                  "[TglEdit] [datetime] NULL," & vbCrLf &
+                  "[IsPosted] [bit] NULL," & vbCrLf &
+                  "[IDUserPosted] [int] NULL," & vbCrLf &
+                  "[TglPosted] [datetime] NULL," & vbCrLf &
+                  "[Keterangan] [varchar](250) NULL," & vbCrLf &
+                  "CONSTRAINT [PK_MSaldoAwalPersediaan] PRIMARY KEY CLUSTERED" & vbCrLf &
+                  "(" & vbCrLf &
+                  "[NoID] Asc" & vbCrLf &
+                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]," & vbCrLf &
+                  "CONSTRAINT [IX_Kode] UNIQUE NONCLUSTERED" & vbCrLf &
+                  "(" & vbCrLf &
+                  "[Kode] Asc" & vbCrLf &
+                  ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]" & vbCrLf &
                   ") ON [PRIMARY]"
             Obj = New Model.UpdateDB With {.DBVersion = "MSaldoAwalPersediaan_2000916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "-- =============================================" & vbCrLf & _
-                    "-- Author: <Author,,Name>" & vbCrLf & _
-                    "-- Create date: <Create Date,,>" & vbCrLf & _
-                    "-- Description: <Description,,>" & vbCrLf & _
-                    "-- =============================================" & vbCrLf & _
-                    "CREATE PROCEDURE [dbo].[spSaldoAwalPersediaan](@TglDari DATETIME = '2019-01-01', @TglSampai DATETIME = '2019-01-31')" & vbCrLf & _
-                    "AS " & vbCrLf & _
-                    "BEGIN" & vbCrLf & _
-                    "SET NOCOUNT ON;" & vbCrLf & _
-                    "SELECT MSaldoAwalPersediaan.*, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang, MBarangD.Barcode, UserEntry.Nama UserEntry, UserEdit.Nama UserEdit, UserPosted.Nama UserPosted, MGudang.Kode Gudang" & vbCrLf & _
-                    "FROM MSaldoAwalPersediaan (NOLOCK)" & vbCrLf & _
-                    "LEFT JOIN MGudang (NOLOCK) ON MSaldoAwalPersediaan.IDGudang=MGudang.NoID" & vbCrLf & _
-                    "LEFT JOIN MBarang (NOLOCK) ON MSaldoAwalPersediaan.IDBarang=MBarang.NoID" & vbCrLf & _
-                    "LEFT JOIN MBarangD (NOLOCK) ON MSaldoAwalPersediaan.IDBarangD=MBarangD.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserEntry (NOLOCK) ON MSaldoAwalPersediaan.IDUserEntry=UserEntry.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserEdit (NOLOCK) ON MSaldoAwalPersediaan.IDUserEdit=UserEdit.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserPosted (NOLOCK) ON MSaldoAwalPersediaan.IDUserPosted=UserPosted.NoID" & vbCrLf & _
-                    "WHERE CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) >= CONVERT(DATE, @TglDari) AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) <= CONVERT(DATE, @TglSampai)" & vbCrLf & _
-                    "ORDER BY MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.NoID" & vbCrLf & _
+            SQL = "-- =============================================" & vbCrLf &
+                    "-- Author: <Author,,Name>" & vbCrLf &
+                    "-- Create date: <Create Date,,>" & vbCrLf &
+                    "-- Description: <Description,,>" & vbCrLf &
+                    "-- =============================================" & vbCrLf &
+                    "CREATE PROCEDURE [dbo].[spSaldoAwalPersediaan](@TglDari DATETIME = '2019-01-01', @TglSampai DATETIME = '2019-01-31')" & vbCrLf &
+                    "AS " & vbCrLf &
+                    "BEGIN" & vbCrLf &
+                    "SET NOCOUNT ON;" & vbCrLf &
+                    "SELECT MSaldoAwalPersediaan.*, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang, MBarangD.Barcode, UserEntry.Nama UserEntry, UserEdit.Nama UserEdit, UserPosted.Nama UserPosted, MGudang.Kode Gudang" & vbCrLf &
+                    "FROM MSaldoAwalPersediaan (NOLOCK)" & vbCrLf &
+                    "LEFT JOIN MGudang (NOLOCK) ON MSaldoAwalPersediaan.IDGudang=MGudang.NoID" & vbCrLf &
+                    "LEFT JOIN MBarang (NOLOCK) ON MSaldoAwalPersediaan.IDBarang=MBarang.NoID" & vbCrLf &
+                    "LEFT JOIN MBarangD (NOLOCK) ON MSaldoAwalPersediaan.IDBarangD=MBarangD.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserEntry (NOLOCK) ON MSaldoAwalPersediaan.IDUserEntry=UserEntry.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserEdit (NOLOCK) ON MSaldoAwalPersediaan.IDUserEdit=UserEdit.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserPosted (NOLOCK) ON MSaldoAwalPersediaan.IDUserPosted=UserPosted.NoID" & vbCrLf &
+                    "WHERE CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) >= CONVERT(DATE, @TglDari) AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) <= CONVERT(DATE, @TglSampai)" & vbCrLf &
+                    "ORDER BY MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.NoID" & vbCrLf &
                     "END"
             Obj = New Model.UpdateDB With {.DBVersion = "spMSaldoAwalPersediaan_200916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "-- =============================================" & vbCrLf & _
-                    "-- Author: <Author,,Name>" & vbCrLf & _
-                    "-- Create date: <Create Date,,>" & vbCrLf & _
-                    "-- Description: <Description,,>" & vbCrLf & _
-                    "-- =============================================" & vbCrLf & _
-                    "CREATE PROCEDURE [dbo].[spFakturMSaldoAwalPersediaan](@TglDari DATETIME = '2019-01-01', @TglSampai DATETIME = '2019-01-31')" & vbCrLf & _
-                    "AS " & vbCrLf & _
-                    "BEGIN" & vbCrLf & _
-                    "SET NOCOUNT ON;" & vbCrLf & _
-                    "SELECT MSaldoAwalPersediaan.*, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang, MBarangD.Barcode, UserEntry.Nama UserEntry, UserEdit.Nama UserEdit, UserPosted.Nama UserPosted, MGudang.Kode Gudang" & vbCrLf & _
-                    "FROM MSaldoAwalPersediaan (NOLOCK)" & vbCrLf & _
-                    "LEFT JOIN MGudang (NOLOCK) ON MSaldoAwalPersediaan.IDGudang=MGudang.NoID" & vbCrLf & _
-                    "LEFT JOIN MBarang (NOLOCK) ON MSaldoAwalPersediaan.IDBarang=MBarang.NoID" & vbCrLf & _
-                    "LEFT JOIN MBarangD (NOLOCK) ON MSaldoAwalPersediaan.IDBarangD=MBarangD.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserEntry (NOLOCK) ON MSaldoAwalPersediaan.IDUserEntry=UserEntry.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserEdit (NOLOCK) ON MSaldoAwalPersediaan.IDUserEdit=UserEdit.NoID" & vbCrLf & _
-                    "LEFT JOIN MUser UserPosted (NOLOCK) ON MSaldoAwalPersediaan.IDUserPosted=UserPosted.NoID" & vbCrLf & _
-                    "WHERE MSaldoAwalPersediaan.IsPosted=1 AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) >= CONVERT(DATE, @TglDari) AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) <= CONVERT(DATE, @TglSampai)" & vbCrLf & _
-                    "ORDER BY MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.NoID" & vbCrLf & _
+            SQL = "-- =============================================" & vbCrLf &
+                    "-- Author: <Author,,Name>" & vbCrLf &
+                    "-- Create date: <Create Date,,>" & vbCrLf &
+                    "-- Description: <Description,,>" & vbCrLf &
+                    "-- =============================================" & vbCrLf &
+                    "CREATE PROCEDURE [dbo].[spFakturMSaldoAwalPersediaan](@TglDari DATETIME = '2019-01-01', @TglSampai DATETIME = '2019-01-31')" & vbCrLf &
+                    "AS " & vbCrLf &
+                    "BEGIN" & vbCrLf &
+                    "SET NOCOUNT ON;" & vbCrLf &
+                    "SELECT MSaldoAwalPersediaan.*, MBarang.Kode KodeBarang, MBarang.Nama NamaBarang, MBarangD.Barcode, UserEntry.Nama UserEntry, UserEdit.Nama UserEdit, UserPosted.Nama UserPosted, MGudang.Kode Gudang" & vbCrLf &
+                    "FROM MSaldoAwalPersediaan (NOLOCK)" & vbCrLf &
+                    "LEFT JOIN MGudang (NOLOCK) ON MSaldoAwalPersediaan.IDGudang=MGudang.NoID" & vbCrLf &
+                    "LEFT JOIN MBarang (NOLOCK) ON MSaldoAwalPersediaan.IDBarang=MBarang.NoID" & vbCrLf &
+                    "LEFT JOIN MBarangD (NOLOCK) ON MSaldoAwalPersediaan.IDBarangD=MBarangD.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserEntry (NOLOCK) ON MSaldoAwalPersediaan.IDUserEntry=UserEntry.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserEdit (NOLOCK) ON MSaldoAwalPersediaan.IDUserEdit=UserEdit.NoID" & vbCrLf &
+                    "LEFT JOIN MUser UserPosted (NOLOCK) ON MSaldoAwalPersediaan.IDUserPosted=UserPosted.NoID" & vbCrLf &
+                    "WHERE MSaldoAwalPersediaan.IsPosted=1 AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) >= CONVERT(DATE, @TglDari) AND CONVERT(DATE, MSaldoAwalPersediaan.Tanggal) <= CONVERT(DATE, @TglSampai)" & vbCrLf &
+                    "ORDER BY MSaldoAwalPersediaan.Tanggal, MSaldoAwalPersediaan.NoID" & vbCrLf &
                     "END"
             Obj = New Model.UpdateDB With {.DBVersion = "spFakturMSaldoAwalPersediaan_200916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
 
-            SQL = "CREATE PROCEDURE [dbo].[spSimpanMSaldoAwalPersediaan]" & vbCrLf & _
-                    "(@NoID         BIGINT, " & vbCrLf & _
-                    "@Kode         VARCHAR(255), " & vbCrLf & _
-                    "@Tanggal      DATETIME, " & vbCrLf & _
-                    "@Keterangan   VARCHAR(MAX), " & vbCrLf & _
-                    "@IDGudang     INT, " & vbCrLf & _
-                    "@IDBarangD    INT, " & vbCrLf & _
-                    "@IDBarang     INT, " & vbCrLf & _
-                    "@IDSatuan     INT, " & vbCrLf & _
-                    "@Qty          NUMERIC(18, 3), " & vbCrLf & _
-                    "@Konversi     INT, " & vbCrLf & _
-                    "@HargaPokok   MONEY, " & vbCrLf & _
-                    "@IsPosted     BIT, " & vbCrLf & _
-                    "@TglPosted    DATETIME, " & vbCrLf & _
-                    "@IDUserPosted INT, " & vbCrLf & _
-                    "@IDUserEntry  INT, " & vbCrLf & _
-                    "@IDUserEdit   INT" & vbCrLf & _
-                    ")" & vbCrLf & _
-                    "AS" & vbCrLf & _
-                    "BEGIN" & vbCrLf & _
-                    "DECLARE @NoUrut AS INT= 0;" & vbCrLf & _
-                    "IF(@NoID <= 0)" & vbCrLf & _
-                    "BEGIN" & vbCrLf & _
-                    "SELECT @NoID = MAX(NoID)" & vbCrLf & _
-                    "FROM MSaldoAwalPersediaan;" & vbCrLf & _
-                    "SET @NoID = ISNULL(@NoID, 0) + 1;" & vbCrLf & _
-                    "SET @Kode = 'SAP/' + SUBSTRING(CONVERT(VARCHAR(100), @Tanggal, 112), 3, 4) + '/';" & vbCrLf & _
-                    "SELECT @NoUrut = MAX(CASE" & vbCrLf & _
-                    "WHEN ISNUMERIC(RIGHT(Kode, 5)) = 1" & vbCrLf & _
-                    "THEN RIGHT(Kode, 5)" & vbCrLf & _
-                    "ELSE 0" & vbCrLf & _
-                    "END)" & vbCrLf & _
-                    "FROM MSaldoAwalPersediaan" & vbCrLf & _
-                    "WHERE LEFT(Kode, LEN(@Kode)) = @Kode;" & vbCrLf & _
-                    "SET @NoUrut = ISNULL(@NoUrut, 0) + 1;" & vbCrLf & _
-                    "SET @Kode = @Kode + LEFT('00000', 5 - LEN(CONVERT(VARCHAR(10), @NoUrut))) + CONVERT(VARCHAR(10), @NoUrut);" & vbCrLf & _
-                    "INSERT INTO [dbo].[MSaldoAwalPersediaan]" & vbCrLf & _
-                    "([NoID], " & vbCrLf & _
-                    "[IDGudang], " & vbCrLf & _
-                    "[IDBarangD], " & vbCrLf & _
-                    "[IDBarang], " & vbCrLf & _
-                    "[Kode], " & vbCrLf & _
-                    "[Tanggal], " & vbCrLf & _
-                    "[Qty], " & vbCrLf & _
-                    "[IDSatuan], " & vbCrLf & _
-                    "[Konversi], " & vbCrLf & _
-                    "[HargaPokok], " & vbCrLf & _
-                    "[Jumlah], " & vbCrLf & _
-                    "[IDUserEntry], " & vbCrLf & _
-                    "[TglEntry], " & vbCrLf & _
-                    "[IDUserEdit], " & vbCrLf & _
-                    "[TglEdit], " & vbCrLf & _
-                    "[IsPosted], " & vbCrLf & _
-                    "[IDUserPosted], " & vbCrLf & _
-                    "[TglPosted], " & vbCrLf & _
-                    "[Keterangan]" & vbCrLf & _
-                    ")" & vbCrLf & _
-                    "SELECT @NoID, " & vbCrLf & _
-                    "@IDGudang, " & vbCrLf & _
-                    "@IDBarangD, " & vbCrLf & _
-                    "@IDBarang, " & vbCrLf & _
-                    "@Kode, " & vbCrLf & _
-                    "@Tanggal, " & vbCrLf & _
-                    "@Qty, " & vbCrLf & _
-                    "@IDSatuan, " & vbCrLf & _
-                    "@Konversi, " & vbCrLf & _
-                    "@HargaPokok, " & vbCrLf & _
-                    "ROUND(@HargaPokok * @Qty, 2), " & vbCrLf & _
-                    "@IDUserEntry, " & vbCrLf & _
-                    "GETDATE(), " & vbCrLf & _
-                    "NULL, " & vbCrLf & _
-                    "NULL, " & vbCrLf & _
-                    "0, " & vbCrLf & _
-                    "NULL, " & vbCrLf & _
-                    "NULL, " & vbCrLf & _
-                    "@Keterangan;" & vbCrLf & _
-                    "END;" & vbCrLf & _
-                    "ELSE" & vbCrLf & _
-                    "BEGIN" & vbCrLf & _
-                    "UPDATE [dbo].[MSaldoAwalPersediaan]" & vbCrLf & _
-                    "SET " & vbCrLf & _
-                    "[IDGudang] = @IDGudang, " & vbCrLf & _
-                    "[IDBarangD] = @IDBarangD, " & vbCrLf & _
-                    "[IDBarang] = @IDBarang, " & vbCrLf & _
-                    "[Kode] = @Kode, " & vbCrLf & _
-                    "[Tanggal] = @Tanggal, " & vbCrLf & _
-                    "[Qty] = @Qty, " & vbCrLf & _
-                    "[IDSatuan] = @IDSatuan, " & vbCrLf & _
-                    "[Konversi] = @Konversi, " & vbCrLf & _
-                    "[HargaPokok] = @HargaPokok, " & vbCrLf & _
-                    "[Jumlah] = ROUND(@HargaPokok * @Qty, 2), " & vbCrLf & _
-                    "[IDUserEdit] = @IDUserEdit, " & vbCrLf & _
-                    "[TglEdit] = GETDATE(), " & vbCrLf & _
-                    "[IsPosted] = @IsPosted, " & vbCrLf & _
-                    "[IDUserPosted] = CASE" & vbCrLf & _
-                    "WHEN ISNULL(@IsPosted, 0) = 1" & vbCrLf & _
-                    "THEN @IDUserPosted" & vbCrLf & _
-                    "ELSE NULL" & vbCrLf & _
-                    "END, " & vbCrLf & _
-                    "[TglPosted] = CASE" & vbCrLf & _
-                    "WHEN ISNULL(@IsPosted, 0) = 1" & vbCrLf & _
-                    "THEN GETDATE()" & vbCrLf & _
-                    "ELSE NULL" & vbCrLf & _
-                    "END, " & vbCrLf & _
-                    "[Keterangan] = @Keterangan" & vbCrLf & _
-                    "WHERE [NoID] = @NoID;" & vbCrLf & _
-                    "END;" & vbCrLf & _
-                    "SELECT @NoID AS NoID;" & vbCrLf & _
+            SQL = "CREATE PROCEDURE [dbo].[spSimpanMSaldoAwalPersediaan]" & vbCrLf &
+                    "(@NoID         BIGINT, " & vbCrLf &
+                    "@Kode         VARCHAR(255), " & vbCrLf &
+                    "@Tanggal      DATETIME, " & vbCrLf &
+                    "@Keterangan   VARCHAR(MAX), " & vbCrLf &
+                    "@IDGudang     INT, " & vbCrLf &
+                    "@IDBarangD    INT, " & vbCrLf &
+                    "@IDBarang     INT, " & vbCrLf &
+                    "@IDSatuan     INT, " & vbCrLf &
+                    "@Qty          NUMERIC(18, 3), " & vbCrLf &
+                    "@Konversi     INT, " & vbCrLf &
+                    "@HargaPokok   MONEY, " & vbCrLf &
+                    "@IsPosted     BIT, " & vbCrLf &
+                    "@TglPosted    DATETIME, " & vbCrLf &
+                    "@IDUserPosted INT, " & vbCrLf &
+                    "@IDUserEntry  INT, " & vbCrLf &
+                    "@IDUserEdit   INT" & vbCrLf &
+                    ")" & vbCrLf &
+                    "AS" & vbCrLf &
+                    "BEGIN" & vbCrLf &
+                    "DECLARE @NoUrut AS INT= 0;" & vbCrLf &
+                    "IF(@NoID <= 0)" & vbCrLf &
+                    "BEGIN" & vbCrLf &
+                    "SELECT @NoID = MAX(NoID)" & vbCrLf &
+                    "FROM MSaldoAwalPersediaan;" & vbCrLf &
+                    "SET @NoID = ISNULL(@NoID, 0) + 1;" & vbCrLf &
+                    "SET @Kode = 'SAP/' + SUBSTRING(CONVERT(VARCHAR(100), @Tanggal, 112), 3, 4) + '/';" & vbCrLf &
+                    "SELECT @NoUrut = MAX(CASE" & vbCrLf &
+                    "WHEN ISNUMERIC(RIGHT(Kode, 5)) = 1" & vbCrLf &
+                    "THEN RIGHT(Kode, 5)" & vbCrLf &
+                    "ELSE 0" & vbCrLf &
+                    "END)" & vbCrLf &
+                    "FROM MSaldoAwalPersediaan" & vbCrLf &
+                    "WHERE LEFT(Kode, LEN(@Kode)) = @Kode;" & vbCrLf &
+                    "SET @NoUrut = ISNULL(@NoUrut, 0) + 1;" & vbCrLf &
+                    "SET @Kode = @Kode + LEFT('00000', 5 - LEN(CONVERT(VARCHAR(10), @NoUrut))) + CONVERT(VARCHAR(10), @NoUrut);" & vbCrLf &
+                    "INSERT INTO [dbo].[MSaldoAwalPersediaan]" & vbCrLf &
+                    "([NoID], " & vbCrLf &
+                    "[IDGudang], " & vbCrLf &
+                    "[IDBarangD], " & vbCrLf &
+                    "[IDBarang], " & vbCrLf &
+                    "[Kode], " & vbCrLf &
+                    "[Tanggal], " & vbCrLf &
+                    "[Qty], " & vbCrLf &
+                    "[IDSatuan], " & vbCrLf &
+                    "[Konversi], " & vbCrLf &
+                    "[HargaPokok], " & vbCrLf &
+                    "[Jumlah], " & vbCrLf &
+                    "[IDUserEntry], " & vbCrLf &
+                    "[TglEntry], " & vbCrLf &
+                    "[IDUserEdit], " & vbCrLf &
+                    "[TglEdit], " & vbCrLf &
+                    "[IsPosted], " & vbCrLf &
+                    "[IDUserPosted], " & vbCrLf &
+                    "[TglPosted], " & vbCrLf &
+                    "[Keterangan]" & vbCrLf &
+                    ")" & vbCrLf &
+                    "SELECT @NoID, " & vbCrLf &
+                    "@IDGudang, " & vbCrLf &
+                    "@IDBarangD, " & vbCrLf &
+                    "@IDBarang, " & vbCrLf &
+                    "@Kode, " & vbCrLf &
+                    "@Tanggal, " & vbCrLf &
+                    "@Qty, " & vbCrLf &
+                    "@IDSatuan, " & vbCrLf &
+                    "@Konversi, " & vbCrLf &
+                    "@HargaPokok, " & vbCrLf &
+                    "ROUND(@HargaPokok * @Qty, 2), " & vbCrLf &
+                    "@IDUserEntry, " & vbCrLf &
+                    "GETDATE(), " & vbCrLf &
+                    "NULL, " & vbCrLf &
+                    "NULL, " & vbCrLf &
+                    "0, " & vbCrLf &
+                    "NULL, " & vbCrLf &
+                    "NULL, " & vbCrLf &
+                    "@Keterangan;" & vbCrLf &
+                    "END;" & vbCrLf &
+                    "ELSE" & vbCrLf &
+                    "BEGIN" & vbCrLf &
+                    "UPDATE [dbo].[MSaldoAwalPersediaan]" & vbCrLf &
+                    "SET " & vbCrLf &
+                    "[IDGudang] = @IDGudang, " & vbCrLf &
+                    "[IDBarangD] = @IDBarangD, " & vbCrLf &
+                    "[IDBarang] = @IDBarang, " & vbCrLf &
+                    "[Kode] = @Kode, " & vbCrLf &
+                    "[Tanggal] = @Tanggal, " & vbCrLf &
+                    "[Qty] = @Qty, " & vbCrLf &
+                    "[IDSatuan] = @IDSatuan, " & vbCrLf &
+                    "[Konversi] = @Konversi, " & vbCrLf &
+                    "[HargaPokok] = @HargaPokok, " & vbCrLf &
+                    "[Jumlah] = ROUND(@HargaPokok * @Qty, 2), " & vbCrLf &
+                    "[IDUserEdit] = @IDUserEdit, " & vbCrLf &
+                    "[TglEdit] = GETDATE(), " & vbCrLf &
+                    "[IsPosted] = @IsPosted, " & vbCrLf &
+                    "[IDUserPosted] = CASE" & vbCrLf &
+                    "WHEN ISNULL(@IsPosted, 0) = 1" & vbCrLf &
+                    "THEN @IDUserPosted" & vbCrLf &
+                    "ELSE NULL" & vbCrLf &
+                    "END, " & vbCrLf &
+                    "[TglPosted] = CASE" & vbCrLf &
+                    "WHEN ISNULL(@IsPosted, 0) = 1" & vbCrLf &
+                    "THEN GETDATE()" & vbCrLf &
+                    "ELSE NULL" & vbCrLf &
+                    "END, " & vbCrLf &
+                    "[Keterangan] = @Keterangan" & vbCrLf &
+                    "WHERE [NoID] = @NoID;" & vbCrLf &
+                    "END;" & vbCrLf &
+                    "SELECT @NoID AS NoID;" & vbCrLf &
                     "END;"
             Obj = New Model.UpdateDB With {.DBVersion = "spSimpanMSaldoAwalPersediaan_200916", .TglUpdate = CDate("2020-09-16"), .SQL = SQL}
             Hasil.Add(Obj)
@@ -1017,6 +1024,251 @@ Namespace Repository
             ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_ChargeRp]  DEFAULT ((0)) FOR [ChargeRp];")
             ListSQL.Add("ALTER TABLE [dbo].[MKasOutDBayar] ADD  CONSTRAINT [DF_MKasOutDBayar_Total]  DEFAULT ((0)) FOR [Total];")
             Obj = New Model.UpdateDB With {.DBVersion = "MKasOut_200922", .TglUpdate = CDate("2020-09-22"), .SQL = "", .ListSQL = ListSQL}
+            Hasil.Add(Obj)
+
+            Return Hasil
+        End Function
+
+        Private Shared Function ListUpdate_Juni_2021() As List(Of Model.UpdateDB)
+            Dim Hasil As New List(Of Model.UpdateDB)
+            Dim Obj As New Model.UpdateDB
+            Dim SQL As String = ""
+            Dim ListSQL As List(Of String) = Nothing
+
+            SQL = "CREATE TABLE dbo.MMaterial (" & vbCrLf &
+                  "NoID uniqueidentifier Not NULL," & vbCrLf &
+                  "Kode varchar(50) NOT NULL," & vbCrLf &
+                  "Nama varchar(150) NOT NULL," & vbCrLf &
+                  "Keterangan varchar(150) NOT NULL," & vbCrLf &
+                  "IsActive bit NOT NULL CONSTRAINT DF_MMaterial_IsActive DEFAULT ((0))," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "IDUser int NOT NULL," & vbCrLf &
+                  "TanggalUpdate datetime NOT NULL," & vbCrLf &
+                  "CONSTRAINT PK_MMaterial PRIMARY KEY (NoID)" & vbCrLf &
+                  ");" & vbCrLf &
+                  "CREATE UNIQUE INDEX IX_Kode" & vbCrLf &
+                  "ON dbo.MMaterial (Kode)"
+            Obj = New Model.UpdateDB With {.DBVersion = "MMaterial_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MWOAssembly (" & vbCrLf &
+                  "NoID uniqueidentifier NOT NULL," & vbCrLf &
+                  "Kode varchar(50) NOT NULL," & vbCrLf &
+                  "Tanggal datetime NOT NULL," & vbCrLf &
+                  "TanggalWO datetime NOT NULL," & vbCrLf &
+                  "IDMaterial uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDPegawai bigint NOT NULL," & vbCrLf &
+                  "IDGudang int NOT NULL," & vbCrLf &
+                  "Catatan varchar(150) NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "IsPosted bit NULL," & vbCrLf &
+                  "TglPosted datetime NULL," & vbCrLf &
+                  "IDUserPosted int NULL," & vbCrLf &
+                  "IDUserEntry int NULL," & vbCrLf &
+                  "IDUserEdit int NULL," & vbCrLf &
+                  "CONSTRAINT PK_MWOAssembly PRIMARY KEY (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MWOAssembly_MMaterial FOREIGN KEY (IDMaterial) REFERENCES dbo.MMaterial (NoID) ON UPDATE CASCADE" & vbCrLf &
+                  ");" & vbCrLf &
+                  "CREATE UNIQUE INDEX IX_Kode" & vbCrLf &
+                  "ON dbo.MWOAssembly (Kode)"
+            Obj = New Model.UpdateDB With {.DBVersion = "MWOAssembly_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MAssembly (" & vbCrLf &
+                  "NoID bigint NOT NULL," & vbCrLf &
+                  "Kode varchar(50) NOT NULL," & vbCrLf &
+                  "Tanggal datetime NOT NULL," & vbCrLf &
+                  "IDWOAssembly uniqueidentifier NULL," & vbCrLf &
+                  "IDMaterial uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDPegawai bigint NOT NULL," & vbCrLf &
+                  "IDGudang int NOT NULL," & vbCrLf &
+                  "Catatan varchar(150) NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "IsPosted bit NULL," & vbCrLf &
+                  "TglPosted datetime NULL," & vbCrLf &
+                  "IDUserPosted int NULL," & vbCrLf &
+                  "IDUserEntry int NULL," & vbCrLf &
+                  "IDUserEdit int NULL," & vbCrLf &
+                  "CONSTRAINT PK_MAssembly PRIMARY KEY (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MAssembly_MMaterial FOREIGN KEY (IDMaterial) REFERENCES dbo.MMaterial (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MAssembly_MWOAssembly FOREIGN KEY (IDWOAssembly) REFERENCES dbo.MWOAssembly (NoID)" & vbCrLf &
+                  ");" & vbCrLf &
+                  "CREATE UNIQUE INDEX IX_Kode" & vbCrLf &
+                  "ON dbo.MAssembly (Kode)"
+            Obj = New Model.UpdateDB With {.DBVersion = "MAssembly_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MMaterialDSisa (" & vbCrLf &
+                  "NoID uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDMaterial uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "CONSTRAINT PK_MMaterialDSisa PRIMARY KEY (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MMaterialDSisa_MMaterial FOREIGN KEY (IDMaterial) REFERENCES dbo.MMaterial (NoID) ON DELETE CASCADE ON UPDATE CASCADE" & vbCrLf &
+                  ");" & vbCrLf &
+                  "CREATE UNIQUE INDEX IX_IDMaterial" & vbCrLf &
+                  "ON dbo.MMaterialDSisa (IDMaterial, IDBarangD)"
+            Obj = New Model.UpdateDB With {.DBVersion = "MMaterialDSisa_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MAssemblyDSisa (" & vbCrLf &
+                  "NoID bigint NOT NULL," & vbCrLf &
+                  "IDHeader bigint NOT NULL," & vbCrLf &
+                  "IDMaterialDSisa uniqueidentifier NOT NULL," & vbCrLf &
+                  "Tanggal datetime NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "IsPosted bit NULL," & vbCrLf &
+                  "TglPosted datetime NULL," & vbCrLf &
+                  "IDUserPosted int NULL," & vbCrLf &
+                  "IDUserEntry int NULL," & vbCrLf &
+                  "IDUserEdit int NULL," & vbCrLf &
+                  "CONSTRAINT PK_MAssemblyDSisa PRIMARY KEY (NoID, IDHeader, IDMaterialDSisa)," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyDSisa_MAssemblyDSisa FOREIGN KEY (IDHeader) REFERENCES dbo.MAssembly (NoID) ON UPDATE CASCADE," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyDSisa_MMaterialDSisa FOREIGN KEY (IDMaterialDSisa) REFERENCES dbo.MMaterialDSisa (NoID) ON UPDATE CASCADE" & vbCrLf &
+                  ")"
+            Obj = New Model.UpdateDB With {.DBVersion = "MAssemblyDSisa_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MMaterialDBiaya (" & vbCrLf &
+                  "NoID uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDMaterial uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDAkun bigint NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "Keterangan varchar(150) NULL," & vbCrLf &
+                  "CONSTRAINT PK_MMaterialDBiaya PRIMARY KEY (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MMaterialDBiaya_MMaterial FOREIGN KEY (IDMaterial) REFERENCES dbo.MMaterial (NoID) ON DELETE CASCADE ON UPDATE CASCADE" & vbCrLf &
+                  ")"
+            Obj = New Model.UpdateDB With {.DBVersion = "MMaterialDBiaya_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MAssemblyDBiaya (" & vbCrLf &
+                  "NoID bigint NOT NULL," & vbCrLf &
+                  "IDHeader bigint NOT NULL," & vbCrLf &
+                  "IDMaterialDBiaya uniqueidentifier NOT NULL," & vbCrLf &
+                  "Tanggal datetime NOT NULL," & vbCrLf &
+                  "IDAkun bigint NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "Keterangan varchar(150) NULL," & vbCrLf &
+                  "IsPosted bit NULL," & vbCrLf &
+                  "TglPosted datetime NULL," & vbCrLf &
+                  "IDUserPosted int NULL," & vbCrLf &
+                  "IDUserEntry int NULL," & vbCrLf &
+                  "IDUserEdit int NULL," & vbCrLf &
+                  "CONSTRAINT PK_MAssemblyDBiaya PRIMARY KEY (NoID, IDHeader, IDMaterialDBiaya)," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyDBiaya_MAssembly FOREIGN KEY (IDHeader) REFERENCES dbo.MAssembly (NoID) ON UPDATE CASCADE," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyDBiaya_MMaterialDBiaya FOREIGN KEY (IDMaterialDBiaya) REFERENCES dbo.MMaterialDBiaya (NoID) ON UPDATE CASCADE" & vbCrLf &
+                  ")"
+            Obj = New Model.UpdateDB With {.DBVersion = "MAssemblyDBiaya_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MMaterialD (" & vbCrLf &
+                  "NoID uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDMaterial uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "CONSTRAINT PK_MMaterialD PRIMARY KEY (NoID)," & vbCrLf &
+                  "CONSTRAINT FK_MMaterialD_MMaterial FOREIGN KEY (IDMaterial) REFERENCES dbo.MMaterial (NoID) ON DELETE CASCADE ON UPDATE CASCADE" & vbCrLf &
+                  ");" & vbCrLf &
+                  "CREATE UNIQUE INDEX IX_IDMaterial" & vbCrLf &
+                  "ON dbo.MMaterialD (IDBarangD, IDMaterial)"
+            Obj = New Model.UpdateDB With {.DBVersion = "MMaterialD_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "CREATE TABLE dbo.MAssemblyD (" & vbCrLf &
+                  "NoID bigint NOT NULL," & vbCrLf &
+                  "IDHeader bigint NOT NULL," & vbCrLf &
+                  "IDMaterialD uniqueidentifier NOT NULL," & vbCrLf &
+                  "IDBarangD bigint NOT NULL," & vbCrLf &
+                  "Tanggal datetime NOT NULL," & vbCrLf &
+                  "IDBarang bigint NOT NULL," & vbCrLf &
+                  "IDSatuan int NOT NULL," & vbCrLf &
+                  "Konversi numeric NOT NULL," & vbCrLf &
+                  "Qty numeric(18, 3) NOT NULL," & vbCrLf &
+                  "HargaPokok money NOT NULL," & vbCrLf &
+                  "Jumlah money NOT NULL," & vbCrLf &
+                  "IsPosted bit NULL," & vbCrLf &
+                  "TglPosted datetime NULL," & vbCrLf &
+                  "IDUserPosted int NULL," & vbCrLf &
+                  "IDUserEntry int NULL," & vbCrLf &
+                  "IDUserEdit int NULL," & vbCrLf &
+                  "CONSTRAINT PK_MAssemblyD PRIMARY KEY (NoID, IDHeader, IDMaterialD)," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyD_MAssembly FOREIGN KEY (IDHeader) REFERENCES dbo.MAssembly (NoID) ON UPDATE CASCADE," & vbCrLf &
+                  "CONSTRAINT FK_MAssemblyD_MMaterialD FOREIGN KEY (IDMaterialD) REFERENCES dbo.MMaterialD (NoID) ON UPDATE CASCADE" & vbCrLf &
+                  ")"
+            Obj = New Model.UpdateDB With {.DBVersion = "MAssemblyD_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
+            Hasil.Add(Obj)
+
+            SQL = "-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE dbo.spFakturMJual @NoID BIGINT = -1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT dbo.MJualD.NoID, dbo.MJualD.Konversi, dbo.MJualD.Qty, dbo.MJualD.Harga, dbo.MJualD.DiscProsen1, dbo.MJualD.DiscProsen2, dbo.MJualD.DiscProsen3, dbo.MJualD.DiscProsen4, dbo.MJualD.DiscProsen5, dbo.MJualD.DiscRp, 
+		dbo.MJualD.JumlahBruto, dbo.MJualD.DPP, dbo.MJualD.PPN, dbo.MJualD.Jumlah, dbo.MJual.Kode, UserEntry.Nama AS UserEntry, UserEdit.Nama AS UserEdit, UserPosted.Nama AS UserPosted, dbo.MAlamat.Kode AS KodeCustomer, 
+		dbo.MAlamat.Nama AS NamaCustomer, dbo.MTypePajak.TypePajak, dbo.MJual.NoReff, dbo.MJual.Tanggal, dbo.MJual.Catatan, dbo.MJual.Subtotal, dbo.MJual.DiscNotaProsen, dbo.MJual.DiscNotaRp, 
+		dbo.MJual.TotalBruto, dbo.MJual.DPP AS DPPHeader, dbo.MJual.PPN AS PPNHeader, dbo.MJual.Total, dbo.MJual.IsPosted, dbo.MJual.TglPosted, dbo.MJual.JatuhTempo, dbo.MJualD.IDHeader, dbo.MBarang.Kode AS KodeBarang, 
+		dbo.MBarang.Nama AS NamaBarang, dbo.MBarangD.Barcode, dbo.MSatuan.Kode AS Satuan, dbo.MJual.Sisa, dbo.MJual.Bayar
+	FROM ((dbo.MJual 
+		INNER JOIN dbo.MJualD ON dbo.MJualD.IDHeader = dbo.MJual.NoID) 
+		LEFT JOIN dbo.MBarangD ON dbo.MJualD.IDBarangD = dbo.MBarangD.NoID) 
+		LEFT JOIN dbo.MSatuan ON dbo.MJualD.IDSatuan = dbo.MSatuan.NoID
+		LEFT JOIN dbo.MBarang ON dbo.MJualD.IDBarang = dbo.MBarang.NoID 
+		LEFT JOIN dbo.MTypePajak ON dbo.MJual.IDTypePajak = dbo.MTypePajak.NoID 
+		LEFT JOIN dbo.MAlamat ON dbo.MAlamat.NoID = dbo.MJual.IDCustomer 
+		LEFT JOIN dbo.MUser AS UserPosted ON UserPosted.NoID = dbo.MJual.IDUserPosted
+		LEFT JOIN dbo.MUser AS UserEntry ON dbo.MJual.IDUserEntry = UserEntry.NoID
+		LEFT JOIN dbo.MUser AS UserEdit ON dbo.MJual.IDUserEdit = UserEdit.NoID
+	WHERE dbo.MJual.IsPosted = 1 AND dbo.MJual.NoID = @NoID
+
+	SELECT MJualDBayar.*, MJenisPembayaran.Kode KodePembayaran, MJenisPembayaran.Nama NamaPembayaran 
+	FROM MJualDBayar(NOLOCK)
+	LEFT JOIN MJenisPembayaran(NOLOCK) ON MJualDBayar.IDJenisPembayaran=MJenisPembayaran.NoID
+	WHERE MJualDBayar.IDHeader=@NoID
+	ORDER BY MJualDBayar.NoID
+END"
+            Obj = New Model.UpdateDB With {.DBVersion = "spFakturMJual_210623", .TglUpdate = CDate("2021-06-23"), .SQL = SQL}
             Hasil.Add(Obj)
 
             Return Hasil

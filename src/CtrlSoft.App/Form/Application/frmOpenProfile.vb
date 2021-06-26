@@ -8,18 +8,18 @@ Imports System.Data.Odbc
 Imports Dapper
 Imports DevExpress.XtraEditors.Controls
 
-Public Class frmSettingDBEntri
+Public Class frmOpenProfile
     Public DBSetting As DBSettings.MDBSetting
 
     Private ListDB As New List(Of DBSettings.DBName)
 
-    Public Sub New(ByVal Id As String)
+    Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        DBSetting = [Public].DBSetting.Get(Id)
+        DBSetting = [Public].DBSetting.Get("")
 
         Dim str As String() = {"(localdb)\MSSQLLocalDB", "(local)", "127.0.0.1", "localhost", "."}
         Dim collection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
@@ -42,7 +42,7 @@ Public Class frmSettingDBEntri
             DBSetting = New DBSettings.MDBSetting With {.Id = ""}
             txtID.Text = DBSetting.Id
             txtServer.Text = "(localdb)\MSSQLLocalDB"
-            txtDatabase.Text = "dbpos"
+            txtDatabase.Text = ""
             txtUserID.Text = "sa"
             txtPassword.Text = "1234123412"
             txtTimeout.Value = 15
@@ -91,10 +91,7 @@ Public Class frmSettingDBEntri
                         temp = (From x In Me.ListDB.ToList()
                                 Select x.DBName).ToList()
                         txtDatabase.Properties.Items.AddRange(temp)
-
-                        cmdNewProfile.Enabled = True
                     Catch ex As Exception
-                        cmdNewProfile.Enabled = False
                         'XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End Try
                 End Using
@@ -103,66 +100,8 @@ Public Class frmSettingDBEntri
         'End Using
     End Sub
 
-    Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtServer.LostFocus, txtUserID.LostFocus, txtPassword.LostFocus
+    Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtUserID.LostFocus, txtPassword.LostFocus
         LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
-    End Sub
-
-    Private Sub txtDatabase_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtDatabase.ButtonClick
-        Select Case e.Button.Index
-            Case 1
-                cmdNewProfile.PerformClick()
-        End Select
-    End Sub
-
-    Private Sub CreateNewDB()
-        Dim sqlBatch As String = String.Empty
-        Dim Script As String = String.Empty
-        Dim DBName As String = InputBox("Isikan nama Database Baru Anda", NamaAplikasi, "")
-        If DBName <> "" Then
-            Using dlg As New WaitDialogForm("Sedang membuatkan database", NamaAplikasi)
-                Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
-                                              "Server=" & txtServer.Text & ";Database=master;User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;",
-                                              "Server=" & txtServer.Text & ";Database=master;Integrated Security=true;Timeout=3;"))
-                    Using ds As New DataSet
-                        Using com As New SqlCommand
-                            Try
-                                dlg.Show()
-
-                                cn.Open()
-                                com.Connection = cn
-                                com.CommandTimeout = cn.ConnectionTimeout
-
-                                'Script = System.IO.File.ReadAllText(Environment.CurrentDirectory & "\Migration\Migration.SQL")
-
-                                Script = My.Resources.Migration.
-                                         Replace("[DBPOS]", "[" & DBName.Replace(" ", "") & "]").
-                                         Replace("'DBPOS'", "'" & DBName.Replace(" ", "") & "'").
-                                         Replace("N'@PathsLayouts'", "N'" & Environment.CurrentDirectory & "\System\Layouts\'").
-                                         Replace("C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_", Environment.CurrentDirectory & "\System\" & DBName.Replace(" ", "") & "_")
-                                For Each line As String In Script.Split(New String(1) {vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
-                                    If line.ToUpperInvariant().Trim() = "GO" Then
-                                        com.CommandText = sqlBatch
-                                        com.ExecuteNonQuery()
-                                        sqlBatch = String.Empty
-                                    Else
-                                        sqlBatch += line & vbLf
-                                    End If
-
-                                    Application.DoEvents()
-                                Next
-                                XtraMessageBox.Show("Sukses membuat database baru!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                                'Sukses
-                                LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
-                                txtDatabase.Text = DBName.Replace(" ", "")
-                            Catch ex As Exception
-                                XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                            End Try
-                        End Using
-                    End Using
-                End Using
-            End Using
-        End If
     End Sub
 
     Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
@@ -184,6 +123,7 @@ Public Class frmSettingDBEntri
         If txtTimeout.Text = "" OrElse NullToLong(txtTimeout.Value) <= 0 Then
             DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
         End If
+
         If Not DxErrorProvider1.HasErrors Then
             Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
                                               "Server=" & txtServer.Text & ";Database=" & txtDatabase.Text & ";User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;",
@@ -214,9 +154,5 @@ Public Class frmSettingDBEntri
     Private Sub mnTutup_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnTutup.ItemClick
         DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
-    End Sub
-
-    Private Sub cmdNewProfile_Click(sender As Object, e As EventArgs) Handles cmdNewProfile.Click
-        CreateNewDB()
     End Sub
 End Class

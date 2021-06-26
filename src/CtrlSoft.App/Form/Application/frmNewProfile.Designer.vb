@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmSettingDBEntri
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmNewProfile
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,19 +17,17 @@ Partial Class frmSettingDBEntri
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
-        Me.cmdNewProfile = New DevExpress.XtraEditors.SimpleButton()
         Me.txtID = New DevExpress.XtraEditors.TextEdit()
         Me.ckDefault = New DevExpress.XtraEditors.CheckEdit()
         Me.txtPassword = New DevExpress.XtraEditors.TextEdit()
         Me.txtUserID = New DevExpress.XtraEditors.TextEdit()
-        Me.txtServer = New DevExpress.XtraEditors.TextEdit()
         Me.txtTimeout = New DevExpress.XtraEditors.SpinEdit()
-        Me.txtDatabase = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.txtServer = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.txtDatabase = New DevExpress.XtraEditors.TextEdit()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
@@ -39,7 +37,6 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar()
@@ -61,8 +58,8 @@ Partial Class frmSettingDBEntri
         CType(Me.ckDefault.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPassword.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtTimeout.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDatabase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,20 +70,18 @@ Partial Class frmSettingDBEntri
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
-        Me.LayoutControl1.Controls.Add(Me.cmdNewProfile)
         Me.LayoutControl1.Controls.Add(Me.txtID)
         Me.LayoutControl1.Controls.Add(Me.ckDefault)
         Me.LayoutControl1.Controls.Add(Me.txtPassword)
         Me.LayoutControl1.Controls.Add(Me.txtUserID)
-        Me.LayoutControl1.Controls.Add(Me.txtServer)
         Me.LayoutControl1.Controls.Add(Me.txtTimeout)
+        Me.LayoutControl1.Controls.Add(Me.txtServer)
         Me.LayoutControl1.Controls.Add(Me.txtDatabase)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 51)
@@ -97,18 +92,6 @@ Partial Class frmSettingDBEntri
         Me.LayoutControl1.Size = New System.Drawing.Size(358, 247)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
-        '
-        'cmdNewProfile
-        '
-        Me.cmdNewProfile.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNewProfile.Appearance.Options.UseFont = True
-        Me.cmdNewProfile.Location = New System.Drawing.Point(225, 132)
-        Me.cmdNewProfile.Name = "cmdNewProfile"
-        Me.cmdNewProfile.Size = New System.Drawing.Size(121, 22)
-        Me.cmdNewProfile.StyleController = Me.LayoutControl1
-        Me.cmdNewProfile.TabIndex = 10
-        Me.cmdNewProfile.Text = "Create &New Profile"
-        Me.cmdNewProfile.ToolTip = "Membuat Profile Database Baru"
         '
         'txtID
         '
@@ -122,7 +105,7 @@ Partial Class frmSettingDBEntri
         '
         'ckDefault
         '
-        Me.ckDefault.Location = New System.Drawing.Point(12, 158)
+        Me.ckDefault.Location = New System.Drawing.Point(12, 156)
         Me.ckDefault.Name = "ckDefault"
         Me.ckDefault.Properties.Caption = "Default Connection"
         Me.ckDefault.Size = New System.Drawing.Size(334, 19)
@@ -148,15 +131,6 @@ Partial Class frmSettingDBEntri
         Me.txtUserID.StyleController = Me.LayoutControl1
         Me.txtUserID.TabIndex = 5
         '
-        'txtServer
-        '
-        Me.txtServer.EnterMoveNextControl = True
-        Me.txtServer.Location = New System.Drawing.Point(61, 36)
-        Me.txtServer.Name = "txtServer"
-        Me.txtServer.Size = New System.Drawing.Size(285, 20)
-        Me.txtServer.StyleController = Me.LayoutControl1
-        Me.txtServer.TabIndex = 4
-        '
         'txtTimeout
         '
         Me.txtTimeout.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
@@ -172,13 +146,21 @@ Partial Class frmSettingDBEntri
         Me.txtTimeout.StyleController = Me.LayoutControl1
         Me.txtTimeout.TabIndex = 5
         '
+        'txtServer
+        '
+        Me.txtServer.Location = New System.Drawing.Point(61, 36)
+        Me.txtServer.Name = "txtServer"
+        Me.txtServer.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtServer.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        Me.txtServer.Size = New System.Drawing.Size(285, 20)
+        Me.txtServer.StyleController = Me.LayoutControl1
+        Me.txtServer.TabIndex = 4
+        '
         'txtDatabase
         '
         Me.txtDatabase.Location = New System.Drawing.Point(61, 132)
         Me.txtDatabase.Name = "txtDatabase"
-        Me.txtDatabase.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, True, True, False, EditorButtonImageOptions1, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), "Membuat Profile Database Baru")})
-        Me.txtDatabase.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.txtDatabase.Size = New System.Drawing.Size(160, 20)
+        Me.txtDatabase.Size = New System.Drawing.Size(285, 20)
         Me.txtDatabase.StyleController = Me.LayoutControl1
         Me.txtDatabase.TabIndex = 5
         '
@@ -187,7 +169,7 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem1, Me.LayoutControlItem6, Me.LayoutControlItem9, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem7})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.EmptySpaceItem1, Me.LayoutControlItem6, Me.LayoutControlItem9, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(358, 247)
@@ -209,7 +191,7 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlItem2.CustomizationFormText = "Database"
         Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 120)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(213, 26)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(338, 24)
         Me.LayoutControlItem2.Text = "Database"
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(46, 13)
         '
@@ -217,15 +199,15 @@ Partial Class frmSettingDBEntri
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 169)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 167)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(338, 58)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(338, 60)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem6
         '
         Me.LayoutControlItem6.Control = Me.ckDefault
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 146)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 144)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
         Me.LayoutControlItem6.Size = New System.Drawing.Size(338, 23)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
@@ -269,15 +251,6 @@ Partial Class frmSettingDBEntri
         Me.LayoutControlItem5.Size = New System.Drawing.Size(338, 24)
         Me.LayoutControlItem5.Text = "Timeout"
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(46, 13)
-        '
-        'LayoutControlItem7
-        '
-        Me.LayoutControlItem7.Control = Me.cmdNewProfile
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(213, 120)
-        Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(125, 26)
-        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem7.TextVisible = False
         '
         'DxErrorProvider1
         '
@@ -394,7 +367,7 @@ Partial Class frmSettingDBEntri
         Me.mnHasilPosting.Id = 4
         Me.mnHasilPosting.Name = "mnHasilPosting"
         '
-        'frmSettingDBEntri
+        'frmNewProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -404,17 +377,17 @@ Partial Class frmSettingDBEntri
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmSettingDBEntri"
+        Me.Name = "frmNewProfile"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Setting Data Management"
+        Me.Text = "New Profile"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
         CType(Me.txtID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ckDefault.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtPassword.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtUserID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtTimeout.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtServer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDatabase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -425,7 +398,6 @@ Partial Class frmSettingDBEntri
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -435,7 +407,6 @@ Partial Class frmSettingDBEntri
     Friend WithEvents LayoutControl1 As DevExpress.XtraLayout.LayoutControl
     Friend WithEvents txtPassword As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txtUserID As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtServer As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlGroup1 As DevExpress.XtraLayout.LayoutControlGroup
     Friend WithEvents LayoutControlItem1 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem2 As DevExpress.XtraLayout.LayoutControlItem
@@ -449,7 +420,6 @@ Partial Class frmSettingDBEntri
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents txtID As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem9 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents txtDatabase As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
     Friend WithEvents BarManager1 As DevExpress.XtraBars.BarManager
     Friend WithEvents Bar2 As DevExpress.XtraBars.Bar
@@ -464,6 +434,6 @@ Partial Class frmSettingDBEntri
     Friend WithEvents mnPosting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnUnposting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnHasilPosting As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents cmdNewProfile As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtServer As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents txtDatabase As DevExpress.XtraEditors.TextEdit
 End Class

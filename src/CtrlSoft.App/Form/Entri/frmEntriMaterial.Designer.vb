@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEntriKontak
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmEntriMaterial
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class frmEntriKontak
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
@@ -149,7 +149,7 @@ Partial Class frmEntriKontak
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(941, 332, 250, 350)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(608, 422)
+        Me.LayoutControl1.Size = New System.Drawing.Size(608, 444)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
@@ -360,7 +360,7 @@ Partial Class frmEntriKontak
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup2, Me.LayoutControlGroup3})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(608, 422)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(608, 444)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutControlGroup2
@@ -369,7 +369,7 @@ Partial Class frmEntriKontak
         Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem13, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.LayoutControlItem3, Me.EmptySpaceItem4})
         Me.LayoutControlGroup2.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup2.Name = "LayoutControlGroup2"
-        Me.LayoutControlGroup2.Size = New System.Drawing.Size(347, 402)
+        Me.LayoutControlGroup2.Size = New System.Drawing.Size(347, 424)
         Me.LayoutControlGroup2.Text = "Informasi Personal"
         '
         'LayoutControlItem4
@@ -471,7 +471,7 @@ Partial Class frmEntriKontak
         Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
         Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 264)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(323, 96)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(323, 118)
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlGroup3
@@ -480,7 +480,7 @@ Partial Class frmEntriKontak
         Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup4, Me.LayoutControlGroup5, Me.LayoutControlGroup6, Me.EmptySpaceItem1})
         Me.LayoutControlGroup3.Location = New System.Drawing.Point(347, 0)
         Me.LayoutControlGroup3.Name = "LayoutControlGroup3"
-        Me.LayoutControlGroup3.Size = New System.Drawing.Size(241, 402)
+        Me.LayoutControlGroup3.Size = New System.Drawing.Size(241, 424)
         Me.LayoutControlGroup3.Text = "Status"
         '
         'LayoutControlGroup4
@@ -602,7 +602,7 @@ Partial Class frmEntriKontak
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 315)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(217, 45)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(217, 67)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'DxErrorProvider1
@@ -682,7 +682,7 @@ Partial Class frmEntriKontak
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 473)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 495)
         Me.barDockControlBottom.Manager = Me.BarManager1
         Me.barDockControlBottom.Size = New System.Drawing.Size(608, 0)
         '
@@ -692,7 +692,7 @@ Partial Class frmEntriKontak
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
         Me.barDockControlLeft.Manager = Me.BarManager1
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 422)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 444)
         '
         'barDockControlRight
         '
@@ -700,21 +700,21 @@ Partial Class frmEntriKontak
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(608, 51)
         Me.barDockControlRight.Manager = Me.BarManager1
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 422)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 444)
         '
-        'frmEntriKontak
+        'frmEntriMaterial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(608, 473)
+        Me.ClientSize = New System.Drawing.Size(608, 495)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Name = "frmEntriKontak"
+        Me.Name = "frmEntriMaterial"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Entri Kontak"
+        Me.Text = "Entri Material / Formula"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
         CType(Me.txtLimitUmur.Properties, System.ComponentModel.ISupportInitialize).EndInit()

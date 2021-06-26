@@ -162,12 +162,14 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="SevenZipSharp, Version=1.0.19.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
       <HintPath>..\packages\SevenZipSharp.Net45.1.0.19\lib\net45\SevenZipSharp.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
@@ -183,6 +185,7 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms">
       <Private>True</Private>
     </Reference>
@@ -201,6 +204,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
       <Private>True</Private>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -251,6 +256,12 @@
     <Compile Include="Form\Application\frmHasilPosting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Application\frmOpenProfile.Designer.vb">
+      <DependentUpon>frmOpenProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmOpenProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmOtorisasi.Designer.vb">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>
     </Compile>
@@ -281,6 +292,12 @@
     <Compile Include="Form\Application\frmSettingDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Application\frmNewProfile.Designer.vb">
+      <DependentUpon>frmNewProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Application\frmNewProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Application\frmSettingDBEntri.Designer.vb">
       <DependentUpon>frmSettingDBEntri.vb</DependentUpon>
     </Compile>
@@ -291,6 +308,12 @@
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Application\frmSettingPerusahaan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterial.Designer.vb">
+      <DependentUpon>frmEntriMaterial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterial.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriSaldoAwalPiutang.Designer.vb">
@@ -534,6 +557,9 @@
     <EmbeddedResource Include="Form\Application\frmHasilPosting.resx">
       <DependentUpon>frmHasilPosting.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmOpenProfile.resx">
+      <DependentUpon>frmOpenProfile.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmOtorisasi.resx">
       <DependentUpon>frmOtorisasi.vb</DependentUpon>
     </EmbeddedResource>
@@ -549,11 +575,17 @@
     <EmbeddedResource Include="Form\Application\frmSettingDB.resx">
       <DependentUpon>frmSettingDB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Application\frmNewProfile.resx">
+      <DependentUpon>frmNewProfile.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingDBEntri.resx">
       <DependentUpon>frmSettingDBEntri.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Application\frmSettingPerusahaan.resx">
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriMaterial.resx">
+      <DependentUpon>frmEntriMaterial.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriSaldoAwalPiutang.resx">
       <DependentUpon>frmEntriSaldoAwalPiutang.vb</DependentUpon>
@@ -739,6 +771,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Logo_Ctrl_White_2.ico" />
+    <None Include="Resources\connect_to_database.png" />
+    <None Include="Resources\import_database2.png" />
+    <None Include="Resources\export_database2.png" />
+    <None Include="Resources\database.png" />
+    <None Include="Resources\undo_32x32.png" />
+    <None Include="Resources\redo_32x32.png" />
+    <None Include="Resources\technology_32x32.png" />
+    <None Include="Resources\database_32x32.png" />
+    <None Include="Resources\addnewdatasource_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

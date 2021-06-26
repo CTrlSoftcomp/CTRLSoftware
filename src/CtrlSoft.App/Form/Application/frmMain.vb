@@ -21,6 +21,8 @@ Imports CtrlSoft.App.Public
 Imports DevExpress.XtraBars
 Imports CtrlSoft.Dto.Model
 Imports CtrlSoft.Dto.ViewModel
+Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraGrid.Views.Tile
 
 Public Class frmMain
     Inherits DevExpress.XtraBars.Ribbon.RibbonForm
@@ -49,7 +51,7 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub barSetting_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barSetting.ItemClick
+    Private Sub barSetting_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Using frm As New frmSettingDB
             Try
                 If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
@@ -58,10 +60,10 @@ Public Class frmMain
                         StrKonSQL = DBSetting.KoneksiString
                     Else
                         StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
-                        ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
-                        ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
-                        ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
-                        ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+                                    ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
+                                    ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
+                                    ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
+                                    ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
                     End If
                 End If
             Catch ex As Exception
@@ -83,6 +85,7 @@ Public Class frmMain
 
                 DisableMenu()
                 UserLogin = New MUser
+                RefreshDataSQLite()
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, "Admin Says", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -114,11 +117,11 @@ Public Class frmMain
             'Next a
             RibbonControl.Pages.Clear()
 
-            barSetting.Enabled = True
-            barLoginOut.Enabled = True
-            barExit.Enabled = True
+            bvDataManagement.Enabled = True
+            bvLogin.Enabled = True
+            bvExit.Enabled = True
             RibbonPageCategory1.Visible = False
-            barLoginOut.Caption = "Login"
+            bvLogin.Caption = "Login"
 
             UserLogin = New MUser()
             Timer1.Enabled = False
@@ -131,15 +134,15 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
-        barLoginOut.PerformClick()
+        mnLoginOut(UserLogin.HasLogin)
     End Sub
 
-    Private Sub barExit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barExit.ItemClick
+    Private Sub barExit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Me.Close()
         DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
-    Private Sub barLoginOut_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles barLoginOut.ItemClick
+    Private Sub barLoginOut_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         mnLoginOut(UserLogin.HasLogin)
     End Sub
 
@@ -151,9 +154,9 @@ Public Class frmMain
                 Try
                     If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
                         InitMenu()
-                        barSetting.Enabled = False
-                        barLoginOut.Enabled = True
-                        barExit.Enabled = True
+                        bvDataManagement.Enabled = False
+                        bvLogin.Enabled = True
+                        bvExit.Enabled = True
                     End If
                 Catch ex As Exception
                     XtraMessageBox.Show(ex.Message, "Admin Says", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -202,7 +205,7 @@ Public Class frmMain
             RibbonControl.LargeImages = ImageCollectionLarge
 
             RibbonPageCategory1.Visible = IIf(UserLogin.Supervisor, True, False)
-            barLoginOut.Caption = "Logout"
+            bvLogin.Caption = "Logout"
 
             UserLogin.TanggalSystem = Repository.RepSQLServer.GetTimeServer()
             TimeZoneInformation.TimeZoneFunctionality.SetTime(System.TimeZone.CurrentTimeZone.ToLocalTime(UserLogin.TanggalSystem))
@@ -597,6 +600,40 @@ Public Class frmMain
                 End If
                 x.Show()
                 x.Focus()
+            Case "mnMaterial"
+                Dim x As frmDaftarMaster = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarMaster AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarMaster(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MMaterial",
+                                            "SELECT MMaterial.NoID," & vbCrLf &
+                                            "MMaterial.Kode," & vbCrLf &
+                                            "MMaterial.Nama," & vbCrLf &
+                                            "MMaterial.Keterangan," & vbCrLf &
+                                            "MMaterial.Konversi," & vbCrLf &
+                                            "MMaterial.Qty," & vbCrLf &
+                                            "MMaterial.HargaPokok," & vbCrLf &
+                                            "MMaterial.Jumlah," & vbCrLf &
+                                            "MMaterial.IsActive Aktif," & vbCrLf &
+                                            "MBarang.Kode AS KodeBarang," & vbCrLf &
+                                            "MBarang.Nama AS NamaBarang," & vbCrLf &
+                                            "MSatuan.Kode AS Satuan," & vbCrLf &
+                                            "MUser.Nama AS UserEntry" & vbCrLf &
+                                            "FROM MMaterial(NOLOCK)" & vbCrLf &
+                                            "LEFT JOIN MBarangD(NOLOCK) ON MBarangD.NoID = MMaterial.IDBarangD" & vbCrLf &
+                                            "LEFT JOIN MBarang(NOLOCK) ON MBarang.NoID = MMaterial.IDBarang" & vbCrLf &
+                                            "LEFT JOIN MSatuan(NOLOCK) ON MSatuan.NoID = MMaterial.IDSatuan" & vbCrLf &
+                                            "LEFT JOIN MUser(NOLOCK) ON MUser.NoID = MMaterial.IDUser",
+                                            frmDaftarMaster.TypePrimary.Guid)
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case Else
                 XtraMessageBox.Show("Menue Durong Onok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
@@ -611,10 +648,10 @@ Public Class frmMain
             End If
         Next
         If x Is Nothing Then
-            x = New frmDaftar(e.Item.Name, _
-                                    e.Item.Caption, _
-                                    "MRole", _
-                                    "SELECT MRole.NoID, MRole.Role, MRole.IsSupervisor SPV" & vbCrLf & _
+            x = New frmDaftar(e.Item.Name,
+                                    e.Item.Caption,
+                                    "MRole",
+                                    "SELECT MRole.NoID, MRole.Role, MRole.IsSupervisor SPV" & vbCrLf &
                                     "FROM MRole")
             x.MdiParent = Me
         End If
@@ -630,11 +667,11 @@ Public Class frmMain
             End If
         Next
         If x Is Nothing Then
-            x = New frmDaftar(e.Item.Name, _
-                                    e.Item.Caption, _
-                                    "MUser", _
-                                    "SELECT MUser.NoID, MUser.Kode, MUser.Nama, MRole.[Role], MRole.IsSupervisor SPV " & vbCrLf & _
-                                    "FROM MUser" & vbCrLf & _
+            x = New frmDaftar(e.Item.Name,
+                                    e.Item.Caption,
+                                    "MUser",
+                                    "SELECT MUser.NoID, MUser.Kode, MUser.Nama, MRole.[Role], MRole.IsSupervisor SPV " & vbCrLf &
+                                    "FROM MUser" & vbCrLf &
                                     "LEFT JOIN MRole ON MRole.NoID=MUser.IDRole")
             x.MdiParent = Me
         End If
@@ -687,4 +724,163 @@ Public Class frmMain
             XtraMessageBox.Show("Error : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Try
     End Sub
+
+#Region "Data SQLite"
+    Dim repckedit As New RepositoryItemCheckEdit
+    Dim repdateedit As New RepositoryItemDateEdit
+    Dim reptextedit As New RepositoryItemTextEdit
+    Dim reppicedit As New RepositoryItemPictureEdit
+
+    Private Data As New List(Of DBSettings.MDBSetting)
+
+    Private Sub RefreshDataSQLite()
+        Dim List = DBSetting.List.ToList
+        Data = List.Where(Function(m) m.Default = False).ToList
+        MDBSettingBindingSource.DataSource = Data
+        GridControl1.DataSource = MDBSettingBindingSource
+        GridControl1.RefreshDataSource()
+
+        Dim Active = List.Where(Function(m) m.Default = True).SingleOrDefault()
+        If (Active IsNot Nothing) Then
+            lbCurrentDBId.Text = Active.Id
+            lbCurrentDBName.Text = Active.Database
+            lbCurrentDBServer.Text = Active.Server
+        Else
+            lbCurrentDBId.Text = "null"
+            lbCurrentDBName.Text = "null"
+            lbCurrentDBServer.Text = "null"
+        End If
+    End Sub
+
+    Private Sub TileView1_DataSourceChanged(sender As Object, e As EventArgs) Handles TileView1.DataSourceChanged
+        With TileView1
+            If System.IO.File.Exists(CtrlSoft.App.Public.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
+                .RestoreLayoutFromXml(CtrlSoft.App.Public.SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
+            End If
+            For i As Integer = 0 To .Columns.Count - 1
+                Select Case .Columns(i).ColumnType.Name.ToLower
+                    Case "int32", "int64", "int"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).DisplayFormat.FormatString = "n0"
+                    Case "decimal", "single", "money", "double"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).DisplayFormat.FormatString = "n2"
+                    Case "string"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.None
+                        .Columns(i).DisplayFormat.FormatString = ""
+                    Case "date"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy"
+                    Case "datetime"
+                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy HH:mm"
+                    Case "byte[]"
+                        reppicedit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze
+                        .Columns(i).OptionsColumn.AllowGroup = False
+                        .Columns(i).OptionsColumn.AllowSort = False
+                        .Columns(i).OptionsFilter.AllowFilter = False
+                        .Columns(i).ColumnEdit = reppicedit
+                    Case "boolean"
+                        .Columns(i).ColumnEdit = repckedit
+                End Select
+            Next
+        End With
+    End Sub
+#End Region
+
+#Region "Menu Baru"
+    Private Sub bvExit_ItemClick(sender As Object, e As BackstageViewItemEventArgs) Handles bvExit.ItemClick
+        pmAppMain.HidePopup()
+        backstageViewControl1.Ribbon.HideApplicationButtonContentControl()
+
+        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+    End Sub
+
+    Private Sub bvLogin_ItemClick(sender As Object, e As BackstageViewItemEventArgs) Handles bvLogin.ItemClick
+        pmAppMain.HidePopup()
+        backstageViewControl1.Ribbon.HideApplicationButtonContentControl()
+
+        mnLoginOut(UserLogin.HasLogin)
+    End Sub
+
+    Private Sub TileView1_ItemClick(sender As Object, e As TileViewItemClickEventArgs) Handles TileView1.ItemClick
+        If (Not UserLogin.HasLogin) Then
+            If (XtraMessageBox.Show("Ingin mengubah ke pengaturan Profile yang dipilih?", NamaAplikasi, MessageBoxButtons.YesNo) = DialogResult.Yes) Then
+                Try
+                    Dim Obj = MDBSettingBindingSource.Current
+
+                    If Obj IsNot Nothing Then
+                        TryCast(Obj, DBSettings.MDBSetting).Default = True
+                        Obj = DBSetting.Save(Obj)
+                        If Obj IsNot Nothing Then
+                            StrKonSQL = Obj.KoneksiString
+
+                            RefreshDataSQLite()
+                        End If
+                    End If
+                Catch ex As Exception
+                    XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        End If
+    End Sub
+
+    Private Sub cmdNewDB_Click(sender As Object, e As EventArgs) Handles cmdNewDB.Click
+        Using frm As New frmNewProfile
+            Try
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                    Dim DBSetting = [Public].DBSetting.List.Where(Function(m) m.Default = True).SingleOrDefault
+                    If (DBSetting IsNot Nothing) Then
+                        StrKonSQL = DBSetting.KoneksiString
+                    Else
+                        StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
+                                    ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
+                                    ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
+                                    ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
+                                    ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+                    End If
+                    RefreshDataSQLite()
+                End If
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, "Admin Says", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
+    End Sub
+
+    Private Sub cmdOpenDB_Click(sender As Object, e As EventArgs) Handles cmdOpenDB.Click
+        Using frm As New frmOpenProfile
+            Try
+                If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                    Dim DBSetting = [Public].DBSetting.List.Where(Function(m) m.Default = True).SingleOrDefault
+                    If (DBSetting IsNot Nothing) Then
+                        StrKonSQL = DBSetting.KoneksiString
+                    Else
+                        StrKonSQL = "Data Source=" & BacaIni("DBConfig", "Server", "localhost") &
+                                    ";initial Catalog=" & BacaIni("DBConfig", "Database", "dbpos") &
+                                    ";User ID=" & BacaIni("DBConfig", "Username", "sa") &
+                                    ";Password=" & BacaIni("DBConfig", "Password", "Sg1") &
+                                    ";Connect Timeout=" & BacaIni("DBConfig", "Timeout", "15")
+                    End If
+                    RefreshDataSQLite()
+                End If
+            Catch ex As Exception
+                XtraMessageBox.Show(ex.Message, "Admin Says", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
+    End Sub
+
+    Private Sub cmdReindexDB_Click(sender As Object, e As EventArgs) Handles cmdReindexDB.Click
+
+    End Sub
+
+    Private Sub cmdBackupDB_Click(sender As Object, e As EventArgs) Handles cmdBackupDB.Click
+
+    End Sub
+
+    Private Sub cmdRestoreDB_Click(sender As Object, e As EventArgs) Handles cmdRestoreDB.Click
+
+    End Sub
+
+#End Region
 End Class

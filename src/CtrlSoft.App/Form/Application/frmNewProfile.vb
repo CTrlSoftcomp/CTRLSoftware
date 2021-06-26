@@ -8,25 +8,23 @@ Imports System.Data.Odbc
 Imports Dapper
 Imports DevExpress.XtraEditors.Controls
 
-Public Class frmSettingDBEntri
+Public Class frmNewProfile
     Public DBSetting As DBSettings.MDBSetting
 
     Private ListDB As New List(Of DBSettings.DBName)
 
-    Public Sub New(ByVal Id As String)
+    Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        DBSetting = [Public].DBSetting.Get(Id)
+        DBSetting = [Public].DBSetting.Get("")
 
         Dim str As String() = {"(localdb)\MSSQLLocalDB", "(local)", "127.0.0.1", "localhost", "."}
-        Dim collection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
-        collection.AddRange(str)
-        txtServer.MaskBox.AutoCompleteCustomSource = collection
-        txtServer.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource
-        txtServer.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+        txtServer.Properties.Items.Clear()
+        txtServer.Properties.Items.AddRange(str.ToList())
+        txtServer.SelectedIndex = 0
     End Sub
 
     Private Sub frmSettingDB_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -41,8 +39,8 @@ Public Class frmSettingDBEntri
         Else
             DBSetting = New DBSettings.MDBSetting With {.Id = ""}
             txtID.Text = DBSetting.Id
-            txtServer.Text = "(localdb)\MSSQLLocalDB"
-            txtDatabase.Text = "dbpos"
+            txtServer.SelectedIndex = 0
+            txtDatabase.Text = ""
             txtUserID.Text = "sa"
             txtPassword.Text = "1234123412"
             txtTimeout.Value = 15
@@ -77,8 +75,6 @@ Public Class frmSettingDBEntri
                         ListDB = cn.Query(Of DBSettings.DBName)("SELECT T.[name] DBName FROM [sysdatabases] T WHERE T.[name] NOT IN ('master', 'tempdb', 'model', 'msdb', 'ReportServer', 'ReportServerTempDB')", Nothing)
 
                         Me.ListDB.Clear()
-                        txtDatabase.Properties.Items.Clear()
-
                         For Each db In ListDB
                             com.CommandText = "SELECT COUNT([name]) AS X FROM [" & db.DBName & "].sys.tables WHERE name = 'TAppDB' OR name = 'MKartuStokOnHand'"
                             If NullToLong(com.ExecuteScalar()) >= 2 Then
@@ -87,14 +83,13 @@ Public Class frmSettingDBEntri
                             End If
                         Next
 
-                        Dim temp As New List(Of String)
-                        temp = (From x In Me.ListDB.ToList()
-                                Select x.DBName).ToList()
-                        txtDatabase.Properties.Items.AddRange(temp)
-
-                        cmdNewProfile.Enabled = True
+                        Dim Validator = Me.ListDB.Where(Function(m) m.DBName.ToLower = txtDatabase.Text.ToLower).SingleOrDefault()
+                        If (Validator IsNot Nothing) Then
+                            mnSimpan.Enabled = False
+                        Else
+                            mnSimpan.Enabled = True
+                        End If
                     Catch ex As Exception
-                        cmdNewProfile.Enabled = False
                         'XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End Try
                 End Using
@@ -103,21 +98,13 @@ Public Class frmSettingDBEntri
         'End Using
     End Sub
 
-    Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtServer.LostFocus, txtUserID.LostFocus, txtPassword.LostFocus
+    Private Sub TextEdit1_LostFocus(sender As Object, e As EventArgs) Handles txtUserID.LostFocus, txtPassword.LostFocus
         LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
     End Sub
 
-    Private Sub txtDatabase_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtDatabase.ButtonClick
-        Select Case e.Button.Index
-            Case 1
-                cmdNewProfile.PerformClick()
-        End Select
-    End Sub
-
-    Private Sub CreateNewDB()
+    Private Function CreateNewDB(ByVal DBName As String) As Boolean
         Dim sqlBatch As String = String.Empty
         Dim Script As String = String.Empty
-        Dim DBName As String = InputBox("Isikan nama Database Baru Anda", NamaAplikasi, "")
         If DBName <> "" Then
             Using dlg As New WaitDialogForm("Sedang membuatkan database", NamaAplikasi)
                 Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
@@ -152,18 +139,18 @@ Public Class frmSettingDBEntri
                                 Next
                                 XtraMessageBox.Show("Sukses membuat database baru!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                                'Sukses
-                                LookUpDB(txtServer.Text, txtUserID.Text, txtPassword.Text)
-                                txtDatabase.Text = DBName.Replace(" ", "")
+                                Return True
                             Catch ex As Exception
                                 XtraMessageBox.Show("Info Kesalahan : " & ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                Return False
                             End Try
                         End Using
                     End Using
                 End Using
             End Using
         End If
-    End Sub
+        Return False
+    End Function
 
     Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
         Dim curentcursor As Cursor = System.Windows.Forms.Cursor.Current
@@ -184,7 +171,12 @@ Public Class frmSettingDBEntri
         If txtTimeout.Text = "" OrElse NullToLong(txtTimeout.Value) <= 0 Then
             DxErrorProvider1.SetError(txtTimeout, "Timeout harus lebih dari 0!")
         End If
-        If Not DxErrorProvider1.HasErrors Then
+        Dim Validator = Me.ListDB.Where(Function(m) m.DBName.ToLower = txtDatabase.Text.ToLower).SingleOrDefault()
+        If (Validator IsNot Nothing) Then
+            DxErrorProvider1.SetError(txtDatabase, "Database sudah ada!")
+        End If
+
+        If Not DxErrorProvider1.HasErrors AndAlso CreateNewDB(txtDatabase.Text) Then
             Using cn As New SqlConnection(IIf(Not txtServer.Text.Equals("(localdb)\MSSQLLocalDB"),
                                               "Server=" & txtServer.Text & ";Database=" & txtDatabase.Text & ";User Id=" & txtUserID.Text & ";Password=" & txtPassword.Text & ";Timeout=3;",
                                               "Server=" & txtServer.Text & ";Database=" & txtDatabase.Text & ";Integrated Security=true;Timeout=3;"))
@@ -216,7 +208,12 @@ Public Class frmSettingDBEntri
         Me.Close()
     End Sub
 
-    Private Sub cmdNewProfile_Click(sender As Object, e As EventArgs) Handles cmdNewProfile.Click
-        CreateNewDB()
+    Private Sub txtDatabase_EditValueChanged(sender As Object, e As EventArgs) Handles txtDatabase.EditValueChanged
+        Dim Validator = Me.ListDB.Where(Function(m) m.DBName.ToLower = txtDatabase.Text.ToLower).SingleOrDefault()
+        If (Validator IsNot Nothing) Then
+            mnSimpan.Enabled = False
+        Else
+            mnSimpan.Enabled = True
+        End If
     End Sub
 End Class

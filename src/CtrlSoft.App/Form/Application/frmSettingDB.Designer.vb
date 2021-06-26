@@ -255,9 +255,9 @@ Partial Class frmSettingDB
         Me.LabelControl1.Appearance.Options.UseFont = True
         Me.LabelControl1.Location = New System.Drawing.Point(12, 9)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(225, 25)
+        Me.LabelControl1.Size = New System.Drawing.Size(233, 25)
         Me.LabelControl1.TabIndex = 1
-        Me.LabelControl1.Text = "Setting Koneksi Database"
+        Me.LabelControl1.Text = "Setting Data Management"
         '
         'GridControl1
         '
@@ -478,7 +478,7 @@ Partial Class frmSettingDB
         Me.Controls.Add(Me.barDockControlTop)
         Me.Name = "frmSettingDB"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Your Connection"
+        Me.Text = "Data Management"
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)

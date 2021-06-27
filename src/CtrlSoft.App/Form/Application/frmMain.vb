@@ -634,6 +634,27 @@ Public Class frmMain
                 End If
                 x.Show()
                 x.Focus()
+            Case "mnDaftarAkun"
+                Dim x As frmDaftarTree = Nothing
+                For Each frm In Me.MdiChildren
+                    If TypeOf frm Is frmDaftarTree AndAlso frm.Name = e.Item.Name Then
+                        x = frm
+                    End If
+                Next
+                If x Is Nothing Then
+                    x = New frmDaftarTree(e.Item.Name,
+                                            e.Item.Caption,
+                                            "MAkun",
+                                            "SELECT MAkun.*, MKlasAkun.Klasifikasi, MKlasAkun.NoUrut" & vbCrLf &
+                                            "FROM dbo.MAkun" & vbCrLf &
+                                            "LEFT JOIN MKlasAkun ON MKlasAkun.ID=MAkun.IDKlasAkun",
+                                            frmDaftarMaster.TypePrimary.Guid,
+                                            "ID",
+                                            "IDParent")
+                    x.MdiParent = Me
+                End If
+                x.Show()
+                x.Focus()
             Case Else
                 XtraMessageBox.Show("Menue Durong Onok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select

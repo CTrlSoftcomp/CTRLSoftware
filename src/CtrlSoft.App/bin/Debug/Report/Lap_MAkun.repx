@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="17.1.3.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="xtraReport1" DisplayName="Lap_MAkun.repx" SnapGridSize="25" DataSourceSchema="E:\DEVELOPER\2021 - CTRLSoftware\src\CtrlSoft.App\bin\Debug\Report\XCD\LAP_MAKUN.xsd" ReportUnit="TenthsOfAMillimeter" Margins="93, 93, 95, 106" PaperKind="Custom" PageWidth="2159" PageHeight="2794" ScriptLanguage="VisualBasic" Version="17.1" ShowPrintStatusDialog="false" ShowPrintMarginsWarning="false" DataMember="MAkun" DataSource="#Ref-0" Dpi="254">
+  <CalculatedFields>
+    <Item1 Ref="2" Name="printDate" FieldType="DateTime" Expression="Now()" DataMember="MAkun" />
+    <Item2 Ref="3" Name="calculatedField1" FieldType="Int32" Expression="1" DataMember="MAkun" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="4" ControlType="TopMarginBand" Name="topMarginBand1" HeightF="95" Dpi="254" />
+    <Item2 Ref="5" ControlType="DetailBand" Name="detailBand1" HeightF="55.5625" Dpi="254">
+      <SortFields>
+        <Item1 Ref="6" FieldName="Kode" />
+      </SortFields>
+      <Controls>
+        <Item1 Ref="7" ControlType="XRTable" Name="table2" TextAlignment="MiddleLeft" SizeF="1970.99988,55.5625" LocationFloat="0, 0" Dpi="254" Padding="5,5,5,5,254" Borders="None">
+          <Rows>
+            <Item1 Ref="8" ControlType="XRTableRow" Name="tableRow2" Weight="1" Dpi="254">
+              <Cells>
+                <Item1 Ref="9" ControlType="XRTableCell" Name="tableCell5" Weight="0.1669129781857312" Text="No." TextAlignment="MiddleLeft" Dpi="254">
+                  <Summary Ref="10" FormatString="{0:n0}" Running="Report" Func="RecordNumber" IgnoreNullValues="true" />
+                  <StylePriority Ref="11" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="12" ControlType="XRTableCell" Name="tableCell6" Weight="0.65179148853484226" Text="Kode Akun" Dpi="254">
+                  <DataBindings>
+                    <Item1 Ref="13" PropertyName="Text" DataMember="MAkun.Kode" />
+                  </DataBindings>
+                </Item2>
+                <Item3 Ref="14" ControlType="XRTableCell" Name="tableCell7" Weight="2.1276009461409178" Text="Nama Akun" Dpi="254">
+                  <DataBindings>
+                    <Item1 Ref="15" PropertyName="Text" DataMember="MAkun.Nama" />
+                  </DataBindings>
+                </Item3>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="16" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item2>
+    <Item3 Ref="17" ControlType="BottomMarginBand" Name="bottomMarginBand1" HeightF="106" Dpi="254">
+      <Controls>
+        <Item1 Ref="18" ControlType="XRLabel" Name="label1" SizeF="783.1667,58.42" LocationFloat="0, 0" Dpi="254" Font="Segoe UI Semibold, 9.75pt" Padding="5,5,0,0,254">
+          <DataBindings>
+            <Item1 Ref="19" FormatString="CTrlSoft, At Print {0:dd-MM-yyyy HH:mm:ss}" PropertyName="Text" DataMember="MAkun.printDate" />
+          </DataBindings>
+          <StylePriority Ref="20" UseFont="false" />
+        </Item1>
+        <Item2 Ref="21" ControlType="XRPageInfo" Name="pageInfo1" TextAlignment="TopRight" SizeF="254,58.42" LocationFloat="1716.99988, 0" Dpi="254" Font="Segoe UI Semibold, 9.75pt" Padding="5,5,0,0,254">
+          <StylePriority Ref="22" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item3>
+    <Item4 Ref="23" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="87.5242157" Dpi="254">
+      <Controls>
+        <Item1 Ref="24" ControlType="XRLabel" Name="label2" Text="Daftar Akun" SizeF="1970.99988,87.5242157" LocationFloat="0, 0" Dpi="254" Font="Segoe UI Semibold, 18pt" Padding="5,5,0,0,254">
+          <StylePriority Ref="25" UseFont="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="26" ControlType="PageHeaderBand" Name="PageHeader" HeightF="68.7916641" Dpi="254">
+      <Controls>
+        <Item1 Ref="27" ControlType="XRTable" Name="table1" TextAlignment="MiddleLeft" SizeF="1970.99988,68.7916641" LocationFloat="0, 0" Dpi="254" Font="Times New Roman, 9.75pt, style=Bold" Padding="5,5,5,5,254" Borders="Top, Bottom">
+          <Rows>
+            <Item1 Ref="28" ControlType="XRTableRow" Name="tableRow1" Weight="1" Dpi="254">
+              <Cells>
+                <Item1 Ref="29" ControlType="XRTableCell" Name="tableCell1" Weight="0.16691302380425538" Text="No." TextAlignment="MiddleLeft" Dpi="254">
+                  <StylePriority Ref="30" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="31" ControlType="XRTableCell" Name="tableCell4" Weight="0.65179144291631808" Text="Kode Akun" Dpi="254" />
+                <Item3 Ref="32" ControlType="XRTableCell" Name="tableCell2" Weight="2.1276009461409182" Text="Nama Akun" Dpi="254" />
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="33" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item5>
+    <Item6 Ref="34" ControlType="ReportFooterBand" Name="ReportFooter" Expanded="false" HeightF="18.5208282" Dpi="254">
+      <Controls>
+        <Item1 Ref="35" ControlType="XRLine" Name="line2" LineWidth="3" SizeF="1970.99988,18.5208282" LocationFloat="0.000141302749, 0" Dpi="254" />
+      </Controls>
+    </Item6>
+    <Item7 Ref="36" ControlType="GroupHeaderBand" Name="GroupHeader1" Level="1" HeightF="0" Dpi="254">
+      <GroupFields>
+        <Item1 Ref="37" FieldName="NoUrut" />
+      </GroupFields>
+    </Item7>
+    <Item8 Ref="38" ControlType="GroupHeaderBand" Name="GroupHeader2" Expanded="false" HeightF="55.5625" Dpi="254">
+      <GroupFields>
+        <Item1 Ref="39" FieldName="Klasifikasi" />
+      </GroupFields>
+      <Controls>
+        <Item1 Ref="40" ControlType="XRTable" Name="table3" TextAlignment="MiddleLeft" SizeF="1971,55.5625" LocationFloat="0, 0" Dpi="254" Padding="5,5,5,5,254" Borders="Top">
+          <Rows>
+            <Item1 Ref="41" ControlType="XRTableRow" Name="tableRow3" Weight="1" Dpi="254">
+              <Cells>
+                <Item1 Ref="42" ControlType="XRTableCell" Name="tableCell12" Weight="1.0536945871385084" Text="Kategori" Dpi="254" Font="Times New Roman, 9.75pt, style=Bold">
+                  <DataBindings>
+                    <Item1 Ref="43" PropertyName="Text" DataMember="MAkun.Klasifikasi" />
+                  </DataBindings>
+                  <StylePriority Ref="44" UseFont="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="45" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item8>
+    <Item9 Ref="46" ControlType="GroupFooterBand" Name="GroupFooter1" Expanded="false" HeightF="55.5625" Dpi="254">
+      <Controls>
+        <Item1 Ref="47" ControlType="XRTable" Name="table4" TextAlignment="MiddleLeft" SizeF="1971,55.5625" LocationFloat="0.000161488846, 0" Dpi="254" Padding="5,5,5,5,254" Borders="None">
+          <Rows>
+            <Item1 Ref="48" ControlType="XRTableRow" Name="tableRow4" Weight="1" Dpi="254">
+              <Cells>
+                <Item1 Ref="49" ControlType="XRTableCell" Name="tableCell3" Weight="1.0536945871385084" Dpi="254" Font="Times New Roman, 9.75pt, style=Bold" Borders="Top">
+                  <StylePriority Ref="50" UseFont="false" UseBorders="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="51" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item9>
+  </Bands>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v17.1" Ref="0" Content="~Xtra#NULL" Type="System.Data.DataSet" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

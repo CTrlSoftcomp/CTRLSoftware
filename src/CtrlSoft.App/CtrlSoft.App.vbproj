@@ -439,6 +439,12 @@
     <Compile Include="Form\Entri\frmEntriStockOpname.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmDaftarTree.Designer.vb">
+      <DependentUpon>frmDaftarTree.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmDaftarTree.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmDaftarTransaksi.Designer.vb">
       <DependentUpon>frmDaftarTransaksi.vb</DependentUpon>
     </Compile>
@@ -661,6 +667,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriStockOpname.resx">
       <DependentUpon>frmEntriStockOpname.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmDaftarTree.resx">
+      <DependentUpon>frmDaftarTree.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDaftarTransaksi.resx">
       <DependentUpon>frmDaftarTransaksi.vb</DependentUpon>

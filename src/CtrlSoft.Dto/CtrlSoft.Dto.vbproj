@@ -75,6 +75,7 @@
     <Compile Include="Model\MMaterialD.vb" />
     <Compile Include="Model\MMaterialDBiaya.vb" />
     <Compile Include="Model\MMaterialDSisa.vb" />
+    <Compile Include="Model\MMenu.vb" />
     <Compile Include="Model\MPOS.vb" />
     <Compile Include="Model\MReset.vb" />
     <Compile Include="Model\MUser.vb" />

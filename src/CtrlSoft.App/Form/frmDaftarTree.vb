@@ -23,18 +23,23 @@ Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors.Repository
 Imports CtrlSoft.App.CetakDX
 
-Public Class frmDaftar
+Public Class frmDaftarTree
     Private formName As String
     Private tableName As String
 
     Private SQL As String
-
+    Private KeyField As String = "", ParentField As String = ""
     Dim repckedit As New RepositoryItemCheckEdit
     Dim repdateedit As New RepositoryItemDateEdit
     Dim reptextedit As New RepositoryItemTextEdit
     Dim reppicedit As New RepositoryItemPictureEdit
 
     Private ds As New DataSet
+    Public Enum TypePrimary
+        BigInt = 0
+        Guid = 1
+    End Enum
+    Private PKType As TypePrimary = TypePrimary.BigInt
 
     Private Sub cmdTutup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTutup.Click
         mnTutup.PerformClick()
@@ -59,12 +64,16 @@ Public Class frmDaftar
 
                                 com.CommandText = SQL
                                 oDA.Fill(ds, tableName)
-                                BindingSource1.DataSource = ds.Tables(tableName)
+                                TreeList1.KeyFieldName = KeyField
+                                TreeList1.ParentFieldName = ParentField
+                                TreeList1.DataSource = ds.Tables(tableName)
 
-                                GridView1.ClearSelection()
-                                GridView1.FocusedRowHandle = GridView1.LocateByDisplayText(0, GridView1.Columns("NoID"), NoID.ToString("n0"))
-                                GridView1.SelectRow(GridView1.FocusedRowHandle)
-
+                                'If (PKType = TypePrimary.BigInt) Then
+                                '    TreeList1.FocusedNode = TreeList1.FindNodeByFieldValue(KeyField, NoID.ToString("n0"))
+                                'Else
+                                '    TreeList1.FocusedNode = TreeList1.FindNodeByFieldValue(KeyField, NoID.ToString())
+                                'End If
+                                'TreeList1.SelectNode(TreeList1.FocusedNode)
                                 Me.ds = ds
                             Catch ex As Exception
                                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -99,15 +108,8 @@ Public Class frmDaftar
                                 oDA.SelectCommand = com
 
                                 Select Case tableName
-                                    Case "MUser"
-                                        com.CommandText = "DELETE FROM MUser WHERE Kode NOT IN ('ADM', 'SU') AND NoID=" & NoID
-                                        com.ExecuteNonQuery()
-                                    Case "MRole"
-                                        com.CommandText = "DELETE MRoleD FROM MRoleD INNER JOIN MRole ON MRole.NoID=MRoleD.IDRole WHERE MRole.Role NOT IN ('ALL', 'SU') AND MRole.NoID=" & NoID
-                                        com.ExecuteNonQuery()
-
-                                        com.CommandText = "DELETE FROM MRole WHERE MRole.Role NOT IN ('ALL', 'SU') AND MRole.NoID=" & NoID
-                                        com.ExecuteNonQuery()
+                                    Case "MAkun"
+                                        XtraMessageBox.Show("Akun tidak dapat dihapus, Untuk itu anda hanya dapat melakukan Perubahan data saja.", NamaAplikasi)
                                 End Select
 
                                 If com.Transaction IsNot Nothing Then
@@ -133,7 +135,13 @@ Public Class frmDaftar
         mnBaru.PerformClick()
     End Sub
 
-    Public Sub New(ByVal formName As String, ByVal caption As String, ByVal tableName As String, ByVal SQL As String)
+    Public Sub New(ByVal formName As String,
+                   ByVal caption As String,
+                   ByVal tableName As String,
+                   ByVal SQL As String,
+                   ByVal PKType As TypePrimary,
+                   ByVal KeyField As String,
+                   ByVal ParentField As String)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -143,38 +151,35 @@ Public Class frmDaftar
         Me.tableName = tableName
         Me.formName = formName
         Me.SQL = SQL
+        Me.PKType = PKType
         Me.Tag = Me.formName
         Me.Name = Me.formName
+        Me.KeyField = KeyField
+        Me.ParentField = ParentField
     End Sub
 
-    Private Sub GridView1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataSourceChanged
-        With GridView1
+    Private Sub Treelist1_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TreeList1.DataSourceChanged
+        With TreeList1
             If System.IO.File.Exists([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml") Then
                 .RestoreLayoutFromXml([Public].SettingPerusahaan.PathLayouts & Me.Name & .Name & ".xml")
             End If
             For i As Integer = 0 To .Columns.Count - 1
                 Select Case .Columns(i).ColumnType.Name.ToLower
                     Case "int32", "int64", "int"
-                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                        .Columns(i).DisplayFormat.FormatString = "n0"
+                        .Columns(i).Format.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).Format.FormatString = "n0"
                     Case "decimal", "single", "money", "double"
-                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                        .Columns(i).DisplayFormat.FormatString = "n2"
+                        .Columns(i).Format.FormatType = DevExpress.Utils.FormatType.Numeric
+                        .Columns(i).Format.FormatString = "n2"
                     Case "string"
-                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.None
-                        .Columns(i).DisplayFormat.FormatString = ""
+                        .Columns(i).Format.FormatType = DevExpress.Utils.FormatType.None
+                        .Columns(i).Format.FormatString = ""
                     Case "date"
-                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy"
+                        .Columns(i).Format.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).Format.FormatString = "dd-MM-yyyy"
                     Case "datetime"
-                        .Columns(i).DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                        .Columns(i).DisplayFormat.FormatString = "dd-MM-yyyy HH:mm"
-                    Case "byte[]"
-                        reppicedit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze
-                        .Columns(i).OptionsColumn.AllowGroup = False
-                        .Columns(i).OptionsColumn.AllowSort = False
-                        .Columns(i).OptionsFilter.AllowFilter = False
-                        .Columns(i).ColumnEdit = reppicedit
+                        .Columns(i).Format.FormatType = DevExpress.Utils.FormatType.DateTime
+                        .Columns(i).Format.FormatString = "dd-MM-yyyy HH:mm"
                     Case "boolean"
                         .Columns(i).ColumnEdit = repckedit
                 End Select
@@ -210,7 +215,7 @@ Public Class frmDaftar
         Using frm As New frmOtorisasi
             Try
                 If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                    GridView1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & GridView1.Name & ".xml")
+                    TreeList1.SaveLayoutToXml([Public].SettingPerusahaan.PathLayouts & Me.Name & TreeList1.Name & ".xml")
                 End If
             Catch ex As Exception
                 XtraMessageBox.Show(ex.Message, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -218,7 +223,7 @@ Public Class frmDaftar
         End Using
     End Sub
 
-    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DoubleClick
+    Private Sub GridView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         cmdEdit.PerformClick()
     End Sub
 
@@ -229,18 +234,7 @@ Public Class frmDaftar
 
     Private Sub mnBaru_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         Select Case tableName
-            Case "MUser"
-                Using frm As New frmEntriUser(-1)
-                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MRole"
-                Using frm As New frmEntriRole(-1)
-                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
+            Case "MAkun"
             Case Else
                 XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
@@ -248,33 +242,18 @@ Public Class frmDaftar
 
     Private Sub mnEdit_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnEdit.ItemClick
         Select Case tableName
-            Case "MUser"
-                Using frm As New frmEntriUser(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
-            Case "MRole"
-                Using frm As New frmEntriRole(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                        RefreshData(frm.NoID)
-                    End If
-                End Using
+            Case "MAkun"
             Case Else
                 XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
     End Sub
 
     Private Sub mnHapus_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
-        If GridView1.RowCount >= 1 Then
+        If TreeList1.Nodes.Count >= 1 Then
             Select Case tableName
-                Case "MUser"
-                    If XtraMessageBox.Show("Ingin menghapus data User " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
-                    End If
-                Case "MRole"
-                    If XtraMessageBox.Show("Ingin menghapus data Role " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Role")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
-                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                Case "MAkun"
+                    If XtraMessageBox.Show("Ingin menghapus data Akun " & NullToStr(TreeList1.GetRowCellValue(TreeList1.FocusedNode, TreeList1.Columns("Nama"))) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
+                        HapusData(TreeList1.GetRowCellValue(TreeList1.FocusedNode, TreeList1.Columns(KeyField)))
                     End If
                 Case Else
                     XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)

@@ -1498,7 +1498,78 @@ INSERT dbo.MAkun(ID, IDKlasAkun, IDParent, IDDepartemen, Kode, Nama, Keterangan,
             Obj = New Model.UpdateDB With {.DBVersion = "Isi_MAkun_210627", .TglUpdate = CDate("2021-06-27"), .SQL = SQL}
             Hasil.Add(Obj)
 
+            SQL = "TRUNCATE TABLE dbo.MMenu;" & vbCrLf &
+                  "INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (1, -1, 1, N'mnMaster', N'Master', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (2, -1, 2, N'mnSaldoAwal', N'Saldo Awal', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (3, -1, 3, N'mnPembelian', N'Pembelian', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (4, -1, 4, N'mnPenjualan', N'Penjualan', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (5, -1, 5, N'mnInternal', N'Internal', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (6, -1, 7, N'mnKasBank', N'Keuangan', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (7, -1, 8, N'mnAccounting', N'Akuntansi', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (8, -1, 9, N'mnLaporan', N'Laporan', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (9, -1, 6, N'mnPabrikasi', N'Pabrikasi', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (101, 1, 1, N'mnKategori', N'Data Kategori', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (102, 1, 2, N'mnSatuan', N'Data Satuan', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (103, 1, 3, N'mnMerk', N'Data Merk', 0, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (104, 1, 4, N'mnBarang', N'Daftar Barang', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (105, 1, 5, N'mnKontak', N'Data All Kontak (Supplier, Customer, dan Karyawan)', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (106, 1, 6, N'mnGudang', N'Data Gudang', 0, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (107, 1, 7, N'mnEDC', N'Data EDC', 0, 0, 0);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (201, 2, 1, N'mnDaftarSA', N'Daftar Saldo Awal Persediaan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (202, 2, 2, N'mnDaftarSAHS', N'Daftar Saldo Awal Hutang', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (203, 2, 3, N'mnDaftarSAPC', N'Daftar Saldo Awal Piutang', 1, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (301, 3, 1, N'mnPO', N'Daftar Pesanan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (302, 3, 2, N'mnBeli', N'Daftar Pembelian', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (303, 3, 3, N'mnReturBeli', N'Daftar Retur Pembelian', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (304, 3, 4, N'mnPPNMasukan', N'Daftar PPN Masukan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (401, 4, 1, N'mnJual', N'Daftar Penjualan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (402, 4, 2, N'mnReturJual', N'Daftar Retur Penjualan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (403, 4, 3, N'mnPPNKeluaran', N'Daftar PPN Keluaran', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (501, 5, 1, N'mnPenyesuaianMasuk', N'Daftar Penyesuaian Masuk', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (502, 5, 2, N'mnPenyesuaianKeluar', N'Daftar Penyesuaian Keluar', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (503, 5, 3, N'mnStockOpname', N'Stock Opname', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (504, 5, 4, N'mnMutasiGudang', N'Daftar Mutasi Gudang', 1, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (601, 6, 1, N'mnDaftarKasOut', N'Pelunasan Hutang dan Kas Keluar', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (602, 6, 2, N'mnDaftarKasIn', N'Pelunasan Piutang dan Kas Masuk', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (603, 6, 3, N'mnBiaya', N'Daftar Biaya', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (701, 7, 1, N'mnAcc', N'Daftar Accounting', 1, 1, 0);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (702, 7, 0, N'mnDaftarAkun', N'Daftar Akun', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (801, 8, 1, N'mnKartuStok', N'Laporan Kartu Stok', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (802, 8, 2, N'mnSaldoStok', N'Laporan Saldo Stok', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (803, 8, 3, N'mnMutasiStok', N'Laporan Mutasi Stok', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (804, 8, 4, N'mnLapJual', N'Laporan Penjualan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (805, 8, 5, N'mnLapBeli', N'Laporan Pembelian', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (806, 8, 6, N'mnLapAgingHutang', N'Laporan Aging Hutang', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (807, 8, 7, N'mnLapAgingPiutang', N'Laporan Aging Piutang', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (808, 8, 8, N'mnLapLabaRugi', N'Laporan Laba Rugi (Kotor)', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (809, 8, 9, N'mnLapJualLaku', N'Laporan Penjualan Paling Laku', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (901, 9, 1, N'mnMaterial', N'Daftar Material / Formula', 1, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (902, 9, 2, N'mnWOAssembly', N'Work Order', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (903, 9, 3, N'mnAssemblyOut', N'Daftar Pengeluaran Bahan', 1, 1, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (904, 9, 4, N'mnAssemblyBiaya', N'Daftar Pencatatan Biaya', 1, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (905, 9, 5, N'mnAssemblyHasil', N'Daftar Hasil Produksi', 1, 0, 1);
+INSERT dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (906, 9, 6, N'mnAssembly', N'Daftar Produksi (Langsung)', 1, 1, 1);"
+            Obj = New Model.UpdateDB With {.DBVersion = "Update_MMenu_210627", .TglUpdate = CDate("2021-06-27"), .SQL = SQL}
+            Hasil.Add(Obj)
+
             Return Hasil
+        End Function
+#End Region
+#Region "Menu"
+        Private Enum ParentMenu
+            Master = 1
+            SaldoAwal = 2
+            Pembelian = 3
+            Penjualan = 4
+            Internal = 5
+            KasBank = 6
+            Keuangan = 7
+            Laporan = 8
+            Pabrikasi = 9
+        End Enum
+
+        Public Shared Function ListMenu_20210623() As List(Of Model.MMenu)
+
         End Function
 #End Region
     End Class

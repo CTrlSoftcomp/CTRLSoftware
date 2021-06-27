@@ -310,10 +310,25 @@
     <Compile Include="Form\Application\frmSettingPerusahaan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterialDBiaya.Designer.vb">
+      <DependentUpon>frmEntriMaterialDBiaya.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterialDBiaya.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterialD.Designer.vb">
+      <DependentUpon>frmEntriMaterialD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterialD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Entri\frmEntriMaterial.Designer.vb">
       <DependentUpon>frmEntriMaterial.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Entri\frmEntriMaterial.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Entri\frmEntriMaterialDSisa.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Entri\frmEntriSaldoAwalPiutang.Designer.vb">
@@ -584,6 +599,12 @@
     <EmbeddedResource Include="Form\Application\frmSettingPerusahaan.resx">
       <DependentUpon>frmSettingPerusahaan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriMaterialDBiaya.resx">
+      <DependentUpon>frmEntriMaterialDBiaya.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Entri\frmEntriMaterialD.resx">
+      <DependentUpon>frmEntriMaterialD.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Entri\frmEntriMaterial.resx">
       <DependentUpon>frmEntriMaterial.vb</DependentUpon>
     </EmbeddedResource>
@@ -707,6 +728,9 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\CtrlSoft.App.DBSettings.MDBSetting.datasource" />
+    <None Include="My Project\DataSources\CtrlSoft.Dto.Model.MMaterialD.datasource" />
+    <None Include="My Project\DataSources\CtrlSoft.Dto.Model.MMaterialDBiaya.datasource" />
+    <None Include="My Project\DataSources\CtrlSoft.Dto.Model.MMaterialDSisa.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -771,6 +795,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Logo_Ctrl_White_2.ico" />
+    <None Include="Migration\Seeder.SQL" />
     <None Include="Resources\connect_to_database.png" />
     <None Include="Resources\import_database2.png" />
     <None Include="Resources\export_database2.png" />

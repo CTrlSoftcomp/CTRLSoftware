@@ -14,6 +14,9 @@ Namespace Model
     Public Class MMaterial
         Public Sub New()
             Me.NoID = System.Guid.NewGuid
+            Me.MMaterialDs = New HashSet(Of MMaterialD)
+            Me.MMaterialDBiayas = New HashSet(Of MMaterialDBiaya)
+            Me.MMaterialDSisas = New HashSet(Of MMaterialDSisa)
         End Sub
 
         Public Property NoID As System.Guid
@@ -28,13 +31,18 @@ Namespace Model
         Public Property Qty As Decimal
         Public Property HargaPokok As Decimal
         Public Property Jumlah As Decimal
+            Get
+                Return System.Math.Round(Qty * HargaPokok, 2)
+            End Get
+            Set(value As Decimal)
+
+            End Set
+        End Property
         Public Property IDUser As Integer
         Public Property TanggalUpdate As Date
 
-        Public Overridable Property MAssemblies As ICollection(Of MAssembly) = New HashSet(Of MAssembly)
         Public Overridable Property MMaterialDs As ICollection(Of MMaterialD) = New HashSet(Of MMaterialD)
         Public Overridable Property MMaterialDBiayas As ICollection(Of MMaterialDBiaya) = New HashSet(Of MMaterialDBiaya)
         Public Overridable Property MMaterialDSisas As ICollection(Of MMaterialDSisa) = New HashSet(Of MMaterialDSisa)
-        Public Overridable Property MWOAssemblies As ICollection(Of MWOAssembly) = New HashSet(Of MWOAssembly)
     End Class
 End Namespace

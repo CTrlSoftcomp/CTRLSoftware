@@ -159,5 +159,19 @@ Namespace Repository
 
             Return Hasil
         End Function
+        Public Shared Function GetKodeMaterial() As String
+            Dim Hasil As String = ""
+            Using dlg As New WaitDialogForm("Sedang mengambil data ...", NamaAplikasi)
+                dlg.Show()
+                dlg.Focus()
+                Dim JSON = CtrlSoft.Repository.Repository.RepSQLServer.GetKodeMaterial(StrKonSQL)
+                If JSON.JSONResult Then
+                    Hasil = JSON.JSONValue
+                Else
+                    XtraMessageBox.Show(JSON.JSONMessage, NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+            Return Hasil
+        End Function
     End Class
 End Namespace

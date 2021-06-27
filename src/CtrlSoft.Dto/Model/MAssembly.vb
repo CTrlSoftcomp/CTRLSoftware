@@ -12,6 +12,14 @@ Imports System.Collections.Generic
 
 Namespace Model
     Public Class MAssembly
+        Public Sub New()
+            Me.IDWOAssembly = System.Guid.NewGuid
+            Me.IDMaterial = System.Guid.NewGuid
+            Me.MAssemblyDs = New HashSet(Of MAssemblyD)
+            Me.MAssemblyDBiayas = New HashSet(Of MAssemblyDBiaya)
+            Me.MAssemblyDSisas = New HashSet(Of MAssemblyDSisa)
+        End Sub
+
         Public Property NoID As Long
         Public Property Kode As String
         Public Property Tanggal As Date
@@ -33,8 +41,6 @@ Namespace Model
         Public Property IDUserEntry As Nullable(Of Integer)
         Public Property IDUserEdit As Nullable(Of Integer)
 
-        Public Overridable Property MMaterial As MMaterial
-        Public Overridable Property MWOAssembly As MWOAssembly
         Public Overridable Property MAssemblyDs As ICollection(Of MAssemblyD) = New HashSet(Of MAssemblyD)
         Public Overridable Property MAssemblyDBiayas As ICollection(Of MAssemblyDBiaya) = New HashSet(Of MAssemblyDBiaya)
         Public Overridable Property MAssemblyDSisas As ICollection(Of MAssemblyDSisa) = New HashSet(Of MAssemblyDSisa)

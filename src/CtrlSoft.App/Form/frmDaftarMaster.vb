@@ -262,6 +262,12 @@ Public Class frmDaftarMaster
                         RefreshData(frm.NoID)
                     End If
                 End Using
+            Case "MMaterial"
+                Using frm As New frmEntriMaterial(System.Guid.NewGuid)
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.data.NoID)
+                    End If
+                End Using
             Case Else
                 XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
@@ -293,6 +299,12 @@ Public Class frmDaftarMaster
                         RefreshData(frm.NoID)
                     End If
                 End Using
+            Case "MMaterial"
+                Using frm As New frmEntriMaterial(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID"))
+                    If frm.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                        RefreshData(frm.data.NoID)
+                    End If
+                End Using
             Case Else
                 XtraMessageBox.Show("Durong isok Boss!!!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Stop)
         End Select
@@ -315,6 +327,10 @@ Public Class frmDaftarMaster
                     End If
                 Case "MGudang"
                     If XtraMessageBox.Show("Ingin menonaktifkan data Gudang " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
+                        HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
+                    End If
+                Case "MMaterial"
+                    If XtraMessageBox.Show("Ingin menonaktifkan data Material " & NullToStr(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "Nama")) & "?", NamaAplikasi, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
                         HapusData(NullToLong(GridView1.GetRowCellValue(GridView1.FocusedRowHandle, "NoID")))
                     End If
                 Case Else

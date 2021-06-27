@@ -162,6 +162,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to -- Method 2 Isi Data Default
+        '''USE [DBPOS]
+        '''GO
+        '''
+        '''--
+        '''-- Inserting data into table dbo.MAlamat
+        '''--
+        '''INSERT [DBPOS].dbo.MAlamat(NoID, Kode, Nama, NamaAlias, Alamat, Kota, HP, Telp, ContactPerson, LimitHutang, LimitPiutang, LimitNotaPiutang, LimitUmurPiutang, IDTypeHarga, IsActive, IsSupplier, IsPegawai, IsCustomer) VALUES (1, N&apos;KRY-00001&apos;, N&apos;ADMIN&apos;, N&apos;ADMIN&apos;, N&apos;-&apos;, N&apos;SURABAYA&apos;, N&apos;-&apos;, N&apos;-&apos;, N&apos;ADMIN&apos;, 0.00, 0.00, 0, 0, 0, 1, 0, 1, 0)
+        '''INSERT [DBPOS].dbo.MAlamat(NoID, Kode, Nama, NamaAlias, Alamat, Kota, HP, Tel [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Seeder() As String
+            Get
+                Return ResourceManager.GetString("Seeder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property technology_32x32() As System.Drawing.Bitmap

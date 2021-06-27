@@ -26,5 +26,16 @@ Namespace Model
         Public Property Qty As Decimal
         Public Property HargaPokok As Decimal
         Public Property Jumlah As Decimal
+            Get
+                Return System.Math.Round(Qty * HargaPokok, 2)
+            End Get
+            Set(value As Decimal)
+
+            End Set
+        End Property
+        Public Property Barcode As String
+        Public Property KodeBarang As String
+        Public Property NamaBarang As String
+        Public Property Satuan As String
     End Class
 End Namespace

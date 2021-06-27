@@ -882,5 +882,9 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub backstageViewControl1_Shown(sender As Object, e As EventArgs) Handles backstageViewControl1.Shown
+        backstageViewControl1.SelectedTabIndex = 0
+    End Sub
+
 #End Region
 End Class

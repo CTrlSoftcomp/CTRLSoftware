@@ -20,50 +20,90 @@ Partial Class frmEntriMaterial
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEntriMaterial))
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim EditorButtonImageOptions2 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim EditorButtonImageOptions3 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
-        Me.txtLimitUmur = New DevExpress.XtraEditors.TextEdit()
-        Me.txtLimitNota = New DevExpress.XtraEditors.TextEdit()
-        Me.txtLimitPiutang = New DevExpress.XtraEditors.TextEdit()
-        Me.txtLimitHutang = New DevExpress.XtraEditors.TextEdit()
-        Me.txtTelp = New DevExpress.XtraEditors.TextEdit()
-        Me.txtHP = New DevExpress.XtraEditors.TextEdit()
-        Me.txtKota = New DevExpress.XtraEditors.TextEdit()
-        Me.txtKontakPerson = New DevExpress.XtraEditors.TextEdit()
-        Me.txtNamaAlias = New DevExpress.XtraEditors.TextEdit()
-        Me.ckPegawai = New DevExpress.XtraEditors.CheckEdit()
-        Me.ckSupplier = New DevExpress.XtraEditors.CheckEdit()
-        Me.ckCustomer = New DevExpress.XtraEditors.CheckEdit()
+        Me.GCSisa = New DevExpress.XtraGrid.GridControl()
+        Me.MMaterialDSisaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.gvSisa = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.colNoID2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDMaterial2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDBarangD1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDBarang1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDSatuan1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colBarcode1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colKodeBarang1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colNamaBarang1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSatuan1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colKonversi1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colQty1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colHargaPokok1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colJumlah2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCBiaya = New DevExpress.XtraGrid.GridControl()
+        Me.MMaterialDBiayaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.gvBiaya = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.colNoID1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDMaterial1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDAkun = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAkun = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colKeterangan = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colJumlah1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCBahan = New DevExpress.XtraGrid.GridControl()
+        Me.MMaterialDBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.gvBahan = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.colNoID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDMaterial = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDBarangD = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDBarang = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colIDSatuan = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colBarcode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colKodeBarang = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colNamaBarang = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSatuan = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colKonversi = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colHargaPokok = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colJumlah = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.txtJumlah = New DevExpress.XtraEditors.TextEdit()
+        Me.txtHargaPokok = New DevExpress.XtraEditors.TextEdit()
+        Me.txtKonversi = New DevExpress.XtraEditors.TextEdit()
+        Me.txtSatuan = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvSatuan = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.txtNamaBarang = New DevExpress.XtraEditors.TextEdit()
+        Me.txtKodeBarang = New DevExpress.XtraEditors.TextEdit()
+        Me.txtBarcode = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.gvBarcode = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.txtQty = New DevExpress.XtraEditors.TextEdit()
         Me.ckAktif = New DevExpress.XtraEditors.CheckEdit()
         Me.txtNama = New DevExpress.XtraEditors.TextEdit()
         Me.txtKode = New DevExpress.XtraEditors.TextEdit()
-        Me.txtTypeHarga = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.txtAlamat = New DevExpress.XtraEditors.MemoEdit()
+        Me.txtKeterangan = New DevExpress.XtraEditors.MemoEdit()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlGroup2 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem15 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.TabControl = New DevExpress.XtraLayout.TabbedControlGroup()
         Me.LayoutControlGroup3 = New DevExpress.XtraLayout.LayoutControlGroup()
+        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlGroup4 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem17 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem18 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlGroup5 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem8 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlGroup6 = New DevExpress.XtraLayout.LayoutControlGroup()
-        Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.Bar2 = New DevExpress.XtraBars.Bar()
@@ -76,301 +116,591 @@ Partial Class frmEntriMaterial
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.mnRefresh = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnBaru = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnEdit = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnHapus = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
-        CType(Me.txtLimitUmur.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtLimitNota.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtLimitPiutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtLimitHutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtTelp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtHP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtKota.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtKontakPerson.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtNamaAlias.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ckPegawai.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ckSupplier.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ckCustomer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCSisa, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MMaterialDSisaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvSisa, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCBiaya, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MMaterialDBiayaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvBiaya, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCBahan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MMaterialDBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvBahan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtJumlah.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtHargaPokok.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtSatuan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvSatuan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtNamaBarang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtKodeBarang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtBarcode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtQty.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtKode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtTypeHarga.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtAlamat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtKeterangan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TabControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
-        Me.LayoutControl1.Controls.Add(Me.txtLimitUmur)
-        Me.LayoutControl1.Controls.Add(Me.txtLimitNota)
-        Me.LayoutControl1.Controls.Add(Me.txtLimitPiutang)
-        Me.LayoutControl1.Controls.Add(Me.txtLimitHutang)
-        Me.LayoutControl1.Controls.Add(Me.txtTelp)
-        Me.LayoutControl1.Controls.Add(Me.txtHP)
-        Me.LayoutControl1.Controls.Add(Me.txtKota)
-        Me.LayoutControl1.Controls.Add(Me.txtKontakPerson)
-        Me.LayoutControl1.Controls.Add(Me.txtNamaAlias)
-        Me.LayoutControl1.Controls.Add(Me.ckPegawai)
-        Me.LayoutControl1.Controls.Add(Me.ckSupplier)
-        Me.LayoutControl1.Controls.Add(Me.ckCustomer)
+        Me.LayoutControl1.Controls.Add(Me.GCSisa)
+        Me.LayoutControl1.Controls.Add(Me.GCBiaya)
+        Me.LayoutControl1.Controls.Add(Me.GCBahan)
+        Me.LayoutControl1.Controls.Add(Me.txtJumlah)
+        Me.LayoutControl1.Controls.Add(Me.txtHargaPokok)
+        Me.LayoutControl1.Controls.Add(Me.txtKonversi)
+        Me.LayoutControl1.Controls.Add(Me.txtSatuan)
+        Me.LayoutControl1.Controls.Add(Me.txtNamaBarang)
+        Me.LayoutControl1.Controls.Add(Me.txtKodeBarang)
+        Me.LayoutControl1.Controls.Add(Me.txtBarcode)
+        Me.LayoutControl1.Controls.Add(Me.txtQty)
         Me.LayoutControl1.Controls.Add(Me.ckAktif)
         Me.LayoutControl1.Controls.Add(Me.txtNama)
         Me.LayoutControl1.Controls.Add(Me.txtKode)
-        Me.LayoutControl1.Controls.Add(Me.txtTypeHarga)
-        Me.LayoutControl1.Controls.Add(Me.txtAlamat)
+        Me.LayoutControl1.Controls.Add(Me.txtKeterangan)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 51)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(941, 332, 250, 350)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(941, 332, 442, 350)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(608, 444)
+        Me.LayoutControl1.Size = New System.Drawing.Size(788, 456)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
-        'txtLimitUmur
+        'GCSisa
         '
-        Me.txtLimitUmur.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
-        Me.txtLimitUmur.EnterMoveNextControl = True
-        Me.txtLimitUmur.Location = New System.Drawing.Point(455, 256)
-        Me.txtLimitUmur.Name = "txtLimitUmur"
-        Me.txtLimitUmur.Properties.Appearance.Options.UseTextOptions = True
-        Me.txtLimitUmur.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.txtLimitUmur.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLimitUmur.Properties.Mask.EditMask = "n2"
-        Me.txtLimitUmur.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.txtLimitUmur.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.txtLimitUmur.Size = New System.Drawing.Size(117, 20)
-        Me.txtLimitUmur.StyleController = Me.LayoutControl1
-        Me.txtLimitUmur.TabIndex = 12
+        Me.GCSisa.DataSource = Me.MMaterialDSisaBindingSource
+        Me.GCSisa.Location = New System.Drawing.Point(322, 46)
+        Me.GCSisa.MainView = Me.gvSisa
+        Me.GCSisa.Name = "GCSisa"
+        Me.GCSisa.Size = New System.Drawing.Size(442, 386)
+        Me.GCSisa.TabIndex = 23
+        Me.GCSisa.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvSisa})
         '
-        'txtLimitNota
+        'MMaterialDSisaBindingSource
         '
-        Me.txtLimitNota.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
-        Me.txtLimitNota.EnterMoveNextControl = True
-        Me.txtLimitNota.Location = New System.Drawing.Point(455, 232)
-        Me.txtLimitNota.Name = "txtLimitNota"
-        Me.txtLimitNota.Properties.Appearance.Options.UseTextOptions = True
-        Me.txtLimitNota.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.txtLimitNota.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLimitNota.Properties.Mask.EditMask = "n2"
-        Me.txtLimitNota.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.txtLimitNota.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.txtLimitNota.Size = New System.Drawing.Size(117, 20)
-        Me.txtLimitNota.StyleController = Me.LayoutControl1
-        Me.txtLimitNota.TabIndex = 12
+        Me.MMaterialDSisaBindingSource.DataSource = GetType(CtrlSoft.Dto.Model.MMaterialDSisa)
         '
-        'txtLimitPiutang
+        'gvSisa
         '
-        Me.txtLimitPiutang.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
-        Me.txtLimitPiutang.EnterMoveNextControl = True
-        Me.txtLimitPiutang.Location = New System.Drawing.Point(455, 208)
-        Me.txtLimitPiutang.Name = "txtLimitPiutang"
-        Me.txtLimitPiutang.Properties.Appearance.Options.UseTextOptions = True
-        Me.txtLimitPiutang.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.txtLimitPiutang.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLimitPiutang.Properties.Mask.EditMask = "n2"
-        Me.txtLimitPiutang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.txtLimitPiutang.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.txtLimitPiutang.Size = New System.Drawing.Size(117, 20)
-        Me.txtLimitPiutang.StyleController = Me.LayoutControl1
-        Me.txtLimitPiutang.TabIndex = 12
+        Me.gvSisa.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colNoID2, Me.colIDMaterial2, Me.colIDBarangD1, Me.colIDBarang1, Me.colIDSatuan1, Me.colBarcode1, Me.colKodeBarang1, Me.colNamaBarang1, Me.colSatuan1, Me.colKonversi1, Me.colQty1, Me.colHargaPokok1, Me.colJumlah2})
+        Me.gvSisa.GridControl = Me.GCSisa
+        Me.gvSisa.Name = "gvSisa"
+        Me.gvSisa.OptionsBehavior.Editable = False
+        Me.gvSisa.OptionsNavigation.EnterMoveNextColumn = True
+        Me.gvSisa.OptionsSelection.MultiSelect = True
+        Me.gvSisa.OptionsView.ColumnAutoWidth = False
+        Me.gvSisa.OptionsView.ShowAutoFilterRow = True
+        Me.gvSisa.OptionsView.ShowFooter = True
+        Me.gvSisa.OptionsView.ShowGroupPanel = False
         '
-        'txtLimitHutang
+        'colNoID2
         '
-        Me.txtLimitHutang.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
-        Me.txtLimitHutang.EnterMoveNextControl = True
-        Me.txtLimitHutang.Location = New System.Drawing.Point(455, 95)
-        Me.txtLimitHutang.Name = "txtLimitHutang"
-        Me.txtLimitHutang.Properties.Appearance.Options.UseTextOptions = True
-        Me.txtLimitHutang.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.txtLimitHutang.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLimitHutang.Properties.Mask.EditMask = "n2"
-        Me.txtLimitHutang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.txtLimitHutang.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.txtLimitHutang.Size = New System.Drawing.Size(117, 20)
-        Me.txtLimitHutang.StyleController = Me.LayoutControl1
-        Me.txtLimitHutang.TabIndex = 12
+        Me.colNoID2.FieldName = "NoID"
+        Me.colNoID2.Name = "colNoID2"
         '
-        'txtTelp
+        'colIDMaterial2
         '
-        Me.txtTelp.EnterMoveNextControl = True
-        Me.txtTelp.Location = New System.Drawing.Point(96, 259)
-        Me.txtTelp.Name = "txtTelp"
-        Me.txtTelp.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtTelp.Size = New System.Drawing.Size(247, 20)
-        Me.txtTelp.StyleController = Me.LayoutControl1
-        Me.txtTelp.TabIndex = 11
+        Me.colIDMaterial2.FieldName = "IDMaterial"
+        Me.colIDMaterial2.Name = "colIDMaterial2"
         '
-        'txtHP
+        'colIDBarangD1
         '
-        Me.txtHP.EnterMoveNextControl = True
-        Me.txtHP.Location = New System.Drawing.Point(96, 235)
-        Me.txtHP.Name = "txtHP"
-        Me.txtHP.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtHP.Size = New System.Drawing.Size(247, 20)
-        Me.txtHP.StyleController = Me.LayoutControl1
-        Me.txtHP.TabIndex = 11
+        Me.colIDBarangD1.FieldName = "IDBarangD"
+        Me.colIDBarangD1.Name = "colIDBarangD1"
         '
-        'txtKota
+        'colIDBarang1
         '
-        Me.txtKota.EnterMoveNextControl = True
-        Me.txtKota.Location = New System.Drawing.Point(96, 211)
-        Me.txtKota.Name = "txtKota"
-        Me.txtKota.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtKota.Size = New System.Drawing.Size(247, 20)
-        Me.txtKota.StyleController = Me.LayoutControl1
-        Me.txtKota.TabIndex = 11
+        Me.colIDBarang1.FieldName = "IDBarang"
+        Me.colIDBarang1.Name = "colIDBarang1"
         '
-        'txtKontakPerson
+        'colIDSatuan1
         '
-        Me.txtKontakPerson.EnterMoveNextControl = True
-        Me.txtKontakPerson.Location = New System.Drawing.Point(96, 114)
-        Me.txtKontakPerson.Name = "txtKontakPerson"
-        Me.txtKontakPerson.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtKontakPerson.Size = New System.Drawing.Size(247, 20)
-        Me.txtKontakPerson.StyleController = Me.LayoutControl1
-        Me.txtKontakPerson.TabIndex = 11
+        Me.colIDSatuan1.FieldName = "IDSatuan"
+        Me.colIDSatuan1.Name = "colIDSatuan1"
         '
-        'txtNamaAlias
+        'colBarcode1
         '
-        Me.txtNamaAlias.EnterMoveNextControl = True
-        Me.txtNamaAlias.Location = New System.Drawing.Point(96, 90)
-        Me.txtNamaAlias.Name = "txtNamaAlias"
-        Me.txtNamaAlias.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtNamaAlias.Size = New System.Drawing.Size(247, 20)
-        Me.txtNamaAlias.StyleController = Me.LayoutControl1
-        Me.txtNamaAlias.TabIndex = 11
+        Me.colBarcode1.FieldName = "Barcode"
+        Me.colBarcode1.Name = "colBarcode1"
+        Me.colBarcode1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "Barcode", "{0}")})
+        Me.colBarcode1.Visible = True
+        Me.colBarcode1.VisibleIndex = 0
+        Me.colBarcode1.Width = 105
         '
-        'ckPegawai
+        'colKodeBarang1
         '
-        Me.ckPegawai.Location = New System.Drawing.Point(383, 322)
-        Me.ckPegawai.Name = "ckPegawai"
-        Me.ckPegawai.Properties.Caption = "Pegawai"
-        Me.ckPegawai.Size = New System.Drawing.Size(189, 19)
-        Me.ckPegawai.StyleController = Me.LayoutControl1
-        Me.ckPegawai.TabIndex = 13
+        Me.colKodeBarang1.FieldName = "KodeBarang"
+        Me.colKodeBarang1.Name = "colKodeBarang1"
+        Me.colKodeBarang1.Visible = True
+        Me.colKodeBarang1.VisibleIndex = 1
+        Me.colKodeBarang1.Width = 103
         '
-        'ckSupplier
+        'colNamaBarang1
         '
-        Me.ckSupplier.Location = New System.Drawing.Point(383, 72)
-        Me.ckSupplier.Name = "ckSupplier"
-        Me.ckSupplier.Properties.Caption = "Supplier"
-        Me.ckSupplier.Size = New System.Drawing.Size(189, 19)
-        Me.ckSupplier.StyleController = Me.LayoutControl1
-        Me.ckSupplier.TabIndex = 13
+        Me.colNamaBarang1.FieldName = "NamaBarang"
+        Me.colNamaBarang1.Name = "colNamaBarang1"
+        Me.colNamaBarang1.Visible = True
+        Me.colNamaBarang1.VisibleIndex = 2
+        Me.colNamaBarang1.Width = 202
         '
-        'ckCustomer
+        'colSatuan1
         '
-        Me.ckCustomer.Location = New System.Drawing.Point(383, 161)
-        Me.ckCustomer.Name = "ckCustomer"
-        Me.ckCustomer.Properties.Caption = "Customer"
-        Me.ckCustomer.Size = New System.Drawing.Size(189, 19)
-        Me.ckCustomer.StyleController = Me.LayoutControl1
-        Me.ckCustomer.TabIndex = 13
+        Me.colSatuan1.FieldName = "Satuan"
+        Me.colSatuan1.Name = "colSatuan1"
+        Me.colSatuan1.Visible = True
+        Me.colSatuan1.VisibleIndex = 3
+        Me.colSatuan1.Width = 76
+        '
+        'colKonversi1
+        '
+        Me.colKonversi1.DisplayFormat.FormatString = "n0"
+        Me.colKonversi1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colKonversi1.FieldName = "Konversi"
+        Me.colKonversi1.Name = "colKonversi1"
+        Me.colKonversi1.Visible = True
+        Me.colKonversi1.VisibleIndex = 4
+        Me.colKonversi1.Width = 76
+        '
+        'colQty1
+        '
+        Me.colQty1.DisplayFormat.FormatString = "n0"
+        Me.colQty1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colQty1.FieldName = "Qty"
+        Me.colQty1.Name = "colQty1"
+        Me.colQty1.Visible = True
+        Me.colQty1.VisibleIndex = 5
+        Me.colQty1.Width = 76
+        '
+        'colHargaPokok1
+        '
+        Me.colHargaPokok1.FieldName = "HargaPokok"
+        Me.colHargaPokok1.Name = "colHargaPokok1"
+        Me.colHargaPokok1.Visible = True
+        Me.colHargaPokok1.VisibleIndex = 6
+        Me.colHargaPokok1.Width = 80
+        '
+        'colJumlah2
+        '
+        Me.colJumlah2.DisplayFormat.FormatString = "n2"
+        Me.colJumlah2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colJumlah2.FieldName = "Jumlah"
+        Me.colJumlah2.Name = "colJumlah2"
+        Me.colJumlah2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Jumlah", "SUM={0:0.##}")})
+        Me.colJumlah2.Visible = True
+        Me.colJumlah2.VisibleIndex = 7
+        Me.colJumlah2.Width = 137
+        '
+        'GCBiaya
+        '
+        Me.GCBiaya.DataSource = Me.MMaterialDBiayaBindingSource
+        Me.GCBiaya.Location = New System.Drawing.Point(322, 46)
+        Me.GCBiaya.MainView = Me.gvBiaya
+        Me.GCBiaya.Name = "GCBiaya"
+        Me.GCBiaya.Size = New System.Drawing.Size(442, 386)
+        Me.GCBiaya.TabIndex = 22
+        Me.GCBiaya.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvBiaya})
+        '
+        'MMaterialDBiayaBindingSource
+        '
+        Me.MMaterialDBiayaBindingSource.DataSource = GetType(CtrlSoft.Dto.Model.MMaterialDBiaya)
+        '
+        'gvBiaya
+        '
+        Me.gvBiaya.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colNoID1, Me.colIDMaterial1, Me.colIDAkun, Me.colAkun, Me.colKeterangan, Me.colJumlah1})
+        Me.gvBiaya.GridControl = Me.GCBiaya
+        Me.gvBiaya.Name = "gvBiaya"
+        Me.gvBiaya.OptionsBehavior.Editable = False
+        Me.gvBiaya.OptionsNavigation.EnterMoveNextColumn = True
+        Me.gvBiaya.OptionsSelection.MultiSelect = True
+        Me.gvBiaya.OptionsView.ColumnAutoWidth = False
+        Me.gvBiaya.OptionsView.ShowAutoFilterRow = True
+        Me.gvBiaya.OptionsView.ShowFooter = True
+        Me.gvBiaya.OptionsView.ShowGroupPanel = False
+        '
+        'colNoID1
+        '
+        Me.colNoID1.FieldName = "NoID"
+        Me.colNoID1.Name = "colNoID1"
+        '
+        'colIDMaterial1
+        '
+        Me.colIDMaterial1.FieldName = "IDMaterial"
+        Me.colIDMaterial1.Name = "colIDMaterial1"
+        '
+        'colIDAkun
+        '
+        Me.colIDAkun.FieldName = "IDAkun"
+        Me.colIDAkun.Name = "colIDAkun"
+        '
+        'colAkun
+        '
+        Me.colAkun.FieldName = "Akun"
+        Me.colAkun.Name = "colAkun"
+        Me.colAkun.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "Akun", "{0}")})
+        Me.colAkun.Visible = True
+        Me.colAkun.VisibleIndex = 0
+        Me.colAkun.Width = 121
+        '
+        'colKeterangan
+        '
+        Me.colKeterangan.FieldName = "Keterangan"
+        Me.colKeterangan.Name = "colKeterangan"
+        Me.colKeterangan.Visible = True
+        Me.colKeterangan.VisibleIndex = 1
+        Me.colKeterangan.Width = 260
+        '
+        'colJumlah1
+        '
+        Me.colJumlah1.DisplayFormat.FormatString = "n2"
+        Me.colJumlah1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colJumlah1.FieldName = "Jumlah"
+        Me.colJumlah1.Name = "colJumlah1"
+        Me.colJumlah1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Jumlah", "SUM={0:n2}")})
+        Me.colJumlah1.Visible = True
+        Me.colJumlah1.VisibleIndex = 2
+        Me.colJumlah1.Width = 161
+        '
+        'GCBahan
+        '
+        Me.GCBahan.DataSource = Me.MMaterialDBindingSource
+        Me.GCBahan.Location = New System.Drawing.Point(322, 46)
+        Me.GCBahan.MainView = Me.gvBahan
+        Me.GCBahan.Name = "GCBahan"
+        Me.GCBahan.Size = New System.Drawing.Size(442, 386)
+        Me.GCBahan.TabIndex = 21
+        Me.GCBahan.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvBahan})
+        '
+        'MMaterialDBindingSource
+        '
+        Me.MMaterialDBindingSource.DataSource = GetType(CtrlSoft.Dto.Model.MMaterialD)
+        '
+        'gvBahan
+        '
+        Me.gvBahan.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colNoID, Me.colIDMaterial, Me.colIDBarangD, Me.colIDBarang, Me.colIDSatuan, Me.colBarcode, Me.colKodeBarang, Me.colNamaBarang, Me.colSatuan, Me.colKonversi, Me.colQty, Me.colHargaPokok, Me.colJumlah})
+        Me.gvBahan.GridControl = Me.GCBahan
+        Me.gvBahan.Name = "gvBahan"
+        Me.gvBahan.OptionsBehavior.Editable = False
+        Me.gvBahan.OptionsNavigation.EnterMoveNextColumn = True
+        Me.gvBahan.OptionsSelection.MultiSelect = True
+        Me.gvBahan.OptionsView.ColumnAutoWidth = False
+        Me.gvBahan.OptionsView.ShowAutoFilterRow = True
+        Me.gvBahan.OptionsView.ShowFooter = True
+        Me.gvBahan.OptionsView.ShowGroupPanel = False
+        '
+        'colNoID
+        '
+        Me.colNoID.FieldName = "NoID"
+        Me.colNoID.Name = "colNoID"
+        '
+        'colIDMaterial
+        '
+        Me.colIDMaterial.FieldName = "IDMaterial"
+        Me.colIDMaterial.Name = "colIDMaterial"
+        '
+        'colIDBarangD
+        '
+        Me.colIDBarangD.FieldName = "IDBarangD"
+        Me.colIDBarangD.Name = "colIDBarangD"
+        '
+        'colIDBarang
+        '
+        Me.colIDBarang.FieldName = "IDBarang"
+        Me.colIDBarang.Name = "colIDBarang"
+        '
+        'colIDSatuan
+        '
+        Me.colIDSatuan.FieldName = "IDSatuan"
+        Me.colIDSatuan.Name = "colIDSatuan"
+        '
+        'colBarcode
+        '
+        Me.colBarcode.FieldName = "Barcode"
+        Me.colBarcode.Name = "colBarcode"
+        Me.colBarcode.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "Barcode", "{0}")})
+        Me.colBarcode.Visible = True
+        Me.colBarcode.VisibleIndex = 0
+        Me.colBarcode.Width = 76
+        '
+        'colKodeBarang
+        '
+        Me.colKodeBarang.FieldName = "KodeBarang"
+        Me.colKodeBarang.Name = "colKodeBarang"
+        Me.colKodeBarang.Visible = True
+        Me.colKodeBarang.VisibleIndex = 1
+        Me.colKodeBarang.Width = 81
+        '
+        'colNamaBarang
+        '
+        Me.colNamaBarang.FieldName = "NamaBarang"
+        Me.colNamaBarang.Name = "colNamaBarang"
+        Me.colNamaBarang.Visible = True
+        Me.colNamaBarang.VisibleIndex = 2
+        Me.colNamaBarang.Width = 84
+        '
+        'colSatuan
+        '
+        Me.colSatuan.FieldName = "Satuan"
+        Me.colSatuan.Name = "colSatuan"
+        Me.colSatuan.Visible = True
+        Me.colSatuan.VisibleIndex = 3
+        Me.colSatuan.Width = 76
+        '
+        'colKonversi
+        '
+        Me.colKonversi.DisplayFormat.FormatString = "n0"
+        Me.colKonversi.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colKonversi.FieldName = "Konversi"
+        Me.colKonversi.Name = "colKonversi"
+        Me.colKonversi.Visible = True
+        Me.colKonversi.VisibleIndex = 4
+        Me.colKonversi.Width = 76
+        '
+        'colQty
+        '
+        Me.colQty.DisplayFormat.FormatString = "n0"
+        Me.colQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colQty.FieldName = "Qty"
+        Me.colQty.Name = "colQty"
+        Me.colQty.Visible = True
+        Me.colQty.VisibleIndex = 5
+        Me.colQty.Width = 76
+        '
+        'colHargaPokok
+        '
+        Me.colHargaPokok.DisplayFormat.FormatString = "n2"
+        Me.colHargaPokok.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colHargaPokok.FieldName = "HargaPokok"
+        Me.colHargaPokok.Name = "colHargaPokok"
+        Me.colHargaPokok.Visible = True
+        Me.colHargaPokok.VisibleIndex = 6
+        Me.colHargaPokok.Width = 80
+        '
+        'colJumlah
+        '
+        Me.colJumlah.DisplayFormat.FormatString = "n2"
+        Me.colJumlah.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.colJumlah.FieldName = "Jumlah"
+        Me.colJumlah.Name = "colJumlah"
+        Me.colJumlah.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Jumlah", "SUM={0:0.##}")})
+        Me.colJumlah.Visible = True
+        Me.colJumlah.VisibleIndex = 7
+        Me.colJumlah.Width = 76
+        '
+        'txtJumlah
+        '
+        Me.txtJumlah.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
+        Me.txtJumlah.EnterMoveNextControl = True
+        Me.txtJumlah.Location = New System.Drawing.Point(91, 331)
+        Me.txtJumlah.Name = "txtJumlah"
+        Me.txtJumlah.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtJumlah.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtJumlah.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtJumlah.Properties.Mask.EditMask = "n2"
+        Me.txtJumlah.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtJumlah.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtJumlah.Properties.ReadOnly = True
+        Me.txtJumlah.Size = New System.Drawing.Size(203, 20)
+        Me.txtJumlah.StyleController = Me.LayoutControl1
+        Me.txtJumlah.TabIndex = 20
+        '
+        'txtHargaPokok
+        '
+        Me.txtHargaPokok.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
+        Me.txtHargaPokok.EnterMoveNextControl = True
+        Me.txtHargaPokok.Location = New System.Drawing.Point(91, 307)
+        Me.txtHargaPokok.Name = "txtHargaPokok"
+        Me.txtHargaPokok.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtHargaPokok.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtHargaPokok.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtHargaPokok.Properties.Mask.EditMask = "n2"
+        Me.txtHargaPokok.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtHargaPokok.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtHargaPokok.Size = New System.Drawing.Size(203, 20)
+        Me.txtHargaPokok.StyleController = Me.LayoutControl1
+        Me.txtHargaPokok.TabIndex = 19
+        '
+        'txtKonversi
+        '
+        Me.txtKonversi.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
+        Me.txtKonversi.EnterMoveNextControl = True
+        Me.txtKonversi.Location = New System.Drawing.Point(91, 259)
+        Me.txtKonversi.Name = "txtKonversi"
+        Me.txtKonversi.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtKonversi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtKonversi.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKonversi.Properties.Mask.EditMask = "n0"
+        Me.txtKonversi.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtKonversi.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtKonversi.Properties.ReadOnly = True
+        Me.txtKonversi.Size = New System.Drawing.Size(203, 20)
+        Me.txtKonversi.StyleController = Me.LayoutControl1
+        Me.txtKonversi.TabIndex = 18
+        '
+        'txtSatuan
+        '
+        Me.txtSatuan.Location = New System.Drawing.Point(91, 235)
+        Me.txtSatuan.Name = "txtSatuan"
+        Me.txtSatuan.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtSatuan.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtSatuan.Properties.NullText = ""
+        Me.txtSatuan.Properties.ReadOnly = True
+        Me.txtSatuan.Properties.View = Me.gvSatuan
+        Me.txtSatuan.Size = New System.Drawing.Size(203, 20)
+        Me.txtSatuan.StyleController = Me.LayoutControl1
+        Me.txtSatuan.TabIndex = 17
+        '
+        'gvSatuan
+        '
+        Me.gvSatuan.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.gvSatuan.Name = "gvSatuan"
+        Me.gvSatuan.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.gvSatuan.OptionsView.ShowGroupPanel = False
+        '
+        'txtNamaBarang
+        '
+        Me.txtNamaBarang.EnterMoveNextControl = True
+        Me.txtNamaBarang.Location = New System.Drawing.Point(91, 211)
+        Me.txtNamaBarang.Name = "txtNamaBarang"
+        Me.txtNamaBarang.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtNamaBarang.Properties.ReadOnly = True
+        Me.txtNamaBarang.Size = New System.Drawing.Size(203, 20)
+        Me.txtNamaBarang.StyleController = Me.LayoutControl1
+        Me.txtNamaBarang.TabIndex = 16
+        '
+        'txtKodeBarang
+        '
+        Me.txtKodeBarang.EnterMoveNextControl = True
+        Me.txtKodeBarang.Location = New System.Drawing.Point(91, 187)
+        Me.txtKodeBarang.Name = "txtKodeBarang"
+        Me.txtKodeBarang.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKodeBarang.Properties.ReadOnly = True
+        Me.txtKodeBarang.Size = New System.Drawing.Size(203, 20)
+        Me.txtKodeBarang.StyleController = Me.LayoutControl1
+        Me.txtKodeBarang.TabIndex = 15
+        '
+        'txtBarcode
+        '
+        Me.txtBarcode.Location = New System.Drawing.Point(91, 163)
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtBarcode.Properties.NullText = ""
+        Me.txtBarcode.Properties.View = Me.gvBarcode
+        Me.txtBarcode.Size = New System.Drawing.Size(203, 20)
+        Me.txtBarcode.StyleController = Me.LayoutControl1
+        Me.txtBarcode.TabIndex = 14
+        '
+        'gvBarcode
+        '
+        Me.gvBarcode.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.gvBarcode.Name = "gvBarcode"
+        Me.gvBarcode.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.gvBarcode.OptionsView.ShowGroupPanel = False
+        '
+        'txtQty
+        '
+        Me.txtQty.EditValue = New Decimal(New Integer() {0, 0, 0, 65536})
+        Me.txtQty.EnterMoveNextControl = True
+        Me.txtQty.Location = New System.Drawing.Point(91, 283)
+        Me.txtQty.Name = "txtQty"
+        Me.txtQty.Properties.Appearance.Options.UseTextOptions = True
+        Me.txtQty.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.txtQty.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtQty.Properties.Mask.EditMask = "n0"
+        Me.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.txtQty.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtQty.Size = New System.Drawing.Size(203, 20)
+        Me.txtQty.StyleController = Me.LayoutControl1
+        Me.txtQty.TabIndex = 12
         '
         'ckAktif
         '
         Me.ckAktif.EditValue = True
-        Me.ckAktif.Location = New System.Drawing.Point(24, 283)
+        Me.ckAktif.Location = New System.Drawing.Point(24, 355)
         Me.ckAktif.Name = "ckAktif"
         Me.ckAktif.Properties.Caption = "Aktif"
-        Me.ckAktif.Size = New System.Drawing.Size(319, 19)
+        Me.ckAktif.Size = New System.Drawing.Size(270, 19)
         Me.ckAktif.StyleController = Me.LayoutControl1
         Me.ckAktif.TabIndex = 12
         '
         'txtNama
         '
         Me.txtNama.EnterMoveNextControl = True
-        Me.txtNama.Location = New System.Drawing.Point(96, 66)
+        Me.txtNama.Location = New System.Drawing.Point(91, 66)
         Me.txtNama.Name = "txtNama"
         Me.txtNama.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtNama.Size = New System.Drawing.Size(247, 20)
+        Me.txtNama.Size = New System.Drawing.Size(203, 20)
         Me.txtNama.StyleController = Me.LayoutControl1
         Me.txtNama.TabIndex = 10
         '
         'txtKode
         '
         Me.txtKode.EnterMoveNextControl = True
-        Me.txtKode.Location = New System.Drawing.Point(96, 42)
+        Me.txtKode.Location = New System.Drawing.Point(91, 42)
         Me.txtKode.Name = "txtKode"
         Me.txtKode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtKode.Size = New System.Drawing.Size(247, 20)
+        Me.txtKode.Size = New System.Drawing.Size(203, 20)
         Me.txtKode.StyleController = Me.LayoutControl1
         Me.txtKode.TabIndex = 9
         '
-        'txtTypeHarga
+        'txtKeterangan
         '
-        Me.txtTypeHarga.Location = New System.Drawing.Point(455, 184)
-        Me.txtTypeHarga.Name = "txtTypeHarga"
-        Me.txtTypeHarga.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txtTypeHarga.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtTypeHarga.Properties.NullText = ""
-        Me.txtTypeHarga.Properties.View = Me.SearchLookUpEdit1View
-        Me.txtTypeHarga.Size = New System.Drawing.Size(117, 20)
-        Me.txtTypeHarga.StyleController = Me.LayoutControl1
-        Me.txtTypeHarga.TabIndex = 10
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'txtAlamat
-        '
-        Me.txtAlamat.Location = New System.Drawing.Point(96, 138)
-        Me.txtAlamat.Name = "txtAlamat"
-        Me.txtAlamat.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtAlamat.Size = New System.Drawing.Size(247, 69)
-        Me.txtAlamat.StyleController = Me.LayoutControl1
-        Me.txtAlamat.TabIndex = 11
+        Me.txtKeterangan.Location = New System.Drawing.Point(91, 90)
+        Me.txtKeterangan.Name = "txtKeterangan"
+        Me.txtKeterangan.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtKeterangan.Size = New System.Drawing.Size(203, 69)
+        Me.txtKeterangan.StyleController = Me.LayoutControl1
+        Me.txtKeterangan.TabIndex = 11
         '
         'LayoutControlGroup1
         '
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup2, Me.LayoutControlGroup3})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup2, Me.TabControl})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(608, 444)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(788, 456)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutControlGroup2
         '
         Me.LayoutControlGroup2.CustomizationFormText = "Informasi Personal"
-        Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem13, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.LayoutControlItem3, Me.EmptySpaceItem4})
+        Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem12, Me.LayoutControlItem3, Me.LayoutControlItem16, Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem13, Me.LayoutControlItem14, Me.LayoutControlItem15})
         Me.LayoutControlGroup2.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup2.Name = "LayoutControlGroup2"
-        Me.LayoutControlGroup2.Size = New System.Drawing.Size(347, 424)
-        Me.LayoutControlGroup2.Text = "Informasi Personal"
+        Me.LayoutControlGroup2.Size = New System.Drawing.Size(298, 436)
+        Me.LayoutControlGroup2.Text = "Informasi Barang Hasil / Jadi"
         '
         'LayoutControlItem4
         '
@@ -378,9 +708,9 @@ Partial Class frmEntriMaterial
         Me.LayoutControlItem4.CustomizationFormText = "Role"
         Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(323, 24)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(274, 24)
         Me.LayoutControlItem4.Text = "Kode"
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(64, 13)
         '
         'LayoutControlItem5
         '
@@ -388,222 +718,172 @@ Partial Class frmEntriMaterial
         Me.LayoutControlItem5.CustomizationFormText = "Nama"
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 24)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(323, 24)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(274, 24)
         Me.LayoutControlItem5.Text = "Nama"
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem10
-        '
-        Me.LayoutControlItem10.Control = Me.txtNamaAlias
-        Me.LayoutControlItem10.CustomizationFormText = "Nama Alias"
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(0, 48)
-        Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(323, 24)
-        Me.LayoutControlItem10.Text = "Nama Alias"
-        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem11
-        '
-        Me.LayoutControlItem11.Control = Me.txtKontakPerson
-        Me.LayoutControlItem11.CustomizationFormText = "Kontak Person"
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(0, 72)
-        Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(323, 24)
-        Me.LayoutControlItem11.Text = "Kontak Person"
-        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(64, 13)
         '
         'LayoutControlItem12
         '
-        Me.LayoutControlItem12.Control = Me.txtAlamat
+        Me.LayoutControlItem12.Control = Me.txtKeterangan
         Me.LayoutControlItem12.CustomizationFormText = "Alamat"
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 96)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 48)
         Me.LayoutControlItem12.MaxSize = New System.Drawing.Size(0, 73)
         Me.LayoutControlItem12.MinSize = New System.Drawing.Size(87, 73)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
-        Me.LayoutControlItem12.Size = New System.Drawing.Size(323, 73)
+        Me.LayoutControlItem12.Size = New System.Drawing.Size(274, 73)
         Me.LayoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem12.Text = "Alamat"
-        Me.LayoutControlItem12.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem13
-        '
-        Me.LayoutControlItem13.Control = Me.txtKota
-        Me.LayoutControlItem13.CustomizationFormText = "Kota"
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 169)
-        Me.LayoutControlItem13.Name = "LayoutControlItem13"
-        Me.LayoutControlItem13.Size = New System.Drawing.Size(323, 24)
-        Me.LayoutControlItem13.Text = "Kota"
-        Me.LayoutControlItem13.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem14
-        '
-        Me.LayoutControlItem14.Control = Me.txtHP
-        Me.LayoutControlItem14.CustomizationFormText = "HP"
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 193)
-        Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(323, 24)
-        Me.LayoutControlItem14.Text = "HP"
-        Me.LayoutControlItem14.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem15
-        '
-        Me.LayoutControlItem15.Control = Me.txtTelp
-        Me.LayoutControlItem15.CustomizationFormText = "Telp"
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(0, 217)
-        Me.LayoutControlItem15.Name = "LayoutControlItem15"
-        Me.LayoutControlItem15.Size = New System.Drawing.Size(323, 24)
-        Me.LayoutControlItem15.Text = "Telp"
-        Me.LayoutControlItem15.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlItem12.Text = "Keterangan"
+        Me.LayoutControlItem12.TextSize = New System.Drawing.Size(64, 13)
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.ckAktif
         Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 241)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 313)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(323, 23)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(274, 81)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem3.TextVisible = False
         '
-        'EmptySpaceItem4
+        'LayoutControlItem16
         '
-        Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 264)
-        Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(323, 118)
-        Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem16.Control = Me.txtQty
+        Me.LayoutControlItem16.CustomizationFormText = "Limit Hutang"
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 241)
+        Me.LayoutControlItem16.Name = "LayoutControlItem16"
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem16.Text = "Qty"
+        Me.LayoutControlItem16.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem1
+        '
+        Me.LayoutControlItem1.Control = Me.txtBarcode
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 121)
+        Me.LayoutControlItem1.Name = "LayoutControlItem1"
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem1.Text = "Barcode"
+        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem2
+        '
+        Me.LayoutControlItem2.Control = Me.txtKodeBarang
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 145)
+        Me.LayoutControlItem2.Name = "LayoutControlItem2"
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem2.Text = "Kode Barang"
+        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem10
+        '
+        Me.LayoutControlItem10.Control = Me.txtNamaBarang
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(0, 169)
+        Me.LayoutControlItem10.Name = "LayoutControlItem10"
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem10.Text = "Nama Barang"
+        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem11
+        '
+        Me.LayoutControlItem11.Control = Me.txtSatuan
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(0, 193)
+        Me.LayoutControlItem11.Name = "LayoutControlItem11"
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem11.Text = "Satuan"
+        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem13
+        '
+        Me.LayoutControlItem13.Control = Me.txtKonversi
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(0, 217)
+        Me.LayoutControlItem13.Name = "LayoutControlItem13"
+        Me.LayoutControlItem13.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem13.Text = "Konversi"
+        Me.LayoutControlItem13.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem14
+        '
+        Me.LayoutControlItem14.Control = Me.txtHargaPokok
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 265)
+        Me.LayoutControlItem14.Name = "LayoutControlItem14"
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem14.Text = "Harga Pokok"
+        Me.LayoutControlItem14.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'LayoutControlItem15
+        '
+        Me.LayoutControlItem15.Control = Me.txtJumlah
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(0, 289)
+        Me.LayoutControlItem15.Name = "LayoutControlItem15"
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(274, 24)
+        Me.LayoutControlItem15.Text = "Nilai"
+        Me.LayoutControlItem15.TextSize = New System.Drawing.Size(64, 13)
+        '
+        'TabControl
+        '
+        EditorButtonImageOptions1.Image = CType(resources.GetObject("EditorButtonImageOptions1.Image"), System.Drawing.Image)
+        EditorButtonImageOptions2.Image = CType(resources.GetObject("EditorButtonImageOptions2.Image"), System.Drawing.Image)
+        EditorButtonImageOptions3.Image = CType(resources.GetObject("EditorButtonImageOptions3.Image"), System.Drawing.Image)
+        Me.TabControl.CustomHeaderButtons.AddRange(New DevExpress.XtraTab.Buttons.CustomHeaderButton() {New DevExpress.XtraTab.Buttons.CustomHeaderButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Data Baru", -1, True, True, EditorButtonImageOptions1, SerializableAppearanceObject1, "", Nothing, Nothing), New DevExpress.XtraTab.Buttons.CustomHeaderButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Edit Data", -1, True, True, EditorButtonImageOptions2, SerializableAppearanceObject2, "", Nothing, Nothing), New DevExpress.XtraTab.Buttons.CustomHeaderButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Hapus Data", -1, True, True, EditorButtonImageOptions3, SerializableAppearanceObject3, "", Nothing, Nothing)})
+        Me.TabControl.Location = New System.Drawing.Point(298, 0)
+        Me.TabControl.Name = "TabControl"
+        Me.TabControl.SelectedTabPage = Me.LayoutControlGroup3
+        Me.TabControl.SelectedTabPageIndex = 0
+        Me.TabControl.Size = New System.Drawing.Size(470, 436)
+        Me.TabControl.TabPages.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup3, Me.LayoutControlGroup4, Me.LayoutControlGroup5})
         '
         'LayoutControlGroup3
         '
-        Me.LayoutControlGroup3.CustomizationFormText = "Status"
-        Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup4, Me.LayoutControlGroup5, Me.LayoutControlGroup6, Me.EmptySpaceItem1})
-        Me.LayoutControlGroup3.Location = New System.Drawing.Point(347, 0)
+        Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6})
+        Me.LayoutControlGroup3.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup3.Name = "LayoutControlGroup3"
-        Me.LayoutControlGroup3.Size = New System.Drawing.Size(241, 424)
-        Me.LayoutControlGroup3.Text = "Status"
-        '
-        'LayoutControlGroup4
-        '
-        Me.LayoutControlGroup4.CustomizationFormText = "Customer"
-        Me.LayoutControlGroup4.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem7, Me.LayoutControlItem6, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19})
-        Me.LayoutControlGroup4.Location = New System.Drawing.Point(0, 89)
-        Me.LayoutControlGroup4.Name = "LayoutControlGroup4"
-        Me.LayoutControlGroup4.Size = New System.Drawing.Size(217, 161)
-        Me.LayoutControlGroup4.Text = "Customer"
-        '
-        'LayoutControlItem7
-        '
-        Me.LayoutControlItem7.Control = Me.ckCustomer
-        Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(193, 23)
-        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem7.TextVisible = False
+        Me.LayoutControlGroup3.ShowInCustomizationForm = False
+        Me.LayoutControlGroup3.Size = New System.Drawing.Size(446, 390)
+        Me.LayoutControlGroup3.Text = "Barang Penyusun"
         '
         'LayoutControlItem6
         '
-        Me.LayoutControlItem6.Control = Me.txtTypeHarga
-        Me.LayoutControlItem6.CustomizationFormText = "Role"
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 23)
-        Me.LayoutControlItem6.MaxSize = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem6.MinSize = New System.Drawing.Size(193, 24)
+        Me.LayoutControlItem6.Control = Me.GCBahan
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem6.Text = "Type  Harga"
-        Me.LayoutControlItem6.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(446, 390)
+        Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem6.TextVisible = False
         '
-        'LayoutControlItem17
+        'LayoutControlGroup4
         '
-        Me.LayoutControlItem17.Control = Me.txtLimitPiutang
-        Me.LayoutControlItem17.CustomizationFormText = "Limit Piutang"
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(0, 47)
-        Me.LayoutControlItem17.Name = "LayoutControlItem17"
-        Me.LayoutControlItem17.Size = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem17.Text = "Limit Piutang"
-        Me.LayoutControlItem17.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlGroup4.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem7})
+        Me.LayoutControlGroup4.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlGroup4.Name = "LayoutControlGroup4"
+        Me.LayoutControlGroup4.ShowInCustomizationForm = False
+        Me.LayoutControlGroup4.Size = New System.Drawing.Size(446, 390)
+        Me.LayoutControlGroup4.Text = "Biaya Penyusun"
         '
-        'LayoutControlItem18
+        'LayoutControlItem7
         '
-        Me.LayoutControlItem18.Control = Me.txtLimitNota
-        Me.LayoutControlItem18.CustomizationFormText = "Limit Nota"
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 71)
-        Me.LayoutControlItem18.Name = "LayoutControlItem18"
-        Me.LayoutControlItem18.Size = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem18.Text = "Limit Nota"
-        Me.LayoutControlItem18.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlItem19
-        '
-        Me.LayoutControlItem19.Control = Me.txtLimitUmur
-        Me.LayoutControlItem19.CustomizationFormText = "Limit Umur"
-        Me.LayoutControlItem19.Location = New System.Drawing.Point(0, 95)
-        Me.LayoutControlItem19.Name = "LayoutControlItem19"
-        Me.LayoutControlItem19.Size = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem19.Text = "Limit Umur"
-        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(69, 13)
+        Me.LayoutControlItem7.Control = Me.GCBiaya
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem7.Name = "LayoutControlItem7"
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(446, 390)
+        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem7.TextVisible = False
         '
         'LayoutControlGroup5
         '
-        Me.LayoutControlGroup5.CustomizationFormText = "Supplier"
-        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem8, Me.LayoutControlItem16})
+        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem8})
         Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup5.Name = "LayoutControlGroup5"
-        Me.LayoutControlGroup5.Size = New System.Drawing.Size(217, 89)
-        Me.LayoutControlGroup5.Text = "Supplier"
+        Me.LayoutControlGroup5.ShowInCustomizationForm = False
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(446, 390)
+        Me.LayoutControlGroup5.Text = "Barang Sisa Produksi"
         '
         'LayoutControlItem8
         '
-        Me.LayoutControlItem8.Control = Me.ckSupplier
-        Me.LayoutControlItem8.CustomizationFormText = "LayoutControlItem8"
+        Me.LayoutControlItem8.Control = Me.GCSisa
         Me.LayoutControlItem8.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(193, 23)
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(446, 390)
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem8.TextVisible = False
-        '
-        'LayoutControlItem16
-        '
-        Me.LayoutControlItem16.Control = Me.txtLimitHutang
-        Me.LayoutControlItem16.CustomizationFormText = "Limit Hutang"
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 23)
-        Me.LayoutControlItem16.MaxSize = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem16.MinSize = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(193, 24)
-        Me.LayoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem16.Text = "Limit Hutang"
-        Me.LayoutControlItem16.TextSize = New System.Drawing.Size(69, 13)
-        '
-        'LayoutControlGroup6
-        '
-        Me.LayoutControlGroup6.CustomizationFormText = "Pegawai"
-        Me.LayoutControlGroup6.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem9})
-        Me.LayoutControlGroup6.Location = New System.Drawing.Point(0, 250)
-        Me.LayoutControlGroup6.Name = "LayoutControlGroup6"
-        Me.LayoutControlGroup6.Size = New System.Drawing.Size(217, 65)
-        Me.LayoutControlGroup6.Text = "Pegawai"
-        '
-        'LayoutControlItem9
-        '
-        Me.LayoutControlItem9.Control = Me.ckPegawai
-        Me.LayoutControlItem9.CustomizationFormText = "LayoutControlItem9"
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(193, 23)
-        Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem9.TextVisible = False
-        '
-        'EmptySpaceItem1
-        '
-        Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 315)
-        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(217, 67)
-        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'DxErrorProvider1
         '
@@ -617,9 +897,9 @@ Partial Class frmEntriMaterial
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnSimpan, Me.mnTutup})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarSubItem1, Me.mnSaveLayout, Me.mnSimpan, Me.mnTutup, Me.mnRefresh, Me.mnBaru, Me.mnEdit, Me.mnHapus})
         Me.BarManager1.MainMenu = Me.Bar2
-        Me.BarManager1.MaxItemId = 4
+        Me.BarManager1.MaxItemId = 8
         '
         'Bar2
         '
@@ -653,7 +933,7 @@ Partial Class frmEntriMaterial
         Me.Bar1.DockCol = 0
         Me.Bar1.DockRow = 1
         Me.Bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
-        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
+        Me.Bar1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.mnBaru), New DevExpress.XtraBars.LinkPersistInfo(Me.mnEdit), New DevExpress.XtraBars.LinkPersistInfo(Me.mnHapus), New DevExpress.XtraBars.LinkPersistInfo(Me.mnRefresh), New DevExpress.XtraBars.LinkPersistInfo(Me.mnSimpan, True), New DevExpress.XtraBars.LinkPersistInfo(Me.mnTutup)})
         Me.Bar1.Text = "Custom 3"
         '
         'mnSimpan
@@ -676,15 +956,15 @@ Partial Class frmEntriMaterial
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
         Me.barDockControlTop.Manager = Me.BarManager1
-        Me.barDockControlTop.Size = New System.Drawing.Size(608, 51)
+        Me.barDockControlTop.Size = New System.Drawing.Size(788, 51)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 495)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 507)
         Me.barDockControlBottom.Manager = Me.BarManager1
-        Me.barDockControlBottom.Size = New System.Drawing.Size(608, 0)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(788, 0)
         '
         'barDockControlLeft
         '
@@ -692,21 +972,49 @@ Partial Class frmEntriMaterial
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 51)
         Me.barDockControlLeft.Manager = Me.BarManager1
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 444)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 456)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(608, 51)
+        Me.barDockControlRight.Location = New System.Drawing.Point(788, 51)
         Me.barDockControlRight.Manager = Me.BarManager1
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 444)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 456)
+        '
+        'mnRefresh
+        '
+        Me.mnRefresh.Caption = "&Reset (F5)"
+        Me.mnRefresh.Id = 4
+        Me.mnRefresh.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
+        Me.mnRefresh.Name = "mnRefresh"
+        '
+        'mnBaru
+        '
+        Me.mnBaru.Caption = "&Baru (F1)"
+        Me.mnBaru.Id = 5
+        Me.mnBaru.Name = "mnBaru"
+        Me.mnBaru.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'mnEdit
+        '
+        Me.mnEdit.Caption = "&Edit (F2)"
+        Me.mnEdit.Id = 6
+        Me.mnEdit.Name = "mnEdit"
+        Me.mnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'mnHapus
+        '
+        Me.mnHapus.Caption = "&Hapus (F4)"
+        Me.mnHapus.Id = 7
+        Me.mnHapus.Name = "mnHapus"
+        Me.mnHapus.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'frmEntriMaterial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(608, 495)
+        Me.ClientSize = New System.Drawing.Size(788, 507)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
@@ -717,49 +1025,50 @@ Partial Class frmEntriMaterial
         Me.Text = "Entri Material / Formula"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
-        CType(Me.txtLimitUmur.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtLimitNota.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtLimitPiutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtLimitHutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtTelp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtHP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtKota.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtKontakPerson.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtNamaAlias.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ckPegawai.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ckSupplier.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ckCustomer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCSisa, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MMaterialDSisaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvSisa, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCBiaya, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MMaterialDBiayaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvBiaya, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCBahan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MMaterialDBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvBahan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtJumlah.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtHargaPokok.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtKonversi.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtSatuan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvSatuan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtNamaBarang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtKodeBarang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtBarcode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvBarcode, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtQty.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ckAktif.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNama.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtKode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtTypeHarga.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtAlamat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtKeterangan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TabControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem17, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlGroup6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -779,47 +1088,84 @@ Partial Class frmEntriMaterial
     Friend WithEvents Bar2 As DevExpress.XtraBars.Bar
     Friend WithEvents BarSubItem1 As DevExpress.XtraBars.BarSubItem
     Friend WithEvents mnSaveLayout As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents txtNama As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem5 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents txtTypeHarga As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents ckAktif As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents ckSupplier As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents ckCustomer As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem8 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents ckPegawai As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents LayoutControlItem9 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents txtTelp As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtHP As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtKota As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtKontakPerson As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtNamaAlias As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LayoutControlItem10 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem11 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem12 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem13 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem14 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem15 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents txtAlamat As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents txtKeterangan As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents LayoutControlGroup2 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlGroup3 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlGroup4 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlGroup5 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlGroup6 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents txtLimitUmur As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtLimitNota As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtLimitPiutang As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txtLimitHutang As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
-    Friend WithEvents LayoutControlItem17 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem18 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem19 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents txtQty As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents Bar1 As DevExpress.XtraBars.Bar
     Friend WithEvents mnSimpan As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnTutup As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents txtJumlah As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtHargaPokok As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtKonversi As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtSatuan As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents gvSatuan As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents txtNamaBarang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtKodeBarang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents txtBarcode As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents gvBarcode As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LayoutControlItem1 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem2 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem10 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem11 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem13 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem14 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem15 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents GCSisa As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gvSisa As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCBiaya As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gvBiaya As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCBahan As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gvBahan As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents TabControl As DevExpress.XtraLayout.TabbedControlGroup
+    Friend WithEvents LayoutControlGroup3 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlGroup4 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlGroup5 As DevExpress.XtraLayout.LayoutControlGroup
+    Friend WithEvents LayoutControlItem8 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents MMaterialDBindingSource As BindingSource
+    Friend WithEvents colNoID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDMaterial As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDBarangD As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDBarang As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDSatuan As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colBarcode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colKodeBarang As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colNamaBarang As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSatuan As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colKonversi As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colHargaPokok As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colJumlah As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents MMaterialDSisaBindingSource As BindingSource
+    Friend WithEvents colNoID2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDMaterial2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDBarangD1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDBarang1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDSatuan1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colBarcode1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colKodeBarang1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colNamaBarang1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSatuan1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colKonversi1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colQty1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colHargaPokok1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colJumlah2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents MMaterialDBiayaBindingSource As BindingSource
+    Friend WithEvents colNoID1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDMaterial1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colIDAkun As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAkun As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colKeterangan As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colJumlah1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents mnRefresh As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnBaru As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnEdit As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnHapus As DevExpress.XtraBars.BarButtonItem
 End Class

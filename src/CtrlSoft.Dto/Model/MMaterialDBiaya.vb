@@ -19,8 +19,9 @@ Namespace Model
 
         Public Property NoID As System.Guid
         Public Property IDMaterial As System.Guid
-        Public Property IDAkun As Long
+        Public Property IDAkun As System.Guid
         Public Property Jumlah As Decimal
         Public Property Keterangan As String
+        Public Property Akun As String
     End Class
 End Namespace

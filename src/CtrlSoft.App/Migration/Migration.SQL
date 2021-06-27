@@ -359,7 +359,7 @@ CREATE TABLE [dbo].[MAssemblyDBiaya]
  [IDHeader]         [BIGINT] NOT NULL, 
  [IDMaterialDBiaya] [UNIQUEIDENTIFIER] NOT NULL, 
  [Tanggal]          [DATETIME] NOT NULL, 
- [IDAkun]           [BIGINT] NOT NULL, 
+ [IDAkun]           [UNIQUEIDENTIFIER] NOT NULL, 
  [Jumlah]           [MONEY] NOT NULL, 
  [Keterangan]       [VARCHAR](150) NULL, 
  [IsPosted]         [BIT] NULL, 
@@ -1006,7 +1006,7 @@ GO
 CREATE TABLE [dbo].[MMaterialDBiaya]
 ([NoID]       [UNIQUEIDENTIFIER] NOT NULL, 
  [IDMaterial] [UNIQUEIDENTIFIER] NOT NULL, 
- [IDAkun]     [BIGINT] NOT NULL, 
+ [IDAkun]     [UNIQUEIDENTIFIER] NOT NULL, 
  [Jumlah]     [MONEY] NOT NULL, 
  [Keterangan] [VARCHAR](150) NULL, 
  CONSTRAINT [PK_MMaterialDBiaya] PRIMARY KEY CLUSTERED([NoID] ASC)
@@ -5639,431 +5639,61 @@ AS
         SELECT @NoID AS NoID;
     END;
 GO
+CREATE TABLE [dbo].[MKlasAkun](
+	[ID] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
+	[NoUrut] [int] NULL,
+	[Klasifikasi] [varchar](150) NULL,
+	[Debet] [bit] NULL,
+	[Neraca] [bit] NULL,
+ CONSTRAINT [PK_MKlasAkun] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[MKlasAkun] ADD  CONSTRAINT [DF_MKlasAkun_ID]  DEFAULT (newid()) FOR [ID]
+GO
+CREATE TABLE [dbo].[MAkun](
+	[ID] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
+	[IDKlasAkun] [uniqueidentifier] NOT NULL,
+	[IDParent] [uniqueidentifier] NULL,
+	[IDDepartemen] [int] NULL,
+	[Kode] [varchar](50) NULL,
+	[Nama] [varchar](100) NULL,
+	[Keterangan] [varchar](255) NULL,
+	[IDType] [int] NULL,
+	[IsDebet] [bit] NULL,
+	[IsKasBank] [bit] NULL,
+	[NoRekening] [varchar](50) NULL,
+	[AtasNamaRekening] [varchar](255) NULL,
+	[IDTypeBank] [int] NULL,
+	[IsNeraca] [bit] NULL,
+ CONSTRAINT [PK_MAkun] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_ID]  DEFAULT (newid()) FOR [ID]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IDDepartemen]  DEFAULT ((1)) FOR [IDDepartemen]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IDType]  DEFAULT ((0)) FOR [IDType]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IsDebet]  DEFAULT ((0)) FOR [IsDebet]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IsKasBank]  DEFAULT ((0)) FOR [IsKasBank]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IDTypeBank]  DEFAULT ((0)) FOR [IDTypeBank]
+GO
+ALTER TABLE [dbo].[MAkun] ADD  CONSTRAINT [DF_MAkun_IsNeraca]  DEFAULT ((0)) FOR [IsNeraca]
+GO
+ALTER TABLE [dbo].[MAkun]  WITH CHECK ADD  CONSTRAINT [FK_MAkun_MKlasAkun] FOREIGN KEY([IDKlasAkun])
+REFERENCES [dbo].[MKlasAkun] ([ID])
+GO
+ALTER TABLE [dbo].[MAkun] CHECK CONSTRAINT [FK_MAkun_MKlasAkun]
+GO
 USE [master];
 GO
 ALTER DATABASE [DBPOS] SET READ_WRITE; 
-GO
-
--- Method 2 Isi Data Default
-USE [DBPOS]
-GO
-
---
--- Inserting data into table dbo.MAlamat
---
-INSERT [DBPOS].dbo.MAlamat(NoID, Kode, Nama, NamaAlias, Alamat, Kota, HP, Telp, ContactPerson, LimitHutang, LimitPiutang, LimitNotaPiutang, LimitUmurPiutang, IDTypeHarga, IsActive, IsSupplier, IsPegawai, IsCustomer) VALUES (1, N'KRY-00001', N'ADMIN', N'ADMIN', N'-', N'SURABAYA', N'-', N'-', N'ADMIN', 0.00, 0.00, 0, 0, 0, 1, 0, 1, 0)
-INSERT [DBPOS].dbo.MAlamat(NoID, Kode, Nama, NamaAlias, Alamat, Kota, HP, Telp, ContactPerson, LimitHutang, LimitPiutang, LimitNotaPiutang, LimitUmurPiutang, IDTypeHarga, IsActive, IsSupplier, IsPegawai, IsCustomer) VALUES (2, N'CUST-00001', N'UMUM', N'UMUM', N'', N'', N'', N'', N'UMUM', 0.00, 99999999.00, 9999, 999, 1, 1, 0, 0, 1)
-INSERT [DBPOS].dbo.MAlamat(NoID, Kode, Nama, NamaAlias, Alamat, Kota, HP, Telp, ContactPerson, LimitHutang, LimitPiutang, LimitNotaPiutang, LimitUmurPiutang, IDTypeHarga, IsActive, IsSupplier, IsPegawai, IsCustomer) VALUES (3, N'SUP-00001', N'OPEN SUPPLIER', N'-', N'', N'', N'', N'', N'', 9999999999.00, 0.00, 0, 0, -1, 1, 1, 0, 0)
-GO
-
---
--- Inserting data into table dbo.MGudang
---
-INSERT [DBPOS].dbo.MGudang(NoID, Kode, Nama, IsActive) VALUES (1, N'GD', N'GUDANG', 1)
-INSERT [DBPOS].dbo.MGudang(NoID, Kode, Nama, IsActive) VALUES (2, N'TK', N'TOKO', 1)
-GO
-
---
--- Inserting data into table dbo.MJenisPembayaran
---
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (1, N'Tunai', N'Tunai', 0, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (2, N'BCA', N'Debet BCA', 1, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (3, N'BNI', N'Debet BNI', 1, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (4, N'BRI', N'Debet BRI', 1, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (5, N'Mandiri', N'Debet Mandiri', 1, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (6, N'CCBCA', N'Credit BCA', 1, 2.50)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (7, N'CCMandiri', N'Credit Mandiri', 1, 2.50)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (8, N'CCLain', N'Credit Lainnya', 1, 2.50)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (9, N'GOPAY', N'GOPAY', 1, 0.00)
-INSERT [DBPOS].dbo.MJenisPembayaran(NoID, Kode, Nama, IsBank, ChargeProsen) VALUES (10, N'OVO', N'OVO', 1, 0.00)
-GO
-
---
--- Inserting data into table dbo.MJenisTransaksi
---
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (1, N'SA', N'Saldo Awal', N'Saldo Awal', 1, 0, NULL, 1)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (2, N'PB', N'Pembelian', N'Purchase', 1, 0, NULL, 2)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (3, N'RB', N'Retur Pembelian', N'Purchase Return', 1, 0, NULL, 3)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (4, N'MK', N'Mutasi Keluar', N'Mutasi Keluar', 1, 0, NULL, 5)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (5, N'MM', N'Mutasi Masuk', N'Mutasi Masuk', 1, 0, NULL, 6)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (6, N'JL', N'Penjualan', N'Sales', 1, 0, NULL, 11)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (7, N'RJ', N'Retur Penjualan', N'Sales Return', 1, 0, NULL, 12)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (8, N'PB', N'Pemakaian Barang', N'Pemakaian Barang', 1, 0, NULL, 9)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (9, N'STO', N'Stok Opname', N'Stok Opname', 1, 0, NULL, 14)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (10, N'SK', N'Stok Opname -', N'Stok Opname -', 1, 0, NULL, 15)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (11, N'RHB', N'Rubah Harga Beli', N'Rubah Harga Beli', 1, 0, NULL, 4)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (12, N'TO', N'Transfer Out', N'Transfer Out', 1, 0, NULL, 7)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (13, N'TI', N'Transfer IN', N'Transfer IN', 1, 0, NULL, 8)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (14, N'PY', N'Penyesuaian Barang', N'Penyesuaian Barang', 1, 0, NULL, 10)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (15, N'RHJ', N'Rubah Harga Jual', N'Rubah Harga Jual', 1, 0, NULL, 13)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (16, N'TK', N'Transfer Kode', N'Transfer Kode', 1, 0, NULL, 16)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (17, N'PH', N'Pembayaran Hutang/Piutang', N'Pembayaran Hutang/Piutang', 1, 0, NULL, 17)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (18, N'SAK', N'Saldo Akhir', N'Saldo Akhir', 1, 0, NULL, 18)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (19, N'ASM', N'Assembly/Disassembly', N'Assembly/Disassembly', 1, 0, NULL, 19)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (20, N'SOL', N'Stock Opname Online', N'Stock Opname Online', 1, 0, NULL, 20)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (21, N'PP', N'Promo Penjualan', N'Promo Penjualan', 1, 0, NULL, 21)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (25, N'CP', N'Claim Promo Jual', N'Claim Promo PenJualan', 1, 0, NULL, 25)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (100, N'JU', N'Jurnal Umum', N'Jurnal Umum', 1, 0, NULL, 100)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (101, N'BKM', N'Kas/Bank Masuk', N'Kas/Bank Masuk', 1, 0, NULL, 101)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (102, N'BKK', N'Kas/Bank Keluar', N'Kas/Bank Masuk', 1, 0, NULL, 102)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (103, N'GR', N'GIRO', N'Giro', 1, 0, NULL, 103)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (104, N'EOD', N'Cash Opname', N'Cash Opname Kasir', 1, 0, NULL, 104)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (105, N'ASS', N'Pembelian Asset', N'Pembelian Asset', 1, 0, NULL, 105)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (106, N'KRA', N'Koreksi Asset', N'Koreksi Asset', 1, 0, NULL, 106)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (107, N'JLA', N'Penjualan Asset', N'Penjualan Asset', 1, 0, NULL, 107)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (108, N'ADJ', N'Adjustment Stok Minus', N'Adjustment Stok Minus', 1, 0, NULL, 108)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (1001, N'SAH', N'Saldo Awal Hutang', N'Saldo Awal Hutang', 1, 0, NULL, 1)
-INSERT [DBPOS].dbo.MJenisTransaksi(ID, Kode, Nama, Keterangan, IsAuto, TERURUT, IDServerAsal, NoUrut) VALUES (1002, N'SAP', N'Saldo Awal Piutang', N'Saldo Awal Piutang', 1, 0, NULL, 1)
-GO
-
---
--- Inserting data into table dbo.MKategori
---
-INSERT [DBPOS].dbo.MKategori(NoID, Kode, Nama, IDParent, IsActive) VALUES (1, N'000', N'UNCATEGORIES', -1, 1)
-GO
-
---
--- Inserting data into table dbo.MMenu
---
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (1, -1, 1, N'mnMaster', N'Master', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (2, -1, 2, N'mnSaldoAwal', N'Saldo Awal', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (3, -1, 3, N'mnPembelian', N'Pembelian', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (4, -1, 4, N'mnPenjualan', N'Penjualan', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (5, -1, 5, N'mnInternal', N'Internal', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (6, -1, 7, N'mnKasBank', N'Keuangan', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (7, -1, 8, N'mnAccounting', N'Akuntansi', 0, 0, 0)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (8, -1, 9, N'mnLaporan', N'Laporan', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (9, -1, 6, N'mnPabrikasi', N'Pabrikasi', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (101, 1, 1, N'mnKategori', N'Data Kategori', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (102, 1, 2, N'mnSatuan', N'Data Satuan', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (103, 1, 3, N'mnMerk', N'Data Merk', 0, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (104, 1, 4, N'mnBarang', N'Daftar Barang', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (105, 1, 5, N'mnKontak', N'Data All Kontak (Supplier, Customer, dan Karyawan)', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (106, 1, 6, N'mnGudang', N'Data Gudang', 0, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (107, 1, 7, N'mnEDC', N'Data EDC', 0, 0, 0)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (201, 2, 1, N'mnDaftarSA', N'Daftar Saldo Awal Persediaan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (202, 2, 2, N'mnDaftarSAHS', N'Daftar Saldo Awal Hutang', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (203, 2, 3, N'mnDaftarSAPC', N'Daftar Saldo Awal Piutang', 1, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (301, 3, 1, N'mnPO', N'Daftar Pesanan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (302, 3, 2, N'mnBeli', N'Daftar Pembelian', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (303, 3, 3, N'mnReturBeli', N'Daftar Retur Pembelian', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (304, 3, 4, N'mnPPNMasukan', N'Daftar PPN Masukan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (401, 4, 1, N'mnJual', N'Daftar Penjualan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (402, 4, 2, N'mnReturJual', N'Daftar Retur Penjualan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (403, 4, 3, N'mnPPNKeluaran', N'Daftar PPN Keluaran', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (501, 5, 1, N'mnPenyesuaianMasuk', N'Daftar Penyesuaian Masuk', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (502, 5, 2, N'mnPenyesuaianKeluar', N'Daftar Penyesuaian Keluar', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (503, 5, 3, N'mnStockOpname', N'Stock Opname', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (504, 5, 4, N'mnMutasiGudang', N'Daftar Mutasi Gudang', 1, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (601, 6, 1, N'mnDaftarKasOut', N'Pelunasan Hutang dan Kas Keluar', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (602, 6, 2, N'mnDaftarKasIn', N'Pelunasan Piutang dan Kas Masuk', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (603, 6, 3, N'mnBiaya', N'Daftar Biaya', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (701, 7, 1, N'mnAcc', N'Daftar Accounting', 1, 1, 0)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (801, 8, 1, N'mnKartuStok', N'Laporan Kartu Stok', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (802, 8, 2, N'mnSaldoStok', N'Laporan Saldo Stok', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (803, 8, 3, N'mnMutasiStok', N'Laporan Mutasi Stok', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (804, 8, 4, N'mnLapJual', N'Laporan Penjualan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (805, 8, 5, N'mnLapBeli', N'Laporan Pembelian', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (806, 8, 6, N'mnLapAgingHutang', N'Laporan Aging Hutang', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (807, 8, 7, N'mnLapAgingPiutang', N'Laporan Aging Piutang', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (808, 8, 8, N'mnLapLabaRugi', N'Laporan Laba Rugi (Kotor)', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (809, 8, 9, N'mnLapJualLaku', N'Laporan Penjualan Paling Laku', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (901, 9, 1, N'mnMaterial', N'Daftar Material / Formula', 1, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (902, 9, 2, N'mnWOAssembly', N'Work Order', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (903, 9, 3, N'mnAssemblyOut', N'Daftar Pengeluaran Bahan', 1, 1, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (904, 9, 4, N'mnAssemblyBiaya', N'Daftar Pencatatan Biaya', 1, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (905, 9, 5, N'mnAssemblyHasil', N'Daftar Hasil Produksi', 1, 0, 1)
-INSERT [DBPOS].dbo.MMenu(NoID, IDParent, NoUrut, Name, Caption, IsBig, IsBeginGroup, IsActive) VALUES (906, 9, 6, N'mnAssembly', N'Daftar Produksi (Langsung)', 1, 1, 1)
-GO
-
---
--- Inserting data into table dbo.MRole
---
-INSERT [DBPOS].dbo.MRole(NoID, [Role], IsSupervisor) VALUES (1, N'ALL', 1)
-INSERT [DBPOS].dbo.MRole(NoID, [Role], IsSupervisor) VALUES (2, N'SPV', 1)
-INSERT [DBPOS].dbo.MRole(NoID, [Role], IsSupervisor) VALUES (3, N'ADM', 0)
-INSERT [DBPOS].dbo.MRole(NoID, [Role], IsSupervisor) VALUES (4, N'KSR', 0)
-GO
-
---
--- Inserting data into table dbo.MRoleD
---
-SET IDENTITY_INSERT dbo.MRoleD ON
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (1, 1, 1, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (2, 1, 2, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (3, 1, 3, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (4, 1, 4, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (5, 1, 5, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (6, 1, 6, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (7, 1, 8, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (8, 1, 9, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (9, 1, 101, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (10, 1, 102, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (11, 1, 103, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (12, 1, 104, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (13, 1, 105, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (14, 1, 106, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (15, 1, 201, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (16, 1, 202, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (17, 1, 203, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (18, 1, 301, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (19, 1, 302, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (20, 1, 303, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (21, 1, 304, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (22, 1, 401, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (23, 1, 402, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (24, 1, 403, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (25, 1, 501, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (26, 1, 502, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (27, 1, 503, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (28, 1, 504, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (29, 1, 601, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (30, 1, 602, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (31, 1, 603, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (32, 1, 801, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (33, 1, 802, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (34, 1, 803, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (35, 1, 804, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (36, 1, 805, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (37, 1, 806, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (38, 1, 807, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (39, 1, 808, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (40, 1, 809, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (41, 1, 901, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (42, 1, 902, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (43, 1, 903, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (44, 1, 904, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (45, 1, 905, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (46, 1, 906, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (47, 2, 1, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (48, 2, 2, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (49, 2, 3, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (50, 2, 4, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (51, 2, 5, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (52, 2, 6, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (53, 2, 8, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (54, 2, 9, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (55, 2, 101, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (56, 2, 102, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (57, 2, 103, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (58, 2, 104, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (59, 2, 105, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (60, 2, 106, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (61, 2, 201, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (62, 2, 202, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (63, 2, 203, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (64, 2, 301, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (65, 2, 302, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (66, 2, 303, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (67, 2, 304, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (68, 2, 401, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (69, 2, 402, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (70, 2, 403, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (71, 2, 501, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (72, 2, 502, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (73, 2, 503, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (74, 2, 504, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (75, 2, 601, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (76, 2, 602, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (77, 2, 603, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (78, 2, 801, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (79, 2, 802, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (80, 2, 803, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (81, 2, 804, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (82, 2, 805, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (83, 2, 806, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (84, 2, 807, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (85, 2, 808, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (86, 2, 809, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (87, 2, 901, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (88, 2, 902, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (89, 2, 903, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (90, 2, 904, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (91, 2, 905, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (92, 2, 906, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (93, 3, 1, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (94, 3, 2, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (95, 3, 3, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (96, 3, 4, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (97, 3, 5, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (98, 3, 6, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (99, 3, 8, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (100, 3, 9, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (101, 3, 101, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (102, 3, 102, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (103, 3, 103, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (104, 3, 104, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (105, 3, 105, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (106, 3, 106, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (107, 3, 201, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (108, 3, 202, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (109, 3, 203, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (110, 3, 301, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (111, 3, 302, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (112, 3, 303, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (113, 3, 304, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (114, 3, 401, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (115, 3, 402, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (116, 3, 403, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (117, 3, 501, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (118, 3, 502, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (119, 3, 503, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (120, 3, 504, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (121, 3, 601, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (122, 3, 602, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (123, 3, 603, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (124, 3, 801, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (125, 3, 802, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (126, 3, 803, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (127, 3, 804, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (128, 3, 805, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (129, 3, 806, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (130, 3, 807, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (131, 3, 808, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (132, 3, 809, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (133, 3, 901, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (134, 3, 902, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (135, 3, 903, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (136, 3, 904, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (137, 3, 905, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (138, 3, 906, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (139, 4, 1, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (140, 4, 2, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (141, 4, 3, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (142, 4, 4, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (143, 4, 5, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (144, 4, 6, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (145, 4, 8, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (146, 4, 9, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (147, 4, 101, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (148, 4, 102, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (149, 4, 103, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (150, 4, 104, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (151, 4, 105, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (152, 4, 106, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (153, 4, 201, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (154, 4, 202, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (155, 4, 203, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (156, 4, 301, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (157, 4, 302, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (158, 4, 303, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (159, 4, 304, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (160, 4, 401, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (161, 4, 402, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (162, 4, 403, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (163, 4, 501, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (164, 4, 502, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (165, 4, 503, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (166, 4, 504, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (167, 4, 601, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (168, 4, 602, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (169, 4, 603, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (170, 4, 801, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (171, 4, 802, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (172, 4, 803, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (173, 4, 804, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (174, 4, 805, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (175, 4, 806, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (176, 4, 807, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (177, 4, 808, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (178, 4, 809, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (179, 4, 901, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (180, 4, 902, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (181, 4, 903, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (182, 4, 904, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (183, 4, 905, 1)
-INSERT dbo.MRoleD(NoID, IDRole, IDMenu, IsActive) VALUES (184, 4, 906, 1)
-SET IDENTITY_INSERT dbo.MRoleD OFF
-GO
-
---
--- Inserting data into table dbo.MSatuan
---
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (1, N'PCS', N'PCS', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (2, N'BIJI', N'BIJI', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (3, N'DUS', N'DUS', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (4, N'IKAT', N'IKAT', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (5, N'KALENG', N'KALENG', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (6, N'LEMBAR', N'LEMBAR', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (7, N'METER', N'METER', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (8, N'PAKET', N'PAKET', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (9, N'RIT', N'RIT', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (10, N'SAK', N'SAK', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (11, N'UNIT', N'UNIT', 1, 1)
-INSERT [DBPOS].dbo.MSatuan(NoID, Kode, Nama, Konversi, IsActive) VALUES (12, N'BATANG', N'BATANG', 1, 1)
-GO
-
---
--- Inserting data into table dbo.MSetting
---
-INSERT [DBPOS].dbo.MSetting(KeySettings, KeyValue) VALUES (N'AlamatPerusahaan', N'Krian Sejahtera Indah Cluster Bagus Blok B6 No 7 - GAMPING - KRIAN')
-INSERT [DBPOS].dbo.MSetting(KeySettings, KeyValue) VALUES (N'KotaPerusahaan', N'Sidoarjo')
-INSERT [DBPOS].dbo.MSetting(KeySettings, KeyValue) VALUES (N'NamaPerusahaan', N'CTrl Mart')
-INSERT [DBPOS].dbo.MSetting(KeySettings, KeyValue) VALUES (N'PathLayouts', N'@PathsLayouts')
-GO
-
---
--- Inserting data into table dbo.MTypeHarga
---
-INSERT [DBPOS].dbo.MTypeHarga(NoID, Caption, FieldName) VALUES (1, N'Harga Retail', N'HargaJual')
-INSERT [DBPOS].dbo.MTypeHarga(NoID, Caption, FieldName) VALUES (2, N'Harga Grosir', N'HargaJualB')
-GO
-
---
--- Inserting data into table dbo.MTypePajak
---
-INSERT [DBPOS].dbo.MTypePajak(NoID, TypePajak) VALUES (0, N'Non Pajak')
-INSERT [DBPOS].dbo.MTypePajak(NoID, TypePajak) VALUES (1, N'Include')
-INSERT [DBPOS].dbo.MTypePajak(NoID, TypePajak) VALUES (2, N'Exclude')
-GO
-
---
--- Inserting data into table dbo.MUser
---
-INSERT [DBPOS].dbo.MUser(NoID, Kode, Nama, Pwd, IDAlamat, IDRole) VALUES (99, N'ADM', N'ADMINISTRATOR', N'ADM', -1, 1)
-INSERT [DBPOS].dbo.MUser(NoID, Kode, Nama, Pwd, IDAlamat, IDRole) VALUES (100, N'SPV', N'SUPERVISOR', N'SPV', -1, 2)
-GO
-
---
--- Inserting data into table dbo.TAppDB
---
-SET IDENTITY_INSERT [DBPOS].dbo.TAppDB ON
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (18, '2020-07-26 00:00:00.000', N'TglUpdate_200726')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (19, '2020-07-26 00:00:00.000', N'MStockOpname_200726')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (20, '2020-07-26 00:00:00.000', N'spDaftarStockOpname_200726')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (21, '2020-07-26 00:00:00.000', N'spFakturMStockOpname_200726')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (22, '2020-07-26 00:00:00.000', N'spSimpanMStockOpname_200726')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (23, '2020-09-06 00:00:00.000', N'MJenisTransaksiD_200906')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (24, '2020-09-06 00:00:00.000', N'MPOS_200906')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (25, '2020-09-06 00:00:00.000', N'MReset_200906')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (26, '2020-09-06 00:00:00.000', N'MResetD_200906')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (27, '2020-09-16 00:00:00.000', N'spKasBank_2000916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (28, '2020-09-16 00:00:00.000', N'mnSaldoAwal_2000916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (29, '2020-09-16 00:00:00.000', N'MSaldoAwalPersediaan_2000916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (30, '2020-09-16 00:00:00.000', N'spMSaldoAwalPersediaan_200916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (31, '2020-09-16 00:00:00.000', N'spFakturMSaldoAwalPersediaan_200916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (32, '2020-09-16 00:00:00.000', N'spSimpanMSaldoAwalPersediaan_200916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (36, '2020-09-16 00:00:00.000', N'JenisTransaksi_200916')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (37, '2020-09-22 00:00:00.000', N'MSaldoAwalPiutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (38, '2020-09-22 00:00:00.000', N'MSaldoAwalHutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (39, '2020-09-22 00:00:00.000', N'spFakturMSaldoAwalHutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (40, '2020-09-22 00:00:00.000', N'spFakturMSaldoAwalPiutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (41, '2020-09-22 00:00:00.000', N'spSimpanMSaldoAwalHutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (42, '2020-09-22 00:00:00.000', N'spSimpanMSaldoAwalPiutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (43, '2020-09-22 00:00:00.000', N'spSaldoAwalPersediaan_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (44, '2020-09-22 00:00:00.000', N'spDaftarSaldoAwalPersediaan_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (45, '2020-09-22 00:00:00.000', N'spDaftarSaldoAwalHutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (46, '2020-09-22 00:00:00.000', N'spDaftarSaldoAwalPiutang_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (47, '2020-09-22 00:00:00.000', N'MKasIN_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (48, '2020-09-22 00:00:00.000', N'MKasOut_200922')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (49, '2021-06-23 00:00:00.000', N'MMaterial_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (50, '2021-06-23 00:00:00.000', N'MWOAssembly_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (51, '2021-06-23 00:00:00.000', N'MAssembly_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (52, '2021-06-23 00:00:00.000', N'MMaterialDSisa_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (53, '2021-06-23 00:00:00.000', N'MAssemblyDSisa_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (54, '2021-06-23 00:00:00.000', N'MMaterialDBiaya_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (55, '2021-06-23 00:00:00.000', N'MAssemblyDBiaya_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (56, '2021-06-23 00:00:00.000', N'MMaterialD_210623')
-INSERT [DBPOS].dbo.TAppDB(NoID, Tanggal, DBVersion) VALUES (57, '2021-06-23 00:00:00.000', N'MAssemblyD_210623')
-SET IDENTITY_INSERT [DBPOS].dbo.TAppDB OFF
 GO

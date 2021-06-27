@@ -7,6 +7,48 @@ Imports CtrlSoft.Dto.ViewModel
 
 Namespace Repository
     Public Class RepSQLServer
+        Public Shared Function GetKodeMaterial(ByVal StrKonSQL As String) As JSONResult
+            Dim JSON As New JSONResult
+            Dim Hasil As String = "", NoUrut As Long = -1
+            Using cn As New SqlConnection(StrKonSQL)
+                Using com As New SqlCommand
+                    Using oDA As New SqlDataAdapter
+                        Using ds As New System.Data.DataSet
+                            Try
+                                cn.Open()
+                                com.Connection = cn
+                                oDA.SelectCommand = com
+
+                                com.CommandText = "SELECT CONVERT(BIGINT, MAX(RIGHT(Kode, 3))) FROM MMaterial WHERE ISNUMERIC(RIGHT(Kode, 3))=1 AND SUBSTRING(Kode, 1, LEN(@Kode))=@Kode"
+                                Hasil = "RAW-"
+                                com.Parameters.Clear()
+                                com.Parameters.Add(New SqlParameter("@Kode", SqlDbType.VarChar)).Value = Hasil
+                                NoUrut = NullToLong(com.ExecuteScalar) + 1
+                                Hasil &= NoUrut.ToString("00000")
+                                With JSON
+                                    .JSONMessage = "Berhasil"
+                                    .JSONResult = True
+                                    .JSONValue = Hasil
+                                End With
+                            Catch ex As Exception
+                                With JSON
+                                    .JSONMessage = ex.Message
+                                    .JSONResult = False
+                                End With
+                                InsertLog(StrKonSQL, New CtrlSoft.Dto.ViewModel.AppLog With {
+                                          .AppName = My.Application.Info.AssemblyName,
+                                          .Date = Now,
+                                          .Event = "GetKodeMaterial",
+                                          .User = "Unknow",
+                                          .JSON = Newtonsoft.Json.JsonConvert.SerializeObject(JSON)},
+                                      JSON)
+                            End Try
+                        End Using
+                    End Using
+                End Using
+            End Using
+            Return JSON
+        End Function
         Public Shared Function GetKodeKontak(ByVal StrKonSQL As String,
                                              ByVal tipe As Integer) As JSONResult
             'All = 0

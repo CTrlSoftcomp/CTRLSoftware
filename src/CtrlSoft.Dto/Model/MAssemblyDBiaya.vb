@@ -16,7 +16,7 @@ Namespace Model
         Public Property IDHeader As Long
         Public Property IDMaterialDBiaya As System.Guid
         Public Property Tanggal As Date
-        Public Property IDAkun As Long
+        Public Property IDAkun As System.Guid
         Public Property Jumlah As Decimal
         Public Property Keterangan As String
         Public Property IsPosted As Nullable(Of Boolean)

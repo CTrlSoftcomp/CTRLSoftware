@@ -137,6 +137,23 @@ Public Class frmNewProfile
 
                                     Application.DoEvents()
                                 Next
+
+                                Script = My.Resources.Seeder.
+                                         Replace("[DBPOS]", "[" & DBName.Replace(" ", "") & "]").
+                                         Replace("'DBPOS'", "'" & DBName.Replace(" ", "") & "'").
+                                         Replace("N'@PathsLayouts'", "N'" & Environment.CurrentDirectory & "\System\Layouts\'").
+                                         Replace("C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DBPOS_", Environment.CurrentDirectory & "\System\" & DBName.Replace(" ", "") & "_")
+                                For Each line As String In Script.Split(New String(1) {vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+                                    If line.ToUpperInvariant().Trim() = "GO" Then
+                                        com.CommandText = sqlBatch
+                                        com.ExecuteNonQuery()
+                                        sqlBatch = String.Empty
+                                    Else
+                                        sqlBatch += line & vbLf
+                                    End If
+
+                                    Application.DoEvents()
+                                Next
                                 XtraMessageBox.Show("Sukses membuat database baru!", NamaAplikasi, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                                 Return True
